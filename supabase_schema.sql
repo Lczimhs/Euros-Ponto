@@ -50,16 +50,27 @@ CREATE TABLE IF NOT EXISTS config_app (
 
 -- RLS POLICIES (Acesso anônimo liberado para a aplicação)
 ALTER TABLE filiais ENABLE ROW LEVEL SECURITY;
+DROP POLICY IF EXISTS "Public filiais" ON filiais;
 CREATE POLICY "Public filiais" ON filiais FOR ALL USING (true) WITH CHECK (true);
+
 ALTER TABLE departamentos ENABLE ROW LEVEL SECURITY;
+DROP POLICY IF EXISTS "Public departamentos" ON departamentos;
 CREATE POLICY "Public departamentos" ON departamentos FOR ALL USING (true) WITH CHECK (true);
+
 ALTER TABLE colaboradores ENABLE ROW LEVEL SECURITY;
+DROP POLICY IF EXISTS "Public colaboradores" ON colaboradores;
 CREATE POLICY "Public colaboradores" ON colaboradores FOR ALL USING (true) WITH CHECK (true);
+
 ALTER TABLE feriados ENABLE ROW LEVEL SECURITY;
+DROP POLICY IF EXISTS "Public feriados" ON feriados;
 CREATE POLICY "Public feriados" ON feriados FOR ALL USING (true) WITH CHECK (true);
+
 ALTER TABLE registros_ponto ENABLE ROW LEVEL SECURITY;
+DROP POLICY IF EXISTS "Public registros_ponto" ON registros_ponto;
 CREATE POLICY "Public registros_ponto" ON registros_ponto FOR ALL USING (true) WITH CHECK (true);
+
 ALTER TABLE config_app ENABLE ROW LEVEL SECURITY;
+DROP POLICY IF EXISTS "Public config_app" ON config_app;
 CREATE POLICY "Public config_app" ON config_app FOR ALL USING (true) WITH CHECK (true);
 
 -- ==============================================================
