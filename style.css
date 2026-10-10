@@ -1342,6 +1342,34 @@ thead .col-dept, thead .col-badge, thead .col-name, thead .col-dsr {
   font-size: 36px;
   color: var(--color-border-bright);
   margin-bottom: 10px;
+/* Cloud Sync Indicator */
+.cloud-badge {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  background: rgba(0, 229, 255, 0.08);
+  color: var(--color-cyan);
+  border: 1px solid rgba(0, 229, 255, 0.35);
+  padding: 4px 10px;
+  border-radius: var(--radius-sm);
+  font-size: 11px;
+  font-weight: 600;
+  user-select: none;
+  box-shadow: 0 0 10px rgba(0, 229, 255, 0.15);
+}
+
+.cloud-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--color-cyan);
+  box-shadow: 0 0 6px var(--color-cyan);
+  animation: pulseCloud 2s infinite ease-in-out;
+}
+
+@keyframes pulseCloud {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.45; transform: scale(0.8); }
 }
 
 /* Print View Styles */

@@ -29,6 +29,22 @@ let appState = {
 };
 
 // ==========================================================================
+// CONFIGURAÇÃO DO SUPABASE CLOUD
+// ==========================================================================
+const SUPABASE_URL = 'https://isuynftkmcdaymczhckx.supabase.co';
+const SUPABASE_KEY = 'sb_publishable_QJeX4fW2543ePivoeZzmzQ__u3AFLhY';
+let supabaseClient = null;
+
+try {
+  if (typeof window !== 'undefined' && window.supabase) {
+    supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+    console.log('Supabase Cloud conectado com sucesso:', SUPABASE_URL);
+  }
+} catch (e) {
+  console.warn('Erro ao inicializar Supabase client:', e);
+}
+
+// ==========================================================================
 // 2. DADOS PADRÃO DE DEMONSTRAÇÃO (SEED COM DADOS REAIS DA EMPRESA)
 // ==========================================================================
 function getDefaultSeedData() {
@@ -1165,8 +1181,8 @@ function getDefaultSeedData() {
   return { filiais, departamentos, colaboradores, feriados, registrosPonto, carryOverDsr };
 }
 
-// Salvar dados no LocalStorage
-function saveStateToStorage() {
+// Salvar dados no LocalStorage e Sincronizar com a Nuvem Supabase
+function saveStateToStorage(syncCloud = true) {
   try {
     const payload = {
       filiais: appState.filiais,
@@ -1183,8 +1199,64 @@ function saveStateToStorage() {
       sortBy: appState.sortBy
     };
     localStorage.setItem(STORAGE_KEY, JSON.stringify(payload));
+
+    if (syncCloud && supabaseClient) {
+      triggerCloudSync(payload);
+    }
   } catch (err) {
     console.error('Falha ao salvar no localStorage:', err);
+  }
+}
+
+let cloudSyncTimer = null;
+function triggerCloudSync(payload) {
+  if (!supabaseClient) return;
+  if (cloudSyncTimer) clearTimeout(cloudSyncTimer);
+  cloudSyncTimer = setTimeout(async () => {
+    try {
+      const badge = document.getElementById('supabase-sync-badge');
+      if (badge) badge.style.opacity = '0.5';
+
+      await supabaseClient
+        .from('config_app')
+        .upsert({ id: 'latest_state', data: payload, updated_at: new Date().toISOString() });
+
+      if (badge) {
+        badge.style.opacity = '1';
+        badge.title = 'Sincronizado com a nuvem: ' + new Date().toLocaleTimeString();
+      }
+    } catch (e) {
+      console.warn('Erro na sincronização em nuvem:', e);
+    }
+  }, 1000);
+}
+
+async function syncFromCloudOnStart() {
+  if (!supabaseClient) return;
+  try {
+    const { data, error } = await supabaseClient
+      .from('config_app')
+      .select('data, updated_at')
+      .eq('id', 'latest_state')
+      .maybeSingle();
+
+    if (data && data.data) {
+      const cloud = data.data;
+      if (cloud.registrosPonto && Object.keys(cloud.registrosPonto).length > 0) {
+        appState.registrosPonto = { ...appState.registrosPonto, ...cloud.registrosPonto };
+      }
+      if (cloud.carryOverDsr) {
+        appState.carryOverDsr = { ...appState.carryOverDsr, ...cloud.carryOverDsr };
+      }
+      if (cloud.colaboradores && cloud.colaboradores.length > 0) {
+        appState.colaboradores = cloud.colaboradores;
+      }
+      saveStateToStorage(false);
+      renderCurrentView();
+      console.log('Dados sincronizados do Supabase Cloud com sucesso.');
+    }
+  } catch (e) {
+    console.warn('Falha ao sincronizar da nuvem:', e);
   }
 }
 
@@ -2797,4 +2869,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   renderCurrentView();
+
+  // Sincronização automática em segundo plano com a nuvem Supabase
+  syncFromCloudOnStart();
 });

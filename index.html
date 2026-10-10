@@ -47,6 +47,9 @@
           <span>📥</span> Restaurar
         </button>
         <input type="file" id="input-import-file" style="display:none;" accept=".json">
+        <div id="supabase-sync-badge" class="cloud-badge" title="Conectado e sincronizado com o Supabase Cloud">
+          <span class="cloud-dot"></span> <span>Supabase Nuvem</span>
+        </div>
       </div>
     </div>
 
@@ -650,6 +653,8 @@
   <!-- Toast Notification Container -->
   <div id="toast-container"></div>
 
+  <!-- Supabase JS Client SDK -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <!-- Main JavaScript Logic -->
   <script src="app.js"></script>
 </body>
