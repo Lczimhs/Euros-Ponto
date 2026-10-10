@@ -1,0 +1,656 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard de Ponto e Vale Alimentação (V4)</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- App Header -->
+  <header class="app-header">
+    <div class="header-top">
+      <div class="brand-section">
+        <div class="brand-logo-icon">P</div>
+        <div class="brand-title-group">
+          <h1>PONTO <span>&amp; VALE ALIMENTAÇÃO</span> <span style="font-size:12px; opacity:0.7; font-weight:400; padding:2px 6px; background:#342A52; border-radius:4px; border:1px solid #4015B8;">V4</span></h1>
+          <div class="brand-subtitle">Gestão Diária de Ponto Eletrônico • Motor DSR • Apuração Financeira VA</div>
+        </div>
+      </div>
+
+      <!-- Main Navigation Views -->
+      <nav class="header-nav-views">
+        <button class="nav-tab-btn active" data-view="view-ponto" id="nav-btn-ponto">
+          <span>📊</span> Matriz de Ponto
+        </button>
+        <button class="nav-tab-btn" data-view="view-va" id="nav-btn-va">
+          <span>💳</span> Fechamento de VA
+        </button>
+        <button class="nav-tab-btn" data-view="view-colaboradores" id="nav-btn-colaboradores">
+          <span>👥</span> Colaboradores
+        </button>
+        <button class="nav-tab-btn" data-view="view-estrutura" id="nav-btn-estrutura">
+          <span>🏢</span> Filiais &amp; Setores
+        </button>
+        <button class="nav-tab-btn" data-view="view-feriados" id="nav-btn-feriados">
+          <span>📅</span> Calendário Feriados
+        </button>
+      </nav>
+
+      <!-- System Actions -->
+      <div class="header-actions">
+        <button class="btn btn-secondary btn-sm" id="btn-export-backup" title="Exportar dados para arquivo JSON">
+          <span>💾</span> Backup
+        </button>
+        <button class="btn btn-secondary btn-sm" id="btn-import-backup" title="Restaurar dados de backup JSON">
+          <span>📥</span> Restaurar
+        </button>
+        <input type="file" id="input-import-file" style="display:none;" accept=".json">
+      </div>
+    </div>
+
+    <!-- Filiais Horizontal Tabs Bar -->
+    <div class="branch-tabs-container">
+      <span class="branch-tab-label">Filial Ativa:</span>
+      <div class="branch-tabs-list" id="branch-tabs-list">
+        <!-- Rendered via JS -->
+      </div>
+      <button class="btn btn-cyan btn-sm" id="btn-quick-new-branch" style="margin-left: 6px;">+ Nova Filial</button>
+    </div>
+  </header>
+
+  <!-- Global Toolbar (for Ponto and VA) -->
+  <div class="toolbar-container" id="main-toolbar">
+    <div class="toolbar-left">
+      <!-- Month/Year Selector -->
+      <div class="month-selector">
+        <button class="month-nav-btn" id="btn-prev-month" title="Mês Anterior">&larr;</button>
+        <div class="current-month-display" id="display-current-month">Outubro 2026</div>
+        <button class="month-nav-btn" id="btn-next-month" title="Próximo Mês">&rarr;</button>
+      </div>
+
+      <!-- Filtro de Situação (Ativos / Demitidos / Todos) -->
+      <div class="sort-select-box" id="box-filter-status" title="Filtrar colaboradores ativos ou apenas demitidos">
+        <label for="filter-status-select">Situação:</label>
+        <select id="filter-status-select" class="sort-select">
+          <option value="ativos">Ativos (Padrão)</option>
+          <option value="demitidos">Apenas Demitidos</option>
+          <option value="todos">Todos</option>
+        </select>
+      </div>
+
+      <!-- Modo Foco Toggle -->
+      <div class="focus-toggle-box" id="focus-toggle-btn" title="Oculta colaboradores 100% OK no mês. Linhas com ao menos uma pendência continuam visíveis.">
+        <div class="toggle-switch"></div>
+        <span class="focus-toggle-text">Modo Foco (Só Pendências)</span>
+      </div>
+
+      <!-- Quick Search -->
+      <div class="search-box">
+        <span class="search-icon">🔍</span>
+        <input type="text" class="search-input" id="search-filter-input" placeholder="Buscar crachá ou nome...">
+      </div>
+
+      <!-- Sort Selection -->
+      <div class="sort-select-box">
+        <label for="sort-select">Ordenar:</label>
+        <select id="sort-select" class="sort-select">
+          <option value="cracha">Código do Crachá (Padrão)</option>
+          <option value="nome">Ordem Alfabética (Nome)</option>
+          <option value="data_admissao">Data Inicial / Admissão</option>
+          <option value="departamento">Departamento (Agrupado)</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="toolbar-right">
+      <button class="btn btn-primary btn-sm" id="btn-novo-colaborador-quick">
+        <span>+</span> Novo Colaborador
+      </button>
+      <button class="btn btn-secondary btn-sm" id="btn-export-matrix-csv">
+        <span>📑</span> Exportar CSV
+      </button>
+    </div>
+  </div>
+
+  <!-- ========================================================================
+       VIEW 1: DASHBOARD PRINCIPAL DE PONTO (MATRIZ EXCEL-LIKE)
+       ======================================================================== -->
+  <main id="view-ponto" class="app-view active-view">
+    <div class="matrix-container" id="matrix-scroll-wrapper">
+      <table class="matrix-table" id="matrix-table">
+        <thead id="matrix-thead">
+          <!-- Rendered dynamically: Row 1 (Day/Month/Year), Row 2 (Weekday) -->
+        </thead>
+        <tbody id="matrix-tbody">
+          <!-- Rendered dynamically -->
+        </tbody>
+      </table>
+    </div>
+  </main>
+
+  <!-- ========================================================================
+       VIEW 2: DASHBOARD SECUNDÁRIO DE VALE ALIMENTAÇÃO (VA)
+       ======================================================================== -->
+  <main id="view-va" class="app-view" style="display:none;">
+    <div class="va-container">
+      
+      <!-- KPI Metrics Summary -->
+      <div class="kpi-grid">
+        <div class="kpi-card">
+          <span class="kpi-label">Colaboradores na Filial</span>
+          <span class="kpi-value purple" id="kpi-total-colab">0</span>
+          <span class="kpi-helper" id="kpi-sub-filial">Filial Selecionada</span>
+        </div>
+        <div class="kpi-card">
+          <span class="kpi-label">Dias Úteis no Mês</span>
+          <span class="kpi-value" id="kpi-dias-uteis">0</span>
+          <span class="kpi-helper">Excluindo Domingos e Feriados</span>
+        </div>
+        <div class="kpi-card">
+          <span class="kpi-label">Valor Base Unitário</span>
+          <span class="kpi-value cyan">R$ 8,00</span>
+          <span class="kpi-helper">R$ 4,00 para meio período</span>
+        </div>
+        <div class="kpi-card">
+          <span class="kpi-label">Potencial Bruto Máximo</span>
+          <span class="kpi-value" id="kpi-potencial-bruto">R$ 0,00</span>
+          <span class="kpi-helper">100% dias trabalhados</span>
+        </div>
+        <div class="kpi-card">
+          <span class="kpi-label">Total Líquido a Pagar</span>
+          <span class="kpi-value cyan" id="kpi-total-liquido">R$ 0,00</span>
+          <span class="kpi-helper">Valor final apurado</span>
+        </div>
+        <div class="kpi-card">
+          <span class="kpi-label">Total de Descontos</span>
+          <span class="kpi-value purple" id="kpi-total-desconto">R$ 0,00</span>
+          <span class="kpi-helper">Economia em faltas e atestados</span>
+        </div>
+      </div>
+
+      <!-- Fechamento VA Table Card -->
+      <div class="va-table-card">
+        <div class="va-card-header">
+          <h2><span>💳</span> Tabela de Fechamento de Vale Alimentação</h2>
+          <div style="display: flex; gap: 8px;">
+            <button class="btn btn-secondary btn-sm" id="btn-print-va"><span>🖨️</span> Imprimir Relatório</button>
+            <button class="btn btn-cyan btn-sm" id="btn-export-va-csv"><span>📊</span> Exportar VA (.csv)</button>
+          </div>
+        </div>
+
+        <div class="table-responsive">
+          <table class="styled-table" id="va-table">
+            <thead>
+              <tr>
+                <th>Crachá</th>
+                <th>Nome do Colaborador</th>
+                <th>Departamento</th>
+                <th class="text-center">Dias Úteis</th>
+                <th class="text-center">Dias OK (R$ 8)</th>
+                <th class="text-center">Meios Dias (R$ 4)</th>
+                <th class="text-center">Faltas / Atestados</th>
+                <th class="text-right">Quanto Ganhará (Líquido)</th>
+                <th class="text-right">Quanto Será Descontado</th>
+                <th class="text-center">Ações</th>
+              </tr>
+            </thead>
+            <tbody id="va-tbody">
+              <!-- Rendered dynamically -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- ========================================================================
+       VIEW 3: CADASTRO DE COLABORADORES
+       ======================================================================== -->
+  <main id="view-colaboradores" class="app-view" style="display:none;">
+    <div class="manage-view-container">
+      <div class="card-panel">
+        <div class="panel-header">
+          <h2><span>👥</span> Gestão de Funcionários</h2>
+          <button class="btn btn-primary" id="btn-abrir-novo-colab">+ Cadastrar Funcionário</button>
+        </div>
+
+        <div class="table-responsive">
+          <table class="styled-table" id="colaboradores-table">
+            <thead>
+              <tr>
+                <th>Crachá</th>
+                <th>Nome Completo</th>
+                <th>Filial</th>
+                <th>Departamento</th>
+                <th>Data Inicial (Admissão)</th>
+                <th class="text-center">Registra Ponto?</th>
+                <th class="text-center">Situação</th>
+                <th class="text-center">Ações</th>
+              </tr>
+            </thead>
+            <tbody id="colaboradores-tbody">
+              <!-- Rendered via JS -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- ========================================================================
+       VIEW 4: FILIAIS E DEPARTAMENTOS
+       ======================================================================== -->
+  <main id="view-estrutura" class="app-view" style="display:none;">
+    <div class="manage-view-container">
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+        
+        <!-- Filiais Panel -->
+        <div class="card-panel">
+          <div class="panel-header">
+            <h2><span>🏢</span> Filiais</h2>
+            <button class="btn btn-primary btn-sm" id="btn-abrir-nova-filial">+ Nova Filial</button>
+          </div>
+          <table class="styled-table">
+            <thead>
+              <tr>
+                <th>Nome da Filial</th>
+                <th>Cidade</th>
+                <th class="text-center">Colaboradores</th>
+                <th class="text-center">Ações</th>
+              </tr>
+            </thead>
+            <tbody id="filiais-tbody">
+              <!-- Rendered via JS -->
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Departamentos Panel -->
+        <div class="card-panel">
+          <div class="panel-header">
+            <h2><span>🏷️</span> Departamentos</h2>
+            <button class="btn btn-primary btn-sm" id="btn-abrir-novo-depto">+ Novo Depto</button>
+          </div>
+          <table class="styled-table">
+            <thead>
+              <tr>
+                <th>Nome do Departamento</th>
+                <th class="text-center">Colaboradores</th>
+                <th class="text-center">Ações</th>
+              </tr>
+            </thead>
+            <tbody id="deptos-tbody">
+              <!-- Rendered via JS -->
+            </tbody>
+          </table>
+        </div>
+
+      </div>
+    </div>
+  </main>
+
+  <!-- ========================================================================
+       VIEW 5: CALENDÁRIO ANUAL DE FERIADOS
+       ======================================================================== -->
+  <main id="view-feriados" class="app-view" style="display:none;">
+    <div class="manage-view-container">
+      <div class="card-panel">
+        <div class="panel-header">
+          <h2><span>📅</span> Calendário Anual de Feriados</h2>
+          <button class="btn btn-primary" id="btn-abrir-novo-feriado">+ Adicionar Feriado</button>
+        </div>
+        <p style="color: var(--color-blue-soft); font-size:12px; margin-bottom: 12px;">
+          Feriados afetam o cálculo de dias úteis para o Vale Alimentação e a regra de DSR (Falta em semana com feriado desconta Domingo + Feriado).
+        </p>
+        <div class="table-responsive">
+          <table class="styled-table">
+            <thead>
+              <tr>
+                <th>Data</th>
+                <th>Descrição do Feriado</th>
+                <th>Abrangência / Filial</th>
+                <th>Tipo</th>
+                <th class="text-center">Ações</th>
+              </tr>
+            </thead>
+            <tbody id="feriados-tbody">
+              <!-- Rendered via JS -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- ========================================================================
+       MODAL 1: AÇÃO EM MASSA POR DATA
+       ======================================================================== -->
+  <div class="modal-overlay" id="modal-mass-override">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3><span>⚡</span> Ação em Massa: Definir Status "OK"</h3>
+        <button class="modal-close-btn" data-close="modal-mass-override">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="note-box">
+          <p id="mass-modal-desc">
+            Deseja definir o status como <strong>"OK"</strong> para TODOS os colaboradores desta filial neste dia?
+          </p>
+        </div>
+        <p style="color: var(--color-text-sub); font-size: 12px;">
+          * Domingos e Feriados não serão sobrescritos para preservar a integridade das regras da folha.
+        </p>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" data-close="modal-mass-override">Cancelar</button>
+        <button class="btn btn-cyan" id="btn-confirm-mass-ok">Confirmar "OK" para Todos</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================================================
+       MODAL 2: DETALHAMENTO DO DIA & RESOLUÇÃO DE PENDÊNCIAS
+       ======================================================================== -->
+  <div class="modal-overlay" id="modal-cell-detail">
+    <div class="modal-card modal-lg">
+      <div class="modal-header">
+        <h3 id="cell-modal-title"><span>🕒</span> Detalhamento do Dia de Ponto</h3>
+        <button class="modal-close-btn" data-close="modal-cell-detail">&times;</button>
+      </div>
+      <div class="modal-body">
+        
+        <!-- Header Info -->
+        <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; background:#1C1827; padding:10px 14px; border-radius:var(--radius-sm); border:1px solid var(--color-border);">
+          <div>
+            <strong id="modal-colab-name" style="color:var(--color-cyan); font-size:14px;">Nome do Colaborador</strong>
+            <div style="font-size:11px; color:var(--color-text-sub);" id="modal-colab-sub">Crachá: 101 • Depto: TI • Filial: Matriz</div>
+          </div>
+          <div style="text-align:right;">
+            <div id="modal-date-display" style="font-family:var(--font-mono); font-weight:700; color:var(--color-blue-bright); font-size:13px;">01/10/2026 (QUI)</div>
+            <div id="modal-status-badge" style="font-size:11px;">Status Atual: OK</div>
+          </div>
+        </div>
+
+        <!-- Punches of the day (Batidas) -->
+        <div class="form-group">
+          <label>Batidas Registradas no Dia (Tolerância: 5 min por período, não cumulativa):</label>
+          <div class="punches-box">
+            <div class="punch-slot">
+              <span class="punch-slot-title">Entrada Manhã (EM)</span>
+              <input type="time" class="form-control" id="punch-em" value="08:00">
+              <span class="punch-slot-hint" id="hint-em" style="font-size:10px; color:var(--color-text-muted);">Padrão: 08:00</span>
+            </div>
+            <div class="punch-slot">
+              <span class="punch-slot-title">Saída Manhã (SM)</span>
+              <input type="time" class="form-control" id="punch-sm" value="12:00">
+              <span class="punch-slot-hint" id="hint-sm" style="font-size:10px; color:var(--color-text-muted);">Padrão: 12:00</span>
+            </div>
+            <div class="punch-slot">
+              <span class="punch-slot-title">Entrada Tarde (ET)</span>
+              <input type="time" class="form-control" id="punch-et" value="13:00">
+              <span class="punch-slot-hint" id="hint-et" style="font-size:10px; color:var(--color-text-muted);">Padrão: 13:00</span>
+            </div>
+            <div class="punch-slot">
+              <span class="punch-slot-title">Saída Tarde (ST)</span>
+              <input type="time" class="form-control" id="punch-st" value="17:00">
+              <span class="punch-slot-hint" id="hint-st" style="font-size:10px; color:var(--color-text-muted);">Padrão: 17:00</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Overrides & Resolution -->
+        <div class="form-row">
+          <div class="form-group">
+            <label for="select-override-status">Substituição Manual (Override de Status):</label>
+            <select class="form-control" id="select-override-status">
+              <option value="AUTO">Automático (Calcular pelas Batidas)</option>
+              <option value="OK">OK (Presença Regular / Sem Pendência)</option>
+              <option value="FALTA">FALTA (Falta Integral Não Justificada)</option>
+              <option value="FM">FM (Falta Manhã - Meio Período)</option>
+              <option value="FT">FT (Falta Tarde - Meio Período)</option>
+              <option value="ATESTADO">ATESTADO (Integral Justificado)</option>
+              <option value="1/2 ATESTADO">1/2 ATESTADO (Meio Período)</option>
+              <option value="FÉRIAS">FÉRIAS (Em Gozo de Férias)</option>
+              <option value="AFASTADO">AFASTADO (Licença / Afastamento)</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="select-resolution">Resolução de Pendência / Atraso:</label>
+            <select class="form-control" id="select-resolution">
+              <option value="NENHUMA">Nenhuma / Conforme Batida</option>
+              <option value="ABONAR">Abonar (Converter para OK)</option>
+              <option value="DESCONTAR_AMBOS">Descontar Ambos (Folha + VA)</option>
+              <option value="DESCONTAR_VA">Descontar só VA</option>
+              <option value="DESCONTAR_FOLHA">Descontar só Folha</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="input-cell-justificativa">Justificativa / Observação do Registro:</label>
+          <input type="text" class="form-control" id="input-cell-justificativa" placeholder="Ex: Atestado médico CID 10, declaração de horas, trânsito liberado pela chefia...">
+        </div>
+
+        <!-- Replication Option -->
+        <div style="background:var(--color-bg-dark); padding:10px; border-radius:var(--radius-sm); border:1px solid var(--color-border);">
+          <label class="custom-checkbox-container">
+            <input type="checkbox" id="check-replicate-days">
+            <span><strong>Ação de Replicação:</strong> Aplicar este mesmo status/justificativa para os próximos</span>
+            <input type="number" id="input-replicate-count" class="form-control" style="width: 60px; padding: 2px 6px; text-align: center;" value="1" min="1" max="30">
+            <span>dias (exceto domingos).</span>
+          </label>
+        </div>
+
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" data-close="modal-cell-detail">Cancelar</button>
+        <button class="btn btn-primary" id="btn-save-cell-detail">Salvar Alterações</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================================================
+       MODAL 3: NOVO / EDITAR COLABORADOR
+       ======================================================================== -->
+  <div class="modal-overlay" id="modal-employee">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3 id="modal-employee-title"><span>👤</span> Cadastrar Funcionário</h3>
+        <button class="modal-close-btn" data-close="modal-employee">&times;</button>
+      </div>
+      <div class="modal-body">
+        <input type="hidden" id="emp-edit-id">
+        <div class="form-group">
+          <label for="emp-name">Nome Completo:</label>
+          <input type="text" class="form-control" id="emp-name" placeholder="Ex: Carlos Eduardo Silva" required>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="emp-badge">Código do Crachá (Numérico):</label>
+            <input type="number" class="form-control" id="emp-badge" placeholder="Ex: 104" required>
+          </div>
+          <div class="form-group">
+            <label for="emp-admission">Data Inicial (Admissão):</label>
+            <input type="date" class="form-control" id="emp-admission" required>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="emp-branch">Filial:</label>
+            <select class="form-control" id="emp-branch" required>
+              <!-- Filled via JS -->
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="emp-dept">Departamento:</label>
+            <select class="form-control" id="emp-dept" required>
+              <!-- Filled via JS -->
+            </select>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="emp-registra-ponto">Registra Ponto?</label>
+            <select class="form-control" id="emp-registra-ponto">
+              <option value="sim">Sim (Aparece no ponto e pendências)</option>
+              <option value="nao">Não (Apenas VA com crédito integral)</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="emp-status">Situação:</label>
+            <select class="form-control" id="emp-status">
+              <option value="ativo">Ativo</option>
+              <option value="demitido">Demitido</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group" id="group-emp-demissao" style="display: none;">
+          <label for="emp-demissao">Data de Demissão (Desligamento):</label>
+          <input type="date" class="form-control" id="emp-demissao">
+          <small style="color: var(--color-cyan); font-size: 11px; display: block; margin-top: 4px;">
+            * Ao final do mês, o Vale Alimentação apurará apenas os dias úteis trabalhados até esta data de rescisão.
+          </small>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" data-close="modal-employee">Cancelar</button>
+        <button class="btn btn-primary" id="btn-save-employee">Salvar Colaborador</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================================================
+       MODAL 4: FILIAL (NOVA / EDITAR)
+       ======================================================================== -->
+  <div class="modal-overlay" id="modal-branch">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3><span>🏢</span> Cadastrar Filial</h3>
+        <button class="modal-close-btn" data-close="modal-branch">&times;</button>
+      </div>
+      <div class="modal-body">
+        <input type="hidden" id="branch-edit-id">
+        <div class="form-group">
+          <label for="branch-name">Nome da Filial:</label>
+          <input type="text" class="form-control" id="branch-name" placeholder="Ex: Matriz - São Paulo" required>
+        </div>
+        <div class="form-group">
+          <label for="branch-city">Cidade / UF:</label>
+          <input type="text" class="form-control" id="branch-city" placeholder="Ex: São Paulo - SP" required>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" data-close="modal-branch">Cancelar</button>
+        <button class="btn btn-primary" id="btn-save-branch">Salvar Filial</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================================================
+       MODAL 5: DEPARTAMENTO (NOVO)
+       ======================================================================== -->
+  <div class="modal-overlay" id="modal-dept">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3><span>🏷️</span> Novo Departamento</h3>
+        <button class="modal-close-btn" data-close="modal-dept">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label for="dept-name">Nome do Departamento:</label>
+          <input type="text" class="form-control" id="dept-name" placeholder="Ex: Suporte Técnico, Logística..." required>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" data-close="modal-dept">Cancelar</button>
+        <button class="btn btn-primary" id="btn-save-dept">Adicionar</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================================================
+       MODAL 6: FERIADO (NOVO)
+       ======================================================================== -->
+  <div class="modal-overlay" id="modal-holiday">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3><span>📅</span> Adicionar Feriado</h3>
+        <button class="modal-close-btn" data-close="modal-holiday">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="form-row">
+          <div class="form-group">
+            <label for="holiday-date">Data do Feriado:</label>
+            <input type="date" class="form-control" id="holiday-date" required>
+          </div>
+          <div class="form-group">
+            <label for="holiday-scope">Abrangência:</label>
+            <select class="form-control" id="holiday-scope">
+              <option value="NACIONAL">Nacional (Todas as filiais)</option>
+              <!-- Branches added here -->
+            </select>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="holiday-name">Descrição / Nome do Feriado:</label>
+          <input type="text" class="form-control" id="holiday-name" placeholder="Ex: Aniversário de São Paulo, Tiradentes..." required>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" data-close="modal-holiday">Cancelar</button>
+        <button class="btn btn-primary" id="btn-save-holiday">Salvar Feriado</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================================================
+       MODAL 7: EXTRATO INDIVIDUAL DETALHADO DE VA
+       ======================================================================== -->
+  <div class="modal-overlay" id="modal-va-audit">
+    <div class="modal-card modal-lg">
+      <div class="modal-header">
+        <h3><span>📑</span> Extrato Analítico de Vale Alimentação</h3>
+        <button class="modal-close-btn" data-close="modal-va-audit">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div id="va-audit-summary" style="display:flex; justify-content:space-between; background:#1E182B; padding:12px; border-radius:var(--radius-sm); border:1px solid var(--color-border);">
+          <!-- Summary info inserted via JS -->
+        </div>
+        <div class="table-responsive" style="max-height: 400px; overflow-y:auto;">
+          <table class="styled-table" id="va-audit-table">
+            <thead>
+              <tr>
+                <th>Data</th>
+                <th>Dia da Semana</th>
+                <th>Tipo / Condição</th>
+                <th>Status do Ponto</th>
+                <th class="text-right">Valor Creditado (R$)</th>
+                <th class="text-right">Desconto (R$)</th>
+                <th>Observação</th>
+              </tr>
+            </thead>
+            <tbody id="va-audit-tbody">
+              <!-- Rendered via JS -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" data-close="modal-va-audit">Fechar</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Notification Container -->
+  <div id="toast-container"></div>
+
+  <!-- Main JavaScript Logic -->
+  <script src="app.js"></script>
+</body>
+</html>
