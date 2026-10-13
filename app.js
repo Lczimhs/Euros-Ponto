@@ -3317,21 +3317,24 @@ function createDayCellElement({ dateStr, dayNum, isOtherMonth, filterTipo, filte
   cell.dataset.date = dateStr;
 
   // Cabeçalho do dia
+  const visiblePills = dayNotices.slice(0, 1);
+  const remainingCount = dayNotices.length - 1;
+
+  // Cabeçalho do dia
   const topDiv = document.createElement('div');
   topDiv.className = 'cal-day-top';
   topDiv.innerHTML = `
-    <span class="cal-day-number">${dayNum}</span>
+    <div style="display:flex; align-items:center; gap:5px;">
+      <span class="cal-day-number">${dayNum}</span>
+      ${remainingCount > 0 ? `<span class="cal-notice-more-badge" title="${dayNotices.length} avisos neste dia">+${remainingCount} mais</span>` : ''}
+    </div>
     <button class="cal-day-add-btn" title="Adicionar novo prazo neste dia">+</button>
   `;
   cell.appendChild(topDiv);
 
-  // Lista de badges de aviso
+  // Lista de badges / faixas de aviso (aumentadas em 30%)
   const noticesContainer = document.createElement('div');
   noticesContainer.className = 'cal-cell-notices';
-
-  const MAX_PILLS = 3;
-  const visiblePills = dayNotices.slice(0, MAX_PILLS);
-  const remainingCount = dayNotices.length - MAX_PILLS;
 
   visiblePills.forEach(aviso => {
     const isAssinatura = aviso.isAssinaturaDoc || aviso.autoRollover || (aviso.titulo && aviso.titulo.toLowerCase().includes('assinar documentos rescisórios'));
@@ -3356,13 +3359,6 @@ function createDayCellElement({ dateStr, dayNum, isOtherMonth, filterTipo, filte
     pill.title = `${aviso.titulo} (${tooltipStatus})`;
     noticesContainer.appendChild(pill);
   });
-
-  if (remainingCount > 0) {
-    const moreBadge = document.createElement('div');
-    moreBadge.className = 'cal-notice-more-badge';
-    moreBadge.textContent = `+${remainingCount} mais...`;
-    noticesContainer.appendChild(moreBadge);
-  }
 
   cell.appendChild(noticesContainer);
 
