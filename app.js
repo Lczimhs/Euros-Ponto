@@ -1179,18 +1179,6 @@ function getDefaultSeedData() {
 
   const avisos = [
     {
-      id: "aviso-rescisao-1",
-      data: "2026-10-19",
-      titulo: "🔴 Prazo Limite Rescisão - Wesley Patrick (10 dias CLT Art. 477)",
-      tipo: "rescisao",
-      descricao: "Prazo fatal de 10 dias corridos para quitação das verbas rescisórias e entrega do TRCT/Guias (Art. 477, § 6º da CLT). Desligamento ocorrido em 09/10/2026.",
-      filialId: "branch-1",
-      colabId: "colab-1034",
-      concluido: false,
-      concluidoEm: null,
-      createdAt: "2026-10-09T10:00:00Z"
-    },
-    {
       id: "aviso-salario-1",
       data: "2026-10-07",
       titulo: "🟡 Pagamento de Salário Mensal (5º Dia Útil - CLT Art. 459)",
@@ -1201,6 +1189,18 @@ function getDefaultSeedData() {
       concluido: true,
       concluidoEm: "2026-10-07T14:30:00Z",
       createdAt: "2026-10-01T08:00:00Z"
+    },
+    {
+      id: "aviso-admissao-wesley",
+      data: "2026-10-09",
+      titulo: "🟢 Admissão Concluída - Wesley Patrick (Início de Atividades)",
+      tipo: "outros",
+      descricao: "Admissão e início oficial de atividades do colaborador Wesley Patrick Fernandes de Oliveira no setor de Produção.",
+      filialId: "branch-1",
+      colabId: "colab-1034",
+      concluido: true,
+      concluidoEm: "2026-10-09T08:00:00Z",
+      createdAt: "2026-10-09T08:00:00Z"
     },
     {
       id: "aviso-ferias-1",
@@ -1240,10 +1240,10 @@ function getDefaultSeedData() {
     },
     {
       id: "aviso-ponto-1",
-      data: "2026-10-25",
-      titulo: "🔵 Fechamento do Ponto Eletrônico & Apuração de VA",
+      data: "2026-10-30",
+      titulo: "🔵 Fechamento de Ponto & VA (Último Dia Útil do Mês)",
       tipo: "ponto",
-      descricao: "Data de corte para conferência de batidas manuais, faltas e atestados para apuração definitiva do crédito de Vale Alimentação.",
+      descricao: "Fechamento do espelho de ponto eletrônico e apuração definitiva do Vale Alimentação no último dia útil do mês.",
       filialId: "TODAS",
       colabId: "",
       concluido: false,
@@ -1389,6 +1389,42 @@ function loadStateFromStorage() {
           appState.activeBranchId = parsed.activeBranchId;
         } else {
           appState.activeBranchId = appState.filiais[0].id;
+        }
+
+        // Correção cadastral para o colaborador Wesley Patrick (crachá 1034 - admitido 09/10/2026)
+        const wesley = appState.colaboradores.find(c => Number(c.cracha) === 1034 || c.id === 'colab-1034');
+        if (wesley) {
+          wesley.status = 'ativo';
+          wesley.admissao = '2026-10-09';
+          wesley.dataDemissao = '';
+        }
+        // Remove qualquer aviso residual que marcava Wesley como demitido
+        if (appState.avisos && Array.isArray(appState.avisos)) {
+          appState.avisos = appState.avisos.filter(a => {
+            const isWesley = a.colabId === 'colab-1034' || (a.titulo && a.titulo.toLowerCase().includes('wesley'));
+            return !(isWesley && a.tipo === 'rescisao');
+          });
+          const hasWesleyAviso = appState.avisos.some(a => a.id === 'aviso-admissao-wesley');
+          if (!hasWesleyAviso) {
+            appState.avisos.push({
+              id: "aviso-admissao-wesley",
+              data: "2026-10-09",
+              titulo: "🟢 Admissão Concluída - Wesley Patrick (Início de Atividades)",
+              tipo: "outros",
+              descricao: "Admissão e início oficial de atividades do colaborador Wesley Patrick Fernandes de Oliveira no setor de Produção.",
+              filialId: "branch-1",
+              colabId: "colab-1034",
+              concluido: true,
+              concluidoEm: "2026-10-09T08:00:00Z",
+              createdAt: "2026-10-09T08:00:00Z"
+            });
+          }
+          // Garante fechamento de ponto no último dia útil do mês
+          const pontoAviso = appState.avisos.find(a => a.tipo === 'ponto' && a.id === 'aviso-ponto-1');
+          if (pontoAviso && pontoAviso.data === '2026-10-25') {
+            pontoAviso.data = '2026-10-30';
+            pontoAviso.titulo = '🔵 Fechamento de Ponto & VA (Último Dia Útil do Mês)';
+          }
         }
 
         if (typeof parsed.currentYear === 'number') appState.currentYear = parsed.currentYear;
@@ -2511,6 +2547,23 @@ function get5thBusinessDay(year, month) {
   return `${year}-${String(month + 1).padStart(2, '0')}-07`;
 }
 
+function getLastBusinessDay(year, month) {
+  const daysInMonth = new Date(year, month + 1, 0).getDate();
+  for (let d = daysInMonth; d >= 1; d--) {
+    const dt = new Date(year, month, d);
+    const dayOfWeek = dt.getDay(); // 0 = Domingo, 6 = Sábado
+    // Considera Segunda a Sexta como dias úteis administrativos de fechamento
+    if (dayOfWeek !== 0 && dayOfWeek !== 6) {
+      const iso = `${year}-${String(month + 1).padStart(2, '0')}-${String(d).padStart(2, '0')}`;
+      const isFeriado = (appState.feriados || []).some(f => f.data === iso && (f.escopo === 'NACIONAL' || f.escopo === appState.activeBranchId));
+      if (!isFeriado) {
+        return iso;
+      }
+    }
+  }
+  return `${year}-${String(month + 1).padStart(2, '0')}-${String(daysInMonth).padStart(2, '0')}`;
+}
+
 function renderAvisosView() {
   if (typeof appState.calendarYear !== 'number') appState.calendarYear = appState.currentYear || 2026;
   if (typeof appState.calendarMonth !== 'number') appState.calendarMonth = (typeof appState.currentMonth === 'number') ? appState.currentMonth : 9;
@@ -2518,10 +2571,10 @@ function renderAvisosView() {
   const calYear = appState.calendarYear;
   const calMonth = appState.calendarMonth;
 
-  // Atualiza título do mês exibido
+  // Atualiza título do mês exibido: ex: "outubro de 2026" (minúsculo como na referência "marzo de 2025")
   const monthDisplay = document.getElementById('cal-month-display');
   if (monthDisplay) {
-    monthDisplay.textContent = `${MESES_PT[calMonth]} ${calYear}`;
+    monthDisplay.textContent = `${MESES_PT[calMonth].toLowerCase()} de ${calYear}`;
   }
 
   // Indicador da filial ativa no topo do calendário
@@ -2560,17 +2613,45 @@ function renderAvisosView() {
   const filterTipo = document.getElementById('cal-filter-tipo')?.value || 'todos';
   const filterStatus = document.getElementById('cal-filter-status')?.value || 'todos';
 
-  // Renderização da Grade do Calendário
+  // Controle de alternância de vistas (Mês | Semana | Dia | Agenda)
+  const currentView = appState.calViewMode || 'mes';
+  document.querySelectorAll('.cal-view-btn').forEach(btn => {
+    btn.classList.toggle('active', btn.dataset.calView === currentView);
+  });
+
+  const mesContainer = document.getElementById('cal-view-container-mes');
+  const semanaContainer = document.getElementById('cal-view-container-semana');
+  const diaContainer = document.getElementById('cal-view-container-dia');
+  const agendaContainer = document.getElementById('cal-view-container-agenda');
+
+  if (mesContainer) mesContainer.style.display = currentView === 'mes' ? 'block' : 'none';
+  if (semanaContainer) semanaContainer.style.display = currentView === 'semana' ? 'block' : 'none';
+  if (diaContainer) diaContainer.style.display = currentView === 'dia' ? 'block' : 'none';
+  if (agendaContainer) agendaContainer.style.display = currentView === 'agenda' ? 'block' : 'none';
+
+  const todayIso = new Date().toISOString().split('T')[0];
+
+  if (currentView === 'agenda') {
+    renderAgendaView(monthNotices);
+    return;
+  } else if (currentView === 'semana') {
+    renderSemanaView(calYear, calMonth, filterTipo, filterStatus, todayIso);
+    return;
+  } else if (currentView === 'dia') {
+    renderDiaView(calYear, calMonth, filterTipo, filterStatus, todayIso);
+    return;
+  }
+
+  // Renderização da Grade do Calendário (Visão Mês - 7 Colunas: SEG a DOM)
   const grid = document.getElementById('cal-days-grid');
   if (!grid) return;
   grid.innerHTML = '';
 
   const firstDay = new Date(calYear, calMonth, 1);
-  const startingDayOfWeek = firstDay.getDay(); // 0 (Dom) a 6 (Sáb)
+  // Alinhamento iniciando na Segunda-feira (0 = Seg, 1 = Ter, ..., 6 = Dom)
+  const startingDayOfWeek = (firstDay.getDay() + 6) % 7;
   const daysInMonth = new Date(calYear, calMonth + 1, 0).getDate();
   const prevMonthDays = new Date(calYear, calMonth, 0).getDate();
-
-  const todayIso = new Date().toISOString().split('T')[0];
 
   // 1. Dias do mês anterior
   for (let i = startingDayOfWeek - 1; i >= 0; i--) {
@@ -2693,16 +2774,197 @@ function createDayCellElement({ dateStr, dayNum, isOtherMonth, filterTipo, filte
     openAvisoModal(null, dateStr);
   });
 
-  // Handler do clique na célula: abre tela com os avisos e botão feito (se houver), ou abre modal de criação
+  // Handler do clique na célula: abre tela com os avisos do dia e botão feito
   cell.addEventListener('click', () => {
-    if (dayNotices.length > 0) {
-      openDayNoticesModal(dateStr);
-    } else {
-      openAvisoModal(null, dateStr);
-    }
+    openDayNoticesModal(dateStr);
   });
 
   return cell;
+}
+
+// --------------------------------------------------------------------------
+// VISTA AGENDA (Lista Cronológica Mensal de Prazos)
+// --------------------------------------------------------------------------
+function renderAgendaView(monthNotices) {
+  const container = document.getElementById('cal-agenda-list');
+  if (!container) return;
+  container.innerHTML = '';
+
+  const branchMap = Object.fromEntries(appState.filiais.map(f => [f.id, f.nome]));
+  const colabMap = Object.fromEntries(appState.colaboradores.map(c => [c.id, c.nome]));
+
+  const sortedNotices = [...monthNotices].sort((a, b) => a.data.localeCompare(b.data));
+
+  if (sortedNotices.length === 0) {
+    container.innerHTML = `
+      <div class="empty-state" style="padding: 40px 20px;">
+        <div class="empty-state-icon">📅</div>
+        <p>Nenhum prazo ou aviso agendado para este mês.</p>
+      </div>
+    `;
+    return;
+  }
+
+  sortedNotices.forEach(aviso => {
+    const item = document.createElement('div');
+    item.className = `cal-agenda-item ${aviso.concluido ? 'is-done' : ''}`;
+    
+    const dParts = aviso.data.split('-');
+    const dt = new Date(parseInt(dParts[0], 10), parseInt(dParts[1], 10) - 1, parseInt(dParts[2], 10), 12);
+    const dayNum = dParts[2];
+    const dayWeek = DIAS_SEMANA_NOMES[dt.getDay()] ? DIAS_SEMANA_NOMES[dt.getDay()].slice(0, 3) : '';
+
+    let tipoBadge = '⚪ Outros';
+    if (aviso.tipo === 'rescisao') tipoBadge = '🔴 Rescisão CLT';
+    else if (aviso.tipo === 'salario') tipoBadge = '🟡 Salário/Vale';
+    else if (aviso.tipo === 'ferias') tipoBadge = '🟣 Férias';
+    else if (aviso.tipo === 'ponto') tipoBadge = '🔵 Ponto & VA';
+    else if (aviso.tipo === 'fgts') tipoBadge = '🟢 FGTS Digital';
+
+    const colabNome = aviso.colabId ? (colabMap[aviso.colabId] || '') : '';
+    const filialNome = (!aviso.filialId || aviso.filialId === 'TODAS') ? 'Todas as Filiais' : (branchMap[aviso.filialId] || '');
+
+    item.innerHTML = `
+      <div style="display:flex; align-items:center; gap:16px;">
+        <div class="cal-agenda-date-box">
+          <div class="day-num">${dayNum}</div>
+          <div class="day-week">${dayWeek}</div>
+        </div>
+        <div>
+          <div style="display:flex; gap:6px; margin-bottom:4px; align-items:center;">
+            <span class="badge-aviso-cat badge-cat-informativo" style="font-size:10px; padding:2px 6px;">${tipoBadge}</span>
+            <span class="badge-aviso-scope" style="font-size:10px; padding:2px 6px;">${escapeHtml(filialNome)}</span>
+            ${aviso.concluido ? '<span class="status-badge-done">✅ Feito</span>' : '<span class="status-badge-pending">🔴 Pendente</span>'}
+          </div>
+          <div style="font-size:14px; font-weight:700; color:var(--color-text-main); margin-bottom:2px;">
+            ${escapeHtml(aviso.titulo)}
+          </div>
+          ${colabNome ? `<div style="font-size:12px; color:var(--color-cyan);">👤 ${escapeHtml(colabNome)}</div>` : ''}
+          ${aviso.descricao ? `<div style="font-size:12px; color:var(--color-text-muted); margin-top:2px;">${escapeHtml(aviso.descricao)}</div>` : ''}
+        </div>
+      </div>
+      <div style="display:flex; align-items:center; gap:8px;">
+        <button class="btn-toggle-done ${aviso.concluido ? 'reopen' : 'mark-done'}" data-id="${aviso.id}" data-date="${aviso.data}">
+          ${aviso.concluido ? '↩️ Reabrir' : '✅ Feito'}
+        </button>
+        <button class="btn btn-secondary btn-sm btn-agenda-open-day" data-date="${aviso.data}">
+          Ver Dia ➔
+        </button>
+      </div>
+    `;
+    container.appendChild(item);
+  });
+
+  container.querySelectorAll('.btn-toggle-done').forEach(btn => {
+    btn.addEventListener('click', () => {
+      toggleAvisoDone(btn.dataset.id, btn.dataset.date);
+    });
+  });
+
+  container.querySelectorAll('.btn-agenda-open-day').forEach(btn => {
+    btn.addEventListener('click', () => {
+      openDayNoticesModal(btn.dataset.date);
+    });
+  });
+}
+
+// --------------------------------------------------------------------------
+// VISTA SEMANA
+// --------------------------------------------------------------------------
+function renderSemanaView(calYear, calMonth, filterTipo, filterStatus, todayIso) {
+  const container = document.getElementById('cal-week-grid');
+  if (!container) return;
+  container.innerHTML = '';
+
+  const now = new Date();
+  const baseDate = (now.getFullYear() === calYear && now.getMonth() === calMonth)
+    ? now
+    : new Date(calYear, calMonth, 15);
+
+  const dayOfWeek = (baseDate.getDay() + 6) % 7; // 0 = Seg, 6 = Dom
+  const monday = new Date(baseDate);
+  monday.setDate(baseDate.getDate() - dayOfWeek);
+
+  const weekGrid = document.createElement('div');
+  weekGrid.className = 'cal-days-grid';
+  weekGrid.style.gridTemplateColumns = 'repeat(7, 1fr)';
+
+  for (let i = 0; i < 7; i++) {
+    const cur = new Date(monday);
+    cur.setDate(monday.getDate() + i);
+    const dateStr = cur.toISOString().split('T')[0];
+    const isOtherMonth = cur.getMonth() !== calMonth;
+    weekGrid.appendChild(createDayCellElement({
+      dateStr,
+      dayNum: cur.getDate(),
+      isOtherMonth,
+      filterTipo,
+      filterStatus,
+      todayIso
+    }));
+  }
+  container.appendChild(weekGrid);
+}
+
+// --------------------------------------------------------------------------
+// VISTA DIA
+// --------------------------------------------------------------------------
+function renderDiaView(calYear, calMonth, filterTipo, filterStatus, todayIso) {
+  const container = document.getElementById('cal-day-detail-panel');
+  if (!container) return;
+  container.innerHTML = '';
+
+  const targetDate = (todayIso.startsWith(`${calYear}-${String(calMonth + 1).padStart(2, '0')}`))
+    ? todayIso
+    : `${calYear}-${String(calMonth + 1).padStart(2, '0')}-01`;
+
+  const dParts = targetDate.split('-');
+  const dt = new Date(parseInt(dParts[0], 10), parseInt(dParts[1], 10) - 1, parseInt(dParts[2], 10), 12);
+  const diaSemana = DIAS_SEMANA_NOMES[dt.getDay()];
+
+  const wrapper = document.createElement('div');
+  wrapper.style.padding = '24px';
+  wrapper.innerHTML = `
+    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:20px; border-bottom:1px solid var(--color-border); padding-bottom:14px;">
+      <div>
+        <h3 style="margin:0; font-size:20px; color:var(--color-text-main);">Visão Diária: ${formatDateBR(targetDate)} (${diaSemana})</h3>
+        <p style="margin:4px 0 0; color:var(--color-text-muted); font-size:13px;">Detalhes e ações diretas para este dia</p>
+      </div>
+      <button class="btn btn-primary" id="btn-dia-view-open-modal">
+        <span>📅</span> Abrir Detalhes do Dia
+      </button>
+    </div>
+    <div id="day-view-inner-content"></div>
+  `;
+  container.appendChild(wrapper);
+
+  wrapper.querySelector('#btn-dia-view-open-modal')?.addEventListener('click', () => {
+    openDayNoticesModal(targetDate);
+  });
+
+  const dayNotices = (appState.avisos || []).filter(a => a.data === targetDate && (!a.filialId || a.filialId === 'TODAS' || a.filialId === appState.activeBranchId));
+  const inner = wrapper.querySelector('#day-view-inner-content');
+  if (dayNotices.length === 0) {
+    inner.innerHTML = `
+      <div class="empty-state" style="padding:40px;">
+        <div class="empty-state-icon">☀️</div>
+        <p>Nenhum prazo ou pendência agendada para este dia específico.</p>
+        <button class="btn btn-secondary btn-sm" style="margin-top:12px;" onclick="openAvisoModal(null, '${targetDate}')">+ Agendar Prazo Neste Dia</button>
+      </div>
+    `;
+  } else {
+    inner.innerHTML = `<div style="display:flex; flex-direction:column; gap:10px;">` + dayNotices.map(a => `
+      <div class="cal-agenda-item ${a.concluido ? 'is-done' : ''}">
+        <div>
+          <div style="font-weight:700; color:var(--color-text-main); font-size:15px;">${escapeHtml(a.titulo)}</div>
+          <div style="color:var(--color-text-muted); font-size:12px; margin-top:4px;">${escapeHtml(a.descricao || '')}</div>
+        </div>
+        <button class="btn-toggle-done ${a.concluido ? 'reopen' : 'mark-done'}" onclick="toggleAvisoDone('${a.id}', '${targetDate}')">
+          ${a.concluido ? '↩️ Reabrir' : '✅ Feito'}
+        </button>
+      </div>
+    `).join('') + `</div>`;
+  }
 }
 
 function openDayNoticesModal(dateStr) {
@@ -2958,9 +3220,10 @@ function handleLegalPresetChange(preset) {
     if (descInput) descInput.value = `O pagamento da remuneração das férias e do terço constitucional deve ser efetuado até 2 dias antes do início do respectivo período (Art. 145 da CLT).`;
   } else if (preset === 'ponto_fechamento') {
     if (tipoInput) tipoInput.value = 'ponto';
-    if (dataInput) dataInput.value = `${calYear}-${String(calMonth + 1).padStart(2, '0')}-25`;
-    if (tituloInput) tituloInput.value = `🔵 Fechamento de Espelho de Ponto & Apuração de Vale Alimentação`;
-    if (descInput) descInput.value = `Data de corte para conferência de batidas manuais, faltas e atestados para apuração definitiva do crédito de Vale Alimentação.`;
+    const lastBusinessDay = getLastBusinessDay(calYear, calMonth);
+    if (dataInput) dataInput.value = lastBusinessDay;
+    if (tituloInput) tituloInput.value = `🔵 Fechamento de Ponto & VA (Último dia útil do mês)`;
+    if (descInput) descInput.value = `Data de corte no último dia útil do mês (${formatDateBR(lastBusinessDay)}) para conferência de batidas manuais, faltas e atestados para apuração definitiva do crédito de Vale Alimentação.`;
   } else if (preset === 'fgts_digital') {
     if (tipoInput) tipoInput.value = 'fgts';
     if (dataInput) dataInput.value = `${calYear}-${String(calMonth + 1).padStart(2, '0')}-20`;
@@ -3321,10 +3584,54 @@ document.getElementById('btn-save-employee')?.addEventListener('click', () => {
     });
   }
 
+  const colabKeyId = id || ('colab-' + cracha);
+
+  // GERAÇÃO AUTOMÁTICA DE AVISO NO MURAL DE PRAZOS (CLT Art. 477 - 10 dias corridos)
+  if (status === 'demitido' && dataDemissao) {
+    const prazoFatal = addCalendarDays(dataDemissao, 10);
+    const avisoId = 'aviso-rescisao-' + colabKeyId;
+
+    if (!appState.avisos) appState.avisos = [];
+    const existingIdx = appState.avisos.findIndex(a => a.id === avisoId || (a.colabId === colabKeyId && a.tipo === 'rescisao'));
+
+    const avisoObj = {
+      id: avisoId,
+      data: prazoFatal,
+      tipo: 'rescisao',
+      titulo: `🔴 Prazo Limite Rescisão - ${nome} (10 dias CLT Art. 477)`,
+      descricao: `Prazo legal fatal de 10 dias corridos para homologação e pagamento de verbas rescisórias (Art. 477, § 6º da CLT). Data da demissão: ${formatDateBR(dataDemissao)}. Prazo fatal: ${formatDateBR(prazoFatal)}.`,
+      filialId: filialId,
+      colabId: colabKeyId,
+      concluido: false,
+      concluidoEm: null,
+      createdAt: new Date().toISOString(),
+      updatedAt: new Date().toISOString()
+    };
+
+    if (existingIdx !== -1) {
+      appState.avisos[existingIdx] = { ...appState.avisos[existingIdx], ...avisoObj };
+    } else {
+      appState.avisos.unshift(avisoObj);
+    }
+  } else if (status === 'ativo') {
+    // Se colaborador for reativado como 'ativo', remove aviso de rescisão pendente
+    if (appState.avisos && Array.isArray(appState.avisos)) {
+      appState.avisos = appState.avisos.filter(a => {
+        const isThisColab = a.colabId === colabKeyId || a.id === ('aviso-rescisao-' + colabKeyId);
+        return !(isThisColab && a.tipo === 'rescisao' && !a.concluido);
+      });
+    }
+  }
+
   saveStateToStorage();
   closeModal('modal-employee');
   renderCurrentView();
-  showToast('Colaborador salvo com sucesso!', 'success');
+
+  if (status === 'demitido') {
+    showToast(`Colaborador salvo e aviso de rescisão (10 dias CLT Art. 477) publicado no mural até ${formatDateBR(addCalendarDays(dataDemissao, 10))}!`, 'purple');
+  } else {
+    showToast('Colaborador salvo com sucesso!', 'success');
+  }
 });
 
 function deleteEmployee(empId) {
@@ -3684,6 +3991,14 @@ function initEvents() {
     appState.calendarMonth = now.getMonth();
     renderAvisosView();
     showToast('Calendário posicionado no mês atual.', 'info');
+  });
+
+  // Alternância de Vistas no Calendário (Mês | Semana | Dia | Agenda)
+  document.querySelectorAll('.cal-view-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      appState.calViewMode = btn.dataset.calView || 'mes';
+      renderAvisosView();
+    });
   });
 
   // Filtros do Calendário

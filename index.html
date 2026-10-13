@@ -169,65 +169,98 @@
         </div>
       </div>
 
-      <!-- Calendar Navigation & Controls Toolbar -->
-      <div class="cal-toolbar">
-        <div class="cal-month-nav">
-          <button class="month-nav-btn" id="btn-cal-prev-month" title="Mês Anterior">&larr;</button>
-          <div class="cal-month-title" id="cal-month-display">Outubro 2026</div>
-          <button class="month-nav-btn" id="btn-cal-next-month" title="Próximo Mês">&rarr;</button>
-          <button class="btn btn-secondary btn-sm" id="btn-cal-today" style="margin-left:8px;">Hoje</button>
-        </div>
-
-        <div class="cal-filters-group">
-          <div class="sort-select-box">
-            <label for="cal-filter-tipo">Tipo de Prazo:</label>
-            <select id="cal-filter-tipo" class="sort-select">
-              <option value="todos">Todos os Tipos</option>
-              <option value="rescisao">🔴 Rescisão Contratual (10 dias)</option>
-              <option value="salario">🟡 Salário / Adiantamento</option>
-              <option value="ferias">🟣 Férias (Aviso / Pagamento)</option>
-              <option value="ponto">🔵 Fechamento de Ponto &amp; VA</option>
-              <option value="fgts">🟢 FGTS / eSocial / Tributos</option>
-              <option value="outros">⚪ Outros Prazos / Lembretes</option>
-            </select>
+      <!-- Calendar Main Card (Design inspirado na referência) -->
+      <div class="calendar-card cal-reference-card">
+        <!-- Top Navigation Bar da Referência -->
+        <div class="cal-ref-header">
+          <div class="cal-ref-nav-left">
+            <div class="cal-ref-arrow-group">
+              <button class="cal-ref-arrow-btn" id="btn-cal-prev-month" title="Mês Anterior">&larr;</button>
+              <button class="cal-ref-arrow-btn" id="btn-cal-next-month" title="Próximo Mês">&rarr;</button>
+            </div>
+            <button class="cal-ref-today-btn" id="btn-cal-today">Hoje</button>
           </div>
 
-          <div class="sort-select-box">
-            <label for="cal-filter-status">Situação:</label>
-            <select id="cal-filter-status" class="sort-select">
-              <option value="todos">Todos (Pendentes &amp; Feitos)</option>
-              <option value="pendente">Apenas Pendentes</option>
-              <option value="concluido">Apenas Concluídos (Feito)</option>
-            </select>
+          <div class="cal-ref-center-title" id="cal-month-display">
+            outubro de 2026
+          </div>
+
+          <div class="cal-ref-views-toggle">
+            <button class="cal-view-btn active" data-cal-view="mes">Mês</button>
+            <button class="cal-view-btn" data-cal-view="semana">Semana</button>
+            <button class="cal-view-btn" data-cal-view="dia">Dia</button>
+            <button class="cal-view-btn" data-cal-view="agenda">Agenda</button>
           </div>
         </div>
 
-        <div class="cal-legend-quick">
-          <span class="legend-dot dot-red"></span> Rescisão
-          <span class="legend-dot dot-yellow"></span> Salário
-          <span class="legend-dot dot-purple"></span> Férias
-          <span class="legend-dot dot-cyan"></span> Ponto/VA
-          <span class="legend-dot dot-green"></span> FGTS
-          <span class="legend-dot dot-done"></span> Feito
-        </div>
-      </div>
+        <!-- Secondary Filters & Actions Toolbar -->
+        <div class="cal-ref-subbar">
+          <div class="cal-filters-group">
+            <div class="sort-select-box">
+              <label for="cal-filter-tipo">Tipo:</label>
+              <select id="cal-filter-tipo" class="sort-select">
+                <option value="todos">Todos os Tipos</option>
+                <option value="rescisao">🔴 Rescisão (10 dias CLT)</option>
+                <option value="salario">🟡 Salário / Vale</option>
+                <option value="ferias">🟣 Férias CLT</option>
+                <option value="ponto">🔵 Fechamento Ponto &amp; VA</option>
+                <option value="fgts">🟢 FGTS / eSocial</option>
+                <option value="outros">⚪ Outros</option>
+              </select>
+            </div>
 
-      <!-- Month Calendar View -->
-      <div class="calendar-card">
-        <!-- Weekdays Header (DOM - SÁB) -->
-        <div class="cal-weekdays-row">
-          <div class="cal-weekday-col weekend">DOM</div>
-          <div class="cal-weekday-col">SEG</div>
-          <div class="cal-weekday-col">TER</div>
-          <div class="cal-weekday-col">QUA</div>
-          <div class="cal-weekday-col">QUI</div>
-          <div class="cal-weekday-col">SEX</div>
-          <div class="cal-weekday-col weekend">SÁB</div>
+            <div class="sort-select-box">
+              <label for="cal-filter-status">Situação:</label>
+              <select id="cal-filter-status" class="sort-select">
+                <option value="todos">Todos (Pendentes &amp; Feitos)</option>
+                <option value="pendente">Apenas Pendentes</option>
+                <option value="concluido">Apenas Concluídos (Feito)</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="cal-legend-quick">
+            <span class="legend-dot dot-red"></span> Rescisão
+            <span class="legend-dot dot-yellow"></span> Salário
+            <span class="legend-dot dot-purple"></span> Férias
+            <span class="legend-dot dot-cyan"></span> Ponto &amp; VA
+            <span class="legend-dot dot-green"></span> FGTS
+            <span class="legend-dot dot-done"></span> Feito
+          </div>
         </div>
 
-        <!-- Dynamic Days Grid -->
-        <div class="cal-days-grid" id="cal-days-grid">
-          <!-- Rendered dynamically via JS -->
+        <!-- MÊS VIEW (Grade 7 Colunas: SEG - DOM) -->
+        <div id="cal-view-container-mes" class="cal-view-content">
+          <!-- Weekdays Header (seg, ter, qua, qui, sex, sáb, dom) -->
+          <div class="cal-weekdays-row">
+            <div class="cal-weekday-col">seg</div>
+            <div class="cal-weekday-col">ter</div>
+            <div class="cal-weekday-col">qua</div>
+            <div class="cal-weekday-col">qui</div>
+            <div class="cal-weekday-col">sex</div>
+            <div class="cal-weekday-col weekend">sáb</div>
+            <div class="cal-weekday-col weekend">dom</div>
+          </div>
+
+          <!-- Dynamic Days Grid -->
+          <div class="cal-days-grid" id="cal-days-grid">
+            <!-- Rendered dynamically via JS -->
+          </div>
+        </div>
+
+        <!-- SEMANA VIEW -->
+        <div id="cal-view-container-semana" class="cal-view-content" style="display:none;">
+          <div class="cal-week-grid" id="cal-week-grid"></div>
+        </div>
+
+        <!-- DIA VIEW -->
+        <div id="cal-view-container-dia" class="cal-view-content" style="display:none;">
+          <div class="cal-day-detail-panel" id="cal-day-detail-panel"></div>
+        </div>
+
+        <!-- AGENDA VIEW (Lista cronológica com botão Feito) -->
+        <div id="cal-view-container-agenda" class="cal-view-content" style="display:none;">
+          <div class="cal-agenda-list" id="cal-agenda-list"></div>
         </div>
       </div>
 
@@ -865,7 +898,7 @@
             <option value="adiantamento">🟡 Adiantamento Salarial / Vale (Dia 20 do mês)</option>
             <option value="ferias_aviso">🟣 Aviso Prévio de Férias - CLT Art. 135 (30 dias de antecedência)</option>
             <option value="ferias_pagto">🟣 Pagamento de Férias - CLT Art. 145 (Até 2 dias antes do início)</option>
-            <option value="ponto_fechamento">🔵 Fechamento de Ponto &amp; Espelho (Dia 25 do mês)</option>
+            <option value="ponto_fechamento">🔵 Fechamento de Ponto &amp; VA (Último dia útil do mês)</option>
             <option value="fgts_digital">🟢 Depósito FGTS Digital (Até o dia 20 do mês)</option>
           </select>
           <div id="box-helper-rescisao" style="display:none; margin-top:8px; padding:8px 12px; background:rgba(255, 51, 102, 0.12); border:1px solid rgba(255, 51, 102, 0.35); border-radius:4px;">
