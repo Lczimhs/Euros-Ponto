@@ -183,3 +183,22 @@ INSERT INTO colaboradores (id, cracha, nome, filial_id, dept_id, admissao, regis
 INSERT INTO colaboradores (id, cracha, nome, filial_id, dept_id, admissao, registra_ponto, status, data_demissao) VALUES ('colab-365', 365, 'LEONARDO DE SOUZA SANTOS', 'branch-3', 'dept-deposito', '2026-09-28', true, 'ativo', NULL) ON CONFLICT (id) DO UPDATE SET nome = EXCLUDED.nome, filial_id = EXCLUDED.filial_id, dept_id = EXCLUDED.dept_id, admissao = EXCLUDED.admissao, registra_ponto = EXCLUDED.registra_ponto, status = EXCLUDED.status, data_demissao = EXCLUDED.data_demissao;
 INSERT INTO colaboradores (id, cracha, nome, filial_id, dept_id, admissao, registra_ponto, status, data_demissao) VALUES ('colab-1491', 1491, 'ELITON ZAMAI DA SILVA', 'branch-4', 'dept-admin', '2023-11-17', true, 'ativo', NULL) ON CONFLICT (id) DO UPDATE SET nome = EXCLUDED.nome, filial_id = EXCLUDED.filial_id, dept_id = EXCLUDED.dept_id, admissao = EXCLUDED.admissao, registra_ponto = EXCLUDED.registra_ponto, status = EXCLUDED.status, data_demissao = EXCLUDED.data_demissao;
 INSERT INTO colaboradores (id, cracha, nome, filial_id, dept_id, admissao, registra_ponto, status, data_demissao) VALUES ('colab-1494', 1494, 'FERNANDO ALVES DE SOUZA', 'branch-4', 'dept-obra', '2025-12-10', true, 'ativo', NULL) ON CONFLICT (id) DO UPDATE SET nome = EXCLUDED.nome, filial_id = EXCLUDED.filial_id, dept_id = EXCLUDED.dept_id, admissao = EXCLUDED.admissao, registra_ponto = EXCLUDED.registra_ponto, status = EXCLUDED.status, data_demissao = EXCLUDED.data_demissao;
+
+-- ==============================================================
+-- TABELA DE AVISOS & COMUNICADOS DO MURAL
+-- ==============================================================
+CREATE TABLE IF NOT EXISTS avisos (
+  id TEXT PRIMARY KEY,
+  titulo TEXT NOT NULL,
+  conteudo TEXT NOT NULL,
+  categoria TEXT DEFAULT 'informativo', -- urgente, importante, informativo, expediente
+  filial_id TEXT DEFAULT 'TODAS',       -- 'TODAS' ou ID da filial
+  autor TEXT DEFAULT 'RH / Departamento Pessoal',
+  fixado BOOLEAN DEFAULT false,
+  created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
+  updated_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
+);
+
+ALTER TABLE avisos ENABLE ROW LEVEL SECURITY;
+DROP POLICY IF EXISTS "Public avisos" ON avisos;
+CREATE POLICY "Public avisos" ON avisos FOR ALL USING (true) WITH CHECK (true);

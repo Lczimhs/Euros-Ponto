@@ -21,7 +21,10 @@
 
       <!-- Main Navigation Views -->
       <nav class="header-nav-views">
-        <button class="nav-tab-btn active" data-view="view-ponto" id="nav-btn-ponto">
+        <button class="nav-tab-btn active" data-view="view-avisos" id="nav-btn-avisos">
+          <span>📢</span> Mural de Avisos
+        </button>
+        <button class="nav-tab-btn" data-view="view-ponto" id="nav-btn-ponto">
           <span>📊</span> Matriz de Ponto
         </button>
         <button class="nav-tab-btn" data-view="view-va" id="nav-btn-va">
@@ -64,7 +67,7 @@
   </header>
 
   <!-- Global Toolbar (for Ponto and VA) -->
-  <div class="toolbar-container" id="main-toolbar">
+  <div class="toolbar-container" id="main-toolbar" style="display:none;">
     <div class="toolbar-left">
       <!-- Month/Year Selector -->
       <div class="month-selector">
@@ -118,9 +121,113 @@
   </div>
 
   <!-- ========================================================================
-       VIEW 1: DASHBOARD PRINCIPAL DE PONTO (MATRIZ EXCEL-LIKE)
+       VIEW 0: DASHBOARD PRINCIPAL - MURAL DE AVISOS E COMUNICADOS
        ======================================================================== -->
-  <main id="view-ponto" class="app-view active-view">
+  <main id="view-avisos" class="app-view active-view">
+    <div class="avisos-dashboard-container">
+
+      <!-- Hero Header & KPI Cards -->
+      <div class="avisos-hero-section">
+        <div class="avisos-title-area">
+          <div class="avisos-title-badge">PAINEL PRINCIPAL DO SISTEMA</div>
+          <h2><span>📢</span> Mural de Avisos &amp; Comunicados</h2>
+          <p id="avisos-branch-indicator" class="avisos-branch-indicator">
+            📍 Exibindo comunicados de: <strong>Euros Ind. e Comércio de Aço - Matriz</strong>
+          </p>
+        </div>
+        <div class="avisos-actions-top">
+          <button class="btn btn-primary" id="btn-novo-aviso">
+            <span>➕</span> Novo Comunicado
+          </button>
+        </div>
+      </div>
+
+      <!-- KPI Grid for Avisos -->
+      <div class="kpi-grid avisos-kpi-grid">
+        <div class="kpi-card">
+          <span class="kpi-label">Total de Avisos</span>
+          <span class="kpi-value cyan" id="kpi-avisos-total">0</span>
+          <span class="kpi-helper">No mural da empresa</span>
+        </div>
+        <div class="kpi-card">
+          <span class="kpi-label">Avisos Urgentes</span>
+          <span class="kpi-value red-urgent" id="kpi-avisos-urgentes">0</span>
+          <span class="kpi-helper">Atenção prioritária</span>
+        </div>
+        <div class="kpi-card">
+          <span class="kpi-label">Comunicados da Filial</span>
+          <span class="kpi-value purple" id="kpi-avisos-filial">0</span>
+          <span class="kpi-helper" id="kpi-avisos-filial-name">Filial Ativa</span>
+        </div>
+        <div class="kpi-card">
+          <span class="kpi-label">Avisos Gerais</span>
+          <span class="kpi-value blue" id="kpi-avisos-gerais">0</span>
+          <span class="kpi-helper">Todas as filiais</span>
+        </div>
+      </div>
+
+      <!-- Toolbar / Filters for Avisos -->
+      <div class="avisos-filter-bar">
+        <div class="avisos-search-box">
+          <span class="search-icon">🔍</span>
+          <input type="text" id="avisos-search-input" class="search-input" placeholder="Buscar por título, conteúdo ou autor...">
+        </div>
+        <div class="avisos-filter-group">
+          <label for="avisos-filter-categoria">Categoria:</label>
+          <select id="avisos-filter-categoria" class="sort-select">
+            <option value="todas">Todas as Categorias</option>
+            <option value="urgente">🔴 Urgente</option>
+            <option value="importante">🟡 Importante</option>
+            <option value="informativo">🔵 Informativo</option>
+            <option value="expediente">🟣 Feriado / Expediente</option>
+          </select>
+        </div>
+        <div class="avisos-filter-group">
+          <label for="avisos-filter-escopo">Destino:</label>
+          <select id="avisos-filter-escopo" class="sort-select">
+            <option value="todos">Todos (Geral + Filial Ativa)</option>
+            <option value="filial">Apenas Desta Filial</option>
+            <option value="geral">Apenas Gerais (Todas)</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Pinned Notices Section (Se houver) -->
+      <div id="avisos-pinned-section" class="avisos-section" style="display:none;">
+        <div class="avisos-section-header">
+          <span>📌</span> Avisos Fixados em Destaque
+        </div>
+        <div class="avisos-cards-grid" id="avisos-pinned-grid">
+          <!-- Rendered via JS -->
+        </div>
+      </div>
+
+      <!-- All Notices Section -->
+      <div class="avisos-section">
+        <div class="avisos-section-header">
+          <span>📋</span> Comunicados Recentes
+        </div>
+        <div class="avisos-cards-grid" id="avisos-cards-grid">
+          <!-- Rendered via JS -->
+        </div>
+        <div id="avisos-empty-state" class="avisos-empty-state" style="display:none;">
+          <div class="empty-icon">📭</div>
+          <h3>Nenhum comunicado encontrado</h3>
+          <p>Não há avisos para os filtros selecionados ou para esta filial.</p>
+          <button class="btn btn-secondary btn-sm" id="btn-empty-novo-aviso" style="margin-top:10px;">+ Criar o Primeiro Comunicado</button>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- ========================================================================
+       VIEW 1: MATRIZ DE PONTO (DASHBOARD EXCEL-LIKE)
+       ======================================================================== -->
+  <main id="view-ponto" class="app-view" style="display:none;">
+    <!-- Banner de Alerta de Avisos Urgentes (se houver) -->
+    <div id="ponto-urgent-banner" class="ponto-urgent-banner" style="display:none;"></div>
+
     <div class="matrix-container" id="matrix-scroll-wrapper">
       <table class="matrix-table" id="matrix-table">
         <thead id="matrix-thead">
@@ -132,6 +239,7 @@
       </table>
     </div>
   </main>
+
 
   <!-- ========================================================================
        VIEW 2: DASHBOARD SECUNDÁRIO DE VALE ALIMENTAÇÃO (VA)
@@ -216,8 +324,58 @@
     <div class="manage-view-container">
       <div class="card-panel">
         <div class="panel-header">
-          <h2><span>👥</span> Gestão de Funcionários</h2>
+          <div>
+            <h2><span>👥</span> Gestão de Colaboradores</h2>
+            <p id="colab-branch-subtitle" style="font-size:12px; color:var(--color-cyan); margin-top:2px; font-weight: 500;">
+              📍 Filial Ativa: Euros Ind. e Comércio de Aço - Matriz
+            </p>
+          </div>
           <button class="btn btn-primary" id="btn-abrir-novo-colab">+ Cadastrar Funcionário</button>
+        </div>
+
+        <!-- Colaboradores Filtering Toolbar -->
+        <div class="colab-filter-bar">
+          <div class="search-box" style="flex: 1; min-width: 200px;">
+            <span class="search-icon">🔍</span>
+            <input type="text" class="search-input" id="colab-search-input" placeholder="Buscar por crachá ou nome...">
+          </div>
+          <div class="sort-select-box">
+            <label for="colab-filter-dept">Departamento:</label>
+            <select id="colab-filter-dept" class="sort-select">
+              <option value="todos">Todos os Departamentos</option>
+              <!-- Filled via JS -->
+            </select>
+          </div>
+          <div class="sort-select-box">
+            <label for="colab-filter-status">Situação:</label>
+            <select id="colab-filter-status" class="sort-select">
+              <option value="todos">Todas as Situações</option>
+              <option value="ativo" selected>Apenas Ativos</option>
+              <option value="demitido">Apenas Demitidos</option>
+            </select>
+          </div>
+          <div class="sort-select-box">
+            <label for="colab-filter-ponto">Registra Ponto:</label>
+            <select id="colab-filter-ponto" class="sort-select">
+              <option value="todos">Todos</option>
+              <option value="sim">Sim (Bate Ponto)</option>
+              <option value="nao">Não (Apenas VA)</option>
+            </select>
+          </div>
+          <div class="sort-select-box">
+            <label for="colab-filter-filial">Filial:</label>
+            <select id="colab-filter-filial" class="sort-select">
+              <!-- Filled via JS -->
+            </select>
+          </div>
+          <button class="btn btn-secondary btn-sm" id="btn-colab-reset-filters" title="Limpar todos os filtros">
+            Limpar
+          </button>
+        </div>
+
+        <div id="colab-stats-count" style="font-size:11px; color:var(--color-text-sub); margin-bottom:10px; display:flex; justify-content:space-between;">
+          <span>Exibindo 0 colaboradores</span>
+          <span style="color:var(--color-text-muted);">* Selecione uma filial acima na barra para alternar entre as empresas</span>
         </div>
 
         <div class="table-responsive">
@@ -646,6 +804,69 @@
       </div>
       <div class="modal-footer">
         <button class="btn btn-secondary" data-close="modal-va-audit">Fechar</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================================================
+       MODAL 8: NOVO / EDITAR COMUNICADO OU AVISO
+       ======================================================================== -->
+  <div class="modal-overlay" id="modal-aviso">
+    <div class="modal-card modal-lg">
+      <div class="modal-header">
+        <h3 id="modal-aviso-title"><span>📢</span> Novo Comunicado / Aviso</h3>
+        <button class="modal-close-btn" data-close="modal-aviso">&times;</button>
+      </div>
+      <div class="modal-body">
+        <input type="hidden" id="aviso-edit-id">
+        
+        <div class="form-group">
+          <label for="aviso-titulo">Título do Comunicado:*</label>
+          <input type="text" class="form-control" id="aviso-titulo" placeholder="Ex: Fechamento do Ponto e Espelho de Outubro" required>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="aviso-categoria">Categoria / Prioridade:*</label>
+            <select class="form-control" id="aviso-categoria">
+              <option value="informativo">🔵 Informativo (Geral)</option>
+              <option value="importante">🟡 Importante (Atenção e Prazos)</option>
+              <option value="urgente">🔴 Urgente (Alerta Prioritário)</option>
+              <option value="expediente">🟣 Expediente / Feriado</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="aviso-filial">Destino / Escopo:*</label>
+            <select class="form-control" id="aviso-filial">
+              <option value="TODAS">🌐 Todas as Filiais (Geral da Empresa)</option>
+              <!-- Filled via JS with branches -->
+            </select>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="aviso-autor">Autor / Emissor do Comunicado:</label>
+            <input type="text" class="form-control" id="aviso-autor" placeholder="Ex: RH / Departamento Pessoal" value="RH / Departamento Pessoal">
+          </div>
+
+          <div class="form-group" style="display:flex; align-items:flex-end;">
+            <label class="custom-checkbox-container" style="padding-bottom: 8px;">
+              <input type="checkbox" id="aviso-fixado">
+              <span><strong>📌 Fixar este aviso no topo do mural</strong></span>
+            </label>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="aviso-conteudo">Mensagem / Conteúdo do Comunicado:*</label>
+          <textarea class="form-control" id="aviso-conteudo" rows="6" placeholder="Escreva a mensagem completa, orientações, datas limites, regras ou observações aos colaboradores..." required style="resize: vertical; font-family: inherit; line-height: 1.5;"></textarea>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" data-close="modal-aviso">Cancelar</button>
+        <button class="btn btn-primary" id="btn-salvar-aviso">Salvar Comunicado</button>
       </div>
     </div>
   </div>

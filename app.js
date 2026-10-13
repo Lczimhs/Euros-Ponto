@@ -10,7 +10,7 @@ const STORAGE_KEY = 'appLucas_ponto_va_v5_data';
 // 1. ESTADO GLOBAL DA APLICAÇÃO
 // ==========================================================================
 let appState = {
-  activeView: 'view-ponto',
+  activeView: 'view-avisos',
   activeBranchId: 'branch-1',
   currentYear: 2026,
   currentMonth: 9, // Outubro (0-indexed: 9 = Outubro)
@@ -24,9 +24,11 @@ let appState = {
   departamentos: [],
   colaboradores: [],
   feriados: [],
+  avisos: [],
   registrosPonto: {}, // chave: colabId_YYYY-MM-DD => { override, resolution, punches, note }
   carryOverDsr: {}    // chave: colabId_YYYY-MM => número de DSRs transferidos
 };
+
 
 // ==========================================================================
 // CONFIGURAÇÃO DO SUPABASE CLOUD
@@ -1175,10 +1177,43 @@ function getDefaultSeedData() {
     { id: 'fer-12', data: '2026-12-25', nome: 'Natal', escopo: 'NACIONAL' }
   ];
 
+  const avisos = [
+    {
+      id: "aviso-1",
+      titulo: "Fechamento da Folha e Ponto de Outubro 2026",
+      conteudo: "Lembramos a todos os encarregados e gestores que as conferências de batidas faltantes, atestados e justificativas devem ser concluídas até o dia 28/10 para fechamento do espelho de ponto e apuração definitiva do Vale Alimentação.",
+      categoria: "urgente",
+      filialId: "TODAS",
+      autor: "RH / Departamento Pessoal",
+      fixado: true,
+      createdAt: "2026-10-10T08:00:00Z"
+    },
+    {
+      id: "aviso-2",
+      titulo: "Obrigatoriedade das 4 Batidas Diárias e Tolerância",
+      conteudo: "Reforçamos a necessidade de registrar todas as 4 batidas obrigatórias do expediente: Entrada Manhã (08:00), Saída Almoço (12:00), Retorno Almoço (13:00) e Saída Tarde (17:00). Lembramos que a tolerância do sistema é de 5 minutos por período (não cumulativa).",
+      categoria: "importante",
+      filialId: "branch-1",
+      autor: "Gerência Administrativa",
+      fixado: true,
+      createdAt: "2026-10-11T09:30:00Z"
+    },
+    {
+      id: "aviso-3",
+      titulo: "Expediente Especial de Manutenção e Organização",
+      conteudo: "Neste próximo sábado teremos expediente específico para alinhamento operacional e manutenção no depósito e maquinários. Os descansos e compensações serão integrados ao banco de horas e controle de DSR.",
+      categoria: "expediente",
+      filialId: "branch-2",
+      autor: "Coordenação Operacional",
+      fixado: false,
+      createdAt: "2026-10-12T14:00:00Z"
+    }
+  ];
+
   const registrosPonto = {};
   const carryOverDsr = {};
 
-  return { filiais, departamentos, colaboradores, feriados, registrosPonto, carryOverDsr };
+  return { filiais, departamentos, colaboradores, feriados, avisos, registrosPonto, carryOverDsr };
 }
 
 // Salvar dados no LocalStorage e Sincronizar com a Nuvem Supabase
@@ -1189,6 +1224,7 @@ function saveStateToStorage(syncCloud = true) {
       departamentos: appState.departamentos,
       colaboradores: appState.colaboradores,
       feriados: appState.feriados,
+      avisos: appState.avisos,
       registrosPonto: appState.registrosPonto,
       carryOverDsr: appState.carryOverDsr,
       activeBranchId: appState.activeBranchId,
@@ -1251,6 +1287,9 @@ async function syncFromCloudOnStart() {
       if (cloud.colaboradores && cloud.colaboradores.length > 0) {
         appState.colaboradores = cloud.colaboradores;
       }
+      if (cloud.avisos && Array.isArray(cloud.avisos) && cloud.avisos.length > 0) {
+        appState.avisos = cloud.avisos;
+      }
       saveStateToStorage(false);
       renderCurrentView();
       console.log('Dados sincronizados do Supabase Cloud com sucesso.');
@@ -1276,6 +1315,9 @@ function loadStateFromStorage() {
           dataDemissao: c.dataDemissao || ''
         }));
         appState.feriados = parsed.feriados || [];
+        appState.avisos = (parsed.avisos && Array.isArray(parsed.avisos) && parsed.avisos.length > 0)
+          ? parsed.avisos
+          : getDefaultSeedData().avisos;
         appState.registrosPonto = parsed.registrosPonto || {};
         appState.carryOverDsr = parsed.carryOverDsr || {};
 
@@ -1303,11 +1345,13 @@ function loadStateFromStorage() {
   appState.departamentos = seed.departamentos;
   appState.colaboradores = seed.colaboradores;
   appState.feriados = seed.feriados;
+  appState.avisos = seed.avisos;
   appState.registrosPonto = seed.registrosPonto;
   appState.carryOverDsr = seed.carryOverDsr;
   appState.activeBranchId = 'branch-1';
   saveStateToStorage();
 }
+
 
 // ==========================================================================
 // 3. UTILITÁRIOS DE DATA E REGRAS DE PONTO
@@ -1806,35 +1850,37 @@ function calculateVAForEmployee(colabId, year, month, branchId) {
 // 4. RENDERIZAÇÃO DA INTERFACE & NAVEGAÇÃO
 // ==========================================================================
 
+function updateNavTabsActive(targetView) {
+  document.querySelectorAll('.nav-tab-btn').forEach(btn => {
+    if (btn.dataset.view === targetView) {
+      btn.classList.add('active');
+    } else {
+      btn.classList.remove('active');
+    }
+  });
+
+  document.querySelectorAll('.app-view').forEach(view => {
+    view.style.display = (view.id === targetView) ? 'block' : 'none';
+  });
+
+  // Toolbar visibilidade (apenas ponto e va utilizam a toolbar global)
+  const toolbar = document.getElementById('main-toolbar');
+  const boxFilterStatus = document.getElementById('box-filter-status');
+  if (targetView === 'view-ponto' || targetView === 'view-va') {
+    if (toolbar) toolbar.style.display = 'flex';
+    if (boxFilterStatus) boxFilterStatus.style.display = 'flex';
+  } else {
+    if (toolbar) toolbar.style.display = 'none';
+  }
+}
+
 function setupNavigation() {
   const navBtns = document.querySelectorAll('.nav-tab-btn');
   navBtns.forEach(btn => {
     btn.addEventListener('click', () => {
       const targetView = btn.dataset.view;
       appState.activeView = targetView;
-
-      navBtns.forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-
-      document.querySelectorAll('.app-view').forEach(view => {
-        if (view.id === targetView) {
-          view.style.display = 'block';
-        } else {
-          view.style.display = 'none';
-        }
-      });
-
-      // Toolbar visibilidade
-      const toolbar = document.getElementById('main-toolbar');
-      const boxFilterStatus = document.getElementById('box-filter-status');
-
-      if (targetView === 'view-ponto' || targetView === 'view-va') {
-        if (toolbar) toolbar.style.display = 'flex';
-        if (boxFilterStatus) boxFilterStatus.style.display = 'flex';
-      } else {
-        if (toolbar) toolbar.style.display = 'none';
-      }
-
+      updateNavTabsActive(targetView);
       renderCurrentView();
     });
   });
@@ -1844,8 +1890,11 @@ function renderCurrentView() {
   renderBranchTabs();
   updateMonthDisplay();
 
-  if (appState.activeView === 'view-ponto') {
+  if (appState.activeView === 'view-avisos') {
+    renderAvisosView();
+  } else if (appState.activeView === 'view-ponto') {
     renderMatrixView();
+    updatePontoUrgentBanner();
   } else if (appState.activeView === 'view-va') {
     renderVAView();
   } else if (appState.activeView === 'view-colaboradores') {
@@ -1861,17 +1910,27 @@ function renderBranchTabs() {
   const container = document.getElementById('branch-tabs-list');
   if (!container) return;
 
+  // Telas globais desmarcam a empresa selecionada
+  const isGlobalView = appState.activeView === 'view-estrutura' || appState.activeView === 'view-feriados';
+
   container.innerHTML = '';
   appState.filiais.forEach(branch => {
     const colabCount = appState.colaboradores.filter(c => c.filialId === branch.id).length;
     const btn = document.createElement('div');
-    btn.className = 'branch-tab-item ' + (branch.id === appState.activeBranchId ? 'active' : '');
+    const isActive = !isGlobalView && branch.id === appState.activeBranchId;
+    btn.className = 'branch-tab-item ' + (isActive ? 'active' : '');
     btn.innerHTML = '<span>' + branch.nome + '</span><span class="branch-badge">' + colabCount + '</span>';
+    btn.title = isGlobalView ? 'Clique para selecionar esta filial' : 'Filial: ' + branch.nome;
     btn.addEventListener('click', () => {
       appState.activeBranchId = branch.id;
+      // Se estava em tela global e clicou na filial, vai para o mural ou mantém e marca
+      if (appState.activeView === 'view-estrutura' || appState.activeView === 'view-feriados') {
+        appState.activeView = 'view-avisos';
+        updateNavTabsActive('view-avisos');
+      }
       saveStateToStorage();
       renderCurrentView();
-      showToast('Filial alterada para: ' + branch.nome, 'info');
+      showToast('Filial selecionada: ' + branch.nome, 'info');
     });
     container.appendChild(btn);
   });
@@ -1883,6 +1942,7 @@ function updateMonthDisplay() {
     el.textContent = MESES_PT[appState.currentMonth] + ' ' + appState.currentYear;
   }
 }
+
 
 /**
  * Filtro e Ordenação de Colaboradores
@@ -2317,8 +2377,412 @@ document.getElementById('btn-save-cell-detail')?.addEventListener('click', () =>
 });
 
 // ==========================================================================
-// 8. CRUD DE COLABORADORES, FILIAIS, DEPTOS E FERIADOS
+// 8. MURAL DE AVISOS & COMUNICADOS (DASHBOARD PRINCIPAL)
 // ==========================================================================
+
+function escapeHtml(str) {
+  if (!str) return '';
+  return String(str)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#039;');
+}
+
+function formatDateTimeBR(isoString) {
+  if (!isoString) return '';
+  try {
+    const d = new Date(isoString);
+    if (isNaN(d.getTime())) return isoString;
+    const dia = String(d.getDate()).padStart(2, '0');
+    const mes = String(d.getMonth() + 1).padStart(2, '0');
+    const ano = d.getFullYear();
+    const hora = String(d.getHours()).padStart(2, '0');
+    const min = String(d.getMinutes()).padStart(2, '0');
+    return `${dia}/${mes}/${ano} às ${hora}:${min}`;
+  } catch (e) {
+    return isoString;
+  }
+}
+
+function renderAvisosView() {
+  const currentBranch = appState.filiais.find(f => f.id === appState.activeBranchId);
+  const branchName = currentBranch ? currentBranch.nome : 'Todas as Filiais';
+  
+  const branchIndicator = document.getElementById('avisos-branch-indicator');
+  if (branchIndicator) {
+    branchIndicator.innerHTML = `📍 Exibindo comunicados de: <strong>${escapeHtml(branchName)}</strong>`;
+  }
+
+  const kpiBranchName = document.getElementById('kpi-avisos-filial-name');
+  if (kpiBranchName) {
+    kpiBranchName.textContent = currentBranch ? (currentBranch.cidade || currentBranch.nome) : 'Filial Ativa';
+  }
+
+  // Estatísticas / KPIs
+  const allAvisos = appState.avisos || [];
+  const urgentes = allAvisos.filter(a => a.categoria === 'urgente');
+  const daFilial = allAvisos.filter(a => a.filialId === appState.activeBranchId);
+  const gerais = allAvisos.filter(a => a.filialId === 'TODAS' || !a.filialId);
+
+  const kpiTotal = document.getElementById('kpi-avisos-total');
+  const kpiUrgentes = document.getElementById('kpi-avisos-urgentes');
+  const kpiFilial = document.getElementById('kpi-avisos-filial');
+  const kpiGerais = document.getElementById('kpi-avisos-gerais');
+
+  if (kpiTotal) kpiTotal.textContent = allAvisos.length;
+  if (kpiUrgentes) kpiUrgentes.textContent = urgentes.length;
+  if (kpiFilial) kpiFilial.textContent = daFilial.length;
+  if (kpiGerais) kpiGerais.textContent = gerais.length;
+
+  // Filtragem
+  const searchInput = document.getElementById('avisos-search-input');
+  const search = (searchInput?.value || '').trim().toLowerCase();
+  const catFilter = document.getElementById('avisos-filter-categoria')?.value || 'todas';
+  const escopoFilter = document.getElementById('avisos-filter-escopo')?.value || 'todos';
+
+  let filtered = allAvisos.filter(aviso => {
+    // Destino / Escopo
+    if (escopoFilter === 'filial' && aviso.filialId !== appState.activeBranchId) return false;
+    if (escopoFilter === 'geral' && (aviso.filialId && aviso.filialId !== 'TODAS')) return false;
+    if (escopoFilter === 'todos') {
+      if (aviso.filialId && aviso.filialId !== 'TODAS' && aviso.filialId !== appState.activeBranchId) {
+        return false;
+      }
+    }
+
+    // Categoria
+    if (catFilter !== 'todas' && aviso.categoria !== catFilter) return false;
+
+    // Busca textual
+    if (search) {
+      const matchTitle = (aviso.titulo || '').toLowerCase().includes(search);
+      const matchContent = (aviso.conteudo || '').toLowerCase().includes(search);
+      const matchAutor = (aviso.autor || '').toLowerCase().includes(search);
+      if (!matchTitle && !matchContent && !matchAutor) return false;
+    }
+
+    return true;
+  });
+
+  // Ordenação: Fixados no topo, depois data descrescente
+  filtered.sort((a, b) => {
+    if (a.fixado && !b.fixado) return -1;
+    if (!a.fixado && b.fixado) return 1;
+    return new Date(b.createdAt || 0) - new Date(a.createdAt || 0);
+  });
+
+  const pinnedList = filtered.filter(a => a.fixado);
+  const normalList = filtered.filter(a => !a.fixado);
+
+  const pinnedSection = document.getElementById('avisos-pinned-section');
+  const pinnedGrid = document.getElementById('avisos-pinned-grid');
+  const cardsGrid = document.getElementById('avisos-cards-grid');
+  const emptyState = document.getElementById('avisos-empty-state');
+
+  if (pinnedList.length > 0) {
+    if (pinnedSection) pinnedSection.style.display = 'block';
+    if (pinnedGrid) pinnedGrid.innerHTML = pinnedList.map(a => renderAvisoCardHtml(a)).join('');
+  } else {
+    if (pinnedSection) pinnedSection.style.display = 'none';
+    if (pinnedGrid) pinnedGrid.innerHTML = '';
+  }
+
+  if (normalList.length > 0) {
+    if (cardsGrid) {
+      cardsGrid.style.display = 'grid';
+      cardsGrid.innerHTML = normalList.map(a => renderAvisoCardHtml(a)).join('');
+    }
+    if (emptyState) emptyState.style.display = 'none';
+  } else if (pinnedList.length > 0) {
+    if (cardsGrid) {
+      cardsGrid.style.display = 'none';
+      cardsGrid.innerHTML = '';
+    }
+    if (emptyState) emptyState.style.display = 'none';
+  } else {
+    if (cardsGrid) {
+      cardsGrid.style.display = 'none';
+      cardsGrid.innerHTML = '';
+    }
+    if (emptyState) emptyState.style.display = 'block';
+  }
+
+  // Eventos dos cards
+  document.querySelectorAll('.btn-toggle-pin-aviso').forEach(b => {
+    b.addEventListener('click', () => togglePinAviso(b.dataset.id));
+  });
+  document.querySelectorAll('.btn-edit-aviso').forEach(b => {
+    b.addEventListener('click', () => openAvisoModal(b.dataset.id));
+  });
+  document.querySelectorAll('.btn-delete-aviso').forEach(b => {
+    b.addEventListener('click', () => deleteAviso(b.dataset.id));
+  });
+}
+
+function renderAvisoCardHtml(aviso) {
+  const branchMap = Object.fromEntries(appState.filiais.map(f => [f.id, f.nome]));
+  const scopeLabel = (!aviso.filialId || aviso.filialId === 'TODAS')
+    ? '🌐 Todas as Filiais'
+    : '🏢 ' + (branchMap[aviso.filialId] || 'Filial Específica');
+
+  let catLabel = '🔵 Informativo';
+  let catClass = 'badge-cat-informativo';
+  if (aviso.categoria === 'urgente') {
+    catLabel = '🔴 Urgente';
+    catClass = 'badge-cat-urgente';
+  } else if (aviso.categoria === 'importante') {
+    catLabel = '🟡 Importante';
+    catClass = 'badge-cat-importante';
+  } else if (aviso.categoria === 'expediente') {
+    catLabel = '🟣 Expediente / Feriado';
+    catClass = 'badge-cat-expediente';
+  }
+
+  const dateStr = aviso.createdAt ? formatDateTimeBR(aviso.createdAt) : 'Data recente';
+  const pinTitle = aviso.fixado ? 'Desafixar do Topo' : 'Fixar no Topo';
+  const pinBtnText = aviso.fixado ? '📌 Desafixar' : '📌 Fixar';
+
+  return `
+    <div class="aviso-card ${aviso.fixado ? 'pinned' : ''} ${aviso.categoria === 'urgente' ? 'urgente' : ''}">
+      <div>
+        <div class="aviso-card-top">
+          <div class="aviso-badges-wrap">
+            <span class="badge-aviso-cat ${catClass}">${catLabel}</span>
+            <span class="badge-aviso-scope">${scopeLabel}</span>
+            ${aviso.fixado ? '<span class="badge-aviso-pin">📌 Fixado</span>' : ''}
+          </div>
+        </div>
+        <h3 class="aviso-card-title">${escapeHtml(aviso.titulo)}</h3>
+        <div class="aviso-card-meta">
+          <span>📅 ${dateStr}</span>
+          <span>•</span>
+          <span>✍️ ${escapeHtml(aviso.autor || 'RH')}</span>
+        </div>
+        <div class="aviso-card-content">${escapeHtml(aviso.conteudo)}</div>
+      </div>
+      <div class="aviso-card-footer">
+        <button class="btn btn-secondary btn-sm btn-toggle-pin-aviso" data-id="${aviso.id}" title="${pinTitle}">${pinBtnText}</button>
+        <div class="aviso-card-actions">
+          <button class="btn btn-secondary btn-sm btn-edit-aviso" data-id="${aviso.id}" title="Editar Comunicado">✏️ Editar</button>
+          <button class="btn btn-danger btn-sm btn-delete-aviso" data-id="${aviso.id}" title="Excluir Comunicado">🗑️</button>
+        </div>
+      </div>
+    </div>
+  `;
+}
+
+function togglePinAviso(avisoId) {
+  const aviso = (appState.avisos || []).find(a => a.id === avisoId);
+  if (!aviso) return;
+  aviso.fixado = !aviso.fixado;
+  aviso.updatedAt = new Date().toISOString();
+  saveStateToStorage();
+  renderAvisosView();
+  showToast(aviso.fixado ? 'Aviso fixado no topo do mural!' : 'Aviso desafixado.', 'info');
+}
+
+function openAvisoModal(avisoId = null) {
+  const idInput = document.getElementById('aviso-edit-id');
+  const tituloInput = document.getElementById('aviso-titulo');
+  const catInput = document.getElementById('aviso-categoria');
+  const filialSelect = document.getElementById('aviso-filial');
+  const autorInput = document.getElementById('aviso-autor');
+  const fixadoInput = document.getElementById('aviso-fixado');
+  const conteudoInput = document.getElementById('aviso-conteudo');
+  const titleHeader = document.getElementById('modal-aviso-title');
+
+  if (!filialSelect) return;
+
+  filialSelect.innerHTML = '<option value="TODAS">🌐 Todas as Filiais (Geral da Empresa)</option>' +
+    appState.filiais.map(f => `<option value="${f.id}">🏢 ${f.nome}</option>`).join('');
+
+  if (avisoId) {
+    const aviso = (appState.avisos || []).find(a => a.id === avisoId);
+    if (!aviso) return;
+    idInput.value = aviso.id;
+    tituloInput.value = aviso.titulo || '';
+    catInput.value = aviso.categoria || 'informativo';
+    filialSelect.value = aviso.filialId || 'TODAS';
+    autorInput.value = aviso.autor || 'RH / Departamento Pessoal';
+    fixadoInput.checked = !!aviso.fixado;
+    conteudoInput.value = aviso.conteudo || '';
+    if (titleHeader) titleHeader.innerHTML = '<span>✏️</span> Editar Comunicado';
+  } else {
+    idInput.value = '';
+    tituloInput.value = '';
+    catInput.value = 'informativo';
+    filialSelect.value = appState.activeBranchId || 'TODAS';
+    autorInput.value = 'RH / Departamento Pessoal';
+    fixadoInput.checked = false;
+    conteudoInput.value = '';
+    if (titleHeader) titleHeader.innerHTML = '<span>📢</span> Novo Comunicado / Aviso';
+  }
+
+  openModal('modal-aviso');
+}
+
+function saveAvisoFromModal() {
+  const idInput = document.getElementById('aviso-edit-id');
+  const tituloInput = document.getElementById('aviso-titulo');
+  const catInput = document.getElementById('aviso-categoria');
+  const filialSelect = document.getElementById('aviso-filial');
+  const autorInput = document.getElementById('aviso-autor');
+  const fixadoInput = document.getElementById('aviso-fixado');
+  const conteudoInput = document.getElementById('aviso-conteudo');
+
+  const titulo = tituloInput.value.trim();
+  const conteudo = conteudoInput.value.trim();
+
+  if (!titulo) {
+    showToast('Por favor, informe o título do comunicado.', 'warning');
+    tituloInput.focus();
+    return;
+  }
+  if (!conteudo) {
+    showToast('Por favor, informe a mensagem do comunicado.', 'warning');
+    conteudoInput.focus();
+    return;
+  }
+
+  if (!appState.avisos) appState.avisos = [];
+
+  const avisoId = idInput.value;
+  if (avisoId) {
+    const idx = appState.avisos.findIndex(a => a.id === avisoId);
+    if (idx !== -1) {
+      appState.avisos[idx] = {
+        ...appState.avisos[idx],
+        titulo,
+        categoria: catInput.value,
+        filialId: filialSelect.value,
+        autor: autorInput.value.trim() || 'RH / Departamento Pessoal',
+        fixado: fixadoInput.checked,
+        conteudo,
+        updatedAt: new Date().toISOString()
+      };
+      showToast('Comunicado atualizado com sucesso!', 'success');
+    }
+  } else {
+    const newAviso = {
+      id: 'aviso-' + Date.now(),
+      titulo,
+      categoria: catInput.value,
+      filialId: filialSelect.value,
+      autor: autorInput.value.trim() || 'RH / Departamento Pessoal',
+      fixado: fixadoInput.checked,
+      conteudo,
+      createdAt: new Date().toISOString(),
+      updatedAt: new Date().toISOString()
+    };
+    appState.avisos.unshift(newAviso);
+    showToast('Novo comunicado publicado no mural!', 'success');
+  }
+
+  saveStateToStorage();
+  closeModal('modal-aviso');
+  renderCurrentView();
+}
+
+function deleteAviso(avisoId) {
+  if (!confirm('Tem certeza de que deseja excluir este comunicado do mural?')) return;
+  appState.avisos = (appState.avisos || []).filter(a => a.id !== avisoId);
+  saveStateToStorage();
+  renderCurrentView();
+  showToast('Comunicado excluído.', 'info');
+}
+
+function updatePontoUrgentBanner() {
+  const banner = document.getElementById('ponto-urgent-banner');
+  if (!banner) return;
+
+  const allAvisos = appState.avisos || [];
+  // Procura aviso urgente ou fixado para esta filial ou geral
+  const urgentAviso = allAvisos.find(a => 
+    (a.categoria === 'urgente' || a.fixado) &&
+    (!a.filialId || a.filialId === 'TODAS' || a.filialId === appState.activeBranchId)
+  );
+
+  if (urgentAviso) {
+    banner.style.display = 'flex';
+    banner.innerHTML = `
+      <div class="ponto-urgent-banner-text">
+        <span>📢</span>
+        <div>
+          <strong>${urgentAviso.categoria === 'urgente' ? 'ALERTA URGENTE:' : 'COMUNICADO FIXADO:'}</strong>
+          ${escapeHtml(urgentAviso.titulo)}
+        </div>
+      </div>
+      <button class="btn btn-cyan btn-sm" id="btn-banner-go-avisos" style="white-space:nowrap;">
+        Ver no Mural ➔
+      </button>
+    `;
+    document.getElementById('btn-banner-go-avisos')?.addEventListener('click', () => {
+      appState.activeView = 'view-avisos';
+      updateNavTabsActive('view-avisos');
+      renderCurrentView();
+    });
+  } else {
+    banner.style.display = 'none';
+    banner.innerHTML = '';
+  }
+}
+
+// ==========================================================================
+// 9. GESTÃO DE COLABORADORES COM FILTROS AVANÇADOS
+// ==========================================================================
+
+let colabFiltersInitialized = false;
+function setupColabFiltersDropdowns() {
+  const deptSelect = document.getElementById('colab-filter-dept');
+  const filialSelect = document.getElementById('colab-filter-filial');
+  if (!deptSelect || !filialSelect) return;
+
+  // Atualiza opções de filial sincronizando com a ativa
+  const currentFilialVal = filialSelect.value || appState.activeBranchId;
+  filialSelect.innerHTML = appState.filiais.map(f => 
+    `<option value="${f.id}" ${f.id === appState.activeBranchId ? 'selected' : ''}>🏢 ${f.nome}</option>`
+  ).join('') + '<option value="todas">🌐 Todas as Filiais</option>';
+
+  if (filialSelect.value !== currentFilialVal && (currentFilialVal === 'todas' || appState.filiais.some(f => f.id === currentFilialVal))) {
+    filialSelect.value = currentFilialVal;
+  }
+
+  // Departamentos
+  const currentDeptVal = deptSelect.value || 'todos';
+  deptSelect.innerHTML = '<option value="todos">Todos os Departamentos</option>' +
+    appState.departamentos.map(d => `<option value="${d.id}">${d.nome}</option>`).join('');
+  if (currentDeptVal) deptSelect.value = currentDeptVal;
+
+  if (!colabFiltersInitialized) {
+    colabFiltersInitialized = true;
+    document.getElementById('colab-search-input')?.addEventListener('input', () => renderColaboradoresView());
+    deptSelect.addEventListener('change', () => renderColaboradoresView());
+    document.getElementById('colab-filter-status')?.addEventListener('change', () => renderColaboradoresView());
+    document.getElementById('colab-filter-ponto')?.addEventListener('change', () => renderColaboradoresView());
+    filialSelect.addEventListener('change', (e) => {
+      if (e.target.value !== 'todas') {
+        appState.activeBranchId = e.target.value;
+        saveStateToStorage();
+        renderBranchTabs();
+      }
+      renderColaboradoresView();
+    });
+    document.getElementById('btn-colab-reset-filters')?.addEventListener('click', () => {
+      const searchIn = document.getElementById('colab-search-input');
+      if (searchIn) searchIn.value = '';
+      deptSelect.value = 'todos';
+      const stEl = document.getElementById('colab-filter-status');
+      if (stEl) stEl.value = 'ativo';
+      const ptEl = document.getElementById('colab-filter-ponto');
+      if (ptEl) ptEl.value = 'todos';
+      filialSelect.value = appState.activeBranchId;
+      renderColaboradoresView();
+      showToast('Filtros de colaboradores redefinidos.', 'info');
+    });
+  }
+}
 
 function renderColaboradoresView() {
   const tbody = document.getElementById('colaboradores-tbody');
@@ -2327,8 +2791,79 @@ function renderColaboradoresView() {
   const branchMap = Object.fromEntries(appState.filiais.map(f => [f.id, f.nome]));
   const deptMap = Object.fromEntries(appState.departamentos.map(d => [d.id, d.nome]));
 
+  // Subtítulo indicador da filial
+  const subEl = document.getElementById('colab-branch-subtitle');
+  if (subEl) {
+    const curBranch = branchMap[appState.activeBranchId] || 'Todas as Filiais';
+    subEl.textContent = '📍 Filial Ativa: ' + curBranch;
+  }
+
+  // Preenche filtros
+  setupColabFiltersDropdowns();
+
+  // Filtragem da lista
+  let list = appState.colaboradores.slice();
+
+  // 1. Filial (por padrão filtra pela filial ativa selecionada no topo)
+  const filialSelect = document.getElementById('colab-filter-filial');
+  const selectedFilial = filialSelect ? filialSelect.value : appState.activeBranchId;
+  if (selectedFilial && selectedFilial !== 'todas') {
+    list = list.filter(c => c.filialId === selectedFilial);
+  }
+
+  // 2. Departamento
+  const deptSelect = document.getElementById('colab-filter-dept');
+  if (deptSelect && deptSelect.value !== 'todos') {
+    list = list.filter(c => c.deptId === deptSelect.value);
+  }
+
+  // 3. Situação (Ativo / Demitido / Todos)
+  const statusSelect = document.getElementById('colab-filter-status');
+  if (statusSelect && statusSelect.value !== 'todos') {
+    if (statusSelect.value === 'ativo') {
+      list = list.filter(c => c.status !== 'demitido');
+    } else if (statusSelect.value === 'demitido') {
+      list = list.filter(c => c.status === 'demitido');
+    }
+  }
+
+  // 4. Registra Ponto
+  const pontoSelect = document.getElementById('colab-filter-ponto');
+  if (pontoSelect && pontoSelect.value !== 'todos') {
+    if (pontoSelect.value === 'sim') {
+      list = list.filter(c => c.registraPonto !== false);
+    } else if (pontoSelect.value === 'nao') {
+      list = list.filter(c => c.registraPonto === false);
+    }
+  }
+
+  // 5. Busca textual
+  const searchInput = document.getElementById('colab-search-input');
+  const q = (searchInput?.value || '').trim().toLowerCase();
+  if (q) {
+    list = list.filter(c =>
+      c.nome.toLowerCase().includes(q) ||
+      String(c.cracha).includes(q)
+    );
+  }
+
+  // Ordenação por crachá
+  list.sort((a, b) => Number(a.cracha) - Number(b.cracha));
+
+  // Contador de resultados
+  const countEl = document.getElementById('colab-stats-count');
+  if (countEl) {
+    const totalBranchColabs = appState.colaboradores.filter(c => c.filialId === appState.activeBranchId).length;
+    countEl.innerHTML = `<span>Exibindo <strong>${list.length}</strong> de ${totalBranchColabs} colaborador(es) desta empresa (Total no sistema: ${appState.colaboradores.length})</span><span style="color:var(--color-text-muted);">* Alterne a filial acima na barra para ver outra empresa</span>`;
+  }
+
   tbody.innerHTML = '';
-  appState.colaboradores.forEach(colab => {
+  if (list.length === 0) {
+    tbody.innerHTML = '<tr><td colspan="8" style="text-align:center; padding: 24px; color: var(--color-text-sub);">Nenhum colaborador encontrado para os filtros selecionados nesta filial.</td></tr>';
+    return;
+  }
+
+  list.forEach(colab => {
     const isDemitido = colab.status === 'demitido';
     const statusBadge = isDemitido 
       ? '<span class="badge-demitido">Demitido (' + (formatDateBR(colab.dataDemissao) || 'S/ Data') + ')</span>'
@@ -2338,7 +2873,7 @@ function renderColaboradoresView() {
       : '<span class="badge-ponto-nao">Não</span>';
 
     const tr = document.createElement('tr');
-    tr.innerHTML = '<td style="font-family: var(--font-mono); font-weight:700;">' + colab.cracha + '</td><td><strong>' + colab.nome + '</strong></td><td>' + (branchMap[colab.filialId] || 'Não informada') + '</td><td>' + (deptMap[colab.deptId] || 'Geral') + '</td><td>' + formatDateBR(colab.admissao) + '</td><td class="text-center">' + pontoBadge + '</td><td class="text-center">' + statusBadge + '</td><td class="text-center"><button class="btn btn-secondary btn-sm btn-edit-colab" data-id="' + colab.id + '">✏️ Editar</button> <button class="btn btn-danger btn-sm btn-delete-colab" data-id="' + colab.id + '">🗑️ Excluir</button></td>';
+    tr.innerHTML = '<td style="font-family: var(--font-mono); font-weight:700;">' + colab.cracha + '</td><td><strong>' + escapeHtml(colab.nome) + '</strong></td><td>' + (branchMap[colab.filialId] || 'Não informada') + '</td><td>' + (deptMap[colab.deptId] || 'Geral') + '</td><td>' + formatDateBR(colab.admissao) + '</td><td class="text-center">' + pontoBadge + '</td><td class="text-center">' + statusBadge + '</td><td class="text-center"><button class="btn btn-secondary btn-sm btn-edit-colab" data-id="' + colab.id + '">✏️ Editar</button> <button class="btn btn-danger btn-sm btn-delete-colab" data-id="' + colab.id + '">🗑️ Excluir</button></td>';
     tbody.appendChild(tr);
   });
 
@@ -2349,6 +2884,7 @@ function renderColaboradoresView() {
     b.addEventListener('click', () => deleteEmployee(b.dataset.id));
   });
 }
+
 
 function openEmployeeModal(empId = null) {
   const branchSelect = document.getElementById('emp-branch');
@@ -2727,6 +3263,9 @@ document.getElementById('input-import-file')?.addEventListener('change', (e) => 
         dataDemissao: c.dataDemissao || ''
       }));
       appState.feriados = imported.feriados || [];
+      if (imported.avisos && Array.isArray(imported.avisos)) {
+        appState.avisos = imported.avisos;
+      }
       appState.registrosPonto = imported.registrosPonto || {};
       appState.carryOverDsr = imported.carryOverDsr || {};
 
@@ -2781,6 +3320,15 @@ function showToast(message, type = 'info') {
 // 11. INICIALIZAÇÃO E EVENT LISTENERS DO TOOLBAR
 // ==========================================================================
 function initEvents() {
+  // Eventos do Mural de Avisos
+  document.getElementById('btn-novo-aviso')?.addEventListener('click', () => openAvisoModal());
+  document.getElementById('btn-empty-novo-aviso')?.addEventListener('click', () => openAvisoModal());
+  document.getElementById('btn-salvar-aviso')?.addEventListener('click', saveAvisoFromModal);
+
+  document.getElementById('avisos-search-input')?.addEventListener('input', () => renderAvisosView());
+  document.getElementById('avisos-filter-categoria')?.addEventListener('change', () => renderAvisosView());
+  document.getElementById('avisos-filter-escopo')?.addEventListener('change', () => renderAvisosView());
+
   // Navegação de Mês
   document.getElementById('btn-prev-month')?.addEventListener('click', () => {
     if (appState.currentMonth === 0) {
@@ -2868,8 +3416,10 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('filter-status-select').value = appState.statusFilter || 'ativos';
   }
 
+  updateNavTabsActive(appState.activeView || 'view-avisos');
   renderCurrentView();
 
   // Sincronização automática em segundo plano com a nuvem Supabase
   syncFromCloudOnStart();
 });
+
