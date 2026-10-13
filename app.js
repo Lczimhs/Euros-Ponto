@@ -1699,6 +1699,20 @@ function getDayStatus(colabId, isoStr, branchId) {
     const override = reg.override;
     const resolution = reg.resolution || 'NENHUMA';
 
+    if (override === 'VAZIO') {
+      return {
+        type: 'VAZIO',
+        display: '',
+        cssClass: 'status-empty',
+        isPending: false,
+        isWorkingDay: false,
+        isSunday: false,
+        isHoliday: !!holiday,
+        isEmptyDay: true,
+        resolution
+      };
+    }
+
     if (override === 'OK' || resolution === 'ABONAR') {
       return {
         type: 'OK',
@@ -2310,6 +2324,10 @@ function calculateVAForEmployee(colabId, year, month, branchId) {
           descontado = baseRate;
           absenceDays++;
           note = resolved.type + ' - Sem benefício de VA';
+        } else if (resolved.type === 'VAZIO') {
+          creditado = 0.00;
+          descontado = 0.00;
+          note = 'Dia futuro em aberto (desmarcado)';
         }
       }
     }

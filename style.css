@@ -40,13 +40,19 @@
   --color-ok-border: rgba(0, 229, 255, 0.35);
   --color-ok-text: #00E5FF;
 
-  --color-falta-bg: #342A52;
-  --color-falta-border: #422985;
-  --color-falta-text: #D6CEEA;
+  /* Falta Integral e Meio Período (FM / FT) - Vermelho */
+  --color-falta-bg: rgba(239, 68, 68, 0.22);
+  --color-falta-border: #EF4444;
+  --color-falta-text: #FCA5A5;
 
-  --color-half-bg: rgba(66, 41, 133, 0.45);
-  --color-half-border: #38BDF8;
-  --color-half-text: #ADD8E6;
+  --color-half-bg: rgba(244, 63, 94, 0.20);
+  --color-half-border: #F43F5E;
+  --color-half-text: #FDA4AF;
+
+  /* Atrasos e Pendências de Batidas (EM, SM, ET, ST) - Amarelo */
+  --color-atraso-bg: rgba(245, 158, 11, 0.20);
+  --color-atraso-border: #F59E0B;
+  --color-atraso-text: #FDE68A;
 
   --color-feriado-bg: rgba(64, 21, 184, 0.25);
   --color-feriado-border: #4015B8;
@@ -750,26 +756,31 @@ thead .col-dsr {
   border: 1px solid var(--color-ok-border);
 }
 
-/* Status: FALTA (Integral) */
+/* Status: FALTA (Integral) - Vermelho Marcante */
 .status-falta {
-  background: var(--color-falta-bg);
-  color: var(--color-falta-text);
-  border: 1px solid var(--color-falta-border);
-  box-shadow: inset 0 0 4px rgba(64, 21, 184, 0.3);
+  background: var(--color-falta-bg) !important;
+  color: #FEE2E2 !important;
+  border: 1px solid var(--color-falta-border) !important;
+  box-shadow: inset 0 0 6px rgba(239, 68, 68, 0.4) !important;
+  font-weight: 700;
 }
 
-/* Status: FT / FM (Meio Período) */
+/* Status: FT / FM (Meio Período) - Vermelho Alerta */
 .status-half {
-  background: var(--color-half-bg);
-  color: var(--color-half-text);
-  border: 1px dashed var(--color-half-border);
+  background: var(--color-half-bg) !important;
+  color: #FECDD3 !important;
+  border: 1px dashed var(--color-half-border) !important;
+  box-shadow: inset 0 0 4px rgba(244, 63, 94, 0.3) !important;
+  font-weight: 700;
 }
 
-/* Status: ATRASO (Ex: A.00:15) */
+/* Status: ATRASO (Ex: A.00:15) e Batidas (EM, SM, ET, ST) - Amarelo Ouro */
 .status-atraso {
-  background: rgba(56, 189, 248, 0.15);
-  color: var(--color-blue-bright);
-  border: 1px solid var(--color-blue-bright);
+  background: var(--color-atraso-bg) !important;
+  color: #FEF08A !important;
+  border: 1px solid var(--color-atraso-border) !important;
+  box-shadow: inset 0 0 4px rgba(245, 158, 11, 0.3) !important;
+  font-weight: 700;
 }
 
 /* Status: ATESTADO & 1/2 ATESTADO */
@@ -844,6 +855,19 @@ thead .col-dsr {
 .status-disabled:hover {
   transform: none !important;
   box-shadow: none !important;
+}
+
+/* Status: VAZIO / DESMARCADO (Dias futuros desmarcados) */
+.status-empty {
+  background: rgba(30, 27, 46, 0.4) !important;
+  color: transparent !important;
+  border: 1px dashed rgba(80, 70, 110, 0.3) !important;
+  box-shadow: none !important;
+}
+
+.status-empty:hover {
+  border-color: rgba(0, 229, 255, 0.4) !important;
+  background: rgba(45, 38, 70, 0.5) !important;
 }
 
 /* Badges de Colaborador */
