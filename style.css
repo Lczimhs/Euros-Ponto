@@ -1370,71 +1370,628 @@ thead .col-dsr {
   font-size: 36px;
   color: var(--color-border-bright);
   margin-bottom: 10px;
+}
 
-  /* Cloud Sync Indicator */
-  .cloud-badge {
-    display: flex;
-    align-items: center;
-    gap: 7px;
-    background: rgba(0, 229, 255, 0.08);
-    color: var(--color-cyan);
-    border: 1px solid rgba(0, 229, 255, 0.35);
-    padding: 4px 10px;
-    border-radius: var(--radius-sm);
-    font-size: 11px;
-    font-weight: 600;
-    user-select: none;
-    box-shadow: 0 0 10px rgba(0, 229, 255, 0.15);
+/* Cloud Sync Indicator */
+.cloud-badge {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  background: rgba(0, 229, 255, 0.08);
+  color: var(--color-cyan);
+  border: 1px solid rgba(0, 229, 255, 0.35);
+  padding: 4px 10px;
+  border-radius: var(--radius-sm);
+  font-size: 11px;
+  font-weight: 600;
+  user-select: none;
+  box-shadow: 0 0 10px rgba(0, 229, 255, 0.15);
+}
+
+.cloud-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--color-cyan);
+  box-shadow: 0 0 6px var(--color-cyan);
+  animation: pulseCloud 2s infinite ease-in-out;
+}
+
+@keyframes pulseCloud {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.45;
+    transform: scale(0.8);
+  }
+}
+
+/* ==========================================================================
+   CALENDÁRIO DE PRAZOS LEGAIS E AVISOS CLT / DP
+   ========================================================================== */
+.avisos-calendar-container {
+  padding: 20px;
+  max-width: 1600px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.cal-hero-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
+  padding: 16px 20px;
+  background: linear-gradient(135deg, rgba(17, 24, 39, 0.95), rgba(30, 41, 59, 0.9));
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
+}
+
+.cal-hero-left h1 {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--color-text-main);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0;
+}
+
+.cal-hero-left p {
+  font-size: 13px;
+  color: var(--color-text-sub);
+  margin: 4px 0 0 0;
+}
+
+.cal-branch-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 6px;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--color-cyan);
+  background: rgba(0, 229, 255, 0.1);
+  border: 1px solid rgba(0, 229, 255, 0.3);
+  padding: 2px 10px;
+  border-radius: 12px;
+}
+
+/* KPI Cards */
+.cal-kpi-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 12px;
+}
+
+.kpi-value.green-done {
+  color: #10B981;
+}
+
+.kpi-value.red-urgent {
+  color: #FF3366;
+}
+
+/* Calendar Toolbar */
+.cal-toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 14px;
+  padding: 12px 18px;
+  background: var(--color-bg-panel);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+}
+
+.cal-month-nav {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.month-nav-btn {
+  background: var(--color-bg-dark);
+  border: 1px solid var(--color-border);
+  color: var(--color-text-main);
+  width: 34px;
+  height: 34px;
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 16px;
+  transition: all 0.2s;
+}
+
+.month-nav-btn:hover {
+  background: var(--color-primary);
+  border-color: var(--color-primary);
+  color: #FFF;
+}
+
+.cal-month-title {
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--color-text-main);
+  min-width: 160px;
+  text-align: center;
+  letter-spacing: 0.5px;
+}
+
+.cal-filters-group {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.cal-legend-quick {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 11px;
+  color: var(--color-text-sub);
+  flex-wrap: wrap;
+}
+
+.legend-dot {
+  display: inline-block;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  margin-right: 2px;
+  vertical-align: middle;
+}
+
+.legend-dot.dot-red { background: #FF3366; }
+.legend-dot.dot-yellow { background: #FFB800; }
+.legend-dot.dot-purple { background: #A855F7; }
+.legend-dot.dot-cyan { background: #00E5FF; }
+.legend-dot.dot-green { background: #10B981; }
+.legend-dot.dot-done { background: #64748B; text-decoration: line-through; }
+
+/* Calendar Card & Grid */
+.calendar-card {
+  background: var(--color-bg-panel);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  box-shadow: var(--shadow-md);
+}
+
+.cal-weekdays-row {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  background: rgba(15, 23, 42, 0.85);
+  border-bottom: 2px solid var(--color-border);
+}
+
+.cal-weekday-col {
+  padding: 10px 8px;
+  text-align: center;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--color-text-sub);
+  letter-spacing: 1px;
+}
+
+.cal-weekday-col.weekend {
+  color: #FF8099;
+}
+
+.cal-days-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  background: var(--color-border);
+  gap: 1px; /* Creates clean cell borders */
+}
+
+/* Individual Day Cell */
+.cal-day-cell {
+  background: var(--color-bg-dark);
+  min-height: 112px;
+  padding: 6px 8px;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  transition: all 0.2s ease;
+  cursor: pointer;
+  user-select: none;
+}
+
+.cal-day-cell:hover {
+  background: #1A2234;
+  box-shadow: inset 0 0 0 1px var(--color-cyan);
+}
+
+.cal-day-cell.other-month {
+  background: rgba(11, 15, 25, 0.6);
+  opacity: 0.45;
+}
+
+.cal-day-cell.other-month:hover {
+  opacity: 0.8;
+}
+
+.cal-day-cell.today {
+  background: rgba(0, 229, 255, 0.05);
+  box-shadow: inset 0 0 0 1.5px var(--color-cyan);
+}
+
+.cal-day-cell.weekend-day {
+  background: rgba(20, 26, 38, 0.8);
+}
+
+.cal-day-cell.has-deadline-urgent {
+  box-shadow: inset 0 0 0 1px rgba(255, 51, 102, 0.5);
+}
+
+.cal-day-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 6px;
+}
+
+.cal-day-number {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--color-text-main);
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+}
+
+.cal-day-cell.today .cal-day-number {
+  background: var(--color-cyan);
+  color: #0B0F19;
+  font-weight: 800;
+}
+
+.cal-day-add-btn {
+  opacity: 0;
+  font-size: 11px;
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--color-text-sub);
+  border: none;
+  border-radius: 3px;
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.15s;
+}
+
+.cal-day-cell:hover .cal-day-add-btn {
+  opacity: 1;
+}
+
+.cal-day-add-btn:hover {
+  background: var(--color-primary);
+  color: #FFF;
+}
+
+/* Notice Badges inside Day Cell */
+.cal-cell-notices {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  overflow: hidden;
+  flex: 1;
+}
+
+.cal-notice-pill {
+  font-size: 10px;
+  font-weight: 600;
+  padding: 2px 6px;
+  border-radius: 4px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  line-height: 1.3;
+  border: 1px solid transparent;
+  transition: transform 0.1s;
+}
+
+.cal-notice-pill:hover {
+  transform: translateX(1px);
+}
+
+/* Colors by Legal Deadline Type */
+.notice-pill-rescisao {
+  background: rgba(255, 51, 102, 0.22);
+  color: #FF8099;
+  border-color: rgba(255, 51, 102, 0.5);
+}
+
+.notice-pill-salario {
+  background: rgba(255, 184, 0, 0.2);
+  color: #FFD166;
+  border-color: rgba(255, 184, 0, 0.5);
+}
+
+.notice-pill-ferias {
+  background: rgba(168, 85, 247, 0.2);
+  color: #D8B4FE;
+  border-color: rgba(168, 85, 247, 0.5);
+}
+
+.notice-pill-ponto {
+  background: rgba(0, 229, 255, 0.18);
+  color: #67E8F9;
+  border-color: rgba(0, 229, 255, 0.45);
+}
+
+.notice-pill-fgts {
+  background: rgba(16, 185, 129, 0.2);
+  color: #6EE7B7;
+  border-color: rgba(16, 185, 129, 0.5);
+}
+
+.notice-pill-outros {
+  background: rgba(148, 163, 184, 0.18);
+  color: #CBD5E1;
+  border-color: rgba(148, 163, 184, 0.4);
+}
+
+/* Notice Done (Feito) Strikethrough style */
+.cal-notice-pill.is-done {
+  background: rgba(100, 116, 139, 0.2) !important;
+  color: #94A3B8 !important;
+  border-color: rgba(100, 116, 139, 0.35) !important;
+  text-decoration: line-through;
+  opacity: 0.7;
+}
+
+.cal-notice-more-badge {
+  font-size: 9px;
+  font-weight: 700;
+  color: var(--color-cyan);
+  padding: 1px 4px;
+  text-align: right;
+  opacity: 0.9;
+}
+
+/* ==========================================================================
+   MODAL 8: AVISOS DO DIA (COM BOTÃO FEITO)
+   ========================================================================== */
+.day-summary-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 14px;
+  background: rgba(15, 23, 42, 0.7);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  margin-bottom: 14px;
+  font-size: 12px;
+  color: var(--color-text-sub);
+}
+
+.day-notices-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  max-height: 520px;
+  overflow-y: auto;
+  padding-right: 4px;
+}
+
+.day-notice-card {
+  background: var(--color-bg-dark);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  padding: 14px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  transition: all 0.2s ease;
+  position: relative;
+}
+
+.day-notice-card:hover {
+  border-color: var(--color-border-bright);
+}
+
+.day-notice-card.is-done {
+  background: rgba(15, 23, 42, 0.5);
+  border-color: rgba(16, 185, 129, 0.3);
+  opacity: 0.85;
+}
+
+.day-notice-card.type-rescisao {
+  border-left: 4px solid #FF3366;
+}
+
+.day-notice-card.type-salario {
+  border-left: 4px solid #FFB800;
+}
+
+.day-notice-card.type-ferias {
+  border-left: 4px solid #A855F7;
+}
+
+.day-notice-card.type-ponto {
+  border-left: 4px solid #00E5FF;
+}
+
+.day-notice-card.type-fgts {
+  border-left: 4px solid #10B981;
+}
+
+.day-notice-card.type-outros {
+  border-left: 4px solid #94A3B8;
+}
+
+.day-notice-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.day-notice-badges {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.status-badge-pending {
+  font-size: 11px;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 10px;
+  background: rgba(239, 68, 68, 0.18);
+  color: #F87171;
+  border: 1px solid rgba(239, 68, 68, 0.4);
+}
+
+.status-badge-done {
+  font-size: 11px;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 10px;
+  background: rgba(16, 185, 129, 0.18);
+  color: #34D399;
+  border: 1px solid rgba(16, 185, 129, 0.4);
+}
+
+.day-notice-title {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--color-text-main);
+  margin: 0;
+}
+
+.day-notice-card.is-done .day-notice-title {
+  text-decoration: line-through;
+  color: var(--color-text-muted);
+}
+
+.day-notice-desc {
+  font-size: 13px;
+  color: var(--color-text-sub);
+  line-height: 1.45;
+  white-space: pre-line;
+}
+
+.day-notice-meta {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 11px;
+  color: var(--color-text-muted);
+  flex-wrap: wrap;
+}
+
+.day-notice-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+  padding-top: 8px;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* The Key "FEITO" Action Button */
+.btn-toggle-done {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  font-weight: 700;
+  padding: 6px 14px;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border: 1px solid transparent;
+}
+
+.btn-toggle-done.mark-done {
+  background: linear-gradient(135deg, #10B981, #059669);
+  color: #FFF;
+  box-shadow: 0 2px 8px rgba(16, 185, 129, 0.35);
+}
+
+.btn-toggle-done.mark-done:hover {
+  background: linear-gradient(135deg, #34D399, #10B981);
+  box-shadow: 0 4px 12px rgba(16, 185, 129, 0.5);
+  transform: translateY(-1px);
+}
+
+.btn-toggle-done.reopen {
+  background: rgba(148, 163, 184, 0.15);
+  color: var(--color-text-sub);
+  border-color: rgba(148, 163, 184, 0.3);
+}
+
+.btn-toggle-done.reopen:hover {
+  background: rgba(251, 191, 36, 0.15);
+  color: #FCD34D;
+  border-color: rgba(251, 191, 36, 0.4);
+}
+
+/* Assistente de Prazos Legais (CLT) */
+.legal-preset-box {
+  background: rgba(0, 229, 255, 0.05);
+  border: 1px solid rgba(0, 229, 255, 0.25);
+  border-radius: var(--radius-sm);
+  padding: 12px 14px;
+  margin-bottom: 14px;
+}
+
+.legal-preset-box label {
+  color: var(--color-cyan);
+  font-weight: 700;
+  margin-bottom: 6px;
+  display: block;
+}
+
+/* Print View Styles */
+@media print {
+  body {
+    background: #FFF !important;
+    color: #000 !important;
   }
 
-  .cloud-dot {
-    width: 7px;
-    height: 7px;
-    border-radius: 50%;
-    background: var(--color-cyan);
-    box-shadow: 0 0 6px var(--color-cyan);
-    animation: pulseCloud 2s infinite ease-in-out;
+  .app-header,
+  .toolbar-container,
+  .legend-bar,
+  .btn,
+  .modal-close-btn,
+  .branch-tabs-bar {
+    display: none !important;
   }
 
-  @keyframes pulseCloud {
-
-    0%,
-    100% {
-      opacity: 1;
-      transform: scale(1);
-    }
-
-    50% {
-      opacity: 0.45;
-      transform: scale(0.8);
-    }
+  .va-table-card,
+  .styled-table,
+  .calendar-card {
+    border: 1px solid #CCC !important;
+    box-shadow: none !important;
   }
 
-  /* Print View Styles */
-  @media print {
-    body {
-      background: #FFF !important;
-      color: #000 !important;
-    }
-
-    .app-header,
-    .toolbar-container,
-    .legend-bar,
-    .btn,
-    .modal-close-btn {
-      display: none !important;
-    }
-
-    .va-table-card,
-    .styled-table {
-      border: 1px solid #CCC !important;
-      box-shadow: none !important;
-    }
-
-    .styled-table th,
-    .styled-table td {
-      color: #000 !important;
-      border-color: #DDD !important;
-    }
+  .styled-table th,
+  .styled-table td {
+    color: #000 !important;
+    border-color: #DDD !important;
   }
 }

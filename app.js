@@ -1179,34 +1179,76 @@ function getDefaultSeedData() {
 
   const avisos = [
     {
-      id: "aviso-1",
-      titulo: "Fechamento da Folha e Ponto de Outubro 2026",
-      conteudo: "Lembramos a todos os encarregados e gestores que as conferências de batidas faltantes, atestados e justificativas devem ser concluídas até o dia 28/10 para fechamento do espelho de ponto e apuração definitiva do Vale Alimentação.",
-      categoria: "urgente",
-      filialId: "TODAS",
-      autor: "RH / Departamento Pessoal",
-      fixado: true,
-      createdAt: "2026-10-10T08:00:00Z"
-    },
-    {
-      id: "aviso-2",
-      titulo: "Obrigatoriedade das 4 Batidas Diárias e Tolerância",
-      conteudo: "Reforçamos a necessidade de registrar todas as 4 batidas obrigatórias do expediente: Entrada Manhã (08:00), Saída Almoço (12:00), Retorno Almoço (13:00) e Saída Tarde (17:00). Lembramos que a tolerância do sistema é de 5 minutos por período (não cumulativa).",
-      categoria: "importante",
+      id: "aviso-rescisao-1",
+      data: "2026-10-19",
+      titulo: "🔴 Prazo Limite Rescisão - Wesley Patrick (10 dias CLT Art. 477)",
+      tipo: "rescisao",
+      descricao: "Prazo fatal de 10 dias corridos para quitação das verbas rescisórias e entrega do TRCT/Guias (Art. 477, § 6º da CLT). Desligamento ocorrido em 09/10/2026.",
       filialId: "branch-1",
-      autor: "Gerência Administrativa",
-      fixado: true,
-      createdAt: "2026-10-11T09:30:00Z"
+      colabId: "colab-1034",
+      concluido: false,
+      concluidoEm: null,
+      createdAt: "2026-10-09T10:00:00Z"
     },
     {
-      id: "aviso-3",
-      titulo: "Expediente Especial de Manutenção e Organização",
-      conteudo: "Neste próximo sábado teremos expediente específico para alinhamento operacional e manutenção no depósito e maquinários. Os descansos e compensações serão integrados ao banco de horas e controle de DSR.",
-      categoria: "expediente",
-      filialId: "branch-2",
-      autor: "Coordenação Operacional",
-      fixado: false,
-      createdAt: "2026-10-12T14:00:00Z"
+      id: "aviso-salario-1",
+      data: "2026-10-07",
+      titulo: "🟡 Pagamento de Salário Mensal (5º Dia Útil - CLT Art. 459)",
+      tipo: "salario",
+      descricao: "Crédito em conta corrente dos vencimentos mensais de todos os colaboradores até o 5º dia útil do mês subsequente.",
+      filialId: "TODAS",
+      colabId: "",
+      concluido: true,
+      concluidoEm: "2026-10-07T14:30:00Z",
+      createdAt: "2026-10-01T08:00:00Z"
+    },
+    {
+      id: "aviso-ferias-1",
+      data: "2026-10-15",
+      titulo: "🟣 Aviso Prévio de Férias - Carlos Henrique (30 dias antecedência CLT)",
+      tipo: "ferias",
+      descricao: "Comunicação formal por escrito com antecedência mínima de 30 dias (Art. 135 da CLT). Início das férias previsto para 15/11/2026.",
+      filialId: "branch-1",
+      colabId: "colab-1020",
+      concluido: false,
+      concluidoEm: null,
+      createdAt: "2026-10-05T09:00:00Z"
+    },
+    {
+      id: "aviso-vale-1",
+      data: "2026-10-20",
+      titulo: "🟡 Adiantamento Salarial Quinzenal (Vale 40%)",
+      tipo: "salario",
+      descricao: "Pagamento do adiantamento salarial de 40% a todos os colaboradores com opção cadastrada.",
+      filialId: "TODAS",
+      colabId: "",
+      concluido: false,
+      concluidoEm: null,
+      createdAt: "2026-10-01T08:00:00Z"
+    },
+    {
+      id: "aviso-fgts-1",
+      data: "2026-10-20",
+      titulo: "🟢 Vencimento FGTS Digital / Guia eSocial",
+      tipo: "fgts",
+      descricao: "Recolhimento mensal das guias do FGTS Digital referente à competência anterior (Vencimento até o dia 20).",
+      filialId: "TODAS",
+      colabId: "",
+      concluido: false,
+      concluidoEm: null,
+      createdAt: "2026-10-01T08:00:00Z"
+    },
+    {
+      id: "aviso-ponto-1",
+      data: "2026-10-25",
+      titulo: "🔵 Fechamento do Ponto Eletrônico & Apuração de VA",
+      tipo: "ponto",
+      descricao: "Data de corte para conferência de batidas manuais, faltas e atestados para apuração definitiva do crédito de Vale Alimentação.",
+      filialId: "TODAS",
+      colabId: "",
+      concluido: false,
+      concluidoEm: null,
+      createdAt: "2026-10-01T08:00:00Z"
     }
   ];
 
@@ -1267,6 +1309,21 @@ function triggerCloudSync(payload) {
   }, 1000);
 }
 
+function normalizeAviso(a) {
+  return {
+    id: a.id || ('aviso-' + Math.random().toString(36).substr(2, 9)),
+    data: a.data || (a.createdAt ? a.createdAt.split('T')[0] : '2026-10-15'),
+    titulo: a.titulo || 'Prazo Legal CLT',
+    tipo: a.tipo || (a.categoria === 'urgente' ? 'rescisao' : 'outros'),
+    descricao: a.descricao || a.conteudo || '',
+    filialId: a.filialId || 'TODAS',
+    colabId: a.colabId || '',
+    concluido: !!a.concluido,
+    concluidoEm: a.concluidoEm || null,
+    createdAt: a.createdAt || new Date().toISOString()
+  };
+}
+
 async function syncFromCloudOnStart() {
   if (!supabaseClient) return;
   try {
@@ -1288,7 +1345,9 @@ async function syncFromCloudOnStart() {
         appState.colaboradores = cloud.colaboradores;
       }
       if (cloud.avisos && Array.isArray(cloud.avisos) && cloud.avisos.length > 0) {
-        appState.avisos = cloud.avisos;
+        // Se avisos da nuvem forem do formato antigo sem data, usa o seed legal enriquecido
+        const hasDates = cloud.avisos.some(a => !!a.data);
+        appState.avisos = hasDates ? cloud.avisos.map(normalizeAviso) : getDefaultSeedData().avisos;
       }
       saveStateToStorage(false);
       renderCurrentView();
@@ -1315,9 +1374,14 @@ function loadStateFromStorage() {
           dataDemissao: c.dataDemissao || ''
         }));
         appState.feriados = parsed.feriados || [];
-        appState.avisos = (parsed.avisos && Array.isArray(parsed.avisos) && parsed.avisos.length > 0)
+        
+        // Se avisos existentes no storage forem do modelo antigo sem "data", carrega os novos seed
+        const rawAvisos = (parsed.avisos && Array.isArray(parsed.avisos) && parsed.avisos.length > 0)
           ? parsed.avisos
           : getDefaultSeedData().avisos;
+        const hasCalendarDates = rawAvisos.some(a => !!a.data);
+        appState.avisos = hasCalendarDates ? rawAvisos.map(normalizeAviso) : getDefaultSeedData().avisos;
+
         appState.registrosPonto = parsed.registrosPonto || {};
         appState.carryOverDsr = parsed.carryOverDsr || {};
 
@@ -2406,243 +2470,526 @@ function formatDateTimeBR(isoString) {
   }
 }
 
-function renderAvisosView() {
-  const currentBranch = appState.filiais.find(f => f.id === appState.activeBranchId);
-  const branchName = currentBranch ? currentBranch.nome : 'Todas as Filiais';
-  
-  const branchIndicator = document.getElementById('avisos-branch-indicator');
-  if (branchIndicator) {
-    branchIndicator.innerHTML = `📍 Exibindo comunicados de: <strong>${escapeHtml(branchName)}</strong>`;
+// ==========================================================================
+// 8. CALENDÁRIO DE PRAZOS LEGAIS & AVISOS CLT / DP
+// ==========================================================================
+
+const DIAS_SEMANA_NOMES = ['Domingo', 'Segunda-feira', 'Terça-feira', 'Quarta-feira', 'Quinta-feira', 'Sexta-feira', 'Sábado'];
+let currentModalDate = null;
+
+function addCalendarDays(dateStr, days) {
+  try {
+    const parts = dateStr.split('-');
+    const dt = new Date(parseInt(parts[0], 10), parseInt(parts[1], 10) - 1, parseInt(parts[2], 10));
+    dt.setDate(dt.getDate() + days);
+    const y = dt.getFullYear();
+    const m = String(dt.getMonth() + 1).padStart(2, '0');
+    const d = String(dt.getDate()).padStart(2, '0');
+    return `${y}-${m}-${d}`;
+  } catch (e) {
+    return dateStr;
   }
+}
 
-  const kpiBranchName = document.getElementById('kpi-avisos-filial-name');
-  if (kpiBranchName) {
-    kpiBranchName.textContent = currentBranch ? (currentBranch.cidade || currentBranch.nome) : 'Filial Ativa';
-  }
-
-  // Estatísticas / KPIs
-  const allAvisos = appState.avisos || [];
-  const urgentes = allAvisos.filter(a => a.categoria === 'urgente');
-  const daFilial = allAvisos.filter(a => a.filialId === appState.activeBranchId);
-  const gerais = allAvisos.filter(a => a.filialId === 'TODAS' || !a.filialId);
-
-  const kpiTotal = document.getElementById('kpi-avisos-total');
-  const kpiUrgentes = document.getElementById('kpi-avisos-urgentes');
-  const kpiFilial = document.getElementById('kpi-avisos-filial');
-  const kpiGerais = document.getElementById('kpi-avisos-gerais');
-
-  if (kpiTotal) kpiTotal.textContent = allAvisos.length;
-  if (kpiUrgentes) kpiUrgentes.textContent = urgentes.length;
-  if (kpiFilial) kpiFilial.textContent = daFilial.length;
-  if (kpiGerais) kpiGerais.textContent = gerais.length;
-
-  // Filtragem
-  const searchInput = document.getElementById('avisos-search-input');
-  const search = (searchInput?.value || '').trim().toLowerCase();
-  const catFilter = document.getElementById('avisos-filter-categoria')?.value || 'todas';
-  const escopoFilter = document.getElementById('avisos-filter-escopo')?.value || 'todos';
-
-  let filtered = allAvisos.filter(aviso => {
-    // Destino / Escopo
-    if (escopoFilter === 'filial' && aviso.filialId !== appState.activeBranchId) return false;
-    if (escopoFilter === 'geral' && (aviso.filialId && aviso.filialId !== 'TODAS')) return false;
-    if (escopoFilter === 'todos') {
-      if (aviso.filialId && aviso.filialId !== 'TODAS' && aviso.filialId !== appState.activeBranchId) {
-        return false;
+function get5thBusinessDay(year, month) {
+  let businessDaysCount = 0;
+  const daysInMonth = new Date(year, month + 1, 0).getDate();
+  for (let d = 1; d <= daysInMonth; d++) {
+    const dt = new Date(year, month, d);
+    const dayOfWeek = dt.getDay(); // 0 = Domingo
+    if (dayOfWeek !== 0) { // Segunda a Sábado contam como dias úteis na CLT
+      const iso = `${year}-${String(month + 1).padStart(2, '0')}-${String(d).padStart(2, '0')}`;
+      const isFeriado = (appState.feriados || []).some(f => f.data === iso);
+      if (!isFeriado) {
+        businessDaysCount++;
+        if (businessDaysCount === 5) {
+          return iso;
+        }
       }
     }
+  }
+  return `${year}-${String(month + 1).padStart(2, '0')}-07`;
+}
 
-    // Categoria
-    if (catFilter !== 'todas' && aviso.categoria !== catFilter) return false;
+function renderAvisosView() {
+  if (typeof appState.calendarYear !== 'number') appState.calendarYear = appState.currentYear || 2026;
+  if (typeof appState.calendarMonth !== 'number') appState.calendarMonth = (typeof appState.currentMonth === 'number') ? appState.currentMonth : 9;
 
-    // Busca textual
-    if (search) {
-      const matchTitle = (aviso.titulo || '').toLowerCase().includes(search);
-      const matchContent = (aviso.conteudo || '').toLowerCase().includes(search);
-      const matchAutor = (aviso.autor || '').toLowerCase().includes(search);
-      if (!matchTitle && !matchContent && !matchAutor) return false;
-    }
+  const calYear = appState.calendarYear;
+  const calMonth = appState.calendarMonth;
 
+  // Atualiza título do mês exibido
+  const monthDisplay = document.getElementById('cal-month-display');
+  if (monthDisplay) {
+    monthDisplay.textContent = `${MESES_PT[calMonth]} ${calYear}`;
+  }
+
+  // Indicador da filial ativa no topo do calendário
+  const currentBranch = appState.filiais.find(f => f.id === appState.activeBranchId);
+  const branchName = currentBranch ? currentBranch.nome : 'Todas as Filiais';
+  const branchIndicator = document.getElementById('avisos-branch-indicator') || document.getElementById('cal-branch-indicator');
+  if (branchIndicator) {
+    branchIndicator.innerHTML = `📍 Filial Ativa: <strong>${escapeHtml(branchName)}</strong> • Prazos de Rescisão (10 dias), Salário, Ponto e Férias`;
+  }
+
+  // Estatísticas e KPIs do Mês
+  const allAvisos = appState.avisos || [];
+  const monthPrefix = `${calYear}-${String(calMonth + 1).padStart(2, '0')}`;
+
+  const monthNotices = allAvisos.filter(a => {
+    if (!a.data || !a.data.startsWith(monthPrefix)) return false;
+    if (a.filialId && a.filialId !== 'TODAS' && a.filialId !== appState.activeBranchId) return false;
     return true;
   });
 
-  // Ordenação: Fixados no topo, depois data descrescente
-  filtered.sort((a, b) => {
-    if (a.fixado && !b.fixado) return -1;
-    if (!a.fixado && b.fixado) return 1;
-    return new Date(b.createdAt || 0) - new Date(a.createdAt || 0);
-  });
+  const pendentes = monthNotices.filter(a => !a.concluido);
+  const concluidos = monthNotices.filter(a => !!a.concluido);
+  const rescisoes = monthNotices.filter(a => a.tipo === 'rescisao');
 
-  const pinnedList = filtered.filter(a => a.fixado);
-  const normalList = filtered.filter(a => !a.fixado);
+  const kpiPendentes = document.getElementById('kpi-cal-pendentes');
+  const kpiConcluidos = document.getElementById('kpi-cal-concluidos');
+  const kpiRescisoes = document.getElementById('kpi-cal-rescisoes');
+  const kpiTotal = document.getElementById('kpi-cal-total');
 
-  const pinnedSection = document.getElementById('avisos-pinned-section');
-  const pinnedGrid = document.getElementById('avisos-pinned-grid');
-  const cardsGrid = document.getElementById('avisos-cards-grid');
-  const emptyState = document.getElementById('avisos-empty-state');
+  if (kpiPendentes) kpiPendentes.textContent = pendentes.length;
+  if (kpiConcluidos) kpiConcluidos.textContent = concluidos.length;
+  if (kpiRescisoes) kpiRescisoes.textContent = rescisoes.length;
+  if (kpiTotal) kpiTotal.textContent = monthNotices.length;
 
-  if (pinnedList.length > 0) {
-    if (pinnedSection) pinnedSection.style.display = 'block';
-    if (pinnedGrid) pinnedGrid.innerHTML = pinnedList.map(a => renderAvisoCardHtml(a)).join('');
-  } else {
-    if (pinnedSection) pinnedSection.style.display = 'none';
-    if (pinnedGrid) pinnedGrid.innerHTML = '';
+  // Filtros ativos
+  const filterTipo = document.getElementById('cal-filter-tipo')?.value || 'todos';
+  const filterStatus = document.getElementById('cal-filter-status')?.value || 'todos';
+
+  // Renderização da Grade do Calendário
+  const grid = document.getElementById('cal-days-grid');
+  if (!grid) return;
+  grid.innerHTML = '';
+
+  const firstDay = new Date(calYear, calMonth, 1);
+  const startingDayOfWeek = firstDay.getDay(); // 0 (Dom) a 6 (Sáb)
+  const daysInMonth = new Date(calYear, calMonth + 1, 0).getDate();
+  const prevMonthDays = new Date(calYear, calMonth, 0).getDate();
+
+  const todayIso = new Date().toISOString().split('T')[0];
+
+  // 1. Dias do mês anterior
+  for (let i = startingDayOfWeek - 1; i >= 0; i--) {
+    const prevDayNum = prevMonthDays - i;
+    const prevMonthIdx = calMonth === 0 ? 11 : calMonth - 1;
+    const prevYearNum = calMonth === 0 ? calYear - 1 : calYear;
+    const dateStr = `${prevYearNum}-${String(prevMonthIdx + 1).padStart(2, '0')}-${String(prevDayNum).padStart(2, '0')}`;
+    grid.appendChild(createDayCellElement({
+      dateStr,
+      dayNum: prevDayNum,
+      isOtherMonth: true,
+      filterTipo,
+      filterStatus,
+      todayIso
+    }));
   }
 
-  if (normalList.length > 0) {
-    if (cardsGrid) {
-      cardsGrid.style.display = 'grid';
-      cardsGrid.innerHTML = normalList.map(a => renderAvisoCardHtml(a)).join('');
-    }
-    if (emptyState) emptyState.style.display = 'none';
-  } else if (pinnedList.length > 0) {
-    if (cardsGrid) {
-      cardsGrid.style.display = 'none';
-      cardsGrid.innerHTML = '';
-    }
-    if (emptyState) emptyState.style.display = 'none';
-  } else {
-    if (cardsGrid) {
-      cardsGrid.style.display = 'none';
-      cardsGrid.innerHTML = '';
-    }
-    if (emptyState) emptyState.style.display = 'block';
+  // 2. Dias do mês atual
+  for (let d = 1; d <= daysInMonth; d++) {
+    const dateStr = `${calYear}-${String(calMonth + 1).padStart(2, '0')}-${String(d).padStart(2, '0')}`;
+    grid.appendChild(createDayCellElement({
+      dateStr,
+      dayNum: d,
+      isOtherMonth: false,
+      filterTipo,
+      filterStatus,
+      todayIso
+    }));
   }
 
-  // Eventos dos cards
-  document.querySelectorAll('.btn-toggle-pin-aviso').forEach(b => {
-    b.addEventListener('click', () => togglePinAviso(b.dataset.id));
-  });
-  document.querySelectorAll('.btn-edit-aviso').forEach(b => {
-    b.addEventListener('click', () => openAvisoModal(b.dataset.id));
-  });
-  document.querySelectorAll('.btn-delete-aviso').forEach(b => {
-    b.addEventListener('click', () => deleteAviso(b.dataset.id));
-  });
+  // 3. Dias do próximo mês
+  const totalRendered = startingDayOfWeek + daysInMonth;
+  const remainingCells = (totalRendered % 7 === 0) ? 0 : 7 - (totalRendered % 7);
+  for (let d = 1; d <= remainingCells; d++) {
+    const nextMonthIdx = calMonth === 11 ? 0 : calMonth + 1;
+    const nextYearNum = calMonth === 11 ? calYear + 1 : calYear;
+    const dateStr = `${nextYearNum}-${String(nextMonthIdx + 1).padStart(2, '0')}-${String(d).padStart(2, '0')}`;
+    grid.appendChild(createDayCellElement({
+      dateStr,
+      dayNum: d,
+      isOtherMonth: true,
+      filterTipo,
+      filterStatus,
+      todayIso
+    }));
+  }
 }
 
-function renderAvisoCardHtml(aviso) {
-  const branchMap = Object.fromEntries(appState.filiais.map(f => [f.id, f.nome]));
-  const scopeLabel = (!aviso.filialId || aviso.filialId === 'TODAS')
-    ? '🌐 Todas as Filiais'
-    : '🏢 ' + (branchMap[aviso.filialId] || 'Filial Específica');
+function createDayCellElement({ dateStr, dayNum, isOtherMonth, filterTipo, filterStatus, todayIso }) {
+  const cell = document.createElement('div');
+  const isToday = dateStr === todayIso;
+  const dayOfWeek = new Date(dateStr + 'T12:00:00').getDay();
+  const isWeekend = dayOfWeek === 0 || dayOfWeek === 6;
 
-  let catLabel = '🔵 Informativo';
-  let catClass = 'badge-cat-informativo';
-  if (aviso.categoria === 'urgente') {
-    catLabel = '🔴 Urgente';
-    catClass = 'badge-cat-urgente';
-  } else if (aviso.categoria === 'importante') {
-    catLabel = '🟡 Importante';
-    catClass = 'badge-cat-importante';
-  } else if (aviso.categoria === 'expediente') {
-    catLabel = '🟣 Expediente / Feriado';
-    catClass = 'badge-cat-expediente';
+  // Filtra avisos deste dia
+  const dayNotices = (appState.avisos || []).filter(a => {
+    if (a.data !== dateStr) return false;
+    if (a.filialId && a.filialId !== 'TODAS' && a.filialId !== appState.activeBranchId) return false;
+    if (filterTipo !== 'todos' && a.tipo !== filterTipo) return false;
+    if (filterStatus === 'pendente' && a.concluido) return false;
+    if (filterStatus === 'concluido' && !a.concluido) return false;
+    return true;
+  });
+
+  const hasUrgentPending = dayNotices.some(a => a.tipo === 'rescisao' && !a.concluido);
+
+  cell.className = 'cal-day-cell' +
+    (isOtherMonth ? ' other-month' : '') +
+    (isToday ? ' today' : '') +
+    (isWeekend ? ' weekend-day' : '') +
+    (hasUrgentPending ? ' has-deadline-urgent' : '');
+  cell.dataset.date = dateStr;
+
+  // Cabeçalho do dia
+  const topDiv = document.createElement('div');
+  topDiv.className = 'cal-day-top';
+  topDiv.innerHTML = `
+    <span class="cal-day-number">${dayNum}</span>
+    <button class="cal-day-add-btn" title="Adicionar novo prazo neste dia">+</button>
+  `;
+  cell.appendChild(topDiv);
+
+  // Lista de badges de aviso
+  const noticesContainer = document.createElement('div');
+  noticesContainer.className = 'cal-cell-notices';
+
+  const MAX_PILLS = 3;
+  const visiblePills = dayNotices.slice(0, MAX_PILLS);
+  const remainingCount = dayNotices.length - MAX_PILLS;
+
+  visiblePills.forEach(aviso => {
+    const pill = document.createElement('div');
+    pill.className = `cal-notice-pill notice-pill-${aviso.tipo || 'outros'} ${aviso.concluido ? 'is-done' : ''}`;
+
+    let icon = '📌';
+    if (aviso.tipo === 'rescisao') icon = '🔴';
+    else if (aviso.tipo === 'salario') icon = '🟡';
+    else if (aviso.tipo === 'ferias') icon = '🟣';
+    else if (aviso.tipo === 'ponto') icon = '🔵';
+    else if (aviso.tipo === 'fgts') icon = '🟢';
+
+    const checkIcon = aviso.concluido ? '✅ ' : `${icon} `;
+    pill.innerHTML = `<span>${checkIcon}</span><span style="overflow:hidden; text-overflow:ellipsis;">${escapeHtml(aviso.titulo)}</span>`;
+    pill.title = `${aviso.titulo} (${aviso.concluido ? 'Concluído/Feito' : 'Pendente'})`;
+    noticesContainer.appendChild(pill);
+  });
+
+  if (remainingCount > 0) {
+    const moreBadge = document.createElement('div');
+    moreBadge.className = 'cal-notice-more-badge';
+    moreBadge.textContent = `+${remainingCount} mais...`;
+    noticesContainer.appendChild(moreBadge);
   }
 
-  const dateStr = aviso.createdAt ? formatDateTimeBR(aviso.createdAt) : 'Data recente';
-  const pinTitle = aviso.fixado ? 'Desafixar do Topo' : 'Fixar no Topo';
-  const pinBtnText = aviso.fixado ? '📌 Desafixar' : '📌 Fixar';
+  cell.appendChild(noticesContainer);
 
-  return `
-    <div class="aviso-card ${aviso.fixado ? 'pinned' : ''} ${aviso.categoria === 'urgente' ? 'urgente' : ''}">
+  // Handler do botão "+"
+  topDiv.querySelector('.cal-day-add-btn').addEventListener('click', (e) => {
+    e.stopPropagation();
+    openAvisoModal(null, dateStr);
+  });
+
+  // Handler do clique na célula: abre tela com os avisos e botão feito (se houver), ou abre modal de criação
+  cell.addEventListener('click', () => {
+    if (dayNotices.length > 0) {
+      openDayNoticesModal(dateStr);
+    } else {
+      openAvisoModal(null, dateStr);
+    }
+  });
+
+  return cell;
+}
+
+function openDayNoticesModal(dateStr) {
+  currentModalDate = dateStr;
+  const branchMap = Object.fromEntries(appState.filiais.map(f => [f.id, f.nome]));
+  const colabMap = Object.fromEntries(appState.colaboradores.map(c => [c.id, c.nome]));
+
+  const d = new Date(dateStr + 'T12:00:00');
+  const diaSemana = DIAS_SEMANA_NOMES[d.getDay()] || '';
+
+  const titleEl = document.getElementById('modal-day-title');
+  if (titleEl) {
+    titleEl.innerHTML = `<span>📅</span> Prazos e Avisos de <strong>${formatDateBR(dateStr)}</strong> (${diaSemana})`;
+  }
+
+  const dayNotices = (appState.avisos || []).filter(a => {
+    if (a.data !== dateStr) return false;
+    if (a.filialId && a.filialId !== 'TODAS' && a.filialId !== appState.activeBranchId) return false;
+    return true;
+  });
+
+  const pendentesCount = dayNotices.filter(a => !a.concluido).length;
+  const feitosCount = dayNotices.filter(a => !!a.concluido).length;
+
+  const summaryBar = document.getElementById('modal-day-summary-bar');
+  if (summaryBar) {
+    summaryBar.innerHTML = `
+      <div><strong>${dayNotices.length}</strong> prazo(s) agendado(s) neste dia</div>
       <div>
-        <div class="aviso-card-top">
-          <div class="aviso-badges-wrap">
-            <span class="badge-aviso-cat ${catClass}">${catLabel}</span>
-            <span class="badge-aviso-scope">${scopeLabel}</span>
-            ${aviso.fixado ? '<span class="badge-aviso-pin">📌 Fixado</span>' : ''}
+        <span style="color:#F87171; font-weight:700;">🔴 ${pendentesCount} Pendente(s)</span>
+        &nbsp;•&nbsp;
+        <span style="color:#34D399; font-weight:700;">✅ ${feitosCount} Concluído(s) [Feito]</span>
+      </div>
+    `;
+  }
+
+  const listContainer = document.getElementById('modal-day-list-container');
+  if (!listContainer) return;
+  listContainer.innerHTML = '';
+
+  if (dayNotices.length === 0) {
+    listContainer.innerHTML = `
+      <div class="empty-state">
+        <div class="empty-state-icon">📅</div>
+        <p>Nenhum aviso ou prazo cadastrado para este dia.</p>
+        <p style="font-size:12px; color:var(--color-text-sub);">Clique no botão abaixo para adicionar um novo aviso neste dia.</p>
+      </div>
+    `;
+  } else {
+    dayNotices.forEach(aviso => {
+      const card = document.createElement('div');
+      card.className = `day-notice-card type-${aviso.tipo || 'outros'} ${aviso.concluido ? 'is-done' : ''}`;
+
+      const scopeName = (!aviso.filialId || aviso.filialId === 'TODAS')
+        ? '🌐 Todas as Filiais'
+        : '🏢 ' + (branchMap[aviso.filialId] || 'Filial Específica');
+
+      let tipoLabel = '⚪ Outros';
+      if (aviso.tipo === 'rescisao') tipoLabel = '🔴 Rescisão Contratual (10 dias)';
+      else if (aviso.tipo === 'salario') tipoLabel = '🟡 Pagamento Salarial / Vale';
+      else if (aviso.tipo === 'ferias') tipoLabel = '🟣 Férias CLT';
+      else if (aviso.tipo === 'ponto') tipoLabel = '🔵 Ponto Eletrônico & VA';
+      else if (aviso.tipo === 'fgts') tipoLabel = '🟢 FGTS Digital / eSocial';
+
+      const statusBadge = aviso.concluido
+        ? '<span class="status-badge-done">✅ Feito (Concluído)</span>'
+        : '<span class="status-badge-pending">🔴 Pendente</span>';
+
+      const colabName = aviso.colabId ? (colabMap[aviso.colabId] || 'Colaborador vinculado') : null;
+
+      card.innerHTML = `
+        <div class="day-notice-header">
+          <div class="day-notice-badges">
+            <span class="badge-aviso-cat badge-cat-informativo" style="font-size:10px; padding:2px 6px;">${tipoLabel}</span>
+            <span class="badge-aviso-scope" style="font-size:10px; padding:2px 6px;">${scopeName}</span>
+            ${statusBadge}
+          </div>
+          <div style="font-size:11px; color:var(--color-text-muted);">
+            ${aviso.concluidoEm ? 'Feito em: ' + formatDateTimeBR(aviso.concluidoEm) : 'Criado em: ' + formatDateTimeBR(aviso.createdAt)}
           </div>
         </div>
-        <h3 class="aviso-card-title">${escapeHtml(aviso.titulo)}</h3>
-        <div class="aviso-card-meta">
-          <span>📅 ${dateStr}</span>
-          <span>•</span>
-          <span>✍️ ${escapeHtml(aviso.autor || 'RH')}</span>
+
+        <h4 class="day-notice-title">${escapeHtml(aviso.titulo)}</h4>
+
+        ${colabName ? `<div style="font-size:12px; color:var(--color-cyan); font-weight:600;">👤 Colaborador: ${escapeHtml(colabName)}</div>` : ''}
+
+        ${aviso.descricao ? `<div class="day-notice-desc">${escapeHtml(aviso.descricao)}</div>` : ''}
+
+        <div class="day-notice-actions">
+          <div>
+            ${aviso.concluido 
+              ? `<button class="btn-toggle-done reopen" data-id="${aviso.id}">↩️ Reabrir (Marcar como Pendente)</button>`
+              : `<button class="btn-toggle-done mark-done" data-id="${aviso.id}">✅ Marcar como FEITO</button>`
+            }
+          </div>
+          <div style="display:flex; gap:6px;">
+            <button class="btn btn-secondary btn-sm btn-edit-day-notice" data-id="${aviso.id}">✏️ Editar</button>
+            <button class="btn btn-danger btn-sm btn-delete-day-notice" data-id="${aviso.id}">🗑️</button>
+          </div>
         </div>
-        <div class="aviso-card-content">${escapeHtml(aviso.conteudo)}</div>
-      </div>
-      <div class="aviso-card-footer">
-        <button class="btn btn-secondary btn-sm btn-toggle-pin-aviso" data-id="${aviso.id}" title="${pinTitle}">${pinBtnText}</button>
-        <div class="aviso-card-actions">
-          <button class="btn btn-secondary btn-sm btn-edit-aviso" data-id="${aviso.id}" title="Editar Comunicado">✏️ Editar</button>
-          <button class="btn btn-danger btn-sm btn-delete-aviso" data-id="${aviso.id}" title="Excluir Comunicado">🗑️</button>
-        </div>
-      </div>
-    </div>
-  `;
+      `;
+
+      listContainer.appendChild(card);
+    });
+
+    listContainer.querySelectorAll('.btn-toggle-done').forEach(btn => {
+      btn.addEventListener('click', () => {
+        toggleAvisoDone(btn.dataset.id, dateStr);
+      });
+    });
+
+    listContainer.querySelectorAll('.btn-edit-day-notice').forEach(btn => {
+      btn.addEventListener('click', () => {
+        closeModal('modal-day-avisos');
+        openAvisoModal(btn.dataset.id);
+      });
+    });
+
+    listContainer.querySelectorAll('.btn-delete-day-notice').forEach(btn => {
+      btn.addEventListener('click', () => {
+        deleteAviso(btn.dataset.id, dateStr);
+      });
+    });
+  }
+
+  const btnAddNew = document.getElementById('btn-day-add-new-notice');
+  if (btnAddNew) {
+    btnAddNew.onclick = () => {
+      closeModal('modal-day-avisos');
+      openAvisoModal(null, dateStr);
+    };
+  }
+
+  openModal('modal-day-avisos');
 }
 
-function togglePinAviso(avisoId) {
+function toggleAvisoDone(avisoId, dateStr) {
   const aviso = (appState.avisos || []).find(a => a.id === avisoId);
   if (!aviso) return;
-  aviso.fixado = !aviso.fixado;
-  aviso.updatedAt = new Date().toISOString();
+  aviso.concluido = !aviso.concluido;
+  aviso.concluidoEm = aviso.concluido ? new Date().toISOString() : null;
   saveStateToStorage();
   renderAvisosView();
-  showToast(aviso.fixado ? 'Aviso fixado no topo do mural!' : 'Aviso desafixado.', 'info');
+  if (dateStr) {
+    openDayNoticesModal(dateStr);
+  }
+  showToast(aviso.concluido ? 'Prazo marcado como CONCLUÍDO (Feito)!' : 'Prazo reaberto como PENDENTE.', 'success');
 }
 
-function openAvisoModal(avisoId = null) {
+function openAvisoModal(avisoId = null, defaultDate = null) {
   const idInput = document.getElementById('aviso-edit-id');
+  const dataInput = document.getElementById('aviso-data');
+  const tipoInput = document.getElementById('aviso-tipo');
   const tituloInput = document.getElementById('aviso-titulo');
-  const catInput = document.getElementById('aviso-categoria');
+  const colabSelect = document.getElementById('aviso-colab');
   const filialSelect = document.getElementById('aviso-filial');
-  const autorInput = document.getElementById('aviso-autor');
-  const fixadoInput = document.getElementById('aviso-fixado');
-  const conteudoInput = document.getElementById('aviso-conteudo');
+  const descInput = document.getElementById('aviso-descricao');
+  const concluidoCheck = document.getElementById('aviso-concluido');
   const titleHeader = document.getElementById('modal-aviso-title');
+  const presetSelect = document.getElementById('select-preset-legal');
+  const boxRescisao = document.getElementById('box-helper-rescisao');
+  const inputDemissao = document.getElementById('input-calc-demissao-data');
 
   if (!filialSelect) return;
 
-  filialSelect.innerHTML = '<option value="TODAS">🌐 Todas as Filiais (Geral da Empresa)</option>' +
+  filialSelect.innerHTML = '<option value="TODAS">🌐 Todas as Filiais</option>' +
     appState.filiais.map(f => `<option value="${f.id}">🏢 ${f.nome}</option>`).join('');
+
+  if (colabSelect) {
+    colabSelect.innerHTML = '<option value="">Nenhum / Prazo Geral</option>' +
+      appState.colaboradores
+        .slice()
+        .sort((a, b) => Number(a.cracha) - Number(b.cracha))
+        .map(c => `<option value="${c.id}">${c.cracha} - ${c.nome}</option>`).join('');
+  }
+
+  if (boxRescisao) boxRescisao.style.display = 'none';
+  if (presetSelect) presetSelect.value = 'custom';
 
   if (avisoId) {
     const aviso = (appState.avisos || []).find(a => a.id === avisoId);
     if (!aviso) return;
     idInput.value = aviso.id;
+    dataInput.value = aviso.data || '';
+    tipoInput.value = aviso.tipo || 'rescisao';
     tituloInput.value = aviso.titulo || '';
-    catInput.value = aviso.categoria || 'informativo';
     filialSelect.value = aviso.filialId || 'TODAS';
-    autorInput.value = aviso.autor || 'RH / Departamento Pessoal';
-    fixadoInput.checked = !!aviso.fixado;
-    conteudoInput.value = aviso.conteudo || '';
-    if (titleHeader) titleHeader.innerHTML = '<span>✏️</span> Editar Comunicado';
+    if (colabSelect) colabSelect.value = aviso.colabId || '';
+    descInput.value = aviso.descricao || aviso.conteudo || '';
+    concluidoCheck.checked = !!aviso.concluido;
+    if (titleHeader) titleHeader.innerHTML = '<span>✏️</span> Editar Prazo / Aviso Legal';
   } else {
     idInput.value = '';
+    const initialDate = defaultDate || new Date().toISOString().split('T')[0];
+    dataInput.value = initialDate;
+    tipoInput.value = 'rescisao';
     tituloInput.value = '';
-    catInput.value = 'informativo';
     filialSelect.value = appState.activeBranchId || 'TODAS';
-    autorInput.value = 'RH / Departamento Pessoal';
-    fixadoInput.checked = false;
-    conteudoInput.value = '';
-    if (titleHeader) titleHeader.innerHTML = '<span>📢</span> Novo Comunicado / Aviso';
+    if (colabSelect) colabSelect.value = '';
+    descInput.value = '';
+    concluidoCheck.checked = false;
+    if (inputDemissao) inputDemissao.value = initialDate;
+    if (titleHeader) titleHeader.innerHTML = '<span>📅</span> Novo Prazo / Aviso Legal';
   }
 
   openModal('modal-aviso');
 }
 
+function handleLegalPresetChange(preset) {
+  const boxRescisao = document.getElementById('box-helper-rescisao');
+  const tipoInput = document.getElementById('aviso-tipo');
+  const dataInput = document.getElementById('aviso-data');
+  const tituloInput = document.getElementById('aviso-titulo');
+  const descInput = document.getElementById('aviso-descricao');
+  const colabSelect = document.getElementById('aviso-colab');
+  const colabNome = (colabSelect && colabSelect.selectedIndex > 0)
+    ? colabSelect.options[colabSelect.selectedIndex].text
+    : 'Colaborador';
+
+  if (boxRescisao) {
+    boxRescisao.style.display = (preset === 'rescisao') ? 'block' : 'none';
+  }
+
+  const calYear = appState.calendarYear || 2026;
+  const calMonth = (typeof appState.calendarMonth === 'number') ? appState.calendarMonth : 9;
+
+  if (preset === 'rescisao') {
+    if (tipoInput) tipoInput.value = 'rescisao';
+    const inputDemissao = document.getElementById('input-calc-demissao-data');
+    const demissaoVal = inputDemissao?.value || new Date().toISOString().split('T')[0];
+    const prazoFatal = addCalendarDays(demissaoVal, 10);
+    if (dataInput) dataInput.value = prazoFatal;
+    if (tituloInput) tituloInput.value = `🔴 Pagamento Rescisão Contratual - ${colabNome} (10 dias CLT Art. 477)`;
+    if (descInput) descInput.value = `Prazo improrrogável de 10 dias corridos para pagamento integral das verbas rescisórias e entrega das guias (TRCT/FGTS) conforme Art. 477, § 6º da CLT. Demissão em: ${formatDateBR(demissaoVal)}.`;
+  } else if (preset === 'salario_5') {
+    if (tipoInput) tipoInput.value = 'salario';
+    const quintoDia = get5thBusinessDay(calYear, calMonth);
+    if (dataInput) dataInput.value = quintoDia;
+    if (tituloInput) tituloInput.value = `🟡 Pagamento Salarial Mensal (5º Dia Útil - CLT Art. 459)`;
+    if (descInput) descInput.value = `Até o 5º dia útil do mês subsequente ao trabalhado conforme Art. 459, § 1º da CLT.`;
+  } else if (preset === 'adiantamento') {
+    if (tipoInput) tipoInput.value = 'salario';
+    if (dataInput) dataInput.value = `${calYear}-${String(calMonth + 1).padStart(2, '0')}-20`;
+    if (tituloInput) tituloInput.value = `🟡 Adiantamento Salarial Quinzenal (Vale 40%)`;
+    if (descInput) descInput.value = `Pagamento do vale salarial quinzenal aos colaboradores com opção cadastrada.`;
+  } else if (preset === 'ferias_aviso') {
+    if (tipoInput) tipoInput.value = 'ferias';
+    if (tituloInput) tituloInput.value = `🟣 Aviso Prévio de Férias - ${colabNome} (30 dias antecedência CLT)`;
+    if (descInput) descInput.value = `Comunicação formal por escrito com antecedência mínima de 30 dias (Art. 135 da CLT).`;
+  } else if (preset === 'ferias_pagto') {
+    if (tipoInput) tipoInput.value = 'ferias';
+    if (tituloInput) tituloInput.value = `🟣 Pagamento de Férias + 1/3 - ${colabNome} (Até 2 dias antes - CLT Art. 145)`;
+    if (descInput) descInput.value = `O pagamento da remuneração das férias e do terço constitucional deve ser efetuado até 2 dias antes do início do respectivo período (Art. 145 da CLT).`;
+  } else if (preset === 'ponto_fechamento') {
+    if (tipoInput) tipoInput.value = 'ponto';
+    if (dataInput) dataInput.value = `${calYear}-${String(calMonth + 1).padStart(2, '0')}-25`;
+    if (tituloInput) tituloInput.value = `🔵 Fechamento de Espelho de Ponto & Apuração de Vale Alimentação`;
+    if (descInput) descInput.value = `Data de corte para conferência de batidas manuais, faltas e atestados para apuração definitiva do crédito de Vale Alimentação.`;
+  } else if (preset === 'fgts_digital') {
+    if (tipoInput) tipoInput.value = 'fgts';
+    if (dataInput) dataInput.value = `${calYear}-${String(calMonth + 1).padStart(2, '0')}-20`;
+    if (tituloInput) tituloInput.value = `🟢 Vencimento Guia FGTS Digital (eSocial)`;
+    if (descInput) descInput.value = `Recolhimento mensal do FGTS Digital via PIX/código de barras referente à folha anterior.`;
+  }
+}
+
 function saveAvisoFromModal() {
   const idInput = document.getElementById('aviso-edit-id');
+  const dataInput = document.getElementById('aviso-data');
+  const tipoInput = document.getElementById('aviso-tipo');
   const tituloInput = document.getElementById('aviso-titulo');
-  const catInput = document.getElementById('aviso-categoria');
+  const colabSelect = document.getElementById('aviso-colab');
   const filialSelect = document.getElementById('aviso-filial');
-  const autorInput = document.getElementById('aviso-autor');
-  const fixadoInput = document.getElementById('aviso-fixado');
-  const conteudoInput = document.getElementById('aviso-conteudo');
+  const descInput = document.getElementById('aviso-descricao');
+  const concluidoCheck = document.getElementById('aviso-concluido');
 
+  const dataVal = dataInput.value;
   const titulo = tituloInput.value.trim();
-  const conteudo = conteudoInput.value.trim();
 
-  if (!titulo) {
-    showToast('Por favor, informe o título do comunicado.', 'warning');
-    tituloInput.focus();
+  if (!dataVal) {
+    showToast('Por favor, informe a data do prazo no calendário.', 'warning');
+    dataInput.focus();
     return;
   }
-  if (!conteudo) {
-    showToast('Por favor, informe a mensagem do comunicado.', 'warning');
-    conteudoInput.focus();
+  if (!titulo) {
+    showToast('Por favor, informe o título do prazo ou aviso.', 'warning');
+    tituloInput.focus();
     return;
   }
 
@@ -2652,45 +2999,58 @@ function saveAvisoFromModal() {
   if (avisoId) {
     const idx = appState.avisos.findIndex(a => a.id === avisoId);
     if (idx !== -1) {
+      const isNowDone = concluidoCheck.checked;
       appState.avisos[idx] = {
         ...appState.avisos[idx],
+        data: dataVal,
+        tipo: tipoInput.value,
         titulo,
-        categoria: catInput.value,
         filialId: filialSelect.value,
-        autor: autorInput.value.trim() || 'RH / Departamento Pessoal',
-        fixado: fixadoInput.checked,
-        conteudo,
+        colabId: colabSelect ? colabSelect.value : '',
+        descricao: descInput.value.trim(),
+        concluido: isNowDone,
+        concluidoEm: isNowDone ? (appState.avisos[idx].concluidoEm || new Date().toISOString()) : null,
         updatedAt: new Date().toISOString()
       };
-      showToast('Comunicado atualizado com sucesso!', 'success');
+      showToast('Prazo atualizado com sucesso!', 'success');
     }
   } else {
+    const isDone = concluidoCheck.checked;
     const newAviso = {
       id: 'aviso-' + Date.now(),
+      data: dataVal,
+      tipo: tipoInput.value,
       titulo,
-      categoria: catInput.value,
       filialId: filialSelect.value,
-      autor: autorInput.value.trim() || 'RH / Departamento Pessoal',
-      fixado: fixadoInput.checked,
-      conteudo,
+      colabId: colabSelect ? colabSelect.value : '',
+      descricao: descInput.value.trim(),
+      concluido: isDone,
+      concluidoEm: isDone ? new Date().toISOString() : null,
       createdAt: new Date().toISOString(),
       updatedAt: new Date().toISOString()
     };
     appState.avisos.unshift(newAviso);
-    showToast('Novo comunicado publicado no mural!', 'success');
+    showToast('Novo prazo agendado no calendário!', 'success');
   }
 
   saveStateToStorage();
   closeModal('modal-aviso');
   renderCurrentView();
+
+  if (currentModalDate && currentModalDate === dataVal) {
+    openDayNoticesModal(dataVal);
+  }
 }
 
-function deleteAviso(avisoId) {
-  if (!confirm('Tem certeza de que deseja excluir este comunicado do mural?')) return;
+function deleteAviso(avisoId, dateStr = null) {
+  if (!confirm('Tem certeza de que deseja excluir este prazo do calendário?')) return;
   appState.avisos = (appState.avisos || []).filter(a => a.id !== avisoId);
   saveStateToStorage();
   renderCurrentView();
-  showToast('Comunicado excluído.', 'info');
+  if (dateStr) {
+    openDayNoticesModal(dateStr);
+  }
+  showToast('Prazo excluído do calendário.', 'info');
 }
 
 function updatePontoUrgentBanner() {
@@ -2698,9 +3058,9 @@ function updatePontoUrgentBanner() {
   if (!banner) return;
 
   const allAvisos = appState.avisos || [];
-  // Procura aviso urgente ou fixado para esta filial ou geral
+  // Procura rescisão ou aviso urgente pendente para esta filial ou geral
   const urgentAviso = allAvisos.find(a => 
-    (a.categoria === 'urgente' || a.fixado) &&
+    !a.concluido && (a.tipo === 'rescisao' || a.tipo === 'ponto') &&
     (!a.filialId || a.filialId === 'TODAS' || a.filialId === appState.activeBranchId)
   );
 
@@ -2708,14 +3068,14 @@ function updatePontoUrgentBanner() {
     banner.style.display = 'flex';
     banner.innerHTML = `
       <div class="ponto-urgent-banner-text">
-        <span>📢</span>
+        <span>⚠️</span>
         <div>
-          <strong>${urgentAviso.categoria === 'urgente' ? 'ALERTA URGENTE:' : 'COMUNICADO FIXADO:'}</strong>
-          ${escapeHtml(urgentAviso.titulo)}
+          <strong>PRAZO LEGAL PENDENTE:</strong>
+          ${escapeHtml(urgentAviso.titulo)} (Data: ${formatDateBR(urgentAviso.data)})
         </div>
       </div>
       <button class="btn btn-cyan btn-sm" id="btn-banner-go-avisos" style="white-space:nowrap;">
-        Ver no Mural ➔
+        Ver no Calendário ➔
       </button>
     `;
     document.getElementById('btn-banner-go-avisos')?.addEventListener('click', () => {
@@ -2730,24 +3090,13 @@ function updatePontoUrgentBanner() {
 }
 
 // ==========================================================================
-// 9. GESTÃO DE COLABORADORES COM FILTROS AVANÇADOS
+// 9. GESTÃO DE COLABORADORES COM FILTRO ESTRITO PELA FILIAL ATIVA DO TOPO
 // ==========================================================================
 
 let colabFiltersInitialized = false;
 function setupColabFiltersDropdowns() {
   const deptSelect = document.getElementById('colab-filter-dept');
-  const filialSelect = document.getElementById('colab-filter-filial');
-  if (!deptSelect || !filialSelect) return;
-
-  // Atualiza opções de filial sincronizando com a ativa
-  const currentFilialVal = filialSelect.value || appState.activeBranchId;
-  filialSelect.innerHTML = appState.filiais.map(f => 
-    `<option value="${f.id}" ${f.id === appState.activeBranchId ? 'selected' : ''}>🏢 ${f.nome}</option>`
-  ).join('') + '<option value="todas">🌐 Todas as Filiais</option>';
-
-  if (filialSelect.value !== currentFilialVal && (currentFilialVal === 'todas' || appState.filiais.some(f => f.id === currentFilialVal))) {
-    filialSelect.value = currentFilialVal;
-  }
+  if (!deptSelect) return;
 
   // Departamentos
   const currentDeptVal = deptSelect.value || 'todos';
@@ -2761,14 +3110,6 @@ function setupColabFiltersDropdowns() {
     deptSelect.addEventListener('change', () => renderColaboradoresView());
     document.getElementById('colab-filter-status')?.addEventListener('change', () => renderColaboradoresView());
     document.getElementById('colab-filter-ponto')?.addEventListener('change', () => renderColaboradoresView());
-    filialSelect.addEventListener('change', (e) => {
-      if (e.target.value !== 'todas') {
-        appState.activeBranchId = e.target.value;
-        saveStateToStorage();
-        renderBranchTabs();
-      }
-      renderColaboradoresView();
-    });
     document.getElementById('btn-colab-reset-filters')?.addEventListener('click', () => {
       const searchIn = document.getElementById('colab-search-input');
       if (searchIn) searchIn.value = '';
@@ -2777,7 +3118,6 @@ function setupColabFiltersDropdowns() {
       if (stEl) stEl.value = 'ativo';
       const ptEl = document.getElementById('colab-filter-ponto');
       if (ptEl) ptEl.value = 'todos';
-      filialSelect.value = appState.activeBranchId;
       renderColaboradoresView();
       showToast('Filtros de colaboradores redefinidos.', 'info');
     });
@@ -2791,25 +3131,18 @@ function renderColaboradoresView() {
   const branchMap = Object.fromEntries(appState.filiais.map(f => [f.id, f.nome]));
   const deptMap = Object.fromEntries(appState.departamentos.map(d => [d.id, d.nome]));
 
-  // Subtítulo indicador da filial
+  // Subtítulo indicador da filial ativa selecionada no topo
   const subEl = document.getElementById('colab-branch-subtitle');
   if (subEl) {
-    const curBranch = branchMap[appState.activeBranchId] || 'Todas as Filiais';
+    const curBranch = branchMap[appState.activeBranchId] || 'Filial Selecionada';
     subEl.textContent = '📍 Filial Ativa: ' + curBranch;
   }
 
   // Preenche filtros
   setupColabFiltersDropdowns();
 
-  // Filtragem da lista
-  let list = appState.colaboradores.slice();
-
-  // 1. Filial (por padrão filtra pela filial ativa selecionada no topo)
-  const filialSelect = document.getElementById('colab-filter-filial');
-  const selectedFilial = filialSelect ? filialSelect.value : appState.activeBranchId;
-  if (selectedFilial && selectedFilial !== 'todas') {
-    list = list.filter(c => c.filialId === selectedFilial);
-  }
+  // 1. FILTRAGEM ESTRITA PELA FILIAL ATIVA SELECIONADA NO TOPO (IGUAL AO DASHBOARD DE PONTO)
+  let list = appState.colaboradores.filter(c => c.filialId === appState.activeBranchId);
 
   // 2. Departamento
   const deptSelect = document.getElementById('colab-filter-dept');
@@ -3320,16 +3653,78 @@ function showToast(message, type = 'info') {
 // 11. INICIALIZAÇÃO E EVENT LISTENERS DO TOOLBAR
 // ==========================================================================
 function initEvents() {
-  // Eventos do Mural de Avisos
+  // Eventos do Calendário de Prazos Legais & Avisos
   document.getElementById('btn-novo-aviso')?.addEventListener('click', () => openAvisoModal());
-  document.getElementById('btn-empty-novo-aviso')?.addEventListener('click', () => openAvisoModal());
   document.getElementById('btn-salvar-aviso')?.addEventListener('click', saveAvisoFromModal);
 
-  document.getElementById('avisos-search-input')?.addEventListener('input', () => renderAvisosView());
-  document.getElementById('avisos-filter-categoria')?.addEventListener('change', () => renderAvisosView());
-  document.getElementById('avisos-filter-escopo')?.addEventListener('change', () => renderAvisosView());
+  // Navegação do Mês no Calendário
+  document.getElementById('btn-cal-prev-month')?.addEventListener('click', () => {
+    if (appState.calendarMonth === 0) {
+      appState.calendarMonth = 11;
+      appState.calendarYear--;
+    } else {
+      appState.calendarMonth--;
+    }
+    renderAvisosView();
+  });
 
-  // Navegação de Mês
+  document.getElementById('btn-cal-next-month')?.addEventListener('click', () => {
+    if (appState.calendarMonth === 11) {
+      appState.calendarMonth = 0;
+      appState.calendarYear++;
+    } else {
+      appState.calendarMonth++;
+    }
+    renderAvisosView();
+  });
+
+  document.getElementById('btn-cal-today')?.addEventListener('click', () => {
+    const now = new Date();
+    appState.calendarYear = now.getFullYear();
+    appState.calendarMonth = now.getMonth();
+    renderAvisosView();
+    showToast('Calendário posicionado no mês atual.', 'info');
+  });
+
+  // Filtros do Calendário
+  document.getElementById('cal-filter-tipo')?.addEventListener('change', () => renderAvisosView());
+  document.getElementById('cal-filter-status')?.addEventListener('change', () => renderAvisosView());
+
+  // Assistente de Prazos Legais CLT / DP
+  document.getElementById('select-preset-legal')?.addEventListener('change', (e) => {
+    handleLegalPresetChange(e.target.value);
+  });
+
+  // Cálculo Automático de 10 Dias Corridos para Rescisão (CLT Art. 477)
+  document.getElementById('btn-calc-prazo-rescisao')?.addEventListener('click', () => {
+    const demissaoVal = document.getElementById('input-calc-demissao-data')?.value;
+    if (!demissaoVal) {
+      showToast('Por favor, informe a data da demissão.', 'warning');
+      return;
+    }
+    const prazoFatal = addCalendarDays(demissaoVal, 10);
+    const avisoData = document.getElementById('aviso-data');
+    if (avisoData) avisoData.value = prazoFatal;
+
+    const colabSelect = document.getElementById('aviso-colab');
+    const colabNome = (colabSelect && colabSelect.selectedIndex > 0)
+      ? colabSelect.options[colabSelect.selectedIndex].text
+      : 'Colaborador';
+
+    const tituloInput = document.getElementById('aviso-titulo');
+    if (tituloInput) {
+      tituloInput.value = `🔴 Prazo Limite Rescisão - ${colabNome} (10 dias CLT Art. 477)`;
+    }
+
+    const descInput = document.getElementById('aviso-descricao');
+    if (descInput) {
+      descInput.value = `Prazo legal fatal de 10 dias corridos para pagamento integral das verbas rescisórias e entrega de guias (Art. 477, § 6º da CLT). Data da demissão: ${formatDateBR(demissaoVal)}. Prazo máximo: ${formatDateBR(prazoFatal)}.`;
+    }
+
+    showToast(`Prazo de 10 dias aplicado! Data fatal: ${formatDateBR(prazoFatal)}`, 'success');
+  });
+
+  // Navegação de Mês da Matriz de Ponto
   document.getElementById('btn-prev-month')?.addEventListener('click', () => {
     if (appState.currentMonth === 0) {
       appState.currentMonth = 11;

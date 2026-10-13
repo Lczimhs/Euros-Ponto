@@ -123,103 +123,117 @@
   <!-- ========================================================================
        VIEW 0: DASHBOARD PRINCIPAL - MURAL DE AVISOS E COMUNICADOS
        ======================================================================== -->
+  <!-- ========================================================================
+       VIEW 0: DASHBOARD PRINCIPAL - CALENDÁRIO DE AVISOS & PRAZOS LEGAIS (DP / CLT)
+       ======================================================================== -->
   <main id="view-avisos" class="app-view active-view">
-    <div class="avisos-dashboard-container">
+    <div class="avisos-calendar-container">
 
-      <!-- Hero Header & KPI Cards -->
-      <div class="avisos-hero-section">
-        <div class="avisos-title-area">
-          <div class="avisos-title-badge">PAINEL PRINCIPAL DO SISTEMA</div>
-          <h2><span>📢</span> Mural de Avisos &amp; Comunicados</h2>
-          <p id="avisos-branch-indicator" class="avisos-branch-indicator">
-            📍 Exibindo comunicados de: <strong>Euros Ind. e Comércio de Aço - Matriz</strong>
+      <!-- Header & Hero Section -->
+      <div class="cal-hero-section">
+        <div class="cal-title-group">
+          <div class="cal-badge-pill">PAINEL PRINCIPAL • CONTROLE DE PRAZOS LEGAIS</div>
+          <h2><span>📅</span> Calendário de Avisos &amp; Prazos Trabalhistas</h2>
+          <p id="avisos-branch-indicator" class="cal-branch-indicator">
+            📍 Filial Ativa: <strong>Euros Ind. e Comércio de Aço - Matriz</strong> • Prazos de Rescisão (10 dias), Salário, Ponto e Férias
           </p>
         </div>
-        <div class="avisos-actions-top">
+        <div class="cal-actions-top">
           <button class="btn btn-primary" id="btn-novo-aviso">
-            <span>➕</span> Novo Comunicado
+            <span>➕</span> Novo Aviso / Prazo Legal
           </button>
         </div>
       </div>
 
-      <!-- KPI Grid for Avisos -->
-      <div class="kpi-grid avisos-kpi-grid">
+      <!-- KPI Summary Cards for Current Month -->
+      <div class="kpi-grid cal-kpi-grid">
         <div class="kpi-card">
-          <span class="kpi-label">Total de Avisos</span>
-          <span class="kpi-value cyan" id="kpi-avisos-total">0</span>
-          <span class="kpi-helper">No mural da empresa</span>
+          <span class="kpi-label">Prazos Pendentes</span>
+          <span class="kpi-value yellow" id="kpi-cal-pendentes">0</span>
+          <span class="kpi-helper">Aguardando cumprimento</span>
         </div>
         <div class="kpi-card">
-          <span class="kpi-label">Avisos Urgentes</span>
-          <span class="kpi-value red-urgent" id="kpi-avisos-urgentes">0</span>
-          <span class="kpi-helper">Atenção prioritária</span>
+          <span class="kpi-label">Prazos Concluídos (Feito)</span>
+          <span class="kpi-value green-done" id="kpi-cal-concluidos">0</span>
+          <span class="kpi-helper">Marcados como feito</span>
         </div>
         <div class="kpi-card">
-          <span class="kpi-label">Comunicados da Filial</span>
-          <span class="kpi-value purple" id="kpi-avisos-filial">0</span>
-          <span class="kpi-helper" id="kpi-avisos-filial-name">Filial Ativa</span>
+          <span class="kpi-label">Rescisões no Mês</span>
+          <span class="kpi-value red-urgent" id="kpi-cal-rescisoes">0</span>
+          <span class="kpi-helper">Prazo limite 10 dias corridos</span>
         </div>
         <div class="kpi-card">
-          <span class="kpi-label">Avisos Gerais</span>
-          <span class="kpi-value blue" id="kpi-avisos-gerais">0</span>
-          <span class="kpi-helper">Todas as filiais</span>
+          <span class="kpi-label">Total no Mês</span>
+          <span class="kpi-value cyan" id="kpi-cal-total">0</span>
+          <span class="kpi-helper">Avisos e prazos agendados</span>
         </div>
       </div>
 
-      <!-- Toolbar / Filters for Avisos -->
-      <div class="avisos-filter-bar">
-        <div class="avisos-search-box">
-          <span class="search-icon">🔍</span>
-          <input type="text" id="avisos-search-input" class="search-input" placeholder="Buscar por título, conteúdo ou autor...">
+      <!-- Calendar Navigation & Controls Toolbar -->
+      <div class="cal-toolbar">
+        <div class="cal-month-nav">
+          <button class="month-nav-btn" id="btn-cal-prev-month" title="Mês Anterior">&larr;</button>
+          <div class="cal-month-title" id="cal-month-display">Outubro 2026</div>
+          <button class="month-nav-btn" id="btn-cal-next-month" title="Próximo Mês">&rarr;</button>
+          <button class="btn btn-secondary btn-sm" id="btn-cal-today" style="margin-left:8px;">Hoje</button>
         </div>
-        <div class="avisos-filter-group">
-          <label for="avisos-filter-categoria">Categoria:</label>
-          <select id="avisos-filter-categoria" class="sort-select">
-            <option value="todas">Todas as Categorias</option>
-            <option value="urgente">🔴 Urgente</option>
-            <option value="importante">🟡 Importante</option>
-            <option value="informativo">🔵 Informativo</option>
-            <option value="expediente">🟣 Feriado / Expediente</option>
-          </select>
+
+        <div class="cal-filters-group">
+          <div class="sort-select-box">
+            <label for="cal-filter-tipo">Tipo de Prazo:</label>
+            <select id="cal-filter-tipo" class="sort-select">
+              <option value="todos">Todos os Tipos</option>
+              <option value="rescisao">🔴 Rescisão Contratual (10 dias)</option>
+              <option value="salario">🟡 Salário / Adiantamento</option>
+              <option value="ferias">🟣 Férias (Aviso / Pagamento)</option>
+              <option value="ponto">🔵 Fechamento de Ponto &amp; VA</option>
+              <option value="fgts">🟢 FGTS / eSocial / Tributos</option>
+              <option value="outros">⚪ Outros Prazos / Lembretes</option>
+            </select>
+          </div>
+
+          <div class="sort-select-box">
+            <label for="cal-filter-status">Situação:</label>
+            <select id="cal-filter-status" class="sort-select">
+              <option value="todos">Todos (Pendentes &amp; Feitos)</option>
+              <option value="pendente">Apenas Pendentes</option>
+              <option value="concluido">Apenas Concluídos (Feito)</option>
+            </select>
+          </div>
         </div>
-        <div class="avisos-filter-group">
-          <label for="avisos-filter-escopo">Destino:</label>
-          <select id="avisos-filter-escopo" class="sort-select">
-            <option value="todos">Todos (Geral + Filial Ativa)</option>
-            <option value="filial">Apenas Desta Filial</option>
-            <option value="geral">Apenas Gerais (Todas)</option>
-          </select>
+
+        <div class="cal-legend-quick">
+          <span class="legend-dot dot-red"></span> Rescisão
+          <span class="legend-dot dot-yellow"></span> Salário
+          <span class="legend-dot dot-purple"></span> Férias
+          <span class="legend-dot dot-cyan"></span> Ponto/VA
+          <span class="legend-dot dot-green"></span> FGTS
+          <span class="legend-dot dot-done"></span> Feito
         </div>
       </div>
 
-      <!-- Pinned Notices Section (Se houver) -->
-      <div id="avisos-pinned-section" class="avisos-section" style="display:none;">
-        <div class="avisos-section-header">
-          <span>📌</span> Avisos Fixados em Destaque
+      <!-- Month Calendar View -->
+      <div class="calendar-card">
+        <!-- Weekdays Header (DOM - SÁB) -->
+        <div class="cal-weekdays-row">
+          <div class="cal-weekday-col weekend">DOM</div>
+          <div class="cal-weekday-col">SEG</div>
+          <div class="cal-weekday-col">TER</div>
+          <div class="cal-weekday-col">QUA</div>
+          <div class="cal-weekday-col">QUI</div>
+          <div class="cal-weekday-col">SEX</div>
+          <div class="cal-weekday-col weekend">SÁB</div>
         </div>
-        <div class="avisos-cards-grid" id="avisos-pinned-grid">
-          <!-- Rendered via JS -->
-        </div>
-      </div>
 
-      <!-- All Notices Section -->
-      <div class="avisos-section">
-        <div class="avisos-section-header">
-          <span>📋</span> Comunicados Recentes
-        </div>
-        <div class="avisos-cards-grid" id="avisos-cards-grid">
-          <!-- Rendered via JS -->
-        </div>
-        <div id="avisos-empty-state" class="avisos-empty-state" style="display:none;">
-          <div class="empty-icon">📭</div>
-          <h3>Nenhum comunicado encontrado</h3>
-          <p>Não há avisos para os filtros selecionados ou para esta filial.</p>
-          <button class="btn btn-secondary btn-sm" id="btn-empty-novo-aviso" style="margin-top:10px;">+ Criar o Primeiro Comunicado</button>
+        <!-- Dynamic Days Grid -->
+        <div class="cal-days-grid" id="cal-days-grid">
+          <!-- Rendered dynamically via JS -->
         </div>
       </div>
 
     </div>
   </main>
+
 
   <!-- ========================================================================
        VIEW 1: MATRIZ DE PONTO (DASHBOARD EXCEL-LIKE)
@@ -360,12 +374,6 @@
               <option value="todos">Todos</option>
               <option value="sim">Sim (Bate Ponto)</option>
               <option value="nao">Não (Apenas VA)</option>
-            </select>
-          </div>
-          <div class="sort-select-box">
-            <label for="colab-filter-filial">Filial:</label>
-            <select id="colab-filter-filial" class="sort-select">
-              <!-- Filled via JS -->
             </select>
           </div>
           <button class="btn btn-secondary btn-sm" id="btn-colab-reset-filters" title="Limpar todos os filtros">
@@ -809,67 +817,131 @@
   </div>
 
   <!-- ========================================================================
-       MODAL 8: NOVO / EDITAR COMUNICADO OU AVISO
+       MODAL 8: AVISOS E PRAZOS DO DIA SELECIONADO (COM BOTÃO FEITO)
+       ======================================================================== -->
+  <div class="modal-overlay" id="modal-day-avisos">
+    <div class="modal-card modal-lg">
+      <div class="modal-header">
+        <h3 id="modal-day-title"><span>📅</span> Avisos do Dia</h3>
+        <button class="modal-close-btn" data-close="modal-day-avisos">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div id="modal-day-summary-bar" class="day-summary-bar">
+          <!-- Summary count info inserted via JS -->
+        </div>
+
+        <div id="modal-day-list-container" class="day-notices-list">
+          <!-- Rendered dynamically via JS: cards with [Feito] button -->
+        </div>
+      </div>
+      <div class="modal-footer" style="display:flex; justify-content:space-between;">
+        <button class="btn btn-cyan" id="btn-day-add-new-notice">
+          <span>➕</span> Adicionar Novo Aviso Neste Dia
+        </button>
+        <button class="btn btn-secondary" data-close="modal-day-avisos">Fechar</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================================================
+       MODAL 9: NOVO / EDITAR AVISO OU PRAZO LEGAL (ASSISTENTE CLT / DP)
        ======================================================================== -->
   <div class="modal-overlay" id="modal-aviso">
     <div class="modal-card modal-lg">
       <div class="modal-header">
-        <h3 id="modal-aviso-title"><span>📢</span> Novo Comunicado / Aviso</h3>
+        <h3 id="modal-aviso-title"><span>📅</span> Novo Aviso / Prazo Legal</h3>
         <button class="modal-close-btn" data-close="modal-aviso">&times;</button>
       </div>
       <div class="modal-body">
         <input type="hidden" id="aviso-edit-id">
-        
-        <div class="form-group">
-          <label for="aviso-titulo">Título do Comunicado:*</label>
-          <input type="text" class="form-control" id="aviso-titulo" placeholder="Ex: Fechamento do Ponto e Espelho de Outubro" required>
+
+        <!-- Assistente de Prazos Legais (CLT / DP) -->
+        <div class="legal-preset-box">
+          <label for="select-preset-legal">⚡ Assistente de Prazo Legal (CLT / DP):</label>
+          <select class="form-control" id="select-preset-legal">
+            <option value="custom">Personalizado (Data e Descrição Livres)</option>
+            <option value="rescisao">🔴 Rescisão Contratual - CLT Art. 477 (10 dias corridos para pagamento)</option>
+            <option value="salario_5">🟡 Pagamento Salarial - CLT Art. 459 (Até o 5º dia útil)</option>
+            <option value="adiantamento">🟡 Adiantamento Salarial / Vale (Dia 20 do mês)</option>
+            <option value="ferias_aviso">🟣 Aviso Prévio de Férias - CLT Art. 135 (30 dias de antecedência)</option>
+            <option value="ferias_pagto">🟣 Pagamento de Férias - CLT Art. 145 (Até 2 dias antes do início)</option>
+            <option value="ponto_fechamento">🔵 Fechamento de Ponto &amp; Espelho (Dia 25 do mês)</option>
+            <option value="fgts_digital">🟢 Depósito FGTS Digital (Até o dia 20 do mês)</option>
+          </select>
+          <div id="box-helper-rescisao" style="display:none; margin-top:8px; padding:8px 12px; background:rgba(255, 51, 102, 0.12); border:1px solid rgba(255, 51, 102, 0.35); border-radius:4px;">
+            <div style="font-size:11px; color:#FF8099; margin-bottom:4px;">
+              <strong>⚖️ Cálculo Automático de Rescisão:</strong> Informe a data da demissão/desligamento para calcular exatamente os 10 dias corridos:
+            </div>
+            <div style="display:flex; align-items:center; gap:8px;">
+              <span style="font-size:11px;">Data da Demissão:</span>
+              <input type="date" class="form-control" id="input-calc-demissao-data" style="width:160px; padding:3px 6px;">
+              <button type="button" class="btn btn-sm btn-cyan" id="btn-calc-prazo-rescisao">Aplicar +10 dias</button>
+            </div>
+          </div>
         </div>
 
         <div class="form-row">
           <div class="form-group">
-            <label for="aviso-categoria">Categoria / Prioridade:*</label>
-            <select class="form-control" id="aviso-categoria">
-              <option value="informativo">🔵 Informativo (Geral)</option>
-              <option value="importante">🟡 Importante (Atenção e Prazos)</option>
-              <option value="urgente">🔴 Urgente (Alerta Prioritário)</option>
-              <option value="expediente">🟣 Expediente / Feriado</option>
+            <label for="aviso-data">Data do Prazo no Calendário:*</label>
+            <input type="date" class="form-control" id="aviso-data" required>
+          </div>
+
+          <div class="form-group">
+            <label for="aviso-tipo">Tipo / Categoria de Prazo:*</label>
+            <select class="form-control" id="aviso-tipo">
+              <option value="rescisao">🔴 Rescisão Contratual (10 dias)</option>
+              <option value="salario">🟡 Salário / Adiantamento</option>
+              <option value="ferias">🟣 Férias (Aviso / Pagamento)</option>
+              <option value="ponto">🔵 Ponto Eletrônico / VA</option>
+              <option value="fgts">🟢 FGTS / eSocial / Tributos</option>
+              <option value="outros">⚪ Outros Prazos / Lembretes</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="aviso-titulo">Título do Prazo / Aviso:*</label>
+          <input type="text" class="form-control" id="aviso-titulo" placeholder="Ex: Pagamento Rescisão - Carlos Eduardo (10 dias corridos)" required>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="aviso-colab">Colaborador Vinculado (Opcional):</label>
+            <select class="form-control" id="aviso-colab">
+              <option value="">Nenhum / Prazo Geral</option>
+              <!-- Filled via JS -->
             </select>
           </div>
 
           <div class="form-group">
-            <label for="aviso-filial">Destino / Escopo:*</label>
+            <label for="aviso-filial">Filial:*</label>
             <select class="form-control" id="aviso-filial">
-              <option value="TODAS">🌐 Todas as Filiais (Geral da Empresa)</option>
-              <!-- Filled via JS with branches -->
+              <option value="TODAS">🌐 Todas as Filiais</option>
+              <!-- Filled via JS -->
             </select>
           </div>
         </div>
 
-        <div class="form-row">
-          <div class="form-group">
-            <label for="aviso-autor">Autor / Emissor do Comunicado:</label>
-            <input type="text" class="form-control" id="aviso-autor" placeholder="Ex: RH / Departamento Pessoal" value="RH / Departamento Pessoal">
-          </div>
-
-          <div class="form-group" style="display:flex; align-items:flex-end;">
-            <label class="custom-checkbox-container" style="padding-bottom: 8px;">
-              <input type="checkbox" id="aviso-fixado">
-              <span><strong>📌 Fixar este aviso no topo do mural</strong></span>
-            </label>
-          </div>
-        </div>
-
         <div class="form-group">
-          <label for="aviso-conteudo">Mensagem / Conteúdo do Comunicado:*</label>
-          <textarea class="form-control" id="aviso-conteudo" rows="6" placeholder="Escreva a mensagem completa, orientações, datas limites, regras ou observações aos colaboradores..." required style="resize: vertical; font-family: inherit; line-height: 1.5;"></textarea>
+          <label for="aviso-descricao">Descrição / Observações / Orientações:</label>
+          <textarea class="form-control" id="aviso-descricao" rows="3" placeholder="Detalhes do pagamento, documentos a recolher, prazos bancários, etc..."></textarea>
         </div>
+
+        <div class="form-group" style="background:var(--color-bg-dark); padding:10px 14px; border-radius:var(--radius-sm); border:1px solid var(--color-border);">
+          <label class="custom-checkbox-container" style="margin:0;">
+            <input type="checkbox" id="aviso-concluido">
+            <span><strong>Marcar imediatamente como "FEITO / CONCLUÍDO"</strong></span>
+          </label>
+        </div>
+
       </div>
       <div class="modal-footer">
         <button class="btn btn-secondary" data-close="modal-aviso">Cancelar</button>
-        <button class="btn btn-primary" id="btn-salvar-aviso">Salvar Comunicado</button>
+        <button class="btn btn-primary" id="btn-salvar-aviso">Salvar no Calendário</button>
       </div>
     </div>
   </div>
+
 
   <!-- Toast Notification Container -->
   <div id="toast-container"></div>
