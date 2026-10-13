@@ -1499,15 +1499,43 @@ function isHoliday(isoStr, branchId) {
 // Converte "HH:MM" para minutos desde 00:00
 function timeToMinutes(timeStr) {
   if (!timeStr) return null;
-  const [h, m] = timeStr.split(':').map(Number);
+  const parts = String(timeStr).split(':');
+  if (parts.length < 2) return null;
+  const h = parseInt(parts[0], 10);
+  const m = parseInt(parts[1], 10);
+  if (isNaN(h) || isNaN(m)) return null;
   return h * 60 + m;
 }
 
+// Interpreta entrada flexível de tempo (ex: "01:00", "1:30", "60", "15 min") para minutos inteiros
+function parseTimeToMinutes(val) {
+  if (val === null || val === undefined) return 0;
+  const str = String(val).trim().toLowerCase().replace('min', '').replace('m', '').replace('h', ':').trim();
+  if (!str) return 0;
+  if (str.includes(':')) {
+    const parts = str.split(':');
+    const h = parseInt(parts[0], 10) || 0;
+    const m = parseInt(parts[1], 10) || 0;
+    return Math.max(0, h * 60 + m);
+  }
+  const num = parseInt(str, 10);
+  return isNaN(num) ? 0 : Math.max(0, num);
+}
+
 function minutesToTime(mins) {
-  if (mins === null || isNaN(mins)) return '--:--';
+  if (mins === null || isNaN(mins) || mins <= 0) return '00:00';
   const h = Math.floor(mins / 60);
   const m = mins % 60;
   return String(h).padStart(2, '0') + ':' + String(m).padStart(2, '0');
+}
+
+function formatMinutesFriendly(mins) {
+  if (!mins || mins <= 0) return '0min';
+  const h = Math.floor(mins / 60);
+  const m = mins % 60;
+  if (h > 0 && m > 0) return `${h}h ${m}min`;
+  if (h > 0) return `${h}h`;
+  return `${m}min`;
 }
 
 /**
@@ -1704,34 +1732,76 @@ function getDayStatus(colabId, isoStr, branchId) {
     };
   }
 
-  // Avaliação por Batidas
-  if (reg && reg.punches) {
+  // Avaliação de Atrasos (Maior e Pequeno) ou por Batidas
+  let atrasoMaiorMin = 0;
+  let atrasoPequenoMin = 0;
+
+  if (reg) {
+    if (reg.atrasoMaiorMin !== undefined && reg.atrasoMaiorMin !== null) {
+      atrasoMaiorMin = reg.atrasoMaiorMin;
+    } else if (reg.atrasoMaior) {
+      atrasoMaiorMin = parseTimeToMinutes(reg.atrasoMaior);
+    }
+
+    if (reg.atrasoPequenoMin !== undefined && reg.atrasoPequenoMin !== null) {
+      atrasoPequenoMin = reg.atrasoPequenoMin;
+    } else if (reg.atrasoPequeno) {
+      atrasoPequenoMin = parseTimeToMinutes(reg.atrasoPequeno);
+    }
+  }
+
+  // Se não foi informado atraso manual, avalia batidas se existirem
+  if (atrasoMaiorMin === 0 && atrasoPequenoMin === 0 && reg && reg.punches) {
     const evalResult = evaluateDailyPunches(reg.punches);
     if (evalResult.status === 'ATRASO') {
-      if (reg.resolution === 'ABONAR') {
-        return {
-          type: 'OK',
-          display: 'OK',
-          cssClass: 'status-ok',
-          isPending: false,
-          isWorkingDay: true,
-          isSunday: false,
-          isHoliday: false,
-          resolution: 'ABONAR'
-        };
-      }
+      atrasoMaiorMin = evalResult.delayMinutes;
+    }
+  }
+
+  // 1. ATRASO MAIOR: enviado para análise de pendência, aparece no dashboard (ex: A.01:00)
+  if (atrasoMaiorMin > 0) {
+    if (reg && reg.resolution === 'ABONAR') {
       return {
-        type: 'ATRASO',
-        display: evalResult.delayText,
-        cssClass: 'status-atraso',
-        isPending: true,
+        type: 'OK',
+        display: 'OK',
+        cssClass: 'status-ok',
+        isPending: false,
         isWorkingDay: true,
         isSunday: false,
         isHoliday: false,
-        delayMinutes: evalResult.delayMinutes,
-        resolution: reg.resolution || 'NENHUMA'
+        delayMinutes: atrasoMaiorMin,
+        atrasoPequenoMin: atrasoPequenoMin,
+        resolution: 'ABONAR'
       };
     }
+    return {
+      type: 'ATRASO',
+      display: 'A.' + minutesToTime(atrasoMaiorMin),
+      cssClass: 'status-atraso',
+      isPending: true,
+      isWorkingDay: true,
+      isSunday: false,
+      isHoliday: false,
+      delayMinutes: atrasoMaiorMin,
+      atrasoPequenoMin: atrasoPequenoMin,
+      resolution: (reg && reg.resolution) || 'NENHUMA'
+    };
+  }
+
+  // 2. PEQUENO ATRASO: NÃO aparece no dashboard como pendência! Continua OK, acumula no DSR
+  if (atrasoPequenoMin > 0) {
+    return {
+      type: 'OK',
+      display: 'OK',
+      cssClass: 'status-ok',
+      isPending: false,
+      isWorkingDay: true,
+      isSunday: false,
+      isHoliday: false,
+      delayMinutes: 0,
+      atrasoPequenoMin: atrasoPequenoMin,
+      resolution: (reg && reg.resolution) || 'NENHUMA'
+    };
   }
 
   // Padrão: Dia regular OK
@@ -1824,6 +1894,248 @@ function calculateDsrForEmployee(colabId, year, month, branchId) {
   }
 
   return { totalDsrLost, breakdown };
+}
+
+/**
+ * Apuração Consolidada de DSR, Faltas e Somatória de Atrasos (Maiores + Pequenos)
+ */
+function calculateDsrAndOccurrences(colabId, year, month, branchId) {
+  const colab = appState.colaboradores.find(c => c.id === colabId);
+  const daysInMonth = getDaysInMonth(year, month);
+  const dsrInfo = calculateDsrForEmployee(colabId, year, month, branchId);
+
+  let faltasIntegrais = 0;
+  let faltasMeioPeriodo = 0;
+  let atrasosMaioresMinutos = 0;
+  let atrasosMaioresQtd = 0;
+  let pequenosAtrasosMinutos = 0;
+  let pequenosAtrasosQtd = 0;
+  let ocorrencias = [];
+
+  for (let d = 1; d <= daysInMonth; d++) {
+    const isoStr = formatDateISO(year, month, d);
+    const regKey = colabId + '_' + isoStr;
+    const reg = appState.registrosPonto[regKey] || null;
+    const resolved = getResolvedDayStatus(colabId, isoStr, branchId);
+
+    // Ignora dias desabilitados, demissão e domingos
+    if (resolved.isDisabled || resolved.isDismissed || resolved.isSunday) {
+      continue;
+    }
+
+    // 1. Faltas Integrais (não abonadas)
+    if (resolved.type === 'FALTA' && resolved.resolution !== 'ABONAR') {
+      faltasIntegrais++;
+      ocorrencias.push({
+        data: isoStr,
+        tipo: 'Falta Integral',
+        badgeClass: 'status-falta',
+        tempo: 'Dia Completo',
+        impacto: 'Gera perda de DSR semanal',
+        obs: reg?.note || 'Falta não justificada'
+      });
+    }
+
+    // 2. Faltas Meio Período (FM, FT, 1/2 ATESTADO)
+    if ((resolved.type === 'FM' || resolved.type === 'FT' || resolved.type === '1/2 ATESTADO') && resolved.resolution !== 'ABONAR') {
+      faltasMeioPeriodo++;
+      ocorrencias.push({
+        data: isoStr,
+        tipo: 'Falta Meio Período (' + resolved.type + ')',
+        badgeClass: 'status-half',
+        tempo: '1/2 Período',
+        impacto: 'Desconto parcial em VA / Folha',
+        obs: reg?.note || 'Ausência parcial registrada'
+      });
+    }
+
+    // 3. Atestado Integral
+    if (resolved.type === 'ATESTADO' && resolved.resolution !== 'ABONAR') {
+      ocorrencias.push({
+        data: isoStr,
+        tipo: 'Atestado Médico Integral',
+        badgeClass: 'status-atestado',
+        tempo: 'Dia Completo',
+        impacto: 'Falta justificada (não perde DSR)',
+        obs: reg?.note || 'Atestado médico anexado'
+      });
+    }
+
+    // 4. Atrasos Maiores e Pequenos Atrasos
+    let maiorMin = 0;
+    let pequenoMin = 0;
+
+    if (reg) {
+      if (reg.atrasoMaiorMin !== undefined && reg.atrasoMaiorMin !== null) {
+        maiorMin = reg.atrasoMaiorMin;
+      } else if (reg.atrasoMaior) {
+        maiorMin = parseTimeToMinutes(reg.atrasoMaior);
+      } else if (resolved.type === 'ATRASO' && resolved.delayMinutes) {
+        maiorMin = resolved.delayMinutes;
+      }
+
+      if (reg.atrasoPequenoMin !== undefined && reg.atrasoPequenoMin !== null) {
+        pequenoMin = reg.atrasoPequenoMin;
+      } else if (reg.atrasoPequeno) {
+        pequenoMin = parseTimeToMinutes(reg.atrasoPequeno);
+      }
+    } else if (resolved.type === 'ATRASO' && resolved.delayMinutes) {
+      maiorMin = resolved.delayMinutes;
+    }
+
+    if (maiorMin > 0) {
+      atrasosMaioresMinutos += maiorMin;
+      atrasosMaioresQtd++;
+      ocorrencias.push({
+        data: isoStr,
+        tipo: 'Atraso Maior (Dashboard)',
+        badgeClass: 'status-atraso',
+        tempo: minutesToTime(maiorMin) + ' (' + formatMinutesFriendly(maiorMin) + ')',
+        impacto: resolved.resolution === 'ABONAR' ? 'Abonado' : 'Pendência no Dashboard',
+        obs: reg?.note || (resolved.resolution === 'ABONAR' ? 'Abonado pela chefia' : 'Enviado para análise')
+      });
+    }
+
+    if (pequenoMin > 0) {
+      pequenosAtrasosMinutos += pequenoMin;
+      pequenosAtrasosQtd++;
+      ocorrencias.push({
+        data: isoStr,
+        tipo: 'Pequeno Atraso (Somente DSR)',
+        badgeClass: 'status-small-delay',
+        tempo: minutesToTime(pequenoMin) + ' (' + formatMinutesFriendly(pequenoMin) + ')',
+        impacto: 'Acumulado no DSR (sem pendência)',
+        obs: reg?.note || 'Pequeno atraso registrado'
+      });
+    }
+  }
+
+  const totalAtrasosMinutos = atrasosMaioresMinutos + pequenosAtrasosMinutos;
+
+  return {
+    colab,
+    totalDsrLost: dsrInfo.totalDsrLost,
+    dsrBreakdown: dsrInfo.breakdown,
+    faltasIntegrais,
+    faltasMeioPeriodo,
+    atrasosMaioresMinutos,
+    atrasosMaioresQtd,
+    pequenosAtrasosMinutos,
+    pequenosAtrasosQtd,
+    totalAtrasosMinutos,
+    ocorrencias
+  };
+}
+
+function openDsrDetailsModal(colabId) {
+  const colab = appState.colaboradores.find(c => c.id === colabId);
+  if (!colab) return;
+
+  const data = calculateDsrAndOccurrences(colabId, appState.currentYear, appState.currentMonth, appState.activeBranchId);
+  const branch = appState.filiais.find(f => f.id === colab.filialId);
+  const dept = appState.departamentos.find(d => d.id === colab.deptId);
+
+  // Header Summary
+  const summaryEl = document.getElementById('dsr-modal-summary');
+  if (summaryEl) {
+    summaryEl.innerHTML = `
+      <div>
+        <strong style="color:var(--color-cyan); font-size:15px;">${escapeHtml(colab.nome)}</strong>
+        <span style="font-family:var(--font-mono); font-size:12px; color:var(--color-text-sub); margin-left:8px;">(Crachá: ${colab.cracha})</span>
+        <div style="font-size:11px; color:var(--color-text-sub); margin-top:3px;">
+          Setor: <strong>${escapeHtml(dept ? dept.nome : 'Geral')}</strong> • Filial: <strong>${escapeHtml(branch ? branch.nome : '')}</strong>
+          ${colab.status === 'demitido' ? ' • <span style="color:#F87171;">Desligado em: ' + formatDateBR(colab.dataDemissao) + '</span>' : ''}
+        </div>
+      </div>
+      <div style="text-align:right;">
+        <div style="font-size:12px; color:var(--color-blue-bright); font-weight:700;">
+          Mês: ${MESES_PT[appState.currentMonth]}/${appState.currentYear}
+        </div>
+        <div style="font-size:11px; color:var(--color-text-muted); margin-top:2px;">
+          Total de Ocorrências: <strong>${data.ocorrencias.length}</strong>
+        </div>
+      </div>
+    `;
+  }
+
+  // KPIs
+  const kpiLost = document.getElementById('dsr-kpi-lost');
+  if (kpiLost) kpiLost.textContent = data.totalDsrLost;
+
+  const kpiFaltas = document.getElementById('dsr-kpi-faltas');
+  if (kpiFaltas) kpiFaltas.textContent = data.faltasIntegrais;
+
+  const kpiHalf = document.getElementById('dsr-kpi-half');
+  if (kpiHalf) kpiHalf.textContent = data.faltasMeioPeriodo;
+
+  const kpiAtrasoTotal = document.getElementById('dsr-kpi-atraso-total');
+  if (kpiAtrasoTotal) kpiAtrasoTotal.textContent = minutesToTime(data.totalAtrasosMinutos);
+
+  const kpiAtrasoSub = document.getElementById('dsr-kpi-atraso-sub');
+  if (kpiAtrasoSub) {
+    kpiAtrasoSub.textContent = `Maiores: ${formatMinutesFriendly(data.atrasosMaioresMinutos)} • Pequenos: ${formatMinutesFriendly(data.pequenosAtrasosMinutos)}`;
+  }
+
+  // Breakdown Regras DSR (CLT)
+  const rulesBox = document.getElementById('dsr-rules-box');
+  if (rulesBox) {
+    if (data.dsrBreakdown && data.dsrBreakdown.length > 0) {
+      rulesBox.innerHTML = `
+        <div style="background:rgba(239, 68, 68, 0.08); border-left:4px solid #EF4444; padding:10px 14px; border-radius:0 var(--radius-sm) var(--radius-sm) 0;">
+          <div style="font-weight:700; color:#FCA5A5; font-size:11px; text-transform:uppercase; margin-bottom:4px;">
+            ⚠️ Regras Legais de Desconto do DSR (Lei 605/49):
+          </div>
+          <ul style="margin:0; padding-left:18px; font-size:11px; color:var(--color-text-main);">
+            ${data.dsrBreakdown.map(b => `<li style="margin-bottom:2px;">${escapeHtml(b)}</li>`).join('')}
+          </ul>
+        </div>
+      `;
+      rulesBox.style.display = 'block';
+    } else {
+      rulesBox.innerHTML = `
+        <div style="background:rgba(16, 185, 129, 0.08); border-left:4px solid #10B981; padding:8px 12px; border-radius:0 var(--radius-sm) var(--radius-sm) 0; font-size:11px; color:#6EE7B7;">
+          ✅ <strong>Sem perda de DSR:</strong> Assiduidade regular mantida durante as semanas do mês.
+        </div>
+      `;
+      rulesBox.style.display = 'block';
+    }
+  }
+
+  // Ocorrências Tbody
+  const countEl = document.getElementById('dsr-count-ocorrencias');
+  if (countEl) countEl.textContent = `${data.ocorrencias.length} registro(s)`;
+
+  const tbody = document.getElementById('dsr-ocorrencias-tbody');
+  if (tbody) {
+    tbody.innerHTML = '';
+    if (data.ocorrencias.length === 0) {
+      const tr = document.createElement('tr');
+      tr.innerHTML = `
+        <td colspan="5" style="text-align:center; padding:24px 12px; color:var(--color-text-sub);">
+          <div style="font-size:24px; margin-bottom:6px;">🌟</div>
+          <div style="font-weight:600; color:var(--color-text-main);">Nenhuma falta ou atraso registrado no mês!</div>
+          <div style="font-size:11px; margin-top:2px;">O colaborador possui 100% de assiduidade e pontualidade neste período.</div>
+        </td>
+      `;
+      tbody.appendChild(tr);
+    } else {
+      data.ocorrencias.forEach(item => {
+        const tr = document.createElement('tr');
+        const dateObj = new Date(item.data + 'T12:00:00');
+        const dayOfWeek = DIAS_SEMANA_SIGLA[dateObj.getDay()];
+        tr.innerHTML = `
+          <td style="font-family:var(--font-mono); font-weight:700;">${formatDateBR(item.data)} (${dayOfWeek})</td>
+          <td><span class="${item.badgeClass}">${escapeHtml(item.tipo)}</span></td>
+          <td style="font-family:var(--font-mono); font-weight:600;">${item.tempo}</td>
+          <td style="font-size:11px; color:var(--color-text-sub);">${escapeHtml(item.impacto)}</td>
+          <td style="font-size:11px; color:var(--color-text-muted);">${escapeHtml(item.obs || '-')}</td>
+        `;
+        tbody.appendChild(tr);
+      });
+    }
+  }
+
+  openModal('modal-dsr-details');
 }
 
 /**
@@ -2037,6 +2349,51 @@ function renderCurrentView() {
   }
 }
 
+function resetMainAndColabFilters(showNotification = false) {
+  // 1. Toolbar Principal (Ponto e Fechamento de VA)
+  appState.searchFilter = '';
+  const searchIn = document.getElementById('search-filter-input');
+  if (searchIn) searchIn.value = '';
+
+  appState.departmentFilter = 'todos';
+  const deptSel = document.getElementById('filter-dept-select');
+  if (deptSel) deptSel.value = 'todos';
+
+  appState.statusFilter = 'ativos';
+  const stSel = document.getElementById('filter-status-select');
+  if (stSel) stSel.value = 'ativos';
+
+  appState.sortBy = 'nome';
+  const sortSel = document.getElementById('sort-select');
+  if (sortSel) sortSel.value = 'nome';
+
+  appState.focusMode = false;
+  document.getElementById('focus-toggle-btn')?.classList.remove('active');
+
+  // 2. Filtros da Gestão de Colaboradores
+  const colabSearch = document.getElementById('colab-search-input');
+  if (colabSearch) colabSearch.value = '';
+  const colabDept = document.getElementById('colab-filter-dept');
+  if (colabDept) colabDept.value = 'todos';
+  const colabStatus = document.getElementById('colab-filter-status');
+  if (colabStatus) colabStatus.value = 'ativo';
+  const colabPonto = document.getElementById('colab-filter-ponto');
+  if (colabPonto) colabPonto.value = 'todos';
+
+  // 3. Filtros do Calendário de Avisos
+  appState.calFilterDept = 'todos';
+  const calDept = document.getElementById('cal-filter-dept');
+  if (calDept) calDept.value = 'todos';
+  const calTipo = document.getElementById('cal-filter-tipo');
+  if (calTipo) calTipo.value = 'todos';
+  const calStatus = document.getElementById('cal-filter-status');
+  if (calStatus) calStatus.value = 'todos';
+
+  if (showNotification) {
+    showToast('Filtros redefinidos: exibindo todos em ordem alfabética.', 'info');
+  }
+}
+
 function renderBranchTabs() {
   const container = document.getElementById('branch-tabs-list');
   if (!container) return;
@@ -2054,6 +2411,8 @@ function renderBranchTabs() {
     btn.title = isGlobalView ? 'Clique para selecionar esta filial' : 'Filial: ' + branch.nome;
     btn.addEventListener('click', () => {
       appState.activeBranchId = branch.id;
+      // Ao mudar de filial, reseta todos os filtros
+      resetMainAndColabFilters(false);
       // Se estava em tela global e clicou na filial, vai para o mural ou mantém e marca
       if (appState.activeView === 'view-estrutura' || appState.activeView === 'view-feriados') {
         appState.activeView = 'view-avisos';
@@ -2061,7 +2420,7 @@ function renderBranchTabs() {
       }
       saveStateToStorage();
       renderCurrentView();
-      showToast('Filial selecionada: ' + branch.nome, 'info');
+      showToast('Filial selecionada: ' + branch.nome + '. Filtros redefinidos.', 'info');
     });
     container.appendChild(btn);
   });
@@ -2256,7 +2615,7 @@ function renderMatrixView() {
     const dsrClass = dsrInfo.totalDsrLost > 0 ? 'dsr-penalty' : 'dsr-zero';
     const dsrTooltip = dsrInfo.breakdown.length > 0 ? dsrInfo.breakdown.join('&#10;') : 'Nenhuma perda de DSR no mês';
 
-    html += '<td class="col-dsr" title="' + dsrTooltip + '"><span class="dsr-badge ' + dsrClass + '">' + dsrInfo.totalDsrLost + '</span></td>';
+    html += '<td class="col-dsr" data-colab-id="' + colab.id + '" title="' + dsrTooltip + ' (Clique para abrir detalhamento analítico)"><span class="dsr-badge ' + dsrClass + '">' + dsrInfo.totalDsrLost + '</span></td>';
 
     tr.innerHTML = html;
     tbody.appendChild(tr);
@@ -2280,6 +2639,17 @@ function renderMatrixView() {
       const colabId = cell.dataset.colabId;
       const isoDate = cell.dataset.date;
       openCellDetailModal(colabId, isoDate);
+    });
+  });
+
+  // Cliques na coluna congelada de DSR para abrir detalhamento analítico
+  tbody.querySelectorAll('.col-dsr').forEach(cell => {
+    cell.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const colabId = cell.dataset.colabId;
+      if (colabId) {
+        openDsrDetailsModal(colabId);
+      }
     });
   });
 }
@@ -2459,6 +2829,24 @@ function openCellDetailModal(colabId, isoDate) {
   document.getElementById('select-resolution').value = reg.resolution || 'NENHUMA';
   document.getElementById('input-cell-justificativa').value = reg.note || '';
 
+  // Carrega campos de atraso maior e pequeno atraso
+  const inputAtrasoMaior = document.getElementById('input-atraso-maior');
+  const inputAtrasoPequeno = document.getElementById('input-atraso-pequeno');
+
+  let defaultAtrasoMaior = reg.atrasoMaior || '';
+  if (!defaultAtrasoMaior && reg.atrasoMaiorMin > 0) {
+    defaultAtrasoMaior = minutesToTime(reg.atrasoMaiorMin);
+  }
+  if (!defaultAtrasoMaior && !reg.atrasoPequeno && reg.punches) {
+    const evalResult = evaluateDailyPunches(reg.punches);
+    if (evalResult.status === 'ATRASO' && evalResult.delayMinutes > 0) {
+      defaultAtrasoMaior = minutesToTime(evalResult.delayMinutes);
+    }
+  }
+
+  if (inputAtrasoMaior) inputAtrasoMaior.value = defaultAtrasoMaior;
+  if (inputAtrasoPequeno) inputAtrasoPequeno.value = reg.atrasoPequeno || '';
+
   const currentStatus = getDayStatus(colabId, isoDate, appState.activeBranchId);
   document.getElementById('modal-status-badge').textContent = 'Status Apurado: ' + currentStatus.display;
 
@@ -2478,6 +2866,12 @@ document.getElementById('btn-save-cell-detail')?.addEventListener('click', () =>
   const resolution = document.getElementById('select-resolution').value;
   const note = document.getElementById('input-cell-justificativa').value.trim();
 
+  const atrasoMaiorRaw = (document.getElementById('input-atraso-maior')?.value || '').trim();
+  const atrasoPequenoRaw = (document.getElementById('input-atraso-pequeno')?.value || '').trim();
+
+  const atrasoMaiorMin = parseTimeToMinutes(atrasoMaiorRaw);
+  const atrasoPequenoMin = parseTimeToMinutes(atrasoPequenoRaw);
+
   const punches = {
     em: document.getElementById('punch-em').value,
     sm: document.getElementById('punch-sm').value,
@@ -2490,7 +2884,11 @@ document.getElementById('btn-save-cell-detail')?.addEventListener('click', () =>
     override,
     resolution,
     punches,
-    note
+    note,
+    atrasoMaior: atrasoMaiorRaw,
+    atrasoMaiorMin,
+    atrasoPequeno: atrasoPequenoRaw,
+    atrasoPequenoMin
   };
 
   // Replicação para os próximos dias
@@ -2518,7 +2916,11 @@ document.getElementById('btn-save-cell-detail')?.addEventListener('click', () =>
         override,
         resolution,
         punches: { ...punches },
-        note: note + ' (Replicado de ' + formatDateBR(isoDate) + ')'
+        note: note + ' (Replicado de ' + formatDateBR(isoDate) + ')',
+        atrasoMaior: atrasoMaiorRaw,
+        atrasoMaiorMin,
+        atrasoPequeno: atrasoPequenoRaw,
+        atrasoPequenoMin
       };
       added++;
     }
@@ -4239,25 +4641,7 @@ function initEvents() {
 
   // Botão Limpar Filtros do Toolbar Principal (Ponto e VA)
   document.getElementById('btn-reset-main-filters')?.addEventListener('click', () => {
-    appState.searchFilter = '';
-    const searchIn = document.getElementById('search-filter-input');
-    if (searchIn) searchIn.value = '';
-
-    appState.departmentFilter = 'todos';
-    const deptSel = document.getElementById('filter-dept-select');
-    if (deptSel) deptSel.value = 'todos';
-
-    appState.statusFilter = 'ativos';
-    const stSel = document.getElementById('filter-status-select');
-    if (stSel) stSel.value = 'ativos';
-
-    appState.sortBy = 'nome';
-    const sortSel = document.getElementById('sort-select');
-    if (sortSel) sortSel.value = 'nome';
-
-    appState.focusMode = false;
-    document.getElementById('focus-toggle-btn')?.classList.remove('active');
-
+    resetMainAndColabFilters(false);
     saveStateToStorage();
     renderCurrentView();
     showToast('Filtros redefinidos: exibindo todos em ordem alfabética.', 'info');
