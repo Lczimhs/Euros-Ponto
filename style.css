@@ -1892,6 +1892,26 @@ thead .col-dsr {
   border: 1px solid rgba(148, 163, 184, 0.4);
 }
 
+.notice-pill-assinatura {
+  background: rgba(236, 72, 153, 0.22);
+  color: #F472B6;
+  border: 1px solid rgba(236, 72, 153, 0.55);
+}
+
+.badge-rollover-daily {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  background: rgba(245, 158, 11, 0.18);
+  border: 1px solid rgba(245, 158, 11, 0.5);
+  color: #FBBF24;
+  border-radius: 9999px;
+  padding: 2px 8px;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.3px;
+}
+
 /* Notice Done (Feito) Strikethrough style */
 .cal-notice-pill.is-done {
   background: rgba(100, 116, 139, 0.2) !important;

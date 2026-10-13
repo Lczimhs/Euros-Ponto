@@ -1439,6 +1439,11 @@ function loadStateFromStorage() {
         if (parsed.calFilterDept) appState.calFilterDept = parsed.calFilterDept;
         if (typeof parsed.focusMode === 'boolean') appState.focusMode = parsed.focusMode;
         if (parsed.sortBy) appState.sortBy = parsed.sortBy;
+
+        // Prorrogação automática diária de avisos de assinatura vencidos e sincronização de demissões
+        checkAndRolloverPendingNotices();
+        syncDismissalNotices();
+
         saveStateToStorage();
         return;
       }
@@ -1457,6 +1462,10 @@ function loadStateFromStorage() {
   appState.registrosPonto = seed.registrosPonto;
   appState.carryOverDsr = seed.carryOverDsr;
   appState.activeBranchId = 'branch-1';
+
+  checkAndRolloverPendingNotices();
+  syncDismissalNotices();
+
   saveStateToStorage();
 }
 
@@ -2330,6 +2339,9 @@ function updateMainToolbarDepartmentOptions() {
 }
 
 function renderCurrentView() {
+  checkAndRolloverPendingNotices();
+  syncDismissalNotices();
+
   renderBranchTabs();
   updateMonthDisplay();
   updateMainToolbarDepartmentOptions();
@@ -2994,6 +3006,115 @@ function addCalendarDays(dateStr, days) {
   }
 }
 
+function getTodayISOLocal() {
+  const now = new Date();
+  const year = now.getFullYear();
+  const month = String(now.getMonth() + 1).padStart(2, '0');
+  const day = String(now.getDate()).padStart(2, '0');
+  return `${year}-${month}-${day}`;
+}
+
+/**
+ * Prorrogação Automática de Avisos Vencidos (Rollover Diário):
+ * Caso um aviso com autoRollover (ex: chamar para assinar rescisão) vença sem ser marcado como feito,
+ * ele automaticamente avança para o dia seguinte e assim por diante até ser concluído.
+ */
+function checkAndRolloverPendingNotices() {
+  if (!appState.avisos || !Array.isArray(appState.avisos)) return;
+  const todayStr = getTodayISOLocal();
+  let modified = false;
+
+  appState.avisos.forEach(aviso => {
+    const isAssinaturaDoc = aviso.autoRollover === true ||
+      aviso.isAssinaturaDoc === true ||
+      (aviso.id && aviso.id.startsWith('aviso-assinatura-')) ||
+      (aviso.titulo && (aviso.titulo.toLowerCase().includes('assinar documentos rescisórios') || aviso.titulo.toLowerCase().includes('documentos rescisórios')));
+
+    if (isAssinaturaDoc && !aviso.concluido) {
+      if (aviso.data < todayStr) {
+        if (!aviso.dataOriginalAgendada) {
+          aviso.dataOriginalAgendada = aviso.data;
+        }
+        aviso.dataAnterior = aviso.data;
+        aviso.data = todayStr;
+        aviso.prorrogadoAutomatico = true;
+        aviso.updatedAt = new Date().toISOString();
+        modified = true;
+      }
+    }
+  });
+
+  if (modified) {
+    saveStateToStorage();
+  }
+}
+
+/**
+ * Garante que colaboradores demitidos tenham os 2 avisos no mural:
+ * 1. Prazo final de pagamento (10 dias corridos CLT Art. 477)
+ * 2. Chamar para assinar documentos rescisórios (1 dia após o pagamento, com prorrogação diária)
+ */
+function syncDismissalNotices() {
+  if (!appState.colaboradores || !Array.isArray(appState.colaboradores)) return;
+  if (!appState.avisos) appState.avisos = [];
+  let modified = false;
+
+  appState.colaboradores.forEach(colab => {
+    if (colab.status === 'demitido' && colab.dataDemissao) {
+      const colabKeyId = colab.id || ('colab-' + colab.cracha);
+      const prazoFatal = addCalendarDays(colab.dataDemissao, 10);
+      const dataAssinatura = addCalendarDays(prazoFatal, 1);
+      const avisoPagamentoId = 'aviso-rescisao-' + colabKeyId;
+      const avisoAssinaturaId = 'aviso-assinatura-' + colabKeyId;
+
+      // 1. Prazo final de pagamento (10 dias CLT Art. 477)
+      const hasPaymentNotice = appState.avisos.some(a => a.id === avisoPagamentoId || (a.colabId === colabKeyId && a.tipo === 'rescisao' && !a.isAssinaturaDoc && !a.autoRollover));
+      if (!hasPaymentNotice) {
+        appState.avisos.unshift({
+          id: avisoPagamentoId,
+          data: prazoFatal,
+          tipo: 'rescisao',
+          titulo: `🔴 Prazo Limite Rescisão - ${colab.nome} (10 dias CLT Art. 477)`,
+          descricao: `Prazo legal fatal de 10 dias corridos para homologação e pagamento de verbas rescisórias (Art. 477, § 6º da CLT). Data da demissão: ${formatDateBR(colab.dataDemissao)}. Prazo fatal: ${formatDateBR(prazoFatal)}.`,
+          filialId: colab.filialId,
+          colabId: colabKeyId,
+          concluido: false,
+          concluidoEm: null,
+          createdAt: new Date().toISOString(),
+          updatedAt: new Date().toISOString()
+        });
+        modified = true;
+      }
+
+      // 2. Chamar para assinar documentos rescisórios (1 dia após o pagamento, com prorrogação diária)
+      const hasSigningNotice = appState.avisos.some(a => a.id === avisoAssinaturaId || (a.colabId === colabKeyId && (a.isAssinaturaDoc || a.autoRollover)));
+      if (!hasSigningNotice) {
+        appState.avisos.unshift({
+          id: avisoAssinaturaId,
+          data: dataAssinatura,
+          dataOriginalAgendada: dataAssinatura,
+          tipo: 'rescisao',
+          isAssinaturaDoc: true,
+          autoRollover: true,
+          titulo: `📝 Chamar para Assinar Documentos Rescisórios - ${colab.nome}`,
+          descricao: `Chamar o colaborador ${colab.nome} para conferência e assinatura dos documentos rescisórios (TRCT, guias do FGTS e Seguro-Desemprego). Prazo de pagamento: ${formatDateBR(prazoFatal)}. Data original: ${formatDateBR(dataAssinatura)}. (Caso não seja concluído ao final do dia, este aviso é prorrogado automaticamente para o dia seguinte).`,
+          filialId: colab.filialId,
+          colabId: colabKeyId,
+          concluido: false,
+          concluidoEm: null,
+          createdAt: new Date().toISOString(),
+          updatedAt: new Date().toISOString()
+        });
+        modified = true;
+      }
+    }
+  });
+
+  if (modified) {
+    saveStateToStorage();
+  }
+}
+
 function get5thBusinessDay(year, month) {
   let businessDaysCount = 0;
   const daysInMonth = new Date(year, month + 1, 0).getDate();
@@ -3032,6 +3153,9 @@ function getLastBusinessDay(year, month) {
 }
 
 function renderAvisosView() {
+  checkAndRolloverPendingNotices();
+  syncDismissalNotices();
+
   if (typeof appState.calendarYear !== 'number') appState.calendarYear = appState.currentYear || 2026;
   if (typeof appState.calendarMonth !== 'number') appState.calendarMonth = (typeof appState.currentMonth === 'number') ? appState.currentMonth : 9;
 
@@ -3210,11 +3334,13 @@ function createDayCellElement({ dateStr, dayNum, isOtherMonth, filterTipo, filte
   const remainingCount = dayNotices.length - MAX_PILLS;
 
   visiblePills.forEach(aviso => {
+    const isAssinatura = aviso.isAssinaturaDoc || aviso.autoRollover || (aviso.titulo && aviso.titulo.toLowerCase().includes('assinar documentos rescisórios'));
     const pill = document.createElement('div');
-    pill.className = `cal-notice-pill notice-pill-${aviso.tipo || 'outros'} ${aviso.concluido ? 'is-done' : ''}`;
+    pill.className = `cal-notice-pill ${isAssinatura ? 'notice-pill-assinatura' : ('notice-pill-' + (aviso.tipo || 'outros'))} ${aviso.concluido ? 'is-done' : ''}`;
 
     let icon = '📌';
-    if (aviso.tipo === 'rescisao') icon = '🔴';
+    if (isAssinatura) icon = '📝';
+    else if (aviso.tipo === 'rescisao') icon = '🔴';
     else if (aviso.tipo === 'salario') icon = '🟡';
     else if (aviso.tipo === 'ferias') icon = '🟣';
     else if (aviso.tipo === 'ponto') icon = '🔵';
@@ -3222,7 +3348,12 @@ function createDayCellElement({ dateStr, dayNum, isOtherMonth, filterTipo, filte
 
     const checkIcon = aviso.concluido ? '✅ ' : `${icon} `;
     pill.innerHTML = `<span>${checkIcon}</span><span style="overflow:hidden; text-overflow:ellipsis;">${escapeHtml(aviso.titulo)}</span>`;
-    pill.title = `${aviso.titulo} (${aviso.concluido ? 'Concluído/Feito' : 'Pendente'})`;
+    
+    let tooltipStatus = aviso.concluido ? 'Concluído/Feito' : 'Pendente';
+    if (aviso.prorrogadoAutomatico && !aviso.concluido) {
+      tooltipStatus = `Prorrogado Diariamente (Data original: ${formatDateBR(aviso.dataOriginalAgendada)})`;
+    }
+    pill.title = `${aviso.titulo} (${tooltipStatus})`;
     noticesContainer.appendChild(pill);
   });
 
@@ -3281,8 +3412,11 @@ function renderAgendaView(monthNotices) {
     const dayNum = dParts[2];
     const dayWeek = DIAS_SEMANA_NOMES[dt.getDay()] ? DIAS_SEMANA_NOMES[dt.getDay()].slice(0, 3) : '';
 
+    const isAssinatura = aviso.isAssinaturaDoc || aviso.autoRollover || (aviso.titulo && aviso.titulo.toLowerCase().includes('assinar documentos rescisórios'));
+
     let tipoBadge = '⚪ Outros';
-    if (aviso.tipo === 'rescisao') tipoBadge = '🔴 Rescisão CLT';
+    if (isAssinatura) tipoBadge = '📝 Assinatura Rescisão';
+    else if (aviso.tipo === 'rescisao') tipoBadge = '🔴 Rescisão CLT';
     else if (aviso.tipo === 'salario') tipoBadge = '🟡 Salário/Vale';
     else if (aviso.tipo === 'ferias') tipoBadge = '🟣 Férias';
     else if (aviso.tipo === 'ponto') tipoBadge = '🔵 Ponto & VA';
@@ -3298,15 +3432,17 @@ function renderAgendaView(monthNotices) {
           <div class="day-week">${dayWeek}</div>
         </div>
         <div>
-          <div style="display:flex; gap:6px; margin-bottom:4px; align-items:center;">
+          <div style="display:flex; gap:6px; margin-bottom:4px; align-items:center; flex-wrap:wrap;">
             <span class="badge-aviso-cat badge-cat-informativo" style="font-size:10px; padding:2px 6px;">${tipoBadge}</span>
             <span class="badge-aviso-scope" style="font-size:10px; padding:2px 6px;">${escapeHtml(filialNome)}</span>
+            ${isAssinatura ? `<span class="badge-rollover-daily">${aviso.prorrogadoAutomatico && !aviso.concluido ? '⏳ Prorrogado Diariamente' : '🔄 Prorroga Diariamente'}</span>` : ''}
             ${aviso.concluido ? '<span class="status-badge-done">✅ Feito</span>' : '<span class="status-badge-pending">🔴 Pendente</span>'}
           </div>
           <div style="font-size:14px; font-weight:700; color:var(--color-text-main); margin-bottom:2px;">
             ${escapeHtml(aviso.titulo)}
           </div>
           ${colabNome ? `<div style="font-size:12px; color:var(--color-cyan);">👤 ${escapeHtml(colabNome)}</div>` : ''}
+          ${aviso.prorrogadoAutomatico && !aviso.concluido ? `<div style="font-size:11px; color:#FBBF24; margin-top:2px;">⏳ Prorrogado automaticamente (Agendado originalmente para ${formatDateBR(aviso.dataOriginalAgendada)})</div>` : ''}
           ${aviso.descricao ? `<div style="font-size:12px; color:var(--color-text-muted); margin-top:2px;">${escapeHtml(aviso.descricao)}</div>` : ''}
         </div>
       </div>
@@ -3489,8 +3625,11 @@ function openDayNoticesModal(dateStr) {
         ? '🌐 Todas as Filiais'
         : '🏢 ' + (branchMap[aviso.filialId] || 'Filial Específica');
 
+      const isAssinaturaNotice = aviso.isAssinaturaDoc || aviso.autoRollover || (aviso.titulo && aviso.titulo.toLowerCase().includes('assinar documentos rescisórios'));
+
       let tipoLabel = '⚪ Outros';
-      if (aviso.tipo === 'rescisao') tipoLabel = '🔴 Rescisão Contratual (10 dias)';
+      if (isAssinaturaNotice) tipoLabel = '📝 Assinatura de Documentos Rescisórios';
+      else if (aviso.tipo === 'rescisao') tipoLabel = '🔴 Rescisão Contratual (10 dias)';
       else if (aviso.tipo === 'salario') tipoLabel = '🟡 Pagamento Salarial / Vale';
       else if (aviso.tipo === 'ferias') tipoLabel = '🟣 Férias CLT';
       else if (aviso.tipo === 'ponto') tipoLabel = '🔵 Ponto Eletrônico & VA';
@@ -3500,13 +3639,18 @@ function openDayNoticesModal(dateStr) {
         ? '<span class="status-badge-done">✅ Feito (Concluído)</span>'
         : '<span class="status-badge-pending">🔴 Pendente</span>';
 
+      const rolloverBadge = isAssinaturaNotice
+        ? `<span class="badge-rollover-daily" title="Caso não seja feito ao final do dia, este aviso avança automaticamente para o dia seguinte até ser marcado como feito">${aviso.prorrogadoAutomatico && !aviso.concluido ? '⏳ Prorrogado Diariamente' : '🔄 Prorroga Diariamente'}</span>`
+        : '';
+
       const colabName = aviso.colabId ? (colabMap[aviso.colabId] || 'Colaborador vinculado') : null;
 
       card.innerHTML = `
         <div class="day-notice-header">
-          <div class="day-notice-badges">
+          <div class="day-notice-badges" style="display:flex; flex-wrap:wrap; gap:4px; align-items:center;">
             <span class="badge-aviso-cat badge-cat-informativo" style="font-size:10px; padding:2px 6px;">${tipoLabel}</span>
             <span class="badge-aviso-scope" style="font-size:10px; padding:2px 6px;">${scopeName}</span>
+            ${rolloverBadge}
             ${statusBadge}
           </div>
           <div style="font-size:11px; color:var(--color-text-muted);">
@@ -3517,6 +3661,12 @@ function openDayNoticesModal(dateStr) {
         <h4 class="day-notice-title">${escapeHtml(aviso.titulo)}</h4>
 
         ${colabName ? `<div style="font-size:12px; color:var(--color-cyan); font-weight:600;">👤 Colaborador: ${escapeHtml(colabName)}</div>` : ''}
+
+        ${aviso.prorrogadoAutomatico && !aviso.concluido ? `
+          <div style="background:rgba(245, 158, 11, 0.12); border:1px solid rgba(245, 158, 11, 0.3); border-radius:6px; padding:8px 10px; margin:8px 0; font-size:12px; color:#FCD34D;">
+            ⏳ <strong>Prorrogação Diária Automática:</strong> Este aviso venceu sem ser concluído (data original agendada: <strong>${formatDateBR(aviso.dataOriginalAgendada)}</strong>) e foi transferido automaticamente para hoje. Ele continuará avançando a cada novo dia até que seja marcado como <strong>FEITO</strong>.
+          </div>
+        ` : ''}
 
         ${aviso.descricao ? `<div class="day-notice-desc">${escapeHtml(aviso.descricao)}</div>` : ''}
 
@@ -3688,7 +3838,7 @@ function handleLegalPresetChange(preset) {
     : 'Colaborador';
 
   if (boxRescisao) {
-    boxRescisao.style.display = (preset === 'rescisao') ? 'block' : 'none';
+    boxRescisao.style.display = (preset === 'rescisao' || preset === 'assinatura_rescisao') ? 'block' : 'none';
   }
 
   const calYear = appState.calendarYear || 2026;
@@ -3702,6 +3852,15 @@ function handleLegalPresetChange(preset) {
     if (dataInput) dataInput.value = prazoFatal;
     if (tituloInput) tituloInput.value = `🔴 Pagamento Rescisão Contratual - ${colabNome} (10 dias CLT Art. 477)`;
     if (descInput) descInput.value = `Prazo improrrogável de 10 dias corridos para pagamento integral das verbas rescisórias e entrega das guias (TRCT/FGTS) conforme Art. 477, § 6º da CLT. Demissão em: ${formatDateBR(demissaoVal)}.`;
+  } else if (preset === 'assinatura_rescisao') {
+    if (tipoInput) tipoInput.value = 'rescisao';
+    const inputDemissao = document.getElementById('input-calc-demissao-data');
+    const demissaoVal = inputDemissao?.value || new Date().toISOString().split('T')[0];
+    const prazoFatal = addCalendarDays(demissaoVal, 10);
+    const dataAssinatura = addCalendarDays(prazoFatal, 1);
+    if (dataInput) dataInput.value = dataAssinatura;
+    if (tituloInput) tituloInput.value = `📝 Chamar para Assinar Documentos Rescisórios - ${colabNome}`;
+    if (descInput) descInput.value = `Chamar o colaborador para conferência e assinatura dos documentos rescisórios (TRCT, guias do FGTS e Seguro-Desemprego). Prazo de pagamento: ${formatDateBR(prazoFatal)}. Data agendada da assinatura: ${formatDateBR(dataAssinatura)}. (Caso não seja concluído ao final do dia, este aviso avança automaticamente para o dia seguinte até ser marcado como feito).`;
   } else if (preset === 'salario_5') {
     if (tipoInput) tipoInput.value = 'salario';
     const quintoDia = get5thBusinessDay(calYear, calMonth);
@@ -3761,6 +3920,11 @@ function saveAvisoFromModal() {
 
   if (!appState.avisos) appState.avisos = [];
 
+  const preset = document.getElementById('select-preset-legal')?.value;
+  const isAssinatura = preset === 'assinatura_rescisao' ||
+    titulo.toLowerCase().includes('assinar documentos rescisórios') ||
+    (titulo.toLowerCase().includes('assinatura') && titulo.toLowerCase().includes('rescis'));
+
   const avisoId = idInput.value;
   if (avisoId) {
     const idx = appState.avisos.findIndex(a => a.id === avisoId);
@@ -3776,6 +3940,9 @@ function saveAvisoFromModal() {
         descricao: descInput.value.trim(),
         concluido: isNowDone,
         concluidoEm: isNowDone ? (appState.avisos[idx].concluidoEm || new Date().toISOString()) : null,
+        autoRollover: isAssinatura ? true : (appState.avisos[idx].autoRollover || false),
+        isAssinaturaDoc: isAssinatura ? true : (appState.avisos[idx].isAssinaturaDoc || false),
+        dataOriginalAgendada: appState.avisos[idx].dataOriginalAgendada || dataVal,
         updatedAt: new Date().toISOString()
       };
       showToast('Prazo atualizado com sucesso!', 'success');
@@ -3783,9 +3950,12 @@ function saveAvisoFromModal() {
   } else {
     const isDone = concluidoCheck.checked;
     const newAviso = {
-      id: 'aviso-' + Date.now(),
+      id: (isAssinatura && colabSelect?.value) ? ('aviso-assinatura-' + colabSelect.value) : ('aviso-' + Date.now()),
       data: dataVal,
+      dataOriginalAgendada: dataVal,
       tipo: tipoInput.value,
+      isAssinaturaDoc: isAssinatura,
+      autoRollover: isAssinatura,
       titulo,
       filialId: filialSelect.value,
       colabId: colabSelect ? colabSelect.value : '',
@@ -4128,39 +4298,74 @@ document.getElementById('btn-save-employee')?.addEventListener('click', () => {
 
   const colabKeyId = id || ('colab-' + cracha);
 
-  // GERAÇÃO AUTOMÁTICA DE AVISO NO MURAL DE PRAZOS (CLT Art. 477 - 10 dias corridos)
+  // GERAÇÃO AUTOMÁTICA DE AVISOS NO MURAL (CLT Art. 477 - 10 dias corridos + 1 dia após para assinatura)
   if (status === 'demitido' && dataDemissao) {
     const prazoFatal = addCalendarDays(dataDemissao, 10);
-    const avisoId = 'aviso-rescisao-' + colabKeyId;
+    const dataAssinatura = addCalendarDays(prazoFatal, 1);
+    const avisoPagtoId = 'aviso-rescisao-' + colabKeyId;
+    const avisoAssinId = 'aviso-assinatura-' + colabKeyId;
 
     if (!appState.avisos) appState.avisos = [];
-    const existingIdx = appState.avisos.findIndex(a => a.id === avisoId || (a.colabId === colabKeyId && a.tipo === 'rescisao'));
 
-    const avisoObj = {
-      id: avisoId,
+    // 1. Aviso de Pagamento da Rescisão (10 dias corridos CLT Art. 477)
+    const existingPagtoIdx = appState.avisos.findIndex(a => a.id === avisoPagtoId || (a.colabId === colabKeyId && a.tipo === 'rescisao' && !a.isAssinaturaDoc && !a.autoRollover));
+    const isPagtoDone = existingPagtoIdx !== -1 ? appState.avisos[existingPagtoIdx].concluido : false;
+
+    const avisoPagtoObj = {
+      id: avisoPagtoId,
       data: prazoFatal,
       tipo: 'rescisao',
       titulo: `🔴 Prazo Limite Rescisão - ${nome} (10 dias CLT Art. 477)`,
       descricao: `Prazo legal fatal de 10 dias corridos para homologação e pagamento de verbas rescisórias (Art. 477, § 6º da CLT). Data da demissão: ${formatDateBR(dataDemissao)}. Prazo fatal: ${formatDateBR(prazoFatal)}.`,
       filialId: filialId,
       colabId: colabKeyId,
-      concluido: false,
-      concluidoEm: null,
-      createdAt: new Date().toISOString(),
+      concluido: isPagtoDone,
+      concluidoEm: existingPagtoIdx !== -1 ? appState.avisos[existingPagtoIdx].concluidoEm : null,
+      createdAt: existingPagtoIdx !== -1 ? appState.avisos[existingPagtoIdx].createdAt : new Date().toISOString(),
       updatedAt: new Date().toISOString()
     };
 
-    if (existingIdx !== -1) {
-      appState.avisos[existingIdx] = { ...appState.avisos[existingIdx], ...avisoObj };
+    if (existingPagtoIdx !== -1) {
+      appState.avisos[existingPagtoIdx] = { ...appState.avisos[existingPagtoIdx], ...avisoPagtoObj };
     } else {
-      appState.avisos.unshift(avisoObj);
+      appState.avisos.unshift(avisoPagtoObj);
+    }
+
+    // 2. Aviso de Chamar para Assinar Documentos Rescisórios (1 dia após o pagamento + Prorrogação diária)
+    const existingAssinIdx = appState.avisos.findIndex(a => a.id === avisoAssinId || (a.colabId === colabKeyId && (a.isAssinaturaDoc || a.autoRollover)));
+    const isAssinDone = existingAssinIdx !== -1 ? appState.avisos[existingAssinIdx].concluido : false;
+    const initialAssinDate = (existingAssinIdx !== -1 && isAssinDone)
+      ? appState.avisos[existingAssinIdx].data
+      : dataAssinatura;
+
+    const avisoAssinObj = {
+      id: avisoAssinId,
+      data: initialAssinDate,
+      dataOriginalAgendada: dataAssinatura,
+      tipo: 'rescisao',
+      isAssinaturaDoc: true,
+      autoRollover: true,
+      titulo: `📝 Chamar para Assinar Documentos Rescisórios - ${nome}`,
+      descricao: `Chamar o colaborador ${nome} para conferência e assinatura dos documentos rescisórios (TRCT, guias do FGTS e Seguro-Desemprego). Prazo de pagamento: ${formatDateBR(prazoFatal)}. Data agendada da assinatura: ${formatDateBR(dataAssinatura)}. (Caso não seja concluído ao final do dia, este aviso avança automaticamente para o dia seguinte até ser marcado como feito).`,
+      filialId: filialId,
+      colabId: colabKeyId,
+      concluido: isAssinDone,
+      concluidoEm: existingAssinIdx !== -1 ? appState.avisos[existingAssinIdx].concluidoEm : null,
+      createdAt: existingAssinIdx !== -1 ? appState.avisos[existingAssinIdx].createdAt : new Date().toISOString(),
+      updatedAt: new Date().toISOString()
+    };
+
+    if (existingAssinIdx !== -1) {
+      appState.avisos[existingAssinIdx] = { ...appState.avisos[existingAssinIdx], ...avisoAssinObj };
+    } else {
+      appState.avisos.unshift(avisoAssinObj);
     }
   } else if (status === 'ativo') {
-    // Se colaborador for reativado como 'ativo', remove aviso de rescisão pendente
+    // Se colaborador for reativado como 'ativo', remove avisos de rescisão e assinatura pendentes
     if (appState.avisos && Array.isArray(appState.avisos)) {
       appState.avisos = appState.avisos.filter(a => {
-        const isThisColab = a.colabId === colabKeyId || a.id === ('aviso-rescisao-' + colabKeyId);
-        return !(isThisColab && a.tipo === 'rescisao' && !a.concluido);
+        const isThisColab = a.colabId === colabKeyId || a.id === ('aviso-rescisao-' + colabKeyId) || a.id === ('aviso-assinatura-' + colabKeyId);
+        return !(isThisColab && (a.tipo === 'rescisao' || a.isAssinaturaDoc) && !a.concluido);
       });
     }
   }
@@ -4170,7 +4375,9 @@ document.getElementById('btn-save-employee')?.addEventListener('click', () => {
   renderCurrentView();
 
   if (status === 'demitido') {
-    showToast(`Colaborador salvo e aviso de rescisão (10 dias CLT Art. 477) publicado no mural até ${formatDateBR(addCalendarDays(dataDemissao, 10))}!`, 'purple');
+    const pFatal = addCalendarDays(dataDemissao, 10);
+    const dAssin = addCalendarDays(pFatal, 1);
+    showToast(`Colaborador salvo! Avisos gerados: 🔴 Pagamento (${formatDateBR(pFatal)}) e 📝 Assinatura (${formatDateBR(dAssin)} com prorrogação diária)!`, 'purple');
   } else {
     showToast('Colaborador salvo com sucesso!', 'success');
   }
@@ -4565,33 +4772,40 @@ function initEvents() {
     handleLegalPresetChange(e.target.value);
   });
 
-  // Cálculo Automático de 10 Dias Corridos para Rescisão (CLT Art. 477)
+  // Cálculo Automático de 10 Dias Corridos para Rescisão (CLT Art. 477) e Assinatura (+1 dia)
   document.getElementById('btn-calc-prazo-rescisao')?.addEventListener('click', () => {
     const demissaoVal = document.getElementById('input-calc-demissao-data')?.value;
     if (!demissaoVal) {
       showToast('Por favor, informe a data da demissão.', 'warning');
       return;
     }
+    const preset = document.getElementById('select-preset-legal')?.value;
     const prazoFatal = addCalendarDays(demissaoVal, 10);
     const avisoData = document.getElementById('aviso-data');
-    if (avisoData) avisoData.value = prazoFatal;
-
     const colabSelect = document.getElementById('aviso-colab');
     const colabNome = (colabSelect && colabSelect.selectedIndex > 0)
       ? colabSelect.options[colabSelect.selectedIndex].text
       : 'Colaborador';
 
     const tituloInput = document.getElementById('aviso-titulo');
-    if (tituloInput) {
-      tituloInput.value = `🔴 Prazo Limite Rescisão - ${colabNome} (10 dias CLT Art. 477)`;
-    }
-
     const descInput = document.getElementById('aviso-descricao');
-    if (descInput) {
-      descInput.value = `Prazo legal fatal de 10 dias corridos para pagamento integral das verbas rescisórias e entrega de guias (Art. 477, § 6º da CLT). Data da demissão: ${formatDateBR(demissaoVal)}. Prazo máximo: ${formatDateBR(prazoFatal)}.`;
-    }
 
-    showToast(`Prazo de 10 dias aplicado! Data fatal: ${formatDateBR(prazoFatal)}`, 'success');
+    if (preset === 'assinatura_rescisao') {
+      const dataAssinatura = addCalendarDays(prazoFatal, 1);
+      if (avisoData) avisoData.value = dataAssinatura;
+      if (tituloInput) tituloInput.value = `📝 Chamar para Assinar Documentos Rescisórios - ${colabNome}`;
+      if (descInput) descInput.value = `Chamar o colaborador para conferência e assinatura dos documentos rescisórios (TRCT, guias do FGTS e Seguro-Desemprego). Prazo de pagamento: ${formatDateBR(prazoFatal)}. Data agendada da assinatura: ${formatDateBR(dataAssinatura)}. (Caso não seja concluído ao final do dia, este aviso avança automaticamente para o dia seguinte até ser marcado como feito).`;
+      showToast(`Data calculada para assinatura (1 dia após pagamento): ${formatDateBR(dataAssinatura)}!`, 'success');
+    } else {
+      if (avisoData) avisoData.value = prazoFatal;
+      if (tituloInput) {
+        tituloInput.value = `🔴 Prazo Limite Rescisão - ${colabNome} (10 dias CLT Art. 477)`;
+      }
+      if (descInput) {
+        descInput.value = `Prazo legal fatal de 10 dias corridos para pagamento integral das verbas rescisórias e entrega de guias (Art. 477, § 6º da CLT). Data da demissão: ${formatDateBR(demissaoVal)}. Prazo máximo: ${formatDateBR(prazoFatal)}.`;
+      }
+      showToast(`Prazo de 10 dias aplicado! Data fatal: ${formatDateBR(prazoFatal)}`, 'success');
+    }
   });
 
   // Navegação de Mês da Matriz de Ponto
