@@ -779,6 +779,14 @@ thead .col-dsr {
   border: 1px solid #5A3AA6;
 }
 
+/* Duas pendências no mesmo dia (ex: SM+FT) */
+.status-combo {
+  font-size: 9px !important;
+  letter-spacing: -0.2px;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
 /* Status: FÉRIAS & AFASTADO */
 .status-ferias {
   background: #231B38;

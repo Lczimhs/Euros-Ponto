@@ -1601,6 +1601,45 @@ function evaluateDailyPunches(punches) {
 }
 
 /**
+ * PENDÊNCIAS DO DIA (até 2 por dia)
+ * Siglas: EM = Entrada Manhã, SM = Saída Manhã, ET = Entrada da Tarde, ST = Saída da Tarde,
+ * além de FALTA, FM, FT, ATESTADO e 1/2 ATESTADO.
+ * No dashboard exibe-se apenas a sigla; com 2 pendências: <PENDÊNCIA 1>+<PENDÊNCIA 2> (ex: SM+FT).
+ */
+const PENDENCIAS_BATIDA = ['EM', 'SM', 'ET', 'ST'];
+const PENDENCIAS_PRIORIDADE = ['FALTA', 'FM', 'FT', 'ATESTADO', '1/2 ATESTADO', 'EM', 'SM', 'ET', 'ST'];
+
+function getRegPendencias(reg) {
+  if (!reg || !reg.override || reg.override === 'AUTO' || reg.override === 'OK') return [];
+  const p1 = reg.override;
+  // Férias/Afastamento não combinam com outra pendência
+  if (p1 === 'FÉRIAS' || p1 === 'AFASTADO') return [p1];
+  const list = [p1];
+  const p2 = reg.override2;
+  if (p2 && p2 !== p1 && PENDENCIAS_PRIORIDADE.includes(p2)) list.push(p2);
+  return list;
+}
+
+function pendenciaDisplay(p) {
+  if (p === '1/2 ATESTADO') return '½ AT';
+  if (p === 'ATESTADO') return 'AT';
+  if (p === 'AFASTADO') return 'AFAST';
+  return p;
+}
+
+function pickPrimaryPendencia(list) {
+  return list.slice().sort((a, b) => PENDENCIAS_PRIORIDADE.indexOf(a) - PENDENCIAS_PRIORIDADE.indexOf(b))[0];
+}
+
+function pendenciaCssClass(primary, count) {
+  let cls = 'status-atraso';
+  if (primary === 'FALTA') cls = 'status-falta';
+  else if (primary === 'FM' || primary === 'FT') cls = 'status-half';
+  else if (primary === 'ATESTADO' || primary === '1/2 ATESTADO') cls = 'status-atestado';
+  return count > 1 ? cls + ' status-combo' : cls;
+}
+
+/**
  * Determina o status consolidado de um colaborador em um dia específico
  */
 function getDayStatus(colabId, isoStr, branchId) {
@@ -1674,37 +1713,15 @@ function getDayStatus(colabId, isoStr, branchId) {
       };
     }
 
-    if (override === 'FALTA') {
+    // Pendências do dia (até 2): FALTA, FM, FT, ATESTADO, 1/2 ATESTADO, EM, SM, ET, ST
+    const pendList = getRegPendencias(reg);
+    if (pendList.length > 0 && override !== 'FÉRIAS' && override !== 'AFASTADO') {
+      const primary = pickPrimaryPendencia(pendList);
       return {
-        type: 'FALTA',
-        display: 'FALTA',
-        cssClass: 'status-falta',
-        isPending: true,
-        isWorkingDay: true,
-        isSunday: false,
-        isHoliday: !!holiday,
-        resolution
-      };
-    }
-
-    if (override === 'FM' || override === 'FT') {
-      return {
-        type: override,
-        display: override,
-        cssClass: 'status-half',
-        isPending: true,
-        isWorkingDay: true,
-        isSunday: false,
-        isHoliday: !!holiday,
-        resolution
-      };
-    }
-
-    if (override === 'ATESTADO' || override === '1/2 ATESTADO') {
-      return {
-        type: override,
-        display: override === '1/2 ATESTADO' ? '½ AT' : 'AT',
-        cssClass: 'status-atestado',
+        type: primary,
+        types: pendList,
+        display: pendList.map(pendenciaDisplay).join('+'),
+        cssClass: pendenciaCssClass(primary, pendList.length),
         isPending: true,
         isWorkingDay: true,
         isSunday: false,
@@ -1932,8 +1949,11 @@ function calculateDsrAndOccurrences(colabId, year, month, branchId) {
       continue;
     }
 
+    const dayTypes = resolved.types || [resolved.type];
+    const notAbonado = resolved.resolution !== 'ABONAR';
+
     // 1. Faltas Integrais (não abonadas)
-    if (resolved.type === 'FALTA' && resolved.resolution !== 'ABONAR') {
+    if (dayTypes.includes('FALTA') && notAbonado) {
       faltasIntegrais++;
       ocorrencias.push({
         data: isoStr,
@@ -1946,21 +1966,23 @@ function calculateDsrAndOccurrences(colabId, year, month, branchId) {
     }
 
     // 2. Faltas Meio Período (Apenas FT e FM)
-    if ((resolved.type === 'FM' || resolved.type === 'FT') && resolved.resolution !== 'ABONAR') {
+    dayTypes.filter(t => t === 'FM' || t === 'FT').forEach(t => {
+      if (!notAbonado) return;
       faltasMeioPeriodo++;
       ocorrencias.push({
         data: isoStr,
-        tipo: 'Falta Meio Período (' + resolved.type + ')',
+        tipo: 'Falta Meio Período (' + t + ')',
         badgeClass: 'status-half',
         tempo: '1/2 Período',
         impacto: 'Desconto parcial em VA / Folha',
-        obs: reg?.note || 'Ausência parcial (' + resolved.type + ')'
+        obs: reg?.note || 'Ausência parcial (' + t + ')'
       });
-    }
+    });
 
     // 3. Atestados Médicos (Integral e 1/2 Atestado) - Justificados (não são faltas injustificadas)
-    if ((resolved.type === 'ATESTADO' || resolved.type === '1/2 ATESTADO') && resolved.resolution !== 'ABONAR') {
-      const isHalf = resolved.type === '1/2 ATESTADO';
+    dayTypes.filter(t => t === 'ATESTADO' || t === '1/2 ATESTADO').forEach(t => {
+      if (!notAbonado) return;
+      const isHalf = t === '1/2 ATESTADO';
       ocorrencias.push({
         data: isoStr,
         tipo: isHalf ? '½ Atestado Médico (Justificado)' : 'Atestado Médico Integral (Justificado)',
@@ -1969,7 +1991,21 @@ function calculateDsrAndOccurrences(colabId, year, month, branchId) {
         impacto: 'Ausência justificada (não perde DSR)',
         obs: reg?.note || (isHalf ? 'Meio período abonado por atestado' : 'Atestado médico anexado')
       });
-    }
+    });
+
+    // 3.1 Pendências de Batida (EM, SM, ET, ST)
+    dayTypes.filter(t => PENDENCIAS_BATIDA.includes(t)).forEach(t => {
+      if (!notAbonado) return;
+      const nomes = { EM: 'Entrada Manhã', SM: 'Saída Manhã', ET: 'Entrada da Tarde', ST: 'Saída da Tarde' };
+      ocorrencias.push({
+        data: isoStr,
+        tipo: 'Pendência de Batida (' + t + ' - ' + nomes[t] + ')',
+        badgeClass: 'status-atraso',
+        tempo: t,
+        impacto: 'Pendência no Dashboard',
+        obs: reg?.note || 'Batida pendente de análise'
+      });
+    });
 
     // 4. Atrasos Maiores e Pequenos Atrasos
     let maiorMin = 0;
@@ -2225,11 +2261,39 @@ function calculateVAForEmployee(colabId, year, month, branchId) {
           note = isAprendiz 
             ? 'Dia trabalhado Aprendiz (Meio período: R$ 4,00)' 
             : 'Dia integral trabalhado (R$ 8,00)';
-        } else if (resolved.type === 'FM' || resolved.type === 'FT' || resolved.type === '1/2 ATESTADO') {
-          creditado = halfRate;
-          descontado = halfRate;
-          halfDaysWorked++;
-          note = 'Meio período (' + resolved.type + ') - Desconto R$ ' + halfRate.toFixed(2).replace('.', ',');
+        } else if (resolved.types && resolved.types.length > 0) {
+          // Pendências do dia (até 2). ATESTADO e 1/2 ATESTADO NÃO descontam VA.
+          const types = resolved.types;
+          const hasFalta = types.includes('FALTA');
+          const halfCount = types.filter(t => t === 'FM' || t === 'FT').length;
+          const hasPunchPend = types.some(t => PENDENCIAS_BATIDA.includes(t));
+          const punchDiscounts = hasPunchPend && halfCount === 0 &&
+            (resolved.resolution === 'DESCONTAR_VA' || resolved.resolution === 'DESCONTAR_AMBOS');
+
+          let desc = 0;
+          if (hasFalta) {
+            desc = baseRate;
+          } else {
+            desc = halfCount * halfRate;
+            if (punchDiscounts) desc += halfRate;
+          }
+          desc = Math.min(desc, baseRate);
+
+          creditado = baseRate - desc;
+          descontado = desc;
+
+          if (desc <= 0) {
+            fullDaysWorked++;
+            note = types.some(t => t === 'ATESTADO' || t === '1/2 ATESTADO')
+              ? 'Atestado médico (' + resolved.display + ') - sem desconto de VA'
+              : 'Pendência (' + resolved.display + ') - VA mantido';
+          } else if (desc >= baseRate) {
+            absenceDays++;
+            note = resolved.display + ' - Desconto integral de R$ ' + baseRate.toFixed(2).replace('.', ',');
+          } else {
+            halfDaysWorked++;
+            note = 'Meio período (' + resolved.display + ') - Desconto R$ ' + desc.toFixed(2).replace('.', ',');
+          }
         } else if (resolved.type === 'ATRASO') {
           if (resolved.resolution === 'DESCONTAR_VA' || resolved.resolution === 'DESCONTAR_AMBOS') {
             creditado = halfRate;
@@ -2241,11 +2305,6 @@ function calculateVAForEmployee(colabId, year, month, branchId) {
             fullDaysWorked++;
             note = 'Atraso com VA mantido (' + resolved.display + ')';
           }
-        } else if (resolved.type === 'FALTA' || resolved.type === 'ATESTADO') {
-          creditado = 0.00;
-          descontado = baseRate;
-          absenceDays++;
-          note = resolved.type + ' - Desconto integral de R$ ' + baseRate.toFixed(2).replace('.', ',');
         } else if (resolved.type === 'FÉRIAS' || resolved.type === 'AFASTADO') {
           creditado = 0.00;
           descontado = baseRate;
@@ -2392,6 +2451,8 @@ function resetMainAndColabFilters(showNotification = false) {
   if (colabStatus) colabStatus.value = 'ativo';
   const colabPonto = document.getElementById('colab-filter-ponto');
   if (colabPonto) colabPonto.value = 'todos';
+  const colabSort = document.getElementById('colab-sort-order');
+  if (colabSort) colabSort.value = 'cracha';
 
   // 3. Filtros do Calendário de Avisos
   appState.calFilterDept = 'todos';
@@ -2839,6 +2900,9 @@ function openCellDetailModal(colabId, isoDate) {
   document.getElementById('punch-st').value = reg.punches?.st || '';
 
   document.getElementById('select-override-status').value = reg.override || 'AUTO';
+  const selOverride2 = document.getElementById('select-override-status-2');
+  if (selOverride2) selOverride2.value = reg.override2 || '';
+  syncPendencia2State();
   document.getElementById('select-resolution').value = reg.resolution || 'NENHUMA';
   document.getElementById('input-cell-justificativa').value = reg.note || '';
 
@@ -2879,6 +2943,26 @@ function openCellDetailModal(colabId, isoDate) {
   openModal('modal-cell-detail');
 }
 
+// Pendência 2 só é habilitada quando a Pendência 1 é uma pendência/falta
+function syncPendencia2State() {
+  const p1 = document.getElementById('select-override-status')?.value;
+  const sel2 = document.getElementById('select-override-status-2');
+  if (!sel2) return;
+  const allowed = !!p1 && !['AUTO', 'OK', 'FÉRIAS', 'AFASTADO'].includes(p1);
+  sel2.disabled = !allowed;
+  if (!allowed) sel2.value = '';
+  if (allowed && sel2.value === p1) sel2.value = '';
+}
+
+document.getElementById('select-override-status')?.addEventListener('change', syncPendencia2State);
+document.getElementById('select-override-status-2')?.addEventListener('change', (e) => {
+  const p1 = document.getElementById('select-override-status')?.value;
+  if (e.target.value && e.target.value === p1) {
+    e.target.value = '';
+    showToast('A Pendência 2 deve ser diferente da Pendência 1.', 'warning');
+  }
+});
+
 document.getElementById('btn-save-cell-detail')?.addEventListener('click', () => {
   const { colabId, isoDate } = currentEditingCell;
   if (!colabId || !isoDate) return;
@@ -2886,6 +2970,8 @@ document.getElementById('btn-save-cell-detail')?.addEventListener('click', () =>
   const colab = appState.colaboradores.find(c => c.id === colabId);
 
   const override = document.getElementById('select-override-status').value;
+  let override2 = document.getElementById('select-override-status-2')?.value || '';
+  if (['AUTO', 'OK', 'FÉRIAS', 'AFASTADO'].includes(override) || override2 === override) override2 = '';
   const resolution = document.getElementById('select-resolution').value;
   const note = document.getElementById('input-cell-justificativa').value.trim();
 
@@ -2905,6 +2991,7 @@ document.getElementById('btn-save-cell-detail')?.addEventListener('click', () =>
   const regKey = colabId + '_' + isoDate;
   appState.registrosPonto[regKey] = {
     override,
+    override2,
     resolution,
     punches,
     note,
@@ -2937,6 +3024,7 @@ document.getElementById('btn-save-cell-detail')?.addEventListener('click', () =>
       const nextKey = colabId + '_' + nextIso;
       appState.registrosPonto[nextKey] = {
         override,
+        override2,
         resolution,
         punches: { ...punches },
         note: note + ' (Replicado de ' + formatDateBR(isoDate) + ')',
@@ -4042,6 +4130,7 @@ function setupColabFiltersDropdowns() {
     deptSelect.addEventListener('change', () => renderColaboradoresView());
     document.getElementById('colab-filter-status')?.addEventListener('change', () => renderColaboradoresView());
     document.getElementById('colab-filter-ponto')?.addEventListener('change', () => renderColaboradoresView());
+    document.getElementById('colab-sort-order')?.addEventListener('change', () => renderColaboradoresView());
     document.getElementById('btn-colab-reset-filters')?.addEventListener('click', () => {
       const searchIn = document.getElementById('colab-search-input');
       if (searchIn) searchIn.value = '';
@@ -4050,6 +4139,8 @@ function setupColabFiltersDropdowns() {
       if (stEl) stEl.value = 'ativo';
       const ptEl = document.getElementById('colab-filter-ponto');
       if (ptEl) ptEl.value = 'todos';
+      const sortEl = document.getElementById('colab-sort-order');
+      if (sortEl) sortEl.value = 'cracha';
       renderColaboradoresView();
       showToast('Filtros de colaboradores redefinidos.', 'info');
     });
@@ -4112,18 +4203,22 @@ function renderColaboradoresView() {
     );
   }
 
-  // Ordenação: se houver busca, nomes que iniciam com o texto digitado ficam no topo!
-  if (q) {
-    list.sort((a, b) => {
+  // Ordenação: crachá (padrão) ou ordem alfabética A→Z / Z→A.
+  // Se houver busca, nomes que iniciam com o texto digitado ficam no topo!
+  const sortOrder = document.getElementById('colab-sort-order')?.value || 'cracha';
+  const byName = (a, b) => a.nome.localeCompare(b.nome, 'pt-BR', { sensitivity: 'base' });
+  list.sort((a, b) => {
+    if (q) {
       const aStarts = a.nome.toLowerCase().startsWith(q);
       const bStarts = b.nome.toLowerCase().startsWith(q);
       if (aStarts && !bStarts) return -1;
       if (!aStarts && bStarts) return 1;
-      return a.nome.localeCompare(b.nome);
-    });
-  } else {
-    list.sort((a, b) => Number(a.cracha) - Number(b.cracha));
-  }
+    }
+    if (sortOrder === 'az') return byName(a, b);
+    if (sortOrder === 'za') return byName(b, a);
+    if (q) return byName(a, b);
+    return Number(a.cracha) - Number(b.cracha);
+  });
 
   // Contador de resultados
   const countEl = document.getElementById('colab-stats-count');

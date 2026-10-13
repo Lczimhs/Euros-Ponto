@@ -412,6 +412,14 @@
             <input type="text" class="search-input" id="colab-search-input" placeholder="Buscar por crachá ou nome...">
           </div>
           <div class="sort-select-box">
+            <label for="colab-sort-order">Ordenar:</label>
+            <select id="colab-sort-order" class="sort-select">
+              <option value="cracha" selected>Crachá (Padrão)</option>
+              <option value="az">Ordem Alfabética (A → Z)</option>
+              <option value="za">Ordem Alfabética (Z → A)</option>
+            </select>
+          </div>
+          <div class="sort-select-box">
             <label for="colab-filter-dept">Departamento:</label>
             <select id="colab-filter-dept" class="sort-select">
               <option value="todos">Todos os Departamentos</option>
@@ -662,22 +670,60 @@
           </div>
         </div>
 
-        <!-- Overrides & Resolution -->
-        <div class="form-row">
-          <div class="form-group">
-            <label for="select-override-status">Substituição Manual (Override de Status):</label>
-            <select class="form-control" id="select-override-status">
-              <option value="AUTO">Automático (Calcular pelas Batidas)</option>
-              <option value="OK">OK (Presença Regular / Sem Pendência)</option>
-              <option value="FALTA">FALTA (Falta Integral Não Justificada)</option>
-              <option value="FM">FM (Falta Manhã - Meio Período)</option>
-              <option value="FT">FT (Falta Tarde - Meio Período)</option>
-              <option value="ATESTADO">ATESTADO (Integral Justificado)</option>
-              <option value="1/2 ATESTADO">1/2 ATESTADO (Meio Período)</option>
-              <option value="FÉRIAS">FÉRIAS (Em Gozo de Férias)</option>
-              <option value="AFASTADO">AFASTADO (Licença / Afastamento)</option>
-            </select>
+        <!-- Pendências do Dia (até 2 por dia) & Resolution -->
+        <div style="background: rgba(30, 27, 46, 0.7); padding: 12px 14px; border-radius: var(--radius-sm); border: 1px solid rgba(0, 229, 255, 0.25); margin-bottom: 14px;">
+          <div style="font-size: 12px; font-weight: 700; color: var(--color-cyan); margin-bottom: 8px; display: flex; align-items: center; gap: 6px;">
+            <span>📌</span> Pendências do Dia (até 2 por dia — no dashboard aparece como <code>SM+FT</code>)
           </div>
+          <div class="form-row" style="margin-bottom: 0;">
+            <div class="form-group" style="margin-bottom: 0;">
+              <label for="select-override-status">Pendência 1 (Status do Dia):</label>
+              <select class="form-control" id="select-override-status">
+                <option value="AUTO">Automático (Calcular pelas Batidas)</option>
+                <option value="OK">OK (Presença Regular / Sem Pendência)</option>
+                <optgroup label="Pendências de Batida">
+                  <option value="EM">EM = Entrada Manhã</option>
+                  <option value="SM">SM = Saída Manhã</option>
+                  <option value="ET">ET = Entrada da Tarde</option>
+                  <option value="ST">ST = Saída da Tarde</option>
+                </optgroup>
+                <optgroup label="Faltas e Ausências">
+                  <option value="FALTA">FALTA (Falta Integral Não Justificada)</option>
+                  <option value="FM">FM (Falta Manhã - Meio Período)</option>
+                  <option value="FT">FT (Falta Tarde - Meio Período)</option>
+                  <option value="ATESTADO">ATESTADO (Integral Justificado)</option>
+                  <option value="1/2 ATESTADO">1/2 ATESTADO (Meio Período)</option>
+                  <option value="FÉRIAS">FÉRIAS (Em Gozo de Férias)</option>
+                  <option value="AFASTADO">AFASTADO (Licença / Afastamento)</option>
+                </optgroup>
+              </select>
+            </div>
+            <div class="form-group" style="margin-bottom: 0;">
+              <label for="select-override-status-2">Pendência 2 (Opcional):</label>
+              <select class="form-control" id="select-override-status-2">
+                <option value="">— Sem segunda pendência —</option>
+                <optgroup label="Pendências de Batida">
+                  <option value="EM">EM = Entrada Manhã</option>
+                  <option value="SM">SM = Saída Manhã</option>
+                  <option value="ET">ET = Entrada da Tarde</option>
+                  <option value="ST">ST = Saída da Tarde</option>
+                </optgroup>
+                <optgroup label="Faltas e Ausências">
+                  <option value="FALTA">FALTA (Falta Integral Não Justificada)</option>
+                  <option value="FM">FM (Falta Manhã - Meio Período)</option>
+                  <option value="FT">FT (Falta Tarde - Meio Período)</option>
+                  <option value="ATESTADO">ATESTADO (Integral Justificado)</option>
+                  <option value="1/2 ATESTADO">1/2 ATESTADO (Meio Período)</option>
+                </optgroup>
+              </select>
+            </div>
+          </div>
+          <span style="font-size: 10px; color: var(--color-text-sub); display: block; margin-top: 5px;">
+            A Pendência 2 só fica disponível quando a Pendência 1 for uma pendência/falta (não vale para Automático, OK, Férias ou Afastado).
+          </span>
+        </div>
+
+        <div class="form-row">
 
           <div class="form-group">
             <label for="select-resolution">Resolução de Pendência / Atraso:</label>
