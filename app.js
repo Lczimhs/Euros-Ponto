@@ -1901,7 +1901,9 @@ function calculateDsrForEmployee(colabId, year, month, branchId) {
 
       for (const day of currentWeekDays) {
         const resolved = getResolvedDayStatus(colabId, day.isoStr, branchId);
-        if (resolved.type === 'FALTA' && resolved.resolution !== 'ABONAR') {
+        const types = resolved.types || [resolved.type];
+        const isFalta = types.some(t => t === 'FALTA' || t === 'FM' || t === 'FT');
+        if (isFalta && resolved.resolution !== 'ABONAR') {
           hasUnjustifiedAbsence = true;
         }
         if (resolved.isHoliday) {
@@ -1988,7 +1990,7 @@ function calculateDsrAndOccurrences(colabId, year, month, branchId) {
         tipo: 'Falta Meio Período (' + t + ')',
         badgeClass: 'status-half',
         tempo: '1/2 Período',
-        impacto: 'Desconto parcial em VA / Folha',
+        impacto: 'Gera perda de DSR semanal + Desconto VA/Folha',
         obs: reg?.note || 'Ausência parcial (' + t + ')'
       });
     });
