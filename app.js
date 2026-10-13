@@ -1373,6 +1373,7 @@ function loadStateFromStorage() {
         appState.departamentos = parsed.departamentos || [];
         appState.colaboradores = (parsed.colaboradores || []).map(c => ({
           ...c,
+          aprendiz: !!(c.aprendiz || c.isAprendiz),
           registraPonto: c.registraPonto !== false,
           status: c.status || 'ativo',
           dataDemissao: c.dataDemissao || ''
@@ -1845,6 +1846,9 @@ function calculateVAForEmployee(colabId, year, month, branchId) {
 
   const doesNotPunch = colab && colab.registraPonto === false;
   const isDemitido = colab && colab.status === 'demitido' && colab.dataDemissao;
+  const isAprendiz = !!(colab && (colab.aprendiz === true || colab.isAprendiz === true));
+  const baseRate = isAprendiz ? 4.00 : 8.00;
+  const halfRate = isAprendiz ? 2.00 : 4.00;
 
   for (let d = 1; d <= daysInMonth; d++) {
     const isoStr = formatDateISO(year, month, d);
@@ -1880,45 +1884,49 @@ function calculateVAForEmployee(colabId, year, month, branchId) {
       totalBusinessDays++;
 
       if (doesNotPunch) {
-        // NÃO REGISTRA PONTO: crédito integral máximo conforme dias úteis
-        creditado = 8.00;
+        // NÃO REGISTRA PONTO: crédito integral conforme tipo de colaborador
+        creditado = baseRate;
         descontado = 0.00;
         fullDaysWorked++;
         resolvedDisplay = 'INTEGRAL';
-        note = 'Crédito integral (Isento de registro de ponto)';
+        note = isAprendiz 
+          ? 'Crédito Aprendiz (Meio período - R$ 4,00/dia)' 
+          : 'Crédito integral (Isento de registro de ponto)';
       } else {
         const resolved = getResolvedDayStatus(colabId, isoStr, branchId);
         resolvedDisplay = resolved.display;
 
         if (resolved.type === 'OK') {
-          creditado = 8.00;
+          creditado = baseRate;
           descontado = 0.00;
           fullDaysWorked++;
-          note = 'Dia integral trabalhado';
+          note = isAprendiz 
+            ? 'Dia trabalhado Aprendiz (Meio período: R$ 4,00)' 
+            : 'Dia integral trabalhado (R$ 8,00)';
         } else if (resolved.type === 'FM' || resolved.type === 'FT' || resolved.type === '1/2 ATESTADO') {
-          creditado = 4.00;
-          descontado = 4.00;
+          creditado = halfRate;
+          descontado = halfRate;
           halfDaysWorked++;
-          note = 'Meio período (' + resolved.type + ') - Desconto R$ 4,00';
+          note = 'Meio período (' + resolved.type + ') - Desconto R$ ' + halfRate.toFixed(2).replace('.', ',');
         } else if (resolved.type === 'ATRASO') {
           if (resolved.resolution === 'DESCONTAR_VA' || resolved.resolution === 'DESCONTAR_AMBOS') {
-            creditado = 4.00;
-            descontado = 4.00;
-            note = 'Atraso com desconto em VA (' + resolved.display + ')';
+            creditado = halfRate;
+            descontado = halfRate;
+            note = 'Atraso com desconto em VA (' + resolved.display + ') - R$ ' + halfRate.toFixed(2).replace('.', ',');
           } else {
-            creditado = 8.00;
+            creditado = baseRate;
             descontado = 0.00;
             fullDaysWorked++;
             note = 'Atraso com VA mantido (' + resolved.display + ')';
           }
         } else if (resolved.type === 'FALTA' || resolved.type === 'ATESTADO') {
           creditado = 0.00;
-          descontado = 8.00;
+          descontado = baseRate;
           absenceDays++;
-          note = resolved.type + ' - Desconto integral de R$ 8,00';
+          note = resolved.type + ' - Desconto integral de R$ ' + baseRate.toFixed(2).replace('.', ',');
         } else if (resolved.type === 'FÉRIAS' || resolved.type === 'AFASTADO') {
           creditado = 0.00;
-          descontado = 8.00;
+          descontado = baseRate;
           absenceDays++;
           note = resolved.type + ' - Sem benefício de VA';
         }
@@ -1939,9 +1947,11 @@ function calculateVAForEmployee(colabId, year, month, branchId) {
     });
   }
 
-  const potencialMaximo = totalBusinessDays * 8.00;
+  const potencialMaximo = totalBusinessDays * baseRate;
 
   return {
+    isAprendiz,
+    baseDailyRate: baseRate,
     totalBusinessDays,
     fullDaysWorked,
     halfDaysWorked,
@@ -1993,9 +2003,23 @@ function setupNavigation() {
   });
 }
 
+function updateMainToolbarDepartmentOptions() {
+  const deptSelect = document.getElementById('filter-dept-select');
+  if (!deptSelect) return;
+  const currentVal = appState.departmentFilter || 'todos';
+
+  let html = '<option value="todos">Todos os Deptos</option>';
+  appState.departamentos.forEach(d => {
+    html += '<option value="' + d.id + '">' + escapeHtml(d.nome) + '</option>';
+  });
+  deptSelect.innerHTML = html;
+  deptSelect.value = currentVal;
+}
+
 function renderCurrentView() {
   renderBranchTabs();
   updateMonthDisplay();
+  updateMainToolbarDepartmentOptions();
 
   if (appState.activeView === 'view-avisos') {
     renderAvisosView();
@@ -2058,6 +2082,11 @@ function updateMonthDisplay() {
 function getFilteredAndSortedEmployees(isForPonto = false) {
   let list = appState.colaboradores.filter(c => c.filialId === appState.activeBranchId);
 
+  // 1. Filtro por Departamento (Setor)
+  if (appState.departmentFilter && appState.departmentFilter !== 'todos') {
+    list = list.filter(c => c.deptId === appState.departmentFilter);
+  }
+
   // Filtro de Ponto
   if (isForPonto) {
     // 1. Quem NÃO registra ponto não aparece na matriz de ponto
@@ -2083,11 +2112,11 @@ function getFilteredAndSortedEmployees(isForPonto = false) {
   }
 
   // Filtro de busca textual
-  if (appState.searchFilter.trim()) {
-    const q = appState.searchFilter.toLowerCase();
+  const searchQ = (appState.searchFilter || '').trim().toLowerCase();
+  if (searchQ) {
     list = list.filter(c =>
-      c.nome.toLowerCase().includes(q) ||
-      String(c.cracha).includes(q)
+      c.nome.toLowerCase().includes(searchQ) ||
+      String(c.cracha).includes(searchQ)
     );
   }
 
@@ -2111,21 +2140,33 @@ function getFilteredAndSortedEmployees(isForPonto = false) {
   // Ordenação
   const deptMap = Object.fromEntries(appState.departamentos.map(d => [d.id, d.nome]));
 
-  if (appState.sortBy === 'cracha') {
-    list.sort((a, b) => Number(a.cracha) - Number(b.cracha));
-  } else if (appState.sortBy === 'nome') {
-    list.sort((a, b) => a.nome.localeCompare(b.nome));
-  } else if (appState.sortBy === 'data_admissao') {
-    list.sort((a, b) => new Date(a.admissao) - new Date(b.admissao));
-  } else if (appState.sortBy === 'departamento') {
-    list.sort((a, b) => {
+  list.sort((a, b) => {
+    // Prioridade Máxima na Busca: Nomes que iniciam com as letras digitadas ficam no topo independente do crachá!
+    if (searchQ) {
+      const aStarts = a.nome.toLowerCase().startsWith(searchQ);
+      const bStarts = b.nome.toLowerCase().startsWith(searchQ);
+      if (aStarts && !bStarts) return -1;
+      if (!aStarts && bStarts) return 1;
+    }
+
+    if (appState.sortBy === 'nome') {
+      return a.nome.localeCompare(b.nome);
+    } else if (appState.sortBy === 'data_admissao') {
+      return new Date(a.admissao) - new Date(b.admissao);
+    } else if (appState.sortBy === 'departamento') {
       const deptA = deptMap[a.deptId] || '';
       const deptB = deptMap[b.deptId] || '';
       const compDept = deptA.localeCompare(deptB);
       if (compDept !== 0) return compDept;
+      return a.nome.localeCompare(b.nome);
+    } else {
+      // Padrão: Crachá (ou ordem alfabética se estiver pesquisando com prefixo)
+      if (searchQ) {
+        return a.nome.localeCompare(b.nome);
+      }
       return Number(a.cracha) - Number(b.cracha);
-    });
-  }
+    }
+  });
 
   return list;
 }
@@ -2280,6 +2321,9 @@ function renderVAView() {
     const deptName = deptMap[colab.deptId] || 'Geral';
 
     let extraBadge = '';
+    if (colab.aprendiz || colab.isAprendiz) {
+      extraBadge += '<span class="badge-aprendiz" style="font-size:10px; margin-left:6px; background:rgba(245, 158, 11, 0.2); color:#FDE047; border:1px solid rgba(245, 158, 11, 0.5); padding:1px 5px; border-radius:3px;" title="Jovem Aprendiz: Meio período (R$ 4,00/dia útil)">Aprendiz (R$ 4/dia)</span>';
+    }
     if (colab.registraPonto === false) {
       extraBadge += '<span class="badge-ponto-nao" style="font-size:10px; margin-left:6px;" title="Isento de registro de ponto">Isento Ponto</span>';
     }
@@ -2326,8 +2370,11 @@ function openVAAuditModal(colabId) {
   const va = calculateVAForEmployee(colabId, appState.currentYear, appState.currentMonth, appState.activeBranchId);
   const deptMap = Object.fromEntries(appState.departamentos.map(d => [d.id, d.nome]));
 
+  const isAprendiz = colab.aprendiz || colab.isAprendiz;
+  const aprendizLabel = isAprendiz ? ' • <span style="color:#FDE047; font-weight:700;">🎓 Jovem Aprendiz (R$ 4,00/dia)</span>' : '';
+
   const summary = document.getElementById('va-audit-summary');
-  summary.innerHTML = '<div><strong style="color:var(--color-cyan); font-size:14px;">' + colab.nome + '</strong> (Crachá: ' + colab.cracha + ')<div style="font-size:11px; color:var(--color-text-sub);">Setor: ' + (deptMap[colab.deptId] || '') + ' • Mês: ' + MESES_PT[appState.currentMonth] + '/' + appState.currentYear + (colab.status === 'demitido' ? ' • Desligado em: ' + formatDateBR(colab.dataDemissao) : '') + '</div></div><div style="text-align:right;"><span style="font-size:11px; color:var(--color-text-muted);">Líquido a Pagar:</span><div style="color:var(--color-cyan); font-family:var(--font-mono); font-size:16px; font-weight:700;">R$ ' + va.valorLiquido.toFixed(2).replace('.', ',') + '</div><div style="font-size:10px; color:#B4A6CF;">Descontos: R$ ' + va.valorDescontado.toFixed(2).replace('.', ',') + '</div></div>';
+  summary.innerHTML = '<div><strong style="color:var(--color-cyan); font-size:14px;">' + colab.nome + '</strong> (Crachá: ' + colab.cracha + ')<div style="font-size:11px; color:var(--color-text-sub);">Setor: ' + (deptMap[colab.deptId] || '') + aprendizLabel + ' • Mês: ' + MESES_PT[appState.currentMonth] + '/' + appState.currentYear + (colab.status === 'demitido' ? ' • Desligado em: ' + formatDateBR(colab.dataDemissao) : '') + '</div></div><div style="text-align:right;"><span style="font-size:11px; color:var(--color-text-muted);">Líquido a Pagar:</span><div style="color:var(--color-cyan); font-family:var(--font-mono); font-size:16px; font-weight:700;">R$ ' + va.valorLiquido.toFixed(2).replace('.', ',') + '</div><div style="font-size:10px; color:#B4A6CF;">Descontos: R$ ' + va.valorDescontado.toFixed(2).replace('.', ',') + '</div></div>';
 
   const tbody = document.getElementById('va-audit-tbody');
   tbody.innerHTML = '';
@@ -3486,8 +3533,18 @@ function renderColaboradoresView() {
     );
   }
 
-  // Ordenação por crachá
-  list.sort((a, b) => Number(a.cracha) - Number(b.cracha));
+  // Ordenação: se houver busca, nomes que iniciam com o texto digitado ficam no topo!
+  if (q) {
+    list.sort((a, b) => {
+      const aStarts = a.nome.toLowerCase().startsWith(q);
+      const bStarts = b.nome.toLowerCase().startsWith(q);
+      if (aStarts && !bStarts) return -1;
+      if (!aStarts && bStarts) return 1;
+      return a.nome.localeCompare(b.nome);
+    });
+  } else {
+    list.sort((a, b) => Number(a.cracha) - Number(b.cracha));
+  }
 
   // Contador de resultados
   const countEl = document.getElementById('colab-stats-count');
@@ -3510,9 +3567,13 @@ function renderColaboradoresView() {
     const pontoBadge = colab.registraPonto !== false
       ? '<span class="badge-ponto-sim">Sim</span>'
       : '<span class="badge-ponto-nao">Não</span>';
+    const isAprendiz = colab.aprendiz || colab.isAprendiz;
+    const aprendizBadge = isAprendiz
+      ? ' <span class="badge-aprendiz" style="font-size:10px; background:rgba(245, 158, 11, 0.2); color:#FDE047; border:1px solid rgba(245, 158, 11, 0.5); padding:1px 5px; border-radius:3px;">Aprendiz</span>'
+      : '';
 
     const tr = document.createElement('tr');
-    tr.innerHTML = '<td style="font-family: var(--font-mono); font-weight:700;">' + colab.cracha + '</td><td><strong>' + escapeHtml(colab.nome) + '</strong></td><td>' + (branchMap[colab.filialId] || 'Não informada') + '</td><td>' + (deptMap[colab.deptId] || 'Geral') + '</td><td>' + formatDateBR(colab.admissao) + '</td><td class="text-center">' + pontoBadge + '</td><td class="text-center">' + statusBadge + '</td><td class="text-center"><button class="btn btn-secondary btn-sm btn-edit-colab" data-id="' + colab.id + '">✏️ Editar</button> <button class="btn btn-danger btn-sm btn-delete-colab" data-id="' + colab.id + '">🗑️ Excluir</button></td>';
+    tr.innerHTML = '<td style="font-family: var(--font-mono); font-weight:700;">' + colab.cracha + '</td><td><strong>' + escapeHtml(colab.nome) + '</strong>' + aprendizBadge + '</td><td>' + (branchMap[colab.filialId] || 'Não informada') + '</td><td>' + (deptMap[colab.deptId] || 'Geral') + '</td><td>' + formatDateBR(colab.admissao) + '</td><td class="text-center">' + pontoBadge + '</td><td class="text-center">' + statusBadge + '</td><td class="text-center"><button class="btn btn-secondary btn-sm btn-edit-colab" data-id="' + colab.id + '">✏️ Editar</button> <button class="btn btn-danger btn-sm btn-delete-colab" data-id="' + colab.id + '">🗑️ Excluir</button></td>';
     tbody.appendChild(tr);
   });
 
@@ -3529,6 +3590,7 @@ function openEmployeeModal(empId = null) {
   const branchSelect = document.getElementById('emp-branch');
   const deptSelect = document.getElementById('emp-dept');
   const checkRegistra = document.getElementById('emp-check-registra-ponto');
+  const checkAprendiz = document.getElementById('emp-check-aprendiz');
   const checkDemitido = document.getElementById('emp-check-demitido');
   const demissaoGroup = document.getElementById('group-emp-demissao');
   const demissaoInput = document.getElementById('emp-demissao');
@@ -3547,6 +3609,7 @@ function openEmployeeModal(empId = null) {
     document.getElementById('emp-dept').value = emp.deptId;
 
     if (checkRegistra) checkRegistra.checked = emp.registraPonto !== false;
+    if (checkAprendiz) checkAprendiz.checked = !!(emp.aprendiz || emp.isAprendiz);
 
     const isDemitido = emp.status === 'demitido';
     if (checkDemitido) checkDemitido.checked = isDemitido;
@@ -3562,6 +3625,7 @@ function openEmployeeModal(empId = null) {
     document.getElementById('emp-branch').value = appState.activeBranchId;
 
     if (checkRegistra) checkRegistra.checked = true;
+    if (checkAprendiz) checkAprendiz.checked = false;
     if (checkDemitido) checkDemitido.checked = false;
     if (demissaoGroup) demissaoGroup.style.display = 'none';
     if (demissaoInput) demissaoInput.value = '';
@@ -3596,6 +3660,10 @@ document.getElementById('btn-save-employee')?.addEventListener('click', () => {
     ? document.getElementById('emp-check-registra-ponto').checked
     : (document.getElementById('emp-registra-ponto')?.value !== 'nao');
 
+  const aprendiz = document.getElementById('emp-check-aprendiz')
+    ? document.getElementById('emp-check-aprendiz').checked
+    : false;
+
   const isDemitido = document.getElementById('emp-check-demitido')
     ? document.getElementById('emp-check-demitido').checked
     : (document.getElementById('emp-status')?.value === 'demitido');
@@ -3623,6 +3691,7 @@ document.getElementById('btn-save-employee')?.addEventListener('click', () => {
         admissao,
         filialId,
         deptId,
+        aprendiz,
         registraPonto,
         status,
         dataDemissao
@@ -3637,6 +3706,7 @@ document.getElementById('btn-save-employee')?.addEventListener('click', () => {
       admissao,
       filialId,
       deptId,
+      aprendiz,
       registraPonto,
       status,
       dataDemissao
@@ -3908,10 +3978,12 @@ function exportVACSV() {
   const employees = getFilteredAndSortedEmployees(false);
   const deptMap = Object.fromEntries(appState.departamentos.map(d => [d.id, d.nome]));
 
-  let csv = 'Crachá;Nome;Departamento;Registra_Ponto;Situacao;Data_Demissao;Dias_Uteis;Dias_OK;Meios_Dias;Faltas_Atestados;Valor_Liquido_RS;Valor_Descontado_RS\n';
+  let csv = 'Crachá;Nome;Departamento;Aprendiz;Taxa_Dia_RS;Registra_Ponto;Situacao;Data_Demissao;Dias_Uteis;Dias_OK;Meios_Dias;Faltas_Atestados;Valor_Liquido_RS;Valor_Descontado_RS\n';
   employees.forEach(colab => {
     const va = calculateVAForEmployee(colab.id, year, month, appState.activeBranchId);
-    csv += colab.cracha + ';"' + colab.nome + '";"' + (deptMap[colab.deptId] || '') + '";"' + (colab.registraPonto ? 'SIM' : 'NAO') + '";"' + (colab.status || 'ativo') + '";"' + formatDateBR(colab.dataDemissao) + '";' + va.totalBusinessDays + ';' + va.fullDaysWorked + ';' + va.halfDaysWorked + ';' + va.absenceDays + ';' + va.valorLiquido.toFixed(2) + ';' + va.valorDescontado.toFixed(2) + '\n';
+    const isAprendiz = !!(colab.aprendiz || colab.isAprendiz);
+    const taxaDia = isAprendiz ? '4.00' : '8.00';
+    csv += colab.cracha + ';"' + colab.nome + '";"' + (deptMap[colab.deptId] || '') + '";"' + (isAprendiz ? 'SIM' : 'NAO') + '";' + taxaDia + ';"' + (colab.registraPonto ? 'SIM' : 'NAO') + '";"' + (colab.status || 'ativo') + '";"' + formatDateBR(colab.dataDemissao) + '";' + va.totalBusinessDays + ';' + va.fullDaysWorked + ';' + va.halfDaysWorked + ';' + va.absenceDays + ';' + va.valorLiquido.toFixed(2) + ';' + va.valorDescontado.toFixed(2) + '\n';
   });
 
   downloadFile('fechamento_VA_' + MESES_PT[month] + '_' + year + '.csv', csv, 'text/csv;charset=utf-8;');
@@ -4165,6 +4237,32 @@ function initEvents() {
     renderCurrentView();
   });
 
+  // Botão Limpar Filtros do Toolbar Principal (Ponto e VA)
+  document.getElementById('btn-reset-main-filters')?.addEventListener('click', () => {
+    appState.searchFilter = '';
+    const searchIn = document.getElementById('search-filter-input');
+    if (searchIn) searchIn.value = '';
+
+    appState.departmentFilter = 'todos';
+    const deptSel = document.getElementById('filter-dept-select');
+    if (deptSel) deptSel.value = 'todos';
+
+    appState.statusFilter = 'ativos';
+    const stSel = document.getElementById('filter-status-select');
+    if (stSel) stSel.value = 'ativos';
+
+    appState.sortBy = 'nome';
+    const sortSel = document.getElementById('sort-select');
+    if (sortSel) sortSel.value = 'nome';
+
+    appState.focusMode = false;
+    document.getElementById('focus-toggle-btn')?.classList.remove('active');
+
+    saveStateToStorage();
+    renderCurrentView();
+    showToast('Filtros redefinidos: exibindo todos em ordem alfabética.', 'info');
+  });
+
   // Atalhos Rápidos
   document.getElementById('btn-novo-colaborador-quick')?.addEventListener('click', () => openEmployeeModal());
   document.getElementById('btn-abrir-novo-colab')?.addEventListener('click', () => openEmployeeModal());
@@ -4194,6 +4292,12 @@ document.addEventListener('DOMContentLoaded', () => {
   }
   if (document.getElementById('filter-status-select')) {
     document.getElementById('filter-status-select').value = appState.statusFilter || 'ativos';
+  }
+  if (document.getElementById('filter-dept-select')) {
+    document.getElementById('filter-dept-select').value = appState.departmentFilter || 'todos';
+  }
+  if (document.getElementById('search-filter-input')) {
+    document.getElementById('search-filter-input').value = appState.searchFilter || '';
   }
 
   updateNavTabsActive(appState.activeView || 'view-avisos');

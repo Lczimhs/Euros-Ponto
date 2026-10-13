@@ -120,6 +120,11 @@
           <option value="departamento">Departamento (Agrupado)</option>
         </select>
       </div>
+
+      <!-- Botão Limpar Filtros -->
+      <button class="btn btn-secondary btn-sm" id="btn-reset-main-filters" title="Limpar todos os filtros da pesquisa e redefinir listagem">
+        <span>🔄</span> Limpar Filtros
+      </button>
     </div>
 
     <div class="toolbar-right">
@@ -720,6 +725,14 @@
           <label class="custom-checkbox-container" style="margin:0; cursor:pointer; display:flex; align-items:center; gap:10px;">
             <input type="checkbox" id="emp-check-registra-ponto" checked>
             <span><strong>Registra Ponto Eletrônico</strong> <small style="color:var(--color-text-sub); display:block; font-size:11px;">(Desmarque apenas se o colaborador NÃO bate ponto e recebe VA integral)</small></span>
+          </label>
+        </div>
+
+        <!-- Checkbox: Jovem Aprendiz (Meio Período - R$ 4,00 VA) -->
+        <div class="form-group" style="background:rgba(245, 158, 11, 0.08); padding:10px 14px; border-radius:var(--radius-sm); border:1px solid rgba(245, 158, 11, 0.35); margin-bottom:12px;">
+          <label class="custom-checkbox-container" style="margin:0; cursor:pointer; display:flex; align-items:center; gap:10px;">
+            <input type="checkbox" id="emp-check-aprendiz">
+            <span style="color:#FDE047;"><strong>Colaborador é Jovem Aprendiz</strong> <small style="color:var(--color-text-sub); display:block; font-size:11px;">(Trabalham meio período — o valor do Vale Alimentação por dia útil será calculado pela metade: <strong>R$ 4,00/dia útil</strong>)</small></span>
           </label>
         </div>
 
