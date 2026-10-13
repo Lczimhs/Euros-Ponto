@@ -1240,10 +1240,10 @@ function getDefaultSeedData() {
     },
     {
       id: "aviso-ponto-1",
-      data: "2026-10-30",
-      titulo: "🔵 Fechamento de Ponto & VA (Último Dia Útil do Mês)",
+      data: "2026-10-31",
+      titulo: "🔵 Fechamento de Ponto & VA (Último Dia Útil do Mês - Sábado)",
       tipo: "ponto",
-      descricao: "Fechamento do espelho de ponto eletrônico e apuração definitiva do Vale Alimentação no último dia útil do mês.",
+      descricao: "Fechamento do espelho de ponto eletrônico e apuração definitiva do Vale Alimentação no último dia útil do mês (Sábado, 31/10/2026).",
       filialId: "TODAS",
       colabId: "",
       concluido: false,
@@ -1419,11 +1419,11 @@ function loadStateFromStorage() {
               createdAt: "2026-10-09T08:00:00Z"
             });
           }
-          // Garante fechamento de ponto no último dia útil do mês
+          // Garante fechamento de ponto no último dia útil do mês (Sábado 31/10/2026)
           const pontoAviso = appState.avisos.find(a => a.tipo === 'ponto' && a.id === 'aviso-ponto-1');
-          if (pontoAviso && pontoAviso.data === '2026-10-25') {
-            pontoAviso.data = '2026-10-30';
-            pontoAviso.titulo = '🔵 Fechamento de Ponto & VA (Último Dia Útil do Mês)';
+          if (pontoAviso) {
+            pontoAviso.data = '2026-10-31';
+            pontoAviso.titulo = '🔵 Fechamento de Ponto & VA (Último Dia Útil do Mês - Sábado)';
           }
         }
 
@@ -1432,6 +1432,7 @@ function loadStateFromStorage() {
         if (parsed.statusFilter) appState.statusFilter = parsed.statusFilter;
         if (typeof parsed.focusMode === 'boolean') appState.focusMode = parsed.focusMode;
         if (parsed.sortBy) appState.sortBy = parsed.sortBy;
+        saveStateToStorage();
         return;
       }
     }
@@ -2551,9 +2552,9 @@ function getLastBusinessDay(year, month) {
   const daysInMonth = new Date(year, month + 1, 0).getDate();
   for (let d = daysInMonth; d >= 1; d--) {
     const dt = new Date(year, month, d);
-    const dayOfWeek = dt.getDay(); // 0 = Domingo, 6 = Sábado
-    // Considera Segunda a Sexta como dias úteis administrativos de fechamento
-    if (dayOfWeek !== 0 && dayOfWeek !== 6) {
+    const dayOfWeek = dt.getDay(); // 0 = Domingo
+    // SÁBADO É DIA ÚTIL! Apenas Domingo (0) não é dia útil, além de feriados cadastrados
+    if (dayOfWeek !== 0) {
       const iso = `${year}-${String(month + 1).padStart(2, '0')}-${String(d).padStart(2, '0')}`;
       const isFeriado = (appState.feriados || []).some(f => f.data === iso && (f.escopo === 'NACIONAL' || f.escopo === appState.activeBranchId));
       if (!isFeriado) {
