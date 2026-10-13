@@ -89,6 +89,15 @@
         </select>
       </div>
 
+      <!-- Filtro por Departamento (Setor) -->
+      <div class="sort-select-box" id="box-filter-dept" title="Filtrar colaboradores por departamento/setor">
+        <label for="filter-dept-select">Departamento:</label>
+        <select id="filter-dept-select" class="sort-select">
+          <option value="todos">Todos os Deptos</option>
+          <!-- Filled via JS -->
+        </select>
+      </div>
+
       <!-- Modo Foco Toggle -->
       <div class="focus-toggle-box" id="focus-toggle-btn" title="Oculta colaboradores 100% OK no mês. Linhas com ao menos uma pendência continuam visíveis.">
         <div class="toggle-switch"></div>
@@ -218,6 +227,14 @@
                 <option value="todos">Todos (Pendentes &amp; Feitos)</option>
                 <option value="pendente">Apenas Pendentes</option>
                 <option value="concluido">Apenas Concluídos (Feito)</option>
+              </select>
+            </div>
+
+            <div class="sort-select-box" id="box-cal-filter-dept">
+              <label for="cal-filter-dept">Departamento:</label>
+              <select id="cal-filter-dept" class="sort-select">
+                <option value="todos">Todos os Departamentos</option>
+                <!-- Filled via JS -->
               </select>
             </div>
           </div>
@@ -698,28 +715,28 @@
           </div>
         </div>
 
-        <div class="form-row">
-          <div class="form-group">
-            <label for="emp-registra-ponto">Registra Ponto?</label>
-            <select class="form-control" id="emp-registra-ponto">
-              <option value="sim">Sim (Aparece no ponto e pendências)</option>
-              <option value="nao">Não (Apenas VA com crédito integral)</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label for="emp-status">Situação:</label>
-            <select class="form-control" id="emp-status">
-              <option value="ativo">Ativo</option>
-              <option value="demitido">Demitido</option>
-            </select>
-          </div>
+        <!-- Checkbox: Registra Ponto Eletrônico -->
+        <div class="form-group" style="background:var(--color-bg-dark); padding:10px 14px; border-radius:var(--radius-sm); border:1px solid var(--color-border); margin-bottom:12px;">
+          <label class="custom-checkbox-container" style="margin:0; cursor:pointer; display:flex; align-items:center; gap:10px;">
+            <input type="checkbox" id="emp-check-registra-ponto" checked>
+            <span><strong>Registra Ponto Eletrônico</strong> <small style="color:var(--color-text-sub); display:block; font-size:11px;">(Desmarque apenas se o colaborador NÃO bate ponto e recebe VA integral)</small></span>
+          </label>
         </div>
 
-        <div class="form-group" id="group-emp-demissao" style="display: none;">
-          <label for="emp-demissao">Data de Demissão (Desligamento):</label>
+        <!-- Checkbox: Marcar como Demitido -->
+        <div class="form-group" style="background:rgba(239, 68, 68, 0.08); padding:10px 14px; border-radius:var(--radius-sm); border:1px solid rgba(239, 68, 68, 0.35); margin-bottom:12px;">
+          <label class="custom-checkbox-container" style="margin:0; cursor:pointer; display:flex; align-items:center; gap:10px;">
+            <input type="checkbox" id="emp-check-demitido">
+            <span style="color:#FCA5A5;"><strong>Marcar colaborador como DEMITIDO (Desligado)</strong> <small style="color:var(--color-text-sub); display:block; font-size:11px;">(Ao marcar, informe a data e o aviso de rescisão subirá no mural automaticamente)</small></span>
+          </label>
+        </div>
+
+        <!-- Campo condicional de data de demissão -->
+        <div class="form-group" id="group-emp-demissao" style="display: none; background:rgba(239, 68, 68, 0.12); padding:12px 14px; border-radius:var(--radius-sm); border:1px solid rgba(239, 68, 68, 0.5);">
+          <label for="emp-demissao" style="color:#F87171; font-weight:700;">Data de Demissão (Desligamento):*</label>
           <input type="date" class="form-control" id="emp-demissao">
-          <small style="color: var(--color-cyan); font-size: 11px; display: block; margin-top: 4px;">
-            * Ao final do mês, o Vale Alimentação apurará apenas os dias úteis trabalhados até esta data de rescisão.
+          <small style="color:#FF8099; font-size:11px; display:block; margin-top:6px;">
+            ⚖️ <strong>CLT Art. 477:</strong> Ao salvar, o prazo fatal de 10 dias corridos para homologação e pagamento das verbas rescisórias será publicado no mural de avisos automaticamente!
           </small>
         </div>
       </div>
@@ -942,20 +959,28 @@
 
         <div class="form-row">
           <div class="form-group">
-            <label for="aviso-colab">Colaborador Vinculado (Opcional):</label>
-            <select class="form-control" id="aviso-colab">
-              <option value="">Nenhum / Prazo Geral</option>
-              <!-- Filled via JS -->
-            </select>
-          </div>
-
-          <div class="form-group">
             <label for="aviso-filial">Filial:*</label>
             <select class="form-control" id="aviso-filial">
               <option value="TODAS">🌐 Todas as Filiais</option>
               <!-- Filled via JS -->
             </select>
           </div>
+
+          <div class="form-group">
+            <label for="aviso-filter-dept">Filtrar por Departamento:</label>
+            <select class="form-control" id="aviso-filter-dept">
+              <option value="todos">Todos os Departamentos</option>
+              <!-- Filled via JS -->
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="aviso-colab">Colaborador Vinculado (Opcional):</label>
+          <select class="form-control" id="aviso-colab">
+            <option value="">Nenhum / Prazo Geral</option>
+            <!-- Filled via JS -->
+          </select>
         </div>
 
         <div class="form-group">

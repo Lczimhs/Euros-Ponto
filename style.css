@@ -1481,86 +1481,92 @@ thead .col-dsr {
 /* ==========================================================================
    CALENDÁRIO DE PRAZOS LEGAIS (INSPIRAÇÃO DE DESIGN EXECUTIVO / REFERÊNCIA)
    ========================================================================== */
+/* ==========================================================================
+   CALENDÁRIO COMPACTO DE PRAZOS LEGAIS (TEMA ESCURO - CÉLULAS UNIFORMES)
+   ========================================================================== */
 .cal-reference-card {
-  background: #FFFFFF !important;
-  border: 1px solid #E2E8F0;
-  border-radius: 12px;
-  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
+  background: var(--color-bg-panel);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.45);
   overflow: hidden;
   display: flex;
   flex-direction: column;
 }
 
-/* Header Top Bar (Exato como a foto de referência: < > escuro, Hoy cinza, mês centralizado minúsculo, vistas na direita) */
+/* Header Top Bar */
 .cal-ref-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 16px 24px;
-  background: #FFFFFF !important;
-  border-bottom: 1px solid #E2E8F0;
-  gap: 16px;
+  padding: 10px 18px;
+  background: rgba(15, 23, 42, 0.95);
+  border-bottom: 1px solid var(--color-border);
+  gap: 12px;
   flex-wrap: wrap;
 }
 
 .cal-ref-nav-left {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 8px;
 }
 
 .cal-ref-arrow-group {
   display: flex;
-  background: #1E293B;
-  border-radius: 6px;
+  background: var(--color-bg-dark);
+  border-radius: var(--radius-sm);
   overflow: hidden;
-  border: 1px solid #0F172A;
+  border: 1px solid var(--color-border);
 }
 
 .cal-ref-arrow-btn {
   background: transparent;
-  color: #FFFFFF;
+  color: var(--color-text-main);
   border: none;
-  padding: 6px 14px;
-  font-size: 14px;
+  padding: 5px 12px;
+  font-size: 13px;
   font-weight: 700;
   cursor: pointer;
-  transition: all 0.15s;
+  transition: all 0.2s;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
 .cal-ref-arrow-btn:hover {
-  background: #334155;
+  background: var(--color-primary);
+  color: #FFF;
 }
 
 .cal-ref-arrow-btn:first-child {
-  border-right: 1px solid rgba(255, 255, 255, 0.2);
+  border-right: 1px solid var(--color-border);
 }
 
 .cal-ref-today-btn {
-  background: #64748B;
-  color: #FFFFFF;
-  border: none;
-  border-radius: 6px;
-  padding: 6px 16px;
-  font-size: 13px;
+  background: var(--color-bg-dark);
+  color: var(--color-text-main);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  padding: 5px 14px;
+  font-size: 12px;
   font-weight: 600;
   cursor: pointer;
-  transition: all 0.15s;
+  transition: all 0.2s;
 }
 
 .cal-ref-today-btn:hover {
-  background: #475569;
+  background: #334155;
+  border-color: var(--color-border-bright);
+  color: #FFF;
 }
 
-/* Título Centralizado: e.g. "outubro de 2026" (como "marzo de 2025" na foto) */
+/* Título Centralizado: e.g. "outubro de 2026" */
 .cal-ref-center-title {
-  font-size: 22px;
+  font-size: 18px;
   font-weight: 700;
-  color: #0F172A !important;
-  letter-spacing: -0.3px;
+  color: #F8FAFC;
+  letter-spacing: 0.2px;
   text-align: center;
   flex: 1;
   text-transform: lowercase;
@@ -1569,18 +1575,18 @@ thead .col-dsr {
 /* Seletor Segmentado de Vistas: [ Mês | Semana | Dia | Agenda ] */
 .cal-ref-views-toggle {
   display: flex;
-  background: #1E293B;
-  padding: 3px;
-  border-radius: 6px;
+  background: var(--color-bg-dark);
+  padding: 2px;
+  border-radius: var(--radius-sm);
   gap: 2px;
-  border: 1px solid #0F172A;
+  border: 1px solid var(--color-border);
 }
 
 .cal-view-btn {
   background: transparent;
-  color: #94A3B8;
+  color: var(--color-text-sub);
   border: none;
-  padding: 5px 14px;
+  padding: 4px 12px;
   border-radius: 4px;
   font-size: 12px;
   font-weight: 600;
@@ -1589,13 +1595,13 @@ thead .col-dsr {
 }
 
 .cal-view-btn:hover {
-  color: #FFFFFF;
+  color: #FFF;
 }
 
 .cal-view-btn.active {
-  background: #0F172A;
-  color: #FFFFFF;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+  background: var(--color-primary);
+  color: #FFF;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
 }
 
 /* Barra Secundária de Filtros & Legenda */
@@ -1603,120 +1609,120 @@ thead .col-dsr {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 10px 20px;
-  background: #F8FAFC !important;
-  border-bottom: 1px solid #E2E8F0;
+  padding: 8px 16px;
+  background: rgba(15, 23, 42, 0.6);
+  border-bottom: 1px solid var(--color-border);
   flex-wrap: wrap;
-  gap: 12px;
+  gap: 10px;
 }
 
 .cal-ref-subbar label {
-  color: #475569;
-  font-size: 12px;
-  font-weight: 600;
-}
-
-.cal-ref-subbar .sort-select {
-  background: #FFFFFF;
-  color: #0F172A;
-  border: 1px solid #CBD5E1;
-  border-radius: 4px;
-  font-weight: 500;
-}
-
-.cal-ref-subbar .cal-legend-quick {
-  color: #475569;
+  color: var(--color-text-sub);
   font-size: 11px;
   font-weight: 600;
 }
 
-/* Cabeçalho de Dias da Semana (seg, ter, qua, qui, sex, sáb, dom em azul vibrante) */
+.cal-ref-subbar .sort-select {
+  background: var(--color-bg-dark);
+  color: var(--color-text-main);
+  border: 1px solid var(--color-border);
+  border-radius: 4px;
+  font-size: 12px;
+  padding: 3px 8px;
+}
+
+/* Cabeçalho de Dias da Semana (seg, ter, qua, qui, sex, sáb, dom) */
 .cal-weekdays-row {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
-  background: #FFFFFF !important;
-  border-bottom: 1px solid #E2E8F0;
+  background: rgba(15, 23, 42, 0.5);
+  border-bottom: 1px solid var(--color-border);
 }
 
 .cal-weekday-col {
-  padding: 10px 4px;
+  padding: 8px 4px;
   text-align: center;
-  font-size: 13px;
+  font-size: 12px;
   font-weight: 700;
-  color: #0284C7 !important; /* Azul vibrante idêntico à foto de referência */
+  color: #38BDF8;
   text-transform: lowercase;
   letter-spacing: 0.5px;
 }
 
-.cal-weekday-col.weekend {
-  color: #0284C7 !important;
-}
-
-/* Grade de Células do Calendário com linhas limpas */
+/* Grade de Células: Compacta, com linhas finas */
 .cal-days-grid {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
-  background: #E2E8F0 !important;
-  gap: 1px; /* Linha de divisão limpa entre as células */
+  background: var(--color-border);
+  gap: 1px;
 }
 
-/* Célula de Dia Individual */
+/* Célula do Dia: TAMANHO ESTRITAMENTE IDÊNTICO (altura fixa de 52px) */
 .cal-day-cell {
-  background: #FFFFFF !important;
-  min-height: 125px;
-  padding: 6px 8px;
+  background: #0B1120;
+  height: 52px;
+  min-height: 52px;
+  max-height: 52px;
+  padding: 4px 8px;
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
   position: relative;
   transition: all 0.15s ease;
   cursor: pointer;
   user-select: none;
+  box-sizing: border-box;
 }
 
 .cal-day-cell:hover {
-  background: #F8FAFC !important;
+  background: #162035;
+  box-shadow: inset 0 0 0 1px #38BDF8;
+  z-index: 2;
 }
 
-/* Dias fora do mês atual: número apagadinho no topo direito como na foto (24, 25, 26, 27, 28) */
+/* Dias fora do mês atual */
 .cal-day-cell.other-month {
-  background: #FFFFFF !important;
+  background: rgba(8, 12, 22, 0.7);
+  opacity: 0.4;
 }
 
 .cal-day-cell.other-month .cal-day-number {
-  color: #94A3B8 !important;
-  opacity: 0.65;
-  text-decoration: none !important;
+  color: #64748B;
+  text-decoration: none;
 }
 
-/* Dia Atual / Selecionado: suave fundo amarelo pastel exatamente como a célula 17 da foto */
+/* Dia Atual / Hoje */
 .cal-day-cell.today {
-  background: #FEF9C3 !important;
+  box-shadow: inset 0 0 0 1.5px #FDE047 !important;
 }
 
 .cal-day-cell.today .cal-day-number {
-  color: #1D4ED8 !important;
+  color: #FDE047;
   font-weight: 800;
 }
 
 .cal-day-top {
   display: flex;
-  justify-content: flex-end; /* Número no topo à direita como na foto */
+  justify-content: space-between;
   align-items: center;
-  margin-bottom: 5px;
-  position: relative;
+  width: 100%;
+}
+
+.cal-day-number {
+  font-size: 13px;
+  font-weight: 700;
+  color: #E2E8F0;
 }
 
 .cal-day-add-btn {
-  position: absolute;
-  left: 0;
   opacity: 0;
   font-size: 11px;
-  background: #E2E8F0;
-  color: #475569;
+  background: rgba(255, 255, 255, 0.12);
+  color: var(--color-text-sub);
   border: none;
   border-radius: 3px;
-  width: 18px;
-  height: 18px;
+  width: 16px;
+  height: 16px;
   cursor: pointer;
   display: flex;
   align-items: center;
@@ -1729,167 +1735,135 @@ thead .col-dsr {
 }
 
 .cal-day-add-btn:hover {
-  background: #0284C7;
+  background: var(--color-primary);
   color: #FFF;
 }
 
-.cal-day-number {
-  font-size: 13px;
-  font-weight: 600;
-  color: #0284C7 !important; /* Azul vibrante / estilo link com sublinhado como na foto */
-  padding: 0 3px;
-  text-decoration: underline !important;
-  text-underline-offset: 2px;
+/* --------------------------------------------------------------------------
+   MUDANÇA DE COR DO DIA CONFORME PENDÊNCIA (SEM NOMES - MESMO TAMANHO!)
+   -------------------------------------------------------------------------- */
+/* Rescisão Contratual (10 dias CLT) - Alerta Vermelho */
+.cal-day-cell.has-rescisao {
+  background: rgba(239, 68, 68, 0.22) !important;
+  box-shadow: inset 0 0 0 1.5px #EF4444 !important;
+}
+.cal-day-cell.has-rescisao .cal-day-number {
+  color: #FCA5A5 !important;
 }
 
-/* Notice Badges dentro da célula do calendário adaptados para fundo claro */
-.cal-cell-notices {
+/* Fechamento Ponto & VA (Último dia útil) - Alerta Azul/Ciano */
+.cal-day-cell.has-ponto {
+  background: rgba(14, 165, 233, 0.22) !important;
+  box-shadow: inset 0 0 0 1.5px #38BDF8 !important;
+}
+.cal-day-cell.has-ponto .cal-day-number {
+  color: #7DD3FC !important;
+}
+
+/* Pagamento Salarial / Vale - Alerta Amarelo */
+.cal-day-cell.has-salario {
+  background: rgba(245, 158, 11, 0.22) !important;
+  box-shadow: inset 0 0 0 1.5px #F59E0B !important;
+}
+.cal-day-cell.has-salario .cal-day-number {
+  color: #FDE047 !important;
+}
+
+/* Férias - Alerta Roxo */
+.cal-day-cell.has-ferias {
+  background: rgba(168, 85, 247, 0.22) !important;
+  box-shadow: inset 0 0 0 1.5px #A855F7 !important;
+}
+.cal-day-cell.has-ferias .cal-day-number {
+  color: #D8B4FE !important;
+}
+
+/* FGTS Digital - Alerta Verde */
+.cal-day-cell.has-fgts {
+  background: rgba(34, 197, 94, 0.2) !important;
+  box-shadow: inset 0 0 0 1.5px #22C55E !important;
+}
+.cal-day-cell.has-fgts .cal-day-number {
+  color: #86EFAC !important;
+}
+
+/* Todos Concluídos (Feito) - Verde */
+.cal-day-cell.all-done {
+  background: rgba(34, 197, 94, 0.12) !important;
+  box-shadow: inset 0 0 0 1px rgba(34, 197, 94, 0.5) !important;
+}
+
+/* Indicadores na Barra Inferior da Célula */
+.cal-day-indicator-bar {
   display: flex;
-  flex-direction: column;
-  gap: 3px;
+  align-items: center;
+  gap: 5px;
+  width: 100%;
+  height: 14px;
   overflow: hidden;
-  flex: 1;
 }
 
-.cal-notice-pill {
+.cal-color-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  display: inline-block;
+  flex-shrink: 0;
+}
+
+.cal-color-dot.dot-rescisao { background: #EF4444; box-shadow: 0 0 6px #EF4444; }
+.cal-color-dot.dot-ponto { background: #38BDF8; box-shadow: 0 0 6px #38BDF8; }
+.cal-color-dot.dot-salario { background: #F59E0B; box-shadow: 0 0 6px #F59E0B; }
+.cal-color-dot.dot-ferias { background: #A855F7; box-shadow: 0 0 6px #A855F7; }
+.cal-color-dot.dot-fgts { background: #22C55E; box-shadow: 0 0 6px #22C55E; }
+.cal-color-dot.dot-done { background: #10B981; }
+
+.cal-pendencia-label {
   font-size: 10px;
-  font-weight: 600;
-  padding: 2px 6px;
-  border-radius: 4px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+
+/* Legenda Rápida */
+.cal-legend-quick {
   display: flex;
   align-items: center;
-  gap: 4px;
-  line-height: 1.3;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
-  transition: transform 0.1s;
-}
-
-.cal-notice-pill:hover {
-  transform: translateX(1px);
-}
-
-.notice-pill-rescisao {
-  background: #FEE2E2 !important;
-  color: #991B1B !important;
-  border: 1px solid #FCA5A5 !important;
-}
-
-.notice-pill-salario {
-  background: #FEF3C7 !important;
-  color: #92400E !important;
-  border: 1px solid #FCD34D !important;
-}
-
-.notice-pill-ferias {
-  background: #F3E8FF !important;
-  color: #6B21A8 !important;
-  border: 1px solid #D8B4FE !important;
-}
-
-.notice-pill-ponto {
-  background: #E0F2FE !important;
-  color: #075985 !important;
-  border: 1px solid #7DD3FC !important;
-}
-
-.notice-pill-fgts {
-  background: #DCFCE7 !important;
-  color: #166534 !important;
-  border: 1px solid #86EFAC !important;
-}
-
-.notice-pill-outros {
-  background: #F1F5F9 !important;
-  color: #334155 !important;
-  border: 1px solid #CBD5E1 !important;
-}
-
-.cal-notice-pill.is-done {
-  opacity: 0.6 !important;
-  text-decoration: line-through !important;
-  background: #F3F4F6 !important;
-  color: #6B7280 !important;
-  border-color: #E5E7EB !important;
-}
-
-.cal-notice-more-badge {
-  font-size: 10px;
-  color: #64748B;
-  font-weight: 700;
-  margin-top: 2px;
-  text-align: right;
-}
-
-/* VISTA AGENDA */
-.cal-agenda-list {
-  padding: 16px 20px;
-  display: flex;
-  flex-direction: column;
   gap: 12px;
-  max-height: 650px;
-  overflow-y: auto;
-  background: #FFFFFF !important;
-}
-
-.cal-agenda-item {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background: #F8FAFC !important;
-  border: 1px solid #E2E8F0 !important;
-  border-radius: 8px;
-  padding: 12px 16px;
-  gap: 14px;
-  transition: all 0.2s;
-}
-
-.cal-agenda-item:hover {
-  border-color: #CBD5E1 !important;
-  background: #FFFFFF !important;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-}
-
-.cal-agenda-item.is-done {
-  opacity: 0.7 !important;
-}
-
-.cal-agenda-date-box {
-  min-width: 85px;
-  text-align: center;
-  background: #FFFFFF !important;
-  border: 1px solid #E2E8F0 !important;
-  padding: 6px 10px;
-  border-radius: 6px;
-}
-
-.cal-agenda-date-box .day-num {
-  font-size: 18px;
-  font-weight: 800;
-  color: #0284C7 !important;
-}
-
-.cal-agenda-date-box .day-week {
   font-size: 11px;
-  color: #64748B !important;
-  text-transform: uppercase;
-  font-weight: 700;
+  color: var(--color-text-sub);
+  flex-wrap: wrap;
 }
-  border-color: rgba(0, 229, 255, 0.45);
+
+.legend-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  display: inline-block;
+  margin-right: 3px;
+  vertical-align: middle;
 }
+
+.legend-dot.dot-red { background: #EF4444; box-shadow: 0 0 5px #EF4444; }
+.legend-dot.dot-yellow { background: #F59E0B; box-shadow: 0 0 5px #F59E0B; }
+.legend-dot.dot-purple { background: #A855F7; box-shadow: 0 0 5px #A855F7; }
+.legend-dot.dot-cyan { background: #38BDF8; box-shadow: 0 0 5px #38BDF8; }
+.legend-dot.dot-green { background: #22C55E; box-shadow: 0 0 5px #22C55E; }
+.legend-dot.dot-done { background: #10B981; }
 
 .notice-pill-fgts {
   background: rgba(16, 185, 129, 0.2);
   color: #6EE7B7;
-  border-color: rgba(16, 185, 129, 0.5);
+  border: 1px solid rgba(16, 185, 129, 0.5);
 }
 
 .notice-pill-outros {
   background: rgba(148, 163, 184, 0.18);
   color: #CBD5E1;
-  border-color: rgba(148, 163, 184, 0.4);
+  border: 1px solid rgba(148, 163, 184, 0.4);
 }
 
 /* Notice Done (Feito) Strikethrough style */
