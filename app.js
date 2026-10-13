@@ -1936,8 +1936,8 @@ function calculateDsrAndOccurrences(colabId, year, month, branchId) {
       });
     }
 
-    // 2. Faltas Meio Período (FM, FT, 1/2 ATESTADO)
-    if ((resolved.type === 'FM' || resolved.type === 'FT' || resolved.type === '1/2 ATESTADO') && resolved.resolution !== 'ABONAR') {
+    // 2. Faltas Meio Período (Apenas FT e FM)
+    if ((resolved.type === 'FM' || resolved.type === 'FT') && resolved.resolution !== 'ABONAR') {
       faltasMeioPeriodo++;
       ocorrencias.push({
         data: isoStr,
@@ -1945,19 +1945,20 @@ function calculateDsrAndOccurrences(colabId, year, month, branchId) {
         badgeClass: 'status-half',
         tempo: '1/2 Período',
         impacto: 'Desconto parcial em VA / Folha',
-        obs: reg?.note || 'Ausência parcial registrada'
+        obs: reg?.note || 'Ausência parcial (' + resolved.type + ')'
       });
     }
 
-    // 3. Atestado Integral
-    if (resolved.type === 'ATESTADO' && resolved.resolution !== 'ABONAR') {
+    // 3. Atestados Médicos (Integral e 1/2 Atestado) - Justificados (não são faltas injustificadas)
+    if ((resolved.type === 'ATESTADO' || resolved.type === '1/2 ATESTADO') && resolved.resolution !== 'ABONAR') {
+      const isHalf = resolved.type === '1/2 ATESTADO';
       ocorrencias.push({
         data: isoStr,
-        tipo: 'Atestado Médico Integral',
+        tipo: isHalf ? '½ Atestado Médico (Justificado)' : 'Atestado Médico Integral (Justificado)',
         badgeClass: 'status-atestado',
-        tempo: 'Dia Completo',
-        impacto: 'Falta justificada (não perde DSR)',
-        obs: reg?.note || 'Atestado médico anexado'
+        tempo: isHalf ? '1/2 Período' : 'Dia Completo',
+        impacto: 'Ausência justificada (não perde DSR)',
+        obs: reg?.note || (isHalf ? 'Meio período abonado por atestado' : 'Atestado médico anexado')
       });
     }
 
@@ -2833,19 +2834,29 @@ function openCellDetailModal(colabId, isoDate) {
   const inputAtrasoMaior = document.getElementById('input-atraso-maior');
   const inputAtrasoPequeno = document.getElementById('input-atraso-pequeno');
 
-  let defaultAtrasoMaior = reg.atrasoMaior || '';
-  if (!defaultAtrasoMaior && reg.atrasoMaiorMin > 0) {
+  let defaultAtrasoMaior = '';
+  if (reg.atrasoMaiorMin > 0) {
     defaultAtrasoMaior = minutesToTime(reg.atrasoMaiorMin);
-  }
-  if (!defaultAtrasoMaior && !reg.atrasoPequeno && reg.punches) {
+  } else if (reg.atrasoMaior) {
+    const m = parseTimeToMinutes(reg.atrasoMaior);
+    if (m > 0) defaultAtrasoMaior = minutesToTime(m);
+  } else if (!reg.atrasoPequeno && reg.punches) {
     const evalResult = evaluateDailyPunches(reg.punches);
     if (evalResult.status === 'ATRASO' && evalResult.delayMinutes > 0) {
       defaultAtrasoMaior = minutesToTime(evalResult.delayMinutes);
     }
   }
 
+  let defaultAtrasoPequeno = '';
+  if (reg.atrasoPequenoMin > 0) {
+    defaultAtrasoPequeno = minutesToTime(reg.atrasoPequenoMin);
+  } else if (reg.atrasoPequeno) {
+    const m = parseTimeToMinutes(reg.atrasoPequeno);
+    if (m > 0) defaultAtrasoPequeno = minutesToTime(m);
+  }
+
   if (inputAtrasoMaior) inputAtrasoMaior.value = defaultAtrasoMaior;
-  if (inputAtrasoPequeno) inputAtrasoPequeno.value = reg.atrasoPequeno || '';
+  if (inputAtrasoPequeno) inputAtrasoPequeno.value = defaultAtrasoPequeno;
 
   const currentStatus = getDayStatus(colabId, isoDate, appState.activeBranchId);
   document.getElementById('modal-status-badge').textContent = 'Status Apurado: ' + currentStatus.display;
@@ -4645,6 +4656,16 @@ function initEvents() {
     saveStateToStorage();
     renderCurrentView();
     showToast('Filtros redefinidos: exibindo todos em ordem alfabética.', 'info');
+  });
+
+  // Botões de Limpar Horário dos Atrasos no Modal do Dia
+  document.getElementById('btn-clear-atraso-maior')?.addEventListener('click', () => {
+    const el = document.getElementById('input-atraso-maior');
+    if (el) el.value = '';
+  });
+  document.getElementById('btn-clear-atraso-pequeno')?.addEventListener('click', () => {
+    const el = document.getElementById('input-atraso-pequeno');
+    if (el) el.value = '';
   });
 
   // Atalhos Rápidos

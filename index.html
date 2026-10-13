@@ -631,14 +631,17 @@
         <!-- Registro e Classificação de Atrasos: Maior (Dashboard/Pendência) e Pequeno (Somente DSR) -->
         <div style="background: rgba(30, 27, 46, 0.7); padding: 12px 14px; border-radius: var(--radius-sm); border: 1px solid rgba(139, 92, 246, 0.3); margin-bottom: 14px;">
           <div style="font-size: 12px; font-weight: 700; color: var(--color-cyan); margin-bottom: 8px; display: flex; align-items: center; gap: 6px;">
-            <span>⏱️</span> Registro e Classificação de Atrasos
+            <span>⏱️</span> Registro e Classificação de Atrasos (Seletor de Horário)
           </div>
           <div class="form-row" style="margin-bottom: 0;">
             <div class="form-group" style="margin-bottom: 0;">
               <label for="input-atraso-maior" style="color: #F87171; font-weight: 600; font-size: 12px; display: flex; align-items: center; gap: 6px;">
                 <span>⚠️</span> Atraso Maior (Análise / Pendência no Dashboard)
               </label>
-              <input type="text" class="form-control" id="input-atraso-maior" placeholder="Ex: 01:00 ou 60" style="font-family: var(--font-mono);">
+              <div style="display:flex; gap:6px; align-items:center;">
+                <input type="time" class="form-control" id="input-atraso-maior" style="font-family: var(--font-mono); flex:1;">
+                <button type="button" class="btn btn-secondary btn-sm" id="btn-clear-atraso-maior" title="Limpar horário do atraso maior" style="padding:5px 9px; font-size:11px;">✕</button>
+              </div>
               <span style="font-size: 10px; color: var(--color-text-sub); display: block; margin-top: 3px;">
                 Enviado para análise de pendências e exibido na matriz (ex: <code>A.01:00</code>).
               </span>
@@ -648,7 +651,10 @@
               <label for="input-atraso-pequeno" style="color: #38BDF8; font-weight: 600; font-size: 12px; display: flex; align-items: center; gap: 6px;">
                 <span>⏱️</span> Pequeno Atraso (Sem Pendência no Dashboard)
               </label>
-              <input type="text" class="form-control" id="input-atraso-pequeno" placeholder="Ex: 00:10 ou 10" style="font-family: var(--font-mono);">
+              <div style="display:flex; gap:6px; align-items:center;">
+                <input type="time" class="form-control" id="input-atraso-pequeno" style="font-family: var(--font-mono); flex:1;">
+                <button type="button" class="btn btn-secondary btn-sm" id="btn-clear-atraso-pequeno" title="Limpar horário do pequeno atraso" style="padding:5px 9px; font-size:11px;">✕</button>
+              </div>
               <span style="font-size: 10px; color: var(--color-text-sub); display: block; margin-top: 3px;">
                 Não aparece no dashboard. Soma apenas na tela de DSR.
               </span>
@@ -741,7 +747,7 @@
           <div style="background:rgba(245, 158, 11, 0.1); border:1px solid rgba(245, 158, 11, 0.35); padding:14px; border-radius:var(--radius-sm); text-align:center;">
             <div style="font-size:11px; color:#FDE047; text-transform:uppercase; font-weight:700;">Faltas Meio Período</div>
             <div id="dsr-kpi-half" style="font-size:26px; font-weight:800; font-family:var(--font-mono); color:#F59E0B; margin:4px 0;">0</div>
-            <div style="font-size:10px; color:var(--color-text-sub);">FM / FT / ½ Atestado</div>
+            <div style="font-size:10px; color:var(--color-text-sub);">Apenas FT e FM</div>
           </div>
 
           <div style="background:rgba(56, 189, 248, 0.1); border:1px solid rgba(56, 189, 248, 0.35); padding:14px; border-radius:var(--radius-sm); text-align:center;">
