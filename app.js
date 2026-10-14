@@ -1346,7 +1346,19 @@ async function syncFromCloudOnStart() {
         appState.carryOverDsr = { ...appState.carryOverDsr, ...cloud.carryOverDsr };
       }
       if (cloud.colaboradores && cloud.colaboradores.length > 0) {
-        appState.colaboradores = cloud.colaboradores;
+        appState.colaboradores = cloud.colaboradores.map(c => {
+          const isAp = !!(c.aprendiz || c.isAprendiz);
+          return {
+            ...c,
+            aprendiz: isAp,
+            trabalhaSabado: c.trabalhaSabado !== undefined ? (c.trabalhaSabado === true || c.trabalhaSabado === 'sim') : !isAp,
+            naoRecebeVa: !!(c.naoRecebeVa || c.recebeVa === false),
+            recebeVa: !(c.naoRecebeVa || c.recebeVa === false),
+            registraPonto: c.registraPonto !== false,
+            status: c.status || 'ativo',
+            dataDemissao: c.dataDemissao || ''
+          };
+        });
       }
       if (cloud.avisos && Array.isArray(cloud.avisos) && cloud.avisos.length > 0) {
         // Se avisos da nuvem forem do formato antigo sem data, usa o seed legal enriquecido
@@ -1371,13 +1383,19 @@ function loadStateFromStorage() {
       if (parsed.filiais && parsed.filiais.length > 0 && parsed.colaboradores && parsed.colaboradores.length > 0) {
         appState.filiais = parsed.filiais;
         appState.departamentos = parsed.departamentos || [];
-        appState.colaboradores = (parsed.colaboradores || []).map(c => ({
-          ...c,
-          aprendiz: !!(c.aprendiz || c.isAprendiz),
-          registraPonto: c.registraPonto !== false,
-          status: c.status || 'ativo',
-          dataDemissao: c.dataDemissao || ''
-        }));
+        appState.colaboradores = (parsed.colaboradores || []).map(c => {
+          const isAp = !!(c.aprendiz || c.isAprendiz);
+          return {
+            ...c,
+            aprendiz: isAp,
+            trabalhaSabado: c.trabalhaSabado !== undefined ? (c.trabalhaSabado === true || c.trabalhaSabado === 'sim') : !isAp,
+            naoRecebeVa: !!(c.naoRecebeVa || c.recebeVa === false),
+            recebeVa: !(c.naoRecebeVa || c.recebeVa === false),
+            registraPonto: c.registraPonto !== false,
+            status: c.status || 'ativo',
+            dataDemissao: c.dataDemissao || ''
+          };
+        });
         appState.feriados = parsed.feriados || [];
 
         // Se avisos existentes no storage forem do modelo antigo sem "data", carrega os novos seed
@@ -1495,6 +1513,24 @@ function formatDateBR(isoStr) {
   const parts = isoStr.split('-');
   if (parts.length < 3) return isoStr;
   return parts[2] + '/' + parts[1] + '/' + parts[0];
+}
+
+/**
+ * Determina se o colaborador tem folga fixa aos sábados (não trabalha aos sábados)
+ * Válido para Aprendizes sem sábado ou qualquer colaborador com trabalhaSabado: false
+ */
+function isColabFolgaSabado(colab) {
+  if (!colab) return false;
+  // Se explicitamente configurado como NÃO trabalha no sábado
+  if (colab.trabalhaSabado === false || colab.trabalhaSabado === 'nao' || colab.trabalhaSabado === 0) {
+    return true;
+  }
+  // Se for aprendiz e não estiver explicitamente marcado como trabalhando sábado
+  const isAp = !!(colab.aprendiz === true || colab.isAprendiz === true);
+  if (isAp && colab.trabalhaSabado !== true && colab.trabalhaSabado !== 'sim') {
+    return true;
+  }
+  return false;
 }
 
 // Verificar se uma data é Feriado (Nacional ou para a filial)
@@ -1677,11 +1713,10 @@ function getDayStatus(colabId, isoStr, branchId) {
   const dayOfWeek = dateObj.getDay();
 
   // Domingos são automáticos e bloqueados
-  // Aprendizes que NÃO trabalham no sábado: o sábado fica travado com texto "SÁBADO", igual ao domingo
-  const isAprendiz = !!(colab && (colab.aprendiz === true || colab.isAprendiz === true));
-  const folgaSabadoAprendiz = isAprendiz && (colab.trabalhaSabado === false || colab.trabalhaSabado === 'nao');
+  // Colaboradores que NÃO trabalham no sábado (aprendizes, administrativo, etc.): o sábado fica travado com texto "SÁBADO", igual ao domingo
+  const folgaSabado = isColabFolgaSabado(colab);
 
-  if (dayOfWeek === 0 || (dayOfWeek === 6 && folgaSabadoAprendiz)) {
+  if (dayOfWeek === 0 || (dayOfWeek === 6 && folgaSabado)) {
     const isSabado = dayOfWeek === 6;
     return {
       type: isSabado ? 'SÁBADO' : 'DOMINGO',
@@ -2226,7 +2261,7 @@ function calculateVAForEmployee(colabId, year, month, branchId) {
   const doesNotPunch = colab && colab.registraPonto === false;
   const isDemitido = colab && colab.status === 'demitido' && colab.dataDemissao;
   const isAprendiz = !!(colab && (colab.aprendiz === true || colab.isAprendiz === true));
-  const folgaSabadoAprendiz = isAprendiz && (colab.trabalhaSabado === false || colab.trabalhaSabado === 'nao');
+  const folgaSabado = isColabFolgaSabado(colab);
   const naoRecebeVa = !!(colab && (colab.naoRecebeVa === true || colab.recebeVa === false));
   const baseRate = isAprendiz ? 4.00 : 8.00;
   const halfRate = isAprendiz ? 2.00 : 4.00;
@@ -2271,7 +2306,7 @@ function calculateVAForEmployee(colabId, year, month, branchId) {
     const holiday = isHoliday(isoStr, branchId);
 
     const isSunday = dayOfWeek === 0;
-    const isSabadoFolga = dayOfWeek === 6 && folgaSabadoAprendiz;
+    const isSabadoFolga = dayOfWeek === 6 && folgaSabado;
     const isRestDay = isSunday || isSabadoFolga;
     const isHolidayDay = !!holiday;
     const isStandardBusinessDay = !isRestDay && !isHolidayDay;
@@ -2287,7 +2322,7 @@ function calculateVAForEmployee(colabId, year, month, branchId) {
 
     if (!isStandardBusinessDay) {
       resolvedDisplay = isRestDay ? (isSunday ? 'DOMINGO' : 'SÁBADO') : 'FERIADO';
-      note = isRestDay ? (isSunday ? 'Domingo (Sem VA)' : 'Sábado (Folga Aprendiz - Sem VA)') : ('Feriado: ' + holiday.nome);
+      note = isRestDay ? (isSunday ? 'Domingo (Sem VA)' : 'Sábado (Folga Semanal - Sem VA)') : ('Feriado: ' + holiday.nome);
     } else if (isBeforeAdmission) {
       resolvedDisplay = '-';
       note = 'Pré-admissão (Admissão: ' + formatDateBR(colab.admissao) + ')';
@@ -2906,7 +2941,10 @@ function renderVAView() {
 
     let extraBadge = '';
     if (colab.aprendiz || colab.isAprendiz) {
-      extraBadge += '<span class="badge-aprendiz" style="font-size:10px; margin-left:6px; background:rgba(245, 158, 11, 0.2); color:#FDE047; border:1px solid rgba(245, 158, 11, 0.5); padding:1px 5px; border-radius:3px;" title="Jovem Aprendiz: Meio período (R$ 4,00/dia útil)">Aprendiz (R$ 4/dia)</span>';
+      const sabadoTxt = isColabFolgaSabado(colab) ? ' (Folga Sáb)' : ' (Trabalha Sáb)';
+      extraBadge += '<span class="badge-aprendiz" style="font-size:10px; margin-left:6px; background:rgba(245, 158, 11, 0.2); color:#FDE047; border:1px solid rgba(245, 158, 11, 0.5); padding:1px 5px; border-radius:3px;" title="Jovem Aprendiz: Meio período (R$ 4,00/dia útil)">Aprendiz' + sabadoTxt + '</span>';
+    } else if (isColabFolgaSabado(colab)) {
+      extraBadge += '<span class="badge-sabado-folga" style="font-size:10px; margin-left:6px; background:rgba(99, 102, 241, 0.2); color:#C7D2FE; border:1px solid rgba(99, 102, 241, 0.4); padding:1px 5px; border-radius:3px;" title="Não trabalha aos sábados">Folga Sábado</span>';
     }
     if (colab.naoRecebeVa || colab.recebeVa === false) {
       extraBadge += '<span class="badge-sem-va" title="Colaborador configurado para não receber Vale Alimentação">Sem VA</span>';
@@ -2959,10 +2997,11 @@ function openVAAuditModal(colabId) {
 
   const isAprendiz = colab.aprendiz || colab.isAprendiz;
   const aprendizLabel = isAprendiz ? ' • <span style="color:#FDE047; font-weight:700;">🎓 Jovem Aprendiz (R$ 4,00/dia)</span>' : '';
+  const folgaSabLabel = isColabFolgaSabado(colab) ? ' • <span style="color:#A5B4FC; font-weight:700;">🏖️ Folga aos Sábados</span>' : '';
   const vaStatusLabel = (colab.naoRecebeVa || colab.recebeVa === false) ? ' • <span style="color:#FCA5A5; font-weight:700;">🚫 Não recebe Vale Alimentação</span>' : '';
 
   const summary = document.getElementById('va-audit-summary');
-  summary.innerHTML = '<div><strong style="color:var(--color-cyan); font-size:14px;">' + colab.nome + '</strong> (Crachá: ' + colab.cracha + ')<div style="font-size:11px; color:var(--color-text-sub);">Setor: ' + (deptMap[colab.deptId] || '') + aprendizLabel + vaStatusLabel + ' • Mês: ' + MESES_PT[appState.currentMonth] + '/' + appState.currentYear + (colab.status === 'demitido' ? ' • Desligado em: ' + formatDateBR(colab.dataDemissao) : '') + '</div></div><div style="text-align:right;"><span style="font-size:11px; color:var(--color-text-muted);">Líquido a Pagar:</span><div style="color:var(--color-cyan); font-family:var(--font-mono); font-size:16px; font-weight:700;">R$ ' + va.valorLiquido.toFixed(2).replace('.', ',') + '</div><div style="font-size:10px; color:#B4A6CF;">Descontos: R$ ' + va.valorDescontado.toFixed(2).replace('.', ',') + '</div></div>';
+  summary.innerHTML = '<div><strong style="color:var(--color-cyan); font-size:14px;">' + colab.nome + '</strong> (Crachá: ' + colab.cracha + ')<div style="font-size:11px; color:var(--color-text-sub);">Setor: ' + (deptMap[colab.deptId] || '') + aprendizLabel + folgaSabLabel + vaStatusLabel + ' • Mês: ' + MESES_PT[appState.currentMonth] + '/' + appState.currentYear + (colab.status === 'demitido' ? ' • Desligado em: ' + formatDateBR(colab.dataDemissao) : '') + '</div></div><div style="text-align:right;"><span style="font-size:11px; color:var(--color-text-muted);">Líquido a Pagar:</span><div style="color:var(--color-cyan); font-family:var(--font-mono); font-size:16px; font-weight:700;">R$ ' + va.valorLiquido.toFixed(2).replace('.', ',') + '</div><div style="font-size:10px; color:#B4A6CF;">Descontos: R$ ' + va.valorDescontado.toFixed(2).replace('.', ',') + '</div></div>';
 
   const tbody = document.getElementById('va-audit-tbody');
   tbody.innerHTML = '';
@@ -3001,9 +3040,8 @@ document.getElementById('btn-confirm-mass-ok')?.addEventListener('click', () => 
     if (colab.status === 'demitido' && colab.dataDemissao && activeMassDate > colab.dataDemissao) return;
     if (colab.admissao && activeMassDate < colab.admissao) return;
 
-    // Se for sábado e o aprendiz não trabalha no sábado, mantém travado como descanso
-    const isAprendiz = !!(colab.aprendiz || colab.isAprendiz);
-    if (isSaturday && isAprendiz && (colab.trabalhaSabado === false || colab.trabalhaSabado === 'nao')) return;
+    // Se for sábado e o colaborador tem folga aos sábados (aprendiz ou escala sem sábado), mantém travado como descanso
+    if (isSaturday && isColabFolgaSabado(colab)) return;
 
     const regKey = colab.id + '_' + activeMassDate;
     appState.registrosPonto[regKey] = {
@@ -4395,8 +4433,10 @@ function renderColaboradoresView() {
     const isAprendiz = colab.aprendiz || colab.isAprendiz;
     let extraColabBadges = '';
     if (isAprendiz) {
-      const sabadoTxt = colab.trabalhaSabado === true ? ' (Sáb: Sim)' : ' (Sáb: Folga)';
+      const sabadoTxt = isColabFolgaSabado(colab) ? ' (Folga Sáb)' : ' (Trabalha Sáb)';
       extraColabBadges += ' <span class="badge-aprendiz" style="font-size:10px; background:rgba(245, 158, 11, 0.2); color:#FDE047; border:1px solid rgba(245, 158, 11, 0.5); padding:1px 5px; border-radius:3px;">Aprendiz' + sabadoTxt + '</span>';
+    } else if (isColabFolgaSabado(colab)) {
+      extraColabBadges += ' <span class="badge-sabado-folga" style="font-size:10px; background:rgba(99, 102, 241, 0.2); color:#C7D2FE; border:1px solid rgba(99, 102, 241, 0.4); padding:1px 5px; border-radius:3px;" title="Não trabalha aos sábados">Folga Sábado</span>';
     }
     if (colab.naoRecebeVa || colab.recebeVa === false) {
       extraColabBadges += ' <span class="badge-sem-va" style="font-size:10px;" title="Não recebe Vale Alimentação">Sem VA</span>';
@@ -4421,9 +4461,8 @@ function openEmployeeModal(empId = null) {
   const deptSelect = document.getElementById('emp-dept');
   const checkRegistra = document.getElementById('emp-check-registra-ponto');
   const checkNaoRecebeVa = document.getElementById('emp-check-nao-recebe-va');
+  const checkTrabalhaSabado = document.getElementById('emp-check-trabalha-sabado') || document.getElementById('emp-check-aprendiz-sabado');
   const checkAprendiz = document.getElementById('emp-check-aprendiz');
-  const checkAprendizSabado = document.getElementById('emp-check-aprendiz-sabado');
-  const groupAprendizSabado = document.getElementById('group-aprendiz-sabado');
   const checkDemitido = document.getElementById('emp-check-demitido');
   const demissaoGroup = document.getElementById('group-emp-demissao');
   const demissaoInput = document.getElementById('emp-demissao');
@@ -4446,8 +4485,12 @@ function openEmployeeModal(empId = null) {
 
     const isAp = !!(emp.aprendiz || emp.isAprendiz);
     if (checkAprendiz) checkAprendiz.checked = isAp;
-    if (groupAprendizSabado) groupAprendizSabado.style.display = isAp ? 'block' : 'none';
-    if (checkAprendizSabado) checkAprendizSabado.checked = emp.trabalhaSabado === true;
+
+    // Trabalha no sábado: se explicitamente definido, usa o booleano. Se for aprendiz e indefinido: false. Se normal e indefinido: true.
+    const trabalhaSab = emp.trabalhaSabado !== undefined
+      ? (emp.trabalhaSabado === true || emp.trabalhaSabado === 'sim')
+      : !isAp;
+    if (checkTrabalhaSabado) checkTrabalhaSabado.checked = trabalhaSab;
 
     const isDemitido = emp.status === 'demitido';
     if (checkDemitido) checkDemitido.checked = isDemitido;
@@ -4464,9 +4507,8 @@ function openEmployeeModal(empId = null) {
 
     if (checkRegistra) checkRegistra.checked = true;
     if (checkNaoRecebeVa) checkNaoRecebeVa.checked = false;
+    if (checkTrabalhaSabado) checkTrabalhaSabado.checked = true;
     if (checkAprendiz) checkAprendiz.checked = false;
-    if (groupAprendizSabado) groupAprendizSabado.style.display = 'none';
-    if (checkAprendizSabado) checkAprendizSabado.checked = false;
     if (checkDemitido) checkDemitido.checked = false;
     if (demissaoGroup) demissaoGroup.style.display = 'none';
     if (demissaoInput) demissaoInput.value = '';
@@ -4477,10 +4519,12 @@ function openEmployeeModal(empId = null) {
   openModal('modal-employee');
 }
 
-// Alterar visibilidade do campo de sábados ao marcar/desmarcar o aprendiz
+// Ao marcar como Jovem Aprendiz, sugere desmarcar o sábado por padrão
 document.getElementById('emp-check-aprendiz')?.addEventListener('change', (e) => {
-  const group = document.getElementById('group-aprendiz-sabado');
-  if (group) group.style.display = e.target.checked ? 'block' : 'none';
+  const checkSab = document.getElementById('emp-check-trabalha-sabado') || document.getElementById('emp-check-aprendiz-sabado');
+  if (e.target.checked && checkSab) {
+    checkSab.checked = false;
+  }
 });
 
 // Alterar visibilidade do campo de demissão ao marcar/desmarcar o checkbox
@@ -4515,9 +4559,10 @@ document.getElementById('btn-save-employee')?.addEventListener('click', () => {
     ? document.getElementById('emp-check-aprendiz').checked
     : false;
 
-  const trabalhaSabado = aprendiz
-    ? (document.getElementById('emp-check-aprendiz-sabado')?.checked || false)
-    : true;
+  const checkSab = document.getElementById('emp-check-trabalha-sabado') || document.getElementById('emp-check-aprendiz-sabado');
+  const trabalhaSabado = checkSab
+    ? checkSab.checked
+    : (aprendiz ? false : true);
 
   const isDemitido = document.getElementById('emp-check-demitido')
     ? document.getElementById('emp-check-demitido').checked

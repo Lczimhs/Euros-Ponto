@@ -893,14 +893,16 @@ thead .col-dsr {
   border: 1px solid var(--color-feriado-border);
 }
 
-/* Status: DOMINGO */
+/* Status: DOMINGO & SÁBADO (Descanso obrigatório / folga travada) */
 .status-domingo {
-  background: var(--color-sunday-bg);
-  color: var(--color-sunday-text);
+  background: var(--color-sunday-bg) !important;
+  color: #B4ACCF !important;
   cursor: not-allowed !important;
-  font-size: 9.5px;
-  letter-spacing: 0.5px;
-  border: 1px solid transparent;
+  font-size: 9px !important;
+  letter-spacing: 0.3px;
+  border: 1px solid rgba(85, 79, 104, 0.45) !important;
+  font-weight: 600;
+  opacity: 0.95;
 }
 
 .status-domingo:hover {
