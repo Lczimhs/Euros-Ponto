@@ -70,40 +70,40 @@
 }
 
 /* ==========================================================================
-   MODO CLARO (LIGHT MODE) - Paleta Azul Executivo Límpida e Moderna
+   MODO CLARO (LIGHT MODE) - Paleta Slate & Deep Midnight Navy (#8E8FA1, #595A61, #151733, #090B33)
    ========================================================================== */
 [data-theme="light"] {
-  --color-bg-base: #F0F6FF;
-  --color-bg-dark: #DBEAFE;
+  --color-bg-base: #F4F4F7;
+  --color-bg-dark: #E3E4EB;
   --color-bg-card: #FFFFFF;
-  --color-bg-surface: #EFF6FF;
-  --color-bg-panel: #EFF6FF;
-  --color-border: #BFDBFE;
-  --color-border-bright: #3B82F6;
-  --color-primary: #2563EB;
-  --color-primary-hover: #1D4ED8;
-  --color-primary-light: #60A5FA;
+  --color-bg-surface: #EDEDF2;
+  --color-bg-panel: #E3E4EB;
+  --color-border: #C8C9D3;
+  --color-border-bright: #8E8FA1;
+  --color-primary: #151733;
+  --color-primary-hover: #090B33;
+  --color-primary-light: #595A61;
 
-  --color-cyan: #0284C7;
-  --color-cyan-glow: rgba(37, 99, 235, 0.25);
-  --color-blue-bright: #2563EB;
-  --color-blue-soft: #1E40AF;
+  --color-cyan: #3B82F6;
+  --color-cyan-glow: rgba(21, 23, 51, 0.20);
+  --color-blue-bright: #151733;
+  --color-blue-soft: #595A61;
 
-  --color-text-main: #0F172A;
-  --color-text-sub: #1E3A8A;
-  --color-text-muted: #475569;
+  --color-text-main: #090B33;
+  --color-text-sub: #595A61;
+  --color-text-muted: #8E8FA1;
 
-  --color-sunday-bg: #E0EEFF;
-  --color-sunday-text: #1E40AF;
+  --color-sunday-bg: #E8E9F0;
+  --color-sunday-text: #595A61;
 
-  --color-ok-bg: rgba(37, 99, 235, 0.10);
-  --color-ok-border: #3B82F6;
-  --color-ok-text: #1D4ED8;
+  --color-ok-bg: rgba(21, 23, 51, 0.08);
+  --color-ok-border: #8E8FA1;
+  --color-ok-text: #151733;
 
   /* Falta Integral e Meio Período (FM / FT) */
   --color-falta-bg: #FEE2E2;
   --color-falta-border: #EF4444;
-  --color-falta-text: #B91C1C;
+  --color-falta-text: #991B1B;
 
   --color-half-bg: #FFE4E6;
   --color-half-border: #F43F5E;
@@ -112,15 +112,15 @@
   /* Atrasos e Pendências de Batidas (EM, SM, ET, ST) */
   --color-atraso-bg: #FEF3C7;
   --color-atraso-border: #F59E0B;
-  --color-atraso-text: #B45309;
+  --color-atraso-text: #92400E;
 
-  --color-feriado-bg: #DBEAFE;
-  --color-feriado-border: #3B82F6;
-  --color-feriado-text: #1D4ED8;
+  --color-feriado-bg: #E3E4EB;
+  --color-feriado-border: #8E8FA1;
+  --color-feriado-text: #151733;
 
-  --shadow-glow: 0 2px 10px rgba(37, 99, 235, 0.20);
-  --shadow-purple: 0 4px 15px rgba(37, 99, 235, 0.15);
-  --shadow-card: 0 2px 8px rgba(15, 23, 42, 0.06);
+  --shadow-glow: 0 2px 10px rgba(21, 23, 51, 0.15);
+  --shadow-purple: 0 4px 15px rgba(21, 23, 51, 0.12);
+  --shadow-card: 0 2px 8px rgba(9, 11, 51, 0.06);
 }
 
 * {
@@ -2386,106 +2386,106 @@ thead th.col-dsr {
 }
 
 /* ==========================================================================
-   ESTILOS ESPECÍFICOS DO MODO CLARO (PALETA AZUL EXECUTIVO MODERNO & LÍMPIDO)
+   ESTILOS ESPECÍFICOS DO MODO CLARO (PALETA SLATE & MIDNIGHT NAVY: #8E8FA1, #595A61, #151733, #090B33)
    ========================================================================== */
 [data-theme="light"] ::-webkit-scrollbar-track {
-  background: #EFF6FF;
+  background: #EDEDF2;
 }
 
 [data-theme="light"] ::-webkit-scrollbar-thumb {
-  background: #BFDBFE;
+  background: #C8C9D3;
   border-radius: 4px;
 }
 
 [data-theme="light"] ::-webkit-scrollbar-thumb:hover {
-  background: #2563EB;
+  background: #8E8FA1;
 }
 
 /* Header & Top Navigation */
 [data-theme="light"] .app-header {
-  background: linear-gradient(180deg, #FFFFFF 0%, #EFF6FF 100%);
-  border-bottom: 1px solid #BFDBFE;
-  box-shadow: 0 2px 10px rgba(37, 99, 235, 0.05);
+  background: linear-gradient(180deg, #FFFFFF 0%, #EDEDF2 100%);
+  border-bottom: 1px solid #C8C9D3;
+  box-shadow: 0 2px 10px rgba(9, 11, 51, 0.05);
 }
 
 [data-theme="light"] .brand-title-group h1 {
-  color: #0F172A;
+  color: #090B33;
 }
 
 [data-theme="light"] .brand-title-group h1 span {
-  color: #2563EB;
+  color: #151733;
   text-shadow: none;
 }
 
 [data-theme="light"] .brand-title-group h1 span[style*="background"] {
-  background: #EFF6FF !important;
-  border-color: #BFDBFE !important;
-  color: #0F172A !important;
+  background: #EDEDF2 !important;
+  border-color: #C8C9D3 !important;
+  color: #090B33 !important;
 }
 
 [data-theme="light"] .brand-subtitle {
-  color: #1E3A8A;
+  color: #595A61;
 }
 
 [data-theme="light"] .brand-logo-icon {
-  background: linear-gradient(135deg, #3B82F6 0%, #2563EB 100%);
+  background: linear-gradient(135deg, #151733 0%, #090B33 100%);
   color: #FFFFFF;
-  border-color: #2563EB;
-  box-shadow: 0 2px 8px rgba(37, 99, 235, 0.35);
+  border-color: #151733;
+  box-shadow: 0 2px 8px rgba(21, 23, 51, 0.35);
 }
 
 /* Nav Tabs */
 [data-theme="light"] .header-nav-views {
-  background: #EFF6FF;
-  border-color: #BFDBFE;
+  background: #EDEDF2;
+  border-color: #C8C9D3;
 }
 
 [data-theme="light"] .nav-tab-btn {
-  color: #1E3A8A;
+  color: #595A61;
 }
 
 [data-theme="light"] .nav-tab-btn:hover {
-  background: #DBEAFE;
-  color: #1D4ED8;
+  background: #E3E4EB;
+  color: #151733;
 }
 
 [data-theme="light"] .nav-tab-btn.active {
-  background: #2563EB;
+  background: #151733;
   color: #FFFFFF;
-  border-color: #2563EB;
-  box-shadow: 0 2px 8px rgba(37, 99, 235, 0.35);
+  border-color: #151733;
+  box-shadow: 0 2px 8px rgba(21, 23, 51, 0.35);
 }
 
 /* Branch Tabs */
 [data-theme="light"] .branch-tabs-container {
-  border-top-color: #BFDBFE;
+  border-top-color: #C8C9D3;
 }
 
 [data-theme="light"] .branch-tab-item {
   background: #FFFFFF;
-  border-color: #BFDBFE;
-  color: #0F172A;
+  border-color: #C8C9D3;
+  color: #090B33;
 }
 
 [data-theme="light"] .branch-tab-item:hover {
-  border-color: #3B82F6;
-  color: #2563EB;
+  border-color: #8E8FA1;
+  color: #151733;
 }
 
 [data-theme="light"] .branch-tab-item.active {
-  background: linear-gradient(135deg, #3B82F6 0%, #2563EB 100%);
+  background: linear-gradient(135deg, #151733 0%, #090B33 100%);
   color: #FFFFFF;
-  border-color: #2563EB;
-  box-shadow: 0 2px 8px rgba(37, 99, 235, 0.25);
+  border-color: #151733;
+  box-shadow: 0 2px 8px rgba(21, 23, 51, 0.25);
 }
 
 [data-theme="light"] .branch-tab-item .branch-badge {
-  background: rgba(15, 23, 42, 0.08);
-  color: #0F172A;
+  background: rgba(9, 11, 51, 0.08);
+  color: #090B33;
 }
 
 [data-theme="light"] .branch-tab-item.active .branch-badge {
-  background: rgba(255, 255, 255, 0.3);
+  background: rgba(255, 255, 255, 0.25);
   color: #FFFFFF;
 }
 
@@ -2493,95 +2493,95 @@ thead th.col-dsr {
 [data-theme="light"] .toolbar-container,
 [data-theme="light"] .filters-bar,
 [data-theme="light"] .calendar-filters-bar {
-  background: #EFF6FF;
-  border-color: #BFDBFE;
+  background: #EDEDF2;
+  border-color: #C8C9D3;
 }
 
 [data-theme="light"] .btn-secondary {
   background: #FFFFFF;
-  color: #0F172A;
-  border-color: #BFDBFE;
+  color: #090B33;
+  border-color: #C8C9D3;
 }
 
 [data-theme="light"] .btn-secondary:hover {
-  background: #EFF6FF;
-  color: #2563EB;
-  border-color: #3B82F6;
+  background: #E3E4EB;
+  color: #151733;
+  border-color: #8E8FA1;
 }
 
 [data-theme="light"] .btn-cyan {
-  background: #EFF6FF;
-  color: #0284C7;
-  border-color: #38BDF8;
+  background: #E3E4EB;
+  color: #151733;
+  border-color: #8E8FA1;
 }
 
 [data-theme="light"] .btn-cyan:hover {
-  background: #DBEAFE;
-  border-color: #0284C7;
+  background: #D5D6DF;
+  border-color: #595A61;
 }
 
 [data-theme="light"] .cloud-badge {
-  background: #EFF6FF;
-  color: #0284C7;
-  border-color: #38BDF8;
-  box-shadow: 0 0 8px rgba(2, 132, 199, 0.15);
+  background: #E3E4EB;
+  color: #151733;
+  border-color: #8E8FA1;
+  box-shadow: 0 0 8px rgba(21, 23, 51, 0.12);
 }
 
 [data-theme="light"] .cloud-dot {
-  background: #0284C7;
-  box-shadow: 0 0 6px rgba(2, 132, 199, 0.5);
+  background: #151733;
+  box-shadow: 0 0 6px rgba(21, 23, 51, 0.4);
 }
 
 [data-theme="light"] .month-nav-btn {
   background: #FFFFFF;
-  border-color: #BFDBFE;
-  color: #0F172A;
+  border-color: #C8C9D3;
+  color: #090B33;
 }
 
 [data-theme="light"] .month-nav-btn:hover {
-  border-color: #3B82F6;
-  color: #2563EB;
-  background: #EFF6FF;
+  border-color: #8E8FA1;
+  color: #151733;
+  background: #E3E4EB;
 }
 
 [data-theme="light"] .current-month-display {
-  color: #0F172A;
+  color: #090B33;
 }
 
 /* ==========================================================================
-   VIEW 0: CALENDÁRIO DE AVISOS E PRAZOS (DESIGN EXECUTIVO AZUL LIMPO)
+   VIEW 0: CALENDÁRIO DE AVISOS E PRAZOS (DESIGN EXECUTIVO SLATE & NAVY)
    ========================================================================== */
-/* Hero Section (Painel Principal de Prazos Legais - Imagem 2 do usuário) */
+/* Hero Section (Painel Principal de Prazos Legais) */
 [data-theme="light"] .cal-hero-section {
-  background: linear-gradient(135deg, #FFFFFF 0%, #EFF6FF 60%, #DBEAFE 100%);
-  border: 1px solid #BFDBFE;
-  box-shadow: 0 4px 16px rgba(37, 99, 235, 0.08);
+  background: linear-gradient(135deg, #FFFFFF 0%, #F4F4F7 60%, #E3E4EB 100%);
+  border: 1px solid #C8C9D3;
+  box-shadow: 0 4px 16px rgba(9, 11, 51, 0.06);
 }
 
 [data-theme="light"] .cal-badge-pill {
-  background: #DBEAFE;
-  color: #1D4ED8;
-  border: 1px solid #93C5FD;
+  background: #E3E4EB;
+  color: #151733;
+  border: 1px solid #8E8FA1;
   font-weight: 700;
   letter-spacing: 0.5px;
 }
 
 [data-theme="light"] .cal-title-group h2,
 [data-theme="light"] .cal-hero-left h1 {
-  color: #0F172A;
+  color: #090B33;
   font-weight: 800;
 }
 
 [data-theme="light"] .cal-branch-indicator,
 [data-theme="light"] .cal-hero-left p {
-  color: #334155;
+  color: #595A61;
 }
 
 [data-theme="light"] .cal-branch-indicator strong {
-  color: #1D4ED8;
+  color: #151733;
 }
 
-/* Manter o Botão "+ Novo Aviso / Prazo Legal" vibrante e atraente */
+/* Manter o Botão "+ Novo Aviso / Prazo Legal" com destaque visual */
 [data-theme="light"] #btn-novo-aviso,
 [data-theme="light"] .btn-primary {
   background: linear-gradient(135deg, #3B82F6 0%, #2563EB 100%) !important;
@@ -2597,18 +2597,18 @@ thead th.col-dsr {
   box-shadow: 0 4px 14px rgba(37, 99, 235, 0.45) !important;
 }
 
-/* Card Principal do Calendário (Imagem 1 do usuário) */
+/* Card Principal do Calendário */
 [data-theme="light"] .cal-reference-card {
   background: #FFFFFF;
-  border: 1px solid #BFDBFE;
-  box-shadow: 0 8px 24px rgba(37, 99, 235, 0.08);
+  border: 1px solid #C8C9D3;
+  box-shadow: 0 8px 24px rgba(9, 11, 51, 0.06);
 }
 
-/* Topo do Calendário (Mês/Ano e Navegação) - Azul Real Elegante */
+/* Topo do Calendário (Mês/Ano e Navegação) - Deep Midnight Navy */
 [data-theme="light"] .cal-ref-header {
-  background: linear-gradient(135deg, #2563EB 0%, #1D4ED8 100%);
-  border-bottom: 1px solid #1E40AF;
-  box-shadow: 0 2px 8px rgba(37, 99, 235, 0.15);
+  background: linear-gradient(135deg, #151733 0%, #090B33 100%);
+  border-bottom: 1px solid #090B33;
+  box-shadow: 0 2px 8px rgba(9, 11, 51, 0.2);
 }
 
 [data-theme="light"] .cal-ref-center-title {
@@ -2616,12 +2616,12 @@ thead th.col-dsr {
   font-weight: 700;
   font-size: 19px;
   letter-spacing: 0.5px;
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.15);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.25);
 }
 
 [data-theme="light"] .cal-ref-arrow-group {
-  background: rgba(255, 255, 255, 0.18);
-  border: 1px solid rgba(255, 255, 255, 0.32);
+  background: rgba(255, 255, 255, 0.14);
+  border: 1px solid rgba(255, 255, 255, 0.28);
   border-radius: 6px;
 }
 
@@ -2630,84 +2630,84 @@ thead th.col-dsr {
 }
 
 [data-theme="light"] .cal-ref-arrow-btn:hover {
-  background: rgba(255, 255, 255, 0.28);
+  background: rgba(255, 255, 255, 0.25);
   color: #FFFFFF;
 }
 
 [data-theme="light"] .cal-ref-arrow-btn:first-child {
-  border-right: 1px solid rgba(255, 255, 255, 0.3);
+  border-right: 1px solid rgba(255, 255, 255, 0.25);
 }
 
 [data-theme="light"] .cal-ref-today-btn {
-  background: rgba(255, 255, 255, 0.18);
+  background: rgba(255, 255, 255, 0.16);
   color: #FFFFFF;
-  border: 1px solid rgba(255, 255, 255, 0.35);
+  border: 1px solid rgba(255, 255, 255, 0.3);
   font-weight: 700;
 }
 
 [data-theme="light"] .cal-ref-today-btn:hover {
   background: #FFFFFF;
-  color: #1D4ED8;
+  color: #090B33;
   border-color: #FFFFFF;
 }
 
 [data-theme="light"] .cal-ref-views-toggle {
-  background: rgba(15, 23, 42, 0.22);
-  border: 1px solid rgba(255, 255, 255, 0.25);
+  background: rgba(0, 0, 0, 0.25);
+  border: 1px solid rgba(255, 255, 255, 0.22);
   border-radius: 6px;
 }
 
 [data-theme="light"] .cal-view-btn {
-  color: rgba(255, 255, 255, 0.9);
+  color: rgba(255, 255, 255, 0.88);
 }
 
 [data-theme="light"] .cal-view-btn:hover {
   color: #FFFFFF;
-  background: rgba(255, 255, 255, 0.18);
+  background: rgba(255, 255, 255, 0.16);
 }
 
 [data-theme="light"] .cal-view-btn.active {
   background: #FFFFFF;
-  color: #1D4ED8;
+  color: #090B33;
   font-weight: 700;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
 }
 
 /* Barra Secundária de Filtros do Calendário */
 [data-theme="light"] .cal-ref-subbar {
-  background: #EFF6FF;
-  border-bottom: 1px solid #BFDBFE;
+  background: #EDEDF2;
+  border-bottom: 1px solid #C8C9D3;
 }
 
 [data-theme="light"] .cal-ref-subbar label {
-  color: #1E3A8A;
+  color: #151733;
   font-weight: 600;
 }
 
 [data-theme="light"] .cal-ref-subbar .sort-select {
   background: #FFFFFF;
-  color: #0F172A;
-  border: 1px solid #BFDBFE;
+  color: #090B33;
+  border: 1px solid #C8C9D3;
 }
 
 [data-theme="light"] .cal-ref-subbar .sort-select:focus {
-  border-color: #2563EB;
-  box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.15);
+  border-color: #151733;
+  box-shadow: 0 0 0 2px rgba(21, 23, 51, 0.15);
 }
 
 [data-theme="light"] .cal-legend-quick {
-  color: #334155;
+  color: #595A61;
   font-weight: 500;
 }
 
 /* Linha com os Dias da Semana (seg, ter, qua, qui, sex, sáb, dom) */
 [data-theme="light"] .cal-weekdays-row {
-  background: #DBEAFE;
-  border-bottom: 1px solid #93C5FD;
+  background: #E3E4EB;
+  border-bottom: 1px solid #C8C9D3;
 }
 
 [data-theme="light"] .cal-weekday-col {
-  color: #1E40AF;
+  color: #151733;
   font-weight: 700;
   font-size: 12px;
   text-transform: uppercase;
@@ -2715,58 +2715,58 @@ thead th.col-dsr {
 }
 
 [data-theme="light"] .cal-weekday-col.weekend {
-  color: #2563EB;
-  background: rgba(191, 219, 254, 0.45);
+  color: #595A61;
+  background: rgba(142, 143, 161, 0.25);
 }
 
 /* Grade de Dias do Calendário */
 [data-theme="light"] .cal-days-grid {
-  background: #BFDBFE;
+  background: #C8C9D3;
 }
 
 [data-theme="light"] .cal-day-cell {
   background: #FFFFFF;
-  border-color: #BFDBFE;
+  border-color: #C8C9D3;
 }
 
 [data-theme="light"] .cal-day-cell:hover {
-  background: #F0F6FF;
-  box-shadow: inset 0 0 0 1.5px #3B82F6;
+  background: #F4F4F7;
+  box-shadow: inset 0 0 0 1.5px #8E8FA1;
 }
 
 [data-theme="light"] .cal-day-number {
-  color: #1E3A8A;
+  color: #090B33;
   font-weight: 700;
 }
 
 [data-theme="light"] .cal-day-cell.other-month {
-  background: #F8FAFC;
+  background: #FAFAFB;
   opacity: 0.55;
 }
 
 [data-theme="light"] .cal-day-cell.other-month .cal-day-number {
-  color: #94A3B8;
+  color: #8E8FA1;
 }
 
 /* Dia de Hoje Destaque */
 [data-theme="light"] .cal-day-cell.today {
-  background: #EFF6FF;
-  box-shadow: inset 0 0 0 2px #2563EB !important;
+  background: #EDEDF2;
+  box-shadow: inset 0 0 0 2px #151733 !important;
 }
 
 [data-theme="light"] .cal-day-cell.today .cal-day-number {
-  color: #1D4ED8;
+  color: #151733;
   font-weight: 800;
 }
 
 [data-theme="light"] .cal-day-add-btn {
-  background: #DBEAFE;
-  color: #1D4ED8;
-  border: 1px solid #BFDBFE;
+  background: #E3E4EB;
+  color: #151733;
+  border: 1px solid #C8C9D3;
 }
 
 [data-theme="light"] .cal-day-add-btn:hover {
-  background: #2563EB;
+  background: #151733;
   color: #FFFFFF;
 }
 
@@ -2800,9 +2800,9 @@ thead th.col-dsr {
 }
 
 [data-theme="light"] .notice-pill-ponto {
-  background: #DBEAFE !important;
-  color: #1E40AF !important;
-  border: 1px solid #93C5FD !important;
+  background: #E3E4EB !important;
+  color: #151733 !important;
+  border: 1px solid #8E8FA1 !important;
   font-weight: 600;
 }
 
@@ -2815,180 +2815,180 @@ thead th.col-dsr {
 
 [data-theme="light"] .notice-pill-outros {
   background: #F1F5F9 !important;
-  color: #334155 !important;
-  border: 1px solid #CBD5E1 !important;
+  color: #595A61 !important;
+  border: 1px solid #C8C9D3 !important;
   font-weight: 600;
 }
 
 [data-theme="light"] .cal-notice-pill.is-done {
   background: #F1F5F9 !important;
-  color: #64748B !important;
-  border-color: #CBD5E1 !important;
+  color: #8E8FA1 !important;
+  border-color: #C8C9D3 !important;
   text-decoration: line-through;
   opacity: 0.85;
 }
 
 [data-theme="light"] .cal-notice-more-badge {
-  background: #EFF6FF !important;
-  color: #2563EB !important;
-  border: 1px solid #93C5FD !important;
+  background: #EDEDF2 !important;
+  color: #151733 !important;
+  border: 1px solid #8E8FA1 !important;
   font-weight: 700;
 }
 
 /* Modal de Avisos do Dia */
 [data-theme="light"] .day-summary-bar {
-  background: #EFF6FF;
-  border: 1px solid #BFDBFE;
+  background: #EDEDF2;
+  border: 1px solid #C8C9D3;
 }
 
 /* Matriz de Ponto (Tabela, Cabeçalhos e Colunas Sticky) */
 [data-theme="light"] .matrix-container {
-  background: #F0F6FF;
+  background: #F4F4F7;
 }
 
 [data-theme="light"] .matrix-table thead tr th {
-  background: #1D4ED8 !important;
+  background: #151733 !important;
   color: #FFFFFF !important;
-  border-color: #93C5FD !important;
+  border-color: #595A61 !important;
 }
 
 [data-theme="light"] .matrix-table thead tr:first-child th {
-  background: #1D4ED8 !important;
+  background: #151733 !important;
   color: #FFFFFF !important;
 }
 
 [data-theme="light"] .matrix-table thead tr:last-child th {
-  background: #DBEAFE !important;
-  color: #1E3A8A !important;
-  border-bottom: 2px solid #2563EB !important;
+  background: #E3E4EB !important;
+  color: #090B33 !important;
+  border-bottom: 2px solid #151733 !important;
 }
 
 [data-theme="light"] .col-dept,
 [data-theme="light"] .col-badge,
 [data-theme="light"] .col-name {
   background: #FFFFFF !important;
-  color: #0F172A !important;
-  border-right: 1px solid #BFDBFE !important;
-  box-shadow: 2px 0 6px rgba(15, 23, 42, 0.05);
+  color: #090B33 !important;
+  border-right: 1px solid #C8C9D3 !important;
+  box-shadow: 2px 0 6px rgba(9, 11, 51, 0.05);
 }
 
 [data-theme="light"] .col-name {
-  border-right: 2px solid #2563EB !important;
-  color: #0F172A !important;
+  border-right: 2px solid #151733 !important;
+  color: #090B33 !important;
 }
 
 [data-theme="light"] .col-dsr {
-  background: #EFF6FF !important;
-  color: #0F172A !important;
-  border-left: 2px solid #2563EB !important;
-  box-shadow: -4px 0 10px rgba(15, 23, 42, 0.04);
+  background: #EDEDF2 !important;
+  color: #090B33 !important;
+  border-left: 2px solid #151733 !important;
+  box-shadow: -4px 0 10px rgba(9, 11, 51, 0.04);
 }
 
 [data-theme="light"] thead th.col-dept,
 [data-theme="light"] thead th.col-badge,
 [data-theme="light"] thead th.col-name,
 [data-theme="light"] thead th.col-dsr {
-  background: #1D4ED8 !important;
+  background: #151733 !important;
   color: #FFFFFF !important;
-  border-bottom: 2px solid #2563EB !important;
+  border-bottom: 2px solid #595A61 !important;
 }
 
 [data-theme="light"] .matrix-table tbody tr:nth-child(even) td.col-dept,
 [data-theme="light"] .matrix-table tbody tr:nth-child(even) td.col-badge,
 [data-theme="light"] .matrix-table tbody tr:nth-child(even) td.col-name {
-  background: #F8FAFC !important;
+  background: #F8F8FA !important;
 }
 
 [data-theme="light"] .matrix-table tbody tr:hover td.col-dept,
 [data-theme="light"] .matrix-table tbody tr:hover td.col-badge,
 [data-theme="light"] .matrix-table tbody tr:hover td.col-name {
-  background: #DBEAFE !important;
+  background: #E3E4EB !important;
 }
 
 [data-theme="light"] .matrix-table tbody tr:nth-child(even) {
-  background: rgba(219, 234, 254, 0.35);
+  background: rgba(227, 228, 235, 0.35);
 }
 
 [data-theme="light"] .matrix-table tbody tr:hover {
-  background: rgba(191, 219, 254, 0.45);
+  background: rgba(142, 143, 161, 0.20);
 }
 
 [data-theme="light"] .th-date-clickable.th-sunday,
 [data-theme="light"] .matrix-table thead tr th.th-sunday {
-  background: #1E3A8A !important;
-  color: #DBEAFE !important;
+  background: #595A61 !important;
+  color: #E3E4EB !important;
 }
 
 [data-theme="light"] .th-date-clickable.th-feriado,
 [data-theme="light"] .matrix-table thead tr th.th-feriado {
-  background: #1D4ED8 !important;
-  color: #BFDBFE !important;
-  border-bottom-color: #2563EB !important;
+  background: #151733 !important;
+  color: #8E8FA1 !important;
+  border-bottom-color: #8E8FA1 !important;
 }
 
 /* Interatividade de seleção no Modo Claro */
 [data-theme="light"] .matrix-table tbody tr.selected-row {
-  background: rgba(59, 130, 246, 0.18) !important;
+  background: rgba(142, 143, 161, 0.25) !important;
 }
 
 [data-theme="light"] .matrix-table tbody tr.selected-row td {
-  border-top: 1px solid #3B82F6 !important;
-  border-bottom: 1px solid #3B82F6 !important;
+  border-top: 1px solid #8E8FA1 !important;
+  border-bottom: 1px solid #8E8FA1 !important;
 }
 
 [data-theme="light"] .matrix-table tbody tr.selected-row td.col-dept {
-  background: #DBEAFE !important;
-  border-left: 4px solid #2563EB !important;
-  color: #0F172A !important;
+  background: #E3E4EB !important;
+  border-left: 4px solid #151733 !important;
+  color: #090B33 !important;
 }
 
 [data-theme="light"] .matrix-table tbody tr.selected-row td.col-badge {
-  background: #DBEAFE !important;
-  color: #1D4ED8 !important;
+  background: #E3E4EB !important;
+  color: #151733 !important;
   font-weight: 800 !important;
 }
 
 [data-theme="light"] .matrix-table tbody tr.selected-row td.col-name {
-  background: #DBEAFE !important;
-  color: #0F172A !important;
+  background: #E3E4EB !important;
+  color: #090B33 !important;
   font-weight: 700 !important;
 }
 
 [data-theme="light"] .matrix-table tbody tr.selected-row td.col-name strong {
-  color: #1D4ED8 !important;
+  color: #151733 !important;
 }
 
 [data-theme="light"] .matrix-table tbody tr.selected-row td.col-dsr {
-  background: #DBEAFE !important;
-  color: #0F172A !important;
+  background: #E3E4EB !important;
+  color: #090B33 !important;
 }
 
 [data-theme="light"] .matrix-table thead th.selected-col {
-  background: #2563EB !important;
+  background: #151733 !important;
   color: #FFFFFF !important;
-  box-shadow: inset 0 -3px 0 #1D4ED8, 0 0 10px rgba(37, 99, 235, 0.4) !important;
+  box-shadow: inset 0 -3px 0 #8E8FA1, 0 0 10px rgba(21, 23, 51, 0.4) !important;
 }
 
 [data-theme="light"] .matrix-table tbody td.selected-col {
-  background: rgba(191, 219, 254, 0.3) !important;
+  background: rgba(142, 143, 161, 0.15) !important;
 }
 
 [data-theme="light"] .cell-ponto.cell-selected {
-  outline: 2px solid #2563EB !important;
+  outline: 2px solid #151733 !important;
   outline-offset: 1px;
-  box-shadow: 0 0 10px rgba(37, 99, 235, 0.5) !important;
+  box-shadow: 0 0 10px rgba(21, 23, 51, 0.4) !important;
 }
 
 /* Células de Status no Modo Claro */
 [data-theme="light"] .status-ok {
-  background: #EFF6FF !important;
-  color: #1D4ED8 !important;
-  border: 1px solid #3B82F6 !important;
+  background: #EDEDF2 !important;
+  color: #151733 !important;
+  border: 1px solid #8E8FA1 !important;
 }
 
 [data-theme="light"] .status-falta {
   background: #FEE2E2 !important;
-  color: #B91C1C !important;
+  color: #991B1B !important;
   border: 1px solid #EF4444 !important;
   box-shadow: inset 0 0 4px rgba(239, 68, 68, 0.2) !important;
 }
@@ -3002,45 +3002,45 @@ thead th.col-dsr {
 
 [data-theme="light"] .status-atraso {
   background: #FEF3C7 !important;
-  color: #B45309 !important;
+  color: #92400E !important;
   border: 1px solid #F59E0B !important;
   box-shadow: inset 0 0 4px rgba(245, 158, 11, 0.2) !important;
 }
 
 [data-theme="light"] .status-atestado {
-  background: #EFF6FF !important;
-  color: #1D4ED8 !important;
-  border: 1px solid #60A5FA !important;
+  background: #EDEDF2 !important;
+  color: #151733 !important;
+  border: 1px solid #8E8FA1 !important;
 }
 
 [data-theme="light"] .status-ferias {
   background: #F1F5F9 !important;
-  color: #475569 !important;
+  color: #595A61 !important;
   border: 1px solid #CBD5E1 !important;
 }
 
 [data-theme="light"] .status-domingo {
-  background: #EFF6FF !important;
-  color: #1E40AF !important;
-  border: 1px solid #BFDBFE !important;
+  background: #E8E9F0 !important;
+  color: #595A61 !important;
+  border: 1px solid #C8C9D3 !important;
 }
 
 [data-theme="light"] .status-feriado {
-  background: #DBEAFE !important;
-  color: #1D4ED8 !important;
-  border: 1px solid #3B82F6 !important;
+  background: #E3E4EB !important;
+  color: #151733 !important;
+  border: 1px solid #8E8FA1 !important;
 }
 
 /* Modais e Formulários */
 [data-theme="light"] .modal-card {
   background: #FFFFFF;
-  border: 1px solid #BFDBFE;
-  box-shadow: 0 10px 30px rgba(15, 23, 42, 0.15);
+  border: 1px solid #C8C9D3;
+  box-shadow: 0 10px 30px rgba(9, 11, 51, 0.15);
 }
 
 [data-theme="light"] .modal-header {
-  background: linear-gradient(135deg, #2563EB 0%, #1D4ED8 100%);
-  border-bottom: 1px solid #1E40AF;
+  background: linear-gradient(135deg, #151733 0%, #090B33 100%);
+  border-bottom: 1px solid #090B33;
 }
 
 [data-theme="light"] .modal-header h3 {
@@ -3048,12 +3048,12 @@ thead th.col-dsr {
 }
 
 [data-theme="light"] .modal-footer {
-  background: #EFF6FF;
-  border-top: 1px solid #BFDBFE;
+  background: #EDEDF2;
+  border-top: 1px solid #C8C9D3;
 }
 
 [data-theme="light"] .modal-close-btn {
-  color: #DBEAFE;
+  color: #C8C9D3;
 }
 
 [data-theme="light"] .modal-close-btn:hover {
@@ -3062,24 +3062,24 @@ thead th.col-dsr {
 
 [data-theme="light"] .form-control {
   background: #FFFFFF;
-  border: 1px solid #BFDBFE;
-  color: #0F172A;
+  border: 1px solid #C8C9D3;
+  color: #090B33;
 }
 
 [data-theme="light"] .form-control:focus {
-  border-color: #2563EB;
-  box-shadow: 0 0 6px rgba(37, 99, 235, 0.35);
+  border-color: #151733;
+  box-shadow: 0 0 6px rgba(21, 23, 51, 0.25);
 }
 
 [data-theme="light"] .punches-box {
-  background: #EFF6FF;
-  border: 1px solid #BFDBFE;
+  background: #EDEDF2;
+  border: 1px solid #C8C9D3;
 }
 
 /* Fechamento VA e KPIs */
 [data-theme="light"] .va-card-header {
-  background: linear-gradient(135deg, #2563EB 0%, #1D4ED8 100%);
-  border-bottom: 1px solid #1E40AF;
+  background: linear-gradient(135deg, #151733 0%, #090B33 100%);
+  border-bottom: 1px solid #090B33;
 }
 
 [data-theme="light"] .va-card-header h2 {
@@ -3087,53 +3087,53 @@ thead th.col-dsr {
 }
 
 [data-theme="light"] .va-card-header h2 span {
-  color: #93C5FD;
+  color: #8E8FA1;
 }
 
 [data-theme="light"] .styled-table th {
-  background: #EFF6FF;
-  color: #0F172A;
-  border-bottom: 1px solid #BFDBFE;
+  background: #EDEDF2;
+  color: #090B33;
+  border-bottom: 1px solid #C8C9D3;
 }
 
 [data-theme="light"] .styled-table td {
-  border-bottom: 1px solid #F1F5F9;
-  color: #0F172A;
+  border-bottom: 1px solid #EAEBEF;
+  color: #090B33;
 }
 
 [data-theme="light"] .styled-table tr:hover td {
-  background: #EFF6FF;
+  background: #EDEDF2;
 }
 
 [data-theme="light"] .kpi-card {
   background: #FFFFFF;
-  border-color: #BFDBFE;
-  box-shadow: 0 2px 8px rgba(37, 99, 235, 0.05);
+  border-color: #C8C9D3;
+  box-shadow: 0 2px 8px rgba(9, 11, 51, 0.05);
 }
 
 [data-theme="light"] .kpi-card::before {
-  background: linear-gradient(90deg, #2563EB 0%, #60A5FA 100%);
+  background: linear-gradient(90deg, #151733 0%, #8E8FA1 100%);
 }
 
 [data-theme="light"] .kpi-value.cyan {
-  color: #0284C7;
+  color: #151733;
   text-shadow: none;
 }
 
 [data-theme="light"] .kpi-value.purple {
-  color: #1E3A8A;
+  color: #090B33;
 }
 
 [data-theme="light"] .kpi-helper {
-  color: #475569;
+  color: #595A61;
 }
 
 [data-theme="light"] .val-liquido {
-  color: #2563EB !important;
+  color: #151733 !important;
 }
 
 [data-theme="light"] .val-desconto {
-  color: #1D4ED8 !important;
+  color: #595A61 !important;
 }
 
 /* Colaboradores e Outros Cards */
@@ -3143,16 +3143,16 @@ thead th.col-dsr {
 [data-theme="light"] .avisos-calendar-card,
 [data-theme="light"] .calendar-card {
   background: #FFFFFF;
-  border-color: #BFDBFE;
+  border-color: #C8C9D3;
 }
 
 [data-theme="light"] .legend-bar {
-  background: #EFF6FF;
-  border-color: #BFDBFE;
+  background: #EDEDF2;
+  border-color: #C8C9D3;
 }
 
 [data-theme="light"] .legend-item {
-  color: #0F172A;
+  color: #090B33;
 }
 
 /* Print View Styles */
