@@ -70,35 +70,35 @@
 }
 
 /* ==========================================================================
-   MODO CLARO (LIGHT MODE) - Derivado da mesma escala (50 - 950)
+   MODO CLARO (LIGHT MODE) - Paleta Azul Executivo Límpida e Moderna
    ========================================================================== */
 [data-theme="light"] {
-  --color-bg-base: #F2F3FD;
-  --color-bg-dark: #E0E2FA;
+  --color-bg-base: #F0F6FF;
+  --color-bg-dark: #DBEAFE;
   --color-bg-card: #FFFFFF;
-  --color-bg-surface: #E0E2FA;
-  --color-bg-panel: #E0E2FA;
-  --color-border: #BFC2F8;
-  --color-border-bright: #5F65F4;
-  --color-primary: #5F65F4;
-  --color-primary-hover: #2128E8;
-  --color-primary-light: #8E92F6;
+  --color-bg-surface: #EFF6FF;
+  --color-bg-panel: #EFF6FF;
+  --color-border: #BFDBFE;
+  --color-border-bright: #3B82F6;
+  --color-primary: #2563EB;
+  --color-primary-hover: #1D4ED8;
+  --color-primary-light: #60A5FA;
 
-  --color-cyan: #2128E8;
-  --color-cyan-glow: rgba(95, 101, 244, 0.25);
-  --color-blue-bright: #5F65F4;
-  --color-blue-soft: #131449;
+  --color-cyan: #0284C7;
+  --color-cyan-glow: rgba(37, 99, 235, 0.25);
+  --color-blue-bright: #2563EB;
+  --color-blue-soft: #1E40AF;
 
-  --color-text-main: #0C0C27;
-  --color-text-sub: #191A71;
-  --color-text-muted: #1B1E97;
+  --color-text-main: #0F172A;
+  --color-text-sub: #1E3A8A;
+  --color-text-muted: #475569;
 
-  --color-sunday-bg: #E4E7FA;
-  --color-sunday-text: #191A71;
+  --color-sunday-bg: #E0EEFF;
+  --color-sunday-text: #1E40AF;
 
-  --color-ok-bg: rgba(95, 101, 244, 0.12);
-  --color-ok-border: #5F65F4;
-  --color-ok-text: #2128E8;
+  --color-ok-bg: rgba(37, 99, 235, 0.10);
+  --color-ok-border: #3B82F6;
+  --color-ok-text: #1D4ED8;
 
   /* Falta Integral e Meio Período (FM / FT) */
   --color-falta-bg: #FEE2E2;
@@ -114,13 +114,13 @@
   --color-atraso-border: #F59E0B;
   --color-atraso-text: #B45309;
 
-  --color-feriado-bg: #BFC2F8;
-  --color-feriado-border: #5F65F4;
-  --color-feriado-text: #1B20C0;
+  --color-feriado-bg: #DBEAFE;
+  --color-feriado-border: #3B82F6;
+  --color-feriado-text: #1D4ED8;
 
-  --shadow-glow: 0 2px 10px rgba(95, 101, 244, 0.25);
-  --shadow-purple: 0 4px 15px rgba(95, 101, 244, 0.2);
-  --shadow-card: 0 2px 8px rgba(12, 12, 39, 0.08);
+  --shadow-glow: 0 2px 10px rgba(37, 99, 235, 0.20);
+  --shadow-purple: 0 4px 15px rgba(37, 99, 235, 0.15);
+  --shadow-card: 0 2px 8px rgba(15, 23, 42, 0.06);
 }
 
 * {
@@ -2386,101 +2386,102 @@ thead th.col-dsr {
 }
 
 /* ==========================================================================
-   ESTILOS ESPECÍFICOS DO MODO CLARO (ESCALA INDIGO 50 - 950)
+   ESTILOS ESPECÍFICOS DO MODO CLARO (PALETA AZUL EXECUTIVO MODERNO & LÍMPIDO)
    ========================================================================== */
 [data-theme="light"] ::-webkit-scrollbar-track {
-  background: #E0E2FA;
+  background: #EFF6FF;
 }
 
 [data-theme="light"] ::-webkit-scrollbar-thumb {
-  background: #BFC2F8;
+  background: #BFDBFE;
+  border-radius: 4px;
 }
 
 [data-theme="light"] ::-webkit-scrollbar-thumb:hover {
-  background: #5F65F4;
+  background: #2563EB;
 }
 
 /* Header & Top Navigation */
 [data-theme="light"] .app-header {
-  background: linear-gradient(180deg, #FFFFFF 0%, #E0E2FA 100%);
-  border-bottom: 1px solid #BFC2F8;
-  box-shadow: 0 2px 10px rgba(12, 12, 39, 0.06);
+  background: linear-gradient(180deg, #FFFFFF 0%, #EFF6FF 100%);
+  border-bottom: 1px solid #BFDBFE;
+  box-shadow: 0 2px 10px rgba(37, 99, 235, 0.05);
 }
 
 [data-theme="light"] .brand-title-group h1 {
-  color: #0C0C27;
+  color: #0F172A;
 }
 
 [data-theme="light"] .brand-title-group h1 span {
-  color: #5F65F4;
+  color: #2563EB;
   text-shadow: none;
 }
 
 [data-theme="light"] .brand-title-group h1 span[style*="background"] {
-  background: #E0E2FA !important;
-  border-color: #BFC2F8 !important;
-  color: #0C0C27 !important;
+  background: #EFF6FF !important;
+  border-color: #BFDBFE !important;
+  color: #0F172A !important;
 }
 
 [data-theme="light"] .brand-subtitle {
-  color: #191A71;
+  color: #1E3A8A;
 }
 
 [data-theme="light"] .brand-logo-icon {
-  background: linear-gradient(135deg, #5F65F4 0%, #2128E8 100%);
+  background: linear-gradient(135deg, #3B82F6 0%, #2563EB 100%);
   color: #FFFFFF;
-  border-color: #5F65F4;
-  box-shadow: 0 2px 8px rgba(95, 101, 244, 0.35);
+  border-color: #2563EB;
+  box-shadow: 0 2px 8px rgba(37, 99, 235, 0.35);
 }
 
 /* Nav Tabs */
 [data-theme="light"] .header-nav-views {
-  background: #E0E2FA;
-  border-color: #BFC2F8;
+  background: #EFF6FF;
+  border-color: #BFDBFE;
 }
 
 [data-theme="light"] .nav-tab-btn {
-  color: #0C0C27;
+  color: #1E3A8A;
 }
 
 [data-theme="light"] .nav-tab-btn:hover {
-  background: #BFC2F8;
-  color: #0C0C27;
+  background: #DBEAFE;
+  color: #1D4ED8;
 }
 
 [data-theme="light"] .nav-tab-btn.active {
-  background: #5F65F4;
+  background: #2563EB;
   color: #FFFFFF;
-  border-color: #5F65F4;
-  box-shadow: 0 2px 8px rgba(95, 101, 244, 0.4);
+  border-color: #2563EB;
+  box-shadow: 0 2px 8px rgba(37, 99, 235, 0.35);
 }
 
 /* Branch Tabs */
 [data-theme="light"] .branch-tabs-container {
-  border-top-color: #BFC2F8;
+  border-top-color: #BFDBFE;
 }
 
 [data-theme="light"] .branch-tab-item {
   background: #FFFFFF;
-  border-color: #BFC2F8;
-  color: #0C0C27;
+  border-color: #BFDBFE;
+  color: #0F172A;
 }
 
 [data-theme="light"] .branch-tab-item:hover {
-  border-color: #5F65F4;
-  color: #2128E8;
+  border-color: #3B82F6;
+  color: #2563EB;
 }
 
 [data-theme="light"] .branch-tab-item.active {
-  background: linear-gradient(135deg, #5F65F4 0%, #2128E8 100%);
+  background: linear-gradient(135deg, #3B82F6 0%, #2563EB 100%);
   color: #FFFFFF;
-  border-color: #5F65F4;
-  box-shadow: 0 2px 8px rgba(95, 101, 244, 0.3);
+  border-color: #2563EB;
+  box-shadow: 0 2px 8px rgba(37, 99, 235, 0.25);
 }
 
 [data-theme="light"] .branch-tab-item .branch-badge {
-  background: rgba(12, 12, 39, 0.08);
-  color: #0C0C27;
+  background: rgba(15, 23, 42, 0.08);
+  color: #0F172A;
 }
 
 [data-theme="light"] .branch-tab-item.active .branch-badge {
@@ -2492,204 +2493,497 @@ thead th.col-dsr {
 [data-theme="light"] .toolbar-container,
 [data-theme="light"] .filters-bar,
 [data-theme="light"] .calendar-filters-bar {
-  background: #E0E2FA;
-  border-color: #BFC2F8;
+  background: #EFF6FF;
+  border-color: #BFDBFE;
 }
 
 [data-theme="light"] .btn-secondary {
   background: #FFFFFF;
-  color: #0C0C27;
-  border-color: #BFC2F8;
+  color: #0F172A;
+  border-color: #BFDBFE;
 }
 
 [data-theme="light"] .btn-secondary:hover {
-  background: #F2F3FD;
-  color: #2128E8;
-  border-color: #5F65F4;
+  background: #EFF6FF;
+  color: #2563EB;
+  border-color: #3B82F6;
 }
 
 [data-theme="light"] .btn-cyan {
-  background: #E0E2FA;
-  color: #2128E8;
-  border-color: #5F65F4;
+  background: #EFF6FF;
+  color: #0284C7;
+  border-color: #38BDF8;
 }
 
 [data-theme="light"] .btn-cyan:hover {
-  background: #BFC2F8;
-  border-color: #2128E8;
+  background: #DBEAFE;
+  border-color: #0284C7;
 }
 
 [data-theme="light"] .cloud-badge {
-  background: #E0E2FA;
-  color: #2128E8;
-  border-color: #5F65F4;
-  box-shadow: 0 0 8px rgba(95, 101, 244, 0.2);
+  background: #EFF6FF;
+  color: #0284C7;
+  border-color: #38BDF8;
+  box-shadow: 0 0 8px rgba(2, 132, 199, 0.15);
 }
 
 [data-theme="light"] .cloud-dot {
-  background: #2128E8;
-  box-shadow: 0 0 6px rgba(33, 40, 232, 0.6);
+  background: #0284C7;
+  box-shadow: 0 0 6px rgba(2, 132, 199, 0.5);
 }
 
 [data-theme="light"] .month-nav-btn {
   background: #FFFFFF;
-  border-color: #BFC2F8;
-  color: #0C0C27;
+  border-color: #BFDBFE;
+  color: #0F172A;
 }
 
 [data-theme="light"] .month-nav-btn:hover {
-  border-color: #5F65F4;
-  color: #2128E8;
-  background: #E0E2FA;
+  border-color: #3B82F6;
+  color: #2563EB;
+  background: #EFF6FF;
 }
 
 [data-theme="light"] .current-month-display {
-  color: #0C0C27;
+  color: #0F172A;
+}
+
+/* ==========================================================================
+   VIEW 0: CALENDÁRIO DE AVISOS E PRAZOS (DESIGN EXECUTIVO AZUL LIMPO)
+   ========================================================================== */
+/* Hero Section (Painel Principal de Prazos Legais - Imagem 2 do usuário) */
+[data-theme="light"] .cal-hero-section {
+  background: linear-gradient(135deg, #FFFFFF 0%, #EFF6FF 60%, #DBEAFE 100%);
+  border: 1px solid #BFDBFE;
+  box-shadow: 0 4px 16px rgba(37, 99, 235, 0.08);
+}
+
+[data-theme="light"] .cal-badge-pill {
+  background: #DBEAFE;
+  color: #1D4ED8;
+  border: 1px solid #93C5FD;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}
+
+[data-theme="light"] .cal-title-group h2,
+[data-theme="light"] .cal-hero-left h1 {
+  color: #0F172A;
+  font-weight: 800;
+}
+
+[data-theme="light"] .cal-branch-indicator,
+[data-theme="light"] .cal-hero-left p {
+  color: #334155;
+}
+
+[data-theme="light"] .cal-branch-indicator strong {
+  color: #1D4ED8;
+}
+
+/* Manter o Botão "+ Novo Aviso / Prazo Legal" vibrante e atraente */
+[data-theme="light"] #btn-novo-aviso,
+[data-theme="light"] .btn-primary {
+  background: linear-gradient(135deg, #3B82F6 0%, #2563EB 100%) !important;
+  color: #FFFFFF !important;
+  border: 1px solid #2563EB !important;
+  box-shadow: 0 3px 10px rgba(37, 99, 235, 0.35) !important;
+  font-weight: 700;
+}
+
+[data-theme="light"] #btn-novo-aviso:hover,
+[data-theme="light"] .btn-primary:hover {
+  background: linear-gradient(135deg, #2563EB 0%, #1D4ED8 100%) !important;
+  box-shadow: 0 4px 14px rgba(37, 99, 235, 0.45) !important;
+}
+
+/* Card Principal do Calendário (Imagem 1 do usuário) */
+[data-theme="light"] .cal-reference-card {
+  background: #FFFFFF;
+  border: 1px solid #BFDBFE;
+  box-shadow: 0 8px 24px rgba(37, 99, 235, 0.08);
+}
+
+/* Topo do Calendário (Mês/Ano e Navegação) - Azul Real Elegante */
+[data-theme="light"] .cal-ref-header {
+  background: linear-gradient(135deg, #2563EB 0%, #1D4ED8 100%);
+  border-bottom: 1px solid #1E40AF;
+  box-shadow: 0 2px 8px rgba(37, 99, 235, 0.15);
+}
+
+[data-theme="light"] .cal-ref-center-title {
+  color: #FFFFFF !important;
+  font-weight: 700;
+  font-size: 19px;
+  letter-spacing: 0.5px;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.15);
+}
+
+[data-theme="light"] .cal-ref-arrow-group {
+  background: rgba(255, 255, 255, 0.18);
+  border: 1px solid rgba(255, 255, 255, 0.32);
+  border-radius: 6px;
+}
+
+[data-theme="light"] .cal-ref-arrow-btn {
+  color: #FFFFFF;
+}
+
+[data-theme="light"] .cal-ref-arrow-btn:hover {
+  background: rgba(255, 255, 255, 0.28);
+  color: #FFFFFF;
+}
+
+[data-theme="light"] .cal-ref-arrow-btn:first-child {
+  border-right: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+[data-theme="light"] .cal-ref-today-btn {
+  background: rgba(255, 255, 255, 0.18);
+  color: #FFFFFF;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  font-weight: 700;
+}
+
+[data-theme="light"] .cal-ref-today-btn:hover {
+  background: #FFFFFF;
+  color: #1D4ED8;
+  border-color: #FFFFFF;
+}
+
+[data-theme="light"] .cal-ref-views-toggle {
+  background: rgba(15, 23, 42, 0.22);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  border-radius: 6px;
+}
+
+[data-theme="light"] .cal-view-btn {
+  color: rgba(255, 255, 255, 0.9);
+}
+
+[data-theme="light"] .cal-view-btn:hover {
+  color: #FFFFFF;
+  background: rgba(255, 255, 255, 0.18);
+}
+
+[data-theme="light"] .cal-view-btn.active {
+  background: #FFFFFF;
+  color: #1D4ED8;
+  font-weight: 700;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+}
+
+/* Barra Secundária de Filtros do Calendário */
+[data-theme="light"] .cal-ref-subbar {
+  background: #EFF6FF;
+  border-bottom: 1px solid #BFDBFE;
+}
+
+[data-theme="light"] .cal-ref-subbar label {
+  color: #1E3A8A;
+  font-weight: 600;
+}
+
+[data-theme="light"] .cal-ref-subbar .sort-select {
+  background: #FFFFFF;
+  color: #0F172A;
+  border: 1px solid #BFDBFE;
+}
+
+[data-theme="light"] .cal-ref-subbar .sort-select:focus {
+  border-color: #2563EB;
+  box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.15);
+}
+
+[data-theme="light"] .cal-legend-quick {
+  color: #334155;
+  font-weight: 500;
+}
+
+/* Linha com os Dias da Semana (seg, ter, qua, qui, sex, sáb, dom) */
+[data-theme="light"] .cal-weekdays-row {
+  background: #DBEAFE;
+  border-bottom: 1px solid #93C5FD;
+}
+
+[data-theme="light"] .cal-weekday-col {
+  color: #1E40AF;
+  font-weight: 700;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+[data-theme="light"] .cal-weekday-col.weekend {
+  color: #2563EB;
+  background: rgba(191, 219, 254, 0.45);
+}
+
+/* Grade de Dias do Calendário */
+[data-theme="light"] .cal-days-grid {
+  background: #BFDBFE;
+}
+
+[data-theme="light"] .cal-day-cell {
+  background: #FFFFFF;
+  border-color: #BFDBFE;
+}
+
+[data-theme="light"] .cal-day-cell:hover {
+  background: #F0F6FF;
+  box-shadow: inset 0 0 0 1.5px #3B82F6;
+}
+
+[data-theme="light"] .cal-day-number {
+  color: #1E3A8A;
+  font-weight: 700;
+}
+
+[data-theme="light"] .cal-day-cell.other-month {
+  background: #F8FAFC;
+  opacity: 0.55;
+}
+
+[data-theme="light"] .cal-day-cell.other-month .cal-day-number {
+  color: #94A3B8;
+}
+
+/* Dia de Hoje Destaque */
+[data-theme="light"] .cal-day-cell.today {
+  background: #EFF6FF;
+  box-shadow: inset 0 0 0 2px #2563EB !important;
+}
+
+[data-theme="light"] .cal-day-cell.today .cal-day-number {
+  color: #1D4ED8;
+  font-weight: 800;
+}
+
+[data-theme="light"] .cal-day-add-btn {
+  background: #DBEAFE;
+  color: #1D4ED8;
+  border: 1px solid #BFDBFE;
+}
+
+[data-theme="light"] .cal-day-add-btn:hover {
+  background: #2563EB;
+  color: #FFFFFF;
+}
+
+/* Faixas e Pílulas de Avisos no Calendário (Cores Vivas e Legíveis) */
+[data-theme="light"] .notice-pill-rescisao {
+  background: #FEE2E2 !important;
+  color: #991B1B !important;
+  border: 1px solid #FCA5A5 !important;
+  font-weight: 600;
+}
+
+[data-theme="light"] .notice-pill-assinatura {
+  background: #FCE7F3 !important;
+  color: #9D174D !important;
+  border: 1px solid #F9A8D4 !important;
+  font-weight: 600;
+}
+
+[data-theme="light"] .notice-pill-salario {
+  background: #FEF3C7 !important;
+  color: #92400E !important;
+  border: 1px solid #FCD34D !important;
+  font-weight: 600;
+}
+
+[data-theme="light"] .notice-pill-ferias {
+  background: #F3E8FF !important;
+  color: #6B21A8 !important;
+  border: 1px solid #D8B4FE !important;
+  font-weight: 600;
+}
+
+[data-theme="light"] .notice-pill-ponto {
+  background: #DBEAFE !important;
+  color: #1E40AF !important;
+  border: 1px solid #93C5FD !important;
+  font-weight: 600;
+}
+
+[data-theme="light"] .notice-pill-fgts {
+  background: #DCFCE7 !important;
+  color: #166534 !important;
+  border: 1px solid #86EFAC !important;
+  font-weight: 600;
+}
+
+[data-theme="light"] .notice-pill-outros {
+  background: #F1F5F9 !important;
+  color: #334155 !important;
+  border: 1px solid #CBD5E1 !important;
+  font-weight: 600;
+}
+
+[data-theme="light"] .cal-notice-pill.is-done {
+  background: #F1F5F9 !important;
+  color: #64748B !important;
+  border-color: #CBD5E1 !important;
+  text-decoration: line-through;
+  opacity: 0.85;
+}
+
+[data-theme="light"] .cal-notice-more-badge {
+  background: #EFF6FF !important;
+  color: #2563EB !important;
+  border: 1px solid #93C5FD !important;
+  font-weight: 700;
+}
+
+/* Modal de Avisos do Dia */
+[data-theme="light"] .day-summary-bar {
+  background: #EFF6FF;
+  border: 1px solid #BFDBFE;
 }
 
 /* Matriz de Ponto (Tabela, Cabeçalhos e Colunas Sticky) */
 [data-theme="light"] .matrix-container {
-  background: #F2F3FD;
+  background: #F0F6FF;
 }
 
 [data-theme="light"] .matrix-table thead tr th {
-  background: #131449 !important;
+  background: #1D4ED8 !important;
   color: #FFFFFF !important;
-  border-color: #BFC2F8 !important;
+  border-color: #93C5FD !important;
 }
 
 [data-theme="light"] .matrix-table thead tr:first-child th {
-  background: #131449 !important;
+  background: #1D4ED8 !important;
   color: #FFFFFF !important;
 }
 
 [data-theme="light"] .matrix-table thead tr:last-child th {
-  background: #E0E2FA !important;
-  color: #0C0C27 !important;
-  border-bottom: 2px solid #5F65F4 !important;
+  background: #DBEAFE !important;
+  color: #1E3A8A !important;
+  border-bottom: 2px solid #2563EB !important;
 }
 
 [data-theme="light"] .col-dept,
 [data-theme="light"] .col-badge,
 [data-theme="light"] .col-name {
   background: #FFFFFF !important;
-  color: #0C0C27 !important;
-  border-right: 1px solid #BFC2F8 !important;
-  box-shadow: 2px 0 6px rgba(12, 12, 39, 0.05);
+  color: #0F172A !important;
+  border-right: 1px solid #BFDBFE !important;
+  box-shadow: 2px 0 6px rgba(15, 23, 42, 0.05);
 }
 
 [data-theme="light"] .col-name {
-  border-right: 2px solid #5F65F4 !important;
-  color: #0C0C27 !important;
+  border-right: 2px solid #2563EB !important;
+  color: #0F172A !important;
 }
 
 [data-theme="light"] .col-dsr {
-  background: #E0E2FA !important;
-  color: #0C0C27 !important;
-  border-left: 2px solid #5F65F4 !important;
-  box-shadow: -4px 0 10px rgba(12, 12, 39, 0.04);
+  background: #EFF6FF !important;
+  color: #0F172A !important;
+  border-left: 2px solid #2563EB !important;
+  box-shadow: -4px 0 10px rgba(15, 23, 42, 0.04);
 }
 
 [data-theme="light"] thead th.col-dept,
 [data-theme="light"] thead th.col-badge,
 [data-theme="light"] thead th.col-name,
 [data-theme="light"] thead th.col-dsr {
-  background: #131449 !important;
+  background: #1D4ED8 !important;
   color: #FFFFFF !important;
-  border-bottom: 2px solid #5F65F4 !important;
+  border-bottom: 2px solid #2563EB !important;
 }
 
 [data-theme="light"] .matrix-table tbody tr:nth-child(even) td.col-dept,
 [data-theme="light"] .matrix-table tbody tr:nth-child(even) td.col-badge,
 [data-theme="light"] .matrix-table tbody tr:nth-child(even) td.col-name {
-  background: #F8F9FE !important;
+  background: #F8FAFC !important;
 }
 
 [data-theme="light"] .matrix-table tbody tr:hover td.col-dept,
 [data-theme="light"] .matrix-table tbody tr:hover td.col-badge,
 [data-theme="light"] .matrix-table tbody tr:hover td.col-name {
-  background: #E0E2FA !important;
+  background: #DBEAFE !important;
 }
 
 [data-theme="light"] .matrix-table tbody tr:nth-child(even) {
-  background: rgba(224, 226, 250, 0.40);
+  background: rgba(219, 234, 254, 0.35);
 }
 
 [data-theme="light"] .matrix-table tbody tr:hover {
-  background: rgba(191, 194, 248, 0.35);
+  background: rgba(191, 219, 254, 0.45);
 }
 
 [data-theme="light"] .th-date-clickable.th-sunday,
 [data-theme="light"] .matrix-table thead tr th.th-sunday {
-  background: #191A71 !important;
-  color: #E0E2FA !important;
+  background: #1E3A8A !important;
+  color: #DBEAFE !important;
 }
 
 [data-theme="light"] .th-date-clickable.th-feriado,
 [data-theme="light"] .matrix-table thead tr th.th-feriado {
-  background: #1B1E97 !important;
-  color: #BFC2F8 !important;
-  border-bottom-color: #5F65F4 !important;
+  background: #1D4ED8 !important;
+  color: #BFDBFE !important;
+  border-bottom-color: #2563EB !important;
 }
 
 /* Interatividade de seleção no Modo Claro */
 [data-theme="light"] .matrix-table tbody tr.selected-row {
-  background: rgba(142, 146, 246, 0.35) !important;
+  background: rgba(59, 130, 246, 0.18) !important;
 }
 
 [data-theme="light"] .matrix-table tbody tr.selected-row td {
-  border-top: 1px solid #5F65F4 !important;
-  border-bottom: 1px solid #5F65F4 !important;
+  border-top: 1px solid #3B82F6 !important;
+  border-bottom: 1px solid #3B82F6 !important;
 }
 
 [data-theme="light"] .matrix-table tbody tr.selected-row td.col-dept {
-  background: #BFC2F8 !important;
-  border-left: 4px solid #5F65F4 !important;
-  color: #0C0C27 !important;
+  background: #DBEAFE !important;
+  border-left: 4px solid #2563EB !important;
+  color: #0F172A !important;
 }
 
 [data-theme="light"] .matrix-table tbody tr.selected-row td.col-badge {
-  background: #BFC2F8 !important;
-  color: #2128E8 !important;
+  background: #DBEAFE !important;
+  color: #1D4ED8 !important;
   font-weight: 800 !important;
 }
 
 [data-theme="light"] .matrix-table tbody tr.selected-row td.col-name {
-  background: #BFC2F8 !important;
-  color: #0C0C27 !important;
+  background: #DBEAFE !important;
+  color: #0F172A !important;
   font-weight: 700 !important;
 }
 
 [data-theme="light"] .matrix-table tbody tr.selected-row td.col-name strong {
-  color: #2128E8 !important;
+  color: #1D4ED8 !important;
 }
 
 [data-theme="light"] .matrix-table tbody tr.selected-row td.col-dsr {
-  background: #BFC2F8 !important;
-  color: #0C0C27 !important;
+  background: #DBEAFE !important;
+  color: #0F172A !important;
 }
 
 [data-theme="light"] .matrix-table thead th.selected-col {
-  background: #5F65F4 !important;
+  background: #2563EB !important;
   color: #FFFFFF !important;
-  box-shadow: inset 0 -3px 0 #2128E8, 0 0 10px rgba(95, 101, 244, 0.4) !important;
+  box-shadow: inset 0 -3px 0 #1D4ED8, 0 0 10px rgba(37, 99, 235, 0.4) !important;
 }
 
 [data-theme="light"] .matrix-table tbody td.selected-col {
-  background: rgba(191, 194, 248, 0.25) !important;
+  background: rgba(191, 219, 254, 0.3) !important;
 }
 
 [data-theme="light"] .cell-ponto.cell-selected {
-  outline: 2px solid #5F65F4 !important;
+  outline: 2px solid #2563EB !important;
   outline-offset: 1px;
-  box-shadow: 0 0 10px rgba(95, 101, 244, 0.5) !important;
+  box-shadow: 0 0 10px rgba(37, 99, 235, 0.5) !important;
 }
 
 /* Células de Status no Modo Claro */
 [data-theme="light"] .status-ok {
-  background: #E0E2FA !important;
-  color: #2128E8 !important;
-  border: 1px solid #5F65F4 !important;
+  background: #EFF6FF !important;
+  color: #1D4ED8 !important;
+  border: 1px solid #3B82F6 !important;
 }
 
 [data-theme="light"] .status-falta {
@@ -2714,39 +3008,39 @@ thead th.col-dsr {
 }
 
 [data-theme="light"] .status-atestado {
-  background: #E0E7FF !important;
-  color: #3730A3 !important;
-  border: 1px solid #818CF8 !important;
+  background: #EFF6FF !important;
+  color: #1D4ED8 !important;
+  border: 1px solid #60A5FA !important;
 }
 
 [data-theme="light"] .status-ferias {
-  background: #E2E8F0 !important;
+  background: #F1F5F9 !important;
   color: #475569 !important;
   border: 1px solid #CBD5E1 !important;
 }
 
 [data-theme="light"] .status-domingo {
-  background: #E4E7FA !important;
-  color: #191A71 !important;
-  border: 1px solid #BFC2F8 !important;
+  background: #EFF6FF !important;
+  color: #1E40AF !important;
+  border: 1px solid #BFDBFE !important;
 }
 
 [data-theme="light"] .status-feriado {
-  background: #BFC2F8 !important;
-  color: #1B20C0 !important;
-  border: 1px solid #5F65F4 !important;
+  background: #DBEAFE !important;
+  color: #1D4ED8 !important;
+  border: 1px solid #3B82F6 !important;
 }
 
 /* Modais e Formulários */
 [data-theme="light"] .modal-card {
   background: #FFFFFF;
-  border: 1px solid #BFC2F8;
-  box-shadow: 0 10px 30px rgba(12, 12, 39, 0.15);
+  border: 1px solid #BFDBFE;
+  box-shadow: 0 10px 30px rgba(15, 23, 42, 0.15);
 }
 
 [data-theme="light"] .modal-header {
-  background: linear-gradient(135deg, #5F65F4 0%, #2128E8 100%);
-  border-bottom: 1px solid #BFC2F8;
+  background: linear-gradient(135deg, #2563EB 0%, #1D4ED8 100%);
+  border-bottom: 1px solid #1E40AF;
 }
 
 [data-theme="light"] .modal-header h3 {
@@ -2754,12 +3048,12 @@ thead th.col-dsr {
 }
 
 [data-theme="light"] .modal-footer {
-  background: #E0E2FA;
-  border-top: 1px solid #BFC2F8;
+  background: #EFF6FF;
+  border-top: 1px solid #BFDBFE;
 }
 
 [data-theme="light"] .modal-close-btn {
-  color: #E0E2FA;
+  color: #DBEAFE;
 }
 
 [data-theme="light"] .modal-close-btn:hover {
@@ -2768,24 +3062,24 @@ thead th.col-dsr {
 
 [data-theme="light"] .form-control {
   background: #FFFFFF;
-  border: 1px solid #BFC2F8;
-  color: #0C0C27;
+  border: 1px solid #BFDBFE;
+  color: #0F172A;
 }
 
 [data-theme="light"] .form-control:focus {
-  border-color: #5F65F4;
-  box-shadow: 0 0 6px rgba(95, 101, 244, 0.35);
+  border-color: #2563EB;
+  box-shadow: 0 0 6px rgba(37, 99, 235, 0.35);
 }
 
 [data-theme="light"] .punches-box {
-  background: #E0E2FA;
-  border: 1px solid #BFC2F8;
+  background: #EFF6FF;
+  border: 1px solid #BFDBFE;
 }
 
 /* Fechamento VA e KPIs */
 [data-theme="light"] .va-card-header {
-  background: #131449;
-  border-bottom: 1px solid #BFC2F8;
+  background: linear-gradient(135deg, #2563EB 0%, #1D4ED8 100%);
+  border-bottom: 1px solid #1E40AF;
 }
 
 [data-theme="light"] .va-card-header h2 {
@@ -2793,92 +3087,72 @@ thead th.col-dsr {
 }
 
 [data-theme="light"] .va-card-header h2 span {
-  color: #8E92F6;
+  color: #93C5FD;
 }
 
 [data-theme="light"] .styled-table th {
-  background: #E0E2FA;
-  color: #0C0C27;
-  border-bottom: 1px solid #BFC2F8;
+  background: #EFF6FF;
+  color: #0F172A;
+  border-bottom: 1px solid #BFDBFE;
 }
 
 [data-theme="light"] .styled-table td {
-  border-bottom: 1px solid #EAEBFA;
-  color: #0C0C27;
+  border-bottom: 1px solid #F1F5F9;
+  color: #0F172A;
 }
 
 [data-theme="light"] .styled-table tr:hover td {
-  background: #E0E2FA;
+  background: #EFF6FF;
 }
 
 [data-theme="light"] .kpi-card {
   background: #FFFFFF;
-  border-color: #BFC2F8;
-  box-shadow: 0 2px 8px rgba(12, 12, 39, 0.05);
+  border-color: #BFDBFE;
+  box-shadow: 0 2px 8px rgba(37, 99, 235, 0.05);
 }
 
 [data-theme="light"] .kpi-card::before {
-  background: linear-gradient(90deg, #5F65F4 0%, #8E92F6 100%);
+  background: linear-gradient(90deg, #2563EB 0%, #60A5FA 100%);
 }
 
 [data-theme="light"] .kpi-value.cyan {
-  color: #2128E8;
+  color: #0284C7;
   text-shadow: none;
 }
 
 [data-theme="light"] .kpi-value.purple {
-  color: #0C0C27;
+  color: #1E3A8A;
 }
 
 [data-theme="light"] .kpi-helper {
-  color: #191A71;
+  color: #475569;
 }
 
 [data-theme="light"] .val-liquido {
-  color: #2128E8 !important;
+  color: #2563EB !important;
 }
 
 [data-theme="light"] .val-desconto {
-  color: #1B1E97 !important;
+  color: #1D4ED8 !important;
 }
 
-/* Colaboradores, Mural de Avisos e Calendário */
+/* Colaboradores e Outros Cards */
 [data-theme="light"] .colab-card,
 [data-theme="light"] .agenda-card,
 [data-theme="light"] .notice-card,
 [data-theme="light"] .avisos-calendar-card,
 [data-theme="light"] .calendar-card {
   background: #FFFFFF;
-  border-color: #BFC2F8;
-}
-
-[data-theme="light"] .cal-day-cell {
-  background: #FFFFFF;
-  border-color: #BFC2F8;
-}
-
-[data-theme="light"] .cal-day-cell.other-month {
-  background: #F8F9FE;
-  color: #8E92F6;
-}
-
-[data-theme="light"] .cal-day-cell.is-today {
-  border: 2px solid #5F65F4;
-}
-
-[data-theme="light"] .cal-header-day {
-  background: #E0E2FA;
-  color: #0C0C27;
-  border-color: #BFC2F8;
+  border-color: #BFDBFE;
 }
 
 [data-theme="light"] .legend-bar {
-  background: #E0E2FA;
-  border-color: #BFC2F8;
+  background: #EFF6FF;
+  border-color: #BFDBFE;
 }
 
 [data-theme="light"] .legend-item {
-  color: #0C0C27;
+  color: #0F172A;
 }
 
 /* Print View Styles */
