@@ -1,44 +1,38 @@
 /* ==========================================================================
    DASHBOARD DE PONTO E VALE ALIMENTAÇÃO (V4)
-   Paleta de Cores Estrita:
-   - #4015B8 (Electric Indigo / Violeta Primário)
-   - #422985 (Deep Royal Violet)
-   - #342A52 (Slate Violet / Cards e Bordas)
-   - #282433 (Dark Charcoal Violet / Painéis)
-   - #2F2D33 (Obsidian Dark / Superfícies)
-   Destaques e Matriz:
-   - #0F0F11 (Fundo Principal Ultranegro)
-   - #00E5FF (Ciano Neon / Destaques)
-   - #38BDF8 (Azul Celeste Claro)
-   - #ADD8E6 (Azul Gelo / Texto Secundário e Matriz)
+   Paleta Solicitada (Adobe Color):
+   - #0E3BA1 (Azul Real / Cobalto Primário)
+   - #213461 (Azul Marinho Ardósia / Bordas e Contraste)
+   - #1E2433 (Carvão Marinho Escuro / Cards e Painéis)
+   - #2B2D33 (Carvão Obsidiana / Superfícies)
    ========================================================================== */
 
 :root {
-  --color-bg-base: #0F0F11;
-  --color-bg-dark: #15131B;
-  --color-bg-card: #282433;
-  --color-bg-surface: #2F2D33;
-  --color-border: #342A52;
-  --color-border-bright: #422985;
-  --color-primary: #4015B8;
-  --color-primary-hover: #4e1cdb;
-  --color-primary-light: #5b28ea;
+  --color-bg-base: #12151E;
+  --color-bg-dark: #171B26;
+  --color-bg-card: #1E2433;
+  --color-bg-surface: #2B2D33;
+  --color-border: #213461;
+  --color-border-bright: #0E3BA1;
+  --color-primary: #0E3BA1;
+  --color-primary-hover: #134ac4;
+  --color-primary-light: #1d58df;
 
-  --color-cyan: #00E5FF;
-  --color-cyan-glow: rgba(0, 229, 255, 0.25);
+  --color-cyan: #38BDF8;
+  --color-cyan-glow: rgba(14, 59, 161, 0.35);
   --color-blue-bright: #38BDF8;
-  --color-blue-soft: #ADD8E6;
+  --color-blue-soft: #B0BDD6;
 
-  --color-text-main: #F3F4F6;
-  --color-text-sub: #B8B2C7;
-  --color-text-muted: #7E7790;
+  --color-text-main: #F1F5F9;
+  --color-text-sub: #CBD5E1;
+  --color-text-muted: #8391A8;
 
-  --color-sunday-bg: #1B1822;
-  --color-sunday-text: #675F79;
+  --color-sunday-bg: #181D29;
+  --color-sunday-text: #6E7C9C;
 
-  --color-ok-bg: rgba(0, 229, 255, 0.08);
-  --color-ok-border: rgba(0, 229, 255, 0.35);
-  --color-ok-text: #00E5FF;
+  --color-ok-bg: rgba(56, 189, 248, 0.10);
+  --color-ok-border: rgba(56, 189, 248, 0.40);
+  --color-ok-text: #38BDF8;
 
   /* Falta Integral e Meio Período (FM / FT) - Vermelho */
   --color-falta-bg: rgba(239, 68, 68, 0.22);
@@ -54,12 +48,12 @@
   --color-atraso-border: #F59E0B;
   --color-atraso-text: #FDE68A;
 
-  --color-feriado-bg: rgba(64, 21, 184, 0.25);
-  --color-feriado-border: #4015B8;
+  --color-feriado-bg: rgba(14, 59, 161, 0.25);
+  --color-feriado-border: #0E3BA1;
   --color-feriado-text: #38BDF8;
 
-  --shadow-glow: 0 0 15px rgba(0, 229, 255, 0.18);
-  --shadow-purple: 0 4px 20px rgba(64, 21, 184, 0.35);
+  --shadow-glow: 0 0 15px rgba(56, 189, 248, 0.25);
+  --shadow-purple: 0 4px 20px rgba(14, 59, 161, 0.35);
   --shadow-card: 0 4px 14px rgba(0, 0, 0, 0.45);
 
   --radius-sm: 4px;
@@ -164,7 +158,7 @@ body {
 
 /* App Header & Top Navigation */
 .app-header {
-  background: linear-gradient(180deg, #1A1624 0%, #121017 100%);
+  background: linear-gradient(180deg, #1E2433 0%, #12151E 100%);
   border-bottom: 1px solid var(--color-border);
   padding: 12px 20px;
   display: flex;
@@ -568,13 +562,13 @@ body {
 }
 
 .btn-danger {
-  background: #342A52;
-  color: #E2D9F3;
+  background: #213461;
+  color: #E2E8F0;
   border-color: var(--color-primary);
 }
 
 .btn-danger:hover {
-  background: #422985;
+  background: var(--color-primary);
   color: #FFFFFF;
 }
 
@@ -643,7 +637,7 @@ body {
 
 /* Sticky Headers (100% Sólidos e Opacos, sem transparência) */
 .matrix-table thead tr th {
-  background: #252033 !important;
+  background: #1E2433 !important;
   color: var(--color-blue-soft);
   border-bottom: 1px solid var(--color-border);
   border-right: 1px solid var(--color-border);
@@ -658,14 +652,14 @@ body {
 .matrix-table thead tr:first-child th {
   top: 0;
   height: 28px;
-  background: #252033 !important;
+  background: #1E2433 !important;
 }
 
 .matrix-table thead tr:last-child th {
   top: 28px;
   height: 24px;
   font-size: 10px;
-  background: #1C1828 !important;
+  background: #181D2A !important;
   color: var(--color-text-muted);
   border-bottom: 2px solid var(--color-border-bright) !important;
 }
@@ -678,7 +672,7 @@ body {
   min-width: 110px;
   max-width: 110px;
   z-index: 15 !important;
-  background: #1C1826 !important;
+  background: #171B26 !important;
   text-align: left !important;
   padding-left: 10px !important;
   border-right: 1px solid var(--color-border) !important;
@@ -692,7 +686,7 @@ body {
   min-width: 70px;
   max-width: 70px;
   z-index: 15 !important;
-  background: #1C1826 !important;
+  background: #171B26 !important;
   text-align: center !important;
   font-family: var(--font-mono);
   border-right: 1px solid var(--color-border) !important;
@@ -706,7 +700,7 @@ body {
   min-width: 240px;
   max-width: 240px;
   z-index: 15 !important;
-  background: #1C1826 !important;
+  background: #171B26 !important;
   text-align: left !important;
   padding-left: 10px !important;
   padding-right: 10px !important;
@@ -725,7 +719,7 @@ body {
   min-width: 90px;
   max-width: 90px;
   z-index: 15 !important;
-  background: #201A2E !important;
+  background: #191E2C !important;
   border-left: 2px solid var(--color-border-bright) !important;
   text-align: center !important;
   font-weight: 700;
@@ -739,7 +733,7 @@ thead th.col-name,
 thead th.col-dsr {
   top: 0 !important;
   z-index: 60 !important; /* Prioridade máxima sobre cabeçalhos e colunas */
-  background: #252033 !important;
+  background: #1E2433 !important;
   border-bottom: 2px solid var(--color-border-bright) !important;
 }
 
@@ -761,14 +755,14 @@ thead th.col-dsr {
 
 .th-date-clickable.th-sunday,
 .matrix-table thead tr th.th-sunday {
-  background: #171420 !important;
-  color: #A59EBA !important;
+  background: #141822 !important;
+  color: #8391A8 !important;
   cursor: not-allowed;
 }
 
 .th-date-clickable.th-feriado,
 .matrix-table thead tr th.th-feriado {
-  background: #2C184E !important;
+  background: #1B294B !important;
   color: var(--color-cyan) !important;
   border-bottom-color: var(--color-cyan) !important;
 }
@@ -780,64 +774,64 @@ thead th.col-dsr {
 }
 
 .matrix-table tbody tr:nth-child(even) {
-  background: rgba(47, 45, 51, 0.4);
+  background: rgba(43, 45, 51, 0.35);
 }
 
 .matrix-table tbody tr:hover {
-  background: rgba(66, 41, 133, 0.25);
+  background: rgba(33, 52, 97, 0.25);
 }
 
 .matrix-table tbody tr:hover td.col-dept,
 .matrix-table tbody tr:hover td.col-badge,
 .matrix-table tbody tr:hover td.col-name {
-  background: #312942 !important;
+  background: #232B3D !important;
 }
 
 /* ==========================================================================
    SELEÇÃO DE LINHA E COLUNA NO DASHBOARD DE PONTO (INTERATIVO)
    ========================================================================== */
 .matrix-table tbody tr.selected-row {
-  background: rgba(99, 102, 241, 0.22) !important;
+  background: rgba(14, 59, 161, 0.20) !important;
 }
 
 .matrix-table tbody tr.selected-row td {
-  border-top: 1px solid rgba(129, 140, 248, 0.5) !important;
-  border-bottom: 1px solid rgba(129, 140, 248, 0.5) !important;
+  border-top: 1px solid rgba(56, 189, 248, 0.4) !important;
+  border-bottom: 1px solid rgba(56, 189, 248, 0.4) !important;
 }
 
 .matrix-table tbody tr.selected-row td.col-dept {
-  background: #3B2E68 !important;
+  background: #213461 !important;
   border-left: 4px solid #38BDF8 !important;
   color: #E2E8F0 !important;
 }
 
 .matrix-table tbody tr.selected-row td.col-badge {
-  background: #3B2E68 !important;
+  background: #213461 !important;
   color: #38BDF8 !important;
   font-weight: 800 !important;
 }
 
 .matrix-table tbody tr.selected-row td.col-name {
-  background: #3B2E68 !important;
+  background: #213461 !important;
   color: #FFFFFF !important;
   font-weight: 700 !important;
 }
 
 .matrix-table tbody tr.selected-row td.col-name strong {
-  color: #A5B4FC !important;
+  color: #93BAD6 !important;
 }
 
 .matrix-table tbody tr.selected-row td.col-dsr {
-  background: #2E2548 !important;
+  background: #1B2642 !important;
 }
 
 /* Coluna selecionada (Cabeçalho e Células) */
 .matrix-table thead th.selected-col {
-  background: #4338CA !important;
+  background: #0E3BA1 !important;
   color: #FFFFFF !important;
-  box-shadow: inset 0 -3px 0 #38BDF8, 0 0 10px rgba(99, 102, 241, 0.5);
-  border-left: 2px solid #818CF8 !important;
-  border-right: 2px solid #818CF8 !important;
+  box-shadow: inset 0 -3px 0 #38BDF8, 0 0 10px rgba(14, 59, 161, 0.5);
+  border-left: 2px solid #38BDF8 !important;
+  border-right: 2px solid #38BDF8 !important;
   z-index: 45 !important;
 }
 
@@ -1332,7 +1326,7 @@ thead th.col-dsr {
 
 .modal-header {
   padding: 16px 20px;
-  background: linear-gradient(135deg, var(--color-primary) 0%, #2A1765 100%);
+  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-border-bright) 100%);
   border-bottom: 1px solid var(--color-border);
   display: flex;
   justify-content: space-between;
