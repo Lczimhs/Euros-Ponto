@@ -93,8 +93,8 @@
   --color-text-sub: #595A61;
   --color-text-muted: #8E8FA1;
 
-  --color-sunday-bg: #E8E9F0;
-  --color-sunday-text: #595A61;
+  --color-sunday-bg: #D5D6E0;
+  --color-sunday-text: #090B33;
 
   --color-ok-bg: rgba(21, 23, 51, 0.08);
   --color-ok-border: #8E8FA1;
@@ -2915,8 +2915,9 @@ thead th.col-dsr {
 
 [data-theme="light"] .th-date-clickable.th-sunday,
 [data-theme="light"] .matrix-table thead tr th.th-sunday {
-  background: #595A61 !important;
-  color: #E3E4EB !important;
+  background: #8E8FA1 !important;
+  color: #FFFFFF !important;
+  text-shadow: 0 1px 2px rgba(9, 11, 51, 0.35);
 }
 
 [data-theme="light"] .th-date-clickable.th-feriado,
@@ -3020,15 +3021,35 @@ thead th.col-dsr {
 }
 
 [data-theme="light"] .status-domingo {
-  background: #E8E9F0 !important;
-  color: #595A61 !important;
-  border: 1px solid #C8C9D3 !important;
+  background: #D5D6E0 !important;
+  color: #090B33 !important;
+  border: 1px solid #B4B6C4 !important;
+  font-weight: 700;
+}
+
+[data-theme="light"] .matrix-table tbody td:has(.status-domingo) {
+  background: rgba(213, 214, 224, 0.40) !important;
 }
 
 [data-theme="light"] .status-feriado {
   background: #E3E4EB !important;
   color: #151733 !important;
   border: 1px solid #8E8FA1 !important;
+}
+
+/* Badges Registra Ponto */
+[data-theme="light"] .badge-ponto-sim {
+  background: #E3E4EB !important;
+  border: 1.5px solid #151733 !important;
+  color: #151733 !important;
+  font-weight: 700 !important;
+}
+
+[data-theme="light"] .badge-ponto-nao {
+  background: #FEF3C7 !important;
+  border: 1.5px solid #D97706 !important;
+  color: #D97706 !important;
+  font-weight: 700 !important;
 }
 
 /* Modais e Formulários */
