@@ -1919,7 +1919,8 @@ function calculateDsrForEmployee(colabId, year, month, branchId) {
   let breakdown = [];
 
   // Transferência de DSR entre meses (Carry-over) DESABILITADA até segunda ordem
-  // Toda apuração é restrita rigorosamente ao mês corrente sem transferir para o mês seguinte
+  // Regra: DSR só é descontado se a semana culminar em um Domingo dentro do mês corrente.
+  // Faltas no final do mês sem domingo restante no mês NÃO contam perda de DSR.
 
   let currentWeekDays = [];
 
@@ -1930,7 +1931,8 @@ function calculateDsrForEmployee(colabId, year, month, branchId) {
 
     currentWeekDays.push({ isoStr, dayOfWeek, dayNum: d });
 
-    if (dayOfWeek === 0 || d === daysInMonth) {
+    // Só desconta DSR se a semana atingir o Domingo (DSR) dentro deste mês
+    if (dayOfWeek === 0) {
       let hasUnjustifiedAbsence = false;
       let holidaysInWeek = 0;
 
@@ -1954,7 +1956,7 @@ function calculateDsrForEmployee(colabId, year, month, branchId) {
         totalDsrLost += penalty;
         const weekEndStr = formatDateBR(currentWeekDays[currentWeekDays.length - 1].isoStr);
         const motivo = holidaysInWeek > 0 ? `Falta + ${holidaysInWeek} Feriado(s)` : 'Falta semanal';
-        breakdown.push(`Semana finalizada em ${weekEndStr}: -${penalty} DSR (${motivo})`);
+        breakdown.push(`Semana encerrada em ${weekEndStr} (Domingo): -${penalty} DSR (${motivo})`);
       }
 
       currentWeekDays = [];
