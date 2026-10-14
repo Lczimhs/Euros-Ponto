@@ -22,7 +22,10 @@ CREATE TABLE IF NOT EXISTS colaboradores (
   admissao DATE NOT NULL,
   registra_ponto BOOLEAN DEFAULT true,
   status TEXT DEFAULT 'ativo',
-  data_demissao DATE
+  data_demissao DATE,
+  aprendiz BOOLEAN DEFAULT false,
+  trabalha_sabado BOOLEAN DEFAULT false,
+  nao_recebe_va BOOLEAN DEFAULT false
 );
 
 CREATE TABLE IF NOT EXISTS feriados (

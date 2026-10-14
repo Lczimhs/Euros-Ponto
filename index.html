@@ -7,7 +7,7 @@
   <meta http-equiv="Pragma" content="no-cache">
   <meta http-equiv="Expires" content="0">
   <title>Dashboard de Ponto e Vale Alimentação (V4)</title>
-  <link rel="stylesheet" href="style.css?v=20261013_colors_v2">
+  <link rel="stylesheet" href="style.css?v=20261014_v3">
 </head>
 <body>
 
@@ -887,12 +887,26 @@
           </label>
         </div>
 
+        <!-- Checkbox: Não recebe Vale Alimentação -->
+        <div class="form-group" style="background:rgba(239, 68, 68, 0.08); padding:10px 14px; border-radius:var(--radius-sm); border:1px solid rgba(239, 68, 68, 0.35); margin-bottom:12px;">
+          <label class="custom-checkbox-container" style="margin:0; cursor:pointer; display:flex; align-items:center; gap:10px;">
+            <input type="checkbox" id="emp-check-nao-recebe-va">
+            <span style="color:#FCA5A5;"><strong>Não recebe Vale Alimentação</strong> <small style="color:var(--color-text-sub); display:block; font-size:11px;">(Marque se o colaborador não possui direito ao benefício de Vale Alimentação — apuração de VA será zerada)</small></span>
+          </label>
+        </div>
+
         <!-- Checkbox: Jovem Aprendiz (Meio Período - R$ 4,00 VA) -->
         <div class="form-group" style="background:rgba(245, 158, 11, 0.08); padding:10px 14px; border-radius:var(--radius-sm); border:1px solid rgba(245, 158, 11, 0.35); margin-bottom:12px;">
           <label class="custom-checkbox-container" style="margin:0; cursor:pointer; display:flex; align-items:center; gap:10px;">
             <input type="checkbox" id="emp-check-aprendiz">
             <span style="color:#FDE047;"><strong>Colaborador é Jovem Aprendiz</strong> <small style="color:var(--color-text-sub); display:block; font-size:11px;">(Trabalham meio período — o valor do Vale Alimentação por dia útil será calculado pela metade: <strong>R$ 4,00/dia útil</strong>)</small></span>
           </label>
+          <div id="group-aprendiz-sabado" style="display:none; margin-top:10px; padding-top:10px; border-top:1px dashed rgba(245, 158, 11, 0.3); padding-left:26px;">
+            <label class="custom-checkbox-container" style="margin:0; cursor:pointer; display:flex; align-items:center; gap:10px;">
+              <input type="checkbox" id="emp-check-aprendiz-sabado">
+              <span style="color:#FEF08A;"><strong>Trabalha aos Sábados?</strong> <small style="color:var(--color-text-sub); display:block; font-size:11px;">(Desmarque se o jovem aprendiz NÃO trabalha aos sábados — o dia ficará automaticamente igual ao domingo)</small></span>
+            </label>
+          </div>
         </div>
 
         <!-- Checkbox: Marcar como Demitido -->
@@ -1183,6 +1197,6 @@
   <!-- Supabase JS Client SDK -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <!-- Main JavaScript Logic -->
-  <script src="app.js?v=20261013_ref_v1"></script>
+  <script src="app.js?v=20261014_v3"></script>
 </body>
 </html>

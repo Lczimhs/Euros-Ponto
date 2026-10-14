@@ -1677,7 +1677,11 @@ function getDayStatus(colabId, isoStr, branchId) {
   const dayOfWeek = dateObj.getDay();
 
   // Domingos são automáticos e bloqueados
-  if (dayOfWeek === 0) {
+  // Aprendizes que NÃO trabalham no sábado: o sábado fica idêntico ao domingo
+  const isAprendiz = !!(colab && (colab.aprendiz === true || colab.isAprendiz === true));
+  const folgaSabadoAprendiz = isAprendiz && (colab.trabalhaSabado === false || colab.trabalhaSabado === 'nao');
+
+  if (dayOfWeek === 0 || (dayOfWeek === 6 && folgaSabadoAprendiz)) {
     return {
       type: 'DOMINGO',
       display: 'DOMINGO',
@@ -2221,8 +2225,42 @@ function calculateVAForEmployee(colabId, year, month, branchId) {
   const doesNotPunch = colab && colab.registraPonto === false;
   const isDemitido = colab && colab.status === 'demitido' && colab.dataDemissao;
   const isAprendiz = !!(colab && (colab.aprendiz === true || colab.isAprendiz === true));
+  const folgaSabadoAprendiz = isAprendiz && (colab.trabalhaSabado === false || colab.trabalhaSabado === 'nao');
+  const naoRecebeVa = !!(colab && (colab.naoRecebeVa === true || colab.recebeVa === false));
   const baseRate = isAprendiz ? 4.00 : 8.00;
   const halfRate = isAprendiz ? 2.00 : 4.00;
+
+  // Se o colaborador não tem direito a Vale Alimentação
+  if (naoRecebeVa) {
+    for (let d = 1; d <= daysInMonth; d++) {
+      const isoStr = formatDateISO(year, month, d);
+      const dateObj = new Date(isoStr + 'T12:00:00');
+      const dayOfWeek = dateObj.getDay();
+      const dayOfWeekName = DIAS_SEMANA_SIGLA[dayOfWeek];
+      dailyAudit.push({
+        dateStr: formatDateBR(isoStr),
+        dayOfWeek: dayOfWeekName,
+        isBusinessDay: false,
+        resolvedType: 'SEM VA',
+        creditado: 0,
+        descontado: 0,
+        note: 'Colaborador não recebe Vale Alimentação (Sem direito a VA)'
+      });
+    }
+    return {
+      isAprendiz,
+      naoRecebeVa: true,
+      baseDailyRate: 0,
+      totalBusinessDays: 0,
+      fullDaysWorked: 0,
+      halfDaysWorked: 0,
+      absenceDays: 0,
+      potencialMaximo: 0,
+      valorLiquido: 0,
+      valorDescontado: 0,
+      dailyAudit
+    };
+  }
 
   for (let d = 1; d <= daysInMonth; d++) {
     const isoStr = formatDateISO(year, month, d);
@@ -2232,8 +2270,10 @@ function calculateVAForEmployee(colabId, year, month, branchId) {
     const holiday = isHoliday(isoStr, branchId);
 
     const isSunday = dayOfWeek === 0;
+    const isSabadoFolga = dayOfWeek === 6 && folgaSabadoAprendiz;
+    const isRestDay = isSunday || isSabadoFolga;
     const isHolidayDay = !!holiday;
-    const isStandardBusinessDay = !isSunday && !isHolidayDay;
+    const isStandardBusinessDay = !isRestDay && !isHolidayDay;
 
     // Verificação de período de vigência contratual
     const isBeforeAdmission = colab && colab.admissao && isoStr < colab.admissao;
@@ -2245,8 +2285,8 @@ function calculateVAForEmployee(colabId, year, month, branchId) {
     let resolvedDisplay = '';
 
     if (!isStandardBusinessDay) {
-      resolvedDisplay = isSunday ? 'DOMINGO' : 'FERIADO';
-      note = isSunday ? 'Domingo (Sem VA)' : ('Feriado: ' + holiday.nome);
+      resolvedDisplay = isRestDay ? (isSunday ? 'DOMINGO' : 'SÁBADO') : 'FERIADO';
+      note = isRestDay ? (isSunday ? 'Domingo (Sem VA)' : 'Sábado (Folga Aprendiz - Sem VA)') : ('Feriado: ' + holiday.nome);
     } else if (isBeforeAdmission) {
       resolvedDisplay = '-';
       note = 'Pré-admissão (Admissão: ' + formatDateBR(colab.admissao) + ')';
@@ -2627,6 +2667,58 @@ function getFilteredAndSortedEmployees(isForPonto = false) {
 // ==========================================================================
 // 5. RENDERIZAÇÃO DA MATRIZ DE PONTO (DASHBOARD PRINCIPAL)
 // ==========================================================================
+let selectedMatrixColabId = null;
+let selectedMatrixDate = null;
+
+function applyMatrixSelection(colabId, isoDate) {
+  if (colabId !== undefined && colabId !== null) selectedMatrixColabId = colabId;
+  if (isoDate !== undefined && isoDate !== null) selectedMatrixDate = isoDate;
+
+  const tbody = document.getElementById('matrix-tbody');
+  const thead = document.getElementById('matrix-thead');
+  if (!tbody) return;
+
+  // 1. Linhas: destaca a linha do funcionário selecionado
+  tbody.querySelectorAll('tr').forEach(tr => {
+    if (selectedMatrixColabId && tr.dataset.colabId === selectedMatrixColabId) {
+      tr.classList.add('selected-row');
+    } else {
+      tr.classList.remove('selected-row');
+    }
+  });
+
+  // 2. Colunas no thead: destaca o cabeçalho do dia selecionado
+  if (thead) {
+    thead.querySelectorAll('th[data-date]').forEach(th => {
+      if (selectedMatrixDate && th.dataset.date === selectedMatrixDate) {
+        th.classList.add('selected-col');
+      } else {
+        th.classList.remove('selected-col');
+      }
+    });
+  }
+
+  // 3. Colunas no tbody: destaca as células do dia verticalmente
+  tbody.querySelectorAll('td[data-date]').forEach(td => {
+    if (selectedMatrixDate && td.dataset.date === selectedMatrixDate) {
+      td.classList.add('selected-col');
+    } else {
+      td.classList.remove('selected-col');
+    }
+  });
+
+  // 4. Célula exata de interseção (ponto/horário selecionado)
+  tbody.querySelectorAll('.cell-ponto').forEach(cell => {
+    if (selectedMatrixColabId && selectedMatrixDate &&
+        cell.dataset.colabId === selectedMatrixColabId &&
+        cell.dataset.date === selectedMatrixDate) {
+      cell.classList.add('cell-selected');
+    } else {
+      cell.classList.remove('cell-selected');
+    }
+  });
+}
+
 function renderMatrixView() {
   const thead = document.getElementById('matrix-thead');
   const tbody = document.getElementById('matrix-tbody');
@@ -2663,7 +2755,7 @@ function renderMatrixView() {
 
     const dayNumStr = String(d).padStart(2, '0');
     row1 += '<th class="' + thClass + '" data-date="' + isoStr + '" data-sunday="' + (isSunday ? '1' : '0') + '" title="' + titleHint + '">' + dayNumStr + '</th>';
-    row2 += '<th class="' + (isSunday ? 'th-sunday' : (holiday ? 'th-feriado' : '')) + '">' + dayOfWeekName + '</th>';
+    row2 += '<th class="' + (isSunday ? 'th-sunday' : (holiday ? 'th-feriado' : '')) + '" data-date="' + isoStr + '">' + dayOfWeekName + '</th>';
   }
 
   row1 += '<th class="col-dsr" rowspan="2" title="Total de DSRs perdidos/descontados no mês">Qtd. DSR</th></tr>';
@@ -2671,13 +2763,15 @@ function renderMatrixView() {
 
   thead.innerHTML = row1 + row2;
 
-  // Ouvintes de clique nos dias do cabeçalho (Ação em Massa por Data)
-  thead.querySelectorAll('.th-date-clickable').forEach(th => {
+  // Ouvintes de clique nos dias do cabeçalho (Ação em Massa por Data e Seleção de Coluna)
+  thead.querySelectorAll('th[data-date]').forEach(th => {
     th.addEventListener('click', () => {
-      const isSunday = th.dataset.sunday === '1';
-      if (isSunday) return;
       const isoDate = th.dataset.date;
-      openMassOverrideModal(isoDate);
+      applyMatrixSelection(selectedMatrixColabId, isoDate);
+
+      if (th.classList.contains('th-date-clickable') && th.dataset.sunday !== '1') {
+        openMassOverrideModal(isoDate);
+      }
     });
   });
 
@@ -2693,15 +2787,16 @@ function renderMatrixView() {
   employees.forEach(colab => {
     const deptName = deptMap[colab.deptId] || 'Geral';
     const tr = document.createElement('tr');
+    tr.setAttribute('data-colab-id', colab.id);
 
-    let html = '<td class="col-dept" title="' + deptName + '">' + deptName + '</td><td class="col-badge">' + colab.cracha + '</td><td class="col-name" title="' + colab.nome + '">' + colab.nome + '</td>';
+    let html = '<td class="col-dept" data-colab-id="' + colab.id + '" title="' + deptName + '">' + deptName + '</td><td class="col-badge" data-colab-id="' + colab.id + '">' + colab.cracha + '</td><td class="col-name" data-colab-id="' + colab.id + '" title="' + colab.nome + '"><strong>' + colab.nome + '</strong></td>';
 
     // Células de Dias
     for (let d = 1; d <= daysInMonth; d++) {
       const isoStr = formatDateISO(year, month, d);
       const resolved = getResolvedDayStatus(colab.id, isoStr, appState.activeBranchId);
 
-      html += '<td><div class="cell-ponto ' + resolved.cssClass + '" data-colab-id="' + colab.id + '" data-colab-name="' + colab.nome + '" data-date="' + isoStr + '" data-sunday="' + (resolved.isSunday ? '1' : '0') + '" data-disabled="' + (resolved.isDisabled ? '1' : '0') + '" data-dismissed="' + (resolved.isDismissed ? '1' : '0') + '" title="' + colab.nome + ' - ' + formatDateBR(isoStr) + ': ' + resolved.display + (resolved.holidayName ? ' (' + resolved.holidayName + ')' : '') + '">' + resolved.display + '</div></td>';
+      html += '<td data-date="' + isoStr + '" data-colab-id="' + colab.id + '"><div class="cell-ponto ' + resolved.cssClass + '" data-colab-id="' + colab.id + '" data-colab-name="' + colab.nome + '" data-date="' + isoStr + '" data-sunday="' + (resolved.isSunday ? '1' : '0') + '" data-disabled="' + (resolved.isDisabled ? '1' : '0') + '" data-dismissed="' + (resolved.isDismissed ? '1' : '0') + '" title="' + colab.nome + ' - ' + formatDateBR(isoStr) + ': ' + resolved.display + (resolved.holidayName ? ' (' + resolved.holidayName + ')' : '') + '">' + resolved.display + '</div></td>';
     }
 
     // Coluna Congelada à Direita: Qtd. DSR
@@ -2712,14 +2807,29 @@ function renderMatrixView() {
     html += '<td class="col-dsr" data-colab-id="' + colab.id + '" title="' + dsrTooltip + ' (Clique para abrir detalhamento analítico)"><span class="dsr-badge ' + dsrClass + '">' + dsrInfo.totalDsrLost + '</span></td>';
 
     tr.innerHTML = html;
+
+    // Seleção de linha ao clicar nas colunas do funcionário (nome, crachá, departamento)
+    tr.querySelectorAll('.col-dept, .col-badge, .col-name').forEach(td => {
+      td.addEventListener('click', () => {
+        // Ao clicar no funcionário, a linha dele é selecionada e a coluna/dia previamente selecionada acompanha!
+        applyMatrixSelection(colab.id, selectedMatrixDate);
+      });
+    });
+
     tbody.appendChild(tr);
   });
 
   // Cliques nas células individuais de ponto
   tbody.querySelectorAll('.cell-ponto').forEach(cell => {
     cell.addEventListener('click', () => {
+      const colabId = cell.dataset.colabId;
+      const isoDate = cell.dataset.date;
+
+      // Seleciona a linha do funcionário e o dia/horário clicado imediatamente
+      applyMatrixSelection(colabId, isoDate);
+
       if (cell.dataset.sunday === '1') {
-        showToast('Domingos são de descanso obrigatório (DSR) e não permitem alteração manual.', 'info');
+        showToast('Dias de descanso obrigatório (DSR / Folga) não permitem alteração manual.', 'info');
         return;
       }
       if (cell.dataset.disabled === '1') {
@@ -2730,8 +2840,6 @@ function renderMatrixView() {
         showToast('Colaborador desligado nesta data.', 'warning');
         return;
       }
-      const colabId = cell.dataset.colabId;
-      const isoDate = cell.dataset.date;
       openCellDetailModal(colabId, isoDate);
     });
   });
@@ -2742,10 +2850,14 @@ function renderMatrixView() {
       e.stopPropagation();
       const colabId = cell.dataset.colabId;
       if (colabId) {
+        applyMatrixSelection(colabId, selectedMatrixDate);
         openDsrDetailsModal(colabId);
       }
     });
   });
+
+  // Re-aplica a seleção persistida (linha, coluna e célula) após renderização
+  applyMatrixSelection(selectedMatrixColabId, selectedMatrixDate);
 }
 
 // ==========================================================================
@@ -2787,6 +2899,9 @@ function renderVAView() {
     let extraBadge = '';
     if (colab.aprendiz || colab.isAprendiz) {
       extraBadge += '<span class="badge-aprendiz" style="font-size:10px; margin-left:6px; background:rgba(245, 158, 11, 0.2); color:#FDE047; border:1px solid rgba(245, 158, 11, 0.5); padding:1px 5px; border-radius:3px;" title="Jovem Aprendiz: Meio período (R$ 4,00/dia útil)">Aprendiz (R$ 4/dia)</span>';
+    }
+    if (colab.naoRecebeVa || colab.recebeVa === false) {
+      extraBadge += '<span class="badge-sem-va" title="Colaborador configurado para não receber Vale Alimentação">Sem VA</span>';
     }
     if (colab.registraPonto === false) {
       extraBadge += '<span class="badge-ponto-nao" style="font-size:10px; margin-left:6px;" title="Isento de registro de ponto">Isento Ponto</span>';
@@ -2836,9 +2951,10 @@ function openVAAuditModal(colabId) {
 
   const isAprendiz = colab.aprendiz || colab.isAprendiz;
   const aprendizLabel = isAprendiz ? ' • <span style="color:#FDE047; font-weight:700;">🎓 Jovem Aprendiz (R$ 4,00/dia)</span>' : '';
+  const vaStatusLabel = (colab.naoRecebeVa || colab.recebeVa === false) ? ' • <span style="color:#FCA5A5; font-weight:700;">🚫 Não recebe Vale Alimentação</span>' : '';
 
   const summary = document.getElementById('va-audit-summary');
-  summary.innerHTML = '<div><strong style="color:var(--color-cyan); font-size:14px;">' + colab.nome + '</strong> (Crachá: ' + colab.cracha + ')<div style="font-size:11px; color:var(--color-text-sub);">Setor: ' + (deptMap[colab.deptId] || '') + aprendizLabel + ' • Mês: ' + MESES_PT[appState.currentMonth] + '/' + appState.currentYear + (colab.status === 'demitido' ? ' • Desligado em: ' + formatDateBR(colab.dataDemissao) : '') + '</div></div><div style="text-align:right;"><span style="font-size:11px; color:var(--color-text-muted);">Líquido a Pagar:</span><div style="color:var(--color-cyan); font-family:var(--font-mono); font-size:16px; font-weight:700;">R$ ' + va.valorLiquido.toFixed(2).replace('.', ',') + '</div><div style="font-size:10px; color:#B4A6CF;">Descontos: R$ ' + va.valorDescontado.toFixed(2).replace('.', ',') + '</div></div>';
+  summary.innerHTML = '<div><strong style="color:var(--color-cyan); font-size:14px;">' + colab.nome + '</strong> (Crachá: ' + colab.cracha + ')<div style="font-size:11px; color:var(--color-text-sub);">Setor: ' + (deptMap[colab.deptId] || '') + aprendizLabel + vaStatusLabel + ' • Mês: ' + MESES_PT[appState.currentMonth] + '/' + appState.currentYear + (colab.status === 'demitido' ? ' • Desligado em: ' + formatDateBR(colab.dataDemissao) : '') + '</div></div><div style="text-align:right;"><span style="font-size:11px; color:var(--color-text-muted);">Líquido a Pagar:</span><div style="color:var(--color-cyan); font-family:var(--font-mono); font-size:16px; font-weight:700;">R$ ' + va.valorLiquido.toFixed(2).replace('.', ',') + '</div><div style="font-size:10px; color:#B4A6CF;">Descontos: R$ ' + va.valorDescontado.toFixed(2).replace('.', ',') + '</div></div>';
 
   const tbody = document.getElementById('va-audit-tbody');
   tbody.innerHTML = '';
@@ -2877,9 +2993,9 @@ document.getElementById('btn-confirm-mass-ok')?.addEventListener('click', () => 
     const regKey = colab.id + '_' + activeMassDate;
     appState.registrosPonto[regKey] = {
       override: 'OK',
-      resolution: 'ABONAR',
+      resolution: 'NENHUMA',
       punches: { em: '08:00', sm: '12:00', et: '13:00', st: '17:00' },
-      note: 'Abono/OK em massa pelo cabeçalho da data'
+      note: 'OK em massa pelo cabeçalho da data'
     };
   });
 
@@ -4262,12 +4378,17 @@ function renderColaboradoresView() {
       ? '<span class="badge-ponto-sim">Sim</span>'
       : '<span class="badge-ponto-nao">Não</span>';
     const isAprendiz = colab.aprendiz || colab.isAprendiz;
-    const aprendizBadge = isAprendiz
-      ? ' <span class="badge-aprendiz" style="font-size:10px; background:rgba(245, 158, 11, 0.2); color:#FDE047; border:1px solid rgba(245, 158, 11, 0.5); padding:1px 5px; border-radius:3px;">Aprendiz</span>'
-      : '';
+    let extraColabBadges = '';
+    if (isAprendiz) {
+      const sabadoTxt = colab.trabalhaSabado === true ? ' (Sáb: Sim)' : ' (Sáb: Folga)';
+      extraColabBadges += ' <span class="badge-aprendiz" style="font-size:10px; background:rgba(245, 158, 11, 0.2); color:#FDE047; border:1px solid rgba(245, 158, 11, 0.5); padding:1px 5px; border-radius:3px;">Aprendiz' + sabadoTxt + '</span>';
+    }
+    if (colab.naoRecebeVa || colab.recebeVa === false) {
+      extraColabBadges += ' <span class="badge-sem-va" style="font-size:10px;" title="Não recebe Vale Alimentação">Sem VA</span>';
+    }
 
     const tr = document.createElement('tr');
-    tr.innerHTML = '<td style="font-family: var(--font-mono); font-weight:700;">' + colab.cracha + '</td><td><strong>' + escapeHtml(colab.nome) + '</strong>' + aprendizBadge + '</td><td>' + (branchMap[colab.filialId] || 'Não informada') + '</td><td>' + (deptMap[colab.deptId] || 'Geral') + '</td><td>' + formatDateBR(colab.admissao) + '</td><td class="text-center">' + pontoBadge + '</td><td class="text-center">' + statusBadge + '</td><td class="text-center"><button class="btn btn-secondary btn-sm btn-edit-colab" data-id="' + colab.id + '">✏️ Editar</button> <button class="btn btn-danger btn-sm btn-delete-colab" data-id="' + colab.id + '">🗑️ Excluir</button></td>';
+    tr.innerHTML = '<td style="font-family: var(--font-mono); font-weight:700;">' + colab.cracha + '</td><td><strong>' + escapeHtml(colab.nome) + '</strong>' + extraColabBadges + '</td><td>' + (branchMap[colab.filialId] || 'Não informada') + '</td><td>' + (deptMap[colab.deptId] || 'Geral') + '</td><td>' + formatDateBR(colab.admissao) + '</td><td class="text-center">' + pontoBadge + '</td><td class="text-center">' + statusBadge + '</td><td class="text-center"><button class="btn btn-secondary btn-sm btn-edit-colab" data-id="' + colab.id + '">✏️ Editar</button> <button class="btn btn-danger btn-sm btn-delete-colab" data-id="' + colab.id + '">🗑️ Excluir</button></td>';
     tbody.appendChild(tr);
   });
 
@@ -4284,7 +4405,10 @@ function openEmployeeModal(empId = null) {
   const branchSelect = document.getElementById('emp-branch');
   const deptSelect = document.getElementById('emp-dept');
   const checkRegistra = document.getElementById('emp-check-registra-ponto');
+  const checkNaoRecebeVa = document.getElementById('emp-check-nao-recebe-va');
   const checkAprendiz = document.getElementById('emp-check-aprendiz');
+  const checkAprendizSabado = document.getElementById('emp-check-aprendiz-sabado');
+  const groupAprendizSabado = document.getElementById('group-aprendiz-sabado');
   const checkDemitido = document.getElementById('emp-check-demitido');
   const demissaoGroup = document.getElementById('group-emp-demissao');
   const demissaoInput = document.getElementById('emp-demissao');
@@ -4303,7 +4427,12 @@ function openEmployeeModal(empId = null) {
     document.getElementById('emp-dept').value = emp.deptId;
 
     if (checkRegistra) checkRegistra.checked = emp.registraPonto !== false;
-    if (checkAprendiz) checkAprendiz.checked = !!(emp.aprendiz || emp.isAprendiz);
+    if (checkNaoRecebeVa) checkNaoRecebeVa.checked = !!(emp.naoRecebeVa || emp.recebeVa === false);
+
+    const isAp = !!(emp.aprendiz || emp.isAprendiz);
+    if (checkAprendiz) checkAprendiz.checked = isAp;
+    if (groupAprendizSabado) groupAprendizSabado.style.display = isAp ? 'block' : 'none';
+    if (checkAprendizSabado) checkAprendizSabado.checked = emp.trabalhaSabado === true;
 
     const isDemitido = emp.status === 'demitido';
     if (checkDemitido) checkDemitido.checked = isDemitido;
@@ -4319,7 +4448,10 @@ function openEmployeeModal(empId = null) {
     document.getElementById('emp-branch').value = appState.activeBranchId;
 
     if (checkRegistra) checkRegistra.checked = true;
+    if (checkNaoRecebeVa) checkNaoRecebeVa.checked = false;
     if (checkAprendiz) checkAprendiz.checked = false;
+    if (groupAprendizSabado) groupAprendizSabado.style.display = 'none';
+    if (checkAprendizSabado) checkAprendizSabado.checked = false;
     if (checkDemitido) checkDemitido.checked = false;
     if (demissaoGroup) demissaoGroup.style.display = 'none';
     if (demissaoInput) demissaoInput.value = '';
@@ -4329,6 +4461,12 @@ function openEmployeeModal(empId = null) {
 
   openModal('modal-employee');
 }
+
+// Alterar visibilidade do campo de sábados ao marcar/desmarcar o aprendiz
+document.getElementById('emp-check-aprendiz')?.addEventListener('change', (e) => {
+  const group = document.getElementById('group-aprendiz-sabado');
+  if (group) group.style.display = e.target.checked ? 'block' : 'none';
+});
 
 // Alterar visibilidade do campo de demissão ao marcar/desmarcar o checkbox
 document.getElementById('emp-check-demitido')?.addEventListener('change', (e) => {
@@ -4354,9 +4492,17 @@ document.getElementById('btn-save-employee')?.addEventListener('click', () => {
     ? document.getElementById('emp-check-registra-ponto').checked
     : (document.getElementById('emp-registra-ponto')?.value !== 'nao');
 
+  const naoRecebeVa = document.getElementById('emp-check-nao-recebe-va')
+    ? document.getElementById('emp-check-nao-recebe-va').checked
+    : false;
+
   const aprendiz = document.getElementById('emp-check-aprendiz')
     ? document.getElementById('emp-check-aprendiz').checked
     : false;
+
+  const trabalhaSabado = aprendiz
+    ? (document.getElementById('emp-check-aprendiz-sabado')?.checked || false)
+    : true;
 
   const isDemitido = document.getElementById('emp-check-demitido')
     ? document.getElementById('emp-check-demitido').checked
@@ -4386,6 +4532,9 @@ document.getElementById('btn-save-employee')?.addEventListener('click', () => {
         filialId,
         deptId,
         aprendiz,
+        trabalhaSabado,
+        naoRecebeVa,
+        recebeVa: !naoRecebeVa,
         registraPonto,
         status,
         dataDemissao
@@ -4401,6 +4550,9 @@ document.getElementById('btn-save-employee')?.addEventListener('click', () => {
       filialId,
       deptId,
       aprendiz,
+      trabalhaSabado,
+      naoRecebeVa,
+      recebeVa: !naoRecebeVa,
       registraPonto,
       status,
       dataDemissao
@@ -4713,7 +4865,8 @@ function exportVACSV() {
   employees.forEach(colab => {
     const va = calculateVAForEmployee(colab.id, year, month, appState.activeBranchId);
     const isAprendiz = !!(colab.aprendiz || colab.isAprendiz);
-    const taxaDia = isAprendiz ? '4.00' : '8.00';
+    const naoRecebeVa = !!(colab.naoRecebeVa || colab.recebeVa === false);
+    const taxaDia = naoRecebeVa ? '0.00' : (isAprendiz ? '4.00' : '8.00');
     csv += colab.cracha + ';"' + colab.nome + '";"' + (deptMap[colab.deptId] || '') + '";"' + (isAprendiz ? 'SIM' : 'NAO') + '";' + taxaDia + ';"' + (colab.registraPonto ? 'SIM' : 'NAO') + '";"' + (colab.status || 'ativo') + '";"' + formatDateBR(colab.dataDemissao) + '";' + va.totalBusinessDays + ';' + va.fullDaysWorked + ';' + va.halfDaysWorked + ';' + va.absenceDays + ';' + va.valorLiquido.toFixed(2) + ';' + va.valorDescontado.toFixed(2) + '\n';
   });
 
