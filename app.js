@@ -4939,6 +4939,44 @@ function downloadFile(filename, content, type) {
   showToast('Arquivo "' + filename + '" exportado!', 'success');
 }
 
+// ==========================================================================
+// TEMA CLARO / ESCURO (LIGHT / DARK MODE)
+// ==========================================================================
+const THEME_STORAGE_KEY = 'euros_ponto_theme';
+
+function initTheme() {
+  const savedTheme = localStorage.getItem(THEME_STORAGE_KEY) || 'dark';
+  applyTheme(savedTheme);
+
+  const btnToggleTheme = document.getElementById('btn-toggle-theme');
+  btnToggleTheme?.addEventListener('click', () => {
+    const currentTheme = document.documentElement.getAttribute('data-theme') === 'light' ? 'light' : 'dark';
+    const nextTheme = currentTheme === 'light' ? 'dark' : 'light';
+    applyTheme(nextTheme);
+    showToast(`Modo ${nextTheme === 'light' ? 'Claro' : 'Escuro'} ativado`, 'info');
+  });
+}
+
+function applyTheme(theme) {
+  const iconSpan = document.getElementById('theme-icon');
+  const labelSpan = document.getElementById('theme-label');
+  const btnToggle = document.getElementById('btn-toggle-theme');
+
+  if (theme === 'light') {
+    document.documentElement.setAttribute('data-theme', 'light');
+    localStorage.setItem(THEME_STORAGE_KEY, 'light');
+    if (iconSpan) iconSpan.textContent = '🌙';
+    if (labelSpan) labelSpan.textContent = 'Modo Escuro';
+    if (btnToggle) btnToggle.title = 'Alternar para Modo Escuro';
+  } else {
+    document.documentElement.removeAttribute('data-theme');
+    localStorage.setItem(THEME_STORAGE_KEY, 'dark');
+    if (iconSpan) iconSpan.textContent = '💡';
+    if (labelSpan) labelSpan.textContent = 'Modo Claro';
+    if (btnToggle) btnToggle.title = 'Alternar para Modo Claro';
+  }
+}
+
 // Backup JSON
 document.getElementById('btn-export-backup')?.addEventListener('click', () => {
   const dataStr = JSON.stringify(appState, null, 2);
@@ -5215,6 +5253,7 @@ function initEvents() {
 
 // Inicialização Geral ao Carregar a Página
 document.addEventListener('DOMContentLoaded', () => {
+  initTheme();
   loadStateFromStorage();
   setupNavigation();
   initEvents();

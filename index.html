@@ -7,7 +7,16 @@
   <meta http-equiv="Pragma" content="no-cache">
   <meta http-equiv="Expires" content="0">
   <title>Dashboard de Ponto e Vale Alimentação (V4)</title>
-  <link rel="stylesheet" href="style.css?v=20261014_v10">
+  <link rel="stylesheet" href="style.css?v=20261014_v11">
+  <script>
+    (function() {
+      try {
+        if (localStorage.getItem('euros_ponto_theme') === 'light') {
+          document.documentElement.setAttribute('data-theme', 'light');
+        }
+      } catch(e) {}
+    })();
+  </script>
 </head>
 <body>
 
@@ -46,6 +55,9 @@
 
       <!-- System Actions -->
       <div class="header-actions">
+        <button class="btn btn-secondary btn-sm" id="btn-toggle-theme" title="Alternar entre Modo Claro e Modo Escuro">
+          <span id="theme-icon">💡</span> <span id="theme-label" style="font-size:11px; font-weight:600;">Modo Claro</span>
+        </button>
         <button class="btn btn-secondary btn-sm" id="btn-export-backup" title="Exportar dados para arquivo JSON">
           <span>💾</span> Backup
         </button>
