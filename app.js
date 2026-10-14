@@ -1342,9 +1342,8 @@ async function syncFromCloudOnStart() {
       if (cloud.registrosPonto && Object.keys(cloud.registrosPonto).length > 0) {
         appState.registrosPonto = { ...appState.registrosPonto, ...cloud.registrosPonto };
       }
-      if (cloud.carryOverDsr) {
-        appState.carryOverDsr = { ...appState.carryOverDsr, ...cloud.carryOverDsr };
-      }
+      // Transferência de DSR entre meses desabilitada até segunda ordem (limpa dados residuais)
+      appState.carryOverDsr = {};
       if (cloud.colaboradores && cloud.colaboradores.length > 0) {
         appState.colaboradores = cloud.colaboradores.map(c => {
           const isAp = !!(c.aprendiz || c.isAprendiz);
@@ -1406,7 +1405,8 @@ function loadStateFromStorage() {
         appState.avisos = hasCalendarDates ? rawAvisos.map(normalizeAviso) : getDefaultSeedData().avisos;
 
         appState.registrosPonto = parsed.registrosPonto || {};
-        appState.carryOverDsr = parsed.carryOverDsr || {};
+        // Transferência de DSR entre meses desabilitada até segunda ordem
+        appState.carryOverDsr = {};
 
         if (parsed.activeBranchId && appState.filiais.some(f => f.id === parsed.activeBranchId)) {
           appState.activeBranchId = parsed.activeBranchId;
@@ -1478,7 +1478,7 @@ function loadStateFromStorage() {
   appState.feriados = seed.feriados;
   appState.avisos = seed.avisos;
   appState.registrosPonto = seed.registrosPonto;
-  appState.carryOverDsr = seed.carryOverDsr;
+  appState.carryOverDsr = {};
   appState.activeBranchId = 'branch-1';
 
   checkAndRolloverPendingNotices();
@@ -1918,13 +1918,8 @@ function calculateDsrForEmployee(colabId, year, month, branchId) {
   let totalDsrLost = 0;
   let breakdown = [];
 
-  // Carry-over do mês anterior
-  const carryKey = colabId + '_' + year + '-' + String(month + 1).padStart(2, '0');
-  const carriedFromPrev = appState.carryOverDsr[carryKey] || 0;
-  if (carriedFromPrev > 0) {
-    totalDsrLost += carriedFromPrev;
-    breakdown.push('+' + carriedFromPrev + ' DSR transferido do fechamento do mês anterior');
-  }
+  // Transferência de DSR entre meses (Carry-over) DESABILITADA até segunda ordem
+  // Toda apuração é restrita rigorosamente ao mês corrente sem transferir para o mês seguinte
 
   let currentWeekDays = [];
 
@@ -1952,23 +1947,14 @@ function calculateDsrForEmployee(colabId, year, month, branchId) {
       }
 
       if (hasUnjustifiedAbsence) {
-        if (d === daysInMonth && dayOfWeek !== 0) {
-          const nextDate = new Date(year, month + 1, 1);
-          const nextYear = nextDate.getFullYear();
-          const nextMonth = nextDate.getMonth();
-          const nextCarryKey = colabId + '_' + nextYear + '-' + String(nextMonth + 1).padStart(2, '0');
-
-          let penalty = 1 + holidaysInWeek;
-          appState.carryOverDsr[nextCarryKey] = (appState.carryOverDsr[nextCarryKey] || 0) + penalty;
-          breakdown.push('Semana final incompleta: ' + penalty + ' DSR transferido para ' + MESES_PT[nextMonth] + '/' + nextYear);
-        } else {
-          let penalty = 1;
-          if (holidaysInWeek > 0) {
-            penalty += holidaysInWeek;
-          }
-          totalDsrLost += penalty;
-          breakdown.push('Semana finalizada em ' + formatDateBR(currentWeekDays[currentWeekDays.length - 1].isoStr) + ': -' + penalty + ' DSR (' + (holidaysInWeek > 0 ? 'Falta + Feriado' : 'Falta semanal') + ')');
+        let penalty = 1;
+        if (holidaysInWeek > 0) {
+          penalty += holidaysInWeek;
         }
+        totalDsrLost += penalty;
+        const weekEndStr = formatDateBR(currentWeekDays[currentWeekDays.length - 1].isoStr);
+        const motivo = holidaysInWeek > 0 ? `Falta + ${holidaysInWeek} Feriado(s)` : 'Falta semanal';
+        breakdown.push(`Semana finalizada em ${weekEndStr}: -${penalty} DSR (${motivo})`);
       }
 
       currentWeekDays = [];
