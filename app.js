@@ -1677,14 +1677,15 @@ function getDayStatus(colabId, isoStr, branchId) {
   const dayOfWeek = dateObj.getDay();
 
   // Domingos são automáticos e bloqueados
-  // Aprendizes que NÃO trabalham no sábado: o sábado fica idêntico ao domingo
+  // Aprendizes que NÃO trabalham no sábado: o sábado fica travado com texto "SÁBADO", igual ao domingo
   const isAprendiz = !!(colab && (colab.aprendiz === true || colab.isAprendiz === true));
   const folgaSabadoAprendiz = isAprendiz && (colab.trabalhaSabado === false || colab.trabalhaSabado === 'nao');
 
   if (dayOfWeek === 0 || (dayOfWeek === 6 && folgaSabadoAprendiz)) {
+    const isSabado = dayOfWeek === 6;
     return {
-      type: 'DOMINGO',
-      display: 'DOMINGO',
+      type: isSabado ? 'SÁBADO' : 'DOMINGO',
+      display: isSabado ? 'SÁBADO' : 'DOMINGO',
       cssClass: 'status-domingo',
       isPending: false,
       isWorkingDay: false,
@@ -2984,11 +2985,18 @@ function openMassOverrideModal(isoDate) {
 document.getElementById('btn-confirm-mass-ok')?.addEventListener('click', () => {
   if (!activeMassDate) return;
 
+  const massDateObj = new Date(activeMassDate + 'T12:00:00');
+  const isSaturday = massDateObj.getDay() === 6;
+
   const branchEmployees = appState.colaboradores.filter(c => c.filialId === appState.activeBranchId);
   branchEmployees.forEach(colab => {
     if (colab.registraPonto === false) return;
     if (colab.status === 'demitido' && colab.dataDemissao && activeMassDate > colab.dataDemissao) return;
     if (colab.admissao && activeMassDate < colab.admissao) return;
+
+    // Se for sábado e o aprendiz não trabalha no sábado, mantém travado como descanso
+    const isAprendiz = !!(colab.aprendiz || colab.isAprendiz);
+    if (isSaturday && isAprendiz && (colab.trabalhaSabado === false || colab.trabalhaSabado === 'nao')) return;
 
     const regKey = colab.id + '_' + activeMassDate;
     appState.registrosPonto[regKey] = {
