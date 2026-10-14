@@ -2825,10 +2825,17 @@ function renderMatrixView() {
     cell.addEventListener('click', () => {
       const colabId = cell.dataset.colabId;
       const isoDate = cell.dataset.date;
+      const wasAlreadySelected = (selectedMatrixColabId === colabId && selectedMatrixDate === isoDate);
 
-      // Seleciona a linha do funcionário e o dia/horário clicado imediatamente
+      // 1. Sempre atualiza a linha e a coluna/dia selecionada
       applyMatrixSelection(colabId, isoDate);
 
+      // 2. Se a célula NÃO estava selecionada previamente, o 1º clique apenas seleciona!
+      if (!wasAlreadySelected) {
+        return;
+      }
+
+      // 3. Se o usuário clicou na célula que JÁ ESTÁ selecionada, aí sim abre o modal de pendências
       if (cell.dataset.sunday === '1') {
         showToast('Dias de descanso obrigatório (DSR / Folga) não permitem alteração manual.', 'info');
         return;
@@ -5197,4 +5204,88 @@ document.addEventListener('DOMContentLoaded', () => {
   // Sincronização automática em segundo plano com a nuvem Supabase
   syncFromCloudOnStart();
 });
+
+// Navegação pelo teclado na Matriz de Ponto (Setas Cima/Baixo/Esquerda/Direita e Enter)
+document.addEventListener('keydown', (e) => {
+  // Apenas opera se a visão ativa for a Matriz de Ponto (view-ponto)
+  if (appState.activeView !== 'view-ponto') return;
+
+  // Não intercepta se o usuário estiver digitando em campos de texto/select
+  const activeTag = document.activeElement ? document.activeElement.tagName : '';
+  if (['INPUT', 'TEXTAREA', 'SELECT'].includes(activeTag)) return;
+
+  // Não intercepta se houver algum modal aberto na tela
+  const openModal = document.querySelector('.modal-overlay.active');
+  if (openModal) return;
+
+  const validKeys = ['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'Enter'];
+  if (!validKeys.includes(e.key)) return;
+
+  const employees = getFilteredAndSortedEmployees(true);
+  if (!employees || employees.length === 0) return;
+
+  const daysInMonth = getDaysInMonth(appState.currentYear, appState.currentMonth);
+
+  // Inicializa caso ainda não haja seleção
+  if (!selectedMatrixColabId) {
+    selectedMatrixColabId = employees[0].id;
+  }
+  if (!selectedMatrixDate) {
+    selectedMatrixDate = formatDateISO(appState.currentYear, appState.currentMonth, 1);
+  }
+
+  const currentColabIdx = employees.findIndex(c => c.id === selectedMatrixColabId);
+  const currentDay = parseInt(selectedMatrixDate.split('-')[2], 10) || 1;
+
+  if (e.key === 'ArrowUp') {
+    e.preventDefault();
+    const newIdx = Math.max(0, (currentColabIdx === -1 ? 0 : currentColabIdx) - 1);
+    applyMatrixSelection(employees[newIdx].id, selectedMatrixDate);
+    scrollSelectedCellIntoView();
+  } else if (e.key === 'ArrowDown') {
+    e.preventDefault();
+    const newIdx = Math.min(employees.length - 1, (currentColabIdx === -1 ? 0 : currentColabIdx) + 1);
+    applyMatrixSelection(employees[newIdx].id, selectedMatrixDate);
+    scrollSelectedCellIntoView();
+  } else if (e.key === 'ArrowLeft') {
+    e.preventDefault();
+    const newDay = Math.max(1, currentDay - 1);
+    const newDate = formatDateISO(appState.currentYear, appState.currentMonth, newDay);
+    applyMatrixSelection(selectedMatrixColabId, newDate);
+    scrollSelectedCellIntoView();
+  } else if (e.key === 'ArrowRight') {
+    e.preventDefault();
+    const newDay = Math.min(daysInMonth, currentDay + 1);
+    const newDate = formatDateISO(appState.currentYear, appState.currentMonth, newDay);
+    applyMatrixSelection(selectedMatrixColabId, newDate);
+    scrollSelectedCellIntoView();
+  } else if (e.key === 'Enter') {
+    e.preventDefault();
+    if (selectedMatrixColabId && selectedMatrixDate) {
+      const cell = document.querySelector('.cell-ponto[data-colab-id="' + selectedMatrixColabId + '"][data-date="' + selectedMatrixDate + '"]');
+      if (cell) {
+        if (cell.dataset.sunday === '1') {
+          showToast('Dias de descanso obrigatório (DSR / Folga) não permitem alteração manual.', 'info');
+          return;
+        }
+        if (cell.dataset.disabled === '1') {
+          showToast('Data anterior à admissão do colaborador.', 'warning');
+          return;
+        }
+        if (cell.dataset.dismissed === '1') {
+          showToast('Colaborador desligado nesta data.', 'warning');
+          return;
+        }
+        openCellDetailModal(selectedMatrixColabId, selectedMatrixDate);
+      }
+    }
+  }
+});
+
+function scrollSelectedCellIntoView() {
+  const cell = document.querySelector('.cell-ponto.cell-selected');
+  if (cell) {
+    cell.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'nearest' });
+  }
+}
 
