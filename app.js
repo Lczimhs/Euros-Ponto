@@ -2706,7 +2706,7 @@ function getFilteredAndSortedEmployees(isForPonto = false) {
 let selectedMatrixColabId = null;
 let selectedMatrixDate = null;
 
-function applyMatrixSelection(colabId, isoDate) {
+function applyMatrixSelection(colabId, isoDate, shouldScroll = true) {
   if (colabId !== undefined && colabId !== null) selectedMatrixColabId = colabId;
   if (isoDate !== undefined && isoDate !== null) selectedMatrixDate = isoDate;
 
@@ -2753,6 +2753,11 @@ function applyMatrixSelection(colabId, isoDate) {
       cell.classList.remove('cell-selected');
     }
   });
+
+  // 5. Acompanhamento automático da tela com a célula selecionada
+  if (shouldScroll) {
+    scrollSelectedCellIntoView(true);
+  }
 }
 
 function renderMatrixView() {
@@ -5327,10 +5332,51 @@ document.addEventListener('keydown', (e) => {
   }
 });
 
-function scrollSelectedCellIntoView() {
+function scrollSelectedCellIntoView(smooth = true) {
+  const container = document.querySelector('.matrix-container');
   const cell = document.querySelector('.cell-ponto.cell-selected');
-  if (cell) {
-    cell.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'nearest' });
+  if (!container || !cell) return;
+
+  const containerRect = container.getBoundingClientRect();
+  const cellRect = cell.getBoundingClientRect();
+
+  // Dimensões exatas das áreas fixas (sticky)
+  // 1. Cabeçalho sticky no topo: 54px
+  const headerHeight = 54;
+
+  // 2. Colunas sticky na esquerda (col-dept + col-badge + col-name):
+  const stickyColLeft = document.querySelector('.matrix-table thead th.col-name') || document.querySelector('.matrix-table tbody tr td.col-name');
+  const leftFrozenWidth = stickyColLeft ? (stickyColLeft.getBoundingClientRect().right - containerRect.left) : 420;
+
+  // 3. Coluna sticky na direita (col-dsr):
+  const stickyColDsr = document.querySelector('.matrix-table thead th.col-dsr') || document.querySelector('.matrix-table tbody tr td.col-dsr');
+  const rightFrozenWidth = stickyColDsr ? (containerRect.right - stickyColDsr.getBoundingClientRect().left) : 95;
+
+  const margin = 18; // Margem de respiro para visibilidade agradável
+
+  let scrollDeltaX = 0;
+  let scrollDeltaY = 0;
+
+  // Verificação Horizontal (Esquerda / Direita)
+  if (cellRect.left < containerRect.left + leftFrozenWidth + margin) {
+    scrollDeltaX = cellRect.left - (containerRect.left + leftFrozenWidth + margin);
+  } else if (cellRect.right > containerRect.right - rightFrozenWidth - margin) {
+    scrollDeltaX = cellRect.right - (containerRect.right - rightFrozenWidth - margin);
+  }
+
+  // Verificação Vertical (Cima / Baixo)
+  if (cellRect.top < containerRect.top + headerHeight + margin) {
+    scrollDeltaY = cellRect.top - (containerRect.top + headerHeight + margin);
+  } else if (cellRect.bottom > containerRect.bottom - margin) {
+    scrollDeltaY = cellRect.bottom - (containerRect.bottom - margin);
+  }
+
+  if (scrollDeltaX !== 0 || scrollDeltaY !== 0) {
+    container.scrollBy({
+      left: scrollDeltaX,
+      top: scrollDeltaY,
+      behavior: smooth ? 'smooth' : 'auto'
+    });
   }
 }
 
