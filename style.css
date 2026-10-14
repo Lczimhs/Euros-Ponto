@@ -64,39 +64,40 @@
 }
 
 /* ==========================================================================
-   MODO CLARO (LIGHT MODE) - Paleta Adobe Solicitada:
-   - #93BAD6 (Azul Céu Suave / Bordas e Destaques Secundários)
-   - #B0BDD6 (Ardósia Claro / Bordas Estruturais e Divisores)
-   - #0F1AD6 (Azul Real Intenso / Ações Principais e Destaques Neon)
-   - #222E57 (Azul Marinho Profundo / Texto Principal, Cabeçalhos e Contraste)
+   MODO CLARO (LIGHT MODE) - Paleta Suave Solicitada:
+   - #E3F4FF (Azul Gelo Claro / Fundo de Painéis e Superfícies Suaves)
+   - #B6DDFF (Azul Céu Suave / Seleções e Destaques Secundários)
+   - #7FB8E6 (Azul Cerúleo / Ações Primárias, Botões e Destaques)
+   - #F9FAFB (Branco Nuvem / Fundo Base Limpo e Cards)
+   - #C7D0DA (Ardósia Suave / Bordas e Divisores)
    ========================================================================== */
 [data-theme="light"] {
-  --color-bg-base: #F1F5FA;
-  --color-bg-dark: #E2EBF5;
+  --color-bg-base: #F9FAFB;
+  --color-bg-dark: #E3F4FF;
   --color-bg-card: #FFFFFF;
-  --color-bg-surface: #E8F0F8;
-  --color-bg-panel: #E2EAF4;
-  --color-border: #B0BDD6;
-  --color-border-bright: #93BAD6;
-  --color-primary: #0F1AD6;
-  --color-primary-hover: #0b13ab;
-  --color-primary-light: #2c38ea;
+  --color-bg-surface: #F0F7FD;
+  --color-bg-panel: #E3F4FF;
+  --color-border: #C7D0DA;
+  --color-border-bright: #7FB8E6;
+  --color-primary: #7FB8E6;
+  --color-primary-hover: #5A9FD6;
+  --color-primary-light: #B6DDFF;
 
-  --color-cyan: #0F1AD6;
-  --color-cyan-glow: rgba(15, 26, 214, 0.15);
-  --color-blue-bright: #0F1AD6;
-  --color-blue-soft: #222E57;
+  --color-cyan: #2B6CB0;
+  --color-cyan-glow: rgba(127, 184, 230, 0.25);
+  --color-blue-bright: #7FB8E6;
+  --color-blue-soft: #1E293B;
 
-  --color-text-main: #222E57;
-  --color-text-sub: #374670;
-  --color-text-muted: #5C6E96;
+  --color-text-main: #1E293B;
+  --color-text-sub: #475569;
+  --color-text-muted: #64748B;
 
-  --color-sunday-bg: #E3EAF3;
-  --color-sunday-text: #4F5F85;
+  --color-sunday-bg: #EAF0F6;
+  --color-sunday-text: #64748B;
 
-  --color-ok-bg: rgba(15, 26, 214, 0.08);
-  --color-ok-border: rgba(15, 26, 214, 0.35);
-  --color-ok-text: #0F1AD6;
+  --color-ok-bg: rgba(127, 184, 230, 0.15);
+  --color-ok-border: #7FB8E6;
+  --color-ok-text: #1D4ED8;
 
   /* Falta Integral e Meio Período (FM / FT) */
   --color-falta-bg: #FEE2E2;
@@ -112,13 +113,13 @@
   --color-atraso-border: #F59E0B;
   --color-atraso-text: #B45309;
 
-  --color-feriado-bg: rgba(147, 186, 214, 0.35);
-  --color-feriado-border: #0F1AD6;
-  --color-feriado-text: #0F1AD6;
+  --color-feriado-bg: #B6DDFF;
+  --color-feriado-border: #7FB8E6;
+  --color-feriado-text: #1D4ED8;
 
-  --shadow-glow: 0 2px 10px rgba(15, 26, 214, 0.2);
-  --shadow-purple: 0 4px 15px rgba(15, 26, 214, 0.15);
-  --shadow-card: 0 2px 8px rgba(34, 46, 87, 0.08);
+  --shadow-glow: 0 2px 10px rgba(127, 184, 230, 0.25);
+  --shadow-purple: 0 4px 15px rgba(127, 184, 230, 0.2);
+  --shadow-card: 0 2px 8px rgba(30, 41, 59, 0.06);
 }
 
 * {
@@ -2384,105 +2385,105 @@ thead th.col-dsr {
 }
 
 /* ==========================================================================
-   ESTILOS ESPECÍFICOS DO MODO CLARO (PALETA #93BAD6, #B0BDD6, #0F1AD6, #222E57)
+   ESTILOS ESPECÍFICOS DO MODO CLARO (PALETA #E3F4FF, #B6DDFF, #7FB8E6, #F9FAFB, #C7D0DA)
    ========================================================================== */
 [data-theme="light"] ::-webkit-scrollbar-track {
-  background: #E2EBF5;
+  background: #E3F4FF;
 }
 
 [data-theme="light"] ::-webkit-scrollbar-thumb {
-  background: #B0BDD6;
+  background: #C7D0DA;
 }
 
 [data-theme="light"] ::-webkit-scrollbar-thumb:hover {
-  background: #93BAD6;
+  background: #7FB8E6;
 }
 
 /* Header & Top Navigation */
 [data-theme="light"] .app-header {
-  background: linear-gradient(180deg, #FFFFFF 0%, #F1F5FA 100%);
-  border-bottom: 1px solid #B0BDD6;
-  box-shadow: 0 2px 12px rgba(34, 46, 87, 0.08);
+  background: linear-gradient(180deg, #FFFFFF 0%, #E3F4FF 100%);
+  border-bottom: 1px solid #C7D0DA;
+  box-shadow: 0 2px 10px rgba(30, 41, 59, 0.05);
 }
 
 [data-theme="light"] .brand-title-group h1 {
-  color: #222E57;
+  color: #1E293B;
 }
 
 [data-theme="light"] .brand-title-group h1 span {
-  color: #0F1AD6;
+  color: #2B6CB0;
   text-shadow: none;
 }
 
 [data-theme="light"] .brand-title-group h1 span[style*="background"] {
-  background: #E2EBF5 !important;
-  border-color: #B0BDD6 !important;
-  color: #222E57 !important;
+  background: #E3F4FF !important;
+  border-color: #C7D0DA !important;
+  color: #1E293B !important;
 }
 
 [data-theme="light"] .brand-subtitle {
-  color: #5C6E96;
+  color: #64748B;
 }
 
 [data-theme="light"] .brand-logo-icon {
-  background: linear-gradient(135deg, #0F1AD6 0%, #222E57 100%);
+  background: linear-gradient(135deg, #7FB8E6 0%, #2B6CB0 100%);
   color: #FFFFFF;
-  border-color: #0F1AD6;
-  box-shadow: 0 2px 8px rgba(15, 26, 214, 0.25);
+  border-color: #7FB8E6;
+  box-shadow: 0 2px 8px rgba(127, 184, 230, 0.35);
 }
 
 /* Nav Tabs */
 [data-theme="light"] .header-nav-views {
-  background: #E2EBF5;
-  border-color: #B0BDD6;
+  background: #E3F4FF;
+  border-color: #C7D0DA;
 }
 
 [data-theme="light"] .nav-tab-btn {
-  color: #222E57;
+  color: #1E293B;
 }
 
 [data-theme="light"] .nav-tab-btn:hover {
-  background: #D5E3F2;
-  color: #0F1AD6;
+  background: #B6DDFF;
+  color: #1E293B;
 }
 
 [data-theme="light"] .nav-tab-btn.active {
-  background: #0F1AD6;
+  background: #7FB8E6;
   color: #FFFFFF;
-  border-color: #0F1AD6;
-  box-shadow: 0 2px 8px rgba(15, 26, 214, 0.35);
+  border-color: #5A9FD6;
+  box-shadow: 0 2px 8px rgba(127, 184, 230, 0.4);
 }
 
 /* Branch Tabs */
 [data-theme="light"] .branch-tabs-container {
-  border-top-color: #B0BDD6;
+  border-top-color: #C7D0DA;
 }
 
 [data-theme="light"] .branch-tab-item {
   background: #FFFFFF;
-  border-color: #B0BDD6;
-  color: #222E57;
+  border-color: #C7D0DA;
+  color: #1E293B;
 }
 
 [data-theme="light"] .branch-tab-item:hover {
-  border-color: #0F1AD6;
-  color: #0F1AD6;
+  border-color: #7FB8E6;
+  color: #2B6CB0;
 }
 
 [data-theme="light"] .branch-tab-item.active {
-  background: linear-gradient(135deg, #0F1AD6 0%, #222E57 100%);
+  background: linear-gradient(135deg, #7FB8E6 0%, #5A9FD6 100%);
   color: #FFFFFF;
-  border-color: #0F1AD6;
-  box-shadow: 0 2px 8px rgba(15, 26, 214, 0.25);
+  border-color: #7FB8E6;
+  box-shadow: 0 2px 8px rgba(127, 184, 230, 0.3);
 }
 
 [data-theme="light"] .branch-tab-item .branch-badge {
-  background: rgba(34, 46, 87, 0.08);
-  color: #222E57;
+  background: rgba(30, 41, 59, 0.08);
+  color: #1E293B;
 }
 
 [data-theme="light"] .branch-tab-item.active .branch-badge {
-  background: rgba(255, 255, 255, 0.25);
+  background: rgba(255, 255, 255, 0.3);
   color: #FFFFFF;
 }
 
@@ -2490,204 +2491,204 @@ thead th.col-dsr {
 [data-theme="light"] .toolbar-container,
 [data-theme="light"] .filters-bar,
 [data-theme="light"] .calendar-filters-bar {
-  background: #E8F0F8;
-  border-color: #B0BDD6;
+  background: #E3F4FF;
+  border-color: #C7D0DA;
 }
 
 [data-theme="light"] .btn-secondary {
   background: #FFFFFF;
-  color: #222E57;
-  border-color: #B0BDD6;
+  color: #1E293B;
+  border-color: #C7D0DA;
 }
 
 [data-theme="light"] .btn-secondary:hover {
-  background: #F1F5FA;
-  color: #0F1AD6;
-  border-color: #93BAD6;
+  background: #F9FAFB;
+  color: #2B6CB0;
+  border-color: #7FB8E6;
 }
 
 [data-theme="light"] .btn-cyan {
-  background: #EBF2FE;
-  color: #0F1AD6;
-  border-color: #93BAD6;
+  background: #E3F4FF;
+  color: #2B6CB0;
+  border-color: #7FB8E6;
 }
 
 [data-theme="light"] .btn-cyan:hover {
-  background: #D9E6FA;
-  border-color: #0F1AD6;
+  background: #B6DDFF;
+  border-color: #2B6CB0;
 }
 
 [data-theme="light"] .cloud-badge {
-  background: #EBF2FE;
-  color: #0F1AD6;
-  border-color: #93BAD6;
-  box-shadow: 0 0 8px rgba(15, 26, 214, 0.12);
+  background: #E3F4FF;
+  color: #2B6CB0;
+  border-color: #7FB8E6;
+  box-shadow: 0 0 8px rgba(127, 184, 230, 0.2);
 }
 
 [data-theme="light"] .cloud-dot {
-  background: #0F1AD6;
-  box-shadow: 0 0 6px rgba(15, 26, 214, 0.6);
+  background: #2B6CB0;
+  box-shadow: 0 0 6px rgba(43, 108, 176, 0.6);
 }
 
 [data-theme="light"] .month-nav-btn {
   background: #FFFFFF;
-  border-color: #B0BDD6;
-  color: #222E57;
+  border-color: #C7D0DA;
+  color: #1E293B;
 }
 
 [data-theme="light"] .month-nav-btn:hover {
-  border-color: #0F1AD6;
-  color: #0F1AD6;
-  background: #F0F4FA;
+  border-color: #7FB8E6;
+  color: #2B6CB0;
+  background: #E3F4FF;
 }
 
 [data-theme="light"] .current-month-display {
-  color: #222E57;
+  color: #1E293B;
 }
 
 /* Matriz de Ponto (Tabela, Cabeçalhos e Colunas Sticky) */
 [data-theme="light"] .matrix-container {
-  background: #F1F5FA;
+  background: #F9FAFB;
 }
 
 [data-theme="light"] .matrix-table thead tr th {
-  background: #222E57 !important;
+  background: #213461 !important;
   color: #FFFFFF !important;
-  border-color: #B0BDD6 !important;
+  border-color: #C7D0DA !important;
 }
 
 [data-theme="light"] .matrix-table thead tr:first-child th {
-  background: #222E57 !important;
+  background: #213461 !important;
   color: #FFFFFF !important;
 }
 
 [data-theme="light"] .matrix-table thead tr:last-child th {
-  background: #2B3A68 !important;
-  color: #B0BDD6 !important;
-  border-bottom: 2px solid #93BAD6 !important;
+  background: #E3F4FF !important;
+  color: #1E293B !important;
+  border-bottom: 2px solid #7FB8E6 !important;
 }
 
 [data-theme="light"] .col-dept,
 [data-theme="light"] .col-badge,
 [data-theme="light"] .col-name {
   background: #FFFFFF !important;
-  color: #222E57 !important;
-  border-right: 1px solid #B0BDD6 !important;
-  box-shadow: 2px 0 6px rgba(34, 46, 87, 0.08);
+  color: #1E293B !important;
+  border-right: 1px solid #C7D0DA !important;
+  box-shadow: 2px 0 6px rgba(30, 41, 59, 0.05);
 }
 
 [data-theme="light"] .col-name {
-  border-right: 2px solid #93BAD6 !important;
-  color: #222E57 !important;
+  border-right: 2px solid #7FB8E6 !important;
+  color: #1E293B !important;
 }
 
 [data-theme="light"] .col-dsr {
-  background: #F0F5FA !important;
-  color: #222E57 !important;
-  border-left: 2px solid #93BAD6 !important;
-  box-shadow: -4px 0 10px rgba(34, 46, 87, 0.06);
+  background: #E3F4FF !important;
+  color: #1E293B !important;
+  border-left: 2px solid #7FB8E6 !important;
+  box-shadow: -4px 0 10px rgba(30, 41, 59, 0.04);
 }
 
 [data-theme="light"] thead th.col-dept,
 [data-theme="light"] thead th.col-badge,
 [data-theme="light"] thead th.col-name,
 [data-theme="light"] thead th.col-dsr {
-  background: #222E57 !important;
+  background: #213461 !important;
   color: #FFFFFF !important;
-  border-bottom: 2px solid #93BAD6 !important;
+  border-bottom: 2px solid #7FB8E6 !important;
 }
 
 [data-theme="light"] .matrix-table tbody tr:nth-child(even) td.col-dept,
 [data-theme="light"] .matrix-table tbody tr:nth-child(even) td.col-badge,
 [data-theme="light"] .matrix-table tbody tr:nth-child(even) td.col-name {
-  background: #F8FAFD !important;
+  background: #F9FAFB !important;
 }
 
 [data-theme="light"] .matrix-table tbody tr:hover td.col-dept,
 [data-theme="light"] .matrix-table tbody tr:hover td.col-badge,
 [data-theme="light"] .matrix-table tbody tr:hover td.col-name {
-  background: #E4EFF9 !important;
+  background: #E3F4FF !important;
 }
 
 [data-theme="light"] .matrix-table tbody tr:nth-child(even) {
-  background: rgba(176, 189, 214, 0.15);
+  background: rgba(227, 244, 255, 0.40);
 }
 
 [data-theme="light"] .matrix-table tbody tr:hover {
-  background: rgba(147, 186, 214, 0.25);
+  background: rgba(182, 221, 255, 0.35);
 }
 
 [data-theme="light"] .th-date-clickable.th-sunday,
 [data-theme="light"] .matrix-table thead tr th.th-sunday {
-  background: #36446E !important;
-  color: #B0BDD6 !important;
+  background: #334155 !important;
+  color: #E2E8F0 !important;
 }
 
 [data-theme="light"] .th-date-clickable.th-feriado,
 [data-theme="light"] .matrix-table thead tr th.th-feriado {
-  background: #18234D !important;
-  color: #93BAD6 !important;
-  border-bottom-color: #93BAD6 !important;
+  background: #1E3A8A !important;
+  color: #B6DDFF !important;
+  border-bottom-color: #7FB8E6 !important;
 }
 
 /* Interatividade de seleção no Modo Claro */
 [data-theme="light"] .matrix-table tbody tr.selected-row {
-  background: rgba(147, 186, 214, 0.25) !important;
+  background: rgba(182, 221, 255, 0.45) !important;
 }
 
 [data-theme="light"] .matrix-table tbody tr.selected-row td {
-  border-top: 1px solid #93BAD6 !important;
-  border-bottom: 1px solid #93BAD6 !important;
+  border-top: 1px solid #7FB8E6 !important;
+  border-bottom: 1px solid #7FB8E6 !important;
 }
 
 [data-theme="light"] .matrix-table tbody tr.selected-row td.col-dept {
-  background: #D5E3F2 !important;
-  border-left: 4px solid #0F1AD6 !important;
-  color: #222E57 !important;
+  background: #B6DDFF !important;
+  border-left: 4px solid #7FB8E6 !important;
+  color: #1E293B !important;
 }
 
 [data-theme="light"] .matrix-table tbody tr.selected-row td.col-badge {
-  background: #D5E3F2 !important;
-  color: #0F1AD6 !important;
+  background: #B6DDFF !important;
+  color: #1D4ED8 !important;
   font-weight: 800 !important;
 }
 
 [data-theme="light"] .matrix-table tbody tr.selected-row td.col-name {
-  background: #D5E3F2 !important;
-  color: #222E57 !important;
+  background: #B6DDFF !important;
+  color: #1E293B !important;
   font-weight: 700 !important;
 }
 
 [data-theme="light"] .matrix-table tbody tr.selected-row td.col-name strong {
-  color: #0F1AD6 !important;
+  color: #1D4ED8 !important;
 }
 
 [data-theme="light"] .matrix-table tbody tr.selected-row td.col-dsr {
-  background: #CADBF0 !important;
-  color: #222E57 !important;
+  background: #B6DDFF !important;
+  color: #1E293B !important;
 }
 
 [data-theme="light"] .matrix-table thead th.selected-col {
-  background: #0F1AD6 !important;
+  background: #7FB8E6 !important;
   color: #FFFFFF !important;
-  box-shadow: inset 0 -3px 0 #93BAD6, 0 0 10px rgba(15, 26, 214, 0.3) !important;
+  box-shadow: inset 0 -3px 0 #2B6CB0, 0 0 10px rgba(127, 184, 230, 0.4) !important;
 }
 
 [data-theme="light"] .matrix-table tbody td.selected-col {
-  background: rgba(147, 186, 214, 0.18) !important;
+  background: rgba(182, 221, 255, 0.25) !important;
 }
 
 [data-theme="light"] .cell-ponto.cell-selected {
-  outline: 2px solid #0F1AD6 !important;
+  outline: 2px solid #2B6CB0 !important;
   outline-offset: 1px;
-  box-shadow: 0 0 10px rgba(15, 26, 214, 0.45) !important;
+  box-shadow: 0 0 10px rgba(127, 184, 230, 0.5) !important;
 }
 
 /* Células de Status no Modo Claro */
 [data-theme="light"] .status-ok {
-  background: #EBF2FE !important;
-  color: #0F1AD6 !important;
-  border: 1px solid #93BAD6 !important;
+  background: #E3F4FF !important;
+  color: #1D4ED8 !important;
+  border: 1px solid #7FB8E6 !important;
 }
 
 [data-theme="light"] .status-falta {
@@ -2724,27 +2725,27 @@ thead th.col-dsr {
 }
 
 [data-theme="light"] .status-domingo {
-  background: #E6EDF5 !important;
-  color: #5C6E96 !important;
-  border: 1px solid #C3D1E4 !important;
+  background: #EAF0F6 !important;
+  color: #64748B !important;
+  border: 1px solid #C7D0DA !important;
 }
 
 [data-theme="light"] .status-feriado {
-  background: rgba(147, 186, 214, 0.35) !important;
-  color: #0F1AD6 !important;
-  border: 1px solid #0F1AD6 !important;
+  background: #B6DDFF !important;
+  color: #1D4ED8 !important;
+  border: 1px solid #7FB8E6 !important;
 }
 
 /* Modais e Formulários */
 [data-theme="light"] .modal-card {
   background: #FFFFFF;
-  border: 1px solid #B0BDD6;
-  box-shadow: 0 10px 30px rgba(34, 46, 87, 0.2);
+  border: 1px solid #C7D0DA;
+  box-shadow: 0 10px 30px rgba(30, 41, 59, 0.15);
 }
 
 [data-theme="light"] .modal-header {
-  background: linear-gradient(135deg, #0F1AD6 0%, #222E57 100%);
-  border-bottom: 1px solid #B0BDD6;
+  background: linear-gradient(135deg, #7FB8E6 0%, #2B6CB0 100%);
+  border-bottom: 1px solid #C7D0DA;
 }
 
 [data-theme="light"] .modal-header h3 {
@@ -2752,8 +2753,8 @@ thead th.col-dsr {
 }
 
 [data-theme="light"] .modal-footer {
-  background: #F1F5FA;
-  border-top: 1px solid #B0BDD6;
+  background: #E3F4FF;
+  border-top: 1px solid #C7D0DA;
 }
 
 [data-theme="light"] .modal-close-btn {
@@ -2766,24 +2767,24 @@ thead th.col-dsr {
 
 [data-theme="light"] .form-control {
   background: #FFFFFF;
-  border: 1px solid #B0BDD6;
-  color: #222E57;
+  border: 1px solid #C7D0DA;
+  color: #1E293B;
 }
 
 [data-theme="light"] .form-control:focus {
-  border-color: #0F1AD6;
-  box-shadow: 0 0 6px rgba(15, 26, 214, 0.25);
+  border-color: #7FB8E6;
+  box-shadow: 0 0 6px rgba(127, 184, 230, 0.35);
 }
 
 [data-theme="light"] .punches-box {
-  background: #F1F5FA;
-  border: 1px solid #B0BDD6;
+  background: #E3F4FF;
+  border: 1px solid #C7D0DA;
 }
 
 /* Fechamento VA e KPIs */
 [data-theme="light"] .va-card-header {
-  background: #222E57;
-  border-bottom: 1px solid #B0BDD6;
+  background: #1E293B;
+  border-bottom: 1px solid #C7D0DA;
 }
 
 [data-theme="light"] .va-card-header h2 {
@@ -2791,53 +2792,53 @@ thead th.col-dsr {
 }
 
 [data-theme="light"] .va-card-header h2 span {
-  color: #93BAD6;
+  color: #7FB8E6;
 }
 
 [data-theme="light"] .styled-table th {
-  background: #E8F0F8;
-  color: #222E57;
-  border-bottom: 1px solid #B0BDD6;
+  background: #E3F4FF;
+  color: #1E293B;
+  border-bottom: 1px solid #C7D0DA;
 }
 
 [data-theme="light"] .styled-table td {
-  border-bottom: 1px solid #E2EBF5;
-  color: #222E57;
+  border-bottom: 1px solid #EBF3FA;
+  color: #1E293B;
 }
 
 [data-theme="light"] .styled-table tr:hover td {
-  background: #EDF3FA;
+  background: #E3F4FF;
 }
 
 [data-theme="light"] .kpi-card {
   background: #FFFFFF;
-  border-color: #B0BDD6;
-  box-shadow: 0 2px 8px rgba(34, 46, 87, 0.06);
+  border-color: #C7D0DA;
+  box-shadow: 0 2px 8px rgba(30, 41, 59, 0.05);
 }
 
 [data-theme="light"] .kpi-card::before {
-  background: linear-gradient(90deg, #0F1AD6 0%, #93BAD6 100%);
+  background: linear-gradient(90deg, #7FB8E6 0%, #B6DDFF 100%);
 }
 
 [data-theme="light"] .kpi-value.cyan {
-  color: #0F1AD6;
+  color: #1D4ED8;
   text-shadow: none;
 }
 
 [data-theme="light"] .kpi-value.purple {
-  color: #222E57;
+  color: #1E293B;
 }
 
 [data-theme="light"] .kpi-helper {
-  color: #5C6E96;
+  color: #64748B;
 }
 
 [data-theme="light"] .val-liquido {
-  color: #0F1AD6 !important;
+  color: #1D4ED8 !important;
 }
 
 [data-theme="light"] .val-desconto {
-  color: #7B8CAE !important;
+  color: #64748B !important;
 }
 
 /* Colaboradores, Mural de Avisos e Calendário */
@@ -2847,36 +2848,36 @@ thead th.col-dsr {
 [data-theme="light"] .avisos-calendar-card,
 [data-theme="light"] .calendar-card {
   background: #FFFFFF;
-  border-color: #B0BDD6;
+  border-color: #C7D0DA;
 }
 
 [data-theme="light"] .cal-day-cell {
   background: #FFFFFF;
-  border-color: #B0BDD6;
+  border-color: #C7D0DA;
 }
 
 [data-theme="light"] .cal-day-cell.other-month {
-  background: #F4F7FC;
-  color: #8E9EBF;
+  background: #F9FAFB;
+  color: #94A3B8;
 }
 
 [data-theme="light"] .cal-day-cell.is-today {
-  border: 2px solid #0F1AD6;
+  border: 2px solid #7FB8E6;
 }
 
 [data-theme="light"] .cal-header-day {
-  background: #E8F0F8;
-  color: #222E57;
-  border-color: #B0BDD6;
+  background: #E3F4FF;
+  color: #1E293B;
+  border-color: #C7D0DA;
 }
 
 [data-theme="light"] .legend-bar {
-  background: #E8F0F8;
-  border-color: #B0BDD6;
+  background: #E3F4FF;
+  border-color: #C7D0DA;
 }
 
 [data-theme="light"] .legend-item {
-  color: #222E57;
+  color: #1E293B;
 }
 
 /* Print View Styles */
