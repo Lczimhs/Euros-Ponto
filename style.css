@@ -73,7 +73,7 @@
    MODO CLARO (LIGHT MODE) - Paleta Slate & Deep Midnight Navy (#8E8FA1, #595A61, #151733, #090B33)
    ========================================================================== */
 [data-theme="light"] {
-  --color-bg-base: #F4F4F7;
+  --color-bg-base: #AEE3F5;
   --color-bg-dark: #E3E4EB;
   --color-bg-card: #FFFFFF;
   --color-bg-surface: #EDEDF2;
@@ -2401,6 +2401,11 @@ thead th.col-dsr {
   background: #8E8FA1;
 }
 
+[data-theme="light"] body,
+[data-theme="light"] .app-view {
+  background-color: #AEE3F5 !important;
+}
+
 /* Header & Top Navigation */
 [data-theme="light"] .app-header {
   background: #CAF0FC !important;
@@ -2510,22 +2515,120 @@ thead th.col-dsr {
 
 /* Toolbar & Filter Bar */
 [data-theme="light"] .toolbar-container,
+[data-theme="light"] .colab-filter-bar,
 [data-theme="light"] .filters-bar,
 [data-theme="light"] .calendar-filters-bar {
-  background: #EDEDF2;
-  border-color: #C8C9D3;
+  background: #FFFFFF !important;
+  border-bottom: 1px solid #C8C9D3 !important;
+  box-shadow: 0 1px 4px rgba(9, 11, 51, 0.04);
+}
+
+[data-theme="light"] .toolbar-container .sort-select-box,
+[data-theme="light"] .colab-filter-bar .sort-select-box {
+  background: #F8F9FA !important;
+  border: 1px solid #B0B3C6 !important;
+  box-shadow: 0 1px 2px rgba(9, 11, 51, 0.04);
+}
+
+[data-theme="light"] .toolbar-container .sort-select-box label,
+[data-theme="light"] .colab-filter-bar .sort-select-box label {
+  color: #151733 !important;
+  font-weight: 700 !important;
+}
+
+[data-theme="light"] .toolbar-container .sort-select,
+[data-theme="light"] .colab-filter-bar .sort-select {
+  color: #1D4ED8 !important;
+  font-weight: 700 !important;
+}
+
+[data-theme="light"] .toolbar-container .search-input,
+[data-theme="light"] .colab-filter-bar .search-input {
+  background: #F8F9FA !important;
+  border: 1px solid #B0B3C6 !important;
+  color: #090B33 !important;
+  font-weight: 600 !important;
+  box-shadow: 0 1px 2px rgba(9, 11, 51, 0.04);
+}
+
+[data-theme="light"] .toolbar-container .search-input::placeholder,
+[data-theme="light"] .colab-filter-bar .search-input::placeholder {
+  color: #595A61 !important;
+  font-weight: 500;
+}
+
+[data-theme="light"] .toolbar-container .search-icon,
+[data-theme="light"] .colab-filter-bar .search-icon {
+  color: #151733 !important;
+}
+
+[data-theme="light"] .toolbar-container .month-selector {
+  background: #F8F9FA !important;
+  border: 1px solid #B0B3C6 !important;
+  box-shadow: 0 1px 2px rgba(9, 11, 51, 0.04);
+}
+
+[data-theme="light"] .toolbar-container .current-month-display {
+  color: #090B33 !important;
+  font-weight: 700 !important;
+}
+
+[data-theme="light"] .toolbar-container .month-nav-btn {
+  background: transparent !important;
+  color: #151733 !important;
+  font-weight: 700 !important;
+}
+
+[data-theme="light"] .toolbar-container .month-nav-btn:hover {
+  background: #E3E4EB !important;
+  color: #090B33 !important;
+}
+
+[data-theme="light"] .toolbar-container .focus-toggle-box {
+  background: #F8F9FA !important;
+  border: 1px solid #B0B3C6 !important;
+  box-shadow: 0 1px 2px rgba(9, 11, 51, 0.04);
+}
+
+[data-theme="light"] .toolbar-container .focus-toggle-text {
+  color: #151733 !important;
+  font-weight: 700 !important;
+}
+
+[data-theme="light"] .toolbar-container .focus-toggle-box .toggle-switch {
+  background: #D8D9E4 !important;
+  border: 1px solid #B0B3C6 !important;
+}
+
+[data-theme="light"] .toolbar-container .focus-toggle-box.active {
+  background: #EFF6FF !important;
+  border-color: #2563EB !important;
+}
+
+[data-theme="light"] .toolbar-container .focus-toggle-box.active .focus-toggle-text {
+  color: #1D4ED8 !important;
 }
 
 [data-theme="light"] .btn-secondary {
-  background: #FFFFFF;
-  color: #090B33;
-  border-color: #C8C9D3;
+  background: #F8F9FA !important;
+  color: #151733 !important;
+  border: 1px solid #B0B3C6 !important;
+  font-weight: 700 !important;
+  box-shadow: 0 1px 2px rgba(9, 11, 51, 0.04);
 }
 
 [data-theme="light"] .btn-secondary:hover {
-  background: #E3E4EB;
-  color: #151733;
-  border-color: #8E8FA1;
+  background: #E3E4EB !important;
+  color: #090B33 !important;
+  border-color: #151733 !important;
+}
+
+[data-theme="light"] .toolbar-container #btn-novo-colaborador-quick {
+  background: linear-gradient(135deg, #3B82F6 0%, #2563EB 100%) !important;
+  color: #FFFFFF !important;
+  border: 1px solid #2563EB !important;
+  box-shadow: 0 2px 6px rgba(37, 99, 235, 0.35) !important;
+  font-weight: 700 !important;
 }
 
 [data-theme="light"] .btn-cyan {
@@ -2572,15 +2675,15 @@ thead th.col-dsr {
    ========================================================================== */
 /* Hero Section (Painel Principal de Prazos Legais) */
 [data-theme="light"] .cal-hero-section {
-  background: #AEE3F5 !important;
+  background: #FFFFFF !important;
   border: 1px solid #8FD2E8 !important;
   box-shadow: 0 4px 16px rgba(9, 11, 51, 0.06);
 }
 
 [data-theme="light"] .cal-badge-pill {
-  background: #FFFFFF !important;
-  color: #034870 !important;
-  border: 1px solid #8FD2E8 !important;
+  background: #E3E4EB !important;
+  color: #151733 !important;
+  border: 1px solid #8E8FA1 !important;
   font-weight: 700;
   letter-spacing: 0.5px;
 }
@@ -2593,11 +2696,11 @@ thead th.col-dsr {
 
 [data-theme="light"] .cal-branch-indicator,
 [data-theme="light"] .cal-hero-left p {
-  color: #1E3A4B !important;
+  color: #595A61 !important;
 }
 
 [data-theme="light"] .cal-branch-indicator strong {
-  color: #090B33 !important;
+  color: #151733 !important;
 }
 
 /* Manter o Botão "+ Novo Aviso / Prazo Legal" com destaque visual */
@@ -2694,19 +2797,27 @@ thead th.col-dsr {
 
 /* Barra Secundária de Filtros do Calendário */
 [data-theme="light"] .cal-ref-subbar {
-  background: #EDEDF2;
-  border-bottom: 1px solid #C8C9D3;
+  background: #FFFFFF !important;
+  border-bottom: 1px solid #C8C9D3 !important;
+  box-shadow: 0 1px 4px rgba(9, 11, 51, 0.04);
+}
+
+[data-theme="light"] .cal-ref-subbar .sort-select-box {
+  background: #F8F9FA !important;
+  border: 1px solid #B0B3C6 !important;
+  box-shadow: 0 1px 2px rgba(9, 11, 51, 0.04);
 }
 
 [data-theme="light"] .cal-ref-subbar label {
-  color: #151733;
-  font-weight: 600;
+  color: #151733 !important;
+  font-weight: 700 !important;
 }
 
 [data-theme="light"] .cal-ref-subbar .sort-select {
-  background: #FFFFFF;
-  color: #090B33;
-  border: 1px solid #C8C9D3;
+  background: transparent !important;
+  color: #1D4ED8 !important;
+  border: none !important;
+  font-weight: 700 !important;
 }
 
 [data-theme="light"] .cal-ref-subbar .sort-select:focus {
@@ -2715,8 +2826,8 @@ thead th.col-dsr {
 }
 
 [data-theme="light"] .cal-legend-quick {
-  color: #595A61;
-  font-weight: 500;
+  color: #151733 !important;
+  font-weight: 600 !important;
 }
 
 /* Linha com os Dias da Semana (seg, ter, qua, qui, sex, sáb, dom) */
