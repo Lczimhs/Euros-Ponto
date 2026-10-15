@@ -91,6 +91,10 @@ function getDefaultSeedData() {
     {
       "id": "dept-obra",
       "nome": "OBRA"
+    },
+    {
+      "id": "dept-admin-sponto",
+      "nome": "ADMIN-S/PONTO"
     }
   ];
 
@@ -111,7 +115,7 @@ function getDefaultSeedData() {
       "cracha": 1031,
       "nome": "IRACI EVANGELISTA DOS SANTOS",
       "filialId": "branch-1",
-      "deptId": "dept-admin",
+      "deptId": "dept-admin-sponto",
       "admissao": "2026-09-30",
       "registraPonto": true,
       "status": "ativo",
@@ -155,7 +159,7 @@ function getDefaultSeedData() {
       "cracha": 325,
       "nome": "JORGE LUIZ DE ANDRADE",
       "filialId": "branch-1",
-      "deptId": "dept-admin",
+      "deptId": "dept-admin-sponto",
       "admissao": "2019-07-31",
       "registraPonto": true,
       "status": "ativo",
@@ -166,7 +170,7 @@ function getDefaultSeedData() {
       "cracha": 336,
       "nome": "CLAUDINEI RIBEIRO FERNANDES",
       "filialId": "branch-1",
-      "deptId": "dept-admin",
+      "deptId": "dept-admin-sponto",
       "admissao": "2019-09-20",
       "registraPonto": true,
       "status": "ativo",
@@ -199,7 +203,7 @@ function getDefaultSeedData() {
       "cracha": 431,
       "nome": "RONALDO RIBEIRO DE ARAUJO",
       "filialId": "branch-1",
-      "deptId": "dept-admin",
+      "deptId": "dept-admin-sponto",
       "admissao": "2020-10-30",
       "registraPonto": true,
       "status": "ativo",
@@ -221,7 +225,7 @@ function getDefaultSeedData() {
       "cracha": 540,
       "nome": "LEONILDO TABORDA BARBOSA",
       "filialId": "branch-1",
-      "deptId": "dept-admin",
+      "deptId": "dept-admin-sponto",
       "admissao": "2021-10-14",
       "registraPonto": true,
       "status": "ativo",
@@ -265,7 +269,7 @@ function getDefaultSeedData() {
       "cracha": 696,
       "nome": "ANTONIO DA SILVA",
       "filialId": "branch-1",
-      "deptId": "dept-admin",
+      "deptId": "dept-admin-sponto",
       "admissao": "2007-03-01",
       "registraPonto": true,
       "status": "ativo",
@@ -287,7 +291,7 @@ function getDefaultSeedData() {
       "cracha": 702,
       "nome": "BRUNO RIBEIRO DA SILVA",
       "filialId": "branch-1",
-      "deptId": "dept-admin",
+      "deptId": "dept-admin-sponto",
       "admissao": "2023-07-10",
       "registraPonto": true,
       "status": "ativo",
@@ -298,7 +302,7 @@ function getDefaultSeedData() {
       "cracha": 736,
       "nome": "EDINEIA CELIA DOS SANTOS",
       "filialId": "branch-1",
-      "deptId": "dept-admin",
+      "deptId": "dept-admin-sponto",
       "admissao": "2023-12-18",
       "registraPonto": true,
       "status": "ativo",
@@ -320,7 +324,7 @@ function getDefaultSeedData() {
       "cracha": 781,
       "nome": "RAFAEL DE JESUS CARDOSO",
       "filialId": "branch-1",
-      "deptId": "dept-admin",
+      "deptId": "dept-admin-sponto",
       "admissao": "2024-05-06",
       "registraPonto": true,
       "status": "ativo",
@@ -364,7 +368,7 @@ function getDefaultSeedData() {
       "cracha": 898,
       "nome": "JOSÉ PAULO DO NASCIMENTO",
       "filialId": "branch-1",
-      "deptId": "dept-admin",
+      "deptId": "dept-admin-sponto",
       "admissao": "2025-03-03",
       "registraPonto": true,
       "status": "ativo",
@@ -441,7 +445,7 @@ function getDefaultSeedData() {
       "cracha": 937,
       "nome": "HUGO HENRIQUE CIONI",
       "filialId": "branch-1",
-      "deptId": "dept-admin",
+      "deptId": "dept-admin-sponto",
       "admissao": "2025-09-08",
       "registraPonto": true,
       "status": "ativo",
@@ -507,7 +511,7 @@ function getDefaultSeedData() {
       "cracha": 965,
       "nome": "LEANDRO MARTINS DO NASCIMENTO",
       "filialId": "branch-1",
-      "deptId": "dept-admin",
+      "deptId": "dept-admin-sponto",
       "admissao": "2026-01-10",
       "registraPonto": true,
       "status": "ativo",
@@ -529,7 +533,7 @@ function getDefaultSeedData() {
       "cracha": 974,
       "nome": "EUCLIDES NUNES DOS SANTOS",
       "filialId": "branch-1",
-      "deptId": "dept-admin",
+      "deptId": "dept-admin-sponto",
       "admissao": "2026-02-09",
       "registraPonto": true,
       "status": "ativo",
@@ -639,7 +643,7 @@ function getDefaultSeedData() {
       "cracha": 1020,
       "nome": "CARLOS HENRIQUE ANGELICO",
       "filialId": "branch-1",
-      "deptId": "dept-admin",
+      "deptId": "dept-admin-sponto",
       "admissao": "2024-05-27",
       "registraPonto": true,
       "status": "ativo",
@@ -661,7 +665,7 @@ function getDefaultSeedData() {
       "cracha": 1027,
       "nome": "VANDEILSON DIAS DE MATOS",
       "filialId": "branch-1",
-      "deptId": "dept-admin",
+      "deptId": "dept-admin-sponto",
       "admissao": "2026-09-23",
       "registraPonto": true,
       "status": "ativo",
@@ -672,7 +676,7 @@ function getDefaultSeedData() {
       "cracha": 1032,
       "nome": "RAUL FERNANDO MENEGUETTI JACOB",
       "filialId": "branch-1",
-      "deptId": "dept-admin",
+      "deptId": "dept-admin-sponto",
       "admissao": "2026-07-07",
       "registraPonto": true,
       "status": "ativo",
@@ -1260,30 +1264,152 @@ function getDefaultSeedData() {
   return { filiais, departamentos, colaboradores, feriados, avisos, registrosPonto, carryOverDsr };
 }
 
+// ==========================================================================
+// CANAL DE SINCRONIZAÇÃO EM TEMPO REAL ENTRE ABAS E JANELAS (BroadcastChannel)
+// ==========================================================================
+const syncBroadcastChannel = (typeof window !== 'undefined' && typeof window.BroadcastChannel !== 'undefined')
+  ? new BroadcastChannel('euros_ponto_channel_v1')
+  : null;
+
+/**
+ * Normaliza e consolida um colaborador, garantindo estrita tipagem dos campos booleanos,
+ * conversão do crachá para número, integridade de departamentos e persistência total.
+ */
+function normalizeColaborador(c) {
+  if (!c) return null;
+  const isAp = !!(
+    c.aprendiz === true ||
+    c.aprendiz === 'sim' ||
+    c.aprendiz === 'true' ||
+    c.aprendiz === 1 ||
+    c.aprendiz === '1' ||
+    c.isAprendiz === true
+  );
+
+  const registraPonto = !(
+    c.registraPonto === false ||
+    c.registraPonto === 'nao' ||
+    c.registraPonto === 'false' ||
+    c.registraPonto === 0 ||
+    c.registraPonto === '0'
+  );
+
+  const naoRecebeVa = !!(
+    c.naoRecebeVa === true ||
+    c.naoRecebeVa === 'sim' ||
+    c.naoRecebeVa === 'true' ||
+    c.recebeVa === false ||
+    c.recebeVa === 'nao' ||
+    c.recebeVa === 'false'
+  );
+
+  let trabalhaSabado;
+  if (c.trabalhaSabado !== undefined && c.trabalhaSabado !== null) {
+    trabalhaSabado = (c.trabalhaSabado === true || c.trabalhaSabado === 'sim' || c.trabalhaSabado === 'true' || c.trabalhaSabado === 1);
+  } else {
+    trabalhaSabado = !isAp;
+  }
+
+  const crachaNum = Number(c.cracha);
+
+  // Unifica e normaliza ID do departamento (legado ou novo)
+  let deptId = c.deptId || 'dept-admin';
+  if (deptId === 'dept-1792071704664') {
+    deptId = 'dept-admin-sponto';
+  }
+
+  // Garantia: 16 colaboradores da Matriz Ji-Paraná movidos para ADMIN-S/PONTO
+  const spontoCrachas = [325, 336, 431, 540, 696, 702, 736, 781, 898, 937, 965, 974, 1020, 1027, 1031, 1032];
+  if (spontoCrachas.includes(crachaNum) && (c.filialId === 'branch-1' || !c.filialId)) {
+    if (deptId === 'dept-admin' || deptId === 'dept-1792071704664') {
+      deptId = 'dept-admin-sponto';
+    }
+  }
+
+  return {
+    ...c,
+    id: c.id || ('colab-' + crachaNum),
+    cracha: isNaN(crachaNum) ? c.cracha : crachaNum,
+    nome: (c.nome || '').trim(),
+    filialId: c.filialId || 'branch-1',
+    deptId: deptId,
+    admissao: c.admissao || '2026-01-01',
+    aprendiz: isAp,
+    trabalhaSabado: trabalhaSabado,
+    naoRecebeVa: naoRecebeVa,
+    recebeVa: !naoRecebeVa,
+    registraPonto: registraPonto,
+    status: (c.status === 'demitido' || c.isDemitido) ? 'demitido' : 'ativo',
+    dataDemissao: c.dataDemissao || ''
+  };
+}
+
+/**
+ * Normaliza e preserva todos os departamentos da empresa, garantindo ADMIN-S/PONTO
+ * e prevenindo que departamentos novos criados pelo usuário sejam perdidos.
+ */
+function normalizeDepartamentos(depts) {
+  const seedDepts = getDefaultSeedData().departamentos;
+  const map = new Map();
+
+  seedDepts.forEach(d => map.set(d.id, { id: d.id, nome: d.nome }));
+
+  if (Array.isArray(depts)) {
+    depts.forEach(d => {
+      if (!d || !d.nome) return;
+      let id = d.id;
+      let nome = d.nome.trim();
+
+      if (id === 'dept-1792071704664' || nome.toUpperCase() === 'ADMIN-S/PONTO') {
+        id = 'dept-admin-sponto';
+        nome = 'ADMIN-S/PONTO';
+      }
+      map.set(id, { id, nome });
+    });
+  }
+
+  if (!map.has('dept-admin-sponto')) {
+    map.set('dept-admin-sponto', { id: 'dept-admin-sponto', nome: 'ADMIN-S/PONTO' });
+  }
+
+  return Array.from(map.values());
+}
+
 // Salvar dados no LocalStorage e Sincronizar com a Nuvem Supabase
-function saveStateToStorage(syncCloud = true) {
+function saveStateToStorage(syncCloud = true, immediateCloud = false) {
   try {
     const payload = {
       filiais: appState.filiais,
-      departamentos: appState.departamentos,
-      colaboradores: appState.colaboradores,
-      feriados: appState.feriados,
-      avisos: appState.avisos,
-      registrosPonto: appState.registrosPonto,
-      carryOverDsr: appState.carryOverDsr,
-      activeBranchId: appState.activeBranchId,
-      currentYear: appState.currentYear,
-      currentMonth: appState.currentMonth,
-      statusFilter: appState.statusFilter,
+      departamentos: normalizeDepartamentos(appState.departamentos),
+      colaboradores: (appState.colaboradores || []).map(normalizeColaborador),
+      feriados: appState.feriados || [],
+      avisos: appState.avisos || [],
+      registrosPonto: appState.registrosPonto || {},
+      carryOverDsr: appState.carryOverDsr || {},
+      activeBranchId: appState.activeBranchId || 'branch-1',
+      currentYear: appState.currentYear || 2026,
+      currentMonth: typeof appState.currentMonth === 'number' ? appState.currentMonth : 9,
+      statusFilter: appState.statusFilter || 'ativos',
       departmentFilter: appState.departmentFilter || 'todos',
       calFilterDept: appState.calFilterDept || 'todos',
-      focusMode: appState.focusMode,
-      sortBy: appState.sortBy
+      focusMode: !!appState.focusMode,
+      sortBy: appState.sortBy || 'cracha',
+      updatedAt: new Date().toISOString()
     };
+
     localStorage.setItem(STORAGE_KEY, JSON.stringify(payload));
 
+    // Propaga imediatamente para qualquer outra aba aberta no mesmo navegador
+    if (syncBroadcastChannel) {
+      try {
+        syncBroadcastChannel.postMessage({ type: 'STATE_UPDATED', payload });
+      } catch (errPost) {
+        console.warn('Erro ao disparar BroadcastChannel:', errPost);
+      }
+    }
+
     if (syncCloud && supabaseClient) {
-      triggerCloudSync(payload);
+      triggerCloudSync(payload, immediateCloud);
     }
   } catch (err) {
     console.error('Falha ao salvar no localStorage:', err);
@@ -1291,13 +1417,16 @@ function saveStateToStorage(syncCloud = true) {
 }
 
 let cloudSyncTimer = null;
-function triggerCloudSync(payload) {
+function triggerCloudSync(payload, immediate = false) {
   if (!supabaseClient) return;
   if (cloudSyncTimer) clearTimeout(cloudSyncTimer);
-  cloudSyncTimer = setTimeout(async () => {
+
+  const performSync = async () => {
     try {
       const badge = document.getElementById('supabase-sync-badge');
       if (badge) badge.style.opacity = '0.5';
+
+      payload.updatedAt = new Date().toISOString();
 
       await supabaseClient
         .from('config_app')
@@ -1307,10 +1436,17 @@ function triggerCloudSync(payload) {
         badge.style.opacity = '1';
         badge.title = 'Sincronizado com a nuvem: ' + new Date().toLocaleTimeString();
       }
+      console.log('Nuvem Supabase atualizada com sucesso.');
     } catch (e) {
       console.warn('Erro na sincronização em nuvem:', e);
     }
-  }, 1000);
+  };
+
+  if (immediate) {
+    performSync();
+  } else {
+    cloudSyncTimer = setTimeout(performSync, 400);
+  }
 }
 
 function normalizeAviso(a) {
@@ -1328,6 +1464,94 @@ function normalizeAviso(a) {
   };
 }
 
+/**
+ * Aplica estado recebido remotamente (de outra aba ou da nuvem Supabase)
+ * atualizando em tempo real a interface sem recarregar a página.
+ */
+function applyRemoteState(incoming) {
+  if (!incoming) return;
+
+  if (Array.isArray(incoming.filiais) && incoming.filiais.length > 0) {
+    appState.filiais = incoming.filiais;
+  }
+  if (Array.isArray(incoming.departamentos) && incoming.departamentos.length > 0) {
+    appState.departamentos = normalizeDepartamentos(incoming.departamentos);
+  }
+  if (Array.isArray(incoming.colaboradores) && incoming.colaboradores.length > 0) {
+    appState.colaboradores = incoming.colaboradores.map(normalizeColaborador);
+  }
+  if (Array.isArray(incoming.feriados)) {
+    appState.feriados = incoming.feriados;
+  }
+  if (Array.isArray(incoming.avisos)) {
+    appState.avisos = incoming.avisos.map(normalizeAviso);
+  }
+  if (incoming.registrosPonto && typeof incoming.registrosPonto === 'object') {
+    appState.registrosPonto = { ...appState.registrosPonto, ...incoming.registrosPonto };
+  }
+
+  renderCurrentView();
+}
+
+// Ouvinte do BroadcastChannel para sincronização instantânea entre abas
+if (syncBroadcastChannel) {
+  syncBroadcastChannel.onmessage = (event) => {
+    if (event.data && event.data.type === 'STATE_UPDATED' && event.data.payload) {
+      applyRemoteState(event.data.payload);
+    }
+  };
+}
+
+// Ouvinte de evento de Storage (disparado entre abas do mesmo domínio quando o localStorage muda)
+if (typeof window !== 'undefined') {
+  window.addEventListener('storage', (event) => {
+    if (event.key === STORAGE_KEY && event.newValue) {
+      try {
+        const parsed = JSON.parse(event.newValue);
+        applyRemoteState(parsed);
+      } catch (e) {
+        console.warn('Erro ao processar sincronização de storage:', e);
+      }
+    }
+  });
+
+  // Salva imediatamente qualquer fila pendente antes de fechar a aba
+  window.addEventListener('beforeunload', () => {
+    if (cloudSyncTimer) {
+      clearTimeout(cloudSyncTimer);
+      try {
+        saveStateToStorage(true, true);
+      } catch (e) {}
+    }
+  });
+}
+
+/**
+ * Sincroniza em tempo real com o Supabase Cloud caso outro dispositivo/navegador faça alterações
+ */
+function initSupabaseRealtime() {
+  if (!supabaseClient) return;
+  try {
+    supabaseClient
+      .channel('public:config_app_realtime')
+      .on('postgres_changes', { event: '*', schema: 'public', table: 'config_app', filter: 'id=eq.latest_state' }, (changePayload) => {
+        if (changePayload.new && changePayload.new.data) {
+          console.log('Atualização em tempo real recebida do Supabase Cloud');
+          applyRemoteState(changePayload.new.data);
+          saveStateToStorage(false);
+          const badge = document.getElementById('supabase-sync-badge');
+          if (badge) {
+            badge.style.opacity = '1';
+            badge.title = 'Nuvem Atualizada: ' + new Date().toLocaleTimeString();
+          }
+        }
+      })
+      .subscribe();
+  } catch (e) {
+    console.warn('Supabase Realtime não pôde ser inicializado:', e);
+  }
+}
+
 async function syncFromCloudOnStart() {
   if (!supabaseClient) return;
   try {
@@ -1337,33 +1561,47 @@ async function syncFromCloudOnStart() {
       .eq('id', 'latest_state')
       .maybeSingle();
 
+    if (error) {
+      console.warn('Erro ao consultar Supabase Cloud:', error);
+      return;
+    }
+
     if (data && data.data) {
       const cloud = data.data;
+
+      // 1. Departamentos (garante sincronização total do ADMIN-S/PONTO e novos deptos)
+      if (cloud.departamentos && Array.isArray(cloud.departamentos) && cloud.departamentos.length > 0) {
+        appState.departamentos = normalizeDepartamentos(cloud.departamentos);
+      }
+
+      // 2. Filiais
+      if (cloud.filiais && Array.isArray(cloud.filiais) && cloud.filiais.length > 0) {
+        appState.filiais = cloud.filiais;
+      }
+
+      // 3. Feriados
+      if (cloud.feriados && Array.isArray(cloud.feriados)) {
+        appState.feriados = cloud.feriados;
+      }
+
+      // 4. Registros de Ponto
       if (cloud.registrosPonto && Object.keys(cloud.registrosPonto).length > 0) {
         appState.registrosPonto = { ...appState.registrosPonto, ...cloud.registrosPonto };
       }
-      // Transferência de DSR entre meses desabilitada até segunda ordem (limpa dados residuais)
       appState.carryOverDsr = {};
-      if (cloud.colaboradores && cloud.colaboradores.length > 0) {
-        appState.colaboradores = cloud.colaboradores.map(c => {
-          const isAp = !!(c.aprendiz || c.isAprendiz);
-          return {
-            ...c,
-            aprendiz: isAp,
-            trabalhaSabado: c.trabalhaSabado !== undefined ? (c.trabalhaSabado === true || c.trabalhaSabado === 'sim') : !isAp,
-            naoRecebeVa: !!(c.naoRecebeVa || c.recebeVa === false),
-            recebeVa: !(c.naoRecebeVa || c.recebeVa === false),
-            registraPonto: c.registraPonto !== false,
-            status: c.status || 'ativo',
-            dataDemissao: c.dataDemissao || ''
-          };
-        });
+
+      // 5. Colaboradores (com normalização de Jovem Aprendiz, Bate Ponto, etc.)
+      if (cloud.colaboradores && Array.isArray(cloud.colaboradores) && cloud.colaboradores.length > 0) {
+        appState.colaboradores = cloud.colaboradores.map(normalizeColaborador);
       }
+
+      // 6. Mural de Avisos
       if (cloud.avisos && Array.isArray(cloud.avisos) && cloud.avisos.length > 0) {
-        // Se avisos da nuvem forem do formato antigo sem data, usa o seed legal enriquecido
         const hasDates = cloud.avisos.some(a => !!a.data);
         appState.avisos = hasDates ? cloud.avisos.map(normalizeAviso) : getDefaultSeedData().avisos;
       }
+
+      // Salva apenas localmente sem re-disparar escrita imediata na nuvem
       saveStateToStorage(false);
       renderCurrentView();
       console.log('Dados sincronizados do Supabase Cloud com sucesso.');
@@ -1373,7 +1611,7 @@ async function syncFromCloudOnStart() {
   }
 }
 
-// Carregar dados
+// Carregar dados locais na inicialização
 function loadStateFromStorage() {
   try {
     const raw = localStorage.getItem(STORAGE_KEY);
@@ -1381,23 +1619,10 @@ function loadStateFromStorage() {
       const parsed = JSON.parse(raw);
       if (parsed.filiais && parsed.filiais.length > 0 && parsed.colaboradores && parsed.colaboradores.length > 0) {
         appState.filiais = parsed.filiais;
-        appState.departamentos = parsed.departamentos || [];
-        appState.colaboradores = (parsed.colaboradores || []).map(c => {
-          const isAp = !!(c.aprendiz || c.isAprendiz);
-          return {
-            ...c,
-            aprendiz: isAp,
-            trabalhaSabado: c.trabalhaSabado !== undefined ? (c.trabalhaSabado === true || c.trabalhaSabado === 'sim') : !isAp,
-            naoRecebeVa: !!(c.naoRecebeVa || c.recebeVa === false),
-            recebeVa: !(c.naoRecebeVa || c.recebeVa === false),
-            registraPonto: c.registraPonto !== false,
-            status: c.status || 'ativo',
-            dataDemissao: c.dataDemissao || ''
-          };
-        });
+        appState.departamentos = normalizeDepartamentos(parsed.departamentos);
+        appState.colaboradores = (parsed.colaboradores || []).map(normalizeColaborador);
         appState.feriados = parsed.feriados || [];
 
-        // Se avisos existentes no storage forem do modelo antigo sem "data", carrega os novos seed
         const rawAvisos = (parsed.avisos && Array.isArray(parsed.avisos) && parsed.avisos.length > 0)
           ? parsed.avisos
           : getDefaultSeedData().avisos;
@@ -1405,7 +1630,6 @@ function loadStateFromStorage() {
         appState.avisos = hasCalendarDates ? rawAvisos.map(normalizeAviso) : getDefaultSeedData().avisos;
 
         appState.registrosPonto = parsed.registrosPonto || {};
-        // Transferência de DSR entre meses desabilitada até segunda ordem
         appState.carryOverDsr = {};
 
         if (parsed.activeBranchId && appState.filiais.some(f => f.id === parsed.activeBranchId)) {
@@ -1421,7 +1645,6 @@ function loadStateFromStorage() {
           wesley.admissao = '2026-10-09';
           wesley.dataDemissao = '';
         }
-        // Remove qualquer aviso residual que marcava Wesley como demitido
         if (appState.avisos && Array.isArray(appState.avisos)) {
           appState.avisos = appState.avisos.filter(a => {
             const isWesley = a.colabId === 'colab-1034' || (a.titulo && a.titulo.toLowerCase().includes('wesley'));
@@ -1442,7 +1665,6 @@ function loadStateFromStorage() {
               createdAt: "2026-10-09T08:00:00Z"
             });
           }
-          // Garante fechamento de ponto no último dia útil do mês (Sábado 31/10/2026)
           const pontoAviso = appState.avisos.find(a => a.tipo === 'ponto' && a.id === 'aviso-ponto-1');
           if (pontoAviso) {
             pontoAviso.data = '2026-10-31';
@@ -1458,11 +1680,11 @@ function loadStateFromStorage() {
         if (typeof parsed.focusMode === 'boolean') appState.focusMode = parsed.focusMode;
         if (parsed.sortBy) appState.sortBy = parsed.sortBy;
 
-        // Prorrogação automática diária de avisos de assinatura vencidos e sincronização de demissões
         checkAndRolloverPendingNotices();
         syncDismissalNotices();
 
-        saveStateToStorage();
+        // Salva apenas localmente; não sobrescreve a nuvem na inicialização
+        saveStateToStorage(false);
         return;
       }
     }
@@ -1470,11 +1692,11 @@ function loadStateFromStorage() {
     console.warn('Erro ao ler do storage, carregando seed real:', err);
   }
 
-  // Se não existir dados ou forem antigos/inválidos, carrega a base enviada
+  // Se não existir dados ou forem antigos/inválidos, carrega a base padrão
   const seed = getDefaultSeedData();
   appState.filiais = seed.filiais;
-  appState.departamentos = seed.departamentos;
-  appState.colaboradores = seed.colaboradores;
+  appState.departamentos = normalizeDepartamentos(seed.departamentos);
+  appState.colaboradores = (seed.colaboradores || []).map(normalizeColaborador);
   appState.feriados = seed.feriados;
   appState.avisos = seed.avisos;
   appState.registrosPonto = seed.registrosPonto;
@@ -1484,7 +1706,8 @@ function loadStateFromStorage() {
   checkAndRolloverPendingNotices();
   syncDismissalNotices();
 
-  saveStateToStorage();
+  // Salva apenas localmente
+  saveStateToStorage(false);
 }
 
 
@@ -4460,6 +4683,9 @@ function openEmployeeModal(empId = null) {
   const demissaoGroup = document.getElementById('group-emp-demissao');
   const demissaoInput = document.getElementById('emp-demissao');
 
+  // Garante que departamentos estejam devidamente preenchidos
+  appState.departamentos = normalizeDepartamentos(appState.departamentos);
+
   branchSelect.innerHTML = appState.filiais.map(f => '<option value="' + f.id + '">' + f.nome + '</option>').join('');
   deptSelect.innerHTML = appState.departamentos.map(d => '<option value="' + d.id + '">' + d.nome + '</option>').join('');
 
@@ -4471,15 +4697,25 @@ function openEmployeeModal(empId = null) {
     document.getElementById('emp-badge').value = emp.cracha;
     document.getElementById('emp-admission').value = emp.admissao;
     document.getElementById('emp-branch').value = emp.filialId;
-    document.getElementById('emp-dept').value = emp.deptId;
 
-    if (checkRegistra) checkRegistra.checked = emp.registraPonto !== false;
-    if (checkNaoRecebeVa) checkNaoRecebeVa.checked = !!(emp.naoRecebeVa || emp.recebeVa === false);
+    let targetDept = emp.deptId;
+    if (targetDept === 'dept-1792071704664') targetDept = 'dept-admin-sponto';
+    if (!appState.departamentos.some(d => d.id === targetDept)) {
+      const sp = appState.departamentos.find(d => d.nome === 'ADMIN-S/PONTO');
+      targetDept = sp ? sp.id : (appState.departamentos[0]?.id || 'dept-admin');
+    }
+    deptSelect.value = targetDept;
+
+    if (checkRegistra) {
+      checkRegistra.checked = (emp.registraPonto !== false && emp.registraPonto !== 'nao' && emp.registraPonto !== 'false');
+    }
+    if (checkNaoRecebeVa) {
+      checkNaoRecebeVa.checked = !!(emp.naoRecebeVa || emp.recebeVa === false);
+    }
 
     const isAp = !!(emp.aprendiz || emp.isAprendiz);
     if (checkAprendiz) checkAprendiz.checked = isAp;
 
-    // Trabalha no sábado: se explicitamente definido, usa o booleano. Se for aprendiz e indefinido: false. Se normal e indefinido: true.
     const trabalhaSab = emp.trabalhaSabado !== undefined
       ? (emp.trabalhaSabado === true || emp.trabalhaSabado === 'sim')
       : !isAp;
@@ -4540,27 +4776,14 @@ document.getElementById('btn-save-employee')?.addEventListener('click', () => {
   const filialId = document.getElementById('emp-branch').value;
   const deptId = document.getElementById('emp-dept').value;
 
-  const registraPonto = document.getElementById('emp-check-registra-ponto')
-    ? document.getElementById('emp-check-registra-ponto').checked
-    : (document.getElementById('emp-registra-ponto')?.value !== 'nao');
-
-  const naoRecebeVa = document.getElementById('emp-check-nao-recebe-va')
-    ? document.getElementById('emp-check-nao-recebe-va').checked
-    : false;
-
-  const aprendiz = document.getElementById('emp-check-aprendiz')
-    ? document.getElementById('emp-check-aprendiz').checked
-    : false;
+  const registraPonto = !!document.getElementById('emp-check-registra-ponto')?.checked;
+  const naoRecebeVa = !!document.getElementById('emp-check-nao-recebe-va')?.checked;
+  const aprendiz = !!document.getElementById('emp-check-aprendiz')?.checked;
 
   const checkSab = document.getElementById('emp-check-trabalha-sabado') || document.getElementById('emp-check-aprendiz-sabado');
-  const trabalhaSabado = checkSab
-    ? checkSab.checked
-    : (aprendiz ? false : true);
+  const trabalhaSabado = checkSab ? checkSab.checked : !aprendiz;
 
-  const isDemitido = document.getElementById('emp-check-demitido')
-    ? document.getElementById('emp-check-demitido').checked
-    : (document.getElementById('emp-status')?.value === 'demitido');
-
+  const isDemitido = !!document.getElementById('emp-check-demitido')?.checked;
   const status = isDemitido ? 'demitido' : 'ativo';
   const dataDemissao = isDemitido ? (document.getElementById('emp-demissao')?.value || '') : '';
 
@@ -4574,42 +4797,31 @@ document.getElementById('btn-save-employee')?.addEventListener('click', () => {
     return;
   }
 
+  const colabObj = normalizeColaborador({
+    id: id || ('colab-' + cracha),
+    nome,
+    cracha,
+    admissao,
+    filialId,
+    deptId,
+    aprendiz,
+    trabalhaSabado,
+    naoRecebeVa,
+    recebeVa: !naoRecebeVa,
+    registraPonto,
+    status,
+    dataDemissao
+  });
+
   if (id) {
     const idx = appState.colaboradores.findIndex(c => c.id === id);
     if (idx !== -1) {
-      appState.colaboradores[idx] = {
-        ...appState.colaboradores[idx],
-        nome,
-        cracha,
-        admissao,
-        filialId,
-        deptId,
-        aprendiz,
-        trabalhaSabado,
-        naoRecebeVa,
-        recebeVa: !naoRecebeVa,
-        registraPonto,
-        status,
-        dataDemissao
-      };
+      appState.colaboradores[idx] = colabObj;
+    } else {
+      appState.colaboradores.push(colabObj);
     }
   } else {
-    const newId = 'colab-' + cracha;
-    appState.colaboradores.push({
-      id: newId,
-      nome,
-      cracha,
-      admissao,
-      filialId,
-      deptId,
-      aprendiz,
-      trabalhaSabado,
-      naoRecebeVa,
-      recebeVa: !naoRecebeVa,
-      registraPonto,
-      status,
-      dataDemissao
-    });
+    appState.colaboradores.push(colabObj);
   }
 
   const colabKeyId = id || ('colab-' + cracha);
@@ -4677,7 +4889,6 @@ document.getElementById('btn-save-employee')?.addEventListener('click', () => {
       appState.avisos.unshift(avisoAssinObj);
     }
   } else if (status === 'ativo') {
-    // Se colaborador for reativado como 'ativo', remove avisos de rescisão e assinatura pendentes
     if (appState.avisos && Array.isArray(appState.avisos)) {
       appState.avisos = appState.avisos.filter(a => {
         const isThisColab = a.colabId === colabKeyId || a.id === ('aviso-rescisao-' + colabKeyId) || a.id === ('aviso-assinatura-' + colabKeyId);
@@ -4686,7 +4897,8 @@ document.getElementById('btn-save-employee')?.addEventListener('click', () => {
     }
   }
 
-  saveStateToStorage();
+  // Grava imediatamente no LocalStorage, sincroniza abas abertas e envia à nuvem sem espera
+  saveStateToStorage(true, true);
   closeModal('modal-employee');
   renderCurrentView();
 
@@ -4705,7 +4917,7 @@ function deleteEmployee(empId) {
   if (!confirm('Confirma a exclusão do colaborador "' + emp.nome + '" (Crachá: ' + emp.cracha + ')?')) return;
 
   appState.colaboradores = appState.colaboradores.filter(c => c.id !== empId);
-  saveStateToStorage();
+  saveStateToStorage(true, true);
   renderCurrentView();
   showToast('Colaborador removido.', 'info');
 }
@@ -4778,7 +4990,7 @@ document.getElementById('btn-save-branch')?.addEventListener('click', () => {
     appState.filiais.push({ id: newId, nome, cidade });
   }
 
-  saveStateToStorage();
+  saveStateToStorage(true, true);
   closeModal('modal-branch');
   renderCurrentView();
   showToast('Filial gravada!', 'success');
@@ -4796,7 +5008,7 @@ function deleteBranch(branchId) {
   if (appState.activeBranchId === branchId) {
     appState.activeBranchId = appState.filiais[0].id;
   }
-  saveStateToStorage();
+  saveStateToStorage(true, true);
   renderCurrentView();
 }
 
@@ -4806,9 +5018,10 @@ document.getElementById('btn-save-dept')?.addEventListener('click', () => {
 
   const newId = 'dept-' + Date.now();
   appState.departamentos.push({ id: newId, nome });
+  appState.departamentos = normalizeDepartamentos(appState.departamentos);
   document.getElementById('dept-name').value = '';
 
-  saveStateToStorage();
+  saveStateToStorage(true, true);
   closeModal('modal-dept');
   renderCurrentView();
   showToast('Departamento "' + nome + '" criado!', 'success');
@@ -4819,9 +5032,17 @@ function deleteDept(deptId) {
     showToast('Mantenha pelo menos um departamento.', 'warning');
     return;
   }
+  const d = appState.departamentos.find(x => x.id === deptId);
+  if (!confirm('Confirma a exclusão do departamento "' + (d ? d.nome : deptId) + '"?')) return;
   appState.departamentos = appState.departamentos.filter(d => d.id !== deptId);
-  saveStateToStorage();
+  // Reatribui colaboradores órfãos para o departamento padrão
+  const fallbackDept = appState.departamentos[0].id;
+  appState.colaboradores.forEach(c => {
+    if (c.deptId === deptId) c.deptId = fallbackDept;
+  });
+  saveStateToStorage(true, true);
   renderCurrentView();
+  showToast('Departamento excluído com sucesso.', 'info');
 }
 
 function renderFeriadosView() {
@@ -5280,6 +5501,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Sincronização automática em segundo plano com a nuvem Supabase
   syncFromCloudOnStart();
+  initSupabaseRealtime();
 });
 
 // Navegação pelo teclado na Matriz de Ponto (Setas Cima/Baixo/Esquerda/Direita e Enter)
