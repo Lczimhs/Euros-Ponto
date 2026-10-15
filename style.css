@@ -2837,8 +2837,177 @@ thead th.col-dsr {
 
 /* Modal de Avisos do Dia */
 [data-theme="light"] .day-summary-bar {
-  background: #EDEDF2;
-  border: 1px solid #C8C9D3;
+  background: #EDEDF2 !important;
+  border: 1px solid #C8C9D3 !important;
+  color: #090B33 !important;
+}
+
+[data-theme="light"] .day-summary-bar div {
+  color: #090B33 !important;
+}
+
+[data-theme="light"] .day-notice-card {
+  background: #EDEDF2 !important;
+  border: 1px solid #C8C9D3 !important;
+  box-shadow: 0 1px 4px rgba(9, 11, 51, 0.04);
+  opacity: 1 !important;
+}
+
+[data-theme="light"] .day-notice-card:hover {
+  border-color: #8E8FA1 !important;
+  box-shadow: 0 3px 8px rgba(9, 11, 51, 0.08);
+}
+
+[data-theme="light"] .day-notice-card.is-done {
+  background: #EDEDF2 !important;
+  border-color: #C8C9D3 !important;
+  opacity: 1 !important;
+}
+
+/* Bordas de tipo com cores mais vivas e definidas no modo claro */
+[data-theme="light"] .day-notice-card.type-salario {
+  border-left: 5px solid #D97706 !important;
+}
+[data-theme="light"] .day-notice-card.type-rescisao {
+  border-left: 5px solid #DC2626 !important;
+}
+[data-theme="light"] .day-notice-card.type-ferias {
+  border-left: 5px solid #7C3AED !important;
+}
+[data-theme="light"] .day-notice-card.type-ponto {
+  border-left: 5px solid #0284C7 !important;
+}
+[data-theme="light"] .day-notice-card.type-fgts {
+  border-left: 5px solid #059669 !important;
+}
+[data-theme="light"] .day-notice-card.type-outros {
+  border-left: 5px solid #475569 !important;
+}
+
+/* Tipografia nítida, escura e de alto contraste no modal de avisos */
+[data-theme="light"] .day-notice-title {
+  color: #090B33 !important;
+  font-weight: 700 !important;
+  font-size: 15px !important;
+  opacity: 1 !important;
+}
+
+[data-theme="light"] .day-notice-card.is-done .day-notice-title {
+  color: #090B33 !important;
+  text-decoration: line-through !important;
+  text-decoration-color: #64748B !important;
+  text-decoration-thickness: 1.5px !important;
+  font-weight: 700 !important;
+  opacity: 1 !important;
+}
+
+[data-theme="light"] .day-notice-desc {
+  color: #1E293B !important;
+  font-weight: 500 !important;
+  font-size: 13px !important;
+  line-height: 1.5 !important;
+  opacity: 1 !important;
+}
+
+[data-theme="light"] .day-notice-header > div:last-child {
+  color: #334155 !important;
+  font-weight: 700 !important;
+  font-size: 12px !important;
+  opacity: 1 !important;
+}
+
+/* Badges do card de aviso com alto contraste */
+[data-theme="light"] .badge-aviso-cat,
+[data-theme="light"] .badge-cat-informativo {
+  background: #FFFFFF !important;
+  color: #090B33 !important;
+  border: 1px solid #94A3B8 !important;
+  font-weight: 700 !important;
+  border-radius: 4px;
+}
+
+[data-theme="light"] .badge-aviso-scope {
+  background: #FFFFFF !important;
+  color: #090B33 !important;
+  border: 1px solid #94A3B8 !important;
+  font-weight: 700 !important;
+  border-radius: 4px;
+}
+
+[data-theme="light"] .status-badge-done {
+  background: #DCFCE7 !important;
+  color: #14532D !important;
+  border: 1px solid #86EFAC !important;
+  font-weight: 700 !important;
+}
+
+[data-theme="light"] .status-badge-pending {
+  background: #FEE2E2 !important;
+  color: #7F1D1D !important;
+  border: 1px solid #FCA5A5 !important;
+  font-weight: 700 !important;
+}
+
+/* Ações e botões no rodapé do card */
+[data-theme="light"] .day-notice-actions {
+  border-top: 1px solid #C8C9D3 !important;
+}
+
+[data-theme="light"] .btn-toggle-done.reopen {
+  background: #FFFFFF !important;
+  color: #090B33 !important;
+  border: 1px solid #94A3B8 !important;
+  font-weight: 700 !important;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08) !important;
+}
+
+[data-theme="light"] .btn-toggle-done.reopen:hover {
+  background: #E2E8F0 !important;
+  color: #000000 !important;
+  border-color: #64748B !important;
+}
+
+[data-theme="light"] .btn-toggle-done.mark-done {
+  background: linear-gradient(135deg, #10B981, #059669) !important;
+  color: #FFFFFF !important;
+  box-shadow: 0 2px 6px rgba(16, 185, 129, 0.25) !important;
+}
+
+[data-theme="light"] .btn-edit-day-notice {
+  background: #FFFFFF !important;
+  color: #090B33 !important;
+  border: 1px solid #94A3B8 !important;
+  font-weight: 700 !important;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08) !important;
+}
+
+[data-theme="light"] .btn-edit-day-notice:hover {
+  background: #E2E8F0 !important;
+  border-color: #64748B !important;
+}
+
+[data-theme="light"] .btn-delete-day-notice {
+  background: #FEE2E2 !important;
+  color: #DC2626 !important;
+  border: 1px solid #FCA5A5 !important;
+  font-weight: 700 !important;
+}
+
+[data-theme="light"] .btn-delete-day-notice:hover {
+  background: #DC2626 !important;
+  color: #FFFFFF !important;
+}
+
+[data-theme="light"] #btn-day-add-new-notice {
+  background: #FFFFFF !important;
+  color: #151733 !important;
+  border: 1px solid #8E8FA1 !important;
+  font-weight: 700 !important;
+}
+
+[data-theme="light"] #btn-day-add-new-notice:hover {
+  background: #EDEDF2 !important;
+  border-color: #151733 !important;
 }
 
 /* Matriz de Ponto (Tabela, Cabeçalhos e Colunas Sticky) */
