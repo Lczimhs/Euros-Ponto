@@ -3206,6 +3206,54 @@ thead th.col-dsr {
   border: 1px solid #8E8FA1 !important;
 }
 
+/* Status: DISABLED (Dias antes da admissão do colaborador - Bloqueado) */
+[data-theme="light"] .status-disabled {
+  background: repeating-linear-gradient(135deg, #E2E4EC, #E2E4EC 4px, #D1D4E0 4px, #D1D4E0 8px) !important;
+  color: #475569 !important;
+  border: 1px solid #B4B6C4 !important;
+  font-weight: 700 !important;
+  opacity: 1 !important;
+  cursor: not-allowed !important;
+  box-shadow: none !important;
+}
+
+[data-theme="light"] .status-disabled:hover {
+  transform: none !important;
+  box-shadow: none !important;
+}
+
+/* Status: VAZIO / DESMARCADO (Campos Vazio / Em Branco) */
+[data-theme="light"] .status-empty {
+  background: #FFFFFF !important;
+  color: transparent !important;
+  border: 1.5px dashed #8E8FA1 !important;
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.04) !important;
+  opacity: 1 !important;
+  cursor: pointer !important;
+}
+
+[data-theme="light"] .status-empty:hover {
+  background: #F4F4F7 !important;
+  border-color: #0284C7 !important;
+  box-shadow: 0 0 6px rgba(2, 132, 199, 0.25) !important;
+}
+
+/* Status: DEMITIDO (Dias posteriores à rescisão) */
+[data-theme="light"] .status-demitido {
+  background: #FEE2E2 !important;
+  color: #DC2626 !important;
+  border: 1px dashed #EF4444 !important;
+  opacity: 0.85 !important;
+  cursor: not-allowed !important;
+  font-size: 9px !important;
+  font-weight: 700 !important;
+}
+
+[data-theme="light"] .status-demitido:hover {
+  transform: none !important;
+  box-shadow: none !important;
+}
+
 /* Badges Registra Ponto */
 [data-theme="light"] .badge-ponto-sim {
   background: #E3E4EB !important;
