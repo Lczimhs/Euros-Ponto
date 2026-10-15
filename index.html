@@ -7,7 +7,16 @@
   <meta http-equiv="Pragma" content="no-cache">
   <meta http-equiv="Expires" content="0">
   <title>Dashboard de Ponto e Vale Alimentação (V4)</title>
-  <link rel="stylesheet" href="style.css?v=20261014_v10">
+  <link rel="stylesheet" href="style.css?v=20261014_v18">
+  <script>
+    (function() {
+      try {
+        if (localStorage.getItem('euros_ponto_theme') === 'light') {
+          document.documentElement.setAttribute('data-theme', 'light');
+        }
+      } catch(e) {}
+    })();
+  </script>
 </head>
 <body>
 
@@ -17,7 +26,7 @@
       <div class="brand-section">
         <div class="brand-logo-icon">P</div>
         <div class="brand-title-group">
-          <h1>PONTO <span>&amp; VALE ALIMENTAÇÃO</span> <span style="font-size:12px; opacity:0.7; font-weight:400; padding:2px 6px; background:#342A52; border-radius:4px; border:1px solid #4015B8;">V4</span></h1>
+          <h1>PONTO <span>&amp; VALE ALIMENTAÇÃO</span> <span style="font-size:12px; opacity:0.85; font-weight:600; padding:2px 8px; background:var(--color-border); border-radius:4px; border:1px solid var(--color-border-bright);">V4</span></h1>
           <div class="brand-subtitle">Gestão Diária de Ponto Eletrônico • Motor DSR • Apuração Financeira VA</div>
         </div>
       </div>
@@ -46,6 +55,9 @@
 
       <!-- System Actions -->
       <div class="header-actions">
+        <button class="btn btn-secondary btn-sm" id="btn-toggle-theme" title="Alternar entre Modo Claro e Modo Escuro">
+          <span id="theme-icon">💡</span> <span id="theme-label" style="font-size:11px; font-weight:600;">Modo Claro</span>
+        </button>
         <button class="btn btn-secondary btn-sm" id="btn-export-backup" title="Exportar dados para arquivo JSON">
           <span>💾</span> Backup
         </button>
