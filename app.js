@@ -3164,9 +3164,9 @@ function renderMatrixView() {
   const deptMap = Object.fromEntries(appState.departamentos.map(d => [d.id, d.nome]));
   const employees = getFilteredAndSortedEmployees(true);
 
-  // Construção do Cabeçalho Duplo
-  let row1 = '<tr><th class="col-dept" rowspan="2">Departamento</th><th class="col-badge" rowspan="2">Crachá</th><th class="col-name" rowspan="2">Colaborador</th>';
-  let row2 = '<tr>';
+  // Construção do Cabeçalho Duplo (ambas as linhas possuem células sticky correspondentes para evitar que os dias atravessem a coluna DSR)
+  let row1 = '<tr><th class="col-dept col-corner-top">Departamento</th><th class="col-badge col-corner-top">Crachá</th><th class="col-name col-corner-top">Colaborador</th>';
+  let row2 = '<tr><th class="col-dept col-corner-sub" aria-hidden="true">&nbsp;</th><th class="col-badge col-corner-sub" aria-hidden="true">&nbsp;</th><th class="col-name col-corner-sub" aria-hidden="true">&nbsp;</th>';
 
   for (let d = 1; d <= daysInMonth; d++) {
     const isoStr = formatDateISO(year, month, d);
@@ -3192,8 +3192,8 @@ function renderMatrixView() {
     row2 += '<th class="' + (isSunday ? 'th-sunday' : (holiday ? 'th-feriado' : '')) + '" data-date="' + isoStr + '">' + dayOfWeekName + '</th>';
   }
 
-  row1 += '<th class="col-dsr" rowspan="2" title="Total de DSRs perdidos/descontados no mês">Qtd. DSR</th></tr>';
-  row2 += '</tr>';
+  row1 += '<th class="col-dsr col-corner-top" title="Total de DSRs perdidos/descontados no mês">Qtd. DSR</th></tr>';
+  row2 += '<th class="col-dsr col-corner-sub" title="Total de DSRs perdidos/descontados no mês" aria-hidden="true">&nbsp;</th></tr>';
 
   thead.innerHTML = row1 + row2;
 

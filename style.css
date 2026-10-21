@@ -751,15 +751,48 @@ html.ponto-scroll-mode body::-webkit-scrollbar {
   box-shadow: -4px 0 10px rgba(0, 0, 0, 0.5);
 }
 
-/* Corner headers intersection (Fixos no topo E nas laterais - Maior Z-Index) */
-thead th.col-dept,
-thead th.col-badge,
-thead th.col-name,
-thead th.col-dsr {
+/* Corner headers intersection (Fixos no topo E nas laterais - Maior Z-Index)
+   Linha 1 (Números dos dias) e Linha 2 (Siglas dos dias: SEG, TER, QUA...) possuem células
+   sticky correspondentes para que os dias nunca atravessem ou fiquem visíveis por trás da coluna Qtd DSR. */
+.matrix-table thead tr:first-child th.col-dept,
+.matrix-table thead tr:first-child th.col-badge,
+.matrix-table thead tr:first-child th.col-name,
+.matrix-table thead tr:first-child th.col-dsr,
+.matrix-table thead th.col-corner-top {
   top: 0 !important;
-  z-index: 60 !important; /* Prioridade máxima sobre cabeçalhos e colunas */
+  height: 28px !important;
+  z-index: 60 !important;
   background: #252033 !important;
+  border-bottom: none !important;
+  vertical-align: middle !important;
+}
+
+.matrix-table thead tr:last-child th.col-dept,
+.matrix-table thead tr:last-child th.col-badge,
+.matrix-table thead tr:last-child th.col-name,
+.matrix-table thead tr:last-child th.col-dsr,
+.matrix-table thead th.col-corner-sub {
+  top: 28px !important;
+  height: 24px !important;
+  z-index: 60 !important;
+  background: #252033 !important;
+  border-top: none !important;
   border-bottom: 2px solid var(--color-border-bright) !important;
+  padding: 0 !important;
+}
+
+.matrix-table thead th.col-dsr {
+  position: sticky !important;
+  right: 0 !important;
+  width: 90px !important;
+  min-width: 90px !important;
+  max-width: 90px !important;
+  box-sizing: border-box !important;
+  z-index: 60 !important;
+  background: #252033 !important;
+  border-left: 2px solid var(--color-border-bright) !important;
+  box-shadow: -4px 0 10px rgba(0, 0, 0, 0.5) !important;
+  text-align: center !important;
 }
 
 /* Date Clickable Header */
@@ -3216,13 +3249,32 @@ thead th.col-dsr {
   box-shadow: -4px 0 10px rgba(9, 11, 51, 0.04);
 }
 
-[data-theme="light"] thead th.col-dept,
-[data-theme="light"] thead th.col-badge,
-[data-theme="light"] thead th.col-name,
-[data-theme="light"] thead th.col-dsr {
+[data-theme="light"] .matrix-table thead tr:first-child th.col-dept,
+[data-theme="light"] .matrix-table thead tr:first-child th.col-badge,
+[data-theme="light"] .matrix-table thead tr:first-child th.col-name,
+[data-theme="light"] .matrix-table thead tr:first-child th.col-dsr,
+[data-theme="light"] .matrix-table thead th.col-corner-top {
   background: #151733 !important;
   color: #FFFFFF !important;
+  border-bottom: none !important;
+}
+
+[data-theme="light"] .matrix-table thead tr:last-child th.col-dept,
+[data-theme="light"] .matrix-table thead tr:last-child th.col-badge,
+[data-theme="light"] .matrix-table thead tr:last-child th.col-name,
+[data-theme="light"] .matrix-table thead tr:last-child th.col-dsr,
+[data-theme="light"] .matrix-table thead th.col-corner-sub {
+  background: #151733 !important;
+  color: #FFFFFF !important;
+  border-top: none !important;
   border-bottom: 2px solid #595A61 !important;
+}
+
+[data-theme="light"] .matrix-table thead th.col-dsr {
+  background: #151733 !important;
+  color: #FFFFFF !important;
+  border-left: 2px solid #595A61 !important;
+  box-shadow: -4px 0 10px rgba(9, 11, 51, 0.12) !important;
 }
 
 [data-theme="light"] .matrix-table tbody tr:nth-child(even) td.col-dept,
