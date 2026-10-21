@@ -3800,3 +3800,131 @@ html.ponto-scroll-mode body::-webkit-scrollbar {
 [data-theme="light"] .ferias-preview strong {
   color: #151733;
 }
+
+/* ==========================================================================
+   ESTILOS DE HISTÓRICO DE BACKUPS & PROTEÇÃO CONTRA FECHAMENTO ACIDENTAL
+   ========================================================================== */
+.backup-protection-box {
+  background: var(--color-bg-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: 14px 16px;
+  margin-bottom: 16px;
+}
+
+.custom-switch {
+  position: relative;
+  display: inline-block;
+  width: 44px;
+  height: 24px;
+  flex-shrink: 0;
+}
+
+.custom-switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.custom-switch .slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: var(--color-border);
+  transition: .3s;
+  border-radius: 24px;
+}
+
+.custom-switch .slider:before {
+  position: absolute;
+  content: "";
+  height: 18px;
+  width: 18px;
+  left: 3px;
+  bottom: 3px;
+  background-color: white;
+  transition: .3s;
+  border-radius: 50%;
+}
+
+.custom-switch input:checked + .slider {
+  background-color: var(--color-cyan);
+}
+
+.custom-switch input:checked + .slider:before {
+  transform: translateX(20px);
+  background-color: #0F0F11;
+}
+
+.backup-history-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-height: 380px;
+  overflow-y: auto;
+  padding-right: 4px;
+}
+
+.backup-history-item {
+  background: var(--color-bg-dark);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: 12px 14px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  transition: all 0.2s ease;
+}
+
+.backup-history-item:hover {
+  border-color: var(--color-cyan);
+  background: rgba(0, 229, 255, 0.04);
+}
+
+.backup-item-title {
+  font-weight: 700;
+  font-size: 13px;
+  color: var(--color-text-main);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.backup-item-subtitle {
+  font-size: 11px;
+  color: var(--color-text-muted);
+  margin-top: 3px;
+  font-family: var(--font-mono);
+}
+
+.backup-empty-state {
+  text-align: center;
+  padding: 30px 20px;
+  color: var(--color-text-muted);
+  font-size: 13px;
+  border: 1px dashed var(--color-border);
+  border-radius: var(--radius-md);
+}
+
+[data-theme="light"] .backup-protection-box {
+  background: #F4F4F8;
+  border-color: #D3D4E0;
+}
+
+[data-theme="light"] .backup-history-item {
+  background: #FFFFFF;
+  border-color: #D3D4E0;
+}
+
+[data-theme="light"] .backup-history-item:hover {
+  background: #F0F4FF;
+  border-color: var(--color-primary);
+}
+
+[data-theme="light"] .backup-item-title {
+  color: #151733;
+}

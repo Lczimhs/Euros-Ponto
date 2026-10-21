@@ -1547,27 +1547,51 @@ function normalizeDepartamentos(depts) {
   return Array.from(map.values());
 }
 
-// Salvar dados no LocalStorage e Sincronizar com a Nuvem Supabase
-function saveStateToStorage(syncCloud = true, immediateCloud = false) {
+// ==========================================================================
+// MOTOR DE PERSISTÊNCIA, BACKUP AUTOMÁTICO E PROTEÇÃO CONTRA PERDA DE DADOS
+// ==========================================================================
+
+const BACKUP_HISTORY_KEY = 'appLucas_backup_history_v1';
+const MODAL_DRAFT_KEY = 'appLucas_modal_draft_v1';
+const CLOSE_PROTECTION_KEY = 'appLucas_close_protection';
+const MAX_BACKUP_SNAPSHOTS = 10;
+
+/**
+ * Retorna o payload completo e normalizado do estado da aplicação
+ */
+function getStoragePayload() {
+  return {
+    filiais: appState.filiais || [],
+    departamentos: normalizeDepartamentos(appState.departamentos || []),
+    colaboradores: (appState.colaboradores || []).map(normalizeColaborador),
+    feriados: appState.feriados || [],
+    avisos: appState.avisos || [],
+    registrosPonto: appState.registrosPonto || {},
+    carryOverDsr: appState.carryOverDsr || {},
+    activeBranchId: appState.activeBranchId || 'branch-1',
+    currentYear: typeof appState.currentYear === 'number' ? appState.currentYear : 2026,
+    currentMonth: typeof appState.currentMonth === 'number' ? appState.currentMonth : 9,
+    statusFilter: appState.statusFilter || 'ativos',
+    departmentFilter: appState.departmentFilter || 'todos',
+    calFilterDept: appState.calFilterDept || 'todos',
+    focusMode: !!appState.focusMode,
+    sortBy: appState.sortBy || 'cracha',
+    updatedAt: appState.updatedAt || new Date().toISOString()
+  };
+}
+
+/**
+ * Salva dados no LocalStorage e Sincroniza com a Nuvem Supabase
+ * @param {boolean} syncCloud Se deve disparar envio para o Supabase
+ * @param {boolean} immediateCloud Se deve enviar sem debounce
+ * @param {boolean} isUserAction Se é uma alteração real do usuário (atualiza timestamp e agenda auto-backup)
+ */
+function saveStateToStorage(syncCloud = true, immediateCloud = false, isUserAction = true) {
   try {
-    const payload = {
-      filiais: appState.filiais,
-      departamentos: normalizeDepartamentos(appState.departamentos),
-      colaboradores: (appState.colaboradores || []).map(normalizeColaborador),
-      feriados: appState.feriados || [],
-      avisos: appState.avisos || [],
-      registrosPonto: appState.registrosPonto || {},
-      carryOverDsr: appState.carryOverDsr || {},
-      activeBranchId: appState.activeBranchId || 'branch-1',
-      currentYear: appState.currentYear || 2026,
-      currentMonth: typeof appState.currentMonth === 'number' ? appState.currentMonth : 9,
-      statusFilter: appState.statusFilter || 'ativos',
-      departmentFilter: appState.departmentFilter || 'todos',
-      calFilterDept: appState.calFilterDept || 'todos',
-      focusMode: !!appState.focusMode,
-      sortBy: appState.sortBy || 'cracha',
-      updatedAt: new Date().toISOString()
-    };
+    if (isUserAction) {
+      appState.updatedAt = new Date().toISOString();
+    }
+    const payload = getStoragePayload();
 
     localStorage.setItem(STORAGE_KEY, JSON.stringify(payload));
 
@@ -1578,6 +1602,11 @@ function saveStateToStorage(syncCloud = true, immediateCloud = false) {
       } catch (errPost) {
         console.warn('Erro ao disparar BroadcastChannel:', errPost);
       }
+    }
+
+    // Cria/agenda ponto de recuperação automático
+    if (isUserAction) {
+      scheduleAutoBackup(payload);
     }
 
     if (syncCloud && supabaseClient) {
@@ -1598,11 +1627,11 @@ function triggerCloudSync(payload, immediate = false) {
       const badge = document.getElementById('supabase-sync-badge');
       if (badge) badge.style.opacity = '0.5';
 
-      payload.updatedAt = new Date().toISOString();
+      payload.updatedAt = payload.updatedAt || new Date().toISOString();
 
       await supabaseClient
         .from('config_app')
-        .upsert({ id: 'latest_state', data: payload, updated_at: new Date().toISOString() });
+        .upsert({ id: 'latest_state', data: payload, updated_at: payload.updatedAt });
 
       if (badge) {
         badge.style.opacity = '1';
@@ -1621,8 +1650,317 @@ function triggerCloudSync(payload, immediate = false) {
   }
 }
 
+/**
+ * Envio síncrono/keepalive para o Supabase durante o descarregamento da página (beforeunload / unload)
+ */
+function sendKeepaliveCloudSync(payload) {
+  try {
+    if (!SUPABASE_URL || !SUPABASE_KEY) return;
+    const url = `${SUPABASE_URL}/rest/v1/config_app?on_conflict=id`;
+    const body = JSON.stringify({
+      id: 'latest_state',
+      data: payload,
+      updated_at: payload.updatedAt || new Date().toISOString()
+    });
+    fetch(url, {
+      method: 'POST',
+      headers: {
+        'apikey': SUPABASE_KEY,
+        'Authorization': `Bearer ${SUPABASE_KEY}`,
+        'Content-Type': 'application/json',
+        'Prefer': 'resolution=merge-duplicates'
+      },
+      body: body,
+      keepalive: true
+    }).catch(() => {});
+  } catch (e) {}
+}
+
+/**
+ * Criação de Snapshot de Backup no Histórico Local
+ */
+let lastAutoBackupTime = 0;
+function createAutoBackupSnapshot(reason = 'Alteração do Usuário') {
+  try {
+    const payload = getStoragePayload();
+    let history = [];
+    const raw = localStorage.getItem(BACKUP_HISTORY_KEY);
+    if (raw) {
+      try { history = JSON.parse(raw); } catch (e) { history = []; }
+    }
+    if (!Array.isArray(history)) history = [];
+
+    const now = Date.now();
+    if (now - lastAutoBackupTime < 5000 && history.length > 0 && history[0].reason === reason) {
+      return;
+    }
+    lastAutoBackupTime = now;
+
+    const snapshot = {
+      id: 'snap-' + now,
+      timestamp: new Date().toISOString(),
+      displayTime: new Date().toLocaleDateString('pt-BR') + ' às ' + new Date().toLocaleTimeString('pt-BR'),
+      reason,
+      colabCount: (payload.colaboradores || []).length,
+      pontoCount: Object.keys(payload.registrosPonto || {}).length,
+      avisosCount: (payload.avisos || []).length,
+      data: payload
+    };
+
+    history.unshift(snapshot);
+    if (history.length > MAX_BACKUP_SNAPSHOTS) {
+      history = history.slice(0, MAX_BACKUP_SNAPSHOTS);
+    }
+
+    try {
+      localStorage.setItem(BACKUP_HISTORY_KEY, JSON.stringify(history));
+    } catch (quotaErr) {
+      history = history.slice(0, 3);
+      try {
+        localStorage.setItem(BACKUP_HISTORY_KEY, JSON.stringify(history));
+      } catch (e2) {}
+    }
+  } catch (err) {
+    console.warn('Erro ao criar snapshot de backup:', err);
+  }
+}
+
+let autoBackupDebounceTimer = null;
+function scheduleAutoBackup(payload) {
+  if (autoBackupDebounceTimer) clearTimeout(autoBackupDebounceTimer);
+  autoBackupDebounceTimer = setTimeout(() => {
+    createAutoBackupSnapshot('Auto-Save');
+  }, 10000);
+}
+
+/**
+ * Rascunho de Modais Ativos (salva o que estava sendo preenchido caso a aba feche)
+ */
+function saveActiveModalDraft() {
+  try {
+    const activeModal = document.querySelector('.modal-overlay.active');
+    if (!activeModal) return null;
+
+    const modalId = activeModal.id;
+    let draft = { modalId, timestamp: new Date().toISOString(), data: {} };
+
+    if (modalId === 'modal-cell-detail') {
+      const { colabId, isoDate } = currentEditingCell || {};
+      if (!colabId || !isoDate) return null;
+
+      draft.colabId = colabId;
+      draft.isoDate = isoDate;
+      const punches = {
+        em: document.getElementById('punch-em')?.value || '',
+        sm: document.getElementById('punch-sm')?.value || '',
+        et: document.getElementById('punch-et')?.value || '',
+        st: document.getElementById('punch-st')?.value || ''
+      };
+      const override = document.getElementById('select-override-status')?.value || 'AUTO';
+      const override2 = document.getElementById('select-override-status-2')?.value || '';
+      const resolution = document.getElementById('select-resolution')?.value || 'NENHUMA';
+      const note = (document.getElementById('input-cell-justificativa')?.value || '').trim();
+      const atrasoMaior = (document.getElementById('input-atraso-maior')?.value || '').trim();
+      const atrasoPequeno = (document.getElementById('input-atraso-pequeno')?.value || '').trim();
+
+      draft.data = { punches, override, override2, resolution, note, atrasoMaior, atrasoPequeno };
+
+      // Salva imediatamente no próprio registrosPonto em memória para não perder o que foi digitado!
+      const regKey = colabId + '_' + isoDate;
+      appState.registrosPonto[regKey] = {
+        override,
+        override2,
+        resolution,
+        punches: { ...punches },
+        note,
+        atrasoMaior,
+        atrasoMaiorMin: parseTimeToMinutes(atrasoMaior),
+        atrasoPequeno,
+        atrasoPequenoMin: parseTimeToMinutes(atrasoPequeno)
+      };
+    } else if (modalId === 'modal-employee') {
+      draft.data = {
+        id: document.getElementById('emp-id')?.value,
+        cracha: document.getElementById('emp-cracha')?.value,
+        nome: document.getElementById('emp-nome')?.value,
+        filialId: document.getElementById('emp-filial')?.value,
+        deptId: document.getElementById('emp-dept')?.value,
+        admissao: document.getElementById('emp-admissao')?.value,
+        registraPonto: document.getElementById('emp-registra-ponto')?.checked,
+        aprendiz: document.getElementById('emp-aprendiz')?.checked,
+        folgaSabado: document.getElementById('emp-folga-sabado')?.checked,
+        naoRecebeVa: document.getElementById('emp-nao-recebe-va')?.checked,
+        status: document.getElementById('emp-status')?.value,
+        dataDemissao: document.getElementById('emp-demissao')?.value
+      };
+    } else if (modalId === 'modal-aviso') {
+      draft.data = {
+        id: document.getElementById('aviso-id')?.value,
+        titulo: document.getElementById('aviso-titulo')?.value,
+        data: document.getElementById('aviso-data')?.value,
+        tipo: document.getElementById('aviso-tipo')?.value,
+        descricao: document.getElementById('aviso-desc')?.value,
+        filialId: document.getElementById('aviso-filial')?.value
+      };
+    }
+
+    localStorage.setItem(MODAL_DRAFT_KEY, JSON.stringify(draft));
+    return draft;
+  } catch (e) {
+    console.warn('Erro ao salvar rascunho de modal:', e);
+    return null;
+  }
+}
+
+function clearModalDraft() {
+  try {
+    localStorage.removeItem(MODAL_DRAFT_KEY);
+  } catch (e) {}
+}
+
+function checkModalDraftOnLoad() {
+  try {
+    const raw = localStorage.getItem(MODAL_DRAFT_KEY);
+    if (!raw) return;
+    const draft = JSON.parse(raw);
+    if (!draft || !draft.timestamp) return;
+
+    const diffHours = (Date.now() - new Date(draft.timestamp).getTime()) / (1000 * 60 * 60);
+    if (diffHours > 24) {
+      clearModalDraft();
+      return;
+    }
+
+    let itemDesc = 'registro em andamento';
+    if (draft.modalId === 'modal-cell-detail') itemDesc = 'ponto do colaborador';
+    if (draft.modalId === 'modal-employee') itemDesc = 'cadastro de colaborador (' + (draft.data?.nome || 'novo') + ')';
+    if (draft.modalId === 'modal-aviso') itemDesc = 'aviso (' + (draft.data?.titulo || 'novo') + ')';
+
+    showToast(`📝 Alterações salvas com segurança antes do fechamento (${itemDesc})!`, 'purple');
+    clearModalDraft();
+  } catch (e) {}
+}
+
+/**
+ * Controle de Proteção contra Fechamento Acidental da Aba
+ */
+function isTabCloseProtectionActive() {
+  const setting = localStorage.getItem(CLOSE_PROTECTION_KEY);
+  return setting !== 'false'; // ATIVADA POR PADRÃO
+}
+
+function setTabCloseProtection(enabled) {
+  localStorage.setItem(CLOSE_PROTECTION_KEY, enabled ? 'true' : 'false');
+  const toggle = document.getElementById('toggle-close-protection');
+  if (toggle) toggle.checked = enabled;
+}
+
+/**
+ * Interface do Modal de Histórico de Backups e Restauração
+ */
+function renderBackupHistoryModal() {
+  const container = document.getElementById('backup-history-list');
+  if (!container) return;
+
+  const toggle = document.getElementById('toggle-close-protection');
+  if (toggle) {
+    toggle.checked = isTabCloseProtectionActive();
+  }
+
+  let history = [];
+  try {
+    const raw = localStorage.getItem(BACKUP_HISTORY_KEY);
+    if (raw) history = JSON.parse(raw);
+  } catch (e) {
+    history = [];
+  }
+
+  if (!Array.isArray(history) || history.length === 0) {
+    container.innerHTML = `
+      <div class="backup-empty-state">
+        <div style="font-size:24px; margin-bottom: 8px;">⏱️</div>
+        <strong>Nenhum ponto de restauração anterior salvo.</strong>
+        <div style="margin-top:4px;">Os backups automáticos são salvos conforme você edita o sistema ou clica em "Salvar Ponto Agora".</div>
+      </div>
+    `;
+    return;
+  }
+
+  container.innerHTML = '';
+  history.forEach((snap, idx) => {
+    const item = document.createElement('div');
+    item.className = 'backup-history-item';
+    const isLatest = idx === 0;
+
+    item.innerHTML = `
+      <div style="flex:1;">
+        <div class="backup-item-title">
+          <span>${isLatest ? '🟢' : '⚪'}</span>
+          <span>${snap.displayTime}</span>
+          <span style="font-size:10px; font-weight:600; padding:2px 6px; border-radius:3px; background:rgba(64,21,184,0.3); color:var(--color-cyan);">
+            ${snap.reason || 'Backup'}
+          </span>
+        </div>
+        <div class="backup-item-subtitle">
+          ${snap.colabCount || 0} colaboradores • ${snap.pontoCount || 0} batidas de ponto • ${snap.avisosCount || 0} avisos
+        </div>
+      </div>
+      <div>
+        <button class="btn btn-secondary btn-sm btn-restore-snap" data-id="${snap.id}" title="Restaurar dados para este ponto">
+          Restaurar
+        </button>
+      </div>
+    `;
+
+    item.querySelector('.btn-restore-snap')?.addEventListener('click', () => {
+      restoreBackupSnapshot(snap.id);
+    });
+
+    container.appendChild(item);
+  });
+}
+
+function restoreBackupSnapshot(snapshotId) {
+  try {
+    const raw = localStorage.getItem(BACKUP_HISTORY_KEY);
+    if (!raw) return;
+    const history = JSON.parse(raw);
+    const snap = history.find(s => s.id === snapshotId);
+    if (!snap || !snap.data) {
+      showToast('Ponto de backup não encontrado.', 'warning');
+      return;
+    }
+
+    if (!confirm(`Deseja restaurar o backup de ${snap.displayTime} (${snap.reason})?\n\nTodas as informações do sistema voltarão exatamente para o estado deste momento.`)) {
+      return;
+    }
+
+    createAutoBackupSnapshot('Pré-Restauração');
+
+    const dt = snap.data;
+    if (Array.isArray(dt.filiais)) appState.filiais = dt.filiais;
+    if (Array.isArray(dt.departamentos)) appState.departamentos = normalizeDepartamentos(dt.departamentos);
+    if (Array.isArray(dt.colaboradores)) appState.colaboradores = dt.colaboradores.map(normalizeColaborador);
+    if (Array.isArray(dt.feriados)) appState.feriados = dt.feriados;
+    if (Array.isArray(dt.avisos)) appState.avisos = dt.avisos.map(normalizeAviso);
+    if (dt.registrosPonto) appState.registrosPonto = dt.registrosPonto;
+    if (dt.carryOverDsr) appState.carryOverDsr = dt.carryOverDsr;
+    if (dt.activeBranchId) appState.activeBranchId = dt.activeBranchId;
+    if (typeof dt.currentYear === 'number') appState.currentYear = dt.currentYear;
+    if (typeof dt.currentMonth === 'number') appState.currentMonth = dt.currentMonth;
+
+    appState.updatedAt = new Date().toISOString();
+    saveStateToStorage(true, true, true);
+    closeModal('modal-backup-history');
+    renderCurrentView();
+    showToast(`Backup de ${snap.displayTime} restaurado com sucesso!`, 'success');
+  } catch (err) {
+    console.error('Erro ao restaurar backup:', err);
+    showToast('Falha ao restaurar o backup selecionado.', 'danger');
+  }
+}
+
 function normalizeAviso(a) {
-  // Preserva campos extras (isAssinaturaDoc, autoRollover, prazoLegal, feriasId, etc.)
   const idStr = String(a.id || '');
   const isAssin = idStr.startsWith('aviso-assinatura-');
   return {
@@ -1644,10 +1982,19 @@ function normalizeAviso(a) {
 
 /**
  * Aplica estado recebido remotamente (de outra aba ou da nuvem Supabase)
- * atualizando em tempo real a interface sem recarregar a página.
+ * com proteção estrita para não regredir se os dados forem mais antigos que os locais.
  */
-function applyRemoteState(incoming) {
+function applyRemoteState(incoming, force = false) {
   if (!incoming) return;
+
+  if (!force && incoming.updatedAt && appState.updatedAt) {
+    const inTime = new Date(incoming.updatedAt).getTime();
+    const curTime = new Date(appState.updatedAt).getTime();
+    if (inTime < curTime) {
+      console.log('Ignorando atualização remota desatualizada:', inTime, '<', curTime);
+      return;
+    }
+  }
 
   if (Array.isArray(incoming.filiais) && incoming.filiais.length > 0) {
     appState.filiais = incoming.filiais;
@@ -1665,7 +2012,15 @@ function applyRemoteState(incoming) {
     appState.avisos = incoming.avisos.map(normalizeAviso);
   }
   if (incoming.registrosPonto && typeof incoming.registrosPonto === 'object') {
-    appState.registrosPonto = { ...appState.registrosPonto, ...incoming.registrosPonto };
+    if (force) {
+      appState.registrosPonto = { ...incoming.registrosPonto };
+    } else {
+      appState.registrosPonto = { ...appState.registrosPonto, ...incoming.registrosPonto };
+    }
+  }
+
+  if (incoming.updatedAt) {
+    appState.updatedAt = incoming.updatedAt;
   }
 
   renderCurrentView();
@@ -1680,7 +2035,7 @@ if (syncBroadcastChannel) {
   };
 }
 
-// Ouvinte de evento de Storage (disparado entre abas do mesmo domínio quando o localStorage muda)
+// Ouvintes de ciclo de vida da janela (Fechamento, Troca de Aba, etc.)
 if (typeof window !== 'undefined') {
   window.addEventListener('storage', (event) => {
     if (event.key === STORAGE_KEY && event.newValue) {
@@ -1693,12 +2048,36 @@ if (typeof window !== 'undefined') {
     }
   });
 
-  // Salva imediatamente qualquer fila pendente antes de fechar a aba
-  window.addEventListener('beforeunload', () => {
-    if (cloudSyncTimer) {
-      clearTimeout(cloudSyncTimer);
+  // Salva imediatamente ao fechar/sair e ativa confirmação de segurança
+  window.addEventListener('beforeunload', (event) => {
+    try {
+      saveActiveModalDraft();
+      saveStateToStorage(false, false, false);
+      createAutoBackupSnapshot('Fechamento de Aba');
+
+      const payload = getStoragePayload();
+      sendKeepaliveCloudSync(payload);
+    } catch (e) {}
+
+    const hasModal = !!document.querySelector('.modal-overlay.active');
+    const protection = isTabCloseProtectionActive();
+
+    // Se houver proteção ativada ou modal aberto, aciona a confirmação nativa do navegador
+    if (protection || hasModal) {
+      event.preventDefault();
+      event.returnValue = '';
+      return '';
+    }
+  });
+
+  // Sincroniza em segundo plano quando o usuário minimiza ou troca de aba
+  document.addEventListener('visibilitychange', () => {
+    if (document.visibilityState === 'hidden') {
       try {
-        saveStateToStorage(true, true);
+        saveActiveModalDraft();
+        saveStateToStorage(false, false, false);
+        const payload = getStoragePayload();
+        sendKeepaliveCloudSync(payload);
       } catch (e) {}
     }
   });
@@ -1716,7 +2095,7 @@ function initSupabaseRealtime() {
         if (changePayload.new && changePayload.new.data) {
           console.log('Atualização em tempo real recebida do Supabase Cloud');
           applyRemoteState(changePayload.new.data);
-          saveStateToStorage(false);
+          saveStateToStorage(false, false, false);
           const badge = document.getElementById('supabase-sync-badge');
           if (badge) {
             badge.style.opacity = '1';
@@ -1730,6 +2109,9 @@ function initSupabaseRealtime() {
   }
 }
 
+/**
+ * Sincronização na inicialização com comparação segura de timestamps
+ */
 async function syncFromCloudOnStart() {
   if (!supabaseClient) return;
   try {
@@ -1746,43 +2128,36 @@ async function syncFromCloudOnStart() {
 
     if (data && data.data) {
       const cloud = data.data;
+      const cloudTime = new Date(data.updated_at || cloud.updatedAt || 0).getTime();
+      const localTime = new Date(appState.updatedAt || 0).getTime();
 
-      // 1. Departamentos (garante sincronização total do ADMIN-S/PONTO e novos deptos)
-      if (cloud.departamentos && Array.isArray(cloud.departamentos) && cloud.departamentos.length > 0) {
-        appState.departamentos = normalizeDepartamentos(cloud.departamentos);
+      console.log('Verificação de Sincronização na Inicialização:');
+      console.log(' - Nuvem:', new Date(cloudTime).toISOString(), cloudTime);
+      console.log(' - Local:', new Date(localTime).toISOString(), localTime);
+
+      // CASO 1: LOCAL MAIS RECENTE QUE A NUVEM
+      // Se os dados locais tiverem sido modificados antes de fechar a aba e ainda não subiram:
+      // NUNCA sobrescreve o local com os dados velhos da nuvem!
+      if (localTime > cloudTime + 2000) {
+        console.log('ALTERAÇÕES LOCAIS SÃO MAIS RECENTES. Preservando trabalho e sincronizando nuvem...');
+        const payload = getStoragePayload();
+        triggerCloudSync(payload, true);
+        showToast('Suas alterações locais mais recentes foram mantidas e sincronizadas com a nuvem.', 'info');
+        return;
       }
 
-      // 2. Filiais
-      if (cloud.filiais && Array.isArray(cloud.filiais) && cloud.filiais.length > 0) {
-        appState.filiais = cloud.filiais;
+      // CASO 2: NUVEM É MAIS NOVA (Ex: alterações feitas em outro dispositivo)
+      if (cloudTime > localTime + 2000) {
+        applyRemoteState(cloud, true);
+        appState.updatedAt = data.updated_at || cloud.updatedAt || new Date().toISOString();
+        saveStateToStorage(false, false, false);
+        renderCurrentView();
+        console.log('Dados atualizados da nuvem Supabase com sucesso.');
+        return;
       }
 
-      // 3. Feriados
-      if (cloud.feriados && Array.isArray(cloud.feriados)) {
-        appState.feriados = cloud.feriados;
-      }
-
-      // 4. Registros de Ponto
-      if (cloud.registrosPonto && Object.keys(cloud.registrosPonto).length > 0) {
-        appState.registrosPonto = { ...appState.registrosPonto, ...cloud.registrosPonto };
-      }
-      appState.carryOverDsr = {};
-
-      // 5. Colaboradores (com normalização de Jovem Aprendiz, Bate Ponto, etc.)
-      if (cloud.colaboradores && Array.isArray(cloud.colaboradores) && cloud.colaboradores.length > 0) {
-        appState.colaboradores = cloud.colaboradores.map(normalizeColaborador);
-      }
-
-      // 6. Mural de Avisos
-      if (cloud.avisos && Array.isArray(cloud.avisos) && cloud.avisos.length > 0) {
-        const hasDates = cloud.avisos.some(a => !!a.data);
-        appState.avisos = hasDates ? cloud.avisos.map(normalizeAviso) : getDefaultSeedData().avisos;
-      }
-
-      // Salva apenas localmente sem re-disparar escrita imediata na nuvem
-      saveStateToStorage(false);
-      renderCurrentView();
-      console.log('Dados sincronizados do Supabase Cloud com sucesso.');
+      // CASO 3: Nuvem e local já estão equivalentes
+      console.log('Nuvem e local estão sincronizados.');
     }
   } catch (e) {
     console.warn('Falha ao sincronizar da nuvem:', e);
@@ -1858,11 +2233,13 @@ function loadStateFromStorage() {
         if (typeof parsed.focusMode === 'boolean') appState.focusMode = parsed.focusMode;
         if (parsed.sortBy) appState.sortBy = parsed.sortBy;
 
+        appState.updatedAt = parsed.updatedAt || new Date().toISOString();
+
         checkAndRolloverPendingNotices();
         syncDismissalNotices();
 
-        // Salva apenas localmente; não sobrescreve a nuvem na inicialização
-        saveStateToStorage(false);
+        // Salva apenas localmente; não atualiza timestamp nem sobrescreve a nuvem
+        saveStateToStorage(false, false, false);
         return;
       }
     }
@@ -1880,12 +2257,13 @@ function loadStateFromStorage() {
   appState.registrosPonto = seed.registrosPonto;
   appState.carryOverDsr = {};
   appState.activeBranchId = 'branch-1';
+  appState.updatedAt = new Date().toISOString();
 
   checkAndRolloverPendingNotices();
   syncDismissalNotices();
 
   // Salva apenas localmente
-  saveStateToStorage(false);
+  saveStateToStorage(false, false, false);
 }
 
 
@@ -3663,7 +4041,7 @@ document.getElementById('btn-save-cell-detail')?.addEventListener('click', () =>
   }
 
   saveStateToStorage();
-  closeModal('modal-cell-detail');
+  clearModalDraft(); closeModal('modal-cell-detail');
   renderCurrentView();
   showToast('Registro de ponto atualizado com sucesso!', 'success');
 });
@@ -5148,7 +5526,7 @@ document.getElementById('btn-save-employee')?.addEventListener('click', () => {
 
   // Grava imediatamente no LocalStorage, sincroniza abas abertas e envia à nuvem sem espera
   saveStateToStorage(true, true);
-  closeModal('modal-employee');
+  clearModalDraft(); closeModal('modal-employee');
   renderCurrentView();
 
   if (status === 'demitido') {
@@ -5747,6 +6125,31 @@ function applyTheme(theme) {
   }
 }
 
+// Histórico de Backups e Restauração Automática
+document.getElementById('btn-backup-history')?.addEventListener('click', () => {
+  renderBackupHistoryModal();
+  openModal('modal-backup-history');
+});
+
+document.getElementById('toggle-close-protection')?.addEventListener('change', (e) => {
+  setTabCloseProtection(e.target.checked);
+  showToast(e.target.checked ? 'Proteção contra fechamento de aba ATIVADA.' : 'Proteção contra fechamento de aba DESATIVADA.', 'info');
+});
+
+document.getElementById('btn-create-manual-backup')?.addEventListener('click', () => {
+  createAutoBackupSnapshot('Ponto Manual');
+  renderBackupHistoryModal();
+  showToast('Ponto de restauração salvo com sucesso!', 'success');
+});
+
+document.getElementById('btn-clear-backup-history')?.addEventListener('click', () => {
+  if (confirm('Deseja realmente limpar os pontos de restauração antigos salvos localmente?')) {
+    localStorage.removeItem(BACKUP_HISTORY_KEY);
+    renderBackupHistoryModal();
+    showToast('Histórico antigo de backups limpo.', 'info');
+  }
+});
+
 // Backup JSON
 document.getElementById('btn-export-backup')?.addEventListener('click', () => {
   const dataStr = JSON.stringify(appState, null, 2);
@@ -5806,6 +6209,7 @@ function openModal(modalId) {
 function closeModal(modalId) {
   const m = document.getElementById(modalId);
   if (m) m.classList.remove('active');
+  clearModalDraft();
 }
 
 document.querySelectorAll('.modal-close-btn, [data-close]').forEach(btn => {
@@ -6028,6 +6432,8 @@ function initEvents() {
 document.addEventListener('DOMContentLoaded', () => {
   initTheme();
   loadStateFromStorage();
+  checkModalDraftOnLoad();
+  createAutoBackupSnapshot('Início da Sessão');
   setupNavigation();
   initEvents();
 
@@ -6054,6 +6460,11 @@ document.addEventListener('DOMContentLoaded', () => {
   // Sincronização automática em segundo plano com a nuvem Supabase
   syncFromCloudOnStart();
   initSupabaseRealtime();
+
+  // Salva snapshot de backup no histórico a cada 3 minutos
+  setInterval(() => {
+    createAutoBackupSnapshot('Auto-Save Periódico');
+  }, 180000);
 });
 
 // Navegação pelo teclado na Matriz de Ponto (Setas Cima/Baixo/Esquerda/Direita e Enter)
