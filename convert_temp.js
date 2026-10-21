@@ -159,7 +159,7 @@ for (const line of lines) {
     const deptId = deptMap[deptoRaw] || 'dept-admin';
     
     colaboradores.push({
-      id: `colab-${cracha}`,
+      id: `colab_${currentBranchId}_${cracha}`,
       cracha,
       nome,
       filialId: currentBranchId,

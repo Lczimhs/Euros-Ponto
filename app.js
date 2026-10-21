@@ -99,1073 +99,1073 @@ function getDefaultSeedData() {
   ];
 
   const colaboradores = [
-    {
-      "id": "colab-1026",
-      "cracha": 1026,
-      "nome": "IAN VINICIUS NERES LEITE",
-      "filialId": "branch-1",
-      "deptId": "dept-admin",
-      "admissao": "2026-09-21",
-      "registraPonto": true,
-      "status": "ativo",
-      "dataDemissao": ""
-    },
-    {
-      "id": "colab-1031",
-      "cracha": 1031,
-      "nome": "IRACI EVANGELISTA DOS SANTOS",
-      "filialId": "branch-1",
-      "deptId": "dept-admin-sponto",
-      "admissao": "2026-09-30",
-      "registraPonto": true,
-      "status": "ativo",
-      "dataDemissao": ""
-    },
-    {
-      "id": "colab-1",
-      "cracha": 1,
-      "nome": "DICEFANI MACEDO FERRARINI",
-      "filialId": "branch-1",
-      "deptId": "dept-admin",
-      "admissao": "2014-02-03",
-      "registraPonto": true,
-      "status": "ativo",
-      "dataDemissao": ""
-    },
-    {
-      "id": "colab-218",
-      "cracha": 218,
-      "nome": "MARCOS BATISTA GONCALVES",
-      "filialId": "branch-1",
-      "deptId": "dept-producao",
-      "admissao": "2007-07-11",
-      "registraPonto": true,
-      "status": "ativo",
-      "dataDemissao": ""
-    },
-    {
-      "id": "colab-234",
-      "cracha": 234,
-      "nome": "GILMAR SABINO DA SILVA",
-      "filialId": "branch-1",
-      "deptId": "dept-producao",
-      "admissao": "2014-05-07",
-      "registraPonto": true,
-      "status": "ativo",
-      "dataDemissao": ""
-    },
-    {
-      "id": "colab-325",
-      "cracha": 325,
-      "nome": "JORGE LUIZ DE ANDRADE",
-      "filialId": "branch-1",
-      "deptId": "dept-admin-sponto",
-      "admissao": "2019-07-31",
-      "registraPonto": true,
-      "status": "ativo",
-      "dataDemissao": ""
-    },
-    {
-      "id": "colab-336",
-      "cracha": 336,
-      "nome": "CLAUDINEI RIBEIRO FERNANDES",
-      "filialId": "branch-1",
-      "deptId": "dept-admin-sponto",
-      "admissao": "2019-09-20",
-      "registraPonto": true,
-      "status": "ativo",
-      "dataDemissao": ""
-    },
-    {
-      "id": "colab-354",
-      "cracha": 354,
-      "nome": "JOSE MARIA ALVES DA CRUZ",
-      "filialId": "branch-1",
-      "deptId": "dept-producao",
-      "admissao": "2020-01-24",
-      "registraPonto": true,
-      "status": "ativo",
-      "dataDemissao": ""
-    },
-    {
-      "id": "colab-361",
-      "cracha": 361,
-      "nome": "FERNANDA CRISTINA PAIXAO DE ALMEIDA",
-      "filialId": "branch-1",
-      "deptId": "dept-admin",
-      "admissao": "2020-02-12",
-      "registraPonto": true,
-      "status": "ativo",
-      "dataDemissao": ""
-    },
-    {
-      "id": "colab-431",
-      "cracha": 431,
-      "nome": "RONALDO RIBEIRO DE ARAUJO",
-      "filialId": "branch-1",
-      "deptId": "dept-admin-sponto",
-      "admissao": "2020-10-30",
-      "registraPonto": true,
-      "status": "ativo",
-      "dataDemissao": ""
-    },
-    {
-      "id": "colab-491",
-      "cracha": 491,
-      "nome": "GILMAR OTERIO DA SILVA DACOL",
-      "filialId": "branch-1",
-      "deptId": "dept-producao",
-      "admissao": "2021-05-10",
-      "registraPonto": true,
-      "status": "ativo",
-      "dataDemissao": ""
-    },
-    {
-      "id": "colab-540",
-      "cracha": 540,
-      "nome": "LEONILDO TABORDA BARBOSA",
-      "filialId": "branch-1",
-      "deptId": "dept-admin-sponto",
-      "admissao": "2021-10-14",
-      "registraPonto": true,
-      "status": "ativo",
-      "dataDemissao": ""
-    },
-    {
-      "id": "colab-545",
-      "cracha": 545,
-      "nome": "ANTONIO BRITO SANTOS",
-      "filialId": "branch-1",
-      "deptId": "dept-producao",
-      "admissao": "2010-01-02",
-      "registraPonto": true,
-      "status": "ativo",
-      "dataDemissao": ""
-    },
-    {
-      "id": "colab-663",
-      "cracha": 663,
-      "nome": "DEVAIR DUARTE SANCHES",
-      "filialId": "branch-1",
-      "deptId": "dept-producao",
-      "admissao": "2023-02-16",
-      "registraPonto": true,
-      "status": "ativo",
-      "dataDemissao": ""
-    },
-    {
-      "id": "colab-668",
-      "cracha": 668,
-      "nome": "JURANDI CAETANO SOARES",
-      "filialId": "branch-1",
-      "deptId": "dept-producao",
-      "admissao": "2023-02-24",
-      "registraPonto": true,
-      "status": "ativo",
-      "dataDemissao": ""
-    },
-    {
-      "id": "colab-696",
-      "cracha": 696,
-      "nome": "ANTONIO DA SILVA",
-      "filialId": "branch-1",
-      "deptId": "dept-admin-sponto",
-      "admissao": "2007-03-01",
-      "registraPonto": true,
-      "status": "ativo",
-      "dataDemissao": ""
-    },
-    {
-      "id": "colab-701",
-      "cracha": 701,
-      "nome": "ANTONIO GOMES COELHO",
-      "filialId": "branch-1",
-      "deptId": "dept-producao",
-      "admissao": "2023-07-06",
-      "registraPonto": true,
-      "status": "ativo",
-      "dataDemissao": ""
-    },
-    {
-      "id": "colab-702",
-      "cracha": 702,
-      "nome": "BRUNO RIBEIRO DA SILVA",
-      "filialId": "branch-1",
-      "deptId": "dept-admin-sponto",
-      "admissao": "2023-07-10",
-      "registraPonto": true,
-      "status": "ativo",
-      "dataDemissao": ""
-    },
-    {
-      "id": "colab-736",
-      "cracha": 736,
-      "nome": "EDINEIA CELIA DOS SANTOS",
-      "filialId": "branch-1",
-      "deptId": "dept-admin-sponto",
-      "admissao": "2023-12-18",
-      "registraPonto": true,
-      "status": "ativo",
-      "dataDemissao": ""
-    },
-    {
-      "id": "colab-778",
-      "cracha": 778,
-      "nome": "ANGELICA DA SILVA GAMA",
-      "filialId": "branch-1",
-      "deptId": "dept-producao",
-      "admissao": "2024-04-19",
-      "registraPonto": true,
-      "status": "ativo",
-      "dataDemissao": ""
-    },
-    {
-      "id": "colab-781",
-      "cracha": 781,
-      "nome": "RAFAEL DE JESUS CARDOSO",
-      "filialId": "branch-1",
-      "deptId": "dept-admin-sponto",
-      "admissao": "2024-05-06",
-      "registraPonto": true,
-      "status": "ativo",
-      "dataDemissao": ""
-    },
-    {
-      "id": "colab-847",
-      "cracha": 847,
-      "nome": "HEBER LUCAS LEONEL FONESI",
-      "filialId": "branch-1",
-      "deptId": "dept-producao",
-      "admissao": "2024-11-14",
-      "registraPonto": true,
-      "status": "ativo",
-      "dataDemissao": ""
-    },
-    {
-      "id": "colab-858",
-      "cracha": 858,
-      "nome": "LUCIANA GUIMARÃES DOS SANTOS",
-      "filialId": "branch-1",
-      "deptId": "dept-producao",
-      "admissao": "2014-02-06",
-      "registraPonto": true,
-      "status": "ativo",
-      "dataDemissao": ""
-    },
-    {
-      "id": "colab-863",
-      "cracha": 863,
-      "nome": "KELVY ALVES COELHO",
-      "filialId": "branch-1",
-      "deptId": "dept-producao",
-      "admissao": "2024-12-11",
-      "registraPonto": true,
-      "status": "ativo",
-      "dataDemissao": ""
-    },
-    {
-      "id": "colab-898",
-      "cracha": 898,
-      "nome": "JOSÉ PAULO DO NASCIMENTO",
-      "filialId": "branch-1",
-      "deptId": "dept-admin-sponto",
-      "admissao": "2025-03-03",
-      "registraPonto": true,
-      "status": "ativo",
-      "dataDemissao": ""
-    },
-    {
-      "id": "colab-900",
-      "cracha": 900,
-      "nome": "JANAINA CARDOSO DA SILVA",
-      "filialId": "branch-1",
-      "deptId": "dept-admin",
-      "admissao": "2025-03-12",
-      "registraPonto": true,
-      "status": "ativo",
-      "dataDemissao": ""
-    },
-    {
-      "id": "colab-908",
-      "cracha": 908,
-      "nome": "ADRIANA DE SOUZA",
-      "filialId": "branch-1",
-      "deptId": "dept-admin",
-      "admissao": "2025-05-19",
-      "registraPonto": true,
-      "status": "ativo",
-      "dataDemissao": ""
-    },
-    {
-      "id": "colab-914",
-      "cracha": 914,
-      "nome": "DANILO NATA DA SILVA SANTOS",
-      "filialId": "branch-1",
-      "deptId": "dept-producao",
-      "admissao": "2025-06-10",
-      "registraPonto": true,
-      "status": "ativo",
-      "dataDemissao": ""
-    },
-    {
-      "id": "colab-917",
-      "cracha": 917,
-      "nome": "PATRICIA MARTINS BENEDITO",
-      "filialId": "branch-1",
-      "deptId": "dept-admin",
-      "admissao": "2025-06-24",
-      "registraPonto": true,
-      "status": "ativo",
-      "dataDemissao": ""
-    },
-    {
-      "id": "colab-1173",
-      "cracha": 1173,
-      "nome": "LUANA CAMILO DE MORAES",
-      "filialId": "branch-1",
-      "deptId": "dept-admin",
-      "admissao": "2013-12-12",
-      "registraPonto": true,
-      "status": "ativo",
-      "dataDemissao": ""
-    },
-    {
-      "id": "colab-1405",
-      "cracha": 1405,
-      "nome": "LUCAS TUPAN DA SILVA",
-      "filialId": "branch-1",
-      "deptId": "dept-admin",
-      "admissao": "2020-01-14",
-      "registraPonto": true,
-      "status": "ativo",
-      "dataDemissao": ""
-    },
-    {
-      "id": "colab-937",
-      "cracha": 937,
-      "nome": "HUGO HENRIQUE CIONI",
-      "filialId": "branch-1",
-      "deptId": "dept-admin-sponto",
-      "admissao": "2025-09-08",
-      "registraPonto": true,
-      "status": "ativo",
-      "dataDemissao": ""
-    },
-    {
-      "id": "colab-942",
-      "cracha": 942,
-      "nome": "USIEL OLIVEIRA",
-      "filialId": "branch-1",
-      "deptId": "dept-admin",
-      "admissao": "2025-09-16",
-      "registraPonto": true,
-      "status": "ativo",
-      "dataDemissao": ""
-    },
-    {
-      "id": "colab-954",
-      "cracha": 954,
-      "nome": "WALLYSON PEREIRA DE MELO",
-      "filialId": "branch-1",
-      "deptId": "dept-producao",
-      "admissao": "2025-11-06",
-      "registraPonto": true,
-      "status": "ativo",
-      "dataDemissao": ""
-    },
-    {
-      "id": "colab-955",
-      "cracha": 955,
-      "nome": "JOSE LUIZ DA SILVA",
-      "filialId": "branch-1",
-      "deptId": "dept-producao",
-      "admissao": "2025-11-17",
-      "registraPonto": true,
-      "status": "ativo",
-      "dataDemissao": ""
-    },
-    {
-      "id": "colab-961",
-      "cracha": 961,
-      "nome": "LEONARDO VIEIRA DOS SANTOS",
-      "filialId": "branch-1",
-      "deptId": "dept-producao",
-      "admissao": "2025-12-19",
-      "registraPonto": true,
-      "status": "ativo",
-      "dataDemissao": ""
-    },
-    {
-      "id": "colab-963",
-      "cracha": 963,
-      "nome": "KELIANE GONCALVES DE SOUZA",
-      "filialId": "branch-1",
-      "deptId": "dept-admin",
-      "admissao": "2026-01-05",
-      "registraPonto": true,
-      "status": "ativo",
-      "dataDemissao": ""
-    },
-    {
-      "id": "colab-965",
-      "cracha": 965,
-      "nome": "LEANDRO MARTINS DO NASCIMENTO",
-      "filialId": "branch-1",
-      "deptId": "dept-admin-sponto",
-      "admissao": "2026-01-10",
-      "registraPonto": true,
-      "status": "ativo",
-      "dataDemissao": ""
-    },
-    {
-      "id": "colab-970",
-      "cracha": 970,
-      "nome": "ANTONIO ALVES DE SOUZA",
-      "filialId": "branch-1",
-      "deptId": "dept-producao",
-      "admissao": "2026-01-29",
-      "registraPonto": true,
-      "status": "ativo",
-      "dataDemissao": ""
-    },
-    {
-      "id": "colab-974",
-      "cracha": 974,
-      "nome": "EUCLIDES NUNES DOS SANTOS",
-      "filialId": "branch-1",
-      "deptId": "dept-admin-sponto",
-      "admissao": "2026-02-09",
-      "registraPonto": true,
-      "status": "ativo",
-      "dataDemissao": ""
-    },
-    {
-      "id": "colab-975",
-      "cracha": 975,
-      "nome": "EDUARDO DE OLIVEIRA SILVA",
-      "filialId": "branch-1",
-      "deptId": "dept-producao",
-      "admissao": "2026-02-17",
-      "registraPonto": true,
-      "status": "ativo",
-      "dataDemissao": ""
-    },
-    {
-      "id": "colab-986",
-      "cracha": 986,
-      "nome": "ALESSANDRO DE SOUSA PAIVA",
-      "filialId": "branch-1",
-      "deptId": "dept-producao",
-      "admissao": "2026-03-26",
-      "registraPonto": true,
-      "status": "ativo",
-      "dataDemissao": ""
-    },
-    {
-      "id": "colab-989",
-      "cracha": 989,
-      "nome": "LUCAS DOS SANTOS ABREU",
-      "filialId": "branch-1",
-      "deptId": "dept-admin",
-      "admissao": "2026-04-22",
-      "registraPonto": true,
-      "status": "ativo",
-      "dataDemissao": ""
-    },
-    {
-      "id": "colab-997",
-      "cracha": 997,
-      "nome": "PATRICIA BARROSO PINHEIRO",
-      "filialId": "branch-1",
-      "deptId": "dept-producao",
-      "admissao": "2026-05-28",
-      "registraPonto": true,
-      "status": "ativo",
-      "dataDemissao": ""
-    },
-    {
-      "id": "colab-999",
-      "cracha": 999,
-      "nome": "JOSEFA JANAINA RODRIGUES DE SOUZA",
-      "filialId": "branch-1",
-      "deptId": "dept-producao",
-      "admissao": "2026-06-02",
-      "registraPonto": true,
-      "status": "ativo",
-      "dataDemissao": ""
-    },
-    {
-      "id": "colab-1000",
-      "cracha": 1000,
-      "nome": "LUCAS VILAS BOAS BRITO",
-      "filialId": "branch-1",
-      "deptId": "dept-admin",
-      "admissao": "2026-06-15",
-      "registraPonto": true,
-      "status": "ativo",
-      "dataDemissao": ""
-    },
-    {
-      "id": "colab-1008",
-      "cracha": 1008,
-      "nome": "BRUNO PHELIPE VICENTE MACHADO",
-      "filialId": "branch-1",
-      "deptId": "dept-producao",
-      "admissao": "2026-07-14",
-      "registraPonto": true,
-      "status": "ativo",
-      "dataDemissao": ""
-    },
-    {
-      "id": "colab-1013",
-      "cracha": 1013,
-      "nome": "RIQUELME ALMEIDA PINHEIRO",
-      "filialId": "branch-1",
-      "deptId": "dept-producao",
-      "admissao": "2026-08-03",
-      "registraPonto": true,
-      "status": "ativo",
-      "dataDemissao": ""
-    },
-    {
-      "id": "colab-1018",
-      "cracha": 1018,
-      "nome": "LEONARDO SILVA KIKO",
-      "filialId": "branch-1",
-      "deptId": "dept-producao",
-      "admissao": "2026-08-27",
-      "registraPonto": true,
-      "status": "ativo",
-      "dataDemissao": ""
-    },
-    {
-      "id": "colab-1020",
-      "cracha": 1020,
-      "nome": "CARLOS HENRIQUE ANGELICO",
-      "filialId": "branch-1",
-      "deptId": "dept-admin-sponto",
-      "admissao": "2024-05-27",
-      "registraPonto": true,
-      "status": "ativo",
-      "dataDemissao": ""
-    },
-    {
-      "id": "colab-1025",
-      "cracha": 1025,
-      "nome": "KAUAN DE CARVALHO PENA",
-      "filialId": "branch-1",
-      "deptId": "dept-producao",
-      "admissao": "2026-09-18",
-      "registraPonto": true,
-      "status": "ativo",
-      "dataDemissao": ""
-    },
-    {
-      "id": "colab-1027",
-      "cracha": 1027,
-      "nome": "VANDEILSON DIAS DE MATOS",
-      "filialId": "branch-1",
-      "deptId": "dept-admin-sponto",
-      "admissao": "2026-09-23",
-      "registraPonto": true,
-      "status": "ativo",
-      "dataDemissao": ""
-    },
-    {
-      "id": "colab-1032",
-      "cracha": 1032,
-      "nome": "RAUL FERNANDO MENEGUETTI JACOB",
-      "filialId": "branch-1",
-      "deptId": "dept-admin-sponto",
-      "admissao": "2026-07-07",
-      "registraPonto": true,
-      "status": "ativo",
-      "dataDemissao": ""
-    },
-    {
-      "id": "colab-1033",
-      "cracha": 1033,
-      "nome": "PEDRO HENRIQUE DAMASCENO MELO",
-      "filialId": "branch-1",
-      "deptId": "dept-producao",
-      "admissao": "2026-10-07",
-      "registraPonto": true,
-      "status": "ativo",
-      "dataDemissao": ""
-    },
-    {
-      "id": "colab-1034",
-      "cracha": 1034,
-      "nome": "WESLEY PATRICK FERNANDES DE OLIVEIRA",
-      "filialId": "branch-1",
-      "deptId": "dept-producao",
-      "admissao": "2026-10-09",
-      "registraPonto": true,
-      "status": "ativo",
-      "dataDemissao": ""
-    },
-    {
-      "id": "colab-1016",
-      "cracha": 1016,
-      "nome": "GUILHERME ANTONIO DOS SANTOS",
-      "filialId": "branch-2",
-      "deptId": "dept-admin",
-      "admissao": "2026-08-24",
-      "registraPonto": true,
-      "status": "ativo",
-      "dataDemissao": ""
-    },
-    {
-      "id": "colab-127",
-      "cracha": 127,
-      "nome": "LEONICE DA SILVA MOURA DE SOUZA",
-      "filialId": "branch-2",
-      "deptId": "dept-producao",
-      "admissao": "2016-07-15",
-      "registraPonto": true,
-      "status": "ativo",
-      "dataDemissao": ""
-    },
-    {
-      "id": "colab-288",
-      "cracha": 288,
-      "nome": "SERGIO RIBEIRO",
-      "filialId": "branch-2",
-      "deptId": "dept-admin",
-      "admissao": "2018-12-11",
-      "registraPonto": true,
-      "status": "ativo",
-      "dataDemissao": ""
-    },
-    {
-      "id": "colab-456",
-      "cracha": 456,
-      "nome": "PAULO SERGIO FERREIRA DA SILVA",
-      "filialId": "branch-2",
-      "deptId": "dept-producao",
-      "admissao": "2021-01-28",
-      "registraPonto": true,
-      "status": "ativo",
-      "dataDemissao": ""
-    },
-    {
-      "id": "colab-463",
-      "cracha": 463,
-      "nome": "FABIO FARIAS",
-      "filialId": "branch-2",
-      "deptId": "dept-admin",
-      "admissao": "2021-02-22",
-      "registraPonto": true,
-      "status": "ativo",
-      "dataDemissao": ""
-    },
-    {
-      "id": "colab-561",
-      "cracha": 561,
-      "nome": "LUCAS DE PAULA CARVALHO",
-      "filialId": "branch-2",
-      "deptId": "dept-producao",
-      "admissao": "2022-01-24",
-      "registraPonto": true,
-      "status": "ativo",
-      "dataDemissao": ""
-    },
-    {
-      "id": "colab-613",
-      "cracha": 613,
-      "nome": "MARCO ANTONIO OLIVEIRA DE SOUZA",
-      "filialId": "branch-2",
-      "deptId": "dept-producao",
-      "admissao": "2022-09-05",
-      "registraPonto": true,
-      "status": "ativo",
-      "dataDemissao": ""
-    },
-    {
-      "id": "colab-780",
-      "cracha": 780,
-      "nome": "LEONARDO MARINHO CARIS",
-      "filialId": "branch-2",
-      "deptId": "dept-producao",
-      "admissao": "2024-04-24",
-      "registraPonto": true,
-      "status": "ativo",
-      "dataDemissao": ""
-    },
-    {
-      "id": "colab-810",
-      "cracha": 810,
-      "nome": "ROSANA SANABRIA FERREIRA DA SILVA",
-      "filialId": "branch-2",
-      "deptId": "dept-admin",
-      "admissao": "2024-08-01",
-      "registraPonto": true,
-      "status": "ativo",
-      "dataDemissao": ""
-    },
-    {
-      "id": "colab-867",
-      "cracha": 867,
-      "nome": "APARICIO AMARILLA",
-      "filialId": "branch-2",
-      "deptId": "dept-producao",
-      "admissao": "2024-12-17",
-      "registraPonto": true,
-      "status": "ativo",
-      "dataDemissao": ""
-    },
-    {
-      "id": "colab-890",
-      "cracha": 890,
-      "nome": "VICTORIA CAROLINA RODRIGUES DE CAMARGO",
-      "filialId": "branch-2",
-      "deptId": "dept-admin",
-      "admissao": "2025-02-10",
-      "registraPonto": true,
-      "status": "ativo",
-      "dataDemissao": ""
-    },
-    {
-      "id": "colab-946",
-      "cracha": 946,
-      "nome": "EVELYN GABRIELE HARADA MANDUCO PRIORI",
-      "filialId": "branch-2",
-      "deptId": "dept-admin",
-      "admissao": "2025-10-13",
-      "registraPonto": true,
-      "status": "ativo",
-      "dataDemissao": ""
-    },
-    {
-      "id": "colab-952",
-      "cracha": 952,
-      "nome": "ROBSON DA SILVA LUIZ",
-      "filialId": "branch-2",
-      "deptId": "dept-admin",
-      "admissao": "2025-11-03",
-      "registraPonto": true,
-      "status": "ativo",
-      "dataDemissao": ""
-    },
-    {
-      "id": "colab-964",
-      "cracha": 964,
-      "nome": "WELLINGTON MARCELINO DOS SANTOS",
-      "filialId": "branch-2",
-      "deptId": "dept-producao",
-      "admissao": "2026-01-10",
-      "registraPonto": true,
-      "status": "ativo",
-      "dataDemissao": ""
-    },
-    {
-      "id": "colab-977",
-      "cracha": 977,
-      "nome": "PAULO HENRIQUE CARVALHO BENTO",
-      "filialId": "branch-2",
-      "deptId": "dept-producao",
-      "admissao": "2026-03-04",
-      "registraPonto": true,
-      "status": "ativo",
-      "dataDemissao": ""
-    },
-    {
-      "id": "colab-990",
-      "cracha": 990,
-      "nome": "ALESSANDRO FRETES FLORENCIANO",
-      "filialId": "branch-2",
-      "deptId": "dept-producao",
-      "admissao": "2026-05-04",
-      "registraPonto": true,
-      "status": "ativo",
-      "dataDemissao": ""
-    },
-    {
-      "id": "colab-993",
-      "cracha": 993,
-      "nome": "PAULO LIMA DA SILVA",
-      "filialId": "branch-2",
-      "deptId": "dept-producao",
-      "admissao": "2026-05-08",
-      "registraPonto": true,
-      "status": "ativo",
-      "dataDemissao": ""
-    },
-    {
-      "id": "colab-994",
-      "cracha": 994,
-      "nome": "TAMIRES TONINI DE MORAES",
-      "filialId": "branch-2",
-      "deptId": "dept-admin",
-      "admissao": "2026-05-08",
-      "registraPonto": true,
-      "status": "ativo",
-      "dataDemissao": ""
-    },
-    {
-      "id": "colab-1009",
-      "cracha": 1009,
-      "nome": "MARTA APARECIDA DE SOUZA",
-      "filialId": "branch-2",
-      "deptId": "dept-producao",
-      "admissao": "2026-07-20",
-      "registraPonto": true,
-      "status": "ativo",
-      "dataDemissao": ""
-    },
-    {
-      "id": "colab-363",
-      "cracha": 363,
-      "nome": "EMILLYN KAROLYNY GARCIA DE OLIVEIRA",
-      "filialId": "branch-3",
-      "deptId": "dept-admin",
-      "admissao": "2026-08-31",
-      "registraPonto": true,
-      "status": "ativo",
-      "dataDemissao": ""
-    },
-    {
-      "id": "colab-234",
-      "cracha": 234,
-      "nome": "BRUNO WINICIUS DE SOUZA",
-      "filialId": "branch-3",
-      "deptId": "dept-admin",
-      "admissao": "2020-07-16",
-      "registraPonto": true,
-      "status": "ativo",
-      "dataDemissao": ""
-    },
-    {
-      "id": "colab-241",
-      "cracha": 241,
-      "nome": "JHELKISSAN WOLKYN BARBOSA RUEDA",
-      "filialId": "branch-3",
-      "deptId": "dept-admin",
-      "admissao": "2021-10-14",
-      "registraPonto": true,
-      "status": "ativo",
-      "dataDemissao": ""
-    },
-    {
-      "id": "colab-249",
-      "cracha": 249,
-      "nome": "RAIMUNDO MONTEIRO DE ARAUJO MELO",
-      "filialId": "branch-3",
-      "deptId": "dept-admin",
-      "admissao": "2010-06-16",
-      "registraPonto": true,
-      "status": "ativo",
-      "dataDemissao": ""
-    },
-    {
-      "id": "colab-250",
-      "cracha": 250,
-      "nome": "RONALDO DE ASSIS MELO",
-      "filialId": "branch-3",
-      "deptId": "dept-admin",
-      "admissao": "2010-02-12",
-      "registraPonto": true,
-      "status": "ativo",
-      "dataDemissao": ""
-    },
-    {
-      "id": "colab-255",
-      "cracha": 255,
-      "nome": "NILZA MARTINS DOS SANTOS",
-      "filialId": "branch-3",
-      "deptId": "dept-admin",
-      "admissao": "2003-03-01",
-      "registraPonto": true,
-      "status": "ativo",
-      "dataDemissao": ""
-    },
-    {
-      "id": "colab-256",
-      "cracha": 256,
-      "nome": "DAVID JOSE NOGUEIRA DE SOUZA",
-      "filialId": "branch-3",
-      "deptId": "dept-admin",
-      "admissao": "2005-07-01",
-      "registraPonto": true,
-      "status": "ativo",
-      "dataDemissao": ""
-    },
-    {
-      "id": "colab-294",
-      "cracha": 294,
-      "nome": "MALALIEL RODRIGUES",
-      "filialId": "branch-3",
-      "deptId": "dept-admin",
-      "admissao": "2024-04-18",
-      "registraPonto": true,
-      "status": "ativo",
-      "dataDemissao": ""
-    },
-    {
-      "id": "colab-295",
-      "cracha": 295,
-      "nome": "GABRIEL FELIPE DOS SANTOS",
-      "filialId": "branch-3",
-      "deptId": "dept-admin",
-      "admissao": "2024-07-05",
-      "registraPonto": true,
-      "status": "ativo",
-      "dataDemissao": ""
-    },
-    {
-      "id": "colab-313",
-      "cracha": 313,
-      "nome": "JHENIFER LOPES FERREIRA",
-      "filialId": "branch-3",
-      "deptId": "dept-admin",
-      "admissao": "2025-02-03",
-      "registraPonto": true,
-      "status": "ativo",
-      "dataDemissao": ""
-    },
-    {
-      "id": "colab-335",
-      "cracha": 335,
-      "nome": "ADEMILSON MARCELO VILETE",
-      "filialId": "branch-3",
-      "deptId": "dept-deposito",
-      "admissao": "2019-06-28",
-      "registraPonto": true,
-      "status": "ativo",
-      "dataDemissao": ""
-    },
-    {
-      "id": "colab-336",
-      "cracha": 336,
-      "nome": "JHONATAN JULIO DA SILVA REIS",
-      "filialId": "branch-3",
-      "deptId": "dept-deposito",
-      "admissao": "2025-10-07",
-      "registraPonto": true,
-      "status": "ativo",
-      "dataDemissao": ""
-    },
-    {
-      "id": "colab-343",
-      "cracha": 343,
-      "nome": "GUILHERME HENRIQUE MELO COUTINHO",
-      "filialId": "branch-3",
-      "deptId": "dept-admin",
-      "admissao": "2026-01-06",
-      "registraPonto": true,
-      "status": "ativo",
-      "dataDemissao": ""
-    },
-    {
-      "id": "colab-344",
-      "cracha": 344,
-      "nome": "WEVERTON SEBASTIAO FIGUEIREDO SOUZA",
-      "filialId": "branch-3",
-      "deptId": "dept-deposito",
-      "admissao": "2026-02-09",
-      "registraPonto": true,
-      "status": "ativo",
-      "dataDemissao": ""
-    },
-    {
-      "id": "colab-350",
-      "cracha": 350,
-      "nome": "GABRIEL BARBOSA LOPES",
-      "filialId": "branch-3",
-      "deptId": "dept-deposito",
-      "admissao": "2026-04-14",
-      "registraPonto": true,
-      "status": "ativo",
-      "dataDemissao": ""
-    },
-    {
-      "id": "colab-356",
-      "cracha": 356,
-      "nome": "FABIANA RODRIGUES DE JESUS",
-      "filialId": "branch-3",
-      "deptId": "dept-admin",
-      "admissao": "2026-07-13",
-      "registraPonto": true,
-      "status": "ativo",
-      "dataDemissao": ""
-    },
-    {
-      "id": "colab-358",
-      "cracha": 358,
-      "nome": "MELQUISEDEQUE ABRANJO DE OLIVEIRA",
-      "filialId": "branch-3",
-      "deptId": "dept-deposito",
-      "admissao": "2026-07-27",
-      "registraPonto": true,
-      "status": "ativo",
-      "dataDemissao": ""
-    },
-    {
-      "id": "colab-360",
-      "cracha": 360,
-      "nome": "ISABELA VIDAL MARTINS",
-      "filialId": "branch-3",
-      "deptId": "dept-admin",
-      "admissao": "2026-08-17",
-      "registraPonto": true,
-      "status": "ativo",
-      "dataDemissao": ""
-    },
-    {
-      "id": "colab-361",
-      "cracha": 361,
-      "nome": "MAYCK CANDIDO DE JESUS",
-      "filialId": "branch-3",
-      "deptId": "dept-deposito",
-      "admissao": "2026-08-27",
-      "registraPonto": true,
-      "status": "ativo",
-      "dataDemissao": ""
-    },
-    {
-      "id": "colab-364",
-      "cracha": 364,
-      "nome": "NARA LORENA PEREIRA RODRIGUES DA SILVA",
-      "filialId": "branch-3",
-      "deptId": "dept-admin",
-      "admissao": "2026-04-27",
-      "registraPonto": true,
-      "status": "ativo",
-      "dataDemissao": ""
-    },
-    {
-      "id": "colab-365",
-      "cracha": 365,
-      "nome": "LEONARDO DE SOUZA SANTOS",
-      "filialId": "branch-3",
-      "deptId": "dept-deposito",
-      "admissao": "2026-09-28",
-      "registraPonto": true,
-      "status": "ativo",
-      "dataDemissao": ""
-    },
-    {
-      "id": "colab-1491",
-      "cracha": 1491,
-      "nome": "ELITON ZAMAI DA SILVA",
-      "filialId": "branch-4",
-      "deptId": "dept-admin",
-      "admissao": "2023-11-17",
-      "registraPonto": true,
-      "status": "ativo",
-      "dataDemissao": ""
-    },
-    {
-      "id": "colab-1494",
-      "cracha": 1494,
-      "nome": "FERNANDO ALVES DE SOUZA",
-      "filialId": "branch-4",
-      "deptId": "dept-obra",
-      "admissao": "2025-12-10",
-      "registraPonto": true,
-      "status": "ativo",
-      "dataDemissao": ""
-    }
+      {
+          "id": "colab_branch-1_1026",
+          "cracha": 1026,
+          "nome": "IAN VINICIUS NERES LEITE",
+          "filialId": "branch-1",
+          "deptId": "dept-admin",
+          "admissao": "2026-09-21",
+          "registraPonto": true,
+          "status": "ativo",
+          "dataDemissao": ""
+      },
+      {
+          "id": "colab_branch-1_1031",
+          "cracha": 1031,
+          "nome": "IRACI EVANGELISTA DOS SANTOS",
+          "filialId": "branch-1",
+          "deptId": "dept-admin",
+          "admissao": "2026-09-30",
+          "registraPonto": true,
+          "status": "ativo",
+          "dataDemissao": ""
+      },
+      {
+          "id": "colab_branch-1_1",
+          "cracha": 1,
+          "nome": "DICEFANI MACEDO FERRARINI",
+          "filialId": "branch-1",
+          "deptId": "dept-admin",
+          "admissao": "2014-02-03",
+          "registraPonto": true,
+          "status": "ativo",
+          "dataDemissao": ""
+      },
+      {
+          "id": "colab_branch-1_218",
+          "cracha": 218,
+          "nome": "MARCOS BATISTA GONCALVES",
+          "filialId": "branch-1",
+          "deptId": "dept-producao",
+          "admissao": "2007-07-11",
+          "registraPonto": true,
+          "status": "ativo",
+          "dataDemissao": ""
+      },
+      {
+          "id": "colab_branch-1_234",
+          "cracha": 234,
+          "nome": "GILMAR SABINO DA SILVA",
+          "filialId": "branch-1",
+          "deptId": "dept-producao",
+          "admissao": "2014-05-07",
+          "registraPonto": true,
+          "status": "ativo",
+          "dataDemissao": ""
+      },
+      {
+          "id": "colab_branch-1_325",
+          "cracha": 325,
+          "nome": "JORGE LUIZ DE ANDRADE",
+          "filialId": "branch-1",
+          "deptId": "dept-admin",
+          "admissao": "2019-07-31",
+          "registraPonto": true,
+          "status": "ativo",
+          "dataDemissao": ""
+      },
+      {
+          "id": "colab_branch-1_336",
+          "cracha": 336,
+          "nome": "CLAUDINEI RIBEIRO FERNANDES",
+          "filialId": "branch-1",
+          "deptId": "dept-admin",
+          "admissao": "2019-09-20",
+          "registraPonto": true,
+          "status": "ativo",
+          "dataDemissao": ""
+      },
+      {
+          "id": "colab_branch-1_354",
+          "cracha": 354,
+          "nome": "JOSE MARIA ALVES DA CRUZ",
+          "filialId": "branch-1",
+          "deptId": "dept-producao",
+          "admissao": "2020-01-24",
+          "registraPonto": true,
+          "status": "ativo",
+          "dataDemissao": ""
+      },
+      {
+          "id": "colab_branch-1_361",
+          "cracha": 361,
+          "nome": "FERNANDA CRISTINA PAIXAO DE ALMEIDA",
+          "filialId": "branch-1",
+          "deptId": "dept-admin",
+          "admissao": "2020-02-12",
+          "registraPonto": true,
+          "status": "ativo",
+          "dataDemissao": ""
+      },
+      {
+          "id": "colab_branch-1_431",
+          "cracha": 431,
+          "nome": "RONALDO RIBEIRO DE ARAUJO",
+          "filialId": "branch-1",
+          "deptId": "dept-admin",
+          "admissao": "2020-10-30",
+          "registraPonto": true,
+          "status": "ativo",
+          "dataDemissao": ""
+      },
+      {
+          "id": "colab_branch-1_491",
+          "cracha": 491,
+          "nome": "GILMAR OTERIO DA SILVA DACOL",
+          "filialId": "branch-1",
+          "deptId": "dept-producao",
+          "admissao": "2021-05-10",
+          "registraPonto": true,
+          "status": "ativo",
+          "dataDemissao": ""
+      },
+      {
+          "id": "colab_branch-1_540",
+          "cracha": 540,
+          "nome": "LEONILDO TABORDA BARBOSA",
+          "filialId": "branch-1",
+          "deptId": "dept-admin",
+          "admissao": "2021-10-14",
+          "registraPonto": true,
+          "status": "ativo",
+          "dataDemissao": ""
+      },
+      {
+          "id": "colab_branch-1_545",
+          "cracha": 545,
+          "nome": "ANTONIO BRITO SANTOS",
+          "filialId": "branch-1",
+          "deptId": "dept-producao",
+          "admissao": "2010-01-02",
+          "registraPonto": true,
+          "status": "ativo",
+          "dataDemissao": ""
+      },
+      {
+          "id": "colab_branch-1_663",
+          "cracha": 663,
+          "nome": "DEVAIR DUARTE SANCHES",
+          "filialId": "branch-1",
+          "deptId": "dept-producao",
+          "admissao": "2023-02-16",
+          "registraPonto": true,
+          "status": "ativo",
+          "dataDemissao": ""
+      },
+      {
+          "id": "colab_branch-1_668",
+          "cracha": 668,
+          "nome": "JURANDI CAETANO SOARES",
+          "filialId": "branch-1",
+          "deptId": "dept-producao",
+          "admissao": "2023-02-24",
+          "registraPonto": true,
+          "status": "ativo",
+          "dataDemissao": ""
+      },
+      {
+          "id": "colab_branch-1_696",
+          "cracha": 696,
+          "nome": "ANTONIO DA SILVA",
+          "filialId": "branch-1",
+          "deptId": "dept-admin",
+          "admissao": "2007-03-01",
+          "registraPonto": true,
+          "status": "ativo",
+          "dataDemissao": ""
+      },
+      {
+          "id": "colab_branch-1_701",
+          "cracha": 701,
+          "nome": "ANTONIO GOMES COELHO",
+          "filialId": "branch-1",
+          "deptId": "dept-producao",
+          "admissao": "2023-07-06",
+          "registraPonto": true,
+          "status": "ativo",
+          "dataDemissao": ""
+      },
+      {
+          "id": "colab_branch-1_702",
+          "cracha": 702,
+          "nome": "BRUNO RIBEIRO DA SILVA",
+          "filialId": "branch-1",
+          "deptId": "dept-admin",
+          "admissao": "2023-07-10",
+          "registraPonto": true,
+          "status": "ativo",
+          "dataDemissao": ""
+      },
+      {
+          "id": "colab_branch-1_736",
+          "cracha": 736,
+          "nome": "EDINEIA CELIA DOS SANTOS",
+          "filialId": "branch-1",
+          "deptId": "dept-admin",
+          "admissao": "2023-12-18",
+          "registraPonto": true,
+          "status": "ativo",
+          "dataDemissao": ""
+      },
+      {
+          "id": "colab_branch-1_778",
+          "cracha": 778,
+          "nome": "ANGELICA DA SILVA GAMA",
+          "filialId": "branch-1",
+          "deptId": "dept-producao",
+          "admissao": "2024-04-19",
+          "registraPonto": true,
+          "status": "ativo",
+          "dataDemissao": ""
+      },
+      {
+          "id": "colab_branch-1_781",
+          "cracha": 781,
+          "nome": "RAFAEL DE JESUS CARDOSO",
+          "filialId": "branch-1",
+          "deptId": "dept-admin",
+          "admissao": "2024-05-06",
+          "registraPonto": true,
+          "status": "ativo",
+          "dataDemissao": ""
+      },
+      {
+          "id": "colab_branch-1_847",
+          "cracha": 847,
+          "nome": "HEBER LUCAS LEONEL FONESI",
+          "filialId": "branch-1",
+          "deptId": "dept-producao",
+          "admissao": "2024-11-14",
+          "registraPonto": true,
+          "status": "ativo",
+          "dataDemissao": ""
+      },
+      {
+          "id": "colab_branch-1_858",
+          "cracha": 858,
+          "nome": "LUCIANA GUIMARÃES DOS SANTOS",
+          "filialId": "branch-1",
+          "deptId": "dept-producao",
+          "admissao": "2014-02-06",
+          "registraPonto": true,
+          "status": "ativo",
+          "dataDemissao": ""
+      },
+      {
+          "id": "colab_branch-1_863",
+          "cracha": 863,
+          "nome": "KELVY ALVES COELHO",
+          "filialId": "branch-1",
+          "deptId": "dept-producao",
+          "admissao": "2024-12-11",
+          "registraPonto": true,
+          "status": "ativo",
+          "dataDemissao": ""
+      },
+      {
+          "id": "colab_branch-1_898",
+          "cracha": 898,
+          "nome": "JOSÉ PAULO DO NASCIMENTO",
+          "filialId": "branch-1",
+          "deptId": "dept-admin",
+          "admissao": "2025-03-03",
+          "registraPonto": true,
+          "status": "ativo",
+          "dataDemissao": ""
+      },
+      {
+          "id": "colab_branch-1_900",
+          "cracha": 900,
+          "nome": "JANAINA CARDOSO DA SILVA",
+          "filialId": "branch-1",
+          "deptId": "dept-admin",
+          "admissao": "2025-03-12",
+          "registraPonto": true,
+          "status": "ativo",
+          "dataDemissao": ""
+      },
+      {
+          "id": "colab_branch-1_908",
+          "cracha": 908,
+          "nome": "ADRIANA DE SOUZA",
+          "filialId": "branch-1",
+          "deptId": "dept-admin",
+          "admissao": "2025-05-19",
+          "registraPonto": true,
+          "status": "ativo",
+          "dataDemissao": ""
+      },
+      {
+          "id": "colab_branch-1_914",
+          "cracha": 914,
+          "nome": "DANILO NATA DA SILVA SANTOS",
+          "filialId": "branch-1",
+          "deptId": "dept-producao",
+          "admissao": "2025-06-10",
+          "registraPonto": true,
+          "status": "ativo",
+          "dataDemissao": ""
+      },
+      {
+          "id": "colab_branch-1_917",
+          "cracha": 917,
+          "nome": "PATRICIA MARTINS BENEDITO",
+          "filialId": "branch-1",
+          "deptId": "dept-admin",
+          "admissao": "2025-06-24",
+          "registraPonto": true,
+          "status": "ativo",
+          "dataDemissao": ""
+      },
+      {
+          "id": "colab_branch-1_1173",
+          "cracha": 1173,
+          "nome": "LUANA CAMILO DE MORAES",
+          "filialId": "branch-1",
+          "deptId": "dept-admin",
+          "admissao": "2013-12-12",
+          "registraPonto": true,
+          "status": "ativo",
+          "dataDemissao": ""
+      },
+      {
+          "id": "colab_branch-1_1405",
+          "cracha": 1405,
+          "nome": "LUCAS TUPAN DA SILVA",
+          "filialId": "branch-1",
+          "deptId": "dept-admin",
+          "admissao": "2020-01-14",
+          "registraPonto": true,
+          "status": "ativo",
+          "dataDemissao": ""
+      },
+      {
+          "id": "colab_branch-1_937",
+          "cracha": 937,
+          "nome": "HUGO HENRIQUE CIONI",
+          "filialId": "branch-1",
+          "deptId": "dept-admin",
+          "admissao": "2025-09-08",
+          "registraPonto": true,
+          "status": "ativo",
+          "dataDemissao": ""
+      },
+      {
+          "id": "colab_branch-1_942",
+          "cracha": 942,
+          "nome": "USIEL OLIVEIRA",
+          "filialId": "branch-1",
+          "deptId": "dept-admin",
+          "admissao": "2025-09-16",
+          "registraPonto": true,
+          "status": "ativo",
+          "dataDemissao": ""
+      },
+      {
+          "id": "colab_branch-1_954",
+          "cracha": 954,
+          "nome": "WALLYSON PEREIRA DE MELO",
+          "filialId": "branch-1",
+          "deptId": "dept-producao",
+          "admissao": "2025-11-06",
+          "registraPonto": true,
+          "status": "ativo",
+          "dataDemissao": ""
+      },
+      {
+          "id": "colab_branch-1_955",
+          "cracha": 955,
+          "nome": "JOSE LUIZ DA SILVA",
+          "filialId": "branch-1",
+          "deptId": "dept-producao",
+          "admissao": "2025-11-17",
+          "registraPonto": true,
+          "status": "ativo",
+          "dataDemissao": ""
+      },
+      {
+          "id": "colab_branch-1_961",
+          "cracha": 961,
+          "nome": "LEONARDO VIEIRA DOS SANTOS",
+          "filialId": "branch-1",
+          "deptId": "dept-producao",
+          "admissao": "2025-12-19",
+          "registraPonto": true,
+          "status": "ativo",
+          "dataDemissao": ""
+      },
+      {
+          "id": "colab_branch-1_963",
+          "cracha": 963,
+          "nome": "KELIANE GONCALVES DE SOUZA",
+          "filialId": "branch-1",
+          "deptId": "dept-admin",
+          "admissao": "2026-01-05",
+          "registraPonto": true,
+          "status": "ativo",
+          "dataDemissao": ""
+      },
+      {
+          "id": "colab_branch-1_965",
+          "cracha": 965,
+          "nome": "LEANDRO MARTINS DO NASCIMENTO",
+          "filialId": "branch-1",
+          "deptId": "dept-admin",
+          "admissao": "2026-01-10",
+          "registraPonto": true,
+          "status": "ativo",
+          "dataDemissao": ""
+      },
+      {
+          "id": "colab_branch-1_970",
+          "cracha": 970,
+          "nome": "ANTONIO ALVES DE SOUZA",
+          "filialId": "branch-1",
+          "deptId": "dept-producao",
+          "admissao": "2026-01-29",
+          "registraPonto": true,
+          "status": "ativo",
+          "dataDemissao": ""
+      },
+      {
+          "id": "colab_branch-1_974",
+          "cracha": 974,
+          "nome": "EUCLIDES NUNES DOS SANTOS",
+          "filialId": "branch-1",
+          "deptId": "dept-admin",
+          "admissao": "2026-02-09",
+          "registraPonto": true,
+          "status": "ativo",
+          "dataDemissao": ""
+      },
+      {
+          "id": "colab_branch-1_975",
+          "cracha": 975,
+          "nome": "EDUARDO DE OLIVEIRA SILVA",
+          "filialId": "branch-1",
+          "deptId": "dept-producao",
+          "admissao": "2026-02-17",
+          "registraPonto": true,
+          "status": "ativo",
+          "dataDemissao": ""
+      },
+      {
+          "id": "colab_branch-1_986",
+          "cracha": 986,
+          "nome": "ALESSANDRO DE SOUSA PAIVA",
+          "filialId": "branch-1",
+          "deptId": "dept-producao",
+          "admissao": "2026-03-26",
+          "registraPonto": true,
+          "status": "ativo",
+          "dataDemissao": ""
+      },
+      {
+          "id": "colab_branch-1_989",
+          "cracha": 989,
+          "nome": "LUCAS DOS SANTOS ABREU",
+          "filialId": "branch-1",
+          "deptId": "dept-admin",
+          "admissao": "2026-04-22",
+          "registraPonto": true,
+          "status": "ativo",
+          "dataDemissao": ""
+      },
+      {
+          "id": "colab_branch-1_997",
+          "cracha": 997,
+          "nome": "PATRICIA BARROSO PINHEIRO",
+          "filialId": "branch-1",
+          "deptId": "dept-producao",
+          "admissao": "2026-05-28",
+          "registraPonto": true,
+          "status": "ativo",
+          "dataDemissao": ""
+      },
+      {
+          "id": "colab_branch-1_999",
+          "cracha": 999,
+          "nome": "JOSEFA JANAINA RODRIGUES DE SOUZA",
+          "filialId": "branch-1",
+          "deptId": "dept-producao",
+          "admissao": "2026-06-02",
+          "registraPonto": true,
+          "status": "ativo",
+          "dataDemissao": ""
+      },
+      {
+          "id": "colab_branch-1_1000",
+          "cracha": 1000,
+          "nome": "LUCAS VILAS BOAS BRITO",
+          "filialId": "branch-1",
+          "deptId": "dept-admin",
+          "admissao": "2026-06-15",
+          "registraPonto": true,
+          "status": "ativo",
+          "dataDemissao": ""
+      },
+      {
+          "id": "colab_branch-1_1008",
+          "cracha": 1008,
+          "nome": "BRUNO PHELIPE VICENTE MACHADO",
+          "filialId": "branch-1",
+          "deptId": "dept-producao",
+          "admissao": "2026-07-14",
+          "registraPonto": true,
+          "status": "ativo",
+          "dataDemissao": ""
+      },
+      {
+          "id": "colab_branch-1_1013",
+          "cracha": 1013,
+          "nome": "RIQUELME ALMEIDA PINHEIRO",
+          "filialId": "branch-1",
+          "deptId": "dept-producao",
+          "admissao": "2026-08-03",
+          "registraPonto": true,
+          "status": "ativo",
+          "dataDemissao": ""
+      },
+      {
+          "id": "colab_branch-1_1018",
+          "cracha": 1018,
+          "nome": "LEONARDO SILVA KIKO",
+          "filialId": "branch-1",
+          "deptId": "dept-producao",
+          "admissao": "2026-08-27",
+          "registraPonto": true,
+          "status": "ativo",
+          "dataDemissao": ""
+      },
+      {
+          "id": "colab_branch-1_1020",
+          "cracha": 1020,
+          "nome": "CARLOS HENRIQUE ANGELICO",
+          "filialId": "branch-1",
+          "deptId": "dept-admin",
+          "admissao": "2024-05-27",
+          "registraPonto": true,
+          "status": "ativo",
+          "dataDemissao": ""
+      },
+      {
+          "id": "colab_branch-1_1025",
+          "cracha": 1025,
+          "nome": "KAUAN DE CARVALHO PENA",
+          "filialId": "branch-1",
+          "deptId": "dept-producao",
+          "admissao": "2026-09-18",
+          "registraPonto": true,
+          "status": "ativo",
+          "dataDemissao": ""
+      },
+      {
+          "id": "colab_branch-1_1027",
+          "cracha": 1027,
+          "nome": "VANDEILSON DIAS DE MATOS",
+          "filialId": "branch-1",
+          "deptId": "dept-admin",
+          "admissao": "2026-09-23",
+          "registraPonto": true,
+          "status": "ativo",
+          "dataDemissao": ""
+      },
+      {
+          "id": "colab_branch-1_1032",
+          "cracha": 1032,
+          "nome": "RAUL FERNANDO MENEGUETTI JACOB",
+          "filialId": "branch-1",
+          "deptId": "dept-admin",
+          "admissao": "2026-07-07",
+          "registraPonto": true,
+          "status": "ativo",
+          "dataDemissao": ""
+      },
+      {
+          "id": "colab_branch-1_1033",
+          "cracha": 1033,
+          "nome": "PEDRO HENRIQUE DAMASCENO MELO",
+          "filialId": "branch-1",
+          "deptId": "dept-producao",
+          "admissao": "2026-10-07",
+          "registraPonto": true,
+          "status": "ativo",
+          "dataDemissao": ""
+      },
+      {
+          "id": "colab_branch-1_1034",
+          "cracha": 1034,
+          "nome": "WESLEY PATRICK FERNANDES DE OLIVEIRA",
+          "filialId": "branch-1",
+          "deptId": "dept-producao",
+          "admissao": "2026-10-09",
+          "registraPonto": true,
+          "status": "ativo",
+          "dataDemissao": ""
+      },
+      {
+          "id": "colab_branch-2_1016",
+          "cracha": 1016,
+          "nome": "GUILHERME ANTONIO DOS SANTOS",
+          "filialId": "branch-2",
+          "deptId": "dept-admin",
+          "admissao": "2026-08-24",
+          "registraPonto": true,
+          "status": "ativo",
+          "dataDemissao": ""
+      },
+      {
+          "id": "colab_branch-2_127",
+          "cracha": 127,
+          "nome": "LEONICE DA SILVA MOURA DE SOUZA",
+          "filialId": "branch-2",
+          "deptId": "dept-producao",
+          "admissao": "2016-07-15",
+          "registraPonto": true,
+          "status": "ativo",
+          "dataDemissao": ""
+      },
+      {
+          "id": "colab_branch-2_288",
+          "cracha": 288,
+          "nome": "SERGIO RIBEIRO",
+          "filialId": "branch-2",
+          "deptId": "dept-admin",
+          "admissao": "2018-12-11",
+          "registraPonto": true,
+          "status": "ativo",
+          "dataDemissao": ""
+      },
+      {
+          "id": "colab_branch-2_456",
+          "cracha": 456,
+          "nome": "PAULO SERGIO FERREIRA DA SILVA",
+          "filialId": "branch-2",
+          "deptId": "dept-producao",
+          "admissao": "2021-01-28",
+          "registraPonto": true,
+          "status": "ativo",
+          "dataDemissao": ""
+      },
+      {
+          "id": "colab_branch-2_463",
+          "cracha": 463,
+          "nome": "FABIO FARIAS",
+          "filialId": "branch-2",
+          "deptId": "dept-admin",
+          "admissao": "2021-02-22",
+          "registraPonto": true,
+          "status": "ativo",
+          "dataDemissao": ""
+      },
+      {
+          "id": "colab_branch-2_561",
+          "cracha": 561,
+          "nome": "LUCAS DE PAULA CARVALHO",
+          "filialId": "branch-2",
+          "deptId": "dept-producao",
+          "admissao": "2022-01-24",
+          "registraPonto": true,
+          "status": "ativo",
+          "dataDemissao": ""
+      },
+      {
+          "id": "colab_branch-2_613",
+          "cracha": 613,
+          "nome": "MARCO ANTONIO OLIVEIRA DE SOUZA",
+          "filialId": "branch-2",
+          "deptId": "dept-producao",
+          "admissao": "2022-09-05",
+          "registraPonto": true,
+          "status": "ativo",
+          "dataDemissao": ""
+      },
+      {
+          "id": "colab_branch-2_780",
+          "cracha": 780,
+          "nome": "LEONARDO MARINHO CARIS",
+          "filialId": "branch-2",
+          "deptId": "dept-producao",
+          "admissao": "2024-04-24",
+          "registraPonto": true,
+          "status": "ativo",
+          "dataDemissao": ""
+      },
+      {
+          "id": "colab_branch-2_810",
+          "cracha": 810,
+          "nome": "ROSANA SANABRIA FERREIRA DA SILVA",
+          "filialId": "branch-2",
+          "deptId": "dept-admin",
+          "admissao": "2024-08-01",
+          "registraPonto": true,
+          "status": "ativo",
+          "dataDemissao": ""
+      },
+      {
+          "id": "colab_branch-2_867",
+          "cracha": 867,
+          "nome": "APARICIO AMARILLA",
+          "filialId": "branch-2",
+          "deptId": "dept-producao",
+          "admissao": "2024-12-17",
+          "registraPonto": true,
+          "status": "ativo",
+          "dataDemissao": ""
+      },
+      {
+          "id": "colab_branch-2_890",
+          "cracha": 890,
+          "nome": "VICTORIA CAROLINA RODRIGUES DE CAMARGO",
+          "filialId": "branch-2",
+          "deptId": "dept-admin",
+          "admissao": "2025-02-10",
+          "registraPonto": true,
+          "status": "ativo",
+          "dataDemissao": ""
+      },
+      {
+          "id": "colab_branch-2_946",
+          "cracha": 946,
+          "nome": "EVELYN GABRIELE HARADA MANDUCO PRIORI",
+          "filialId": "branch-2",
+          "deptId": "dept-admin",
+          "admissao": "2025-10-13",
+          "registraPonto": true,
+          "status": "ativo",
+          "dataDemissao": ""
+      },
+      {
+          "id": "colab_branch-2_952",
+          "cracha": 952,
+          "nome": "ROBSON DA SILVA LUIZ",
+          "filialId": "branch-2",
+          "deptId": "dept-admin",
+          "admissao": "2025-11-03",
+          "registraPonto": true,
+          "status": "ativo",
+          "dataDemissao": ""
+      },
+      {
+          "id": "colab_branch-2_964",
+          "cracha": 964,
+          "nome": "WELLINGTON MARCELINO DOS SANTOS",
+          "filialId": "branch-2",
+          "deptId": "dept-producao",
+          "admissao": "2026-01-10",
+          "registraPonto": true,
+          "status": "ativo",
+          "dataDemissao": ""
+      },
+      {
+          "id": "colab_branch-2_977",
+          "cracha": 977,
+          "nome": "PAULO HENRIQUE CARVALHO BENTO",
+          "filialId": "branch-2",
+          "deptId": "dept-producao",
+          "admissao": "2026-03-04",
+          "registraPonto": true,
+          "status": "ativo",
+          "dataDemissao": ""
+      },
+      {
+          "id": "colab_branch-2_990",
+          "cracha": 990,
+          "nome": "ALESSANDRO FRETES FLORENCIANO",
+          "filialId": "branch-2",
+          "deptId": "dept-producao",
+          "admissao": "2026-05-04",
+          "registraPonto": true,
+          "status": "ativo",
+          "dataDemissao": ""
+      },
+      {
+          "id": "colab_branch-2_993",
+          "cracha": 993,
+          "nome": "PAULO LIMA DA SILVA",
+          "filialId": "branch-2",
+          "deptId": "dept-producao",
+          "admissao": "2026-05-08",
+          "registraPonto": true,
+          "status": "ativo",
+          "dataDemissao": ""
+      },
+      {
+          "id": "colab_branch-2_994",
+          "cracha": 994,
+          "nome": "TAMIRES TONINI DE MORAES",
+          "filialId": "branch-2",
+          "deptId": "dept-admin",
+          "admissao": "2026-05-08",
+          "registraPonto": true,
+          "status": "ativo",
+          "dataDemissao": ""
+      },
+      {
+          "id": "colab_branch-2_1009",
+          "cracha": 1009,
+          "nome": "MARTA APARECIDA DE SOUZA",
+          "filialId": "branch-2",
+          "deptId": "dept-producao",
+          "admissao": "2026-07-20",
+          "registraPonto": true,
+          "status": "ativo",
+          "dataDemissao": ""
+      },
+      {
+          "id": "colab_branch-3_363",
+          "cracha": 363,
+          "nome": "EMILLYN KAROLYNY GARCIA DE OLIVEIRA",
+          "filialId": "branch-3",
+          "deptId": "dept-admin",
+          "admissao": "2026-08-31",
+          "registraPonto": true,
+          "status": "ativo",
+          "dataDemissao": ""
+      },
+      {
+          "id": "colab_branch-3_234",
+          "cracha": 234,
+          "nome": "BRUNO WINICIUS DE SOUZA",
+          "filialId": "branch-3",
+          "deptId": "dept-admin",
+          "admissao": "2020-07-16",
+          "registraPonto": true,
+          "status": "ativo",
+          "dataDemissao": ""
+      },
+      {
+          "id": "colab_branch-3_241",
+          "cracha": 241,
+          "nome": "JHELKISSAN WOLKYN BARBOSA RUEDA",
+          "filialId": "branch-3",
+          "deptId": "dept-admin",
+          "admissao": "2021-10-14",
+          "registraPonto": true,
+          "status": "ativo",
+          "dataDemissao": ""
+      },
+      {
+          "id": "colab_branch-3_249",
+          "cracha": 249,
+          "nome": "RAIMUNDO MONTEIRO DE ARAUJO MELO",
+          "filialId": "branch-3",
+          "deptId": "dept-admin",
+          "admissao": "2010-06-16",
+          "registraPonto": true,
+          "status": "ativo",
+          "dataDemissao": ""
+      },
+      {
+          "id": "colab_branch-3_250",
+          "cracha": 250,
+          "nome": "RONALDO DE ASSIS MELO",
+          "filialId": "branch-3",
+          "deptId": "dept-admin",
+          "admissao": "2010-02-12",
+          "registraPonto": true,
+          "status": "ativo",
+          "dataDemissao": ""
+      },
+      {
+          "id": "colab_branch-3_255",
+          "cracha": 255,
+          "nome": "NILZA MARTINS DOS SANTOS",
+          "filialId": "branch-3",
+          "deptId": "dept-admin",
+          "admissao": "2003-03-01",
+          "registraPonto": true,
+          "status": "ativo",
+          "dataDemissao": ""
+      },
+      {
+          "id": "colab_branch-3_256",
+          "cracha": 256,
+          "nome": "DAVID JOSE NOGUEIRA DE SOUZA",
+          "filialId": "branch-3",
+          "deptId": "dept-admin",
+          "admissao": "2005-07-01",
+          "registraPonto": true,
+          "status": "ativo",
+          "dataDemissao": ""
+      },
+      {
+          "id": "colab_branch-3_294",
+          "cracha": 294,
+          "nome": "MALALIEL RODRIGUES",
+          "filialId": "branch-3",
+          "deptId": "dept-admin",
+          "admissao": "2024-04-18",
+          "registraPonto": true,
+          "status": "ativo",
+          "dataDemissao": ""
+      },
+      {
+          "id": "colab_branch-3_295",
+          "cracha": 295,
+          "nome": "GABRIEL FELIPE DOS SANTOS",
+          "filialId": "branch-3",
+          "deptId": "dept-admin",
+          "admissao": "2024-07-05",
+          "registraPonto": true,
+          "status": "ativo",
+          "dataDemissao": ""
+      },
+      {
+          "id": "colab_branch-3_313",
+          "cracha": 313,
+          "nome": "JHENIFER LOPES FERREIRA",
+          "filialId": "branch-3",
+          "deptId": "dept-admin",
+          "admissao": "2025-02-03",
+          "registraPonto": true,
+          "status": "ativo",
+          "dataDemissao": ""
+      },
+      {
+          "id": "colab_branch-3_335",
+          "cracha": 335,
+          "nome": "ADEMILSON MARCELO VILETE",
+          "filialId": "branch-3",
+          "deptId": "dept-deposito",
+          "admissao": "2019-06-28",
+          "registraPonto": true,
+          "status": "ativo",
+          "dataDemissao": ""
+      },
+      {
+          "id": "colab_branch-3_336",
+          "cracha": 336,
+          "nome": "JHONATAN JULIO DA SILVA REIS",
+          "filialId": "branch-3",
+          "deptId": "dept-deposito",
+          "admissao": "2025-10-07",
+          "registraPonto": true,
+          "status": "ativo",
+          "dataDemissao": ""
+      },
+      {
+          "id": "colab_branch-3_343",
+          "cracha": 343,
+          "nome": "GUILHERME HENRIQUE MELO COUTINHO",
+          "filialId": "branch-3",
+          "deptId": "dept-admin",
+          "admissao": "2026-01-06",
+          "registraPonto": true,
+          "status": "ativo",
+          "dataDemissao": ""
+      },
+      {
+          "id": "colab_branch-3_344",
+          "cracha": 344,
+          "nome": "WEVERTON SEBASTIAO FIGUEIREDO SOUZA",
+          "filialId": "branch-3",
+          "deptId": "dept-deposito",
+          "admissao": "2026-02-09",
+          "registraPonto": true,
+          "status": "ativo",
+          "dataDemissao": ""
+      },
+      {
+          "id": "colab_branch-3_350",
+          "cracha": 350,
+          "nome": "GABRIEL BARBOSA LOPES",
+          "filialId": "branch-3",
+          "deptId": "dept-deposito",
+          "admissao": "2026-04-14",
+          "registraPonto": true,
+          "status": "ativo",
+          "dataDemissao": ""
+      },
+      {
+          "id": "colab_branch-3_356",
+          "cracha": 356,
+          "nome": "FABIANA RODRIGUES DE JESUS",
+          "filialId": "branch-3",
+          "deptId": "dept-admin",
+          "admissao": "2026-07-13",
+          "registraPonto": true,
+          "status": "ativo",
+          "dataDemissao": ""
+      },
+      {
+          "id": "colab_branch-3_358",
+          "cracha": 358,
+          "nome": "MELQUISEDEQUE ABRANJO DE OLIVEIRA",
+          "filialId": "branch-3",
+          "deptId": "dept-deposito",
+          "admissao": "2026-07-27",
+          "registraPonto": true,
+          "status": "ativo",
+          "dataDemissao": ""
+      },
+      {
+          "id": "colab_branch-3_360",
+          "cracha": 360,
+          "nome": "ISABELA VIDAL MARTINS",
+          "filialId": "branch-3",
+          "deptId": "dept-admin",
+          "admissao": "2026-08-17",
+          "registraPonto": true,
+          "status": "ativo",
+          "dataDemissao": ""
+      },
+      {
+          "id": "colab_branch-3_361",
+          "cracha": 361,
+          "nome": "MAYCK CANDIDO DE JESUS",
+          "filialId": "branch-3",
+          "deptId": "dept-deposito",
+          "admissao": "2026-08-27",
+          "registraPonto": true,
+          "status": "ativo",
+          "dataDemissao": ""
+      },
+      {
+          "id": "colab_branch-3_364",
+          "cracha": 364,
+          "nome": "NARA LORENA PEREIRA RODRIGUES DA SILVA",
+          "filialId": "branch-3",
+          "deptId": "dept-admin",
+          "admissao": "2026-04-27",
+          "registraPonto": true,
+          "status": "ativo",
+          "dataDemissao": ""
+      },
+      {
+          "id": "colab_branch-3_365",
+          "cracha": 365,
+          "nome": "LEONARDO DE SOUZA SANTOS",
+          "filialId": "branch-3",
+          "deptId": "dept-deposito",
+          "admissao": "2026-09-28",
+          "registraPonto": true,
+          "status": "ativo",
+          "dataDemissao": ""
+      },
+      {
+          "id": "colab_branch-4_1491",
+          "cracha": 1491,
+          "nome": "ELITON ZAMAI DA SILVA",
+          "filialId": "branch-4",
+          "deptId": "dept-admin",
+          "admissao": "2023-11-17",
+          "registraPonto": true,
+          "status": "ativo",
+          "dataDemissao": ""
+      },
+      {
+          "id": "colab_branch-4_1494",
+          "cracha": 1494,
+          "nome": "FERNANDO ALVES DE SOUZA",
+          "filialId": "branch-4",
+          "deptId": "dept-obra",
+          "admissao": "2025-12-10",
+          "registraPonto": true,
+          "status": "ativo",
+          "dataDemissao": ""
+      }
   ];
 
   const feriados = [
@@ -1203,7 +1203,7 @@ function getDefaultSeedData() {
       tipo: "outros",
       descricao: "Admissão e início oficial de atividades do colaborador Wesley Patrick Fernandes de Oliveira no setor de Produção.",
       filialId: "branch-1",
-      colabId: "colab-1034",
+      colabId: "colab_branch-1_1034",
       concluido: true,
       concluidoEm: "2026-10-09T08:00:00Z",
       createdAt: "2026-10-09T08:00:00Z"
@@ -1215,7 +1215,7 @@ function getDefaultSeedData() {
       tipo: "ferias",
       descricao: "Comunicação formal por escrito com antecedência mínima de 30 dias (Art. 135 da CLT). Início das férias previsto para 15/11/2026.",
       filialId: "branch-1",
-      colabId: "colab-1020",
+      colabId: "colab_branch-1_1020",
       concluido: false,
       concluidoEm: null,
       createdAt: "2026-10-05T09:00:00Z"
@@ -1275,6 +1275,16 @@ const syncBroadcastChannel = (typeof window !== 'undefined' && typeof window.Bro
  * Normaliza e consolida um colaborador, garantindo estrita tipagem dos campos booleanos,
  * conversão do crachá para número, integridade de departamentos e persistência total.
  */
+
+/**
+ * Gera um ID único e determinístico com escopo por filial.
+ * Permite que filiais diferentes tenham o mesmo número de crachá sem conflito.
+ */
+function generateColaboradorId(filialId, cracha) {
+  const f = filialId || 'branch-1';
+  return `colab_${f}_${cracha}`;
+}
+
 function normalizeColaborador(c) {
   if (!c) return null;
   const isAp = !!(
@@ -1326,14 +1336,58 @@ function normalizeColaborador(c) {
     }
   }
 
+    let filialId = c.filialId || 'branch-1';
+  let crachaFinal = isNaN(crachaNum) ? c.cracha : crachaNum;
+  let admissao = c.admissao || '2026-01-01';
+  let nome = (c.nome || '').trim();
+
+  // Tratamento específico para garantir separação de homônimos de crachá
+  if (nome.includes('FERNANDA CRISTINA PAIXAO DE ALMEIDA')) {
+    filialId = 'branch-1';
+    crachaFinal = 361;
+    admissao = '2020-02-12';
+    deptId = 'dept-admin';
+  } else if (nome.includes('MAYCK CANDIDO DE JESUS')) {
+    filialId = 'branch-3';
+    crachaFinal = 361;
+    admissao = '2026-08-27';
+    deptId = 'dept-deposito';
+  } else if (nome.includes('GILMAR SABINO DA SILVA')) {
+    filialId = 'branch-1';
+    crachaFinal = 234;
+    admissao = '2014-05-07';
+    deptId = 'dept-producao';
+  } else if (nome.includes('BRUNO WINICIUS DE SOUZA')) {
+    filialId = 'branch-3';
+    crachaFinal = 234;
+    admissao = '2020-07-16';
+    deptId = 'dept-admin';
+  } else if (nome.includes('CLAUDINEI RIBEIRO FERNANDES')) {
+    filialId = 'branch-1';
+    crachaFinal = 336;
+    admissao = '2019-09-20';
+    deptId = 'dept-admin-sponto';
+  } else if (nome.includes('JHONATAN JULIO DA SILVA REIS')) {
+    filialId = 'branch-3';
+    crachaFinal = 336;
+    admissao = '2025-10-07';
+    deptId = 'dept-deposito';
+  }
+
+  // Se ID não existir ou for formato legado 'colab-123' (sem filial), gera com escopo de filial
+  let targetId = c.id;
+  if (!targetId || targetId.startsWith('colab-')) {
+    targetId = generateColaboradorId(filialId, crachaFinal);
+  }
+
   return {
     ...c,
-    id: c.id || ('colab-' + crachaNum),
-    cracha: isNaN(crachaNum) ? c.cracha : crachaNum,
-    nome: (c.nome || '').trim(),
-    filialId: c.filialId || 'branch-1',
+    id: targetId,
+    cracha: crachaFinal,
+    nome: nome,
+    filialId: filialId,
     deptId: deptId,
-    admissao: c.admissao || '2026-01-01',
+    admissao: admissao,
     aprendiz: isAp,
     trabalhaSabado: trabalhaSabado,
     naoRecebeVa: naoRecebeVa,
@@ -1348,6 +1402,124 @@ function normalizeColaborador(c) {
  * Normaliza e preserva todos os departamentos da empresa, garantindo ADMIN-S/PONTO
  * e prevenindo que departamentos novos criados pelo usuário sejam perdidos.
  */
+
+/**
+ * Migra o estado global da aplicação para a arquitetura de IDs escopados por filial.
+ * Garante que homônimos de crachá (ex: Fernanda crachá 361 na Matriz e Mayck crachá 361 na Distribuidora)
+ * tenham bancos/chaves de registros de ponto totalmente isolados e livres de bugs.
+ */
+function migrateAppState(state) {
+  if (!state || !Array.isArray(state.colaboradores) || state.colaboradores.length === 0) return state;
+
+  const colabs = state.colaboradores;
+  const oldRp = state.registrosPonto || {};
+  const newRp = {};
+  const idMap = new Map();
+  let hasChanges = false;
+
+  const updatedColabs = colabs.map(c => {
+    let filialId = c.filialId || 'branch-1';
+    let cracha = Number(c.cracha);
+    let admissao = c.admissao;
+    let nome = (c.nome || '').trim();
+    let deptId = c.deptId || 'dept-admin';
+
+    if (nome.includes('FERNANDA CRISTINA PAIXAO DE ALMEIDA')) {
+      if (cracha !== 361 || admissao !== '2020-02-12' || filialId !== 'branch-1' || c.id !== 'colab_branch-1_361') hasChanges = true;
+      filialId = 'branch-1';
+      cracha = 361;
+      admissao = '2020-02-12';
+      deptId = 'dept-admin';
+    } else if (nome.includes('MAYCK CANDIDO DE JESUS')) {
+      if (cracha !== 361 || filialId !== 'branch-3' || c.id !== 'colab_branch-3_361') hasChanges = true;
+      filialId = 'branch-3';
+      cracha = 361;
+      admissao = '2026-08-27';
+      deptId = 'dept-deposito';
+    } else if (nome.includes('GILMAR SABINO DA SILVA')) {
+      filialId = 'branch-1'; cracha = 234; admissao = '2014-05-07'; deptId = 'dept-producao';
+    } else if (nome.includes('BRUNO WINICIUS DE SOUZA')) {
+      filialId = 'branch-3'; cracha = 234; admissao = '2020-07-16'; deptId = 'dept-admin';
+    } else if (nome.includes('CLAUDINEI RIBEIRO FERNANDES')) {
+      filialId = 'branch-1'; cracha = 336; admissao = '2019-09-20'; deptId = 'dept-admin-sponto';
+    } else if (nome.includes('JHONATAN JULIO DA SILVA REIS')) {
+      filialId = 'branch-3'; cracha = 336; admissao = '2025-10-07'; deptId = 'dept-deposito';
+    }
+
+    const expectedId = generateColaboradorId(filialId, cracha);
+    if (c.id !== expectedId) {
+      hasChanges = true;
+      idMap.set(c.id + '__' + filialId, expectedId);
+      if (!idMap.has(c.id)) {
+        idMap.set(c.id, expectedId);
+      }
+    }
+
+    return {
+      ...c,
+      id: expectedId,
+      cracha,
+      nome,
+      filialId,
+      deptId,
+      admissao
+    };
+  });
+
+  // Re-mapear registros de ponto legados
+  Object.keys(oldRp).forEach(k => {
+    const parts = k.split('_');
+    const oldId = parts[0];
+    const dateStr = parts.slice(1).join('_');
+
+    let targetNewId = oldId;
+    if (oldId === 'colab-234') {
+      targetNewId = 'colab_branch-1_234';
+      hasChanges = true;
+    } else if (oldId === 'colab-336') {
+      targetNewId = 'colab_branch-1_336';
+      hasChanges = true;
+    } else if (oldId === 'colab-361') {
+      targetNewId = 'colab_branch-1_361';
+      hasChanges = true;
+    } else if (oldId.startsWith('colab-')) {
+      targetNewId = idMap.get(oldId);
+      if (!targetNewId) {
+        const crachaFromId = Number(oldId.replace('colab-', ''));
+        const found = updatedColabs.find(c => c.cracha === crachaFromId);
+        targetNewId = found ? found.id : oldId;
+      }
+      if (targetNewId !== oldId) hasChanges = true;
+    }
+
+    newRp[`${targetNewId}_${dateStr}`] = oldRp[k];
+  });
+
+  // Re-mapear avisos
+  const updatedAvisos = (state.avisos || []).map(a => {
+    let colabId = a.colabId;
+    if (colabId && (colabId.startsWith('colab-') || colabId === 'colab-361')) {
+      if (colabId === 'colab-361') colabId = 'colab_branch-1_361';
+      else if (colabId === 'colab-234') colabId = 'colab_branch-1_234';
+      else if (colabId === 'colab-336') colabId = 'colab_branch-1_336';
+      else if (idMap.has(colabId)) colabId = idMap.get(colabId);
+      else {
+        const crachaFromId = Number(colabId.replace('colab-', ''));
+        const found = updatedColabs.find(c => c.cracha === crachaFromId);
+        if (found) colabId = found.id;
+      }
+      hasChanges = true;
+    }
+    return { ...a, colabId };
+  });
+
+  state.colaboradores = updatedColabs;
+  state.registrosPonto = newRp;
+  state.avisos = updatedAvisos;
+
+  return state;
+}
+
 function normalizeDepartamentos(depts) {
   const seedDepts = getDefaultSeedData().departamentos;
   const map = new Map();
@@ -1639,7 +1811,7 @@ function loadStateFromStorage() {
         }
 
         // Correção cadastral para o colaborador Wesley Patrick (crachá 1034 - admitido 09/10/2026)
-        const wesley = appState.colaboradores.find(c => Number(c.cracha) === 1034 || c.id === 'colab-1034');
+        const wesley = appState.colaboradores.find(c => Number(c.cracha) === 1034 || (c.id === 'colab-1034' || c.id === 'colab_branch-1_1034'));
         if (wesley) {
           wesley.status = 'ativo';
           wesley.admissao = '2026-10-09';
@@ -1647,7 +1819,7 @@ function loadStateFromStorage() {
         }
         if (appState.avisos && Array.isArray(appState.avisos)) {
           appState.avisos = appState.avisos.filter(a => {
-            const isWesley = a.colabId === 'colab-1034' || (a.titulo && a.titulo.toLowerCase().includes('wesley'));
+            const isWesley = (a.colabId === 'colab-1034' || a.colabId === 'colab_branch-1_1034') || (a.titulo && a.titulo.toLowerCase().includes('wesley'));
             return !(isWesley && a.tipo === 'rescisao');
           });
           const hasWesleyAviso = appState.avisos.some(a => a.id === 'aviso-admissao-wesley');
@@ -3554,7 +3726,7 @@ function syncDismissalNotices() {
 
   appState.colaboradores.forEach(colab => {
     if (colab.status === 'demitido' && colab.dataDemissao) {
-      const colabKeyId = colab.id || ('colab-' + colab.cracha);
+      const colabKeyId = colab.id || generateColaboradorId(colab.filialId, colab.cracha);
       const prazoFatal = addCalendarDays(colab.dataDemissao, 10);
       const dataAssinatura = addCalendarDays(prazoFatal, 1);
       const avisoPagamentoId = 'aviso-rescisao-' + colabKeyId;
@@ -4730,7 +4902,10 @@ function openEmployeeModal(empId = null) {
   } else {
     document.getElementById('emp-edit-id').value = '';
     document.getElementById('emp-name').value = '';
-    document.getElementById('emp-badge').value = Math.max(0, ...appState.colaboradores.map(c => Number(c.cracha) || 0)) + 1;
+    const branchColabs = appState.colaboradores.filter(c => c.filialId === appState.activeBranchId);
+    document.getElementById('emp-badge').value = branchColabs.length > 0
+      ? Math.max(0, ...branchColabs.map(c => Number(c.cracha) || 0)) + 1
+      : 1;
     document.getElementById('emp-admission').value = new Date().toISOString().split('T')[0];
     document.getElementById('emp-branch').value = appState.activeBranchId;
 
