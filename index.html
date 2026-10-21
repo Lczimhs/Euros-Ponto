@@ -7,7 +7,7 @@
   <meta http-equiv="Pragma" content="no-cache">
   <meta http-equiv="Expires" content="0">
   <title>Dashboard de Ponto e Vale Alimentação (V4)</title>
-  <link rel="stylesheet" href="style.css?v=20261014_v18">
+  <link rel="stylesheet" href="style.css?v=20261021_v19">
   <script>
     (function() {
       try {
@@ -309,9 +309,6 @@
        VIEW 1: MATRIZ DE PONTO (DASHBOARD EXCEL-LIKE)
        ======================================================================== -->
   <main id="view-ponto" class="app-view" style="display:none;">
-    <!-- Banner de Alerta de Avisos Urgentes (se houver) -->
-    <div id="ponto-urgent-banner" class="ponto-urgent-banner" style="display:none;"></div>
-
     <div class="matrix-container" id="matrix-scroll-wrapper">
       <table class="matrix-table" id="matrix-table">
         <thead id="matrix-thead">
@@ -584,16 +581,17 @@
       <div class="modal-body">
         <div class="note-box">
           <p id="mass-modal-desc">
-            Deseja definir o status como <strong>"OK"</strong> para TODOS os colaboradores desta filial neste dia?
+            Deseja definir o status como <strong>"OK"</strong> para os colaboradores filtrados neste dia?
           </p>
         </div>
         <p style="color: var(--color-text-sub); font-size: 12px;">
-          * Domingos e Feriados não serão sobrescritos para preservar a integridade das regras da folha.
+          * Apenas os colaboradores exibidos no filtro atual recebem o "OK".<br>
+          * Dias que já possuem registro (Atestado, Férias, Falta, Atraso, Afastamento etc.), Domingos e Feriados <strong>não serão sobrescritos</strong>.
         </p>
       </div>
       <div class="modal-footer">
-        <button class="btn btn-secondary" data-close="modal-mass-override">Cancelar</button>
-        <button class="btn btn-cyan" id="btn-confirm-mass-ok">Confirmar "OK" para Todos</button>
+        <button class="btn btn-secondary" data-close="modal-mass-override">Cancelar (Esc)</button>
+        <button class="btn btn-cyan" id="btn-confirm-mass-ok">Confirmar "OK" para Filtrados (Enter)</button>
       </div>
     </div>
   </div>
@@ -767,8 +765,8 @@
 
       </div>
       <div class="modal-footer">
-        <button class="btn btn-secondary" data-close="modal-cell-detail">Cancelar</button>
-        <button class="btn btn-primary" id="btn-save-cell-detail">Salvar Alterações</button>
+        <button class="btn btn-secondary" data-close="modal-cell-detail">Cancelar (Esc)</button>
+        <button class="btn btn-primary" id="btn-save-cell-detail">Salvar Alterações (Enter)</button>
       </div>
     </div>
   </div>
@@ -846,7 +844,7 @@
 
       </div>
       <div class="modal-footer">
-        <button class="btn btn-secondary" data-close="modal-dsr-details">Fechar</button>
+        <button class="btn btn-secondary" data-close="modal-dsr-details">Fechar (Esc / Enter)</button>
       </div>
     </div>
   </div>
@@ -921,6 +919,15 @@
             <input type="checkbox" id="emp-check-aprendiz">
             <span style="color:#FDE047;"><strong>Colaborador é Jovem Aprendiz</strong> <small style="color:var(--color-text-sub); display:block; font-size:11px;">(Trabalham meio período — o valor do Vale Alimentação por dia útil será calculado pela metade: <strong>R$ 4,00/dia útil</strong>)</small></span>
           </label>
+        </div>
+
+        <!-- Programação de Férias -->
+        <div class="form-group emp-ferias-box" id="group-emp-ferias">
+          <div class="emp-ferias-box-info">
+            <strong>🏖️ Férias do Colaborador</strong>
+            <small id="emp-ferias-resumo">Nenhum período de férias programado.</small>
+          </div>
+          <button type="button" class="btn btn-cyan btn-sm" id="btn-open-ferias">🏖️ Programar Férias</button>
         </div>
 
         <!-- Checkbox: Marcar como Demitido -->
@@ -1205,12 +1212,58 @@
   </div>
 
 
+  <!-- ========================================================================
+       MODAL: PROGRAMAÇÃO DE FÉRIAS DO COLABORADOR
+       ======================================================================== -->
+  <div class="modal-overlay" id="modal-ferias">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3><span>🏖️</span> Programar Férias</h3>
+        <button class="modal-close-btn" data-close="modal-ferias">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="ferias-colab-header">
+          <strong id="ferias-colab-nome">Colaborador</strong>
+          <small id="ferias-colab-sub"></small>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="ferias-inicio">Início das Férias:*</label>
+            <input type="date" class="form-control" id="ferias-inicio">
+          </div>
+          <div class="form-group">
+            <label for="ferias-dias">Quantidade de Dias:*</label>
+            <input type="number" class="form-control" id="ferias-dias" value="30" min="1" max="30">
+          </div>
+          <div class="form-group">
+            <label for="ferias-fim">Último Dia de Férias:</label>
+            <input type="date" class="form-control" id="ferias-fim">
+          </div>
+        </div>
+
+        <div class="ferias-preview" id="ferias-preview">
+          Informe a data de início para visualizar os avisos que serão gerados.
+        </div>
+
+        <div>
+          <div class="ferias-list-title">📋 Períodos programados</div>
+          <div class="ferias-list" id="ferias-list"></div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" data-close="modal-ferias">Fechar</button>
+        <button class="btn btn-primary" id="btn-save-ferias">Salvar Férias e Gerar Avisos</button>
+      </div>
+    </div>
+  </div>
+
   <!-- Toast Notification Container -->
   <div id="toast-container"></div>
 
   <!-- Supabase JS Client SDK -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <!-- Main JavaScript Logic -->
-  <script src="app.js?v=20261015_v1"></script>
+  <script src="app.js?v=20261021_v2"></script>
 </body>
 </html>

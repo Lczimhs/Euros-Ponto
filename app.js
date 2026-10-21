@@ -1622,7 +1622,13 @@ function triggerCloudSync(payload, immediate = false) {
 }
 
 function normalizeAviso(a) {
+  // Preserva campos extras (isAssinaturaDoc, autoRollover, prazoLegal, feriasId, etc.)
+  const idStr = String(a.id || '');
+  const isAssin = idStr.startsWith('aviso-assinatura-');
   return {
+    ...a,
+    isAssinaturaDoc: a.isAssinaturaDoc === true || isAssin,
+    autoRollover: a.autoRollover === true || isAssin,
     id: a.id || ('aviso-' + Math.random().toString(36).substr(2, 9)),
     data: a.data || (a.createdAt ? a.createdAt.split('T')[0] : '2026-10-15'),
     titulo: a.titulo || 'Prazo Legal CLT',
@@ -2849,6 +2855,11 @@ function updateNavTabsActive(targetView) {
   } else {
     if (toolbar) toolbar.style.display = 'none';
   }
+
+  // Rolagem unificada no Dashboard de Ponto (header e filtros rolam junto com a página)
+  const isPonto = targetView === 'view-ponto';
+  document.body.classList.toggle('ponto-scroll-mode', isPonto);
+  document.documentElement.classList.toggle('ponto-scroll-mode', isPonto);
 }
 
 function setupNavigation() {
@@ -2888,7 +2899,6 @@ function renderCurrentView() {
     renderAvisosView();
   } else if (appState.activeView === 'view-ponto') {
     renderMatrixView();
-    updatePontoUrgentBanner();
   } else if (appState.activeView === 'view-va') {
     renderVAView();
   } else if (appState.activeView === 'view-colaboradores') {
@@ -3167,7 +3177,7 @@ function renderMatrixView() {
     const holiday = isHoliday(isoStr, appState.activeBranchId);
 
     let thClass = 'th-date-clickable';
-    let titleHint = "Clique no dia " + String(d).padStart(2, '0') + " para aplicar 'OK' em massa para todos";
+    let titleHint = "Clique no dia " + String(d).padStart(2, '0') + " para aplicar 'OK' em massa para os colaboradores filtrados";
 
     if (isSunday) {
       thClass += ' th-sunday';
@@ -3224,9 +3234,16 @@ function renderMatrixView() {
     }
 
     // Coluna Congelada à Direita: Qtd. DSR
-    const dsrInfo = calculateDsrForEmployee(colab.id, year, month, appState.activeBranchId);
-    const dsrClass = dsrInfo.totalDsrLost > 0 ? 'dsr-penalty' : 'dsr-zero';
-    const dsrTooltip = dsrInfo.breakdown.length > 0 ? dsrInfo.breakdown.join('&#10;') : 'Nenhuma perda de DSR no mês';
+    const dsrInfo = calculateDsrAndOccurrences(colab.id, year, month, appState.activeBranchId);
+    const hasDesconto = hasDescontoNoMes(dsrInfo);
+    let dsrClass = 'dsr-penalty';
+    let dsrTooltip = dsrInfo.dsrBreakdown.join('&#10;');
+    if (dsrInfo.totalDsrLost === 0) {
+      dsrClass = 'dsr-zero' + (hasDesconto ? ' dsr-has-desconto' : '');
+      dsrTooltip = hasDesconto
+        ? 'DSR zerado, PORÉM há desconto no mês: ' + dsrInfo.faltasIntegrais + ' falta(s) integral(is), ' + dsrInfo.faltasMeioPeriodo + ' falta(s) de meio período, atrasos ' + minutesToTime(dsrInfo.totalAtrasosMinutos)
+        : 'Nenhuma perda de DSR no mês';
+    }
 
     html += '<td class="col-dsr" data-colab-id="' + colab.id + '" title="' + dsrTooltip + ' (Clique para abrir detalhamento analítico)"><span class="dsr-badge ' + dsrClass + '">' + dsrInfo.totalDsrLost + '</span></td>';
 
@@ -3411,9 +3428,26 @@ function openMassOverrideModal(isoDate) {
   activeMassDate = isoDate;
   const branch = appState.filiais.find(f => f.id === appState.activeBranchId);
   const branchName = branch ? branch.nome : 'esta filial';
+  const filtered = getFilteredAndSortedEmployees(true);
   const desc = document.getElementById('mass-modal-desc');
-  desc.innerHTML = 'Deseja definir o status como <strong>"OK"</strong> para <strong>TODOS</strong> os colaboradores que registram ponto na filial <em>"' + branchName + '"</em> no dia <strong>' + formatDateBR(isoDate) + '</strong>?';
+  desc.innerHTML = 'Deseja definir o status como <strong>"OK"</strong> para os <strong>' + filtered.length + ' colaborador(es) filtrados</strong> no momento na filial <em>"' + branchName + '"</em> no dia <strong>' + formatDateBR(isoDate) + '</strong>?';
   openModal('modal-mass-override');
+}
+
+/**
+ * Verifica se o dia do colaborador já possui algum registro (Atestado, Férias, Falta, Atraso,
+ * Afastamento, abono etc.). Nesses casos o "OK em massa" NÃO sobrepõe o registro existente.
+ */
+function dayHasExistingRecord(colabId, isoDate) {
+  const reg = appState.registrosPonto[colabId + '_' + isoDate];
+  if (reg) {
+    if (reg.override && !['AUTO', 'OK', 'VAZIO'].includes(reg.override)) return true;
+    if (reg.resolution && reg.resolution !== 'NENHUMA') return true;
+    if ((Number(reg.atrasoMaiorMin) || 0) > 0 || (Number(reg.atrasoPequenoMin) || 0) > 0) return true;
+    if (parseTimeToMinutes(reg.atrasoMaior || '') > 0 || parseTimeToMinutes(reg.atrasoPequeno || '') > 0) return true;
+  }
+  const status = getDayStatus(colabId, isoDate, appState.activeBranchId);
+  return !(status.type === 'OK' || status.type === 'VAZIO');
 }
 
 document.getElementById('btn-confirm-mass-ok')?.addEventListener('click', () => {
@@ -3422,8 +3456,12 @@ document.getElementById('btn-confirm-mass-ok')?.addEventListener('click', () => 
   const massDateObj = new Date(activeMassDate + 'T12:00:00');
   const isSaturday = massDateObj.getDay() === 6;
 
-  const branchEmployees = appState.colaboradores.filter(c => c.filialId === appState.activeBranchId);
-  branchEmployees.forEach(colab => {
+  // Apenas os colaboradores que estão sendo exibidos no filtro atual da matriz
+  const filteredEmployees = getFilteredAndSortedEmployees(true);
+  let applied = 0;
+  let preserved = 0;
+
+  filteredEmployees.forEach(colab => {
     if (colab.registraPonto === false) return;
     if (colab.status === 'demitido' && colab.dataDemissao && activeMassDate > colab.dataDemissao) return;
     if (colab.admissao && activeMassDate < colab.admissao) return;
@@ -3432,18 +3470,28 @@ document.getElementById('btn-confirm-mass-ok')?.addEventListener('click', () => 
     if (isSaturday && isColabFolgaSabado(colab)) return;
 
     const regKey = colab.id + '_' + activeMassDate;
+    const existing = appState.registrosPonto[regKey];
+
+    // Não sobrepõe dias que já possuem algo (Atestado, Férias, Falta, Atraso, Feriado etc.)
+    if (dayHasExistingRecord(colab.id, activeMassDate)) {
+      preserved++;
+      return;
+    }
+    if (existing && existing.override === 'OK') return; // Já está OK
+
     appState.registrosPonto[regKey] = {
       override: 'OK',
       resolution: 'NENHUMA',
       punches: { em: '08:00', sm: '12:00', et: '13:00', st: '17:00' },
       note: 'OK em massa pelo cabeçalho da data'
     };
+    applied++;
   });
 
   saveStateToStorage();
   closeModal('modal-mass-override');
   renderCurrentView();
-  showToast('Status definido como "OK" para todos os colaboradores em ' + formatDateBR(activeMassDate), 'success');
+  showToast('"OK" aplicado para ' + applied + ' colaborador(es) filtrados em ' + formatDateBR(activeMassDate) + (preserved > 0 ? ' • ' + preserved + ' registro(s) existente(s) preservado(s)' : ''), 'success');
 });
 
 let currentEditingCell = { colabId: null, isoDate: null };
@@ -3671,6 +3719,25 @@ function addCalendarDays(dateStr, days) {
   }
 }
 
+/**
+ * Regra de folga dos avisos de PAGAMENTO (rescisão, férias, salário, FGTS...):
+ * o aviso sempre aparece pelo menos 1 dia ANTES do prazo legal, garantindo 1 dia a mais
+ * de prazo além do aviso. Se o dia cair em domingo/feriado, recua para o dia útil anterior.
+ */
+function getPaymentNoticeDate(deadlineIso, branchId) {
+  if (!deadlineIso) return deadlineIso;
+  let d = addCalendarDays(deadlineIso, -1);
+  for (let i = 0; i < 10; i++) {
+    const dow = new Date(d + 'T12:00:00').getDay();
+    const isFeriado = (appState.feriados || []).some(f =>
+      f.data === d && (f.escopo === 'NACIONAL' || !branchId || branchId === 'TODAS' || f.escopo === branchId)
+    );
+    if (dow !== 0 && !isFeriado) break;
+    d = addCalendarDays(d, -1);
+  }
+  return d;
+}
+
 function getTodayISOLocal() {
   const now = new Date();
   const year = now.getFullYear();
@@ -3729,18 +3796,21 @@ function syncDismissalNotices() {
       const colabKeyId = colab.id || generateColaboradorId(colab.filialId, colab.cracha);
       const prazoFatal = addCalendarDays(colab.dataDemissao, 10);
       const dataAssinatura = addCalendarDays(prazoFatal, 1);
+      // Aviso de pagamento sempre 1 dia antes do prazo fatal (1 dia de folga além do aviso)
+      const avisoPagtoData = getPaymentNoticeDate(prazoFatal, colab.filialId);
       const avisoPagamentoId = 'aviso-rescisao-' + colabKeyId;
       const avisoAssinaturaId = 'aviso-assinatura-' + colabKeyId;
 
       // 1. Prazo final de pagamento (10 dias CLT Art. 477)
-      const hasPaymentNotice = appState.avisos.some(a => a.id === avisoPagamentoId || (a.colabId === colabKeyId && a.tipo === 'rescisao' && !a.isAssinaturaDoc && !a.autoRollover));
+      const hasPaymentNotice = appState.avisos.some(a => a.id === avisoPagamentoId || (a.colabId === colabKeyId && a.tipo === 'rescisao' && !a.isAssinaturaDoc && !a.autoRollover && !String(a.id || '').startsWith('aviso-assinatura-') && !a.feriasId));
       if (!hasPaymentNotice) {
         appState.avisos.unshift({
           id: avisoPagamentoId,
-          data: prazoFatal,
+          data: avisoPagtoData,
+          prazoLegal: prazoFatal,
           tipo: 'rescisao',
           titulo: `🔴 Prazo Limite Rescisão - ${colab.nome} (10 dias CLT Art. 477)`,
-          descricao: `Prazo legal fatal de 10 dias corridos para homologação e pagamento de verbas rescisórias (Art. 477, § 6º da CLT). Data da demissão: ${formatDateBR(colab.dataDemissao)}. Prazo fatal: ${formatDateBR(prazoFatal)}.`,
+          descricao: `Prazo legal fatal de 10 dias corridos para homologação e pagamento de verbas rescisórias (Art. 477, § 6º da CLT). Data da demissão: ${formatDateBR(colab.dataDemissao)}. Prazo fatal: ${formatDateBR(prazoFatal)}. Aviso antecipado para ${formatDateBR(avisoPagtoData)} (1 dia de folga além do aviso).`,
           filialId: colab.filialId,
           colabId: colabKeyId,
           concluido: false,
@@ -3749,6 +3819,15 @@ function syncDismissalNotices() {
           updatedAt: new Date().toISOString()
         });
         modified = true;
+      } else {
+        // Migração: avisos automáticos antigos ficavam no próprio dia do prazo fatal → antecipa 1 dia
+        const existingPagto = appState.avisos.find(a => a.id === avisoPagamentoId);
+        if (existingPagto && !existingPagto.concluido && existingPagto.data === prazoFatal && avisoPagtoData !== prazoFatal) {
+          existingPagto.data = avisoPagtoData;
+          existingPagto.prazoLegal = prazoFatal;
+          existingPagto.updatedAt = new Date().toISOString();
+          modified = true;
+        }
       }
 
       // 2. Chamar para assinar documentos rescisórios (1 dia após o pagamento, com prorrogação diária)
@@ -4510,9 +4589,10 @@ function handleLegalPresetChange(preset) {
     const inputDemissao = document.getElementById('input-calc-demissao-data');
     const demissaoVal = inputDemissao?.value || new Date().toISOString().split('T')[0];
     const prazoFatal = addCalendarDays(demissaoVal, 10);
-    if (dataInput) dataInput.value = prazoFatal;
+    const avisoPagto = getPaymentNoticeDate(prazoFatal, appState.activeBranchId);
+    if (dataInput) dataInput.value = avisoPagto;
     if (tituloInput) tituloInput.value = `🔴 Pagamento Rescisão Contratual - ${colabNome} (10 dias CLT Art. 477)`;
-    if (descInput) descInput.value = `Prazo improrrogável de 10 dias corridos para pagamento integral das verbas rescisórias e entrega das guias (TRCT/FGTS) conforme Art. 477, § 6º da CLT. Demissão em: ${formatDateBR(demissaoVal)}.`;
+    if (descInput) descInput.value = `Prazo improrrogável de 10 dias corridos para pagamento integral das verbas rescisórias e entrega das guias (TRCT/FGTS) conforme Art. 477, § 6º da CLT. Demissão em: ${formatDateBR(demissaoVal)}. Prazo fatal: ${formatDateBR(prazoFatal)} (aviso antecipado em 1 dia).`;
   } else if (preset === 'assinatura_rescisao') {
     if (tipoInput) tipoInput.value = 'rescisao';
     const inputDemissao = document.getElementById('input-calc-demissao-data');
@@ -4525,12 +4605,12 @@ function handleLegalPresetChange(preset) {
   } else if (preset === 'salario_5') {
     if (tipoInput) tipoInput.value = 'salario';
     const quintoDia = get5thBusinessDay(calYear, calMonth);
-    if (dataInput) dataInput.value = quintoDia;
+    if (dataInput) dataInput.value = getPaymentNoticeDate(quintoDia, appState.activeBranchId);
     if (tituloInput) tituloInput.value = `🟡 Pagamento Salarial Mensal (5º Dia Útil - CLT Art. 459)`;
     if (descInput) descInput.value = `Até o 5º dia útil do mês subsequente ao trabalhado conforme Art. 459, § 1º da CLT.`;
   } else if (preset === 'adiantamento') {
     if (tipoInput) tipoInput.value = 'salario';
-    if (dataInput) dataInput.value = `${calYear}-${String(calMonth + 1).padStart(2, '0')}-20`;
+    if (dataInput) dataInput.value = getPaymentNoticeDate(`${calYear}-${String(calMonth + 1).padStart(2, '0')}-20`, appState.activeBranchId);
     if (tituloInput) tituloInput.value = `🟡 Adiantamento Salarial Quinzenal (Vale 40%)`;
     if (descInput) descInput.value = `Pagamento do vale salarial quinzenal aos colaboradores com opção cadastrada.`;
   } else if (preset === 'ferias_aviso') {
@@ -4540,7 +4620,7 @@ function handleLegalPresetChange(preset) {
   } else if (preset === 'ferias_pagto') {
     if (tipoInput) tipoInput.value = 'ferias';
     if (tituloInput) tituloInput.value = `🟣 Pagamento de Férias + 1/3 - ${colabNome} (Até 2 dias antes - CLT Art. 145)`;
-    if (descInput) descInput.value = `O pagamento da remuneração das férias e do terço constitucional deve ser efetuado até 2 dias antes do início do respectivo período (Art. 145 da CLT).`;
+    if (descInput) descInput.value = `O pagamento da remuneração das férias e do terço constitucional deve ser efetuado até 2 dias antes do início do respectivo período (Art. 145 da CLT). Agende este aviso 3 dias antes do início das férias (1 dia de folga além do aviso).`;
   } else if (preset === 'ponto_fechamento') {
     if (tipoInput) tipoInput.value = 'ponto';
     const lastBusinessDay = getLastBusinessDay(calYear, calMonth);
@@ -4549,7 +4629,7 @@ function handleLegalPresetChange(preset) {
     if (descInput) descInput.value = `Data de corte no último dia útil do mês (${formatDateBR(lastBusinessDay)}) para conferência de batidas manuais, faltas e atestados para apuração definitiva do crédito de Vale Alimentação.`;
   } else if (preset === 'fgts_digital') {
     if (tipoInput) tipoInput.value = 'fgts';
-    if (dataInput) dataInput.value = `${calYear}-${String(calMonth + 1).padStart(2, '0')}-20`;
+    if (dataInput) dataInput.value = getPaymentNoticeDate(`${calYear}-${String(calMonth + 1).padStart(2, '0')}-20`, appState.activeBranchId);
     if (tituloInput) tituloInput.value = `🟢 Vencimento Guia FGTS Digital (eSocial)`;
     if (descInput) descInput.value = `Recolhimento mensal do FGTS Digital via PIX/código de barras referente à folha anterior.`;
   }
@@ -4650,40 +4730,21 @@ function deleteAviso(avisoId, dateStr = null) {
   showToast('Prazo excluído do calendário.', 'info');
 }
 
+// Os avisos do calendário e o botão "Ver no Calendário" foram removidos do Dashboard de Ponto.
+// Mantida apenas como no-op para compatibilidade com chamadas antigas.
 function updatePontoUrgentBanner() {
-  const banner = document.getElementById('ponto-urgent-banner');
-  if (!banner) return;
+  document.getElementById('ponto-urgent-banner')?.remove();
+}
 
-  const allAvisos = appState.avisos || [];
-  // Procura rescisão ou aviso urgente pendente para esta filial ou geral
-  const urgentAviso = allAvisos.find(a =>
-    !a.concluido && (a.tipo === 'rescisao' || a.tipo === 'ponto') &&
-    (!a.filialId || a.filialId === 'TODAS' || a.filialId === appState.activeBranchId)
-  );
-
-  if (urgentAviso) {
-    banner.style.display = 'flex';
-    banner.innerHTML = `
-      <div class="ponto-urgent-banner-text">
-        <span>⚠️</span>
-        <div>
-          <strong>PRAZO LEGAL PENDENTE:</strong>
-          ${escapeHtml(urgentAviso.titulo)} (Data: ${formatDateBR(urgentAviso.data)})
-        </div>
-      </div>
-      <button class="btn btn-cyan btn-sm" id="btn-banner-go-avisos" style="white-space:nowrap;">
-        Ver no Calendário ➔
-      </button>
-    `;
-    document.getElementById('btn-banner-go-avisos')?.addEventListener('click', () => {
-      appState.activeView = 'view-avisos';
-      updateNavTabsActive('view-avisos');
-      renderCurrentView();
-    });
-  } else {
-    banner.style.display = 'none';
-    banner.innerHTML = '';
-  }
+/**
+ * Indica se o colaborador possui algum desconto no mês (falta integral, meio período ou atraso
+ * não abonado). Usado para destacar com borda vermelha o DSR zerado que ainda tem descontos.
+ */
+function hasDescontoNoMes(occ) {
+  if (!occ) return false;
+  if (occ.faltasIntegrais > 0 || occ.faltasMeioPeriodo > 0) return true;
+  if (occ.pequenosAtrasosMinutos > 0) return true;
+  return (occ.ocorrencias || []).some(o => String(o.tipo || '').startsWith('Atraso Maior') && o.impacto !== 'Abonado');
 }
 
 // ==========================================================================
@@ -4899,6 +4960,7 @@ function openEmployeeModal(empId = null) {
     if (demissaoInput) demissaoInput.value = emp.dataDemissao || '';
 
     document.getElementById('modal-employee-title').innerHTML = '<span>👤</span> Editar Funcionário';
+    updateEmpFeriasResumo(emp);
   } else {
     document.getElementById('emp-edit-id').value = '';
     document.getElementById('emp-name').value = '';
@@ -4918,6 +4980,7 @@ function openEmployeeModal(empId = null) {
     if (demissaoInput) demissaoInput.value = '';
 
     document.getElementById('modal-employee-title').innerHTML = '<span>👤</span> Cadastrar Funcionário';
+    updateEmpFeriasResumo(null);
   }
 
   openModal('modal-employee');
@@ -4972,7 +5035,10 @@ document.getElementById('btn-save-employee')?.addEventListener('click', () => {
     return;
   }
 
+  // Preserva campos extras do cadastro existente (ex: períodos de férias programados)
+  const existingEmp = id ? appState.colaboradores.find(c => c.id === id) : null;
   const colabObj = normalizeColaborador({
+    ...(existingEmp || {}),
     id: id || ('colab-' + cracha),
     nome,
     cracha,
@@ -4980,11 +5046,13 @@ document.getElementById('btn-save-employee')?.addEventListener('click', () => {
     filialId,
     deptId,
     aprendiz,
+    isAprendiz: aprendiz,
     trabalhaSabado,
     naoRecebeVa,
     recebeVa: !naoRecebeVa,
     registraPonto,
     status,
+    isDemitido: isDemitido,
     dataDemissao
   });
 
@@ -5005,21 +5073,27 @@ document.getElementById('btn-save-employee')?.addEventListener('click', () => {
   if (status === 'demitido' && dataDemissao) {
     const prazoFatal = addCalendarDays(dataDemissao, 10);
     const dataAssinatura = addCalendarDays(prazoFatal, 1);
+    // Aviso de pagamento 1 dia antes do prazo fatal (1 dia de folga além do aviso)
+    const avisoPagtoData = getPaymentNoticeDate(prazoFatal, filialId);
     const avisoPagtoId = 'aviso-rescisao-' + colabKeyId;
     const avisoAssinId = 'aviso-assinatura-' + colabKeyId;
 
     if (!appState.avisos) appState.avisos = [];
 
     // 1. Aviso de Pagamento da Rescisão (10 dias corridos CLT Art. 477)
-    const existingPagtoIdx = appState.avisos.findIndex(a => a.id === avisoPagtoId || (a.colabId === colabKeyId && a.tipo === 'rescisao' && !a.isAssinaturaDoc && !a.autoRollover));
+    let existingPagtoIdx = appState.avisos.findIndex(a => a.id === avisoPagtoId);
+    if (existingPagtoIdx === -1) {
+      existingPagtoIdx = appState.avisos.findIndex(a => a.colabId === colabKeyId && a.tipo === 'rescisao' && !a.isAssinaturaDoc && !a.autoRollover && !String(a.id || '').startsWith('aviso-assinatura-') && !a.feriasId);
+    }
     const isPagtoDone = existingPagtoIdx !== -1 ? appState.avisos[existingPagtoIdx].concluido : false;
 
     const avisoPagtoObj = {
       id: avisoPagtoId,
-      data: prazoFatal,
+      data: avisoPagtoData,
+      prazoLegal: prazoFatal,
       tipo: 'rescisao',
       titulo: `🔴 Prazo Limite Rescisão - ${nome} (10 dias CLT Art. 477)`,
-      descricao: `Prazo legal fatal de 10 dias corridos para homologação e pagamento de verbas rescisórias (Art. 477, § 6º da CLT). Data da demissão: ${formatDateBR(dataDemissao)}. Prazo fatal: ${formatDateBR(prazoFatal)}.`,
+      descricao: `Prazo legal fatal de 10 dias corridos para homologação e pagamento de verbas rescisórias (Art. 477, § 6º da CLT). Data da demissão: ${formatDateBR(dataDemissao)}. Prazo fatal: ${formatDateBR(prazoFatal)}. Aviso antecipado para ${formatDateBR(avisoPagtoData)} (1 dia de folga além do aviso).`,
       filialId: filialId,
       colabId: colabKeyId,
       concluido: isPagtoDone,
@@ -5079,11 +5153,311 @@ document.getElementById('btn-save-employee')?.addEventListener('click', () => {
 
   if (status === 'demitido') {
     const pFatal = addCalendarDays(dataDemissao, 10);
+    const pAviso = getPaymentNoticeDate(pFatal, filialId);
     const dAssin = addCalendarDays(pFatal, 1);
-    showToast(`Colaborador salvo! Avisos gerados: 🔴 Pagamento (${formatDateBR(pFatal)}) e 📝 Assinatura (${formatDateBR(dAssin)} com prorrogação diária)!`, 'purple');
+    showToast(`Colaborador salvo! Avisos gerados: 🔴 Pagamento (aviso ${formatDateBR(pAviso)} • prazo ${formatDateBR(pFatal)}) e 📝 Assinatura (${formatDateBR(dAssin)} com prorrogação diária)!`, 'purple');
   } else {
     showToast('Colaborador salvo com sucesso!', 'success');
   }
+});
+
+// ==========================================================================
+// PROGRAMAÇÃO DE FÉRIAS (botão no modal de edição do colaborador)
+// - Gera aviso no mural do início das férias
+// - Gera aviso de pagamento 3 dias antes do início (prazo CLT Art. 145 = 2 dias antes + 1 dia de folga)
+// - Marca os dias como FÉRIAS no Dashboard de Ponto (sem sobrepor registros existentes)
+// ==========================================================================
+let feriasEditingColabId = null;
+
+function getColabFerias(colab) {
+  return (colab && Array.isArray(colab.ferias)) ? colab.ferias : [];
+}
+
+function daysBetweenISO(a, b) {
+  const da = new Date(a + 'T12:00:00');
+  const db = new Date(b + 'T12:00:00');
+  return Math.round((db - da) / 86400000);
+}
+
+function computeFeriasDates(inicio, dias, branchId) {
+  const fim = addCalendarDays(inicio, dias - 1);
+  const retorno = addCalendarDays(fim, 1);
+  const prazoPagto = addCalendarDays(inicio, -2); // CLT Art. 145: até 2 dias antes do início
+  const avisoPagto = getPaymentNoticeDate(prazoPagto, branchId); // 3 dias antes (1 dia de folga)
+  return { inicio, fim, retorno, prazoPagto, avisoPagto };
+}
+
+function updateEmpFeriasResumo(colab) {
+  const resumo = document.getElementById('emp-ferias-resumo');
+  const btn = document.getElementById('btn-open-ferias');
+  if (btn) {
+    btn.disabled = !colab;
+    btn.title = colab ? 'Informar o período de férias do colaborador' : 'Salve o colaborador antes de programar as férias';
+  }
+  if (!resumo) return;
+  if (!colab) {
+    resumo.textContent = 'Salve o cadastro do colaborador para programar as férias.';
+    return;
+  }
+  const list = getColabFerias(colab).slice().sort((a, b) => a.inicio.localeCompare(b.inicio));
+  if (list.length === 0) {
+    resumo.textContent = 'Nenhum período de férias programado.';
+    return;
+  }
+  const today = getTodayISOLocal();
+  const next = list.find(f => f.fim >= today);
+  if (next) {
+    resumo.textContent = `Próximas/atuais férias: ${formatDateBR(next.inicio)} a ${formatDateBR(next.fim)} • ${list.length} período(s) cadastrado(s)`;
+  } else {
+    const last = list[list.length - 1];
+    resumo.textContent = `Últimas férias: ${formatDateBR(last.inicio)} a ${formatDateBR(last.fim)} • ${list.length} período(s) cadastrado(s)`;
+  }
+}
+
+function openFeriasModal(colabId) {
+  const colab = appState.colaboradores.find(c => c.id === colabId);
+  if (!colab) {
+    showToast('Salve o colaborador antes de programar as férias.', 'warning');
+    return;
+  }
+  feriasEditingColabId = colabId;
+
+  const branch = appState.filiais.find(f => f.id === colab.filialId);
+  const dept = appState.departamentos.find(d => d.id === colab.deptId);
+  document.getElementById('ferias-colab-nome').textContent = colab.nome;
+  document.getElementById('ferias-colab-sub').textContent = 'Crachá: ' + colab.cracha + ' • Depto: ' + (dept ? dept.nome : 'Geral') + ' • Filial: ' + (branch ? branch.nome : '');
+
+  document.getElementById('ferias-inicio').value = '';
+  document.getElementById('ferias-dias').value = 30;
+  document.getElementById('ferias-fim').value = '';
+
+  updateFeriasPreview();
+  renderFeriasList();
+  openModal('modal-ferias');
+  setTimeout(() => document.getElementById('ferias-inicio')?.focus(), 80);
+}
+
+function updateFeriasPreview() {
+  const preview = document.getElementById('ferias-preview');
+  if (!preview) return;
+  const colab = appState.colaboradores.find(c => c.id === feriasEditingColabId);
+  const inicio = document.getElementById('ferias-inicio')?.value;
+  const dias = parseInt(document.getElementById('ferias-dias')?.value, 10);
+
+  if (!inicio || !(dias > 0)) {
+    preview.innerHTML = 'Informe a data de início para visualizar os avisos que serão gerados.';
+    return;
+  }
+
+  const d = computeFeriasDates(inicio, dias, colab ? colab.filialId : appState.activeBranchId);
+  preview.innerHTML = `
+    📅 Período: <strong>${formatDateBR(d.inicio)} a ${formatDateBR(d.fim)}</strong> (${dias} dias) • Retorno: <strong>${formatDateBR(d.retorno)}</strong><br>
+    🏖️ Aviso no mural (início das férias): <strong>${formatDateBR(d.inicio)}</strong><br>
+    💰 Aviso de pagamento: <strong>${formatDateBR(d.avisoPagto)}</strong> — prazo legal ${formatDateBR(d.prazoPagto)} (CLT Art. 145: até 2 dias antes + 1 dia de folga)<br>
+    📊 Os dias serão marcados como <strong>FÉRIAS</strong> no Dashboard de Ponto (sem sobrepor registros existentes).
+  `;
+}
+
+function renderFeriasList() {
+  const el = document.getElementById('ferias-list');
+  if (!el) return;
+  const colab = appState.colaboradores.find(c => c.id === feriasEditingColabId);
+  const list = getColabFerias(colab).slice().sort((a, b) => b.inicio.localeCompare(a.inicio));
+
+  if (list.length === 0) {
+    el.innerHTML = '<div class="ferias-empty">Nenhum período de férias cadastrado para este colaborador.</div>';
+    return;
+  }
+
+  el.innerHTML = list.map(f => {
+    const d = computeFeriasDates(f.inicio, f.dias, colab.filialId);
+    return `
+      <div class="ferias-item">
+        <div>
+          <div class="ferias-item-periodo">${formatDateBR(f.inicio)} a ${formatDateBR(f.fim)}</div>
+          <div class="ferias-item-sub">${f.dias} dias • Retorno: ${formatDateBR(d.retorno)} • Aviso de pagamento: ${formatDateBR(d.avisoPagto)}</div>
+        </div>
+        <button type="button" class="btn btn-danger btn-sm btn-remove-ferias" data-id="${f.id}" title="Remover período e seus avisos">🗑️ Remover</button>
+      </div>
+    `;
+  }).join('');
+
+  el.querySelectorAll('.btn-remove-ferias').forEach(btn => {
+    btn.addEventListener('click', () => removeFeriasPeriodo(btn.dataset.id));
+  });
+}
+
+function generateFeriasNotices(colab, periodo) {
+  if (!appState.avisos) appState.avisos = [];
+  const d = computeFeriasDates(periodo.inicio, periodo.dias, colab.filialId);
+  const now = new Date().toISOString();
+  const avisoInicioId = 'aviso-ferias-' + periodo.id;
+  const avisoPagtoId = 'aviso-ferias-pagto-' + periodo.id;
+
+  const avisoInicio = {
+    id: avisoInicioId,
+    data: periodo.inicio,
+    tipo: 'ferias',
+    titulo: `🏖️ Início das Férias - ${colab.nome} (${periodo.dias} dias)`,
+    descricao: `O colaborador ${colab.nome} (Crachá ${colab.cracha}) entra em férias em ${formatDateBR(periodo.inicio)}. Período: ${formatDateBR(periodo.inicio)} a ${formatDateBR(periodo.fim)} (${periodo.dias} dias). Retorno ao trabalho: ${formatDateBR(d.retorno)}.`,
+    filialId: colab.filialId,
+    colabId: colab.id,
+    feriasId: periodo.id,
+    concluido: false,
+    concluidoEm: null,
+    createdAt: now,
+    updatedAt: now
+  };
+
+  const avisoPagto = {
+    id: avisoPagtoId,
+    data: d.avisoPagto,
+    prazoLegal: d.prazoPagto,
+    tipo: 'ferias',
+    titulo: `💰 Pagamento de Férias + 1/3 - ${colab.nome} (prazo ${formatDateBR(d.prazoPagto)})`,
+    descricao: `Efetuar o pagamento da remuneração das férias + 1/3 constitucional de ${colab.nome}. Prazo legal: até 2 dias antes do início (CLT Art. 145) = ${formatDateBR(d.prazoPagto)}. Aviso antecipado para ${formatDateBR(d.avisoPagto)} (1 dia de folga além do aviso). Início das férias: ${formatDateBR(periodo.inicio)}.`,
+    filialId: colab.filialId,
+    colabId: colab.id,
+    feriasId: periodo.id,
+    concluido: false,
+    concluidoEm: null,
+    createdAt: now,
+    updatedAt: now
+  };
+
+  appState.avisos = appState.avisos.filter(a => a.id !== avisoInicioId && a.id !== avisoPagtoId);
+  appState.avisos.unshift(avisoPagto, avisoInicio);
+  return d;
+}
+
+function applyFeriasToPonto(colab, periodo) {
+  let preserved = 0;
+  const note = `Férias programadas (${formatDateBR(periodo.inicio)} a ${formatDateBR(periodo.fim)})`;
+  for (let i = 0; i < periodo.dias; i++) {
+    const iso = addCalendarDays(periodo.inicio, i);
+    const key = colab.id + '_' + iso;
+    const reg = appState.registrosPonto[key];
+    // Não sobrepõe registros já existentes (atestado, falta, afastamento etc.)
+    if (reg && reg.override && !['AUTO', 'OK', 'VAZIO', 'FÉRIAS'].includes(reg.override)) {
+      preserved++;
+      continue;
+    }
+    appState.registrosPonto[key] = {
+      override: 'FÉRIAS',
+      override2: '',
+      resolution: 'NENHUMA',
+      punches: { em: '', sm: '', et: '', st: '' },
+      note,
+      feriasId: periodo.id
+    };
+  }
+  return preserved;
+}
+
+function saveFeriasFromModal() {
+  const colab = appState.colaboradores.find(c => c.id === feriasEditingColabId);
+  if (!colab) return;
+
+  const inicio = document.getElementById('ferias-inicio')?.value;
+  const dias = parseInt(document.getElementById('ferias-dias')?.value, 10);
+
+  if (!inicio) {
+    showToast('Informe a data de início das férias.', 'warning');
+    document.getElementById('ferias-inicio')?.focus();
+    return;
+  }
+  if (!(dias >= 1 && dias <= 30)) {
+    showToast('A quantidade de dias de férias deve estar entre 1 e 30.', 'warning');
+    return;
+  }
+  if (colab.admissao && inicio < colab.admissao) {
+    showToast('O início das férias não pode ser anterior à admissão do colaborador.', 'warning');
+    return;
+  }
+  if (colab.status === 'demitido' && colab.dataDemissao && inicio > colab.dataDemissao) {
+    showToast('O início das férias é posterior à data de demissão do colaborador.', 'warning');
+    return;
+  }
+
+  const fim = addCalendarDays(inicio, dias - 1);
+  const overlap = getColabFerias(colab).find(f => !(fim < f.inicio || inicio > f.fim));
+  if (overlap) {
+    showToast(`Período em conflito com férias já cadastradas (${formatDateBR(overlap.inicio)} a ${formatDateBR(overlap.fim)}).`, 'warning');
+    return;
+  }
+
+  const periodo = { id: 'ferias-' + Date.now(), inicio, fim, dias, createdAt: new Date().toISOString() };
+  colab.ferias = [...getColabFerias(colab), periodo];
+
+  const d = generateFeriasNotices(colab, periodo);
+  const preserved = applyFeriasToPonto(colab, periodo);
+
+  saveStateToStorage(true, true);
+  renderFeriasList();
+  updateEmpFeriasResumo(colab);
+  document.getElementById('ferias-inicio').value = '';
+  document.getElementById('ferias-fim').value = '';
+  document.getElementById('ferias-dias').value = 30;
+  updateFeriasPreview();
+  renderCurrentView();
+
+  showToast(`Férias salvas! Avisos no mural: 🏖️ Início (${formatDateBR(inicio)}) e 💰 Pagamento (${formatDateBR(d.avisoPagto)})` + (preserved > 0 ? ` • ${preserved} dia(s) com registro existente preservado(s)` : ''), 'purple');
+}
+
+function removeFeriasPeriodo(periodoId) {
+  const colab = appState.colaboradores.find(c => c.id === feriasEditingColabId);
+  if (!colab) return;
+  const periodo = getColabFerias(colab).find(f => f.id === periodoId);
+  if (!periodo) return;
+  if (!confirm(`Remover as férias de ${formatDateBR(periodo.inicio)} a ${formatDateBR(periodo.fim)} e os avisos gerados no mural?`)) return;
+
+  colab.ferias = getColabFerias(colab).filter(f => f.id !== periodoId);
+
+  // Desfaz as marcações de FÉRIAS geradas por este período no Dashboard de Ponto
+  for (let i = 0; i < periodo.dias; i++) {
+    const key = colab.id + '_' + addCalendarDays(periodo.inicio, i);
+    const reg = appState.registrosPonto[key];
+    if (reg && reg.feriasId === periodoId && reg.override === 'FÉRIAS') {
+      appState.registrosPonto[key] = { override: 'AUTO', resolution: 'NENHUMA', note: '' };
+    }
+  }
+
+  // Remove os avisos pendentes deste período
+  appState.avisos = (appState.avisos || []).filter(a =>
+    !((a.id === 'aviso-ferias-' + periodoId || a.id === 'aviso-ferias-pagto-' + periodoId) && !a.concluido)
+  );
+
+  saveStateToStorage(true, true);
+  renderFeriasList();
+  updateEmpFeriasResumo(colab);
+  renderCurrentView();
+  showToast('Período de férias removido.', 'info');
+}
+
+document.getElementById('btn-open-ferias')?.addEventListener('click', () => {
+  const empId = document.getElementById('emp-edit-id')?.value;
+  openFeriasModal(empId);
+});
+document.getElementById('btn-save-ferias')?.addEventListener('click', saveFeriasFromModal);
+
+// Sincroniza Início + Quantidade de Dias <-> Último Dia
+['ferias-inicio', 'ferias-dias'].forEach(fieldId => {
+  document.getElementById(fieldId)?.addEventListener('input', () => {
+    const inicio = document.getElementById('ferias-inicio').value;
+    const dias = parseInt(document.getElementById('ferias-dias').value, 10);
+    if (inicio && dias > 0) {
+      document.getElementById('ferias-fim').value = addCalendarDays(inicio, dias - 1);
+    }
+    updateFeriasPreview();
+  });
+});
+document.getElementById('ferias-fim')?.addEventListener('input', () => {
+  const inicio = document.getElementById('ferias-inicio').value;
+  const fim = document.getElementById('ferias-fim').value;
+  if (inicio && fim && fim >= inicio) {
+    document.getElementById('ferias-dias').value = daysBetweenISO(inicio, fim) + 1;
+  }
+  updateFeriasPreview();
 });
 
 function deleteEmployee(empId) {
@@ -5548,14 +5922,14 @@ function initEvents() {
       if (descInput) descInput.value = `Chamar o colaborador para conferência e assinatura dos documentos rescisórios (TRCT, guias do FGTS e Seguro-Desemprego). Prazo de pagamento: ${formatDateBR(prazoFatal)}. Data agendada da assinatura: ${formatDateBR(dataAssinatura)}. (Caso não seja concluído ao final do dia, este aviso avança automaticamente para o dia seguinte até ser marcado como feito).`;
       showToast(`Data calculada para assinatura (1 dia após pagamento): ${formatDateBR(dataAssinatura)}!`, 'success');
     } else {
-      if (avisoData) avisoData.value = prazoFatal;
+      if (avisoData) avisoData.value = getPaymentNoticeDate(prazoFatal, appState.activeBranchId);
       if (tituloInput) {
         tituloInput.value = `🔴 Prazo Limite Rescisão - ${colabNome} (10 dias CLT Art. 477)`;
       }
       if (descInput) {
         descInput.value = `Prazo legal fatal de 10 dias corridos para pagamento integral das verbas rescisórias e entrega de guias (Art. 477, § 6º da CLT). Data da demissão: ${formatDateBR(demissaoVal)}. Prazo máximo: ${formatDateBR(prazoFatal)}.`;
       }
-      showToast(`Prazo de 10 dias aplicado! Data fatal: ${formatDateBR(prazoFatal)}`, 'success');
+      showToast(`Prazo de 10 dias aplicado! Data fatal: ${formatDateBR(prazoFatal)} • Aviso: ${formatDateBR(getPaymentNoticeDate(prazoFatal, appState.activeBranchId))}`, 'success');
     }
   });
 
@@ -5645,6 +6019,9 @@ function initEvents() {
   document.getElementById('btn-export-matrix-csv')?.addEventListener('click', exportMatrixCSV);
   document.getElementById('btn-export-va-csv')?.addEventListener('click', exportVACSV);
   document.getElementById('btn-print-va')?.addEventListener('click', () => window.print());
+
+  // Rolagem única do Dashboard de Ponto
+  initMatrixUnifiedScroll();
 }
 
 // Inicialização Geral ao Carregar a Página
@@ -5788,11 +6165,19 @@ function scrollSelectedCellIntoView(smooth = true) {
     scrollDeltaX = cellRect.right - (containerRect.right - rightFrozenWidth - margin);
   }
 
-  // Verificação Vertical (Cima / Baixo)
+  // Verificação Vertical (Cima / Baixo) considerando apenas a área VISÍVEL da matriz na janela
+  const visibleBottom = Math.min(containerRect.bottom, window.innerHeight);
   if (cellRect.top < containerRect.top + headerHeight + margin) {
     scrollDeltaY = cellRect.top - (containerRect.top + headerHeight + margin);
-  } else if (cellRect.bottom > containerRect.bottom - margin) {
-    scrollDeltaY = cellRect.bottom - (containerRect.bottom - margin);
+  } else if (cellRect.bottom > visibleBottom - margin) {
+    scrollDeltaY = cellRect.bottom - (visibleBottom - margin);
+  }
+
+  // Rolagem unificada: ao descer, primeiro a página sobe (header/filtros saem), depois a matriz
+  if (scrollDeltaY > 0 && containerRect.top > 0) {
+    const pageDelta = Math.min(scrollDeltaY, containerRect.top);
+    window.scrollBy({ top: pageDelta, behavior: smooth ? 'smooth' : 'auto' });
+    scrollDeltaY -= pageDelta;
   }
 
   if (scrollDeltaX !== 0 || scrollDeltaY !== 0) {
@@ -5803,4 +6188,86 @@ function scrollSelectedCellIntoView(smooth = true) {
     });
   }
 }
+
+/**
+ * ROLAGEM ÚNICA DO DASHBOARD DE PONTO
+ * - Rolando para BAIXO: primeiro a página rola (header e filtros saem da tela) até a matriz
+ *   encostar no topo; a partir daí a rolagem continua nos funcionários até o final.
+ * - Rolando para CIMA: primeiro passam todos os funcionários; só quando a lista chega ao topo
+ *   o filtro e o cabeçalho voltam a aparecer.
+ * O cabeçalho dos dias (e Departamento / Crachá / Colaborador / Qtd. DSR) fica sempre fixo.
+ */
+function initMatrixUnifiedScroll() {
+  const container = document.getElementById('matrix-scroll-wrapper');
+  if (!container || container.dataset.unifiedScroll === '1') return;
+  container.dataset.unifiedScroll = '1';
+
+  container.addEventListener('wheel', (e) => {
+    if (appState.activeView !== 'view-ponto') return;
+    if (e.ctrlKey) return; // zoom do navegador
+    if (e.shiftKey) return; // Shift + roda = rolagem horizontal nativa
+    if (Math.abs(e.deltaX) > Math.abs(e.deltaY)) return; // gesto horizontal (touchpad)
+
+    let dy = e.deltaY;
+    if (!dy) return;
+    if (e.deltaMode === 1) dy *= 16;
+    else if (e.deltaMode === 2) dy *= window.innerHeight;
+
+    const doc = document.scrollingElement || document.documentElement;
+    const pageMax = doc.scrollHeight - window.innerHeight;
+    const pageY = window.scrollY || doc.scrollTop || 0;
+    const containerTop = container.getBoundingClientRect().top;
+
+    if (dy > 0) {
+      // Descendo: a página rola primeiro até a matriz ocupar a tela inteira
+      if (containerTop > 0.5 && pageY < pageMax - 0.5) {
+        e.preventDefault();
+        window.scrollBy(0, Math.min(dy, containerTop));
+      }
+    } else {
+      // Subindo: primeiro os funcionários; no topo da lista, a página volta a mostrar os filtros
+      if (container.scrollTop <= 0 && pageY > 0) {
+        e.preventDefault();
+        window.scrollBy(0, dy);
+      }
+    }
+  }, { passive: false });
+}
+
+/**
+ * ATALHOS DE TECLADO DOS MODAIS
+ * - Esc: fecha o modal do topo SEM salvar.
+ * - Enter: salva e fecha (Detalhe do Dia, OK em massa, Férias) / fecha (Detalhamento de DSR).
+ * Registrado em fase de captura para rodar antes da navegação por teclado da matriz.
+ */
+const MODAL_ENTER_ACTIONS = {
+  'modal-cell-detail': () => document.getElementById('btn-save-cell-detail')?.click(),
+  'modal-mass-override': () => document.getElementById('btn-confirm-mass-ok')?.click(),
+  'modal-dsr-details': () => closeModal('modal-dsr-details'),
+  'modal-ferias': () => document.getElementById('btn-save-ferias')?.click()
+};
+
+window.addEventListener('keydown', (e) => {
+  if (e.key !== 'Escape' && e.key !== 'Enter') return;
+  const activeModals = Array.from(document.querySelectorAll('.modal-overlay.active'));
+  if (activeModals.length === 0) return;
+  const topModal = activeModals[activeModals.length - 1];
+
+  if (e.key === 'Escape') {
+    e.preventDefault();
+    e.stopPropagation();
+    closeModal(topModal.id);
+    return;
+  }
+
+  const action = MODAL_ENTER_ACTIONS[topModal.id];
+  if (!action) return;
+  if (e.repeat || e.isComposing) return;
+  if (document.activeElement && document.activeElement.tagName === 'TEXTAREA') return;
+
+  e.preventDefault();
+  e.stopPropagation();
+  action();
+}, true);
+
 

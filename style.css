@@ -616,10 +616,13 @@ body {
   font-weight: bold;
 }
 
-/* Main Matrix Grid Container */
+/* Main Matrix Grid Container
+   Rolagem unificada: a página rola primeiro (cabeçalho/filtros saem da tela) e a matriz
+   passa a ocupar a altura inteira da janela, mantendo o cabeçalho dos dias fixo. */
 .matrix-container {
   width: 100%;
-  height: calc(100vh - 190px);
+  height: auto;
+  max-height: 100vh;
   overflow: auto;
   position: relative;
   background: var(--color-bg-base);
@@ -627,6 +630,24 @@ body {
   scroll-padding-top: 56px;
   scroll-padding-left: 430px;
   scroll-padding-right: 95px;
+  overscroll-behavior: auto;
+}
+
+/* No dashboard de ponto o topo (header + filtros) rola junto com a página */
+body.ponto-scroll-mode .app-header {
+  position: relative;
+}
+
+/* Esconde a barra de rolagem da página para existir apenas UMA barra (a da matriz) */
+html.ponto-scroll-mode {
+  scrollbar-width: none;
+}
+
+html.ponto-scroll-mode::-webkit-scrollbar,
+html.ponto-scroll-mode body::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+  display: none;
 }
 
 .matrix-table {
@@ -666,14 +687,16 @@ body {
   border-bottom: 2px solid var(--color-border-bright) !important;
 }
 
-/* Sticky Left Columns (Fixas na rolagem horizontal) */
+/* Sticky Left Columns (Fixas na rolagem horizontal)
+   z-index 30: sempre ACIMA das células de dias (inclusive a célula selecionada, z 20),
+   e abaixo do cabeçalho dos dias (40) e dos cantos fixos (60). */
 .col-dept {
   position: sticky !important;
   left: 0 !important;
   width: 110px;
   min-width: 110px;
   max-width: 110px;
-  z-index: 15 !important;
+  z-index: 30 !important;
   background: #1C1826 !important;
   text-align: left !important;
   padding-left: 10px !important;
@@ -687,7 +710,7 @@ body {
   width: 70px;
   min-width: 70px;
   max-width: 70px;
-  z-index: 15 !important;
+  z-index: 30 !important;
   background: #1C1826 !important;
   text-align: center !important;
   font-family: var(--font-mono);
@@ -701,7 +724,7 @@ body {
   width: 240px; /* Largura ampliada para caber os nomes inteiros e badges sem cortar */
   min-width: 240px;
   max-width: 240px;
-  z-index: 15 !important;
+  z-index: 30 !important;
   background: #1C1826 !important;
   text-align: left !important;
   padding-left: 10px !important;
@@ -720,7 +743,7 @@ body {
   width: 90px;
   min-width: 90px;
   max-width: 90px;
-  z-index: 15 !important;
+  z-index: 30 !important;
   background: #201A2E !important;
   border-left: 2px solid var(--color-border-bright) !important;
   text-align: center !important;
@@ -1079,6 +1102,15 @@ thead th.col-dsr {
   opacity: 0.6;
 }
 
+/* DSR zerado, porém com desconto de falta/atraso no mês: 0 com borda vermelha */
+.dsr-zero.dsr-has-desconto {
+  opacity: 1;
+  color: #FCA5A5;
+  border: 2px solid #EF4444;
+  background: rgba(239, 68, 68, 0.12);
+  box-shadow: 0 0 8px rgba(239, 68, 68, 0.45);
+}
+
 .dsr-penalty {
   background: var(--color-primary);
   color: #FFFFFF;
@@ -1091,8 +1123,9 @@ thead th.col-dsr {
   transition: background-color 0.15s ease;
 }
 
-.col-dsr:hover {
-  background-color: rgba(0, 229, 255, 0.12) !important;
+/* Hover com cor SÓLIDA: os dias nunca aparecem por trás da coluna fixa de DSR */
+.matrix-table tbody td.col-dsr:hover {
+  background-color: #2A2340 !important;
 }
 
 .col-dsr:hover .dsr-badge {
@@ -3551,4 +3584,167 @@ thead th.col-dsr {
     color: #000 !important;
     border-color: #DDD !important;
   }
+}
+
+/* ==========================================================================
+   DSR - VARIAÇÕES NO MODO CLARO
+   ========================================================================== */
+[data-theme="light"] .matrix-table tbody td.col-dsr:hover {
+  background-color: #DCDDE6 !important;
+}
+
+[data-theme="light"] .dsr-zero.dsr-has-desconto {
+  color: #B91C1C !important;
+  background: #FEE2E2;
+  border: 2px solid #EF4444;
+  box-shadow: 0 0 6px rgba(239, 68, 68, 0.35);
+}
+
+/* ==========================================================================
+   PROGRAMAÇÃO DE FÉRIAS (Modal de Colaborador + Modal de Férias)
+   ========================================================================== */
+.emp-ferias-box {
+  flex-direction: row !important;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  background: linear-gradient(135deg, rgba(0, 229, 255, 0.08) 0%, rgba(99, 102, 241, 0.10) 100%);
+  padding: 10px 14px;
+  border-radius: var(--radius-sm);
+  border: 1px solid rgba(0, 229, 255, 0.35);
+  margin-bottom: 12px;
+}
+
+.emp-ferias-box-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.emp-ferias-box-info strong {
+  color: var(--color-cyan);
+  font-size: 12.5px;
+}
+
+.emp-ferias-box-info small {
+  color: var(--color-text-sub);
+  font-size: 11px;
+}
+
+.emp-ferias-box .btn {
+  white-space: nowrap;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.emp-ferias-box .btn:hover:not(:disabled) {
+  transform: translateY(-1px);
+  box-shadow: 0 0 12px rgba(0, 229, 255, 0.45);
+}
+
+.emp-ferias-box .btn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.ferias-colab-header {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  background: #1C1827;
+  padding: 10px 14px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--color-border);
+}
+
+.ferias-colab-header strong {
+  color: var(--color-cyan);
+  font-size: 14px;
+}
+
+.ferias-colab-header small {
+  color: var(--color-text-sub);
+  font-size: 11px;
+}
+
+.ferias-preview {
+  background: rgba(99, 102, 241, 0.08);
+  border-left: 4px solid #818CF8;
+  padding: 10px 14px;
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  font-size: 12px;
+  color: var(--color-text-main);
+  line-height: 1.6;
+}
+
+.ferias-preview strong {
+  color: #A5B4FC;
+}
+
+.ferias-list-title {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--color-text-main);
+  margin-bottom: 8px;
+}
+
+.ferias-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-height: 220px;
+  overflow-y: auto;
+}
+
+.ferias-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  background: var(--color-bg-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  padding: 8px 12px;
+  font-size: 12px;
+  transition: border-color 0.15s ease;
+}
+
+.ferias-item:hover {
+  border-color: var(--color-blue-bright);
+}
+
+.ferias-item-periodo {
+  font-family: var(--font-mono);
+  font-weight: 700;
+  color: var(--color-cyan);
+}
+
+.ferias-item-sub {
+  font-size: 11px;
+  color: var(--color-text-sub);
+  margin-top: 2px;
+}
+
+.ferias-empty {
+  font-size: 12px;
+  color: var(--color-text-muted);
+  text-align: center;
+  padding: 12px;
+  border: 1px dashed var(--color-border);
+  border-radius: var(--radius-sm);
+}
+
+[data-theme="light"] .ferias-colab-header {
+  background: #EDEDF2;
+  border-color: #C8C9D3;
+}
+
+[data-theme="light"] .ferias-colab-header strong,
+[data-theme="light"] .emp-ferias-box-info strong,
+[data-theme="light"] .ferias-item-periodo {
+  color: #151733;
+}
+
+[data-theme="light"] .ferias-preview strong {
+  color: #151733;
 }
