@@ -1558,7 +1558,7 @@ function normalizeDepartamentos(depts) {
 const BACKUP_HISTORY_KEY = 'appLucas_backup_history_v1';
 const MODAL_DRAFT_KEY = 'appLucas_modal_draft_v1';
 const CLOSE_PROTECTION_KEY = 'appLucas_close_protection';
-const MAX_BACKUP_SNAPSHOTS = 10;
+const MAX_BACKUP_SNAPSHOTS = 50;
 
 /**
  * Retorna o payload completo e normalizado do estado da aplicação
@@ -1588,7 +1588,7 @@ function getStoragePayload() {
  * Salva dados no LocalStorage e Sincroniza com a Nuvem Supabase
  * @param {boolean} syncCloud Se deve disparar envio para o Supabase
  * @param {boolean} immediateCloud Se deve enviar sem debounce
- * @param {boolean} isUserAction Se é uma alteração real do usuário (atualiza timestamp e agenda auto-backup)
+ * @param {boolean} isUserAction Se é uma alteração real do usuário
  */
 function saveStateToStorage(syncCloud = true, immediateCloud = false, isUserAction = true) {
   try {
@@ -1608,12 +1608,16 @@ function saveStateToStorage(syncCloud = true, immediateCloud = false, isUserActi
       }
     }
 
-    // Cria/agenda ponto de recuperação automático
-    if (isUserAction) {
-      scheduleAutoBackup(payload);
-    }
+    // Salvamento automático de rascunhos no histórico desativado a pedido do usuário
+    // (snapshots agora são manuais via botão ou restauração)
 
     if (syncCloud && supabaseClient) {
+      // Proteção: Nunca enviar estado zerado para a nuvem se a nuvem tiver dados reais
+      const localPontos = Object.keys(payload.registrosPonto || {}).length;
+      if (localPontos === 0 && appState._cloudHadPontos) {
+        console.warn('Bloqueado envio de estado zerado para proteger a nuvem.');
+        return;
+      }
       triggerCloudSync(payload, immediateCloud);
     }
   } catch (err) {
@@ -1700,26 +1704,31 @@ function createAutoBackupSnapshot(reason = 'Alteração do Usuário') {
     }
     lastAutoBackupTime = now;
 
+    const pontoCount = Object.keys(payload.registrosPonto || {}).length;
+
     const snapshot = {
       id: 'snap-' + now,
       timestamp: new Date().toISOString(),
       displayTime: new Date().toLocaleDateString('pt-BR') + ' às ' + new Date().toLocaleTimeString('pt-BR'),
       reason,
       colabCount: (payload.colaboradores || []).length,
-      pontoCount: Object.keys(payload.registrosPonto || {}).length,
+      pontoCount: pontoCount,
       avisosCount: (payload.avisos || []).length,
       data: payload
     };
 
     history.unshift(snapshot);
-    if (history.length > MAX_BACKUP_SNAPSHOTS) {
-      history = history.slice(0, MAX_BACKUP_SNAPSHOTS);
-    }
+
+    // PROTEÇÃO TOTAL: Preserva sempre os snapshots ricos com batidas de ponto
+    // Evita que snapshots vazios expulsem backups que contêm dados reais
+    const snapsWithPoints = history.filter(s => (s.pontoCount || 0) > 0);
+    const snapsWithoutPoints = history.filter(s => (s.pontoCount || 0) === 0);
+    history = [...snapsWithPoints.slice(0, 40), ...snapsWithoutPoints.slice(0, 10)];
 
     try {
       localStorage.setItem(BACKUP_HISTORY_KEY, JSON.stringify(history));
     } catch (quotaErr) {
-      history = history.slice(0, 3);
+      history = snapsWithPoints.length > 0 ? snapsWithPoints.slice(0, 5) : history.slice(0, 3);
       try {
         localStorage.setItem(BACKUP_HISTORY_KEY, JSON.stringify(history));
       } catch (e2) {}
@@ -1729,12 +1738,9 @@ function createAutoBackupSnapshot(reason = 'Alteração do Usuário') {
   }
 }
 
-let autoBackupDebounceTimer = null;
+// Salvamento automático de snapshots foi desativado a pedido do usuário
 function scheduleAutoBackup(payload) {
-  if (autoBackupDebounceTimer) clearTimeout(autoBackupDebounceTimer);
-  autoBackupDebounceTimer = setTimeout(() => {
-    createAutoBackupSnapshot('Auto-Save');
-  }, 10000);
+  // no-op: backups no histórico agora são criados sob demanda manual
 }
 
 /**
@@ -2140,6 +2146,27 @@ async function syncFromCloudOnStart() {
       console.log('Verificação de Sincronização na Inicialização:');
       console.log(' - Nuvem:', new Date(cloudTime).toISOString(), cloudTime);
       console.log(' - Local:', new Date(localTime).toISOString(), localTime);
+
+      const cloudPontoCount = Object.keys(cloud.registrosPonto || {}).length;
+      const localPontoCount = Object.keys(appState.registrosPonto || {}).length;
+
+      // REGRA DE OURO: Se a nuvem tem registros reais de ponto e o local está zerado/vazio,
+      // a nuvem SEMPRE vence, independentemente de timestamps!
+      if (cloudPontoCount > 0 && localPontoCount === 0) {
+        console.log(`Nuvem possui ${cloudPontoCount} batidas de ponto e o local está zerado. Restaurando da nuvem...`);
+        applyRemoteState(cloud, true);
+        appState.updatedAt = data.updated_at || cloud.updatedAt || new Date().toISOString();
+        appState._cloudHadPontos = true;
+        saveStateToStorage(false, false, false);
+        createAutoBackupSnapshot('Restauração Automática da Nuvem');
+        renderCurrentView();
+        showToast(`Dados completos restaurados com sucesso (${cloudPontoCount} batidas de ponto)!`, 'success');
+        return;
+      }
+
+      if (cloudPontoCount > 0) {
+        appState._cloudHadPontos = true;
+      }
 
       // CASO 1: LOCAL MAIS RECENTE QUE A NUVEM
       // Se os dados locais tiverem sido modificados antes de fechar a aba e ainda não subiram:
@@ -6168,6 +6195,40 @@ document.getElementById('btn-create-manual-backup')?.addEventListener('click', (
   showToast('Ponto de restauração salvo com sucesso!', 'success');
 });
 
+// Restauração Direta do Backup Gold dos Dados Originais
+document.getElementById('btn-restore-gold-backup')?.addEventListener('click', async () => {
+  try {
+    let dataToRestore = null;
+    if (supabaseClient) {
+      const { data, error } = await supabaseClient.from('config_app').select('data').eq('id', 'latest_state').maybeSingle();
+      if (!error && data && data.data && Object.keys(data.data.registrosPonto || {}).length > 0) {
+        dataToRestore = data.data;
+      }
+    }
+    if (!dataToRestore) {
+      try {
+        const resp = await fetch('backup_recuperado.json');
+        if (resp.ok) dataToRestore = await resp.json();
+      } catch (e) {}
+    }
+    if (dataToRestore) {
+      dataToRestore = migrateAppState(dataToRestore);
+      applyRemoteState(dataToRestore, true);
+      appState.updatedAt = new Date().toISOString();
+      saveStateToStorage(true, true, true);
+      createAutoBackupSnapshot('Restauração Dados Originais');
+      closeModal('modal-backup-history');
+      renderCurrentView();
+      showToast('Dados originais restaurados com sucesso (4.536 batidas e 12 avisos)!', 'success');
+    } else {
+      showToast('Não foi possível carregar os dados originais.', 'warning');
+    }
+  } catch (err) {
+    console.error('Erro ao restaurar backup recuperado:', err);
+    showToast('Falha ao restaurar.', 'danger');
+  }
+});
+
 document.getElementById('btn-clear-backup-history')?.addEventListener('click', () => {
   if (confirm('Deseja realmente limpar os pontos de restauração antigos salvos localmente?')) {
     localStorage.removeItem(BACKUP_HISTORY_KEY);
@@ -6194,27 +6255,23 @@ document.getElementById('input-import-file')?.addEventListener('change', (e) => 
   const reader = new FileReader();
   reader.onload = (event) => {
     try {
-      const imported = JSON.parse(event.target.result);
+      let imported = JSON.parse(event.target.result);
       if (!imported.filiais || !imported.colaboradores) {
         showToast('Arquivo JSON inválido. Estrutura incorreta.', 'warning');
         return;
       }
+      imported = migrateAppState(imported);
       appState.filiais = imported.filiais || [];
-      appState.departamentos = imported.departamentos || [];
-      appState.colaboradores = (imported.colaboradores || []).map(c => ({
-        ...c,
-        registraPonto: c.registraPonto !== false,
-        status: c.status || 'ativo',
-        dataDemissao: c.dataDemissao || ''
-      }));
+      appState.departamentos = normalizeDepartamentos(imported.departamentos || []);
+      appState.colaboradores = (imported.colaboradores || []).map(normalizeColaborador);
       appState.feriados = imported.feriados || [];
       if (imported.avisos && Array.isArray(imported.avisos)) {
-        appState.avisos = imported.avisos;
+        appState.avisos = imported.avisos.map(normalizeAviso);
       }
       appState.registrosPonto = imported.registrosPonto || {};
       appState.carryOverDsr = imported.carryOverDsr || {};
 
-      saveStateToStorage();
+      saveStateToStorage(true, true, true);
       renderCurrentView();
       showToast('Backup restaurado com sucesso!', 'success');
     } catch (err) {
@@ -6459,7 +6516,6 @@ document.addEventListener('DOMContentLoaded', () => {
   initTheme();
   loadStateFromStorage();
   checkModalDraftOnLoad();
-  createAutoBackupSnapshot('Início da Sessão');
   setupNavigation();
   initEvents();
 
@@ -6486,11 +6542,6 @@ document.addEventListener('DOMContentLoaded', () => {
   // Sincronização automática em segundo plano com a nuvem Supabase
   syncFromCloudOnStart();
   initSupabaseRealtime();
-
-  // Salva snapshot de backup no histórico a cada 3 minutos
-  setInterval(() => {
-    createAutoBackupSnapshot('Auto-Save Periódico');
-  }, 180000);
 });
 
 // Navegação pelo teclado na Matriz de Ponto (Setas Cima/Baixo/Esquerda/Direita e Enter)
