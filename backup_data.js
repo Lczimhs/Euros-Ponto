@@ -65192,7 +65192,7 @@ root.GOLD_RECOVERY_DATA = {
     }
   },
   "carryOverDsr": {},
-  "activeBranchId": "branch-2",
+  "activeBranchId": "branch-1",
   "currentYear": 2026,
   "currentMonth": 9,
   "statusFilter": "ativos",

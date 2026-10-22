@@ -58,17 +58,14 @@
         <button class="btn btn-secondary btn-sm" id="btn-toggle-theme" title="Alternar entre Modo Claro e Modo Escuro">
           <span id="theme-icon">💡</span> <span id="theme-label" style="font-size:11px; font-weight:600;">Modo Claro</span>
         </button>
-        <button class="btn btn-secondary btn-sm" id="btn-backup-history" title="Histórico de Backups Automáticos e Recuperação de Dados">
-          <span>⏪</span> <span style="font-size:11px; font-weight:600;">Backups &amp; Histórico</span>
+        <button class="btn btn-secondary btn-sm" id="btn-export-backup" title="Baixar arquivo de backup com todos os dados atuais (JSON)">
+          <span>💾</span> Baixar Backup
         </button>
-        <button class="btn btn-secondary btn-sm" id="btn-export-backup" title="Exportar dados para arquivo JSON">
-          <span>💾</span> Backup
-        </button>
-        <button class="btn btn-secondary btn-sm" id="btn-import-backup" title="Restaurar dados de backup JSON">
-          <span>📥</span> Restaurar
+        <button class="btn btn-secondary btn-sm" id="btn-import-backup" title="Carregar arquivo de backup JSON">
+          <span>📥</span> Importar Backup
         </button>
         <input type="file" id="input-import-file" style="display:none;" accept=".json">
-        <div id="supabase-sync-badge" class="cloud-badge" title="Conectado e sincronizado com o Supabase Cloud">
+        <div id="supabase-sync-badge" class="cloud-badge" title="Conectado e 100% sincronizado com o Supabase Cloud">
           <span class="cloud-dot"></span> <span>Supabase Nuvem</span>
         </div>
       </div>
@@ -1261,68 +1258,14 @@
     </div>
   </div>
 
-  <!-- ========================================================================
-       MODAL: HISTÓRICO DE BACKUPS E RECUPERAÇÃO AUTOMÁTICA
-       ======================================================================== -->
-  <div class="modal-overlay" id="modal-backup-history">
-    <div class="modal-card" style="max-width: 660px;">
-      <div class="modal-header">
-        <h3><span>🛡️</span> Histórico de Backups &amp; Recuperação</h3>
-        <button class="modal-close-btn" data-close="modal-backup-history">&times;</button>
-      </div>
-      <div class="modal-body">
-        <div class="backup-protection-box">
-          <div style="display: flex; justify-content: space-between; align-items: center; gap: 12px;">
-            <div>
-              <strong style="display: flex; align-items: center; gap: 6px;">🛡️ Proteção contra Fechamento Acidental da Aba</strong>
-              <div style="font-size: 12px; color: var(--color-text-muted); margin-top: 3px;">
-                Exibe confirmação antes de fechar a guia do navegador para evitar que você perca alterações sem querer.
-              </div>
-            </div>
-            <label class="custom-switch" title="Ativar ou desativar aviso de confirmação ao fechar a aba">
-              <input type="checkbox" id="toggle-close-protection" checked>
-              <span class="slider"></span>
-            </label>
-          </div>
-        </div>
-
-        <!-- Banner de Restauração dos Dados Originais Recuperados -->
-        <div id="banner-gold-recovery" style="margin: 14px 0; padding: 12px 14px; background: rgba(0, 204, 136, 0.12); border: 1px solid var(--color-cyan); border-radius: 8px; display: flex; justify-content: space-between; align-items: center; gap: 10px;">
-          <div>
-            <div style="font-weight: 700; color: var(--color-cyan); font-size: 13px; display: flex; align-items: center; gap: 6px;">
-              <span>⭐</span> Backup dos Dados Originais Disponível
-            </div>
-            <div style="font-size: 11px; color: var(--color-text-muted); margin-top: 3px;">
-              99 colaboradores • 4.536 batidas de ponto • 12 avisos no mural
-            </div>
-          </div>
-          <button class="btn btn-cyan btn-sm" id="btn-restore-gold-backup" style="font-weight: 700; white-space: nowrap;">Restaurar Agora</button>
-        </div>
-
-        <div style="margin: 14px 0 10px 0; display: flex; justify-content: space-between; align-items: center;">
-          <h4 style="margin:0; font-size: 13px; font-weight: 700;">Pontos de Restauração Salvos</h4>
-          <button class="btn btn-cyan btn-sm" id="btn-create-manual-backup">+ Salvar Ponto Agora</button>
-        </div>
-
-        <div id="backup-history-list" class="backup-history-list">
-          <!-- Renderizado via JS -->
-        </div>
-      </div>
-      <div class="modal-footer" style="justify-content: space-between;">
-        <button class="btn btn-danger btn-sm" id="btn-clear-backup-history" style="font-size: 11px;">🗑️ Limpar Histórico Antigo</button>
-        <button class="btn btn-secondary" data-close="modal-backup-history">Fechar</button>
-      </div>
-    </div>
-  </div>
-
   <!-- Toast Notification Container -->
   <div id="toast-container"></div>
 
   <!-- Supabase JS Client SDK -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <!-- Base de Dados Originais Recuperados (Carga Instantânea Garantida) -->
-  <script src="backup_data.js?v=20261022_v1"></script>
+  <script src="backup_data.js?v=20261022_v25"></script>
   <!-- Main JavaScript Logic -->
-  <script src="app.js?v=20261022_v10"></script>
+  <script src="app.js?v=20261022_v25"></script>
 </body>
 </html>

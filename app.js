@@ -1466,7 +1466,7 @@ function migrateAppState(state) {
     };
   });
 
-  // Re-mapear registros de ponto legados
+  // Re-mapear registros de ponto legados com preservação integral de dados
   Object.keys(oldRp).forEach(k => {
     const lastUnderscore = k.lastIndexOf('_');
     if (lastUnderscore === -1) {
@@ -1496,7 +1496,31 @@ function migrateAppState(state) {
       if (targetNewId !== oldId) hasChanges = true;
     }
 
-    newRp[`${targetNewId}_${dateStr}`] = oldRp[k];
+    const targetKey = `${targetNewId}_${dateStr}`;
+    const incomingItem = oldRp[k];
+    const existingItem = newRp[targetKey];
+
+    if (!existingItem) {
+      newRp[targetKey] = incomingItem;
+    } else {
+      const existingHasPunches = existingItem.punches && Object.values(existingItem.punches).some(p => !!p);
+      const incomingHasPunches = incomingItem.punches && Object.values(incomingItem.punches).some(p => !!p);
+      const existingHasOverride = existingItem.override && existingItem.override !== 'VAZIO';
+      const incomingHasOverride = incomingItem.override && incomingItem.override !== 'VAZIO';
+
+      let chosen = existingItem;
+      if (!existingHasPunches && incomingHasPunches) {
+        chosen = incomingItem;
+      } else if (!existingHasOverride && incomingHasOverride) {
+        chosen = incomingItem;
+      }
+      newRp[targetKey] = { ...existingItem, ...incomingItem, ...chosen };
+    }
+
+    // Preserva a chave original também para compatibilidade e resiliência total
+    if (!newRp[k]) {
+      newRp[k] = oldRp[k];
+    }
   });
 
   // Re-mapear avisos
@@ -1685,57 +1709,11 @@ function sendKeepaliveCloudSync(payload) {
 }
 
 /**
- * Criação de Snapshot de Backup no Histórico Local
+ * Backups automáticos locais desativados a pedido do usuário.
+ * O backup agora é gerado sob demanda via download de arquivo JSON no botão "Baixar Backup".
  */
-let lastAutoBackupTime = 0;
-function createAutoBackupSnapshot(reason = 'Alteração do Usuário') {
-  try {
-    const payload = getStoragePayload();
-    let history = [];
-    const raw = localStorage.getItem(BACKUP_HISTORY_KEY);
-    if (raw) {
-      try { history = JSON.parse(raw); } catch (e) { history = []; }
-    }
-    if (!Array.isArray(history)) history = [];
-
-    const now = Date.now();
-    if (now - lastAutoBackupTime < 5000 && history.length > 0 && history[0].reason === reason) {
-      return;
-    }
-    lastAutoBackupTime = now;
-
-    const pontoCount = Object.keys(payload.registrosPonto || {}).length;
-
-    const snapshot = {
-      id: 'snap-' + now,
-      timestamp: new Date().toISOString(),
-      displayTime: new Date().toLocaleDateString('pt-BR') + ' às ' + new Date().toLocaleTimeString('pt-BR'),
-      reason,
-      colabCount: (payload.colaboradores || []).length,
-      pontoCount: pontoCount,
-      avisosCount: (payload.avisos || []).length,
-      data: payload
-    };
-
-    history.unshift(snapshot);
-
-    // PROTEÇÃO TOTAL: Preserva sempre os snapshots ricos com batidas de ponto
-    // Evita que snapshots vazios expulsem backups que contêm dados reais
-    const snapsWithPoints = history.filter(s => (s.pontoCount || 0) > 0);
-    const snapsWithoutPoints = history.filter(s => (s.pontoCount || 0) === 0);
-    history = [...snapsWithPoints.slice(0, 40), ...snapsWithoutPoints.slice(0, 10)];
-
-    try {
-      localStorage.setItem(BACKUP_HISTORY_KEY, JSON.stringify(history));
-    } catch (quotaErr) {
-      history = snapsWithPoints.length > 0 ? snapsWithPoints.slice(0, 5) : history.slice(0, 3);
-      try {
-        localStorage.setItem(BACKUP_HISTORY_KEY, JSON.stringify(history));
-      } catch (e2) {}
-    }
-  } catch (err) {
-    console.warn('Erro ao criar snapshot de backup:', err);
-  }
+function createAutoBackupSnapshot() {
+  // Desativado a pedido do usuário
 }
 
 // Salvamento automático de snapshots foi desativado a pedido do usuário
@@ -1865,111 +1843,7 @@ function setTabCloseProtection(enabled) {
   if (toggle) toggle.checked = enabled;
 }
 
-/**
- * Interface do Modal de Histórico de Backups e Restauração
- */
-function renderBackupHistoryModal() {
-  const container = document.getElementById('backup-history-list');
-  if (!container) return;
-
-  const toggle = document.getElementById('toggle-close-protection');
-  if (toggle) {
-    toggle.checked = isTabCloseProtectionActive();
-  }
-
-  let history = [];
-  try {
-    const raw = localStorage.getItem(BACKUP_HISTORY_KEY);
-    if (raw) history = JSON.parse(raw);
-  } catch (e) {
-    history = [];
-  }
-
-  if (!Array.isArray(history) || history.length === 0) {
-    container.innerHTML = `
-      <div class="backup-empty-state">
-        <div style="font-size:24px; margin-bottom: 8px;">⏱️</div>
-        <strong>Nenhum ponto de restauração anterior salvo.</strong>
-        <div style="margin-top:4px;">Os backups automáticos são salvos conforme você edita o sistema ou clica em "Salvar Ponto Agora".</div>
-      </div>
-    `;
-    return;
-  }
-
-  container.innerHTML = '';
-  history.forEach((snap, idx) => {
-    const item = document.createElement('div');
-    item.className = 'backup-history-item';
-    const isLatest = idx === 0;
-
-    item.innerHTML = `
-      <div style="flex:1;">
-        <div class="backup-item-title">
-          <span>${isLatest ? '🟢' : '⚪'}</span>
-          <span>${snap.displayTime}</span>
-          <span style="font-size:10px; font-weight:600; padding:2px 6px; border-radius:3px; background:rgba(64,21,184,0.3); color:var(--color-cyan);">
-            ${snap.reason || 'Backup'}
-          </span>
-        </div>
-        <div class="backup-item-subtitle">
-          ${snap.colabCount || 0} colaboradores • ${snap.pontoCount || 0} batidas de ponto • ${snap.avisosCount || 0} avisos
-        </div>
-      </div>
-      <div>
-        <button class="btn btn-secondary btn-sm btn-restore-snap" data-id="${snap.id}" title="Restaurar dados para este ponto">
-          Restaurar
-        </button>
-      </div>
-    `;
-
-    item.querySelector('.btn-restore-snap')?.addEventListener('click', () => {
-      restoreBackupSnapshot(snap.id);
-    });
-
-    container.appendChild(item);
-  });
-}
-
-function restoreBackupSnapshot(snapshotId) {
-  try {
-    const raw = localStorage.getItem(BACKUP_HISTORY_KEY);
-    if (!raw) return;
-    const history = JSON.parse(raw);
-    const snap = history.find(s => s.id === snapshotId);
-    if (!snap || !snap.data) {
-      showToast('Ponto de backup não encontrado.', 'warning');
-      return;
-    }
-
-    if (!confirm(`Deseja restaurar o backup de ${snap.displayTime} (${snap.reason})?\n\nTodas as informações do sistema voltarão exatamente para o estado deste momento.`)) {
-      return;
-    }
-
-    createAutoBackupSnapshot('Pré-Restauração');
-
-    let dt = snap.data;
-    if (dt) dt = migrateAppState(dt);
-    if (Array.isArray(dt.filiais)) appState.filiais = dt.filiais;
-    if (Array.isArray(dt.departamentos)) appState.departamentos = normalizeDepartamentos(dt.departamentos);
-    if (Array.isArray(dt.colaboradores)) appState.colaboradores = dt.colaboradores.map(normalizeColaborador);
-    if (Array.isArray(dt.feriados)) appState.feriados = dt.feriados;
-    if (Array.isArray(dt.avisos)) appState.avisos = dt.avisos.map(normalizeAviso);
-    if (dt.registrosPonto) appState.registrosPonto = dt.registrosPonto;
-    if (dt.carryOverDsr) appState.carryOverDsr = dt.carryOverDsr;
-    if (dt.activeBranchId) appState.activeBranchId = dt.activeBranchId;
-    if (typeof dt.currentYear === 'number') appState.currentYear = dt.currentYear;
-    if (typeof dt.currentMonth === 'number') appState.currentMonth = dt.currentMonth;
-
-    appState.updatedAt = new Date().toISOString();
-    saveStateToStorage(true, true, true);
-    closeModal('modal-backup-history');
-    renderCurrentView();
-    showToast(`Backup de ${snap.displayTime} restaurado com sucesso!`, 'success');
-  } catch (err) {
-    console.error('Erro ao restaurar backup:', err);
-    showToast('Falha ao restaurar o backup selecionado.', 'danger');
-  }
-}
+// Histórico e modal de snapshots removidos a pedido do usuário (backup via download JSON sob demanda)
 
 function normalizeAviso(a) {
   const idStr = String(a.id || '');
@@ -2024,7 +1898,13 @@ function applyRemoteState(incoming, force = false) {
     appState.avisos = incoming.avisos.map(normalizeAviso);
   }
   if (incoming.registrosPonto && typeof incoming.registrosPonto === 'object') {
-    if (force) {
+    const incCount = Object.keys(incoming.registrosPonto).length;
+    const curCount = Object.keys(appState.registrosPonto || {}).length;
+
+    // Se o estado atual tiver registros substanciais e o recebido for vazio ou insignificante, JAMAIS esvaziar!
+    if (curCount > 100 && incCount < 100) {
+      console.warn(`PROTEÇÃO ATIVA: Ignorando tentativa remota de esvaziar batidas (${curCount} locais vs ${incCount} recebidas).`);
+    } else if (force && incCount >= curCount) {
       appState.registrosPonto = { ...incoming.registrosPonto };
     } else {
       appState.registrosPonto = { ...appState.registrosPonto, ...incoming.registrosPonto };
@@ -2150,10 +2030,10 @@ async function syncFromCloudOnStart() {
       const cloudPontoCount = Object.keys(cloud.registrosPonto || {}).length;
       const localPontoCount = Object.keys(appState.registrosPonto || {}).length;
 
-      // REGRA DE OURO: Se a nuvem tem registros reais de ponto e o local está zerado/vazio,
+      // REGRA DE OURO 1: Se a nuvem tem registros reais de ponto e o local está zerado/insuficiente,
       // a nuvem SEMPRE vence, independentemente de timestamps!
-      if (cloudPontoCount > 0 && localPontoCount === 0) {
-        console.log(`Nuvem possui ${cloudPontoCount} batidas de ponto e o local está zerado. Restaurando da nuvem...`);
+      if (cloudPontoCount > 100 && localPontoCount < 100) {
+        console.log(`Nuvem possui ${cloudPontoCount} batidas de ponto e o local está zerado/insuficiente. Restaurando da nuvem...`);
         applyRemoteState(cloud, true);
         appState.updatedAt = data.updated_at || cloud.updatedAt || new Date().toISOString();
         appState._cloudHadPontos = true;
@@ -2161,6 +2041,15 @@ async function syncFromCloudOnStart() {
         createAutoBackupSnapshot('Restauração Automática da Nuvem');
         renderCurrentView();
         showToast(`Dados completos restaurados com sucesso (${cloudPontoCount} batidas de ponto)!`, 'success');
+        return;
+      }
+
+      // REGRA DE OURO 2: Se o local possui registros reais e a nuvem está zerada/insuficiente,
+      // o local NUNCA pode ser sobrescrito! Ele deve imediatamente sincronizar com a nuvem!
+      if (localPontoCount > 100 && cloudPontoCount < 100) {
+        console.warn(`PROTEÇÃO ATIVA: Nuvem incompleta (${cloudPontoCount} batidas). Preservando ${localPontoCount} batidas locais e enviando para a nuvem...`);
+        const payload = getStoragePayload();
+        triggerCloudSync(payload, true);
         return;
       }
 
@@ -2180,7 +2069,8 @@ async function syncFromCloudOnStart() {
       }
 
       // CASO 2: NUVEM É MAIS NOVA (Ex: alterações feitas em outro dispositivo)
-      if (cloudTime > localTime + 2000) {
+      // Só aplica se a nuvem não tiver perdido dados de ponto em relação ao local
+      if (cloudTime > localTime + 2000 && cloudPontoCount >= localPontoCount) {
         applyRemoteState(cloud, true);
         appState.updatedAt = data.updated_at || cloud.updatedAt || new Date().toISOString();
         saveStateToStorage(false, false, false);
@@ -2202,31 +2092,21 @@ function loadStateFromStorage() {
   try {
     let raw = localStorage.getItem(STORAGE_KEY);
     
-    // Se o storage principal estiver vazio, verifica se há snapshot no histórico de backups
-    if (!raw) {
-      try {
-        const histRaw = localStorage.getItem(BACKUP_HISTORY_KEY);
-        if (histRaw) {
-          const hist = JSON.parse(histRaw);
-          if (Array.isArray(hist) && hist.length > 0) {
-            const bestSnap = hist.find(s => (s.pontoCount > 0 || (s.data && Object.keys(s.data.registrosPonto || {}).length > 0))) || hist[0];
-            if (bestSnap && bestSnap.data) {
-              console.log('Restaurando automaticamente a partir do histórico de backup mais rico:', bestSnap.id, bestSnap.displayTime);
-              raw = JSON.stringify(bestSnap.data);
-            }
-          }
-        }
-      } catch (eHist) {}
-    }
 
     if (raw) {
       let parsed = JSON.parse(raw);
       parsed = migrateAppState(parsed);
 
       const rawPontosCount = Object.keys(parsed.registrosPonto || {}).length;
-      if (rawPontosCount === 0 && typeof window !== 'undefined' && window.GOLD_RECOVERY_DATA) {
-        console.log('Detectado storage local sem batidas de ponto. Restaurando automaticamente GOLD_RECOVERY_DATA...');
-        parsed = migrateAppState(window.GOLD_RECOVERY_DATA);
+      const goldPontosCount = (typeof window !== 'undefined' && window.GOLD_RECOVERY_DATA)
+        ? Object.keys(window.GOLD_RECOVERY_DATA.registrosPonto || {}).length
+        : 0;
+
+      if (goldPontosCount > 100 && rawPontosCount < 100) {
+        console.log(`Detectado storage local com dados insuficientes (${rawPontosCount} vs ${goldPontosCount} no Gold). Restaurando automaticamente base completa...`);
+        parsed = JSON.parse(JSON.stringify(window.GOLD_RECOVERY_DATA));
+        parsed.activeBranchId = 'branch-1';
+        parsed = migrateAppState(parsed);
       }
 
       if (parsed.filiais && parsed.filiais.length > 0 && parsed.colaboradores && parsed.colaboradores.length > 0) {
@@ -2245,7 +2125,11 @@ function loadStateFromStorage() {
         appState.carryOverDsr = parsed.carryOverDsr || {};
 
         if (parsed.activeBranchId && appState.filiais.some(f => f.id === parsed.activeBranchId)) {
-          appState.activeBranchId = parsed.activeBranchId;
+          if (parsed.activeBranchId === 'branch-4' && rawPontosCount < 100) {
+            appState.activeBranchId = 'branch-1';
+          } else {
+            appState.activeBranchId = parsed.activeBranchId;
+          }
         } else {
           appState.activeBranchId = appState.filiais[0].id;
         }
@@ -2573,7 +2457,18 @@ function getDayStatus(colabId, isoStr, branchId) {
   // Verificar feriado
   const holiday = isHoliday(isoStr, branchId);
   const regKey = colabId + '_' + isoStr;
-  const reg = appState.registrosPonto[regKey];
+  let reg = appState.registrosPonto[regKey];
+  if (!reg) {
+    if (colabId && colabId.startsWith('colab_')) {
+      const parts = colabId.split('_');
+      const cracha = parts[2];
+      if (cracha) reg = appState.registrosPonto[`colab-${cracha}_${isoStr}`];
+    } else if (colabId && colabId.startsWith('colab-')) {
+      const cracha = colabId.replace('colab-', '');
+      const cObj = appState.colaboradores?.find(c => Number(c.cracha) === Number(cracha));
+      if (cObj) reg = appState.registrosPonto[`${cObj.id}_${isoStr}`];
+    }
+  }
 
   // Se houver override manual
   if (reg && reg.override && reg.override !== 'AUTO') {
@@ -3654,7 +3549,16 @@ function renderMatrixView() {
 
   if (employees.length === 0) {
     const totalCols = daysInMonth + 4;
-    tbody.innerHTML = '<tr><td colspan="' + totalCols + '" class="empty-state"><div class="empty-state-icon">📋</div><p>Nenhum colaborador encontrado com os filtros atuais nesta filial.</p></td></tr>';
+    tbody.innerHTML = '<tr><td colspan="' + totalCols + '" class="empty-state"><div class="empty-state-icon">📋</div><p>Nenhum colaborador encontrado com os filtros atuais nesta filial.</p><div style="margin-top: 10px; display: flex; gap: 8px; justify-content: center;"><button class="btn btn-cyan btn-sm" id="btn-empty-switch-matriz">Ir para Matriz (56 Colaboradores)</button><button class="btn btn-secondary btn-sm" id="btn-empty-reset-filters">Limpar Filtros</button></div></td></tr>';
+    tbody.querySelector('#btn-empty-switch-matriz')?.addEventListener('click', () => {
+      appState.activeBranchId = 'branch-1';
+      resetMainAndColabFilters(false);
+      saveStateToStorage();
+      renderCurrentView();
+    });
+    tbody.querySelector('#btn-empty-reset-filters')?.addEventListener('click', () => {
+      resetMainAndColabFilters(true);
+    });
     return;
   }
 
@@ -3770,7 +3674,16 @@ function renderVAView() {
   tbody.innerHTML = '';
 
   if (employees.length === 0) {
-    tbody.innerHTML = '<tr><td colspan="10" class="empty-state"><div class="empty-state-icon">💳</div><p>Nenhum colaborador encontrado para fechamento de VA nesta filial.</p></td></tr>';
+    tbody.innerHTML = '<tr><td colspan="10" class="empty-state"><div class="empty-state-icon">💳</div><p>Nenhum colaborador encontrado para fechamento de VA nesta filial.</p><div style="margin-top: 10px; display: flex; gap: 8px; justify-content: center;"><button class="btn btn-cyan btn-sm" id="btn-va-switch-matriz">Ir para Matriz (56 Colaboradores)</button><button class="btn btn-secondary btn-sm" id="btn-va-reset-filters">Limpar Filtros</button></div></td></tr>';
+    tbody.querySelector('#btn-va-switch-matriz')?.addEventListener('click', () => {
+      appState.activeBranchId = 'branch-1';
+      resetMainAndColabFilters(false);
+      saveStateToStorage();
+      renderCurrentView();
+    });
+    tbody.querySelector('#btn-va-reset-filters')?.addEventListener('click', () => {
+      resetMainAndColabFilters(true);
+    });
     updateVAKpis(0, 0, 0, 0, 0);
     return;
   }
@@ -6187,72 +6100,12 @@ function applyTheme(theme) {
   }
 }
 
-// Histórico de Backups e Restauração Automática
-document.getElementById('btn-backup-history')?.addEventListener('click', () => {
-  renderBackupHistoryModal();
-  openModal('modal-backup-history');
-});
-
-document.getElementById('toggle-close-protection')?.addEventListener('change', (e) => {
-  setTabCloseProtection(e.target.checked);
-  showToast(e.target.checked ? 'Proteção contra fechamento de aba ATIVADA.' : 'Proteção contra fechamento de aba DESATIVADA.', 'info');
-});
-
-document.getElementById('btn-create-manual-backup')?.addEventListener('click', () => {
-  createAutoBackupSnapshot('Ponto Manual');
-  renderBackupHistoryModal();
-  showToast('Ponto de restauração salvo com sucesso!', 'success');
-});
-
-// Restauração Direta do Backup Gold dos Dados Originais
-document.getElementById('btn-restore-gold-backup')?.addEventListener('click', async () => {
-  try {
-    let dataToRestore = (typeof window !== 'undefined' && window.GOLD_RECOVERY_DATA)
-      ? window.GOLD_RECOVERY_DATA
-      : null;
-
-    if (!dataToRestore && supabaseClient) {
-      const { data, error } = await supabaseClient.from('config_app').select('data').eq('id', 'latest_state').maybeSingle();
-      if (!error && data && data.data && Object.keys(data.data.registrosPonto || {}).length > 0) {
-        dataToRestore = data.data;
-      }
-    }
-    if (!dataToRestore) {
-      try {
-        const resp = await fetch('backup_recuperado.json');
-        if (resp.ok) dataToRestore = await resp.json();
-      } catch (e) {}
-    }
-    if (dataToRestore) {
-      dataToRestore = migrateAppState(dataToRestore);
-      applyRemoteState(dataToRestore, true);
-      appState.updatedAt = new Date().toISOString();
-      saveStateToStorage(true, true, true);
-      createAutoBackupSnapshot('Restauração Dados Originais');
-      closeModal('modal-backup-history');
-      renderCurrentView();
-      showToast('Dados originais restaurados com sucesso (4.536 batidas e 12 avisos)!', 'success');
-    } else {
-      showToast('Não foi possível carregar os dados originais.', 'warning');
-    }
-  } catch (err) {
-    console.error('Erro ao restaurar backup recuperado:', err);
-    showToast('Falha ao restaurar.', 'danger');
-  }
-});
-
-document.getElementById('btn-clear-backup-history')?.addEventListener('click', () => {
-  if (confirm('Deseja realmente limpar os pontos de restauração antigos salvos localmente?')) {
-    localStorage.removeItem(BACKUP_HISTORY_KEY);
-    renderBackupHistoryModal();
-    showToast('Histórico antigo de backups limpo.', 'info');
-  }
-});
-
-// Backup JSON
+// Baixar Cópia de Backup JSON Manualmente (sob demanda)
 document.getElementById('btn-export-backup')?.addEventListener('click', () => {
   const dataStr = JSON.stringify(appState, null, 2);
-  downloadFile('backup_ponto_va_' + new Date().toISOString().split('T')[0] + '.json', dataStr, 'application/json');
+  const dateStr = new Date().toISOString().split('T')[0];
+  downloadFile(`backup_ponto_euros_${dateStr}.json`, dataStr, 'application/json');
+  showToast('Download do backup JSON gerado com sucesso!', 'success');
 });
 
 // Restaurar JSON
@@ -6526,6 +6379,7 @@ function initEvents() {
 // Inicialização Geral ao Carregar a Página
 document.addEventListener('DOMContentLoaded', () => {
   initTheme();
+  try { localStorage.removeItem('ponto_app_backup_history'); } catch (e) {}
   loadStateFromStorage();
   checkModalDraftOnLoad();
   setupNavigation();
