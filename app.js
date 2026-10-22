@@ -1468,9 +1468,13 @@ function migrateAppState(state) {
 
   // Re-mapear registros de ponto legados
   Object.keys(oldRp).forEach(k => {
-    const parts = k.split('_');
-    const oldId = parts[0];
-    const dateStr = parts.slice(1).join('_');
+    const lastUnderscore = k.lastIndexOf('_');
+    if (lastUnderscore === -1) {
+      newRp[k] = oldRp[k];
+      return;
+    }
+    const oldId = k.substring(0, lastUnderscore);
+    const dateStr = k.substring(lastUnderscore + 1);
 
     let targetNewId = oldId;
     if (oldId === 'colab-234') {
@@ -1937,7 +1941,8 @@ function restoreBackupSnapshot(snapshotId) {
 
     createAutoBackupSnapshot('Pré-Restauração');
 
-    const dt = snap.data;
+    let dt = snap.data;
+    if (dt) dt = migrateAppState(dt);
     if (Array.isArray(dt.filiais)) appState.filiais = dt.filiais;
     if (Array.isArray(dt.departamentos)) appState.departamentos = normalizeDepartamentos(dt.departamentos);
     if (Array.isArray(dt.colaboradores)) appState.colaboradores = dt.colaboradores.map(normalizeColaborador);
@@ -1986,6 +1991,7 @@ function normalizeAviso(a) {
  */
 function applyRemoteState(incoming, force = false) {
   if (!incoming) return;
+  incoming = migrateAppState(incoming);
 
   if (!force && incoming.updatedAt && appState.updatedAt) {
     const inTime = new Date(incoming.updatedAt).getTime();
@@ -2167,9 +2173,28 @@ async function syncFromCloudOnStart() {
 // Carregar dados locais na inicialização
 function loadStateFromStorage() {
   try {
-    const raw = localStorage.getItem(STORAGE_KEY);
+    let raw = localStorage.getItem(STORAGE_KEY);
+    
+    // Se o storage principal estiver vazio, verifica se há snapshot no histórico de backups
+    if (!raw) {
+      try {
+        const histRaw = localStorage.getItem(BACKUP_HISTORY_KEY);
+        if (histRaw) {
+          const hist = JSON.parse(histRaw);
+          if (Array.isArray(hist) && hist.length > 0) {
+            const bestSnap = hist.find(s => (s.pontoCount > 0 || (s.data && Object.keys(s.data.registrosPonto || {}).length > 0))) || hist[0];
+            if (bestSnap && bestSnap.data) {
+              console.log('Restaurando automaticamente a partir do histórico de backup mais rico:', bestSnap.id, bestSnap.displayTime);
+              raw = JSON.stringify(bestSnap.data);
+            }
+          }
+        }
+      } catch (eHist) {}
+    }
+
     if (raw) {
-      const parsed = JSON.parse(raw);
+      let parsed = JSON.parse(raw);
+      parsed = migrateAppState(parsed);
       if (parsed.filiais && parsed.filiais.length > 0 && parsed.colaboradores && parsed.colaboradores.length > 0) {
         appState.filiais = parsed.filiais;
         appState.departamentos = normalizeDepartamentos(parsed.departamentos);
@@ -2183,7 +2208,7 @@ function loadStateFromStorage() {
         appState.avisos = hasCalendarDates ? rawAvisos.map(normalizeAviso) : getDefaultSeedData().avisos;
 
         appState.registrosPonto = parsed.registrosPonto || {};
-        appState.carryOverDsr = {};
+        appState.carryOverDsr = parsed.carryOverDsr || {};
 
         if (parsed.activeBranchId && appState.filiais.some(f => f.id === parsed.activeBranchId)) {
           appState.activeBranchId = parsed.activeBranchId;
@@ -2257,7 +2282,8 @@ function loadStateFromStorage() {
   appState.registrosPonto = seed.registrosPonto;
   appState.carryOverDsr = {};
   appState.activeBranchId = 'branch-1';
-  appState.updatedAt = new Date().toISOString();
+  // Marca com timestamp antigo para que se houver dados reais na nuvem, ela prevaleça
+  appState.updatedAt = '1970-01-01T00:00:00.000Z';
 
   checkAndRolloverPendingNotices();
   syncDismissalNotices();
