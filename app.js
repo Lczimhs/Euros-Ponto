@@ -2222,6 +2222,13 @@ function loadStateFromStorage() {
     if (raw) {
       let parsed = JSON.parse(raw);
       parsed = migrateAppState(parsed);
+
+      const rawPontosCount = Object.keys(parsed.registrosPonto || {}).length;
+      if (rawPontosCount === 0 && typeof window !== 'undefined' && window.GOLD_RECOVERY_DATA) {
+        console.log('Detectado storage local sem batidas de ponto. Restaurando automaticamente GOLD_RECOVERY_DATA...');
+        parsed = migrateAppState(window.GOLD_RECOVERY_DATA);
+      }
+
       if (parsed.filiais && parsed.filiais.length > 0 && parsed.colaboradores && parsed.colaboradores.length > 0) {
         appState.filiais = parsed.filiais;
         appState.departamentos = normalizeDepartamentos(parsed.departamentos);
@@ -2299,8 +2306,10 @@ function loadStateFromStorage() {
     console.warn('Erro ao ler do storage, carregando seed real:', err);
   }
 
-  // Se não existir dados ou forem antigos/inválidos, carrega a base padrão
-  const seed = getDefaultSeedData();
+  // Se não existir dados ou forem antigos/inválidos, carrega GOLD_RECOVERY_DATA ou a base padrão
+  const seed = (typeof window !== 'undefined' && window.GOLD_RECOVERY_DATA)
+    ? migrateAppState(window.GOLD_RECOVERY_DATA)
+    : getDefaultSeedData();
   appState.filiais = seed.filiais;
   appState.departamentos = normalizeDepartamentos(seed.departamentos);
   appState.colaboradores = (seed.colaboradores || []).map(normalizeColaborador);
@@ -6198,8 +6207,11 @@ document.getElementById('btn-create-manual-backup')?.addEventListener('click', (
 // Restauração Direta do Backup Gold dos Dados Originais
 document.getElementById('btn-restore-gold-backup')?.addEventListener('click', async () => {
   try {
-    let dataToRestore = null;
-    if (supabaseClient) {
+    let dataToRestore = (typeof window !== 'undefined' && window.GOLD_RECOVERY_DATA)
+      ? window.GOLD_RECOVERY_DATA
+      : null;
+
+    if (!dataToRestore && supabaseClient) {
       const { data, error } = await supabaseClient.from('config_app').select('data').eq('id', 'latest_state').maybeSingle();
       if (!error && data && data.data && Object.keys(data.data.registrosPonto || {}).length > 0) {
         dataToRestore = data.data;
