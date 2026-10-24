@@ -1,5 +1,252 @@
-var root = typeof window !== 'undefined' ? window : (typeof globalThis !== 'undefined' ? globalThis : this);
-root.GOLD_RECOVERY_DATA = {
+/**
+ * BASE DE DADOS ORIGINAIS RECUPERADOS E CONSOLIDADOS
+ * Contém 100 colaboradores, 16 avisos e 4.572 registros de ponto integralmente preservados.
+ * Gerado automaticamente para garantia de persistência multi-dispositivo e inicialização instantânea.
+ */
+(function() {
+  const root = typeof window !== 'undefined' ? window : (typeof global !== 'undefined' ? global : this);
+  root.GOLD_RECOVERY_DATA = {
+  "avisos": [
+    {
+      "id": "aviso-1792785792265",
+      "data": "2026-11-02",
+      "tipo": "outros",
+      "titulo": "GRATIFICAÇÕES/SALARIOS",
+      "colabId": "",
+      "filialId": "branch-1",
+      "concluido": false,
+      "createdAt": "2026-10-23T20:03:12.265Z",
+      "descricao": "JANAINA:100\nLUCAS:200\nGILMAR SABINO:200\nENTRA COMO GRATIFICAÇÃO NESSA FOLHA FECHADA E APARTIR DE 01/11 ENTRA NO SALARIO",
+      "updatedAt": "2026-10-23T20:03:56.657Z",
+      "concluidoEm": null,
+      "autoRollover": false,
+      "isAssinaturaDoc": false,
+      "dataOriginalAgendada": "2026-11-02"
+    },
+    {
+      "id": "aviso-assinatura-colab_branch-1_1035",
+      "data": "2026-10-31",
+      "tipo": "rescisao",
+      "titulo": "📝 Chamar para Assinar Documentos Rescisórios - CAIQUE PEREIRA DOS SANTOS",
+      "colabId": "colab_branch-1_1035",
+      "filialId": "branch-1",
+      "concluido": false,
+      "createdAt": "2026-10-22T21:04:56.267Z",
+      "descricao": "Chamar o colaborador CAIQUE PEREIRA DOS SANTOS para conferência e assinatura dos documentos rescisórios (TRCT, guias do FGTS e Seguro-Desemprego). Prazo de pagamento: 30/10/2026. Data agendada da assinatura: 31/10/2026. (Caso não seja concluído ao final do dia, este aviso avança automaticamente para o dia seguinte até ser marcado como feito).",
+      "updatedAt": "2026-10-22T21:04:56.267Z",
+      "concluidoEm": null,
+      "autoRollover": true,
+      "isAssinaturaDoc": true,
+      "dataOriginalAgendada": "2026-10-31"
+    },
+    {
+      "id": "aviso-rescisao-colab_branch-1_1035",
+      "data": "2026-10-29",
+      "tipo": "rescisao",
+      "titulo": "🔴 Prazo Limite Rescisão - CAIQUE PEREIRA DOS SANTOS (10 dias CLT Art. 477)",
+      "colabId": "colab_branch-1_1035",
+      "filialId": "branch-1",
+      "concluido": false,
+      "createdAt": "2026-10-22T21:04:56.267Z",
+      "descricao": "Prazo legal fatal de 10 dias corridos para homologação e pagamento de verbas rescisórias (Art. 477, § 6º da CLT). Data da demissão: 20/10/2026. Prazo fatal: 30/10/2026. Aviso antecipado para 29/10/2026 (1 dia de folga além do aviso).",
+      "updatedAt": "2026-10-22T21:04:56.267Z",
+      "prazoLegal": "2026-10-30",
+      "concluidoEm": null,
+      "autoRollover": false,
+      "isAssinaturaDoc": false
+    },
+    {
+      "id": "aviso-1792699408234",
+      "data": "2026-10-26",
+      "tipo": "outros",
+      "titulo": "COMISSÃO VENDEDORES",
+      "colabId": "",
+      "filialId": "TODAS",
+      "concluido": false,
+      "createdAt": "2026-10-22T20:03:28.234Z",
+      "descricao": "",
+      "updatedAt": "2026-10-22T20:03:28.234Z",
+      "concluidoEm": null,
+      "autoRollover": false,
+      "isAssinaturaDoc": false,
+      "dataOriginalAgendada": "2026-10-26"
+    },
+    {
+      "id": "aviso-assinatura-colab_branch-1_1025",
+      "data": "2026-10-30",
+      "tipo": "rescisao",
+      "titulo": "📝 Chamar para Assinar Documentos Rescisórios - KAUAN DE CARVALHO PENA",
+      "colabId": "colab_branch-1_1025",
+      "filialId": "branch-1",
+      "concluido": true,
+      "createdAt": "2026-10-22T20:02:26.729Z",
+      "descricao": "Chamar o colaborador KAUAN DE CARVALHO PENA para conferência e assinatura dos documentos rescisórios (TRCT, guias do FGTS e Seguro-Desemprego). Prazo de pagamento: 29/10/2026. Data original: 30/10/2026. (Caso não seja concluído ao final do dia, este aviso é prorrogado automaticamente para o dia seguinte).",
+      "updatedAt": "2026-10-22T20:02:26.729Z",
+      "concluidoEm": "2026-10-22T20:02:34.450Z",
+      "autoRollover": true,
+      "isAssinaturaDoc": true,
+      "dataOriginalAgendada": "2026-10-30"
+    },
+    {
+      "id": "aviso-assinatura-colab_branch-2_990",
+      "data": "2026-11-03",
+      "tipo": "rescisao",
+      "titulo": "📝 Chamar para Assinar Documentos Rescisórios - ALESSANDRO FRETES FLORENCIANO",
+      "colabId": "colab_branch-2_990",
+      "filialId": "branch-2",
+      "concluido": false,
+      "createdAt": "2026-10-22T20:01:42.451Z",
+      "descricao": "Chamar o colaborador ALESSANDRO FRETES FLORENCIANO para conferência e assinatura dos documentos rescisórios (TRCT, guias do FGTS e Seguro-Desemprego). Prazo de pagamento: 02/11/2026. Data agendada da assinatura: 03/11/2026. (Caso não seja concluído ao final do dia, este aviso avança automaticamente para o dia seguinte até ser marcado como feito).",
+      "updatedAt": "2026-10-22T20:35:56.716Z",
+      "concluidoEm": null,
+      "autoRollover": true,
+      "isAssinaturaDoc": true,
+      "dataOriginalAgendada": "2026-11-03"
+    },
+    {
+      "id": "aviso-rescisao-colab_branch-2_990",
+      "data": "2026-10-31",
+      "tipo": "rescisao",
+      "titulo": "🔴 Prazo Limite Rescisão - ALESSANDRO FRETES FLORENCIANO (10 dias CLT Art. 477)",
+      "colabId": "colab_branch-2_990",
+      "filialId": "branch-2",
+      "concluido": false,
+      "createdAt": "2026-10-22T20:01:42.451Z",
+      "descricao": "Prazo legal fatal de 10 dias corridos para homologação e pagamento de verbas rescisórias (Art. 477, § 6º da CLT). Data da demissão: 23/10/2026. Prazo fatal: 02/11/2026. Aviso antecipado para 31/10/2026 (1 dia de folga além do aviso).",
+      "updatedAt": "2026-10-22T20:35:56.716Z",
+      "prazoLegal": "2026-11-02",
+      "concluidoEm": null,
+      "autoRollover": false,
+      "isAssinaturaDoc": false
+    },
+    {
+      "id": "aviso-assinatura-colab_branch-1_986",
+      "data": "2026-10-30",
+      "tipo": "rescisao",
+      "titulo": "📝 Chamar para Assinar Documentos Rescisórios - ALESSANDRO DE SOUSA PAIVA",
+      "colabId": "colab_branch-1_986",
+      "filialId": "branch-1",
+      "concluido": false,
+      "createdAt": "2026-10-21T19:41:17.977Z",
+      "descricao": "Chamar o colaborador ALESSANDRO DE SOUSA PAIVA para conferência e assinatura dos documentos rescisórios (TRCT, guias do FGTS e Seguro-Desemprego). Prazo de pagamento: 29/10/2026. Data original: 30/10/2026. (Caso não seja concluído ao final do dia, este aviso é prorrogado automaticamente para o dia seguinte).",
+      "concluidoEm": null,
+      "autoRollover": true,
+      "isAssinaturaDoc": true
+    },
+    {
+      "id": "aviso-rescisao-colab-986",
+      "data": "2026-10-29",
+      "tipo": "rescisao",
+      "titulo": "🔴 Prazo Limite Rescisão - ALESSANDRO DE SOUSA PAIVA (10 dias CLT Art. 477)",
+      "colabId": "colab_branch-1_986",
+      "filialId": "branch-1",
+      "concluido": false,
+      "createdAt": "2026-10-20T12:35:51.516Z",
+      "descricao": "Prazo legal fatal de 10 dias corridos para homologação e pagamento de verbas rescisórias (Art. 477, § 6º da CLT). Data da demissão: 19/10/2026. Prazo fatal: 29/10/2026.",
+      "concluidoEm": null,
+      "autoRollover": false,
+      "isAssinaturaDoc": false
+    },
+    {
+      "id": "aviso-rescisao-colab-1025",
+      "data": "2026-10-29",
+      "tipo": "rescisao",
+      "titulo": "🔴 Prazo Limite Rescisão - KAUAN DE CARVALHO PENA (10 dias CLT Art. 477)",
+      "colabId": "colab_branch-1_1025",
+      "filialId": "branch-1",
+      "concluido": true,
+      "createdAt": "2026-10-19T20:32:24.157Z",
+      "descricao": "Prazo legal fatal de 10 dias corridos para homologação e pagamento de verbas rescisórias (Art. 477, § 6º da CLT). Data da demissão: 19/10/2026. Prazo fatal: 29/10/2026.",
+      "concluidoEm": "2026-10-22T20:02:48.538Z",
+      "autoRollover": false,
+      "isAssinaturaDoc": false
+    },
+    {
+      "id": "aviso-1792175970365",
+      "data": "2026-10-31",
+      "tipo": "outros",
+      "titulo": "NARA - DESCONTOS",
+      "colabId": "",
+      "filialId": "branch-3",
+      "concluido": false,
+      "createdAt": "2026-10-16T18:39:30.365Z",
+      "descricao": "09/10 Atraso, 15/10 Falta (verificar se tem atestado)",
+      "concluidoEm": null,
+      "autoRollover": false,
+      "isAssinaturaDoc": false
+    },
+    {
+      "id": "aviso-1792100850536",
+      "data": "2026-10-16",
+      "tipo": "outros",
+      "titulo": "IMPRMIR LISTA DE EMPRESTIMO",
+      "colabId": "",
+      "filialId": "branch-1",
+      "concluido": true,
+      "createdAt": "2026-10-15T21:47:30.537Z",
+      "descricao": "",
+      "concluidoEm": "2026-10-19T20:41:59.695Z",
+      "autoRollover": false,
+      "isAssinaturaDoc": false
+    },
+    {
+      "id": "aviso-vale-1",
+      "data": "2026-10-20",
+      "tipo": "salario",
+      "titulo": "🟡 Adiantamento Salarial Quinzenal (Vale 30%)",
+      "colabId": "",
+      "filialId": "TODAS",
+      "concluido": true,
+      "createdAt": "2026-10-01T08:00:00Z",
+      "descricao": "Pagamento do adiantamento salarial de 40% a todos os colaboradores com opção cadastrada.",
+      "concluidoEm": "2026-10-19T20:42:32.158Z",
+      "autoRollover": false,
+      "isAssinaturaDoc": false
+    },
+    {
+      "id": "aviso-fgts-1",
+      "data": "2026-10-20",
+      "tipo": "fgts",
+      "titulo": "🟢 Vencimento FGTS Digital / Guia eSocial",
+      "colabId": "",
+      "filialId": "TODAS",
+      "concluido": true,
+      "createdAt": "2026-10-01T08:00:00Z",
+      "descricao": "Recolhimento mensal das guias do FGTS Digital referente à competência anterior (Vencimento até o dia 20).",
+      "concluidoEm": "2026-10-19T20:42:19.951Z",
+      "autoRollover": false,
+      "isAssinaturaDoc": false
+    },
+    {
+      "id": "aviso-ponto-1",
+      "data": "2026-10-31",
+      "tipo": "ponto",
+      "titulo": "🔵 Fechamento de Ponto & VA (Último Dia Útil do Mês - Sábado)",
+      "colabId": "",
+      "filialId": "TODAS",
+      "concluido": false,
+      "createdAt": "2026-10-01T08:00:00Z",
+      "descricao": "Fechamento do espelho de ponto eletrônico e apuração definitiva do Vale Alimentação no último dia útil do mês (Sábado, 31/10/2026).",
+      "concluidoEm": null,
+      "autoRollover": false,
+      "isAssinaturaDoc": false
+    },
+    {
+      "id": "aviso-admissao-wesley",
+      "data": "2026-10-09",
+      "tipo": "outros",
+      "titulo": "🟢 Admissão Concluída - Wesley Patrick (Início de Atividades)",
+      "colabId": "colab_branch-1_1034",
+      "filialId": "branch-1",
+      "concluido": true,
+      "createdAt": "2026-10-09T08:00:00Z",
+      "descricao": "Admissão e início oficial de atividades do colaborador Wesley Patrick Fernandes de Oliveira no setor de Produção.",
+      "concluidoEm": "2026-10-09T08:00:00Z",
+      "autoRollover": false,
+      "isAssinaturaDoc": false
+    }
+  ],
+  "sortBy": "nome",
   "filiais": [
     {
       "id": "branch-1",
@@ -22,28 +269,87 @@ root.GOLD_RECOVERY_DATA = {
       "cidade": "Ji-Paraná - RO"
     }
   ],
-  "departamentos": [
+  "feriados": [
     {
-      "id": "dept-admin",
-      "nome": "ADMIN"
+      "id": "fer-1",
+      "data": "2026-01-01",
+      "nome": "Confraternização Universal",
+      "escopo": "NACIONAL"
     },
     {
-      "id": "dept-producao",
-      "nome": "PRODUÇÃO"
+      "id": "fer-2",
+      "data": "2026-02-17",
+      "nome": "Carnaval",
+      "escopo": "NACIONAL"
     },
     {
-      "id": "dept-deposito",
-      "nome": "DEPOSITO"
+      "id": "fer-3",
+      "data": "2026-04-03",
+      "nome": "Sexta-feira Santa",
+      "escopo": "NACIONAL"
     },
     {
-      "id": "dept-obra",
-      "nome": "OBRA"
+      "id": "fer-4",
+      "data": "2026-04-21",
+      "nome": "Tiradentes",
+      "escopo": "NACIONAL"
     },
     {
-      "id": "dept-admin-sponto",
-      "nome": "ADMIN-S/PONTO"
+      "id": "fer-5",
+      "data": "2026-05-01",
+      "nome": "Dia do Trabalhador",
+      "escopo": "NACIONAL"
+    },
+    {
+      "id": "fer-6",
+      "data": "2026-06-04",
+      "nome": "Corpus Christi",
+      "escopo": "NACIONAL"
+    },
+    {
+      "id": "fer-7",
+      "data": "2026-09-07",
+      "nome": "Independência do Brasil",
+      "escopo": "NACIONAL"
+    },
+    {
+      "id": "fer-8",
+      "data": "2026-10-12",
+      "nome": "Nossa Senhora Aparecida",
+      "escopo": "NACIONAL"
+    },
+    {
+      "id": "fer-9",
+      "data": "2026-11-02",
+      "nome": "Finados",
+      "escopo": "NACIONAL"
+    },
+    {
+      "id": "fer-10",
+      "data": "2026-11-15",
+      "nome": "Proclamação da República",
+      "escopo": "NACIONAL"
+    },
+    {
+      "id": "fer-11",
+      "data": "2026-11-20",
+      "nome": "Dia da Consciência Negra",
+      "escopo": "NACIONAL"
+    },
+    {
+      "id": "fer-12",
+      "data": "2026-12-25",
+      "nome": "Natal",
+      "escopo": "NACIONAL"
     }
   ],
+  "focusMode": false,
+  "updatedAt": "2026-10-24T12:55:42.404Z",
+  "currentYear": 2026,
+  "carryOverDsr": {},
+  "currentMonth": 9,
+  "statusFilter": "ativos",
+  "calFilterDept": "todos",
   "colaboradores": [
     {
       "id": "colab_branch-1_1026",
@@ -1070,13 +1376,15 @@ root.GOLD_RECOVERY_DATA = {
       "nome": "ALESSANDRO FRETES FLORENCIANO",
       "cracha": 990,
       "deptId": "dept-producao",
-      "status": "ativo",
+      "status": "demitido",
       "admissao": "2026-05-04",
       "aprendiz": false,
       "filialId": "branch-2",
       "recebeVa": true,
+      "isAprendiz": false,
+      "isDemitido": true,
       "naoRecebeVa": false,
-      "dataDemissao": "",
+      "dataDemissao": "2026-10-23",
       "registraPonto": true,
       "trabalhaSabado": true
     },
@@ -1475,13 +1783,15 @@ root.GOLD_RECOVERY_DATA = {
       "nome": "CAIQUE PEREIRA DOS SANTOS",
       "cracha": 1035,
       "deptId": "dept-producao",
-      "status": "ativo",
+      "status": "demitido",
       "admissao": "2026-10-16",
       "aprendiz": false,
       "filialId": "branch-1",
       "recebeVa": true,
+      "isAprendiz": false,
+      "isDemitido": true,
       "naoRecebeVa": false,
-      "dataDemissao": "",
+      "dataDemissao": "2026-10-20",
       "registraPonto": true,
       "trabalhaSabado": true
     },
@@ -1529,252 +1839,48 @@ root.GOLD_RECOVERY_DATA = {
       "dataDemissao": "",
       "registraPonto": true,
       "trabalhaSabado": true
+    },
+    {
+      "id": "colab_branch-1_1038",
+      "nome": "EDSON FERREIRA MOTA JUNIOR",
+      "cracha": 1038,
+      "deptId": "dept-producao",
+      "status": "ativo",
+      "admissao": "2026-10-21",
+      "aprendiz": false,
+      "filialId": "branch-1",
+      "recebeVa": true,
+      "isAprendiz": false,
+      "isDemitido": false,
+      "naoRecebeVa": false,
+      "dataDemissao": "",
+      "registraPonto": true,
+      "trabalhaSabado": true
     }
   ],
-  "feriados": [
+  "departamentos": [
     {
-      "id": "fer-1",
-      "data": "2026-01-01",
-      "nome": "Confraternização Universal",
-      "escopo": "NACIONAL"
+      "id": "dept-admin",
+      "nome": "ADMIN"
     },
     {
-      "id": "fer-2",
-      "data": "2026-02-17",
-      "nome": "Carnaval",
-      "escopo": "NACIONAL"
+      "id": "dept-producao",
+      "nome": "PRODUÇÃO"
     },
     {
-      "id": "fer-3",
-      "data": "2026-04-03",
-      "nome": "Sexta-feira Santa",
-      "escopo": "NACIONAL"
+      "id": "dept-deposito",
+      "nome": "DEPOSITO"
     },
     {
-      "id": "fer-4",
-      "data": "2026-04-21",
-      "nome": "Tiradentes",
-      "escopo": "NACIONAL"
+      "id": "dept-obra",
+      "nome": "OBRA"
     },
     {
-      "id": "fer-5",
-      "data": "2026-05-01",
-      "nome": "Dia do Trabalhador",
-      "escopo": "NACIONAL"
-    },
-    {
-      "id": "fer-6",
-      "data": "2026-06-04",
-      "nome": "Corpus Christi",
-      "escopo": "NACIONAL"
-    },
-    {
-      "id": "fer-7",
-      "data": "2026-09-07",
-      "nome": "Independência do Brasil",
-      "escopo": "NACIONAL"
-    },
-    {
-      "id": "fer-8",
-      "data": "2026-10-12",
-      "nome": "Nossa Senhora Aparecida",
-      "escopo": "NACIONAL"
-    },
-    {
-      "id": "fer-9",
-      "data": "2026-11-02",
-      "nome": "Finados",
-      "escopo": "NACIONAL"
-    },
-    {
-      "id": "fer-10",
-      "data": "2026-11-15",
-      "nome": "Proclamação da República",
-      "escopo": "NACIONAL"
-    },
-    {
-      "id": "fer-11",
-      "data": "2026-11-20",
-      "nome": "Dia da Consciência Negra",
-      "escopo": "NACIONAL"
-    },
-    {
-      "id": "fer-12",
-      "data": "2026-12-25",
-      "nome": "Natal",
-      "escopo": "NACIONAL"
+      "id": "dept-admin-sponto",
+      "nome": "ADMIN-S/PONTO"
     }
   ],
-  "avisos": [
-    {
-      "id": "aviso-assinatura-colab_branch-1_1025",
-      "data": "2026-10-30",
-      "tipo": "rescisao",
-      "titulo": "📝 Chamar para Assinar Documentos Rescisórios - KAUAN DE CARVALHO PENA",
-      "colabId": "colab_branch-1_1025",
-      "filialId": "branch-1",
-      "concluido": false,
-      "createdAt": "2026-10-21T19:41:17.977Z",
-      "descricao": "Chamar o colaborador KAUAN DE CARVALHO PENA para conferência e assinatura dos documentos rescisórios (TRCT, guias do FGTS e Seguro-Desemprego). Prazo de pagamento: 29/10/2026. Data original: 30/10/2026. (Caso não seja concluído ao final do dia, este aviso é prorrogado automaticamente para o dia seguinte).",
-      "concluidoEm": null,
-      "autoRollover": true,
-      "isAssinaturaDoc": true
-    },
-    {
-      "id": "aviso-assinatura-colab_branch-1_986",
-      "data": "2026-10-30",
-      "tipo": "rescisao",
-      "titulo": "📝 Chamar para Assinar Documentos Rescisórios - ALESSANDRO DE SOUSA PAIVA",
-      "colabId": "colab_branch-1_986",
-      "filialId": "branch-1",
-      "concluido": false,
-      "createdAt": "2026-10-21T19:41:17.977Z",
-      "descricao": "Chamar o colaborador ALESSANDRO DE SOUSA PAIVA para conferência e assinatura dos documentos rescisórios (TRCT, guias do FGTS e Seguro-Desemprego). Prazo de pagamento: 29/10/2026. Data original: 30/10/2026. (Caso não seja concluído ao final do dia, este aviso é prorrogado automaticamente para o dia seguinte).",
-      "concluidoEm": null,
-      "autoRollover": true,
-      "isAssinaturaDoc": true
-    },
-    {
-      "id": "aviso-assinatura-colab-986",
-      "data": "2026-10-30",
-      "tipo": "rescisao",
-      "titulo": "📝 Chamar para Assinar Documentos Rescisórios - ALESSANDRO DE SOUSA PAIVA",
-      "colabId": "colab_branch-1_986",
-      "filialId": "branch-1",
-      "concluido": false,
-      "createdAt": "2026-10-20T12:35:51.516Z",
-      "descricao": "Chamar o colaborador ALESSANDRO DE SOUSA PAIVA para conferência e assinatura dos documentos rescisórios (TRCT, guias do FGTS e Seguro-Desemprego). Prazo de pagamento: 29/10/2026. Data agendada da assinatura: 30/10/2026. (Caso não seja concluído ao final do dia, este aviso avança automaticamente para o dia seguinte até ser marcado como feito).",
-      "concluidoEm": null,
-      "autoRollover": true,
-      "isAssinaturaDoc": true
-    },
-    {
-      "id": "aviso-rescisao-colab-986",
-      "data": "2026-10-29",
-      "tipo": "rescisao",
-      "titulo": "🔴 Prazo Limite Rescisão - ALESSANDRO DE SOUSA PAIVA (10 dias CLT Art. 477)",
-      "colabId": "colab_branch-1_986",
-      "filialId": "branch-1",
-      "concluido": false,
-      "createdAt": "2026-10-20T12:35:51.516Z",
-      "descricao": "Prazo legal fatal de 10 dias corridos para homologação e pagamento de verbas rescisórias (Art. 477, § 6º da CLT). Data da demissão: 19/10/2026. Prazo fatal: 29/10/2026.",
-      "concluidoEm": null,
-      "autoRollover": false,
-      "isAssinaturaDoc": false
-    },
-    {
-      "id": "aviso-assinatura-colab-1025",
-      "data": "2026-10-30",
-      "tipo": "rescisao",
-      "titulo": "📝 Chamar para Assinar Documentos Rescisórios - KAUAN DE CARVALHO PENA",
-      "colabId": "colab_branch-1_1025",
-      "filialId": "branch-1",
-      "concluido": false,
-      "createdAt": "2026-10-19T20:32:24.157Z",
-      "descricao": "Chamar o colaborador KAUAN DE CARVALHO PENA para conferência e assinatura dos documentos rescisórios (TRCT, guias do FGTS e Seguro-Desemprego). Prazo de pagamento: 29/10/2026. Data agendada da assinatura: 30/10/2026. (Caso não seja concluído ao final do dia, este aviso avança automaticamente para o dia seguinte até ser marcado como feito).",
-      "concluidoEm": null,
-      "autoRollover": true,
-      "isAssinaturaDoc": true
-    },
-    {
-      "id": "aviso-rescisao-colab-1025",
-      "data": "2026-10-29",
-      "tipo": "rescisao",
-      "titulo": "🔴 Prazo Limite Rescisão - KAUAN DE CARVALHO PENA (10 dias CLT Art. 477)",
-      "colabId": "colab_branch-1_1025",
-      "filialId": "branch-1",
-      "concluido": false,
-      "createdAt": "2026-10-19T20:32:24.157Z",
-      "descricao": "Prazo legal fatal de 10 dias corridos para homologação e pagamento de verbas rescisórias (Art. 477, § 6º da CLT). Data da demissão: 19/10/2026. Prazo fatal: 29/10/2026.",
-      "concluidoEm": null,
-      "autoRollover": false,
-      "isAssinaturaDoc": false
-    },
-    {
-      "id": "aviso-1792175970365",
-      "data": "2026-10-31",
-      "tipo": "outros",
-      "titulo": "NARA - DESCONTOS",
-      "colabId": "",
-      "filialId": "branch-3",
-      "concluido": false,
-      "createdAt": "2026-10-16T18:39:30.365Z",
-      "descricao": "09/10 Atraso, 15/10 Falta (verificar se tem atestado)",
-      "concluidoEm": null,
-      "autoRollover": false,
-      "isAssinaturaDoc": false
-    },
-    {
-      "id": "aviso-1792100850536",
-      "data": "2026-10-16",
-      "tipo": "outros",
-      "titulo": "IMPRMIR LISTA DE EMPRESTIMO",
-      "colabId": "",
-      "filialId": "branch-1",
-      "concluido": true,
-      "createdAt": "2026-10-15T21:47:30.537Z",
-      "descricao": "",
-      "concluidoEm": "2026-10-19T20:41:59.695Z",
-      "autoRollover": false,
-      "isAssinaturaDoc": false
-    },
-    {
-      "id": "aviso-vale-1",
-      "data": "2026-10-20",
-      "tipo": "salario",
-      "titulo": "🟡 Adiantamento Salarial Quinzenal (Vale 30%)",
-      "colabId": "",
-      "filialId": "TODAS",
-      "concluido": true,
-      "createdAt": "2026-10-01T08:00:00Z",
-      "descricao": "Pagamento do adiantamento salarial de 40% a todos os colaboradores com opção cadastrada.",
-      "concluidoEm": "2026-10-19T20:42:32.158Z",
-      "autoRollover": false,
-      "isAssinaturaDoc": false
-    },
-    {
-      "id": "aviso-fgts-1",
-      "data": "2026-10-20",
-      "tipo": "fgts",
-      "titulo": "🟢 Vencimento FGTS Digital / Guia eSocial",
-      "colabId": "",
-      "filialId": "TODAS",
-      "concluido": true,
-      "createdAt": "2026-10-01T08:00:00Z",
-      "descricao": "Recolhimento mensal das guias do FGTS Digital referente à competência anterior (Vencimento até o dia 20).",
-      "concluidoEm": "2026-10-19T20:42:19.951Z",
-      "autoRollover": false,
-      "isAssinaturaDoc": false
-    },
-    {
-      "id": "aviso-ponto-1",
-      "data": "2026-10-31",
-      "tipo": "ponto",
-      "titulo": "🔵 Fechamento de Ponto & VA (Último Dia Útil do Mês - Sábado)",
-      "colabId": "",
-      "filialId": "TODAS",
-      "concluido": false,
-      "createdAt": "2026-10-01T08:00:00Z",
-      "descricao": "Fechamento do espelho de ponto eletrônico e apuração definitiva do Vale Alimentação no último dia útil do mês (Sábado, 31/10/2026).",
-      "concluidoEm": null,
-      "autoRollover": false,
-      "isAssinaturaDoc": false
-    },
-    {
-      "id": "aviso-admissao-wesley",
-      "data": "2026-10-09",
-      "titulo": "🟢 Admissão Concluída - Wesley Patrick (Início de Atividades)",
-      "tipo": "outros",
-      "descricao": "Admissão e início oficial de atividades do colaborador Wesley Patrick Fernandes de Oliveira no setor de Produção.",
-      "filialId": "branch-1",
-      "colabId": "colab-1034",
-      "concluido": true,
-      "concluidoEm": "2026-10-09T08:00:00Z",
-      "createdAt": "2026-10-09T08:00:00Z",
-      "isAssinaturaDoc": false,
-      "autoRollover": false
-    }
-  ],
+  "activeBranchId": "branch-1",
   "registrosPonto": {
     "colab-1_2026-10-13": {
       "note": "Dia futuro em aberto (desmarcado)",
@@ -9569,6 +9675,22 @@ root.GOLD_RECOVERY_DATA = {
       "atrasoMaiorMin": 0,
       "atrasoPequenoMin": 0
     },
+    "colab-360_2026-10-12": {
+      "note": "Falta integral (Planilha) (Replicado de 10/10/2026)",
+      "punches": {
+        "em": "",
+        "et": "",
+        "sm": "",
+        "st": ""
+      },
+      "override": "FALTA",
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaior": "",
+      "atrasoPequeno": "",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
+    },
     "colab-360_2026-10-13": {
       "note": "Abono/OK em massa pelo cabeçalho da data",
       "punches": {
@@ -11265,6 +11387,193 @@ root.GOLD_RECOVERY_DATA = {
       "override": "VAZIO",
       "override2": "",
       "resolution": "NENHUMA",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
+    },
+    "colab-366_2026-10-19": {
+      "note": "OK em massa pelo cabeçalho da data",
+      "punches": {
+        "em": "08:00",
+        "et": "13:00",
+        "sm": "12:00",
+        "st": "17:00"
+      },
+      "override": "FM",
+      "override2": "ET",
+      "resolution": "NENHUMA",
+      "atrasoMaior": "",
+      "atrasoPequeno": "",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
+    },
+    "colab-366_2026-10-20": {
+      "note": "OK em massa pelo cabeçalho da data",
+      "punches": {
+        "em": "08:00",
+        "et": "13:00",
+        "sm": "12:00",
+        "st": "17:00"
+      },
+      "override": "OK",
+      "resolution": "NENHUMA"
+    },
+    "colab-366_2026-10-21": {
+      "note": " (Replicado de 20/10/2026)",
+      "punches": {
+        "em": "08:00",
+        "et": "13:00",
+        "sm": "12:00",
+        "st": "17:00"
+      },
+      "override": "AUTO",
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaior": "",
+      "atrasoPequeno": "",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
+    },
+    "colab-366_2026-10-22": {
+      "note": " (Replicado de 20/10/2026)",
+      "punches": {
+        "em": "08:00",
+        "et": "13:00",
+        "sm": "12:00",
+        "st": "17:00"
+      },
+      "override": "AUTO",
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaior": "",
+      "atrasoPequeno": "",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
+    },
+    "colab-366_2026-10-23": {
+      "note": " (Replicado de 20/10/2026)",
+      "punches": {
+        "em": "08:00",
+        "et": "13:00",
+        "sm": "12:00",
+        "st": "17:00"
+      },
+      "override": "AUTO",
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaior": "",
+      "atrasoPequeno": "",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
+    },
+    "colab-366_2026-10-24": {
+      "note": " (Replicado de 20/10/2026)",
+      "punches": {
+        "em": "08:00",
+        "et": "13:00",
+        "sm": "12:00",
+        "st": "17:00"
+      },
+      "override": "AUTO",
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaior": "",
+      "atrasoPequeno": "",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
+    },
+    "colab-366_2026-10-26": {
+      "note": " (Replicado de 20/10/2026)",
+      "punches": {
+        "em": "08:00",
+        "et": "13:00",
+        "sm": "12:00",
+        "st": "17:00"
+      },
+      "override": "AUTO",
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaior": "",
+      "atrasoPequeno": "",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
+    },
+    "colab-366_2026-10-27": {
+      "note": " (Replicado de 20/10/2026)",
+      "punches": {
+        "em": "08:00",
+        "et": "13:00",
+        "sm": "12:00",
+        "st": "17:00"
+      },
+      "override": "AUTO",
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaior": "",
+      "atrasoPequeno": "",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
+    },
+    "colab-366_2026-10-28": {
+      "note": " (Replicado de 20/10/2026)",
+      "punches": {
+        "em": "08:00",
+        "et": "13:00",
+        "sm": "12:00",
+        "st": "17:00"
+      },
+      "override": "AUTO",
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaior": "",
+      "atrasoPequeno": "",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
+    },
+    "colab-366_2026-10-29": {
+      "note": " (Replicado de 20/10/2026)",
+      "punches": {
+        "em": "08:00",
+        "et": "13:00",
+        "sm": "12:00",
+        "st": "17:00"
+      },
+      "override": "AUTO",
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaior": "",
+      "atrasoPequeno": "",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
+    },
+    "colab-366_2026-10-30": {
+      "note": " (Replicado de 20/10/2026)",
+      "punches": {
+        "em": "08:00",
+        "et": "13:00",
+        "sm": "12:00",
+        "st": "17:00"
+      },
+      "override": "AUTO",
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaior": "",
+      "atrasoPequeno": "",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
+    },
+    "colab-366_2026-10-31": {
+      "note": "",
+      "punches": {
+        "em": "08:00",
+        "et": "13:00",
+        "sm": "12:00",
+        "st": "17:00"
+      },
+      "override": "AUTO",
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaior": "",
+      "atrasoPequeno": "",
       "atrasoMaiorMin": 0,
       "atrasoPequenoMin": 0
     },
@@ -28648,7 +28957,7 @@ root.GOLD_RECOVERY_DATA = {
         "sm": "12:00",
         "st": "17:00"
       },
-      "override": "VAZIO",
+      "override": "AUTO",
       "override2": "",
       "resolution": "NENHUMA",
       "atrasoMaior": "",
@@ -29678,7 +29987,7 @@ root.GOLD_RECOVERY_DATA = {
         "sm": "12:00",
         "st": "17:00"
       },
-      "override": "VAZIO",
+      "override": "AUTO",
       "override2": "",
       "resolution": "NENHUMA",
       "atrasoMaior": "",
@@ -29710,7 +30019,7 @@ root.GOLD_RECOVERY_DATA = {
         "sm": "12:00",
         "st": "17:00"
       },
-      "override": "VAZIO",
+      "override": "OK",
       "override2": "",
       "resolution": "NENHUMA",
       "atrasoMaior": "",
@@ -30992,7 +31301,7 @@ root.GOLD_RECOVERY_DATA = {
         "sm": "12:00",
         "st": "17:00"
       },
-      "override": "VAZIO",
+      "override": "AUTO",
       "override2": "",
       "resolution": "NENHUMA",
       "atrasoMaior": "",
@@ -31008,7 +31317,7 @@ root.GOLD_RECOVERY_DATA = {
         "sm": "12:00",
         "st": "17:00"
       },
-      "override": "VAZIO",
+      "override": "AUTO",
       "override2": "",
       "resolution": "NENHUMA",
       "atrasoMaior": "",
@@ -31024,7 +31333,7 @@ root.GOLD_RECOVERY_DATA = {
         "sm": "12:00",
         "st": "17:00"
       },
-      "override": "VAZIO",
+      "override": "AUTO",
       "override2": "",
       "resolution": "NENHUMA",
       "atrasoMaior": "",
@@ -31040,7 +31349,7 @@ root.GOLD_RECOVERY_DATA = {
         "sm": "12:00",
         "st": "17:00"
       },
-      "override": "VAZIO",
+      "override": "AUTO",
       "override2": "",
       "resolution": "NENHUMA",
       "atrasoMaior": "",
@@ -31288,7 +31597,7 @@ root.GOLD_RECOVERY_DATA = {
         "sm": "12:00",
         "st": "17:00"
       },
-      "override": "VAZIO",
+      "override": "AUTO",
       "override2": "",
       "resolution": "NENHUMA",
       "atrasoMaior": "",
@@ -31304,7 +31613,7 @@ root.GOLD_RECOVERY_DATA = {
         "sm": "12:00",
         "st": "17:00"
       },
-      "override": "VAZIO",
+      "override": "AUTO",
       "override2": "",
       "resolution": "NENHUMA",
       "atrasoMaior": "",
@@ -31541,6 +31850,595 @@ root.GOLD_RECOVERY_DATA = {
       "override": "VAZIO",
       "override2": "",
       "resolution": "NENHUMA",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
+    },
+    "colab-1035_2026-10-16": {
+      "note": "OK em massa pelo cabeçalho da data",
+      "punches": {
+        "em": "08:00",
+        "et": "13:00",
+        "sm": "12:00",
+        "st": "17:00"
+      },
+      "override": "OK",
+      "resolution": "NENHUMA"
+    },
+    "colab-1035_2026-10-17": {
+      "note": "OK em massa pelo cabeçalho da data",
+      "punches": {
+        "em": "08:00",
+        "et": "13:00",
+        "sm": "12:00",
+        "st": "17:00"
+      },
+      "override": "OK",
+      "resolution": "NENHUMA"
+    },
+    "colab-1035_2026-10-19": {
+      "note": "OK em massa pelo cabeçalho da data",
+      "punches": {
+        "em": "08:00",
+        "et": "13:00",
+        "sm": "12:00",
+        "st": "17:00"
+      },
+      "override": "OK",
+      "resolution": "NENHUMA"
+    },
+    "colab-1035_2026-10-20": {
+      "note": "OK em massa pelo cabeçalho da data",
+      "punches": {
+        "em": "08:00",
+        "et": "13:00",
+        "sm": "12:00",
+        "st": "17:00"
+      },
+      "override": "FALTA",
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaior": "",
+      "atrasoPequeno": "",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
+    },
+    "colab-1035_2026-10-21": {
+      "note": " (Replicado de 16/10/2026)",
+      "punches": {
+        "em": "08:00",
+        "et": "13:00",
+        "sm": "12:00",
+        "st": "17:00"
+      },
+      "override": "AUTO",
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaior": "",
+      "atrasoPequeno": "",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
+    },
+    "colab-1035_2026-10-22": {
+      "note": " (Replicado de 16/10/2026)",
+      "punches": {
+        "em": "08:00",
+        "et": "13:00",
+        "sm": "12:00",
+        "st": "17:00"
+      },
+      "override": "AUTO",
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaior": "",
+      "atrasoPequeno": "",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
+    },
+    "colab-1035_2026-10-23": {
+      "note": " (Replicado de 16/10/2026)",
+      "punches": {
+        "em": "08:00",
+        "et": "13:00",
+        "sm": "12:00",
+        "st": "17:00"
+      },
+      "override": "AUTO",
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaior": "",
+      "atrasoPequeno": "",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
+    },
+    "colab-1035_2026-10-24": {
+      "note": " (Replicado de 16/10/2026)",
+      "punches": {
+        "em": "08:00",
+        "et": "13:00",
+        "sm": "12:00",
+        "st": "17:00"
+      },
+      "override": "AUTO",
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaior": "",
+      "atrasoPequeno": "",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
+    },
+    "colab-1035_2026-10-26": {
+      "note": " (Replicado de 16/10/2026)",
+      "punches": {
+        "em": "08:00",
+        "et": "13:00",
+        "sm": "12:00",
+        "st": "17:00"
+      },
+      "override": "AUTO",
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaior": "",
+      "atrasoPequeno": "",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
+    },
+    "colab-1035_2026-10-27": {
+      "note": " (Replicado de 16/10/2026)",
+      "punches": {
+        "em": "08:00",
+        "et": "13:00",
+        "sm": "12:00",
+        "st": "17:00"
+      },
+      "override": "AUTO",
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaior": "",
+      "atrasoPequeno": "",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
+    },
+    "colab-1035_2026-10-28": {
+      "note": " (Replicado de 16/10/2026)",
+      "punches": {
+        "em": "08:00",
+        "et": "13:00",
+        "sm": "12:00",
+        "st": "17:00"
+      },
+      "override": "AUTO",
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaior": "",
+      "atrasoPequeno": "",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
+    },
+    "colab-1035_2026-10-29": {
+      "note": " (Replicado de 16/10/2026)",
+      "punches": {
+        "em": "08:00",
+        "et": "13:00",
+        "sm": "12:00",
+        "st": "17:00"
+      },
+      "override": "AUTO",
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaior": "",
+      "atrasoPequeno": "",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
+    },
+    "colab-1035_2026-10-30": {
+      "note": " (Replicado de 16/10/2026)",
+      "punches": {
+        "em": "08:00",
+        "et": "13:00",
+        "sm": "12:00",
+        "st": "17:00"
+      },
+      "override": "AUTO",
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaior": "",
+      "atrasoPequeno": "",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
+    },
+    "colab-1035_2026-10-31": {
+      "note": " (Replicado de 16/10/2026)",
+      "punches": {
+        "em": "08:00",
+        "et": "13:00",
+        "sm": "12:00",
+        "st": "17:00"
+      },
+      "override": "AUTO",
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaior": "",
+      "atrasoPequeno": "",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
+    },
+    "colab-1036_2026-10-16": {
+      "note": "OK em massa pelo cabeçalho da data",
+      "punches": {
+        "em": "08:00",
+        "et": "13:00",
+        "sm": "12:00",
+        "st": "17:00"
+      },
+      "override": "OK",
+      "resolution": "NENHUMA"
+    },
+    "colab-1036_2026-10-17": {
+      "note": "OK em massa pelo cabeçalho da data",
+      "punches": {
+        "em": "08:00",
+        "et": "13:00",
+        "sm": "12:00",
+        "st": "17:00"
+      },
+      "override": "OK",
+      "resolution": "NENHUMA"
+    },
+    "colab-1036_2026-10-19": {
+      "note": "OK em massa pelo cabeçalho da data",
+      "punches": {
+        "em": "08:00",
+        "et": "13:00",
+        "sm": "12:00",
+        "st": "17:00"
+      },
+      "override": "OK",
+      "resolution": "NENHUMA"
+    },
+    "colab-1036_2026-10-20": {
+      "note": "OK em massa pelo cabeçalho da data",
+      "punches": {
+        "em": "08:00",
+        "et": "13:00",
+        "sm": "12:00",
+        "st": "17:00"
+      },
+      "override": "OK",
+      "resolution": "NENHUMA"
+    },
+    "colab-1036_2026-10-21": {
+      "note": " (Replicado de 16/10/2026)",
+      "punches": {
+        "em": "08:00",
+        "et": "13:00",
+        "sm": "12:00",
+        "st": "17:00"
+      },
+      "override": "AUTO",
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaior": "",
+      "atrasoPequeno": "",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
+    },
+    "colab-1036_2026-10-22": {
+      "note": " (Replicado de 16/10/2026)",
+      "punches": {
+        "em": "08:00",
+        "et": "13:00",
+        "sm": "12:00",
+        "st": "17:00"
+      },
+      "override": "AUTO",
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaior": "",
+      "atrasoPequeno": "",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
+    },
+    "colab-1036_2026-10-23": {
+      "note": " (Replicado de 16/10/2026)",
+      "punches": {
+        "em": "08:00",
+        "et": "13:00",
+        "sm": "12:00",
+        "st": "17:00"
+      },
+      "override": "AUTO",
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaior": "",
+      "atrasoPequeno": "",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
+    },
+    "colab-1036_2026-10-24": {
+      "note": " (Replicado de 16/10/2026)",
+      "punches": {
+        "em": "08:00",
+        "et": "13:00",
+        "sm": "12:00",
+        "st": "17:00"
+      },
+      "override": "AUTO",
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaior": "",
+      "atrasoPequeno": "",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
+    },
+    "colab-1036_2026-10-26": {
+      "note": " (Replicado de 16/10/2026)",
+      "punches": {
+        "em": "08:00",
+        "et": "13:00",
+        "sm": "12:00",
+        "st": "17:00"
+      },
+      "override": "AUTO",
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaior": "",
+      "atrasoPequeno": "",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
+    },
+    "colab-1036_2026-10-27": {
+      "note": " (Replicado de 16/10/2026)",
+      "punches": {
+        "em": "08:00",
+        "et": "13:00",
+        "sm": "12:00",
+        "st": "17:00"
+      },
+      "override": "AUTO",
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaior": "",
+      "atrasoPequeno": "",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
+    },
+    "colab-1036_2026-10-28": {
+      "note": " (Replicado de 16/10/2026)",
+      "punches": {
+        "em": "08:00",
+        "et": "13:00",
+        "sm": "12:00",
+        "st": "17:00"
+      },
+      "override": "AUTO",
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaior": "",
+      "atrasoPequeno": "",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
+    },
+    "colab-1036_2026-10-29": {
+      "note": " (Replicado de 16/10/2026)",
+      "punches": {
+        "em": "08:00",
+        "et": "13:00",
+        "sm": "12:00",
+        "st": "17:00"
+      },
+      "override": "AUTO",
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaior": "",
+      "atrasoPequeno": "",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
+    },
+    "colab-1036_2026-10-30": {
+      "note": " (Replicado de 16/10/2026)",
+      "punches": {
+        "em": "08:00",
+        "et": "13:00",
+        "sm": "12:00",
+        "st": "17:00"
+      },
+      "override": "AUTO",
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaior": "",
+      "atrasoPequeno": "",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
+    },
+    "colab-1036_2026-10-31": {
+      "note": " (Replicado de 16/10/2026)",
+      "punches": {
+        "em": "08:00",
+        "et": "13:00",
+        "sm": "12:00",
+        "st": "17:00"
+      },
+      "override": "AUTO",
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaior": "",
+      "atrasoPequeno": "",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
+    },
+    "colab-1037_2026-10-20": {
+      "note": "OK em massa pelo cabeçalho da data",
+      "punches": {
+        "em": "08:00",
+        "et": "13:00",
+        "sm": "12:00",
+        "st": "17:00"
+      },
+      "override": "OK",
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaior": "",
+      "atrasoPequeno": "",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
+    },
+    "colab-1037_2026-10-21": {
+      "note": "",
+      "punches": {
+        "em": "08:00",
+        "et": "13:00",
+        "sm": "12:00",
+        "st": "17:00"
+      },
+      "override": "AUTO",
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaior": "",
+      "atrasoPequeno": "",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
+    },
+    "colab-1037_2026-10-22": {
+      "note": " (Replicado de 21/10/2026)",
+      "punches": {
+        "em": "08:00",
+        "et": "13:00",
+        "sm": "12:00",
+        "st": "17:00"
+      },
+      "override": "AUTO",
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaior": "",
+      "atrasoPequeno": "",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
+    },
+    "colab-1037_2026-10-23": {
+      "note": " (Replicado de 21/10/2026)",
+      "punches": {
+        "em": "08:00",
+        "et": "13:00",
+        "sm": "12:00",
+        "st": "17:00"
+      },
+      "override": "AUTO",
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaior": "",
+      "atrasoPequeno": "",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
+    },
+    "colab-1037_2026-10-24": {
+      "note": " (Replicado de 21/10/2026)",
+      "punches": {
+        "em": "08:00",
+        "et": "13:00",
+        "sm": "12:00",
+        "st": "17:00"
+      },
+      "override": "AUTO",
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaior": "",
+      "atrasoPequeno": "",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
+    },
+    "colab-1037_2026-10-26": {
+      "note": " (Replicado de 21/10/2026)",
+      "punches": {
+        "em": "08:00",
+        "et": "13:00",
+        "sm": "12:00",
+        "st": "17:00"
+      },
+      "override": "AUTO",
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaior": "",
+      "atrasoPequeno": "",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
+    },
+    "colab-1037_2026-10-27": {
+      "note": " (Replicado de 21/10/2026)",
+      "punches": {
+        "em": "08:00",
+        "et": "13:00",
+        "sm": "12:00",
+        "st": "17:00"
+      },
+      "override": "AUTO",
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaior": "",
+      "atrasoPequeno": "",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
+    },
+    "colab-1037_2026-10-28": {
+      "note": " (Replicado de 21/10/2026)",
+      "punches": {
+        "em": "08:00",
+        "et": "13:00",
+        "sm": "12:00",
+        "st": "17:00"
+      },
+      "override": "AUTO",
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaior": "",
+      "atrasoPequeno": "",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
+    },
+    "colab-1037_2026-10-29": {
+      "note": " (Replicado de 21/10/2026)",
+      "punches": {
+        "em": "08:00",
+        "et": "13:00",
+        "sm": "12:00",
+        "st": "17:00"
+      },
+      "override": "AUTO",
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaior": "",
+      "atrasoPequeno": "",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
+    },
+    "colab-1037_2026-10-30": {
+      "note": " (Replicado de 21/10/2026)",
+      "punches": {
+        "em": "08:00",
+        "et": "13:00",
+        "sm": "12:00",
+        "st": "17:00"
+      },
+      "override": "AUTO",
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaior": "",
+      "atrasoPequeno": "",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
+    },
+    "colab-1037_2026-10-31": {
+      "note": "",
+      "punches": {
+        "em": "08:00",
+        "et": "13:00",
+        "sm": "12:00",
+        "st": "17:00"
+      },
+      "override": "AUTO",
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaior": "",
+      "atrasoPequeno": "",
       "atrasoMaiorMin": 0,
       "atrasoPequenoMin": 0
     },
@@ -32738,798 +33636,6 @@ root.GOLD_RECOVERY_DATA = {
       "atrasoMaiorMin": 0,
       "atrasoPequenoMin": 0
     },
-    "colab-1035_2026-10-16": {
-      "note": "OK em massa pelo cabeçalho da data",
-      "punches": {
-        "em": "08:00",
-        "et": "13:00",
-        "sm": "12:00",
-        "st": "17:00"
-      },
-      "override": "OK",
-      "resolution": "NENHUMA"
-    },
-    "colab-1035_2026-10-17": {
-      "note": "OK em massa pelo cabeçalho da data",
-      "punches": {
-        "em": "08:00",
-        "et": "13:00",
-        "sm": "12:00",
-        "st": "17:00"
-      },
-      "override": "OK",
-      "resolution": "NENHUMA"
-    },
-    "colab-1035_2026-10-19": {
-      "note": "OK em massa pelo cabeçalho da data",
-      "punches": {
-        "em": "08:00",
-        "et": "13:00",
-        "sm": "12:00",
-        "st": "17:00"
-      },
-      "override": "OK",
-      "resolution": "NENHUMA"
-    },
-    "colab-1035_2026-10-20": {
-      "note": "OK em massa pelo cabeçalho da data",
-      "punches": {
-        "em": "08:00",
-        "et": "13:00",
-        "sm": "12:00",
-        "st": "17:00"
-      },
-      "override": "FALTA",
-      "override2": "",
-      "resolution": "NENHUMA",
-      "atrasoMaior": "",
-      "atrasoPequeno": "",
-      "atrasoMaiorMin": 0,
-      "atrasoPequenoMin": 0
-    },
-    "colab-1035_2026-10-21": {
-      "note": " (Replicado de 16/10/2026)",
-      "punches": {
-        "em": "08:00",
-        "et": "13:00",
-        "sm": "12:00",
-        "st": "17:00"
-      },
-      "override": "VAZIO",
-      "override2": "",
-      "resolution": "NENHUMA",
-      "atrasoMaior": "",
-      "atrasoPequeno": "",
-      "atrasoMaiorMin": 0,
-      "atrasoPequenoMin": 0
-    },
-    "colab-1035_2026-10-22": {
-      "note": " (Replicado de 16/10/2026)",
-      "punches": {
-        "em": "08:00",
-        "et": "13:00",
-        "sm": "12:00",
-        "st": "17:00"
-      },
-      "override": "VAZIO",
-      "override2": "",
-      "resolution": "NENHUMA",
-      "atrasoMaior": "",
-      "atrasoPequeno": "",
-      "atrasoMaiorMin": 0,
-      "atrasoPequenoMin": 0
-    },
-    "colab-1035_2026-10-23": {
-      "note": " (Replicado de 16/10/2026)",
-      "punches": {
-        "em": "08:00",
-        "et": "13:00",
-        "sm": "12:00",
-        "st": "17:00"
-      },
-      "override": "VAZIO",
-      "override2": "",
-      "resolution": "NENHUMA",
-      "atrasoMaior": "",
-      "atrasoPequeno": "",
-      "atrasoMaiorMin": 0,
-      "atrasoPequenoMin": 0
-    },
-    "colab-1035_2026-10-24": {
-      "note": " (Replicado de 16/10/2026)",
-      "punches": {
-        "em": "08:00",
-        "et": "13:00",
-        "sm": "12:00",
-        "st": "17:00"
-      },
-      "override": "VAZIO",
-      "override2": "",
-      "resolution": "NENHUMA",
-      "atrasoMaior": "",
-      "atrasoPequeno": "",
-      "atrasoMaiorMin": 0,
-      "atrasoPequenoMin": 0
-    },
-    "colab-1035_2026-10-26": {
-      "note": " (Replicado de 16/10/2026)",
-      "punches": {
-        "em": "08:00",
-        "et": "13:00",
-        "sm": "12:00",
-        "st": "17:00"
-      },
-      "override": "VAZIO",
-      "override2": "",
-      "resolution": "NENHUMA",
-      "atrasoMaior": "",
-      "atrasoPequeno": "",
-      "atrasoMaiorMin": 0,
-      "atrasoPequenoMin": 0
-    },
-    "colab-1035_2026-10-27": {
-      "note": " (Replicado de 16/10/2026)",
-      "punches": {
-        "em": "08:00",
-        "et": "13:00",
-        "sm": "12:00",
-        "st": "17:00"
-      },
-      "override": "VAZIO",
-      "override2": "",
-      "resolution": "NENHUMA",
-      "atrasoMaior": "",
-      "atrasoPequeno": "",
-      "atrasoMaiorMin": 0,
-      "atrasoPequenoMin": 0
-    },
-    "colab-1035_2026-10-28": {
-      "note": " (Replicado de 16/10/2026)",
-      "punches": {
-        "em": "08:00",
-        "et": "13:00",
-        "sm": "12:00",
-        "st": "17:00"
-      },
-      "override": "VAZIO",
-      "override2": "",
-      "resolution": "NENHUMA",
-      "atrasoMaior": "",
-      "atrasoPequeno": "",
-      "atrasoMaiorMin": 0,
-      "atrasoPequenoMin": 0
-    },
-    "colab-1035_2026-10-29": {
-      "note": " (Replicado de 16/10/2026)",
-      "punches": {
-        "em": "08:00",
-        "et": "13:00",
-        "sm": "12:00",
-        "st": "17:00"
-      },
-      "override": "VAZIO",
-      "override2": "",
-      "resolution": "NENHUMA",
-      "atrasoMaior": "",
-      "atrasoPequeno": "",
-      "atrasoMaiorMin": 0,
-      "atrasoPequenoMin": 0
-    },
-    "colab-1035_2026-10-30": {
-      "note": " (Replicado de 16/10/2026)",
-      "punches": {
-        "em": "08:00",
-        "et": "13:00",
-        "sm": "12:00",
-        "st": "17:00"
-      },
-      "override": "VAZIO",
-      "override2": "",
-      "resolution": "NENHUMA",
-      "atrasoMaior": "",
-      "atrasoPequeno": "",
-      "atrasoMaiorMin": 0,
-      "atrasoPequenoMin": 0
-    },
-    "colab-1035_2026-10-31": {
-      "note": " (Replicado de 16/10/2026)",
-      "punches": {
-        "em": "08:00",
-        "et": "13:00",
-        "sm": "12:00",
-        "st": "17:00"
-      },
-      "override": "VAZIO",
-      "override2": "",
-      "resolution": "NENHUMA",
-      "atrasoMaior": "",
-      "atrasoPequeno": "",
-      "atrasoMaiorMin": 0,
-      "atrasoPequenoMin": 0
-    },
-    "colab-1036_2026-10-16": {
-      "note": "OK em massa pelo cabeçalho da data",
-      "punches": {
-        "em": "08:00",
-        "et": "13:00",
-        "sm": "12:00",
-        "st": "17:00"
-      },
-      "override": "OK",
-      "resolution": "NENHUMA"
-    },
-    "colab-1036_2026-10-17": {
-      "note": "OK em massa pelo cabeçalho da data",
-      "punches": {
-        "em": "08:00",
-        "et": "13:00",
-        "sm": "12:00",
-        "st": "17:00"
-      },
-      "override": "OK",
-      "resolution": "NENHUMA"
-    },
-    "colab-1036_2026-10-19": {
-      "note": "OK em massa pelo cabeçalho da data",
-      "punches": {
-        "em": "08:00",
-        "et": "13:00",
-        "sm": "12:00",
-        "st": "17:00"
-      },
-      "override": "OK",
-      "resolution": "NENHUMA"
-    },
-    "colab-1036_2026-10-20": {
-      "note": "OK em massa pelo cabeçalho da data",
-      "punches": {
-        "em": "08:00",
-        "et": "13:00",
-        "sm": "12:00",
-        "st": "17:00"
-      },
-      "override": "OK",
-      "resolution": "NENHUMA"
-    },
-    "colab-1036_2026-10-21": {
-      "note": " (Replicado de 16/10/2026)",
-      "punches": {
-        "em": "08:00",
-        "et": "13:00",
-        "sm": "12:00",
-        "st": "17:00"
-      },
-      "override": "VAZIO",
-      "override2": "",
-      "resolution": "NENHUMA",
-      "atrasoMaior": "",
-      "atrasoPequeno": "",
-      "atrasoMaiorMin": 0,
-      "atrasoPequenoMin": 0
-    },
-    "colab-1036_2026-10-22": {
-      "note": " (Replicado de 16/10/2026)",
-      "punches": {
-        "em": "08:00",
-        "et": "13:00",
-        "sm": "12:00",
-        "st": "17:00"
-      },
-      "override": "VAZIO",
-      "override2": "",
-      "resolution": "NENHUMA",
-      "atrasoMaior": "",
-      "atrasoPequeno": "",
-      "atrasoMaiorMin": 0,
-      "atrasoPequenoMin": 0
-    },
-    "colab-1036_2026-10-23": {
-      "note": " (Replicado de 16/10/2026)",
-      "punches": {
-        "em": "08:00",
-        "et": "13:00",
-        "sm": "12:00",
-        "st": "17:00"
-      },
-      "override": "VAZIO",
-      "override2": "",
-      "resolution": "NENHUMA",
-      "atrasoMaior": "",
-      "atrasoPequeno": "",
-      "atrasoMaiorMin": 0,
-      "atrasoPequenoMin": 0
-    },
-    "colab-1036_2026-10-24": {
-      "note": " (Replicado de 16/10/2026)",
-      "punches": {
-        "em": "08:00",
-        "et": "13:00",
-        "sm": "12:00",
-        "st": "17:00"
-      },
-      "override": "VAZIO",
-      "override2": "",
-      "resolution": "NENHUMA",
-      "atrasoMaior": "",
-      "atrasoPequeno": "",
-      "atrasoMaiorMin": 0,
-      "atrasoPequenoMin": 0
-    },
-    "colab-1036_2026-10-26": {
-      "note": " (Replicado de 16/10/2026)",
-      "punches": {
-        "em": "08:00",
-        "et": "13:00",
-        "sm": "12:00",
-        "st": "17:00"
-      },
-      "override": "VAZIO",
-      "override2": "",
-      "resolution": "NENHUMA",
-      "atrasoMaior": "",
-      "atrasoPequeno": "",
-      "atrasoMaiorMin": 0,
-      "atrasoPequenoMin": 0
-    },
-    "colab-1036_2026-10-27": {
-      "note": " (Replicado de 16/10/2026)",
-      "punches": {
-        "em": "08:00",
-        "et": "13:00",
-        "sm": "12:00",
-        "st": "17:00"
-      },
-      "override": "VAZIO",
-      "override2": "",
-      "resolution": "NENHUMA",
-      "atrasoMaior": "",
-      "atrasoPequeno": "",
-      "atrasoMaiorMin": 0,
-      "atrasoPequenoMin": 0
-    },
-    "colab-1036_2026-10-28": {
-      "note": " (Replicado de 16/10/2026)",
-      "punches": {
-        "em": "08:00",
-        "et": "13:00",
-        "sm": "12:00",
-        "st": "17:00"
-      },
-      "override": "VAZIO",
-      "override2": "",
-      "resolution": "NENHUMA",
-      "atrasoMaior": "",
-      "atrasoPequeno": "",
-      "atrasoMaiorMin": 0,
-      "atrasoPequenoMin": 0
-    },
-    "colab-1036_2026-10-29": {
-      "note": " (Replicado de 16/10/2026)",
-      "punches": {
-        "em": "08:00",
-        "et": "13:00",
-        "sm": "12:00",
-        "st": "17:00"
-      },
-      "override": "VAZIO",
-      "override2": "",
-      "resolution": "NENHUMA",
-      "atrasoMaior": "",
-      "atrasoPequeno": "",
-      "atrasoMaiorMin": 0,
-      "atrasoPequenoMin": 0
-    },
-    "colab-1036_2026-10-30": {
-      "note": " (Replicado de 16/10/2026)",
-      "punches": {
-        "em": "08:00",
-        "et": "13:00",
-        "sm": "12:00",
-        "st": "17:00"
-      },
-      "override": "VAZIO",
-      "override2": "",
-      "resolution": "NENHUMA",
-      "atrasoMaior": "",
-      "atrasoPequeno": "",
-      "atrasoMaiorMin": 0,
-      "atrasoPequenoMin": 0
-    },
-    "colab-1036_2026-10-31": {
-      "note": " (Replicado de 16/10/2026)",
-      "punches": {
-        "em": "08:00",
-        "et": "13:00",
-        "sm": "12:00",
-        "st": "17:00"
-      },
-      "override": "VAZIO",
-      "override2": "",
-      "resolution": "NENHUMA",
-      "atrasoMaior": "",
-      "atrasoPequeno": "",
-      "atrasoMaiorMin": 0,
-      "atrasoPequenoMin": 0
-    },
-    "colab-366_2026-10-20": {
-      "note": "OK em massa pelo cabeçalho da data",
-      "punches": {
-        "em": "08:00",
-        "et": "13:00",
-        "sm": "12:00",
-        "st": "17:00"
-      },
-      "override": "OK",
-      "resolution": "NENHUMA"
-    },
-    "colab-366_2026-10-21": {
-      "note": " (Replicado de 20/10/2026)",
-      "punches": {
-        "em": "08:00",
-        "et": "13:00",
-        "sm": "12:00",
-        "st": "17:00"
-      },
-      "override": "VAZIO",
-      "override2": "",
-      "resolution": "NENHUMA",
-      "atrasoMaior": "",
-      "atrasoPequeno": "",
-      "atrasoMaiorMin": 0,
-      "atrasoPequenoMin": 0
-    },
-    "colab-366_2026-10-22": {
-      "note": " (Replicado de 20/10/2026)",
-      "punches": {
-        "em": "08:00",
-        "et": "13:00",
-        "sm": "12:00",
-        "st": "17:00"
-      },
-      "override": "VAZIO",
-      "override2": "",
-      "resolution": "NENHUMA",
-      "atrasoMaior": "",
-      "atrasoPequeno": "",
-      "atrasoMaiorMin": 0,
-      "atrasoPequenoMin": 0
-    },
-    "colab-366_2026-10-23": {
-      "note": " (Replicado de 20/10/2026)",
-      "punches": {
-        "em": "08:00",
-        "et": "13:00",
-        "sm": "12:00",
-        "st": "17:00"
-      },
-      "override": "VAZIO",
-      "override2": "",
-      "resolution": "NENHUMA",
-      "atrasoMaior": "",
-      "atrasoPequeno": "",
-      "atrasoMaiorMin": 0,
-      "atrasoPequenoMin": 0
-    },
-    "colab-366_2026-10-24": {
-      "note": " (Replicado de 20/10/2026)",
-      "punches": {
-        "em": "08:00",
-        "et": "13:00",
-        "sm": "12:00",
-        "st": "17:00"
-      },
-      "override": "VAZIO",
-      "override2": "",
-      "resolution": "NENHUMA",
-      "atrasoMaior": "",
-      "atrasoPequeno": "",
-      "atrasoMaiorMin": 0,
-      "atrasoPequenoMin": 0
-    },
-    "colab-366_2026-10-26": {
-      "note": " (Replicado de 20/10/2026)",
-      "punches": {
-        "em": "08:00",
-        "et": "13:00",
-        "sm": "12:00",
-        "st": "17:00"
-      },
-      "override": "VAZIO",
-      "override2": "",
-      "resolution": "NENHUMA",
-      "atrasoMaior": "",
-      "atrasoPequeno": "",
-      "atrasoMaiorMin": 0,
-      "atrasoPequenoMin": 0
-    },
-    "colab-366_2026-10-27": {
-      "note": " (Replicado de 20/10/2026)",
-      "punches": {
-        "em": "08:00",
-        "et": "13:00",
-        "sm": "12:00",
-        "st": "17:00"
-      },
-      "override": "VAZIO",
-      "override2": "",
-      "resolution": "NENHUMA",
-      "atrasoMaior": "",
-      "atrasoPequeno": "",
-      "atrasoMaiorMin": 0,
-      "atrasoPequenoMin": 0
-    },
-    "colab-366_2026-10-28": {
-      "note": " (Replicado de 20/10/2026)",
-      "punches": {
-        "em": "08:00",
-        "et": "13:00",
-        "sm": "12:00",
-        "st": "17:00"
-      },
-      "override": "VAZIO",
-      "override2": "",
-      "resolution": "NENHUMA",
-      "atrasoMaior": "",
-      "atrasoPequeno": "",
-      "atrasoMaiorMin": 0,
-      "atrasoPequenoMin": 0
-    },
-    "colab-366_2026-10-29": {
-      "note": " (Replicado de 20/10/2026)",
-      "punches": {
-        "em": "08:00",
-        "et": "13:00",
-        "sm": "12:00",
-        "st": "17:00"
-      },
-      "override": "VAZIO",
-      "override2": "",
-      "resolution": "NENHUMA",
-      "atrasoMaior": "",
-      "atrasoPequeno": "",
-      "atrasoMaiorMin": 0,
-      "atrasoPequenoMin": 0
-    },
-    "colab-366_2026-10-30": {
-      "note": " (Replicado de 20/10/2026)",
-      "punches": {
-        "em": "08:00",
-        "et": "13:00",
-        "sm": "12:00",
-        "st": "17:00"
-      },
-      "override": "VAZIO",
-      "override2": "",
-      "resolution": "NENHUMA",
-      "atrasoMaior": "",
-      "atrasoPequeno": "",
-      "atrasoMaiorMin": 0,
-      "atrasoPequenoMin": 0
-    },
-    "colab-366_2026-10-31": {
-      "note": "",
-      "punches": {
-        "em": "08:00",
-        "et": "13:00",
-        "sm": "12:00",
-        "st": "17:00"
-      },
-      "override": "VAZIO",
-      "override2": "",
-      "resolution": "NENHUMA",
-      "atrasoMaior": "",
-      "atrasoPequeno": "",
-      "atrasoMaiorMin": 0,
-      "atrasoPequenoMin": 0
-    },
-    "colab-1037_2026-10-21": {
-      "note": "",
-      "punches": {
-        "em": "08:00",
-        "et": "13:00",
-        "sm": "12:00",
-        "st": "17:00"
-      },
-      "override": "VAZIO",
-      "override2": "",
-      "resolution": "NENHUMA",
-      "atrasoMaior": "",
-      "atrasoPequeno": "",
-      "atrasoMaiorMin": 0,
-      "atrasoPequenoMin": 0
-    },
-    "colab-1037_2026-10-22": {
-      "note": " (Replicado de 21/10/2026)",
-      "punches": {
-        "em": "08:00",
-        "et": "13:00",
-        "sm": "12:00",
-        "st": "17:00"
-      },
-      "override": "VAZIO",
-      "override2": "",
-      "resolution": "NENHUMA",
-      "atrasoMaior": "",
-      "atrasoPequeno": "",
-      "atrasoMaiorMin": 0,
-      "atrasoPequenoMin": 0
-    },
-    "colab-1037_2026-10-23": {
-      "note": " (Replicado de 21/10/2026)",
-      "punches": {
-        "em": "08:00",
-        "et": "13:00",
-        "sm": "12:00",
-        "st": "17:00"
-      },
-      "override": "VAZIO",
-      "override2": "",
-      "resolution": "NENHUMA",
-      "atrasoMaior": "",
-      "atrasoPequeno": "",
-      "atrasoMaiorMin": 0,
-      "atrasoPequenoMin": 0
-    },
-    "colab-1037_2026-10-24": {
-      "note": " (Replicado de 21/10/2026)",
-      "punches": {
-        "em": "08:00",
-        "et": "13:00",
-        "sm": "12:00",
-        "st": "17:00"
-      },
-      "override": "VAZIO",
-      "override2": "",
-      "resolution": "NENHUMA",
-      "atrasoMaior": "",
-      "atrasoPequeno": "",
-      "atrasoMaiorMin": 0,
-      "atrasoPequenoMin": 0
-    },
-    "colab-1037_2026-10-26": {
-      "note": " (Replicado de 21/10/2026)",
-      "punches": {
-        "em": "08:00",
-        "et": "13:00",
-        "sm": "12:00",
-        "st": "17:00"
-      },
-      "override": "VAZIO",
-      "override2": "",
-      "resolution": "NENHUMA",
-      "atrasoMaior": "",
-      "atrasoPequeno": "",
-      "atrasoMaiorMin": 0,
-      "atrasoPequenoMin": 0
-    },
-    "colab-1037_2026-10-27": {
-      "note": " (Replicado de 21/10/2026)",
-      "punches": {
-        "em": "08:00",
-        "et": "13:00",
-        "sm": "12:00",
-        "st": "17:00"
-      },
-      "override": "VAZIO",
-      "override2": "",
-      "resolution": "NENHUMA",
-      "atrasoMaior": "",
-      "atrasoPequeno": "",
-      "atrasoMaiorMin": 0,
-      "atrasoPequenoMin": 0
-    },
-    "colab-1037_2026-10-28": {
-      "note": " (Replicado de 21/10/2026)",
-      "punches": {
-        "em": "08:00",
-        "et": "13:00",
-        "sm": "12:00",
-        "st": "17:00"
-      },
-      "override": "VAZIO",
-      "override2": "",
-      "resolution": "NENHUMA",
-      "atrasoMaior": "",
-      "atrasoPequeno": "",
-      "atrasoMaiorMin": 0,
-      "atrasoPequenoMin": 0
-    },
-    "colab-1037_2026-10-29": {
-      "note": " (Replicado de 21/10/2026)",
-      "punches": {
-        "em": "08:00",
-        "et": "13:00",
-        "sm": "12:00",
-        "st": "17:00"
-      },
-      "override": "VAZIO",
-      "override2": "",
-      "resolution": "NENHUMA",
-      "atrasoMaior": "",
-      "atrasoPequeno": "",
-      "atrasoMaiorMin": 0,
-      "atrasoPequenoMin": 0
-    },
-    "colab-1037_2026-10-30": {
-      "note": " (Replicado de 21/10/2026)",
-      "punches": {
-        "em": "08:00",
-        "et": "13:00",
-        "sm": "12:00",
-        "st": "17:00"
-      },
-      "override": "VAZIO",
-      "override2": "",
-      "resolution": "NENHUMA",
-      "atrasoMaior": "",
-      "atrasoPequeno": "",
-      "atrasoMaiorMin": 0,
-      "atrasoPequenoMin": 0
-    },
-    "colab-1037_2026-10-31": {
-      "note": "",
-      "punches": {
-        "em": "08:00",
-        "et": "13:00",
-        "sm": "12:00",
-        "st": "17:00"
-      },
-      "override": "VAZIO",
-      "override2": "",
-      "resolution": "NENHUMA",
-      "atrasoMaior": "",
-      "atrasoPequeno": "",
-      "atrasoMaiorMin": 0,
-      "atrasoPequenoMin": 0
-    },
-    "colab-366_2026-10-19": {
-      "note": "OK em massa pelo cabeçalho da data",
-      "punches": {
-        "em": "08:00",
-        "et": "13:00",
-        "sm": "12:00",
-        "st": "17:00"
-      },
-      "override": "FM",
-      "override2": "ET",
-      "resolution": "NENHUMA",
-      "atrasoMaior": "",
-      "atrasoPequeno": "",
-      "atrasoMaiorMin": 0,
-      "atrasoPequenoMin": 0
-    },
-    "colab-360_2026-10-12": {
-      "note": "Falta integral (Planilha) (Replicado de 10/10/2026)",
-      "punches": {
-        "em": "",
-        "et": "",
-        "sm": "",
-        "st": ""
-      },
-      "override": "FALTA",
-      "override2": "",
-      "resolution": "NENHUMA",
-      "atrasoMaior": "",
-      "atrasoPequeno": "",
-      "atrasoMaiorMin": 0,
-      "atrasoPequenoMin": 0
-    },
-    "colab-1037_2026-10-20": {
-      "note": "OK em massa pelo cabeçalho da data",
-      "punches": {
-        "em": "08:00",
-        "et": "13:00",
-        "sm": "12:00",
-        "st": "17:00"
-      },
-      "override": "VAZIO",
-      "override2": "",
-      "resolution": "NENHUMA",
-      "atrasoMaior": "",
-      "atrasoPequeno": "",
-      "atrasoMaiorMin": 0,
-      "atrasoPequenoMin": 0
-    },
     "colab_branch-1_1_2026-10-13": {
       "note": "Dia futuro em aberto (desmarcado)",
       "punches": {
@@ -33925,7 +34031,10 @@ root.GOLD_RECOVERY_DATA = {
         "st": "17:00"
       },
       "override": "OK",
-      "resolution": "NENHUMA"
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
     },
     "colab_branch-1_218_2026-10-16": {
       "note": "OK em massa pelo cabeçalho da data",
@@ -33936,7 +34045,10 @@ root.GOLD_RECOVERY_DATA = {
         "st": "17:00"
       },
       "override": "OK",
-      "resolution": "NENHUMA"
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
     },
     "colab_branch-1_218_2026-10-17": {
       "note": "OK em massa pelo cabeçalho da data",
@@ -33947,7 +34059,10 @@ root.GOLD_RECOVERY_DATA = {
         "st": "17:00"
       },
       "override": "OK",
-      "resolution": "NENHUMA"
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
     },
     "colab_branch-1_218_2026-10-19": {
       "note": "OK em massa pelo cabeçalho da data",
@@ -33958,7 +34073,10 @@ root.GOLD_RECOVERY_DATA = {
         "st": "17:00"
       },
       "override": "OK",
-      "resolution": "NENHUMA"
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
     },
     "colab_branch-1_218_2026-10-20": {
       "note": "OK em massa pelo cabeçalho da data",
@@ -33969,31 +34087,34 @@ root.GOLD_RECOVERY_DATA = {
         "st": "17:00"
       },
       "override": "OK",
-      "resolution": "NENHUMA"
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
     },
     "colab_branch-1_218_2026-10-21": {
-      "note": "Dia futuro em aberto (desmarcado)",
+      "note": "OK em massa pelo cabeçalho da data",
       "punches": {
-        "em": "",
-        "et": "",
-        "sm": "",
-        "st": ""
+        "em": "08:00",
+        "et": "13:00",
+        "sm": "12:00",
+        "st": "17:00"
       },
-      "override": "VAZIO",
+      "override": "OK",
       "override2": "",
       "resolution": "NENHUMA",
       "atrasoMaiorMin": 0,
       "atrasoPequenoMin": 0
     },
     "colab_branch-1_218_2026-10-22": {
-      "note": "Dia futuro em aberto (desmarcado)",
+      "note": "OK em massa pelo cabeçalho da data",
       "punches": {
-        "em": "",
-        "et": "",
-        "sm": "",
-        "st": ""
+        "em": "08:00",
+        "et": "13:00",
+        "sm": "12:00",
+        "st": "17:00"
       },
-      "override": "VAZIO",
+      "override": "OK",
       "override2": "",
       "resolution": "NENHUMA",
       "atrasoMaiorMin": 0,
@@ -34195,9 +34316,9 @@ root.GOLD_RECOVERY_DATA = {
       "override2": "",
       "resolution": "NENHUMA",
       "atrasoMaior": "",
-      "atrasoPequeno": "",
+      "atrasoPequeno": "00:06",
       "atrasoMaiorMin": 0,
-      "atrasoPequenoMin": 0
+      "atrasoPequenoMin": 6
     },
     "colab_branch-1_234_2026-10-08": {
       "note": "Presença regular (Planilha)",
@@ -34281,7 +34402,10 @@ root.GOLD_RECOVERY_DATA = {
         "st": "17:00"
       },
       "override": "OK",
-      "resolution": "NENHUMA"
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
     },
     "colab_branch-1_234_2026-10-16": {
       "note": "OK em massa pelo cabeçalho da data",
@@ -34308,7 +34432,10 @@ root.GOLD_RECOVERY_DATA = {
         "st": "17:00"
       },
       "override": "OK",
-      "resolution": "NENHUMA"
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
     },
     "colab_branch-1_234_2026-10-19": {
       "note": "OK em massa pelo cabeçalho da data",
@@ -34319,7 +34446,10 @@ root.GOLD_RECOVERY_DATA = {
         "st": "17:00"
       },
       "override": "OK",
-      "resolution": "NENHUMA"
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
     },
     "colab_branch-1_234_2026-10-20": {
       "note": "OK em massa pelo cabeçalho da data",
@@ -34330,31 +34460,34 @@ root.GOLD_RECOVERY_DATA = {
         "st": "17:00"
       },
       "override": "OK",
-      "resolution": "NENHUMA"
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
     },
     "colab_branch-1_234_2026-10-21": {
-      "note": "Dia futuro em aberto (desmarcado)",
+      "note": "OK em massa pelo cabeçalho da data",
       "punches": {
-        "em": "",
-        "et": "",
-        "sm": "",
-        "st": ""
+        "em": "08:00",
+        "et": "13:00",
+        "sm": "12:00",
+        "st": "17:00"
       },
-      "override": "VAZIO",
+      "override": "OK",
       "override2": "",
       "resolution": "NENHUMA",
       "atrasoMaiorMin": 0,
       "atrasoPequenoMin": 0
     },
     "colab_branch-1_234_2026-10-22": {
-      "note": "Dia futuro em aberto (desmarcado)",
+      "note": "OK em massa pelo cabeçalho da data",
       "punches": {
-        "em": "",
-        "et": "",
-        "sm": "",
-        "st": ""
+        "em": "08:00",
+        "et": "13:00",
+        "sm": "12:00",
+        "st": "17:00"
       },
-      "override": "VAZIO",
+      "override": "OK",
       "override2": "",
       "resolution": "NENHUMA",
       "atrasoMaiorMin": 0,
@@ -34503,7 +34636,10 @@ root.GOLD_RECOVERY_DATA = {
         "st": "17:00"
       },
       "override": "OK",
-      "resolution": "NENHUMA"
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
     },
     "colab_branch-1_325_2026-10-16": {
       "note": "OK em massa pelo cabeçalho da data",
@@ -34514,7 +34650,10 @@ root.GOLD_RECOVERY_DATA = {
         "st": "17:00"
       },
       "override": "OK",
-      "resolution": "NENHUMA"
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
     },
     "colab_branch-1_325_2026-10-17": {
       "note": "OK em massa pelo cabeçalho da data",
@@ -34525,7 +34664,10 @@ root.GOLD_RECOVERY_DATA = {
         "st": "17:00"
       },
       "override": "OK",
-      "resolution": "NENHUMA"
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
     },
     "colab_branch-1_325_2026-10-19": {
       "note": "OK em massa pelo cabeçalho da data",
@@ -34536,7 +34678,10 @@ root.GOLD_RECOVERY_DATA = {
         "st": "17:00"
       },
       "override": "OK",
-      "resolution": "NENHUMA"
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
     },
     "colab_branch-1_325_2026-10-20": {
       "note": "OK em massa pelo cabeçalho da data",
@@ -34547,7 +34692,10 @@ root.GOLD_RECOVERY_DATA = {
         "st": "17:00"
       },
       "override": "OK",
-      "resolution": "NENHUMA"
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
     },
     "colab_branch-1_325_2026-10-21": {
       "note": "Dia futuro em aberto (desmarcado)",
@@ -34873,7 +35021,7 @@ root.GOLD_RECOVERY_DATA = {
         "sm": "12:00",
         "st": "17:00"
       },
-      "override": "AFASTADO",
+      "override": "OK",
       "override2": "",
       "resolution": "NENHUMA",
       "atrasoMaior": "",
@@ -34922,7 +35070,12 @@ root.GOLD_RECOVERY_DATA = {
         "st": "17:00"
       },
       "override": "OK",
-      "resolution": "NENHUMA"
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaior": "",
+      "atrasoPequeno": "",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
     },
     "colab_branch-1_336_2026-10-19": {
       "note": "OK em massa pelo cabeçalho da data",
@@ -34949,7 +35102,12 @@ root.GOLD_RECOVERY_DATA = {
         "st": "17:00"
       },
       "override": "OK",
-      "resolution": "NENHUMA"
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaior": "",
+      "atrasoPequeno": "",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
     },
     "colab_branch-1_336_2026-10-21": {
       "note": "Afastamento convertido para Atestado (Planilha) (Replicado de 01/10/2026)",
@@ -35270,9 +35428,9 @@ root.GOLD_RECOVERY_DATA = {
       "override": "AUTO",
       "override2": "",
       "resolution": "NENHUMA",
-      "atrasoMaior": "",
+      "atrasoMaior": "01:10",
       "atrasoPequeno": "",
-      "atrasoMaiorMin": 0,
+      "atrasoMaiorMin": 70,
       "atrasoPequenoMin": 0
     },
     "colab_branch-1_361_2026-10-09": {
@@ -35297,7 +35455,7 @@ root.GOLD_RECOVERY_DATA = {
         "sm": "",
         "st": ""
       },
-      "override": "OK",
+      "override": "FALTA",
       "override2": "",
       "resolution": "NENHUMA",
       "atrasoMaior": "",
@@ -35316,9 +35474,9 @@ root.GOLD_RECOVERY_DATA = {
       "override": "AUTO",
       "override2": "",
       "resolution": "NENHUMA",
-      "atrasoMaior": "",
+      "atrasoMaior": "00:18",
       "atrasoPequeno": "",
-      "atrasoMaiorMin": 0,
+      "atrasoMaiorMin": 18,
       "atrasoPequenoMin": 0
     },
     "colab_branch-1_361_2026-10-14": {
@@ -35341,7 +35499,10 @@ root.GOLD_RECOVERY_DATA = {
         "st": "17:00"
       },
       "override": "OK",
-      "resolution": "NENHUMA"
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
     },
     "colab_branch-1_361_2026-10-16": {
       "note": "OK em massa pelo cabeçalho da data",
@@ -35384,9 +35545,44 @@ root.GOLD_RECOVERY_DATA = {
         "st": "17:00"
       },
       "override": "OK",
-      "resolution": "NENHUMA"
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
     },
     "colab_branch-1_361_2026-10-20": {
+      "note": "OK em massa pelo cabeçalho da data",
+      "punches": {
+        "em": "08:00",
+        "et": "13:00",
+        "sm": "12:00",
+        "st": "17:00"
+      },
+      "override": "ATESTADO",
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaior": "",
+      "atrasoPequeno": "",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
+    },
+    "colab_branch-1_361_2026-10-21": {
+      "note": "OK em massa pelo cabeçalho da data",
+      "punches": {
+        "em": "08:00",
+        "et": "13:00",
+        "sm": "12:00",
+        "st": "17:00"
+      },
+      "override": "ATESTADO",
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaior": "",
+      "atrasoPequeno": "",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
+    },
+    "colab_branch-1_361_2026-10-22": {
       "note": "OK em massa pelo cabeçalho da data",
       "punches": {
         "em": "08:00",
@@ -35397,40 +35593,6 @@ root.GOLD_RECOVERY_DATA = {
       "override": "OK",
       "override2": "",
       "resolution": "NENHUMA",
-      "atrasoMaior": "",
-      "atrasoPequeno": "",
-      "atrasoMaiorMin": 0,
-      "atrasoPequenoMin": 0
-    },
-    "colab_branch-1_361_2026-10-21": {
-      "note": "OK em massa pelo cabeçalho da data (Replicado de 20/10/2026)",
-      "punches": {
-        "em": "08:00",
-        "et": "13:00",
-        "sm": "12:00",
-        "st": "17:00"
-      },
-      "override": "VAZIO",
-      "override2": "",
-      "resolution": "NENHUMA",
-      "atrasoMaior": "",
-      "atrasoPequeno": "",
-      "atrasoMaiorMin": 0,
-      "atrasoPequenoMin": 0
-    },
-    "colab_branch-1_361_2026-10-22": {
-      "note": "OK em massa pelo cabeçalho da data (Replicado de 20/10/2026)",
-      "punches": {
-        "em": "08:00",
-        "et": "13:00",
-        "sm": "12:00",
-        "st": "17:00"
-      },
-      "override": "VAZIO",
-      "override2": "",
-      "resolution": "NENHUMA",
-      "atrasoMaior": "",
-      "atrasoPequeno": "",
       "atrasoMaiorMin": 0,
       "atrasoPequenoMin": 0
     },
@@ -35577,7 +35739,10 @@ root.GOLD_RECOVERY_DATA = {
         "st": "17:00"
       },
       "override": "OK",
-      "resolution": "NENHUMA"
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
     },
     "colab_branch-1_431_2026-10-16": {
       "note": "OK em massa pelo cabeçalho da data",
@@ -35588,7 +35753,10 @@ root.GOLD_RECOVERY_DATA = {
         "st": "17:00"
       },
       "override": "OK",
-      "resolution": "NENHUMA"
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
     },
     "colab_branch-1_431_2026-10-17": {
       "note": "OK em massa pelo cabeçalho da data",
@@ -35599,7 +35767,10 @@ root.GOLD_RECOVERY_DATA = {
         "st": "17:00"
       },
       "override": "OK",
-      "resolution": "NENHUMA"
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
     },
     "colab_branch-1_431_2026-10-19": {
       "note": "OK em massa pelo cabeçalho da data",
@@ -35610,7 +35781,10 @@ root.GOLD_RECOVERY_DATA = {
         "st": "17:00"
       },
       "override": "OK",
-      "resolution": "NENHUMA"
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
     },
     "colab_branch-1_431_2026-10-20": {
       "note": "OK em massa pelo cabeçalho da data",
@@ -35621,7 +35795,10 @@ root.GOLD_RECOVERY_DATA = {
         "st": "17:00"
       },
       "override": "OK",
-      "resolution": "NENHUMA"
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
     },
     "colab_branch-1_431_2026-10-21": {
       "note": "Dia futuro em aberto (desmarcado)",
@@ -35920,7 +36097,10 @@ root.GOLD_RECOVERY_DATA = {
         "st": "17:00"
       },
       "override": "OK",
-      "resolution": "NENHUMA"
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
     },
     "colab_branch-1_491_2026-10-16": {
       "note": "OK em massa pelo cabeçalho da data",
@@ -35931,7 +36111,10 @@ root.GOLD_RECOVERY_DATA = {
         "st": "17:00"
       },
       "override": "OK",
-      "resolution": "NENHUMA"
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
     },
     "colab_branch-1_491_2026-10-17": {
       "note": "OK em massa pelo cabeçalho da data",
@@ -35942,7 +36125,10 @@ root.GOLD_RECOVERY_DATA = {
         "st": "17:00"
       },
       "override": "OK",
-      "resolution": "NENHUMA"
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
     },
     "colab_branch-1_491_2026-10-19": {
       "note": "OK em massa pelo cabeçalho da data",
@@ -35953,7 +36139,10 @@ root.GOLD_RECOVERY_DATA = {
         "st": "17:00"
       },
       "override": "OK",
-      "resolution": "NENHUMA"
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
     },
     "colab_branch-1_491_2026-10-20": {
       "note": "OK em massa pelo cabeçalho da data",
@@ -35964,31 +36153,34 @@ root.GOLD_RECOVERY_DATA = {
         "st": "17:00"
       },
       "override": "OK",
-      "resolution": "NENHUMA"
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
     },
     "colab_branch-1_491_2026-10-21": {
-      "note": "Dia futuro em aberto (desmarcado)",
+      "note": "OK em massa pelo cabeçalho da data",
       "punches": {
-        "em": "",
-        "et": "",
-        "sm": "",
-        "st": ""
+        "em": "08:00",
+        "et": "13:00",
+        "sm": "12:00",
+        "st": "17:00"
       },
-      "override": "VAZIO",
+      "override": "OK",
       "override2": "",
       "resolution": "NENHUMA",
       "atrasoMaiorMin": 0,
       "atrasoPequenoMin": 0
     },
     "colab_branch-1_491_2026-10-22": {
-      "note": "Dia futuro em aberto (desmarcado)",
+      "note": "OK em massa pelo cabeçalho da data",
       "punches": {
-        "em": "",
-        "et": "",
-        "sm": "",
-        "st": ""
+        "em": "08:00",
+        "et": "13:00",
+        "sm": "12:00",
+        "st": "17:00"
       },
-      "override": "VAZIO",
+      "override": "OK",
       "override2": "",
       "resolution": "NENHUMA",
       "atrasoMaiorMin": 0,
@@ -36137,7 +36329,10 @@ root.GOLD_RECOVERY_DATA = {
         "st": "17:00"
       },
       "override": "OK",
-      "resolution": "NENHUMA"
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
     },
     "colab_branch-1_540_2026-10-16": {
       "note": "OK em massa pelo cabeçalho da data",
@@ -36148,7 +36343,10 @@ root.GOLD_RECOVERY_DATA = {
         "st": "17:00"
       },
       "override": "OK",
-      "resolution": "NENHUMA"
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
     },
     "colab_branch-1_540_2026-10-17": {
       "note": "OK em massa pelo cabeçalho da data",
@@ -36159,7 +36357,10 @@ root.GOLD_RECOVERY_DATA = {
         "st": "17:00"
       },
       "override": "OK",
-      "resolution": "NENHUMA"
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
     },
     "colab_branch-1_540_2026-10-19": {
       "note": "OK em massa pelo cabeçalho da data",
@@ -36170,7 +36371,10 @@ root.GOLD_RECOVERY_DATA = {
         "st": "17:00"
       },
       "override": "OK",
-      "resolution": "NENHUMA"
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
     },
     "colab_branch-1_540_2026-10-20": {
       "note": "OK em massa pelo cabeçalho da data",
@@ -36181,7 +36385,10 @@ root.GOLD_RECOVERY_DATA = {
         "st": "17:00"
       },
       "override": "OK",
-      "resolution": "NENHUMA"
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
     },
     "colab_branch-1_540_2026-10-21": {
       "note": "Dia futuro em aberto (desmarcado)",
@@ -37480,7 +37687,10 @@ root.GOLD_RECOVERY_DATA = {
         "st": "17:00"
       },
       "override": "OK",
-      "resolution": "NENHUMA"
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
     },
     "colab_branch-1_696_2026-10-16": {
       "note": "OK em massa pelo cabeçalho da data",
@@ -37491,7 +37701,10 @@ root.GOLD_RECOVERY_DATA = {
         "st": "17:00"
       },
       "override": "OK",
-      "resolution": "NENHUMA"
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
     },
     "colab_branch-1_696_2026-10-17": {
       "note": "OK em massa pelo cabeçalho da data",
@@ -37502,7 +37715,10 @@ root.GOLD_RECOVERY_DATA = {
         "st": "17:00"
       },
       "override": "OK",
-      "resolution": "NENHUMA"
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
     },
     "colab_branch-1_696_2026-10-19": {
       "note": "OK em massa pelo cabeçalho da data",
@@ -37513,7 +37729,10 @@ root.GOLD_RECOVERY_DATA = {
         "st": "17:00"
       },
       "override": "OK",
-      "resolution": "NENHUMA"
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
     },
     "colab_branch-1_696_2026-10-20": {
       "note": "OK em massa pelo cabeçalho da data",
@@ -37524,7 +37743,10 @@ root.GOLD_RECOVERY_DATA = {
         "st": "17:00"
       },
       "override": "OK",
-      "resolution": "NENHUMA"
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
     },
     "colab_branch-1_696_2026-10-21": {
       "note": "Dia futuro em aberto (desmarcado)",
@@ -37873,7 +38095,10 @@ root.GOLD_RECOVERY_DATA = {
         "st": "17:00"
       },
       "override": "OK",
-      "resolution": "NENHUMA"
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
     },
     "colab_branch-1_701_2026-10-20": {
       "note": "OK em massa pelo cabeçalho da data",
@@ -37884,31 +38109,34 @@ root.GOLD_RECOVERY_DATA = {
         "st": "17:00"
       },
       "override": "OK",
-      "resolution": "NENHUMA"
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
     },
     "colab_branch-1_701_2026-10-21": {
-      "note": "Dia futuro em aberto (desmarcado)",
+      "note": "OK em massa pelo cabeçalho da data",
       "punches": {
-        "em": "",
-        "et": "",
-        "sm": "",
-        "st": ""
+        "em": "08:00",
+        "et": "13:00",
+        "sm": "12:00",
+        "st": "17:00"
       },
-      "override": "VAZIO",
+      "override": "OK",
       "override2": "",
       "resolution": "NENHUMA",
       "atrasoMaiorMin": 0,
       "atrasoPequenoMin": 0
     },
     "colab_branch-1_701_2026-10-22": {
-      "note": "Dia futuro em aberto (desmarcado)",
+      "note": "OK em massa pelo cabeçalho da data",
       "punches": {
-        "em": "",
-        "et": "",
-        "sm": "",
-        "st": ""
+        "em": "08:00",
+        "et": "13:00",
+        "sm": "12:00",
+        "st": "17:00"
       },
-      "override": "VAZIO",
+      "override": "OK",
       "override2": "",
       "resolution": "NENHUMA",
       "atrasoMaiorMin": 0,
@@ -38057,7 +38285,10 @@ root.GOLD_RECOVERY_DATA = {
         "st": "17:00"
       },
       "override": "OK",
-      "resolution": "NENHUMA"
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
     },
     "colab_branch-1_702_2026-10-16": {
       "note": "OK em massa pelo cabeçalho da data",
@@ -38068,7 +38299,10 @@ root.GOLD_RECOVERY_DATA = {
         "st": "17:00"
       },
       "override": "OK",
-      "resolution": "NENHUMA"
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
     },
     "colab_branch-1_702_2026-10-17": {
       "note": "OK em massa pelo cabeçalho da data",
@@ -38079,7 +38313,10 @@ root.GOLD_RECOVERY_DATA = {
         "st": "17:00"
       },
       "override": "OK",
-      "resolution": "NENHUMA"
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
     },
     "colab_branch-1_702_2026-10-19": {
       "note": "OK em massa pelo cabeçalho da data",
@@ -38090,7 +38327,10 @@ root.GOLD_RECOVERY_DATA = {
         "st": "17:00"
       },
       "override": "OK",
-      "resolution": "NENHUMA"
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
     },
     "colab_branch-1_702_2026-10-20": {
       "note": "OK em massa pelo cabeçalho da data",
@@ -38101,7 +38341,10 @@ root.GOLD_RECOVERY_DATA = {
         "st": "17:00"
       },
       "override": "OK",
-      "resolution": "NENHUMA"
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
     },
     "colab_branch-1_702_2026-10-21": {
       "note": "Dia futuro em aberto (desmarcado)",
@@ -38274,7 +38517,10 @@ root.GOLD_RECOVERY_DATA = {
         "st": "17:00"
       },
       "override": "OK",
-      "resolution": "NENHUMA"
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
     },
     "colab_branch-1_736_2026-10-16": {
       "note": "OK em massa pelo cabeçalho da data",
@@ -38285,7 +38531,10 @@ root.GOLD_RECOVERY_DATA = {
         "st": "17:00"
       },
       "override": "OK",
-      "resolution": "NENHUMA"
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
     },
     "colab_branch-1_736_2026-10-17": {
       "note": "OK em massa pelo cabeçalho da data",
@@ -38296,7 +38545,10 @@ root.GOLD_RECOVERY_DATA = {
         "st": "17:00"
       },
       "override": "OK",
-      "resolution": "NENHUMA"
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
     },
     "colab_branch-1_736_2026-10-19": {
       "note": "OK em massa pelo cabeçalho da data",
@@ -38307,7 +38559,10 @@ root.GOLD_RECOVERY_DATA = {
         "st": "17:00"
       },
       "override": "OK",
-      "resolution": "NENHUMA"
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
     },
     "colab_branch-1_736_2026-10-20": {
       "note": "OK em massa pelo cabeçalho da data",
@@ -38318,7 +38573,10 @@ root.GOLD_RECOVERY_DATA = {
         "st": "17:00"
       },
       "override": "OK",
-      "resolution": "NENHUMA"
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
     },
     "colab_branch-1_736_2026-10-21": {
       "note": "Dia futuro em aberto (desmarcado)",
@@ -38885,7 +39143,10 @@ root.GOLD_RECOVERY_DATA = {
         "st": "17:00"
       },
       "override": "OK",
-      "resolution": "NENHUMA"
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
     },
     "colab_branch-1_781_2026-10-16": {
       "note": "OK em massa pelo cabeçalho da data",
@@ -38896,7 +39157,10 @@ root.GOLD_RECOVERY_DATA = {
         "st": "17:00"
       },
       "override": "OK",
-      "resolution": "NENHUMA"
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
     },
     "colab_branch-1_781_2026-10-17": {
       "note": "OK em massa pelo cabeçalho da data",
@@ -38907,7 +39171,10 @@ root.GOLD_RECOVERY_DATA = {
         "st": "17:00"
       },
       "override": "OK",
-      "resolution": "NENHUMA"
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
     },
     "colab_branch-1_781_2026-10-19": {
       "note": "OK em massa pelo cabeçalho da data",
@@ -38918,7 +39185,10 @@ root.GOLD_RECOVERY_DATA = {
         "st": "17:00"
       },
       "override": "OK",
-      "resolution": "NENHUMA"
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
     },
     "colab_branch-1_781_2026-10-20": {
       "note": "OK em massa pelo cabeçalho da data",
@@ -38929,7 +39199,10 @@ root.GOLD_RECOVERY_DATA = {
         "st": "17:00"
       },
       "override": "OK",
-      "resolution": "NENHUMA"
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
     },
     "colab_branch-1_781_2026-10-21": {
       "note": "Dia futuro em aberto (desmarcado)",
@@ -39232,7 +39505,10 @@ root.GOLD_RECOVERY_DATA = {
         "st": "17:00"
       },
       "override": "OK",
-      "resolution": "NENHUMA"
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
     },
     "colab_branch-1_847_2026-10-16": {
       "note": "OK em massa pelo cabeçalho da data",
@@ -39243,7 +39519,10 @@ root.GOLD_RECOVERY_DATA = {
         "st": "17:00"
       },
       "override": "OK",
-      "resolution": "NENHUMA"
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
     },
     "colab_branch-1_847_2026-10-17": {
       "note": "OK em massa pelo cabeçalho da data",
@@ -39254,7 +39533,10 @@ root.GOLD_RECOVERY_DATA = {
         "st": "17:00"
       },
       "override": "OK",
-      "resolution": "NENHUMA"
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
     },
     "colab_branch-1_847_2026-10-19": {
       "note": "OK em massa pelo cabeçalho da data",
@@ -39265,7 +39547,10 @@ root.GOLD_RECOVERY_DATA = {
         "st": "17:00"
       },
       "override": "OK",
-      "resolution": "NENHUMA"
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
     },
     "colab_branch-1_847_2026-10-20": {
       "note": "OK em massa pelo cabeçalho da data",
@@ -39276,31 +39561,34 @@ root.GOLD_RECOVERY_DATA = {
         "st": "17:00"
       },
       "override": "OK",
-      "resolution": "NENHUMA"
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
     },
     "colab_branch-1_847_2026-10-21": {
-      "note": "Dia futuro em aberto (desmarcado)",
+      "note": "OK em massa pelo cabeçalho da data",
       "punches": {
-        "em": "",
-        "et": "",
-        "sm": "",
-        "st": ""
+        "em": "08:00",
+        "et": "13:00",
+        "sm": "12:00",
+        "st": "17:00"
       },
-      "override": "VAZIO",
+      "override": "OK",
       "override2": "",
       "resolution": "NENHUMA",
       "atrasoMaiorMin": 0,
       "atrasoPequenoMin": 0
     },
     "colab_branch-1_847_2026-10-22": {
-      "note": "Dia futuro em aberto (desmarcado)",
+      "note": "OK em massa pelo cabeçalho da data",
       "punches": {
-        "em": "",
-        "et": "",
-        "sm": "",
-        "st": ""
+        "em": "08:00",
+        "et": "13:00",
+        "sm": "12:00",
+        "st": "17:00"
       },
-      "override": "VAZIO",
+      "override": "OK",
       "override2": "",
       "resolution": "NENHUMA",
       "atrasoMaiorMin": 0,
@@ -39813,7 +40101,10 @@ root.GOLD_RECOVERY_DATA = {
         "st": "17:00"
       },
       "override": "OK",
-      "resolution": "NENHUMA"
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
     },
     "colab_branch-1_863_2026-10-16": {
       "note": "OK em massa pelo cabeçalho da data",
@@ -39824,7 +40115,10 @@ root.GOLD_RECOVERY_DATA = {
         "st": "17:00"
       },
       "override": "OK",
-      "resolution": "NENHUMA"
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
     },
     "colab_branch-1_863_2026-10-17": {
       "note": "OK em massa pelo cabeçalho da data",
@@ -39835,7 +40129,10 @@ root.GOLD_RECOVERY_DATA = {
         "st": "17:00"
       },
       "override": "OK",
-      "resolution": "NENHUMA"
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
     },
     "colab_branch-1_863_2026-10-19": {
       "note": "OK em massa pelo cabeçalho da data",
@@ -39846,7 +40143,10 @@ root.GOLD_RECOVERY_DATA = {
         "st": "17:00"
       },
       "override": "OK",
-      "resolution": "NENHUMA"
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
     },
     "colab_branch-1_863_2026-10-20": {
       "note": "OK em massa pelo cabeçalho da data",
@@ -39857,31 +40157,34 @@ root.GOLD_RECOVERY_DATA = {
         "st": "17:00"
       },
       "override": "OK",
-      "resolution": "NENHUMA"
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
     },
     "colab_branch-1_863_2026-10-21": {
-      "note": "Dia futuro em aberto (desmarcado)",
+      "note": "OK em massa pelo cabeçalho da data",
       "punches": {
-        "em": "",
-        "et": "",
-        "sm": "",
-        "st": ""
+        "em": "08:00",
+        "et": "13:00",
+        "sm": "12:00",
+        "st": "17:00"
       },
-      "override": "VAZIO",
+      "override": "OK",
       "override2": "",
       "resolution": "NENHUMA",
       "atrasoMaiorMin": 0,
       "atrasoPequenoMin": 0
     },
     "colab_branch-1_863_2026-10-22": {
-      "note": "Dia futuro em aberto (desmarcado)",
+      "note": "OK em massa pelo cabeçalho da data",
       "punches": {
-        "em": "",
-        "et": "",
-        "sm": "",
-        "st": ""
+        "em": "08:00",
+        "et": "13:00",
+        "sm": "12:00",
+        "st": "17:00"
       },
-      "override": "VAZIO",
+      "override": "OK",
       "override2": "",
       "resolution": "NENHUMA",
       "atrasoMaiorMin": 0,
@@ -40030,7 +40333,10 @@ root.GOLD_RECOVERY_DATA = {
         "st": "17:00"
       },
       "override": "OK",
-      "resolution": "NENHUMA"
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
     },
     "colab_branch-1_898_2026-10-16": {
       "note": "OK em massa pelo cabeçalho da data",
@@ -40041,7 +40347,10 @@ root.GOLD_RECOVERY_DATA = {
         "st": "17:00"
       },
       "override": "OK",
-      "resolution": "NENHUMA"
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
     },
     "colab_branch-1_898_2026-10-17": {
       "note": "OK em massa pelo cabeçalho da data",
@@ -40052,7 +40361,10 @@ root.GOLD_RECOVERY_DATA = {
         "st": "17:00"
       },
       "override": "OK",
-      "resolution": "NENHUMA"
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
     },
     "colab_branch-1_898_2026-10-19": {
       "note": "OK em massa pelo cabeçalho da data",
@@ -40063,7 +40375,10 @@ root.GOLD_RECOVERY_DATA = {
         "st": "17:00"
       },
       "override": "OK",
-      "resolution": "NENHUMA"
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
     },
     "colab_branch-1_898_2026-10-20": {
       "note": "OK em massa pelo cabeçalho da data",
@@ -40074,7 +40389,10 @@ root.GOLD_RECOVERY_DATA = {
         "st": "17:00"
       },
       "override": "OK",
-      "resolution": "NENHUMA"
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
     },
     "colab_branch-1_898_2026-10-21": {
       "note": "Dia futuro em aberto (desmarcado)",
@@ -40391,7 +40709,10 @@ root.GOLD_RECOVERY_DATA = {
         "st": "17:00"
       },
       "override": "OK",
-      "resolution": "NENHUMA"
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
     },
     "colab_branch-1_900_2026-10-17": {
       "note": "OK em massa pelo cabeçalho da data",
@@ -40402,7 +40723,10 @@ root.GOLD_RECOVERY_DATA = {
         "st": "17:00"
       },
       "override": "OK",
-      "resolution": "NENHUMA"
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
     },
     "colab_branch-1_900_2026-10-19": {
       "note": "OK em massa pelo cabeçalho da data",
@@ -40413,7 +40737,10 @@ root.GOLD_RECOVERY_DATA = {
         "st": "17:00"
       },
       "override": "OK",
-      "resolution": "NENHUMA"
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
     },
     "colab_branch-1_900_2026-10-20": {
       "note": "OK em massa pelo cabeçalho da data",
@@ -40424,31 +40751,34 @@ root.GOLD_RECOVERY_DATA = {
         "st": "17:00"
       },
       "override": "OK",
-      "resolution": "NENHUMA"
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
     },
     "colab_branch-1_900_2026-10-21": {
-      "note": "Dia futuro em aberto (desmarcado)",
+      "note": "OK em massa pelo cabeçalho da data",
       "punches": {
-        "em": "",
-        "et": "",
-        "sm": "",
-        "st": ""
+        "em": "08:00",
+        "et": "13:00",
+        "sm": "12:00",
+        "st": "17:00"
       },
-      "override": "VAZIO",
+      "override": "OK",
       "override2": "",
       "resolution": "NENHUMA",
       "atrasoMaiorMin": 0,
       "atrasoPequenoMin": 0
     },
     "colab_branch-1_900_2026-10-22": {
-      "note": "Dia futuro em aberto (desmarcado)",
+      "note": "OK em massa pelo cabeçalho da data",
       "punches": {
-        "em": "",
-        "et": "",
-        "sm": "",
-        "st": ""
+        "em": "08:00",
+        "et": "13:00",
+        "sm": "12:00",
+        "st": "17:00"
       },
-      "override": "VAZIO",
+      "override": "OK",
       "override2": "",
       "resolution": "NENHUMA",
       "atrasoMaiorMin": 0,
@@ -40746,9 +41076,9 @@ root.GOLD_RECOVERY_DATA = {
       "override": "AUTO",
       "override2": "",
       "resolution": "NENHUMA",
-      "atrasoMaior": "",
+      "atrasoMaior": "02:51",
       "atrasoPequeno": "",
-      "atrasoMaiorMin": 0,
+      "atrasoMaiorMin": 171,
       "atrasoPequenoMin": 0
     },
     "colab_branch-1_908_2026-10-15": {
@@ -40776,7 +41106,10 @@ root.GOLD_RECOVERY_DATA = {
         "st": "17:00"
       },
       "override": "OK",
-      "resolution": "NENHUMA"
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
     },
     "colab_branch-1_908_2026-10-17": {
       "note": "OK em massa pelo cabeçalho da data",
@@ -40787,7 +41120,10 @@ root.GOLD_RECOVERY_DATA = {
         "st": "17:00"
       },
       "override": "OK",
-      "resolution": "NENHUMA"
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
     },
     "colab_branch-1_908_2026-10-19": {
       "note": "OK em massa pelo cabeçalho da data",
@@ -40798,7 +41134,10 @@ root.GOLD_RECOVERY_DATA = {
         "st": "17:00"
       },
       "override": "OK",
-      "resolution": "NENHUMA"
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
     },
     "colab_branch-1_908_2026-10-20": {
       "note": "OK em massa pelo cabeçalho da data",
@@ -40809,17 +41148,20 @@ root.GOLD_RECOVERY_DATA = {
         "st": "17:00"
       },
       "override": "OK",
-      "resolution": "NENHUMA"
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
     },
     "colab_branch-1_908_2026-10-21": {
-      "note": "Dia futuro em aberto (desmarcado)",
+      "note": "OK em massa pelo cabeçalho da data",
       "punches": {
-        "em": "",
-        "et": "",
-        "sm": "",
-        "st": ""
+        "em": "08:00",
+        "et": "13:00",
+        "sm": "12:00",
+        "st": "17:00"
       },
-      "override": "VAZIO",
+      "override": "OK",
       "override2": "",
       "resolution": "NENHUMA",
       "atrasoMaiorMin": 0,
@@ -40833,9 +41175,11 @@ root.GOLD_RECOVERY_DATA = {
         "sm": "",
         "st": ""
       },
-      "override": "VAZIO",
+      "override": "ATESTADO",
       "override2": "",
       "resolution": "NENHUMA",
+      "atrasoMaior": "",
+      "atrasoPequeno": "",
       "atrasoMaiorMin": 0,
       "atrasoPequenoMin": 0
     },
@@ -41142,7 +41486,10 @@ root.GOLD_RECOVERY_DATA = {
         "st": "17:00"
       },
       "override": "OK",
-      "resolution": "NENHUMA"
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
     },
     "colab_branch-1_917_2026-10-19": {
       "note": "OK em massa pelo cabeçalho da data",
@@ -41153,7 +41500,10 @@ root.GOLD_RECOVERY_DATA = {
         "st": "17:00"
       },
       "override": "OK",
-      "resolution": "NENHUMA"
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
     },
     "colab_branch-1_917_2026-10-20": {
       "note": "OK em massa pelo cabeçalho da data",
@@ -41164,31 +41514,34 @@ root.GOLD_RECOVERY_DATA = {
         "st": "17:00"
       },
       "override": "OK",
-      "resolution": "NENHUMA"
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
     },
     "colab_branch-1_917_2026-10-21": {
-      "note": "Dia futuro em aberto (desmarcado)",
+      "note": "OK em massa pelo cabeçalho da data",
       "punches": {
-        "em": "",
-        "et": "",
-        "sm": "",
-        "st": ""
+        "em": "08:00",
+        "et": "13:00",
+        "sm": "12:00",
+        "st": "17:00"
       },
-      "override": "VAZIO",
+      "override": "OK",
       "override2": "",
       "resolution": "NENHUMA",
       "atrasoMaiorMin": 0,
       "atrasoPequenoMin": 0
     },
     "colab_branch-1_917_2026-10-22": {
-      "note": "Dia futuro em aberto (desmarcado)",
+      "note": "OK em massa pelo cabeçalho da data",
       "punches": {
-        "em": "",
-        "et": "",
-        "sm": "",
-        "st": ""
+        "em": "08:00",
+        "et": "13:00",
+        "sm": "12:00",
+        "st": "17:00"
       },
-      "override": "VAZIO",
+      "override": "OK",
       "override2": "",
       "resolution": "NENHUMA",
       "atrasoMaiorMin": 0,
@@ -41337,7 +41690,10 @@ root.GOLD_RECOVERY_DATA = {
         "st": "17:00"
       },
       "override": "OK",
-      "resolution": "NENHUMA"
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
     },
     "colab_branch-1_937_2026-10-16": {
       "note": "OK em massa pelo cabeçalho da data",
@@ -41348,7 +41704,10 @@ root.GOLD_RECOVERY_DATA = {
         "st": "17:00"
       },
       "override": "OK",
-      "resolution": "NENHUMA"
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
     },
     "colab_branch-1_937_2026-10-17": {
       "note": "OK em massa pelo cabeçalho da data",
@@ -41359,7 +41718,10 @@ root.GOLD_RECOVERY_DATA = {
         "st": "17:00"
       },
       "override": "OK",
-      "resolution": "NENHUMA"
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
     },
     "colab_branch-1_937_2026-10-19": {
       "note": "OK em massa pelo cabeçalho da data",
@@ -41370,7 +41732,10 @@ root.GOLD_RECOVERY_DATA = {
         "st": "17:00"
       },
       "override": "OK",
-      "resolution": "NENHUMA"
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
     },
     "colab_branch-1_937_2026-10-20": {
       "note": "OK em massa pelo cabeçalho da data",
@@ -41381,7 +41746,10 @@ root.GOLD_RECOVERY_DATA = {
         "st": "17:00"
       },
       "override": "OK",
-      "resolution": "NENHUMA"
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
     },
     "colab_branch-1_937_2026-10-21": {
       "note": "Dia futuro em aberto (desmarcado)",
@@ -41615,8 +41983,8 @@ root.GOLD_RECOVERY_DATA = {
         "sm": "",
         "st": ""
       },
-      "override": "OK",
-      "override2": "",
+      "override": "SM",
+      "override2": "ET",
       "resolution": "NENHUMA",
       "atrasoMaior": "",
       "atrasoPequeno": "",
@@ -41684,7 +42052,10 @@ root.GOLD_RECOVERY_DATA = {
         "st": "17:00"
       },
       "override": "OK",
-      "resolution": "NENHUMA"
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
     },
     "colab_branch-1_942_2026-10-16": {
       "note": "OK em massa pelo cabeçalho da data",
@@ -41695,7 +42066,10 @@ root.GOLD_RECOVERY_DATA = {
         "st": "17:00"
       },
       "override": "OK",
-      "resolution": "NENHUMA"
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
     },
     "colab_branch-1_942_2026-10-17": {
       "note": "OK em massa pelo cabeçalho da data",
@@ -41706,7 +42080,10 @@ root.GOLD_RECOVERY_DATA = {
         "st": "17:00"
       },
       "override": "OK",
-      "resolution": "NENHUMA"
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
     },
     "colab_branch-1_942_2026-10-19": {
       "note": "OK em massa pelo cabeçalho da data",
@@ -41717,7 +42094,10 @@ root.GOLD_RECOVERY_DATA = {
         "st": "17:00"
       },
       "override": "OK",
-      "resolution": "NENHUMA"
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
     },
     "colab_branch-1_942_2026-10-20": {
       "note": "OK em massa pelo cabeçalho da data",
@@ -41728,31 +42108,34 @@ root.GOLD_RECOVERY_DATA = {
         "st": "17:00"
       },
       "override": "OK",
-      "resolution": "NENHUMA"
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
     },
     "colab_branch-1_942_2026-10-21": {
-      "note": "Dia futuro em aberto (desmarcado)",
+      "note": "OK em massa pelo cabeçalho da data",
       "punches": {
-        "em": "",
-        "et": "",
-        "sm": "",
-        "st": ""
+        "em": "08:00",
+        "et": "13:00",
+        "sm": "12:00",
+        "st": "17:00"
       },
-      "override": "VAZIO",
+      "override": "OK",
       "override2": "",
       "resolution": "NENHUMA",
       "atrasoMaiorMin": 0,
       "atrasoPequenoMin": 0
     },
     "colab_branch-1_942_2026-10-22": {
-      "note": "Dia futuro em aberto (desmarcado)",
+      "note": "OK em massa pelo cabeçalho da data",
       "punches": {
-        "em": "",
-        "et": "",
-        "sm": "",
-        "st": ""
+        "em": "08:00",
+        "et": "13:00",
+        "sm": "12:00",
+        "st": "17:00"
       },
-      "override": "VAZIO",
+      "override": "OK",
       "override2": "",
       "resolution": "NENHUMA",
       "atrasoMaiorMin": 0,
@@ -42266,7 +42649,10 @@ root.GOLD_RECOVERY_DATA = {
         "st": "17:00"
       },
       "override": "OK",
-      "resolution": "NENHUMA"
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
     },
     "colab_branch-1_955_2026-10-16": {
       "note": "OK em massa pelo cabeçalho da data",
@@ -42277,7 +42663,10 @@ root.GOLD_RECOVERY_DATA = {
         "st": "17:00"
       },
       "override": "OK",
-      "resolution": "NENHUMA"
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
     },
     "colab_branch-1_955_2026-10-17": {
       "note": "OK em massa pelo cabeçalho da data",
@@ -42288,7 +42677,10 @@ root.GOLD_RECOVERY_DATA = {
         "st": "17:00"
       },
       "override": "OK",
-      "resolution": "NENHUMA"
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
     },
     "colab_branch-1_955_2026-10-19": {
       "note": "OK em massa pelo cabeçalho da data",
@@ -42299,7 +42691,10 @@ root.GOLD_RECOVERY_DATA = {
         "st": "17:00"
       },
       "override": "OK",
-      "resolution": "NENHUMA"
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
     },
     "colab_branch-1_955_2026-10-20": {
       "note": "OK em massa pelo cabeçalho da data",
@@ -42310,31 +42705,34 @@ root.GOLD_RECOVERY_DATA = {
         "st": "17:00"
       },
       "override": "OK",
-      "resolution": "NENHUMA"
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
     },
     "colab_branch-1_955_2026-10-21": {
-      "note": "Dia futuro em aberto (desmarcado)",
+      "note": "OK em massa pelo cabeçalho da data",
       "punches": {
-        "em": "",
-        "et": "",
-        "sm": "",
-        "st": ""
+        "em": "08:00",
+        "et": "13:00",
+        "sm": "12:00",
+        "st": "17:00"
       },
-      "override": "VAZIO",
+      "override": "OK",
       "override2": "",
       "resolution": "NENHUMA",
       "atrasoMaiorMin": 0,
       "atrasoPequenoMin": 0
     },
     "colab_branch-1_955_2026-10-22": {
-      "note": "Dia futuro em aberto (desmarcado)",
+      "note": "OK em massa pelo cabeçalho da data",
       "punches": {
-        "em": "",
-        "et": "",
-        "sm": "",
-        "st": ""
+        "em": "08:00",
+        "et": "13:00",
+        "sm": "12:00",
+        "st": "17:00"
       },
-      "override": "VAZIO",
+      "override": "OK",
       "override2": "",
       "resolution": "NENHUMA",
       "atrasoMaiorMin": 0,
@@ -42477,9 +42875,9 @@ root.GOLD_RECOVERY_DATA = {
       "override": "OK",
       "override2": "",
       "resolution": "NENHUMA",
-      "atrasoMaior": "",
+      "atrasoMaior": "01:23",
       "atrasoPequeno": "",
-      "atrasoMaiorMin": 0,
+      "atrasoMaiorMin": 83,
       "atrasoPequenoMin": 0
     },
     "colab_branch-1_961_2026-10-03": {
@@ -42643,7 +43041,10 @@ root.GOLD_RECOVERY_DATA = {
         "st": "17:00"
       },
       "override": "OK",
-      "resolution": "NENHUMA"
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
     },
     "colab_branch-1_961_2026-10-19": {
       "note": "OK em massa pelo cabeçalho da data",
@@ -42670,31 +43071,34 @@ root.GOLD_RECOVERY_DATA = {
         "st": "17:00"
       },
       "override": "OK",
-      "resolution": "NENHUMA"
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
     },
     "colab_branch-1_961_2026-10-21": {
-      "note": "Dia futuro em aberto (desmarcado)",
+      "note": "OK em massa pelo cabeçalho da data",
       "punches": {
-        "em": "",
-        "et": "",
-        "sm": "",
-        "st": ""
+        "em": "08:00",
+        "et": "13:00",
+        "sm": "12:00",
+        "st": "17:00"
       },
-      "override": "VAZIO",
+      "override": "OK",
       "override2": "",
       "resolution": "NENHUMA",
       "atrasoMaiorMin": 0,
       "atrasoPequenoMin": 0
     },
     "colab_branch-1_961_2026-10-22": {
-      "note": "Dia futuro em aberto (desmarcado)",
+      "note": "OK em massa pelo cabeçalho da data",
       "punches": {
-        "em": "",
-        "et": "",
-        "sm": "",
-        "st": ""
+        "em": "08:00",
+        "et": "13:00",
+        "sm": "12:00",
+        "st": "17:00"
       },
-      "override": "VAZIO",
+      "override": "OK",
       "override2": "",
       "resolution": "NENHUMA",
       "atrasoMaiorMin": 0,
@@ -43032,8 +43436,13 @@ root.GOLD_RECOVERY_DATA = {
         "sm": "12:00",
         "st": "17:00"
       },
-      "override": "OK",
-      "resolution": "NENHUMA"
+      "override": "ATESTADO",
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaior": "",
+      "atrasoPequeno": "",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
     },
     "colab_branch-1_963_2026-10-21": {
       "note": "OK em massa pelo cabeçalho da data (Replicado de 15/10/2026)",
@@ -43226,7 +43635,10 @@ root.GOLD_RECOVERY_DATA = {
         "st": "17:00"
       },
       "override": "OK",
-      "resolution": "NENHUMA"
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
     },
     "colab_branch-1_965_2026-10-16": {
       "note": "OK em massa pelo cabeçalho da data",
@@ -43237,7 +43649,10 @@ root.GOLD_RECOVERY_DATA = {
         "st": "17:00"
       },
       "override": "OK",
-      "resolution": "NENHUMA"
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
     },
     "colab_branch-1_965_2026-10-17": {
       "note": "OK em massa pelo cabeçalho da data",
@@ -43248,7 +43663,10 @@ root.GOLD_RECOVERY_DATA = {
         "st": "17:00"
       },
       "override": "OK",
-      "resolution": "NENHUMA"
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
     },
     "colab_branch-1_965_2026-10-19": {
       "note": "OK em massa pelo cabeçalho da data",
@@ -43259,7 +43677,10 @@ root.GOLD_RECOVERY_DATA = {
         "st": "17:00"
       },
       "override": "OK",
-      "resolution": "NENHUMA"
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
     },
     "colab_branch-1_965_2026-10-20": {
       "note": "OK em massa pelo cabeçalho da data",
@@ -43270,7 +43691,10 @@ root.GOLD_RECOVERY_DATA = {
         "st": "17:00"
       },
       "override": "OK",
-      "resolution": "NENHUMA"
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
     },
     "colab_branch-1_965_2026-10-21": {
       "note": "Dia futuro em aberto (desmarcado)",
@@ -43569,7 +43993,10 @@ root.GOLD_RECOVERY_DATA = {
         "st": "17:00"
       },
       "override": "OK",
-      "resolution": "NENHUMA"
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
     },
     "colab_branch-1_970_2026-10-16": {
       "note": "OK em massa pelo cabeçalho da data",
@@ -43580,7 +44007,10 @@ root.GOLD_RECOVERY_DATA = {
         "st": "17:00"
       },
       "override": "OK",
-      "resolution": "NENHUMA"
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
     },
     "colab_branch-1_970_2026-10-17": {
       "note": "OK em massa pelo cabeçalho da data",
@@ -43591,7 +44021,10 @@ root.GOLD_RECOVERY_DATA = {
         "st": "17:00"
       },
       "override": "OK",
-      "resolution": "NENHUMA"
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
     },
     "colab_branch-1_970_2026-10-19": {
       "note": "OK em massa pelo cabeçalho da data",
@@ -43602,7 +44035,10 @@ root.GOLD_RECOVERY_DATA = {
         "st": "17:00"
       },
       "override": "OK",
-      "resolution": "NENHUMA"
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
     },
     "colab_branch-1_970_2026-10-20": {
       "note": "OK em massa pelo cabeçalho da data",
@@ -43613,31 +44049,34 @@ root.GOLD_RECOVERY_DATA = {
         "st": "17:00"
       },
       "override": "OK",
-      "resolution": "NENHUMA"
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
     },
     "colab_branch-1_970_2026-10-21": {
-      "note": "Dia futuro em aberto (desmarcado)",
+      "note": "OK em massa pelo cabeçalho da data",
       "punches": {
-        "em": "",
-        "et": "",
-        "sm": "",
-        "st": ""
+        "em": "08:00",
+        "et": "13:00",
+        "sm": "12:00",
+        "st": "17:00"
       },
-      "override": "VAZIO",
+      "override": "OK",
       "override2": "",
       "resolution": "NENHUMA",
       "atrasoMaiorMin": 0,
       "atrasoPequenoMin": 0
     },
     "colab_branch-1_970_2026-10-22": {
-      "note": "Dia futuro em aberto (desmarcado)",
+      "note": "OK em massa pelo cabeçalho da data",
       "punches": {
-        "em": "",
-        "et": "",
-        "sm": "",
-        "st": ""
+        "em": "08:00",
+        "et": "13:00",
+        "sm": "12:00",
+        "st": "17:00"
       },
-      "override": "VAZIO",
+      "override": "OK",
       "override2": "",
       "resolution": "NENHUMA",
       "atrasoMaiorMin": 0,
@@ -43786,7 +44225,10 @@ root.GOLD_RECOVERY_DATA = {
         "st": "17:00"
       },
       "override": "OK",
-      "resolution": "NENHUMA"
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
     },
     "colab_branch-1_974_2026-10-16": {
       "note": "OK em massa pelo cabeçalho da data",
@@ -43797,7 +44239,10 @@ root.GOLD_RECOVERY_DATA = {
         "st": "17:00"
       },
       "override": "OK",
-      "resolution": "NENHUMA"
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
     },
     "colab_branch-1_974_2026-10-17": {
       "note": "OK em massa pelo cabeçalho da data",
@@ -43808,7 +44253,10 @@ root.GOLD_RECOVERY_DATA = {
         "st": "17:00"
       },
       "override": "OK",
-      "resolution": "NENHUMA"
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
     },
     "colab_branch-1_974_2026-10-19": {
       "note": "OK em massa pelo cabeçalho da data",
@@ -43819,7 +44267,10 @@ root.GOLD_RECOVERY_DATA = {
         "st": "17:00"
       },
       "override": "OK",
-      "resolution": "NENHUMA"
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
     },
     "colab_branch-1_974_2026-10-20": {
       "note": "OK em massa pelo cabeçalho da data",
@@ -43830,7 +44281,10 @@ root.GOLD_RECOVERY_DATA = {
         "st": "17:00"
       },
       "override": "OK",
-      "resolution": "NENHUMA"
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
     },
     "colab_branch-1_974_2026-10-21": {
       "note": "Dia futuro em aberto (desmarcado)",
@@ -44131,7 +44585,10 @@ root.GOLD_RECOVERY_DATA = {
         "st": "17:00"
       },
       "override": "OK",
-      "resolution": "NENHUMA"
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
     },
     "colab_branch-1_975_2026-10-16": {
       "note": "OK em massa pelo cabeçalho da data",
@@ -44142,7 +44599,10 @@ root.GOLD_RECOVERY_DATA = {
         "st": "17:00"
       },
       "override": "OK",
-      "resolution": "NENHUMA"
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
     },
     "colab_branch-1_975_2026-10-17": {
       "note": "OK em massa pelo cabeçalho da data",
@@ -44153,7 +44613,10 @@ root.GOLD_RECOVERY_DATA = {
         "st": "17:00"
       },
       "override": "OK",
-      "resolution": "NENHUMA"
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
     },
     "colab_branch-1_975_2026-10-19": {
       "note": "OK em massa pelo cabeçalho da data",
@@ -44164,7 +44627,10 @@ root.GOLD_RECOVERY_DATA = {
         "st": "17:00"
       },
       "override": "OK",
-      "resolution": "NENHUMA"
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
     },
     "colab_branch-1_975_2026-10-20": {
       "note": "OK em massa pelo cabeçalho da data",
@@ -44175,31 +44641,34 @@ root.GOLD_RECOVERY_DATA = {
         "st": "17:00"
       },
       "override": "OK",
-      "resolution": "NENHUMA"
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
     },
     "colab_branch-1_975_2026-10-21": {
-      "note": "Dia futuro em aberto (desmarcado)",
+      "note": "OK em massa pelo cabeçalho da data",
       "punches": {
-        "em": "",
-        "et": "",
-        "sm": "",
-        "st": ""
+        "em": "08:00",
+        "et": "13:00",
+        "sm": "12:00",
+        "st": "17:00"
       },
-      "override": "VAZIO",
+      "override": "OK",
       "override2": "",
       "resolution": "NENHUMA",
       "atrasoMaiorMin": 0,
       "atrasoPequenoMin": 0
     },
     "colab_branch-1_975_2026-10-22": {
-      "note": "Dia futuro em aberto (desmarcado)",
+      "note": "OK em massa pelo cabeçalho da data",
       "punches": {
-        "em": "",
-        "et": "",
-        "sm": "",
-        "st": ""
+        "em": "08:00",
+        "et": "13:00",
+        "sm": "12:00",
+        "st": "17:00"
       },
-      "override": "VAZIO",
+      "override": "OK",
       "override2": "",
       "resolution": "NENHUMA",
       "atrasoMaiorMin": 0,
@@ -44534,7 +45003,10 @@ root.GOLD_RECOVERY_DATA = {
         "st": "17:00"
       },
       "override": "OK",
-      "resolution": "NENHUMA"
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
     },
     "colab_branch-1_986_2026-10-20": {
       "note": "Dia futuro em aberto (desmarcado)",
@@ -44847,7 +45319,10 @@ root.GOLD_RECOVERY_DATA = {
         "st": "17:00"
       },
       "override": "OK",
-      "resolution": "NENHUMA"
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
     },
     "colab_branch-1_989_2026-10-16": {
       "note": "OK em massa pelo cabeçalho da data",
@@ -44874,7 +45349,10 @@ root.GOLD_RECOVERY_DATA = {
         "st": "17:00"
       },
       "override": "OK",
-      "resolution": "NENHUMA"
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
     },
     "colab_branch-1_989_2026-10-19": {
       "note": "OK em massa pelo cabeçalho da data",
@@ -44885,7 +45363,10 @@ root.GOLD_RECOVERY_DATA = {
         "st": "17:00"
       },
       "override": "OK",
-      "resolution": "NENHUMA"
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
     },
     "colab_branch-1_989_2026-10-20": {
       "note": "OK em massa pelo cabeçalho da data",
@@ -44896,31 +45377,36 @@ root.GOLD_RECOVERY_DATA = {
         "st": "17:00"
       },
       "override": "OK",
-      "resolution": "NENHUMA"
-    },
-    "colab_branch-1_989_2026-10-21": {
-      "note": "Dia futuro em aberto (desmarcado)",
-      "punches": {
-        "em": "",
-        "et": "",
-        "sm": "",
-        "st": ""
-      },
-      "override": "VAZIO",
       "override2": "",
       "resolution": "NENHUMA",
       "atrasoMaiorMin": 0,
       "atrasoPequenoMin": 0
     },
-    "colab_branch-1_989_2026-10-22": {
-      "note": "Dia futuro em aberto (desmarcado)",
+    "colab_branch-1_989_2026-10-21": {
+      "note": "OK em massa pelo cabeçalho da data",
       "punches": {
-        "em": "",
-        "et": "",
-        "sm": "",
-        "st": ""
+        "em": "08:00",
+        "et": "13:00",
+        "sm": "12:00",
+        "st": "17:00"
       },
-      "override": "VAZIO",
+      "override": "AUTO",
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaior": "00:22",
+      "atrasoPequeno": "",
+      "atrasoMaiorMin": 22,
+      "atrasoPequenoMin": 0
+    },
+    "colab_branch-1_989_2026-10-22": {
+      "note": "OK em massa pelo cabeçalho da data",
+      "punches": {
+        "em": "08:00",
+        "et": "13:00",
+        "sm": "12:00",
+        "st": "17:00"
+      },
+      "override": "OK",
       "override2": "",
       "resolution": "NENHUMA",
       "atrasoMaiorMin": 0,
@@ -45130,7 +45616,7 @@ root.GOLD_RECOVERY_DATA = {
         "sm": "",
         "st": ""
       },
-      "override": "1/2 ATESTADO",
+      "override": "FT",
       "override2": "",
       "resolution": "NENHUMA",
       "atrasoMaior": "",
@@ -45174,7 +45660,7 @@ root.GOLD_RECOVERY_DATA = {
         "sm": "12:00",
         "st": "17:00"
       },
-      "override": "1/2 ATESTADO",
+      "override": "FT",
       "override2": "",
       "resolution": "NENHUMA",
       "atrasoMaior": "",
@@ -45191,7 +45677,12 @@ root.GOLD_RECOVERY_DATA = {
         "st": "17:00"
       },
       "override": "OK",
-      "resolution": "NENHUMA"
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaior": "",
+      "atrasoPequeno": "",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
     },
     "colab_branch-1_997_2026-10-15": {
       "note": "OK em massa pelo cabeçalho da data",
@@ -45274,28 +45765,28 @@ root.GOLD_RECOVERY_DATA = {
       "atrasoPequenoMin": 0
     },
     "colab_branch-1_997_2026-10-21": {
-      "note": "Dia futuro em aberto (desmarcado)",
+      "note": "OK em massa pelo cabeçalho da data",
       "punches": {
-        "em": "",
-        "et": "",
-        "sm": "",
-        "st": ""
+        "em": "08:00",
+        "et": "13:00",
+        "sm": "12:00",
+        "st": "17:00"
       },
-      "override": "VAZIO",
+      "override": "OK",
       "override2": "",
       "resolution": "NENHUMA",
       "atrasoMaiorMin": 0,
       "atrasoPequenoMin": 0
     },
     "colab_branch-1_997_2026-10-22": {
-      "note": "Dia futuro em aberto (desmarcado)",
+      "note": "OK em massa pelo cabeçalho da data",
       "punches": {
-        "em": "",
-        "et": "",
-        "sm": "",
-        "st": ""
+        "em": "08:00",
+        "et": "13:00",
+        "sm": "12:00",
+        "st": "17:00"
       },
-      "override": "VAZIO",
+      "override": "OK",
       "override2": "",
       "resolution": "NENHUMA",
       "atrasoMaiorMin": 0,
@@ -45463,7 +45954,7 @@ root.GOLD_RECOVERY_DATA = {
         "sm": "",
         "st": ""
       },
-      "override": "1/2 ATESTADO",
+      "override": "FM",
       "override2": "",
       "resolution": "NENHUMA",
       "atrasoMaior": "",
@@ -45549,7 +46040,7 @@ root.GOLD_RECOVERY_DATA = {
         "sm": "12:00",
         "st": "17:00"
       },
-      "override": "ATESTADO",
+      "override": "FALTA",
       "override2": "",
       "resolution": "NENHUMA",
       "atrasoMaior": "",
@@ -45593,7 +46084,10 @@ root.GOLD_RECOVERY_DATA = {
         "st": "17:00"
       },
       "override": "OK",
-      "resolution": "NENHUMA"
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
     },
     "colab_branch-1_999_2026-10-17": {
       "note": "OK em massa pelo cabeçalho da data",
@@ -45604,7 +46098,10 @@ root.GOLD_RECOVERY_DATA = {
         "st": "17:00"
       },
       "override": "OK",
-      "resolution": "NENHUMA"
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
     },
     "colab_branch-1_999_2026-10-19": {
       "note": "OK em massa pelo cabeçalho da data",
@@ -45631,31 +46128,34 @@ root.GOLD_RECOVERY_DATA = {
         "st": "17:00"
       },
       "override": "OK",
-      "resolution": "NENHUMA"
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
     },
     "colab_branch-1_999_2026-10-21": {
-      "note": "Dia futuro em aberto (desmarcado)",
+      "note": "OK em massa pelo cabeçalho da data",
       "punches": {
-        "em": "",
-        "et": "",
-        "sm": "",
-        "st": ""
+        "em": "08:00",
+        "et": "13:00",
+        "sm": "12:00",
+        "st": "17:00"
       },
-      "override": "VAZIO",
+      "override": "OK",
       "override2": "",
       "resolution": "NENHUMA",
       "atrasoMaiorMin": 0,
       "atrasoPequenoMin": 0
     },
     "colab_branch-1_999_2026-10-22": {
-      "note": "Dia futuro em aberto (desmarcado)",
+      "note": "OK em massa pelo cabeçalho da data",
       "punches": {
-        "em": "",
-        "et": "",
-        "sm": "",
-        "st": ""
+        "em": "08:00",
+        "et": "13:00",
+        "sm": "12:00",
+        "st": "17:00"
       },
-      "override": "VAZIO",
+      "override": "OK",
       "override2": "",
       "resolution": "NENHUMA",
       "atrasoMaiorMin": 0,
@@ -46466,19 +46966,19 @@ root.GOLD_RECOVERY_DATA = {
       "atrasoPequenoMin": 0
     },
     "colab_branch-2_288_2026-10-16": {
+      "note": "OK em massa pelo cabeçalho da data",
+      "punches": {
+        "em": "08:00",
+        "et": "13:00",
+        "sm": "12:00",
+        "st": "17:00"
+      },
       "override": "OK",
       "override2": "",
       "resolution": "NENHUMA",
-      "punches": {
-        "em": "08:00",
-        "sm": "12:00",
-        "et": "13:00",
-        "st": "17:00"
-      },
-      "note": "OK em massa pelo cabeçalho da data",
       "atrasoMaior": "",
-      "atrasoMaiorMin": 0,
       "atrasoPequeno": "",
+      "atrasoMaiorMin": 0,
       "atrasoPequenoMin": 0
     },
     "colab_branch-2_288_2026-10-17": {
@@ -46490,7 +46990,12 @@ root.GOLD_RECOVERY_DATA = {
         "st": "17:00"
       },
       "override": "OK",
-      "resolution": "NENHUMA"
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaior": "",
+      "atrasoPequeno": "",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
     },
     "colab_branch-2_288_2026-10-19": {
       "note": "OK em massa pelo cabeçalho da data",
@@ -46501,7 +47006,12 @@ root.GOLD_RECOVERY_DATA = {
         "st": "17:00"
       },
       "override": "OK",
-      "resolution": "NENHUMA"
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaior": "",
+      "atrasoPequeno": "",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
     },
     "colab_branch-2_288_2026-10-20": {
       "note": "OK em massa pelo cabeçalho da data",
@@ -46512,7 +47022,12 @@ root.GOLD_RECOVERY_DATA = {
         "st": "17:00"
       },
       "override": "OK",
-      "resolution": "NENHUMA"
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaior": "",
+      "atrasoPequeno": "",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
     },
     "colab_branch-2_288_2026-10-21": {
       "note": "Férias (Planilha) (Replicado de 10/10/2026)",
@@ -46815,7 +47330,10 @@ root.GOLD_RECOVERY_DATA = {
         "st": "17:00"
       },
       "override": "OK",
-      "resolution": "NENHUMA"
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
     },
     "colab_branch-2_456_2026-10-16": {
       "note": "OK em massa pelo cabeçalho da data",
@@ -46826,7 +47344,10 @@ root.GOLD_RECOVERY_DATA = {
         "st": "17:00"
       },
       "override": "OK",
-      "resolution": "NENHUMA"
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
     },
     "colab_branch-2_456_2026-10-17": {
       "note": "OK em massa pelo cabeçalho da data",
@@ -46837,7 +47358,10 @@ root.GOLD_RECOVERY_DATA = {
         "st": "17:00"
       },
       "override": "OK",
-      "resolution": "NENHUMA"
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
     },
     "colab_branch-2_456_2026-10-19": {
       "note": "OK em massa pelo cabeçalho da data",
@@ -46848,7 +47372,10 @@ root.GOLD_RECOVERY_DATA = {
         "st": "17:00"
       },
       "override": "OK",
-      "resolution": "NENHUMA"
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
     },
     "colab_branch-2_456_2026-10-20": {
       "note": "OK em massa pelo cabeçalho da data",
@@ -46859,31 +47386,36 @@ root.GOLD_RECOVERY_DATA = {
         "st": "17:00"
       },
       "override": "OK",
-      "resolution": "NENHUMA"
-    },
-    "colab_branch-2_456_2026-10-21": {
-      "note": "Dia futuro em aberto (desmarcado)",
-      "punches": {
-        "em": "",
-        "et": "",
-        "sm": "",
-        "st": ""
-      },
-      "override": "VAZIO",
       "override2": "",
       "resolution": "NENHUMA",
       "atrasoMaiorMin": 0,
       "atrasoPequenoMin": 0
     },
-    "colab_branch-2_456_2026-10-22": {
-      "note": "Dia futuro em aberto (desmarcado)",
+    "colab_branch-2_456_2026-10-21": {
+      "note": "OK em massa pelo cabeçalho da data",
       "punches": {
-        "em": "",
-        "et": "",
-        "sm": "",
-        "st": ""
+        "em": "08:00",
+        "et": "13:00",
+        "sm": "12:00",
+        "st": "17:00"
       },
-      "override": "VAZIO",
+      "override": "FM",
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaior": "",
+      "atrasoPequeno": "",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
+    },
+    "colab_branch-2_456_2026-10-22": {
+      "note": "OK em massa pelo cabeçalho da data",
+      "punches": {
+        "em": "08:00",
+        "et": "13:00",
+        "sm": "12:00",
+        "st": "17:00"
+      },
+      "override": "OK",
       "override2": "",
       "resolution": "NENHUMA",
       "atrasoMaiorMin": 0,
@@ -47032,7 +47564,10 @@ root.GOLD_RECOVERY_DATA = {
         "st": "17:00"
       },
       "override": "OK",
-      "resolution": "NENHUMA"
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
     },
     "colab_branch-2_463_2026-10-16": {
       "note": "Dia futuro em aberto (desmarcado)",
@@ -47231,307 +47766,321 @@ root.GOLD_RECOVERY_DATA = {
       "atrasoPequenoMin": 0
     },
     "colab_branch-2_561_2026-10-01": {
-      "override": "OK",
-      "override2": "",
-      "resolution": "NENHUMA",
+      "note": "Falta integral (Planilha)",
       "punches": {
         "em": "",
-        "sm": "",
         "et": "",
+        "sm": "",
         "st": ""
       },
-      "note": "Falta integral (Planilha)",
+      "override": "FALTA",
+      "override2": "",
+      "resolution": "NENHUMA",
       "atrasoMaior": "",
-      "atrasoMaiorMin": 0,
       "atrasoPequeno": "",
+      "atrasoMaiorMin": 0,
       "atrasoPequenoMin": 0
     },
     "colab_branch-2_561_2026-10-02": {
-      "override": "OK",
-      "override2": "",
-      "resolution": "NENHUMA",
+      "note": "Falta integral (Planilha)",
       "punches": {
         "em": "",
-        "sm": "",
         "et": "",
+        "sm": "",
         "st": ""
       },
-      "note": "Falta integral (Planilha) (Replicado de 01/10/2026)",
+      "override": "FALTA",
+      "override2": "",
+      "resolution": "NENHUMA",
       "atrasoMaior": "",
-      "atrasoMaiorMin": 0,
       "atrasoPequeno": "",
+      "atrasoMaiorMin": 0,
       "atrasoPequenoMin": 0
     },
     "colab_branch-2_561_2026-10-03": {
+      "note": "Presença regular (Planilha)",
+      "punches": {
+        "em": "08:00",
+        "et": "13:00",
+        "sm": "12:00",
+        "st": "17:00"
+      },
       "override": "OK",
       "override2": "",
       "resolution": "NENHUMA",
-      "punches": {
-        "em": "",
-        "sm": "",
-        "et": "",
-        "st": ""
-      },
-      "note": "Falta integral (Planilha) (Replicado de 01/10/2026)",
       "atrasoMaior": "",
-      "atrasoMaiorMin": 0,
       "atrasoPequeno": "",
+      "atrasoMaiorMin": 0,
       "atrasoPequenoMin": 0
     },
     "colab_branch-2_561_2026-10-05": {
-      "override": "OK",
-      "override2": "",
-      "resolution": "NENHUMA",
+      "note": "Pendência ST (Planilha)",
       "punches": {
         "em": "",
-        "sm": "",
         "et": "",
+        "sm": "",
         "st": ""
       },
-      "note": "Falta integral (Planilha) (Replicado de 01/10/2026)",
+      "override": "ST",
+      "override2": "",
+      "resolution": "NENHUMA",
       "atrasoMaior": "",
-      "atrasoMaiorMin": 0,
       "atrasoPequeno": "00:08",
-      "atrasoPequenoMin": 8
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
     },
     "colab_branch-2_561_2026-10-06": {
-      "override": "OK",
-      "override2": "",
-      "resolution": "NENHUMA",
+      "note": "Pendência SM (Planilha)",
       "punches": {
         "em": "",
-        "sm": "",
         "et": "",
+        "sm": "",
         "st": ""
       },
-      "note": "Falta integral (Planilha) (Replicado de 01/10/2026)",
+      "override": "SM",
+      "override2": "",
+      "resolution": "NENHUMA",
       "atrasoMaior": "",
-      "atrasoMaiorMin": 0,
       "atrasoPequeno": "",
+      "atrasoMaiorMin": 0,
       "atrasoPequenoMin": 0
     },
     "colab_branch-2_561_2026-10-07": {
-      "override": "OK",
-      "override2": "",
-      "resolution": "NENHUMA",
+      "note": "Falta integral (Planilha)",
       "punches": {
         "em": "",
-        "sm": "",
         "et": "",
+        "sm": "",
         "st": ""
       },
-      "note": "Falta integral (Planilha) (Replicado de 01/10/2026)",
+      "override": "FALTA",
+      "override2": "",
+      "resolution": "NENHUMA",
       "atrasoMaior": "",
-      "atrasoMaiorMin": 0,
       "atrasoPequeno": "",
+      "atrasoMaiorMin": 0,
       "atrasoPequenoMin": 0
     },
     "colab_branch-2_561_2026-10-08": {
-      "override": "OK",
-      "override2": "",
-      "resolution": "NENHUMA",
+      "note": "Dupla pendência SM+ST (Planilha)",
       "punches": {
         "em": "",
-        "sm": "",
         "et": "",
+        "sm": "",
         "st": ""
       },
-      "note": "Falta integral (Planilha) (Replicado de 01/10/2026)",
+      "override": "SM",
+      "override2": "ST",
+      "resolution": "NENHUMA",
       "atrasoMaior": "",
-      "atrasoMaiorMin": 0,
       "atrasoPequeno": "",
+      "atrasoMaiorMin": 0,
       "atrasoPequenoMin": 0
     },
     "colab_branch-2_561_2026-10-09": {
-      "override": "OK",
-      "override2": "",
-      "resolution": "NENHUMA",
+      "note": "Pendência SM (Planilha)",
       "punches": {
         "em": "",
-        "sm": "",
         "et": "",
+        "sm": "",
         "st": ""
       },
-      "note": "Falta integral (Planilha) (Replicado de 01/10/2026)",
+      "override": "SM",
+      "override2": "",
+      "resolution": "NENHUMA",
       "atrasoMaior": "",
-      "atrasoMaiorMin": 0,
       "atrasoPequeno": "00:13",
-      "atrasoPequenoMin": 13
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
     },
     "colab_branch-2_561_2026-10-10": {
+      "note": "Presença regular (Planilha)",
+      "punches": {
+        "em": "08:00",
+        "et": "13:00",
+        "sm": "12:00",
+        "st": "17:00"
+      },
+      "override": "ET",
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaior": "",
+      "atrasoPequeno": "",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
+    },
+    "colab_branch-2_561_2026-10-12": {
+      "note": "Falta integral (Planilha) (Replicado de 01/10/2026)",
+      "punches": {
+        "em": "",
+        "et": "",
+        "sm": "",
+        "st": ""
+      },
       "override": "OK",
       "override2": "",
       "resolution": "NENHUMA",
-      "punches": {
-        "em": "",
-        "sm": "",
-        "et": "",
-        "st": ""
-      },
-      "note": "Falta integral (Planilha) (Replicado de 01/10/2026)",
       "atrasoMaior": "",
-      "atrasoMaiorMin": 0,
       "atrasoPequeno": "",
+      "atrasoMaiorMin": 0,
       "atrasoPequenoMin": 0
     },
     "colab_branch-2_561_2026-10-13": {
+      "note": "Abono/OK em massa pelo cabeçalho da data",
+      "punches": {
+        "em": "08:00",
+        "et": "13:00",
+        "sm": "12:00",
+        "st": "17:00"
+      },
       "override": "OK",
       "override2": "",
-      "resolution": "NENHUMA",
-      "punches": {
-        "em": "",
-        "sm": "",
-        "et": "",
-        "st": ""
-      },
-      "note": "Falta integral (Planilha) (Replicado de 01/10/2026)",
+      "resolution": "ABONAR",
       "atrasoMaior": "",
-      "atrasoMaiorMin": 0,
       "atrasoPequeno": "",
+      "atrasoMaiorMin": 0,
       "atrasoPequenoMin": 0
     },
     "colab_branch-2_561_2026-10-14": {
+      "note": "OK em massa pelo cabeçalho da data",
+      "punches": {
+        "em": "08:00",
+        "et": "13:00",
+        "sm": "12:00",
+        "st": "17:00"
+      },
       "override": "OK",
       "override2": "",
       "resolution": "NENHUMA",
-      "punches": {
-        "em": "",
-        "sm": "",
-        "et": "",
-        "st": ""
-      },
-      "note": "Falta integral (Planilha) (Replicado de 01/10/2026)",
       "atrasoMaior": "",
-      "atrasoMaiorMin": 0,
       "atrasoPequeno": "00:07",
+      "atrasoMaiorMin": 0,
       "atrasoPequenoMin": 7
     },
     "colab_branch-2_561_2026-10-15": {
+      "note": "Falta integral (Planilha) (Replicado de 01/10/2026)",
+      "punches": {
+        "em": "",
+        "et": "",
+        "sm": "",
+        "st": ""
+      },
       "override": "OK",
       "override2": "",
       "resolution": "NENHUMA",
-      "punches": {
-        "em": "",
-        "sm": "",
-        "et": "",
-        "st": ""
-      },
-      "note": "Falta integral (Planilha) (Replicado de 01/10/2026)",
       "atrasoMaior": "",
-      "atrasoMaiorMin": 0,
       "atrasoPequeno": "",
+      "atrasoMaiorMin": 0,
       "atrasoPequenoMin": 0
     },
     "colab_branch-2_561_2026-10-16": {
+      "note": "Falta integral (Planilha) (Replicado de 01/10/2026)",
+      "punches": {
+        "em": "",
+        "et": "",
+        "sm": "",
+        "st": ""
+      },
       "override": "OK",
       "override2": "",
       "resolution": "NENHUMA",
-      "punches": {
-        "em": "",
-        "sm": "",
-        "et": "",
-        "st": ""
-      },
-      "note": "Falta integral (Planilha) (Replicado de 01/10/2026)",
       "atrasoMaior": "",
-      "atrasoMaiorMin": 0,
       "atrasoPequeno": "00:09",
+      "atrasoMaiorMin": 0,
       "atrasoPequenoMin": 9
     },
     "colab_branch-2_561_2026-10-17": {
+      "note": "Falta integral (Planilha) (Replicado de 01/10/2026)",
+      "punches": {
+        "em": "",
+        "et": "",
+        "sm": "",
+        "st": ""
+      },
       "override": "OK",
       "override2": "",
       "resolution": "NENHUMA",
-      "punches": {
-        "em": "",
-        "sm": "",
-        "et": "",
-        "st": ""
-      },
-      "note": "Falta integral (Planilha) (Replicado de 01/10/2026)",
       "atrasoMaior": "",
-      "atrasoMaiorMin": 0,
       "atrasoPequeno": "00:06",
+      "atrasoMaiorMin": 0,
       "atrasoPequenoMin": 6
     },
     "colab_branch-2_561_2026-10-19": {
+      "note": "Falta integral (Planilha) (Replicado de 01/10/2026)",
+      "punches": {
+        "em": "",
+        "et": "",
+        "sm": "",
+        "st": ""
+      },
       "override": "OK",
       "override2": "",
       "resolution": "NENHUMA",
-      "punches": {
-        "em": "",
-        "sm": "",
-        "et": "",
-        "st": ""
-      },
-      "note": "Falta integral (Planilha) (Replicado de 01/10/2026)",
       "atrasoMaior": "",
-      "atrasoMaiorMin": 0,
       "atrasoPequeno": "00:06",
+      "atrasoMaiorMin": 0,
       "atrasoPequenoMin": 6
     },
     "colab_branch-2_561_2026-10-20": {
+      "note": "Falta integral (Planilha) (Replicado de 01/10/2026)",
+      "punches": {
+        "em": "",
+        "et": "",
+        "sm": "",
+        "st": ""
+      },
       "override": "OK",
       "override2": "",
       "resolution": "NENHUMA",
-      "punches": {
-        "em": "",
-        "sm": "",
-        "et": "",
-        "st": ""
-      },
-      "note": "Falta integral (Planilha) (Replicado de 01/10/2026)",
       "atrasoMaior": "",
-      "atrasoMaiorMin": 0,
       "atrasoPequeno": "",
+      "atrasoMaiorMin": 0,
       "atrasoPequenoMin": 0
     },
     "colab_branch-2_561_2026-10-21": {
-      "override": "VAZIO",
+      "note": "OK em massa pelo cabeçalho da data",
+      "punches": {
+        "em": "08:00",
+        "et": "13:00",
+        "sm": "12:00",
+        "st": "17:00"
+      },
+      "override": "FM",
       "override2": "",
       "resolution": "NENHUMA",
-      "punches": {
-        "em": "",
-        "sm": "",
-        "et": "",
-        "st": ""
-      },
-      "note": "Falta integral (Planilha) (Replicado de 01/10/2026)",
       "atrasoMaior": "",
-      "atrasoMaiorMin": 0,
       "atrasoPequeno": "",
+      "atrasoMaiorMin": 0,
       "atrasoPequenoMin": 0
     },
     "colab_branch-2_561_2026-10-22": {
-      "override": "VAZIO",
+      "note": "OK em massa pelo cabeçalho da data",
+      "punches": {
+        "em": "08:00",
+        "et": "13:00",
+        "sm": "12:00",
+        "st": "17:00"
+      },
+      "override": "OK",
       "override2": "",
       "resolution": "NENHUMA",
-      "punches": {
-        "em": "",
-        "sm": "",
-        "et": "",
-        "st": ""
-      },
-      "note": "Falta integral (Planilha) (Replicado de 01/10/2026) (Replicado de 21/10/2026)",
-      "atrasoMaior": "",
       "atrasoMaiorMin": 0,
-      "atrasoPequeno": "",
       "atrasoPequenoMin": 0
     },
     "colab_branch-2_561_2026-10-23": {
+      "note": "Dia futuro em aberto (desmarcado)",
+      "punches": {
+        "em": "",
+        "et": "",
+        "sm": "",
+        "st": ""
+      },
       "override": "VAZIO",
       "override2": "",
       "resolution": "NENHUMA",
-      "punches": {
-        "em": "",
-        "sm": "",
-        "et": "",
-        "st": ""
-      },
-      "note": "Falta integral (Planilha) (Replicado de 01/10/2026) (Replicado de 21/10/2026)",
       "atrasoMaior": "",
-      "atrasoMaiorMin": 0,
       "atrasoPequeno": "",
+      "atrasoMaiorMin": 0,
       "atrasoPequenoMin": 0
     },
     "colab_branch-2_561_2026-10-24": {
@@ -47643,23 +48192,25 @@ root.GOLD_RECOVERY_DATA = {
       "override": "OK",
       "override2": "",
       "resolution": "NENHUMA",
+      "atrasoMaior": "",
+      "atrasoPequeno": "",
       "atrasoMaiorMin": 0,
       "atrasoPequenoMin": 0
     },
     "colab_branch-2_613_2026-10-02": {
-      "override": "AUTO",
+      "note": "Presença regular (Planilha) (Replicado de 01/10/2026)",
+      "punches": {
+        "em": "08:00",
+        "et": "13:00",
+        "sm": "12:00",
+        "st": "17:00"
+      },
+      "override": "OK",
       "override2": "",
       "resolution": "NENHUMA",
-      "punches": {
-        "em": "",
-        "sm": "",
-        "et": "",
-        "st": ""
-      },
-      "note": "Atraso registrado A.33 (Planilha)",
       "atrasoMaior": "",
-      "atrasoMaiorMin": 0,
       "atrasoPequeno": "",
+      "atrasoMaiorMin": 0,
       "atrasoPequenoMin": 0
     },
     "colab_branch-2_613_2026-10-03": {
@@ -47673,6 +48224,8 @@ root.GOLD_RECOVERY_DATA = {
       "override": "OK",
       "override2": "",
       "resolution": "NENHUMA",
+      "atrasoMaior": "",
+      "atrasoPequeno": "",
       "atrasoMaiorMin": 0,
       "atrasoPequenoMin": 0
     },
@@ -47687,23 +48240,25 @@ root.GOLD_RECOVERY_DATA = {
       "override": "OK",
       "override2": "",
       "resolution": "NENHUMA",
+      "atrasoMaior": "",
+      "atrasoPequeno": "",
       "atrasoMaiorMin": 0,
       "atrasoPequenoMin": 0
     },
     "colab_branch-2_613_2026-10-06": {
+      "note": "Presença regular (Planilha) (Replicado de 01/10/2026)",
+      "punches": {
+        "em": "08:00",
+        "et": "13:00",
+        "sm": "12:00",
+        "st": "17:00"
+      },
       "override": "OK",
       "override2": "",
       "resolution": "NENHUMA",
-      "punches": {
-        "em": "",
-        "sm": "",
-        "et": "",
-        "st": ""
-      },
-      "note": "Pendência FM (Planilha)",
       "atrasoMaior": "",
-      "atrasoMaiorMin": 0,
       "atrasoPequeno": "",
+      "atrasoMaiorMin": 0,
       "atrasoPequenoMin": 0
     },
     "colab_branch-2_613_2026-10-07": {
@@ -47717,6 +48272,8 @@ root.GOLD_RECOVERY_DATA = {
       "override": "OK",
       "override2": "",
       "resolution": "NENHUMA",
+      "atrasoMaior": "",
+      "atrasoPequeno": "",
       "atrasoMaiorMin": 0,
       "atrasoPequenoMin": 0
     },
@@ -47753,19 +48310,35 @@ root.GOLD_RECOVERY_DATA = {
       "atrasoPequenoMin": 13
     },
     "colab_branch-2_613_2026-10-10": {
-      "override": "AUTO",
+      "note": "Presença regular (Planilha) (Replicado de 01/10/2026)",
+      "punches": {
+        "em": "08:00",
+        "et": "13:00",
+        "sm": "12:00",
+        "st": "17:00"
+      },
+      "override": "OK",
       "override2": "",
       "resolution": "NENHUMA",
-      "punches": {
-        "em": "",
-        "sm": "",
-        "et": "",
-        "st": ""
-      },
-      "note": "Atraso registrado A.00:25 (Planilha)",
       "atrasoMaior": "",
-      "atrasoMaiorMin": 0,
       "atrasoPequeno": "",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
+    },
+    "colab_branch-2_613_2026-10-12": {
+      "note": "Presença regular (Planilha) (Replicado de 01/10/2026)",
+      "punches": {
+        "em": "08:00",
+        "et": "13:00",
+        "sm": "12:00",
+        "st": "17:00"
+      },
+      "override": "OK",
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaior": "",
+      "atrasoPequeno": "",
+      "atrasoMaiorMin": 0,
       "atrasoPequenoMin": 0
     },
     "colab_branch-2_613_2026-10-13": {
@@ -47785,35 +48358,35 @@ root.GOLD_RECOVERY_DATA = {
       "atrasoPequenoMin": 6
     },
     "colab_branch-2_613_2026-10-14": {
+      "note": "OK em massa pelo cabeçalho da data",
+      "punches": {
+        "em": "08:00",
+        "et": "13:00",
+        "sm": "12:00",
+        "st": "17:00"
+      },
       "override": "AUTO",
       "override2": "",
       "resolution": "NENHUMA",
-      "punches": {
-        "em": "08:00",
-        "sm": "12:00",
-        "et": "13:00",
-        "st": "17:00"
-      },
-      "note": "OK em massa pelo cabeçalho da data",
-      "atrasoMaior": "",
-      "atrasoMaiorMin": 0,
-      "atrasoPequeno": "",
-      "atrasoPequenoMin": 0
+      "atrasoMaior": "01:39",
+      "atrasoPequeno": "00:09",
+      "atrasoMaiorMin": 99,
+      "atrasoPequenoMin": 9
     },
     "colab_branch-2_613_2026-10-15": {
+      "note": "OK em massa pelo cabeçalho da data",
+      "punches": {
+        "em": "08:00",
+        "et": "13:00",
+        "sm": "12:00",
+        "st": "17:00"
+      },
       "override": "AUTO",
       "override2": "",
       "resolution": "NENHUMA",
-      "punches": {
-        "em": "08:00",
-        "sm": "12:00",
-        "et": "13:00",
-        "st": "17:00"
-      },
-      "note": "OK em massa pelo cabeçalho da data",
       "atrasoMaior": "",
-      "atrasoMaiorMin": 0,
       "atrasoPequeno": "00:10",
+      "atrasoMaiorMin": 0,
       "atrasoPequenoMin": 10
     },
     "colab_branch-2_613_2026-10-16": {
@@ -47881,32 +48454,36 @@ root.GOLD_RECOVERY_DATA = {
       "atrasoPequenoMin": 9
     },
     "colab_branch-2_613_2026-10-21": {
-      "note": "Dia futuro em aberto (desmarcado)",
+      "note": "OK em massa pelo cabeçalho da data",
       "punches": {
-        "em": "",
-        "et": "",
-        "sm": "",
-        "st": ""
+        "em": "08:00",
+        "et": "13:00",
+        "sm": "12:00",
+        "st": "17:00"
       },
-      "override": "VAZIO",
+      "override": "OK",
       "override2": "",
       "resolution": "NENHUMA",
+      "atrasoMaior": "",
+      "atrasoPequeno": "00:17",
       "atrasoMaiorMin": 0,
-      "atrasoPequenoMin": 0
+      "atrasoPequenoMin": 17
     },
     "colab_branch-2_613_2026-10-22": {
-      "note": "Dia futuro em aberto (desmarcado)",
+      "note": "OK em massa pelo cabeçalho da data",
       "punches": {
-        "em": "",
-        "et": "",
-        "sm": "",
-        "st": ""
+        "em": "08:00",
+        "et": "13:00",
+        "sm": "12:00",
+        "st": "17:00"
       },
-      "override": "VAZIO",
+      "override": "OK",
       "override2": "",
       "resolution": "NENHUMA",
+      "atrasoMaior": "",
+      "atrasoPequeno": "00:19",
       "atrasoMaiorMin": 0,
-      "atrasoPequenoMin": 0
+      "atrasoPequenoMin": 19
     },
     "colab_branch-2_613_2026-10-23": {
       "note": "Dia futuro em aberto (desmarcado)",
@@ -48091,51 +48668,51 @@ root.GOLD_RECOVERY_DATA = {
       "atrasoPequenoMin": 0
     },
     "colab_branch-2_780_2026-10-07": {
-      "override": "OK",
-      "override2": "",
-      "resolution": "NENHUMA",
+      "note": "Falta integral (Planilha)",
       "punches": {
         "em": "",
-        "sm": "",
         "et": "",
+        "sm": "",
         "st": ""
       },
-      "note": "Falta integral (Planilha)",
+      "override": "FALTA",
+      "override2": "",
+      "resolution": "NENHUMA",
       "atrasoMaior": "",
-      "atrasoMaiorMin": 0,
       "atrasoPequeno": "",
+      "atrasoMaiorMin": 0,
       "atrasoPequenoMin": 0
     },
     "colab_branch-2_780_2026-10-08": {
+      "note": "Presença regular (Planilha)",
+      "punches": {
+        "em": "08:00",
+        "et": "13:00",
+        "sm": "12:00",
+        "st": "17:00"
+      },
       "override": "OK",
       "override2": "",
       "resolution": "NENHUMA",
-      "punches": {
-        "em": "",
-        "sm": "",
-        "et": "",
-        "st": ""
-      },
-      "note": "Falta integral (Planilha) (Replicado de 07/10/2026)",
       "atrasoMaior": "",
-      "atrasoMaiorMin": 0,
       "atrasoPequeno": "",
+      "atrasoMaiorMin": 0,
       "atrasoPequenoMin": 0
     },
     "colab_branch-2_780_2026-10-09": {
-      "override": "OK",
-      "override2": "",
-      "resolution": "NENHUMA",
+      "note": "Pendência FT (Planilha)",
       "punches": {
         "em": "",
-        "sm": "",
         "et": "",
+        "sm": "",
         "st": ""
       },
-      "note": "Falta integral (Planilha) (Replicado de 07/10/2026)",
+      "override": "FT",
+      "override2": "",
+      "resolution": "NENHUMA",
       "atrasoMaior": "",
-      "atrasoMaiorMin": 0,
       "atrasoPequeno": "",
+      "atrasoMaiorMin": 0,
       "atrasoPequenoMin": 0
     },
     "colab_branch-2_780_2026-10-10": {
@@ -48183,7 +48760,10 @@ root.GOLD_RECOVERY_DATA = {
         "st": "17:00"
       },
       "override": "OK",
-      "resolution": "NENHUMA"
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
     },
     "colab_branch-2_780_2026-10-16": {
       "note": "OK em massa pelo cabeçalho da data",
@@ -48194,7 +48774,10 @@ root.GOLD_RECOVERY_DATA = {
         "st": "17:00"
       },
       "override": "OK",
-      "resolution": "NENHUMA"
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
     },
     "colab_branch-2_780_2026-10-17": {
       "note": "OK em massa pelo cabeçalho da data",
@@ -48205,7 +48788,10 @@ root.GOLD_RECOVERY_DATA = {
         "st": "17:00"
       },
       "override": "OK",
-      "resolution": "NENHUMA"
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
     },
     "colab_branch-2_780_2026-10-19": {
       "note": "OK em massa pelo cabeçalho da data",
@@ -48216,7 +48802,10 @@ root.GOLD_RECOVERY_DATA = {
         "st": "17:00"
       },
       "override": "OK",
-      "resolution": "NENHUMA"
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
     },
     "colab_branch-2_780_2026-10-20": {
       "note": "OK em massa pelo cabeçalho da data",
@@ -48227,31 +48816,36 @@ root.GOLD_RECOVERY_DATA = {
         "st": "17:00"
       },
       "override": "OK",
-      "resolution": "NENHUMA"
-    },
-    "colab_branch-2_780_2026-10-21": {
-      "note": "Dia futuro em aberto (desmarcado)",
-      "punches": {
-        "em": "",
-        "et": "",
-        "sm": "",
-        "st": ""
-      },
-      "override": "VAZIO",
       "override2": "",
       "resolution": "NENHUMA",
       "atrasoMaiorMin": 0,
       "atrasoPequenoMin": 0
     },
-    "colab_branch-2_780_2026-10-22": {
-      "note": "Dia futuro em aberto (desmarcado)",
+    "colab_branch-2_780_2026-10-21": {
+      "note": "OK em massa pelo cabeçalho da data",
       "punches": {
-        "em": "",
-        "et": "",
-        "sm": "",
-        "st": ""
+        "em": "08:00",
+        "et": "13:00",
+        "sm": "12:00",
+        "st": "17:00"
       },
-      "override": "VAZIO",
+      "override": "FALTA",
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaior": "",
+      "atrasoPequeno": "",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
+    },
+    "colab_branch-2_780_2026-10-22": {
+      "note": "OK em massa pelo cabeçalho da data",
+      "punches": {
+        "em": "08:00",
+        "et": "13:00",
+        "sm": "12:00",
+        "st": "17:00"
+      },
+      "override": "OK",
       "override2": "",
       "resolution": "NENHUMA",
       "atrasoMaiorMin": 0,
@@ -48526,7 +49120,10 @@ root.GOLD_RECOVERY_DATA = {
         "st": "17:00"
       },
       "override": "OK",
-      "resolution": "NENHUMA"
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
     },
     "colab_branch-2_810_2026-10-16": {
       "note": "OK em massa pelo cabeçalho da data",
@@ -48537,7 +49134,10 @@ root.GOLD_RECOVERY_DATA = {
         "st": "17:00"
       },
       "override": "OK",
-      "resolution": "NENHUMA"
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
     },
     "colab_branch-2_810_2026-10-17": {
       "note": "OK em massa pelo cabeçalho da data",
@@ -48548,7 +49148,10 @@ root.GOLD_RECOVERY_DATA = {
         "st": "17:00"
       },
       "override": "OK",
-      "resolution": "NENHUMA"
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
     },
     "colab_branch-2_810_2026-10-19": {
       "note": "OK em massa pelo cabeçalho da data",
@@ -48559,47 +49162,50 @@ root.GOLD_RECOVERY_DATA = {
         "st": "17:00"
       },
       "override": "OK",
-      "resolution": "NENHUMA"
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
     },
     "colab_branch-2_810_2026-10-20": {
+      "note": "OK em massa pelo cabeçalho da data",
+      "punches": {
+        "em": "08:00",
+        "et": "13:00",
+        "sm": "12:00",
+        "st": "17:00"
+      },
       "override": "AUTO",
       "override2": "",
       "resolution": "NENHUMA",
-      "punches": {
-        "em": "08:00",
-        "sm": "12:00",
-        "et": "13:00",
-        "st": "17:00"
-      },
-      "note": "OK em massa pelo cabeçalho da data",
       "atrasoMaior": "",
-      "atrasoMaiorMin": 0,
       "atrasoPequeno": "",
+      "atrasoMaiorMin": 0,
       "atrasoPequenoMin": 0
     },
     "colab_branch-2_810_2026-10-21": {
-      "note": "Dia futuro em aberto (desmarcado)",
+      "note": "OK em massa pelo cabeçalho da data",
       "punches": {
-        "em": "",
-        "et": "",
-        "sm": "",
-        "st": ""
+        "em": "08:00",
+        "et": "13:00",
+        "sm": "12:00",
+        "st": "17:00"
       },
-      "override": "VAZIO",
+      "override": "OK",
       "override2": "",
       "resolution": "NENHUMA",
       "atrasoMaiorMin": 0,
       "atrasoPequenoMin": 0
     },
     "colab_branch-2_810_2026-10-22": {
-      "note": "Dia futuro em aberto (desmarcado)",
+      "note": "OK em massa pelo cabeçalho da data",
       "punches": {
-        "em": "",
-        "et": "",
-        "sm": "",
-        "st": ""
+        "em": "08:00",
+        "et": "13:00",
+        "sm": "12:00",
+        "st": "17:00"
       },
-      "override": "VAZIO",
+      "override": "OK",
       "override2": "",
       "resolution": "NENHUMA",
       "atrasoMaiorMin": 0,
@@ -48857,83 +49463,83 @@ root.GOLD_RECOVERY_DATA = {
       "resolution": "ABONAR"
     },
     "colab_branch-2_867_2026-10-14": {
+      "note": "OK em massa pelo cabeçalho da data",
+      "punches": {
+        "em": "08:00",
+        "et": "13:00",
+        "sm": "12:00",
+        "st": "17:00"
+      },
       "override": "OK",
       "override2": "",
       "resolution": "NENHUMA",
-      "punches": {
-        "em": "08:00",
-        "sm": "12:00",
-        "et": "13:00",
-        "st": "17:00"
-      },
-      "note": "OK em massa pelo cabeçalho da data",
       "atrasoMaior": "",
-      "atrasoMaiorMin": 0,
       "atrasoPequeno": "",
+      "atrasoMaiorMin": 0,
       "atrasoPequenoMin": 0
     },
     "colab_branch-2_867_2026-10-15": {
+      "note": "OK em massa pelo cabeçalho da data (Replicado de 14/10/2026)",
+      "punches": {
+        "em": "08:00",
+        "et": "13:00",
+        "sm": "12:00",
+        "st": "17:00"
+      },
       "override": "OK",
       "override2": "",
       "resolution": "NENHUMA",
-      "punches": {
-        "em": "08:00",
-        "sm": "12:00",
-        "et": "13:00",
-        "st": "17:00"
-      },
-      "note": "OK em massa pelo cabeçalho da data (Replicado de 14/10/2026)",
       "atrasoMaior": "",
-      "atrasoMaiorMin": 0,
       "atrasoPequeno": "",
+      "atrasoMaiorMin": 0,
       "atrasoPequenoMin": 0
     },
     "colab_branch-2_867_2026-10-16": {
+      "note": "OK em massa pelo cabeçalho da data (Replicado de 14/10/2026)",
+      "punches": {
+        "em": "08:00",
+        "et": "13:00",
+        "sm": "12:00",
+        "st": "17:00"
+      },
       "override": "OK",
       "override2": "",
       "resolution": "NENHUMA",
-      "punches": {
-        "em": "08:00",
-        "sm": "12:00",
-        "et": "13:00",
-        "st": "17:00"
-      },
-      "note": "OK em massa pelo cabeçalho da data (Replicado de 14/10/2026)",
       "atrasoMaior": "",
-      "atrasoMaiorMin": 0,
       "atrasoPequeno": "",
+      "atrasoMaiorMin": 0,
       "atrasoPequenoMin": 0
     },
     "colab_branch-2_867_2026-10-17": {
+      "note": "OK em massa pelo cabeçalho da data (Replicado de 14/10/2026)",
+      "punches": {
+        "em": "08:00",
+        "et": "13:00",
+        "sm": "12:00",
+        "st": "17:00"
+      },
       "override": "OK",
       "override2": "",
       "resolution": "NENHUMA",
-      "punches": {
-        "em": "08:00",
-        "sm": "12:00",
-        "et": "13:00",
-        "st": "17:00"
-      },
-      "note": "OK em massa pelo cabeçalho da data (Replicado de 14/10/2026)",
       "atrasoMaior": "",
-      "atrasoMaiorMin": 0,
       "atrasoPequeno": "",
+      "atrasoMaiorMin": 0,
       "atrasoPequenoMin": 0
     },
     "colab_branch-2_867_2026-10-19": {
+      "note": "OK em massa pelo cabeçalho da data",
+      "punches": {
+        "em": "08:00",
+        "et": "13:00",
+        "sm": "12:00",
+        "st": "17:00"
+      },
       "override": "OK",
       "override2": "",
       "resolution": "NENHUMA",
-      "punches": {
-        "em": "08:00",
-        "sm": "12:00",
-        "et": "13:00",
-        "st": "17:00"
-      },
-      "note": "OK em massa pelo cabeçalho da data",
       "atrasoMaior": "",
-      "atrasoMaiorMin": 0,
       "atrasoPequeno": "00:14",
+      "atrasoMaiorMin": 0,
       "atrasoPequenoMin": 14
     },
     "colab_branch-2_867_2026-10-20": {
@@ -48945,33 +49551,38 @@ root.GOLD_RECOVERY_DATA = {
         "st": "17:00"
       },
       "override": "OK",
-      "resolution": "NENHUMA"
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
     },
     "colab_branch-2_867_2026-10-21": {
-      "note": "Dia futuro em aberto (desmarcado)",
+      "note": "OK em massa pelo cabeçalho da data",
       "punches": {
-        "em": "",
-        "et": "",
-        "sm": "",
-        "st": ""
+        "em": "08:00",
+        "et": "13:00",
+        "sm": "12:00",
+        "st": "17:00"
       },
-      "override": "VAZIO",
+      "override": "OK",
       "override2": "",
       "resolution": "NENHUMA",
       "atrasoMaiorMin": 0,
       "atrasoPequenoMin": 0
     },
     "colab_branch-2_867_2026-10-22": {
-      "note": "Dia futuro em aberto (desmarcado)",
+      "note": "OK em massa pelo cabeçalho da data",
       "punches": {
-        "em": "",
-        "et": "",
-        "sm": "",
-        "st": ""
+        "em": "08:00",
+        "et": "13:00",
+        "sm": "12:00",
+        "st": "17:00"
       },
-      "override": "VAZIO",
+      "override": "FALTA",
       "override2": "",
       "resolution": "NENHUMA",
+      "atrasoMaior": "",
+      "atrasoPequeno": "",
       "atrasoMaiorMin": 0,
       "atrasoPequenoMin": 0
     },
@@ -49264,37 +49875,52 @@ root.GOLD_RECOVERY_DATA = {
       "atrasoPequenoMin": 0
     },
     "colab_branch-2_890_2026-10-15": {
-      "note": "OK em massa pelo cabeçalho da data",
+      "note": "Férias (Planilha) (Replicado de 10/10/2026)",
       "punches": {
-        "em": "08:00",
-        "et": "13:00",
-        "sm": "12:00",
-        "st": "17:00"
+        "em": "",
+        "et": "",
+        "sm": "",
+        "st": ""
       },
-      "override": "OK",
-      "resolution": "NENHUMA"
+      "override": "FÉRIAS",
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaior": "",
+      "atrasoPequeno": "",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
     },
     "colab_branch-2_890_2026-10-16": {
-      "note": "OK em massa pelo cabeçalho da data",
+      "note": "Férias (Planilha) (Replicado de 10/10/2026)",
       "punches": {
-        "em": "08:00",
-        "et": "13:00",
-        "sm": "12:00",
-        "st": "17:00"
+        "em": "",
+        "et": "",
+        "sm": "",
+        "st": ""
       },
-      "override": "OK",
-      "resolution": "NENHUMA"
+      "override": "FÉRIAS",
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaior": "",
+      "atrasoPequeno": "",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
     },
     "colab_branch-2_890_2026-10-17": {
-      "note": "OK em massa pelo cabeçalho da data",
+      "note": "Férias (Planilha) (Replicado de 10/10/2026)",
       "punches": {
-        "em": "08:00",
-        "et": "13:00",
-        "sm": "12:00",
-        "st": "17:00"
+        "em": "",
+        "et": "",
+        "sm": "",
+        "st": ""
       },
-      "override": "OK",
-      "resolution": "NENHUMA"
+      "override": "FÉRIAS",
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaior": "",
+      "atrasoPequeno": "",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
     },
     "colab_branch-2_890_2026-10-19": {
       "note": "OK em massa pelo cabeçalho da data",
@@ -49304,8 +49930,13 @@ root.GOLD_RECOVERY_DATA = {
         "sm": "12:00",
         "st": "17:00"
       },
-      "override": "OK",
-      "resolution": "NENHUMA"
+      "override": "FÉRIAS",
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaior": "",
+      "atrasoPequeno": "",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
     },
     "colab_branch-2_890_2026-10-20": {
       "note": "OK em massa pelo cabeçalho da data",
@@ -49347,7 +49978,7 @@ root.GOLD_RECOVERY_DATA = {
         "sm": "",
         "st": ""
       },
-      "override": "VAZIO",
+      "override": "FÉRIAS",
       "override2": "",
       "resolution": "NENHUMA",
       "atrasoMaior": "",
@@ -49624,7 +50255,10 @@ root.GOLD_RECOVERY_DATA = {
         "st": "17:00"
       },
       "override": "OK",
-      "resolution": "NENHUMA"
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
     },
     "colab_branch-2_946_2026-10-16": {
       "note": "OK em massa pelo cabeçalho da data",
@@ -49667,47 +50301,50 @@ root.GOLD_RECOVERY_DATA = {
         "st": "17:00"
       },
       "override": "OK",
-      "resolution": "NENHUMA"
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
     },
     "colab_branch-2_946_2026-10-20": {
+      "note": "OK em massa pelo cabeçalho da data",
+      "punches": {
+        "em": "08:00",
+        "et": "13:00",
+        "sm": "12:00",
+        "st": "17:00"
+      },
       "override": "OK",
       "override2": "",
       "resolution": "NENHUMA",
-      "punches": {
-        "em": "08:00",
-        "sm": "12:00",
-        "et": "13:00",
-        "st": "17:00"
-      },
-      "note": "OK em massa pelo cabeçalho da data",
       "atrasoMaior": "",
-      "atrasoMaiorMin": 0,
       "atrasoPequeno": "00:16",
+      "atrasoMaiorMin": 0,
       "atrasoPequenoMin": 16
     },
     "colab_branch-2_946_2026-10-21": {
-      "note": "Dia futuro em aberto (desmarcado)",
+      "note": "OK em massa pelo cabeçalho da data",
       "punches": {
-        "em": "",
-        "et": "",
-        "sm": "",
-        "st": ""
+        "em": "08:00",
+        "et": "13:00",
+        "sm": "12:00",
+        "st": "17:00"
       },
-      "override": "VAZIO",
+      "override": "OK",
       "override2": "",
       "resolution": "NENHUMA",
       "atrasoMaiorMin": 0,
       "atrasoPequenoMin": 0
     },
     "colab_branch-2_946_2026-10-22": {
-      "note": "Dia futuro em aberto (desmarcado)",
+      "note": "OK em massa pelo cabeçalho da data",
       "punches": {
-        "em": "",
-        "et": "",
-        "sm": "",
-        "st": ""
+        "em": "08:00",
+        "et": "13:00",
+        "sm": "12:00",
+        "st": "17:00"
       },
-      "override": "VAZIO",
+      "override": "OK",
       "override2": "",
       "resolution": "NENHUMA",
       "atrasoMaiorMin": 0,
@@ -49868,83 +50505,83 @@ root.GOLD_RECOVERY_DATA = {
       "atrasoPequenoMin": 0
     },
     "colab_branch-2_952_2026-10-05": {
-      "override": "OK",
-      "override2": "",
-      "resolution": "NENHUMA",
+      "note": "Falta integral (Planilha)",
       "punches": {
         "em": "",
-        "sm": "",
         "et": "",
+        "sm": "",
         "st": ""
       },
-      "note": "Falta integral (Planilha)",
+      "override": "FALTA",
+      "override2": "",
+      "resolution": "NENHUMA",
       "atrasoMaior": "",
-      "atrasoMaiorMin": 0,
       "atrasoPequeno": "",
+      "atrasoMaiorMin": 0,
       "atrasoPequenoMin": 0
     },
     "colab_branch-2_952_2026-10-06": {
-      "override": "OK",
-      "override2": "",
-      "resolution": "NENHUMA",
+      "note": "Falta integral (Planilha)",
       "punches": {
         "em": "",
-        "sm": "",
         "et": "",
+        "sm": "",
         "st": ""
       },
-      "note": "Falta integral (Planilha) (Replicado de 05/10/2026)",
+      "override": "FALTA",
+      "override2": "",
+      "resolution": "NENHUMA",
       "atrasoMaior": "",
-      "atrasoMaiorMin": 0,
       "atrasoPequeno": "",
+      "atrasoMaiorMin": 0,
       "atrasoPequenoMin": 0
     },
     "colab_branch-2_952_2026-10-07": {
-      "override": "OK",
-      "override2": "",
-      "resolution": "NENHUMA",
+      "note": "Falta integral (Planilha)",
       "punches": {
         "em": "",
-        "sm": "",
         "et": "",
+        "sm": "",
         "st": ""
       },
-      "note": "Falta integral (Planilha) (Replicado de 05/10/2026)",
+      "override": "FALTA",
+      "override2": "",
+      "resolution": "NENHUMA",
       "atrasoMaior": "",
-      "atrasoMaiorMin": 0,
       "atrasoPequeno": "",
+      "atrasoMaiorMin": 0,
       "atrasoPequenoMin": 0
     },
     "colab_branch-2_952_2026-10-08": {
-      "override": "OK",
-      "override2": "",
-      "resolution": "NENHUMA",
+      "note": "Falta integral (Planilha)",
       "punches": {
         "em": "",
-        "sm": "",
         "et": "",
+        "sm": "",
         "st": ""
       },
-      "note": "Falta integral (Planilha) (Replicado de 05/10/2026)",
+      "override": "FALTA",
+      "override2": "",
+      "resolution": "NENHUMA",
       "atrasoMaior": "",
-      "atrasoMaiorMin": 0,
       "atrasoPequeno": "",
+      "atrasoMaiorMin": 0,
       "atrasoPequenoMin": 0
     },
     "colab_branch-2_952_2026-10-09": {
-      "override": "OK",
-      "override2": "",
-      "resolution": "NENHUMA",
+      "note": "Falta integral (Planilha)",
       "punches": {
         "em": "",
-        "sm": "",
         "et": "",
+        "sm": "",
         "st": ""
       },
-      "note": "Falta integral (Planilha) (Replicado de 05/10/2026)",
+      "override": "FALTA",
+      "override2": "",
+      "resolution": "NENHUMA",
       "atrasoMaior": "",
-      "atrasoMaiorMin": 0,
       "atrasoPequeno": "",
+      "atrasoMaiorMin": 0,
       "atrasoPequenoMin": 0
     },
     "colab_branch-2_952_2026-10-10": {
@@ -49992,7 +50629,10 @@ root.GOLD_RECOVERY_DATA = {
         "st": "17:00"
       },
       "override": "OK",
-      "resolution": "NENHUMA"
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
     },
     "colab_branch-2_952_2026-10-16": {
       "note": "OK em massa pelo cabeçalho da data",
@@ -50003,7 +50643,10 @@ root.GOLD_RECOVERY_DATA = {
         "st": "17:00"
       },
       "override": "OK",
-      "resolution": "NENHUMA"
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
     },
     "colab_branch-2_952_2026-10-17": {
       "note": "OK em massa pelo cabeçalho da data",
@@ -50014,7 +50657,10 @@ root.GOLD_RECOVERY_DATA = {
         "st": "17:00"
       },
       "override": "OK",
-      "resolution": "NENHUMA"
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
     },
     "colab_branch-2_952_2026-10-19": {
       "note": "OK em massa pelo cabeçalho da data",
@@ -50049,30 +50695,34 @@ root.GOLD_RECOVERY_DATA = {
       "atrasoPequenoMin": 0
     },
     "colab_branch-2_952_2026-10-21": {
-      "note": "Dia futuro em aberto (desmarcado)",
+      "note": "OK em massa pelo cabeçalho da data",
       "punches": {
-        "em": "",
-        "et": "",
-        "sm": "",
-        "st": ""
+        "em": "08:00",
+        "et": "13:00",
+        "sm": "12:00",
+        "st": "17:00"
       },
-      "override": "VAZIO",
+      "override": "FALTA",
       "override2": "",
       "resolution": "NENHUMA",
+      "atrasoMaior": "",
+      "atrasoPequeno": "",
       "atrasoMaiorMin": 0,
       "atrasoPequenoMin": 0
     },
     "colab_branch-2_952_2026-10-22": {
-      "note": "Dia futuro em aberto (desmarcado)",
+      "note": "OK em massa pelo cabeçalho da data",
       "punches": {
-        "em": "",
-        "et": "",
-        "sm": "",
-        "st": ""
+        "em": "08:00",
+        "et": "13:00",
+        "sm": "12:00",
+        "st": "17:00"
       },
-      "override": "VAZIO",
+      "override": "FALTA",
       "override2": "",
       "resolution": "NENHUMA",
+      "atrasoMaior": "",
+      "atrasoPequeno": "",
       "atrasoMaiorMin": 0,
       "atrasoPequenoMin": 0
     },
@@ -50577,7 +51227,10 @@ root.GOLD_RECOVERY_DATA = {
         "st": "17:00"
       },
       "override": "OK",
-      "resolution": "NENHUMA"
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
     },
     "colab_branch-2_977_2026-10-16": {
       "note": "OK em massa pelo cabeçalho da data",
@@ -50588,7 +51241,10 @@ root.GOLD_RECOVERY_DATA = {
         "st": "17:00"
       },
       "override": "OK",
-      "resolution": "NENHUMA"
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
     },
     "colab_branch-2_977_2026-10-17": {
       "note": "OK em massa pelo cabeçalho da data",
@@ -50599,7 +51255,10 @@ root.GOLD_RECOVERY_DATA = {
         "st": "17:00"
       },
       "override": "OK",
-      "resolution": "NENHUMA"
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
     },
     "colab_branch-2_977_2026-10-19": {
       "note": "OK em massa pelo cabeçalho da data",
@@ -50610,7 +51269,10 @@ root.GOLD_RECOVERY_DATA = {
         "st": "17:00"
       },
       "override": "OK",
-      "resolution": "NENHUMA"
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
     },
     "colab_branch-2_977_2026-10-20": {
       "note": "OK em massa pelo cabeçalho da data",
@@ -50621,33 +51283,38 @@ root.GOLD_RECOVERY_DATA = {
         "st": "17:00"
       },
       "override": "OK",
-      "resolution": "NENHUMA"
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
     },
     "colab_branch-2_977_2026-10-21": {
-      "note": "Dia futuro em aberto (desmarcado)",
+      "note": "OK em massa pelo cabeçalho da data",
       "punches": {
-        "em": "",
-        "et": "",
-        "sm": "",
-        "st": ""
+        "em": "08:00",
+        "et": "13:00",
+        "sm": "12:00",
+        "st": "17:00"
       },
-      "override": "VAZIO",
+      "override": "OK",
       "override2": "",
       "resolution": "NENHUMA",
       "atrasoMaiorMin": 0,
       "atrasoPequenoMin": 0
     },
     "colab_branch-2_977_2026-10-22": {
-      "note": "Dia futuro em aberto (desmarcado)",
+      "note": "OK em massa pelo cabeçalho da data",
       "punches": {
-        "em": "",
-        "et": "",
-        "sm": "",
-        "st": ""
+        "em": "08:00",
+        "et": "13:00",
+        "sm": "12:00",
+        "st": "17:00"
       },
-      "override": "VAZIO",
+      "override": "FM",
       "override2": "",
       "resolution": "NENHUMA",
+      "atrasoMaior": "",
+      "atrasoPequeno": "",
       "atrasoMaiorMin": 0,
       "atrasoPequenoMin": 0
     },
@@ -50764,35 +51431,35 @@ root.GOLD_RECOVERY_DATA = {
       "atrasoPequenoMin": 0
     },
     "colab_branch-2_990_2026-10-01": {
+      "note": "Presença regular (Planilha)",
+      "punches": {
+        "em": "08:00",
+        "et": "13:00",
+        "sm": "12:00",
+        "st": "17:00"
+      },
       "override": "OK",
       "override2": "",
       "resolution": "NENHUMA",
-      "punches": {
-        "em": "08:00",
-        "sm": "12:00",
-        "et": "13:00",
-        "st": "17:00"
-      },
-      "note": "Presença regular (Planilha)",
       "atrasoMaior": "",
-      "atrasoMaiorMin": 0,
       "atrasoPequeno": "",
+      "atrasoMaiorMin": 0,
       "atrasoPequenoMin": 0
     },
     "colab_branch-2_990_2026-10-02": {
+      "note": "Atraso registrado A.30 (Planilha)",
+      "punches": {
+        "em": "",
+        "et": "",
+        "sm": "",
+        "st": ""
+      },
       "override": "AUTO",
       "override2": "",
       "resolution": "NENHUMA",
-      "punches": {
-        "em": "",
-        "sm": "",
-        "et": "",
-        "st": ""
-      },
-      "note": "Atraso registrado A.30 (Planilha)",
-      "atrasoMaior": "",
-      "atrasoMaiorMin": 0,
+      "atrasoMaior": "30",
       "atrasoPequeno": "",
+      "atrasoMaiorMin": 30,
       "atrasoPequenoMin": 0
     },
     "colab_branch-2_990_2026-10-03": {
@@ -50924,7 +51591,10 @@ root.GOLD_RECOVERY_DATA = {
         "st": "17:00"
       },
       "override": "OK",
-      "resolution": "NENHUMA"
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
     },
     "colab_branch-2_990_2026-10-16": {
       "note": "OK em massa pelo cabeçalho da data",
@@ -50959,19 +51629,19 @@ root.GOLD_RECOVERY_DATA = {
       "atrasoPequenoMin": 0
     },
     "colab_branch-2_990_2026-10-19": {
+      "note": "OK em massa pelo cabeçalho da data",
+      "punches": {
+        "em": "08:00",
+        "et": "13:00",
+        "sm": "12:00",
+        "st": "17:00"
+      },
       "override": "OK",
       "override2": "",
       "resolution": "NENHUMA",
-      "punches": {
-        "em": "08:00",
-        "sm": "12:00",
-        "et": "13:00",
-        "st": "17:00"
-      },
-      "note": "OK em massa pelo cabeçalho da data",
       "atrasoMaior": "",
-      "atrasoMaiorMin": 0,
       "atrasoPequeno": "",
+      "atrasoMaiorMin": 0,
       "atrasoPequenoMin": 0
     },
     "colab_branch-2_990_2026-10-20": {
@@ -50998,23 +51668,27 @@ root.GOLD_RECOVERY_DATA = {
         "sm": "",
         "st": ""
       },
-      "override": "VAZIO",
+      "override": "OK",
       "override2": "",
       "resolution": "NENHUMA",
+      "atrasoMaior": "",
+      "atrasoPequeno": "",
       "atrasoMaiorMin": 0,
       "atrasoPequenoMin": 0
     },
     "colab_branch-2_990_2026-10-22": {
-      "note": "Dia futuro em aberto (desmarcado)",
+      "note": "OK em massa pelo cabeçalho da data",
       "punches": {
-        "em": "",
-        "et": "",
-        "sm": "",
-        "st": ""
+        "em": "08:00",
+        "et": "13:00",
+        "sm": "12:00",
+        "st": "17:00"
       },
-      "override": "VAZIO",
+      "override": "FM",
       "override2": "",
       "resolution": "NENHUMA",
+      "atrasoMaior": "",
+      "atrasoPequeno": "",
       "atrasoMaiorMin": 0,
       "atrasoPequenoMin": 0
     },
@@ -51159,19 +51833,19 @@ root.GOLD_RECOVERY_DATA = {
       "atrasoPequenoMin": 0
     },
     "colab_branch-2_993_2026-10-03": {
-      "override": "OK",
-      "override2": "",
-      "resolution": "NENHUMA",
+      "note": "Falta integral (Planilha)",
       "punches": {
         "em": "",
-        "sm": "",
         "et": "",
+        "sm": "",
         "st": ""
       },
-      "note": "Falta integral (Planilha)",
+      "override": "FALTA",
+      "override2": "",
+      "resolution": "NENHUMA",
       "atrasoMaior": "",
-      "atrasoMaiorMin": 0,
       "atrasoPequeno": "",
+      "atrasoMaiorMin": 0,
       "atrasoPequenoMin": 0
     },
     "colab_branch-2_993_2026-10-05": {
@@ -51203,19 +51877,19 @@ root.GOLD_RECOVERY_DATA = {
       "atrasoPequenoMin": 0
     },
     "colab_branch-2_993_2026-10-07": {
-      "override": "OK",
-      "override2": "",
-      "resolution": "NENHUMA",
+      "note": "Pendência FM (Planilha)",
       "punches": {
         "em": "",
-        "sm": "",
         "et": "",
+        "sm": "",
         "st": ""
       },
-      "note": "Pendência FM (Planilha)",
+      "override": "FM",
+      "override2": "",
+      "resolution": "NENHUMA",
       "atrasoMaior": "",
-      "atrasoMaiorMin": 0,
       "atrasoPequeno": "",
+      "atrasoMaiorMin": 0,
       "atrasoPequenoMin": 0
     },
     "colab_branch-2_993_2026-10-08": {
@@ -51272,19 +51946,19 @@ root.GOLD_RECOVERY_DATA = {
       "resolution": "ABONAR"
     },
     "colab_branch-2_993_2026-10-14": {
-      "override": "OK",
-      "override2": "",
-      "resolution": "NENHUMA",
+      "note": "OK em massa pelo cabeçalho da data",
       "punches": {
         "em": "08:00",
-        "sm": "12:00",
         "et": "13:00",
+        "sm": "12:00",
         "st": "17:00"
       },
-      "note": "OK em massa pelo cabeçalho da data",
+      "override": "SM",
+      "override2": "",
+      "resolution": "NENHUMA",
       "atrasoMaior": "",
-      "atrasoMaiorMin": 0,
       "atrasoPequeno": "",
+      "atrasoMaiorMin": 0,
       "atrasoPequenoMin": 0
     },
     "colab_branch-2_993_2026-10-15": {
@@ -51296,7 +51970,10 @@ root.GOLD_RECOVERY_DATA = {
         "st": "17:00"
       },
       "override": "OK",
-      "resolution": "NENHUMA"
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
     },
     "colab_branch-2_993_2026-10-16": {
       "note": "OK em massa pelo cabeçalho da data",
@@ -51315,35 +51992,35 @@ root.GOLD_RECOVERY_DATA = {
       "atrasoPequenoMin": 9
     },
     "colab_branch-2_993_2026-10-17": {
+      "note": "OK em massa pelo cabeçalho da data",
+      "punches": {
+        "em": "08:00",
+        "et": "13:00",
+        "sm": "12:00",
+        "st": "17:00"
+      },
       "override": "OK",
       "override2": "",
       "resolution": "NENHUMA",
-      "punches": {
-        "em": "08:00",
-        "sm": "12:00",
-        "et": "13:00",
-        "st": "17:00"
-      },
-      "note": "OK em massa pelo cabeçalho da data",
       "atrasoMaior": "",
-      "atrasoMaiorMin": 0,
       "atrasoPequeno": "",
+      "atrasoMaiorMin": 0,
       "atrasoPequenoMin": 0
     },
     "colab_branch-2_993_2026-10-19": {
+      "note": "OK em massa pelo cabeçalho da data",
+      "punches": {
+        "em": "08:00",
+        "et": "13:00",
+        "sm": "12:00",
+        "st": "17:00"
+      },
       "override": "OK",
       "override2": "",
       "resolution": "NENHUMA",
-      "punches": {
-        "em": "08:00",
-        "sm": "12:00",
-        "et": "13:00",
-        "st": "17:00"
-      },
-      "note": "OK em massa pelo cabeçalho da data",
       "atrasoMaior": "",
-      "atrasoMaiorMin": 0,
       "atrasoPequeno": "",
+      "atrasoMaiorMin": 0,
       "atrasoPequenoMin": 0
     },
     "colab_branch-2_993_2026-10-20": {
@@ -51355,33 +52032,38 @@ root.GOLD_RECOVERY_DATA = {
         "st": "17:00"
       },
       "override": "OK",
-      "resolution": "NENHUMA"
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
     },
     "colab_branch-2_993_2026-10-21": {
-      "note": "Dia futuro em aberto (desmarcado)",
+      "note": "OK em massa pelo cabeçalho da data",
       "punches": {
-        "em": "",
-        "et": "",
-        "sm": "",
-        "st": ""
+        "em": "08:00",
+        "et": "13:00",
+        "sm": "12:00",
+        "st": "17:00"
       },
-      "override": "VAZIO",
+      "override": "OK",
       "override2": "",
       "resolution": "NENHUMA",
       "atrasoMaiorMin": 0,
       "atrasoPequenoMin": 0
     },
     "colab_branch-2_993_2026-10-22": {
-      "note": "Dia futuro em aberto (desmarcado)",
+      "note": "OK em massa pelo cabeçalho da data",
       "punches": {
-        "em": "",
-        "et": "",
-        "sm": "",
-        "st": ""
+        "em": "08:00",
+        "et": "13:00",
+        "sm": "12:00",
+        "st": "17:00"
       },
-      "override": "VAZIO",
+      "override": "FM",
       "override2": "",
       "resolution": "NENHUMA",
+      "atrasoMaior": "",
+      "atrasoPequeno": "",
       "atrasoMaiorMin": 0,
       "atrasoPequenoMin": 0
     },
@@ -51596,19 +52278,19 @@ root.GOLD_RECOVERY_DATA = {
       "atrasoPequenoMin": 0
     },
     "colab_branch-2_994_2026-10-09": {
-      "override": "ATESTADO",
-      "override2": "",
-      "resolution": "NENHUMA",
+      "note": "Falta integral (Planilha)",
       "punches": {
         "em": "",
-        "sm": "",
         "et": "",
+        "sm": "",
         "st": ""
       },
-      "note": "Falta integral (Planilha)",
+      "override": "FALTA",
+      "override2": "",
+      "resolution": "NENHUMA",
       "atrasoMaior": "",
-      "atrasoMaiorMin": 0,
       "atrasoPequeno": "",
+      "atrasoMaiorMin": 0,
       "atrasoPequenoMin": 0
     },
     "colab_branch-2_994_2026-10-10": {
@@ -51637,19 +52319,19 @@ root.GOLD_RECOVERY_DATA = {
       "resolution": "ABONAR"
     },
     "colab_branch-2_994_2026-10-14": {
+      "note": "OK em massa pelo cabeçalho da data",
+      "punches": {
+        "em": "08:00",
+        "et": "13:00",
+        "sm": "12:00",
+        "st": "17:00"
+      },
       "override": "AUTO",
       "override2": "",
       "resolution": "NENHUMA",
-      "punches": {
-        "em": "08:00",
-        "sm": "12:00",
-        "et": "13:00",
-        "st": "17:00"
-      },
-      "note": "OK em massa pelo cabeçalho da data",
-      "atrasoMaior": "",
-      "atrasoMaiorMin": 0,
+      "atrasoMaior": "00:39",
       "atrasoPequeno": "",
+      "atrasoMaiorMin": 39,
       "atrasoPequenoMin": 0
     },
     "colab_branch-2_994_2026-10-15": {
@@ -51661,7 +52343,10 @@ root.GOLD_RECOVERY_DATA = {
         "st": "17:00"
       },
       "override": "OK",
-      "resolution": "NENHUMA"
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
     },
     "colab_branch-2_994_2026-10-16": {
       "note": "OK em massa pelo cabeçalho da data",
@@ -51704,7 +52389,10 @@ root.GOLD_RECOVERY_DATA = {
         "st": "17:00"
       },
       "override": "OK",
-      "resolution": "NENHUMA"
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
     },
     "colab_branch-2_994_2026-10-20": {
       "note": "OK em massa pelo cabeçalho da data",
@@ -51715,34 +52403,39 @@ root.GOLD_RECOVERY_DATA = {
         "st": "17:00"
       },
       "override": "OK",
-      "resolution": "NENHUMA"
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
     },
     "colab_branch-2_994_2026-10-21": {
-      "note": "Dia futuro em aberto (desmarcado)",
+      "note": "OK em massa pelo cabeçalho da data",
       "punches": {
-        "em": "",
-        "et": "",
-        "sm": "",
-        "st": ""
+        "em": "08:00",
+        "et": "13:00",
+        "sm": "12:00",
+        "st": "17:00"
       },
-      "override": "VAZIO",
+      "override": "OK",
       "override2": "",
       "resolution": "NENHUMA",
       "atrasoMaiorMin": 0,
       "atrasoPequenoMin": 0
     },
     "colab_branch-2_994_2026-10-22": {
-      "note": "Dia futuro em aberto (desmarcado)",
+      "note": "OK em massa pelo cabeçalho da data",
       "punches": {
-        "em": "",
-        "et": "",
-        "sm": "",
-        "st": ""
+        "em": "08:00",
+        "et": "13:00",
+        "sm": "12:00",
+        "st": "17:00"
       },
-      "override": "VAZIO",
+      "override": "AUTO",
       "override2": "",
       "resolution": "NENHUMA",
-      "atrasoMaiorMin": 0,
+      "atrasoMaior": "00:35",
+      "atrasoPequeno": "",
+      "atrasoMaiorMin": 35,
       "atrasoPequenoMin": 0
     },
     "colab_branch-2_994_2026-10-23": {
@@ -51855,6 +52548,113 @@ root.GOLD_RECOVERY_DATA = {
       "override2": "",
       "resolution": "NENHUMA",
       "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
+    },
+    "colab_branch-3_234_2026-10-15": {
+      "note": "",
+      "punches": {
+        "em": "08:00",
+        "et": "13:00",
+        "sm": "12:00",
+        "st": "17:00"
+      },
+      "override": "OK",
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaior": "",
+      "atrasoPequeno": "",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
+    },
+    "colab_branch-3_234_2026-10-16": {
+      "note": " (Replicado de 15/10/2026)",
+      "punches": {
+        "em": "08:00",
+        "et": "13:00",
+        "sm": "12:00",
+        "st": "17:00"
+      },
+      "override": "OK",
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaior": "",
+      "atrasoPequeno": "",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
+    },
+    "colab_branch-3_234_2026-10-17": {
+      "note": " (Replicado de 15/10/2026)",
+      "punches": {
+        "em": "08:00",
+        "et": "13:00",
+        "sm": "12:00",
+        "st": "17:00"
+      },
+      "override": "OK",
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaior": "",
+      "atrasoPequeno": "",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
+    },
+    "colab_branch-3_234_2026-10-19": {
+      "note": " (Replicado de 15/10/2026)",
+      "punches": {
+        "em": "08:00",
+        "et": "13:00",
+        "sm": "12:00",
+        "st": "17:00"
+      },
+      "override": "OK",
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaior": "",
+      "atrasoPequeno": "",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
+    },
+    "colab_branch-3_234_2026-10-20": {
+      "note": " (Replicado de 15/10/2026)",
+      "punches": {
+        "em": "08:00",
+        "et": "13:00",
+        "sm": "12:00",
+        "st": "17:00"
+      },
+      "override": "OK",
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaior": "",
+      "atrasoPequeno": "",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
+    },
+    "colab_branch-3_234_2026-10-21": {
+      "note": "OK em massa pelo cabeçalho da data",
+      "punches": {
+        "em": "08:00",
+        "et": "13:00",
+        "sm": "12:00",
+        "st": "17:00"
+      },
+      "override": "OK",
+      "resolution": "NENHUMA"
+    },
+    "colab_branch-3_234_2026-10-22": {
+      "note": "OK em massa pelo cabeçalho da data",
+      "punches": {
+        "em": "08:00",
+        "et": "13:00",
+        "sm": "12:00",
+        "st": "17:00"
+      },
+      "override": "AUTO",
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaior": "01:24",
+      "atrasoPequeno": "",
+      "atrasoMaiorMin": 84,
       "atrasoPequenoMin": 0
     },
     "colab_branch-3_241_2026-10-01": {
@@ -51993,7 +52793,7 @@ root.GOLD_RECOVERY_DATA = {
         "sm": "12:00",
         "st": "17:00"
       },
-      "override": "VAZIO",
+      "override": "FALTA",
       "override2": "",
       "resolution": "NENHUMA",
       "atrasoMaior": "",
@@ -52002,14 +52802,14 @@ root.GOLD_RECOVERY_DATA = {
       "atrasoPequenoMin": 0
     },
     "colab_branch-3_241_2026-10-14": {
-      "note": "Abono/OK em massa pelo cabeçalho da data (Replicado de 13/10/2026)",
+      "note": "OK em massa pelo cabeçalho da data",
       "punches": {
         "em": "08:00",
         "et": "13:00",
         "sm": "12:00",
         "st": "17:00"
       },
-      "override": "VAZIO",
+      "override": "FALTA",
       "override2": "",
       "resolution": "NENHUMA",
       "atrasoMaior": "",
@@ -52025,7 +52825,7 @@ root.GOLD_RECOVERY_DATA = {
         "sm": "12:00",
         "st": "17:00"
       },
-      "override": "VAZIO",
+      "override": "OK",
       "override2": "",
       "resolution": "NENHUMA",
       "atrasoMaior": "",
@@ -52041,7 +52841,7 @@ root.GOLD_RECOVERY_DATA = {
         "sm": "12:00",
         "st": "17:00"
       },
-      "override": "VAZIO",
+      "override": "OK",
       "override2": "",
       "resolution": "NENHUMA",
       "atrasoMaior": "",
@@ -52057,7 +52857,7 @@ root.GOLD_RECOVERY_DATA = {
         "sm": "12:00",
         "st": "17:00"
       },
-      "override": "VAZIO",
+      "override": "OK",
       "override2": "",
       "resolution": "NENHUMA",
       "atrasoMaior": "",
@@ -52073,7 +52873,7 @@ root.GOLD_RECOVERY_DATA = {
         "sm": "12:00",
         "st": "17:00"
       },
-      "override": "VAZIO",
+      "override": "OK",
       "override2": "",
       "resolution": "NENHUMA",
       "atrasoMaior": "",
@@ -52089,7 +52889,7 @@ root.GOLD_RECOVERY_DATA = {
         "sm": "12:00",
         "st": "17:00"
       },
-      "override": "VAZIO",
+      "override": "OK",
       "override2": "",
       "resolution": "NENHUMA",
       "atrasoMaior": "",
@@ -52098,30 +52898,34 @@ root.GOLD_RECOVERY_DATA = {
       "atrasoPequenoMin": 0
     },
     "colab_branch-3_241_2026-10-21": {
-      "note": "Dia futuro em aberto (desmarcado)",
+      "note": "OK em massa pelo cabeçalho da data",
       "punches": {
-        "em": "",
-        "et": "",
-        "sm": "",
-        "st": ""
+        "em": "08:00",
+        "et": "13:00",
+        "sm": "12:00",
+        "st": "17:00"
       },
-      "override": "VAZIO",
+      "override": "OK",
       "override2": "",
       "resolution": "NENHUMA",
+      "atrasoMaior": "",
+      "atrasoPequeno": "",
       "atrasoMaiorMin": 0,
       "atrasoPequenoMin": 0
     },
     "colab_branch-3_241_2026-10-22": {
-      "note": "Dia futuro em aberto (desmarcado)",
+      "note": "OK em massa pelo cabeçalho da data (Replicado de 21/10/2026)",
       "punches": {
-        "em": "",
-        "et": "",
-        "sm": "",
-        "st": ""
+        "em": "08:00",
+        "et": "13:00",
+        "sm": "12:00",
+        "st": "17:00"
       },
-      "override": "VAZIO",
+      "override": "OK",
       "override2": "",
       "resolution": "NENHUMA",
+      "atrasoMaior": "",
+      "atrasoPequeno": "",
       "atrasoMaiorMin": 0,
       "atrasoPequenoMin": 0
     },
@@ -52380,14 +53184,14 @@ root.GOLD_RECOVERY_DATA = {
       "atrasoPequenoMin": 0
     },
     "colab_branch-3_249_2026-10-14": {
-      "note": "Abono/OK em massa pelo cabeçalho da data (Replicado de 13/10/2026)",
+      "note": "OK em massa pelo cabeçalho da data",
       "punches": {
         "em": "08:00",
         "et": "13:00",
         "sm": "12:00",
         "st": "17:00"
       },
-      "override": "FÉRIAS",
+      "override": "OK",
       "override2": "",
       "resolution": "NENHUMA",
       "atrasoMaior": "",
@@ -52467,34 +53271,43 @@ root.GOLD_RECOVERY_DATA = {
         "sm": "12:00",
         "st": "17:00"
       },
-      "override": "OK",
-      "resolution": "NENHUMA"
-    },
-    "colab_branch-3_249_2026-10-21": {
-      "note": "Dia futuro em aberto (desmarcado)",
-      "punches": {
-        "em": "",
-        "et": "",
-        "sm": "",
-        "st": ""
-      },
-      "override": "VAZIO",
+      "override": "FÉRIAS",
       "override2": "",
       "resolution": "NENHUMA",
+      "atrasoMaior": "",
+      "atrasoPequeno": "",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
+    },
+    "colab_branch-3_249_2026-10-21": {
+      "note": "OK em massa pelo cabeçalho da data",
+      "punches": {
+        "em": "08:00",
+        "et": "13:00",
+        "sm": "12:00",
+        "st": "17:00"
+      },
+      "override": "FALTA",
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaior": "",
+      "atrasoPequeno": "",
       "atrasoMaiorMin": 0,
       "atrasoPequenoMin": 0
     },
     "colab_branch-3_249_2026-10-22": {
-      "note": "Dia futuro em aberto (desmarcado)",
+      "note": "OK em massa pelo cabeçalho da data",
       "punches": {
-        "em": "",
-        "et": "",
-        "sm": "",
-        "st": ""
+        "em": "08:00",
+        "et": "13:00",
+        "sm": "12:00",
+        "st": "17:00"
       },
-      "override": "VAZIO",
+      "override": "EM",
       "override2": "",
       "resolution": "NENHUMA",
+      "atrasoMaior": "",
+      "atrasoPequeno": "",
       "atrasoMaiorMin": 0,
       "atrasoPequenoMin": 0
     },
@@ -52926,7 +53739,7 @@ root.GOLD_RECOVERY_DATA = {
         "sm": "",
         "st": ""
       },
-      "override": "OK",
+      "override": "FALTA",
       "override2": "",
       "resolution": "NENHUMA",
       "atrasoMaior": "",
@@ -53007,7 +53820,10 @@ root.GOLD_RECOVERY_DATA = {
         "st": "17:00"
       },
       "override": "OK",
-      "resolution": "NENHUMA"
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
     },
     "colab_branch-3_255_2026-10-16": {
       "note": "OK em massa pelo cabeçalho da data",
@@ -53018,7 +53834,10 @@ root.GOLD_RECOVERY_DATA = {
         "st": "17:00"
       },
       "override": "OK",
-      "resolution": "NENHUMA"
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
     },
     "colab_branch-3_255_2026-10-17": {
       "note": "OK em massa pelo cabeçalho da data",
@@ -53029,7 +53848,10 @@ root.GOLD_RECOVERY_DATA = {
         "st": "17:00"
       },
       "override": "OK",
-      "resolution": "NENHUMA"
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
     },
     "colab_branch-3_255_2026-10-19": {
       "note": "OK em massa pelo cabeçalho da data",
@@ -53040,7 +53862,10 @@ root.GOLD_RECOVERY_DATA = {
         "st": "17:00"
       },
       "override": "OK",
-      "resolution": "NENHUMA"
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
     },
     "colab_branch-3_255_2026-10-20": {
       "note": "OK em massa pelo cabeçalho da data",
@@ -53051,33 +53876,38 @@ root.GOLD_RECOVERY_DATA = {
         "st": "17:00"
       },
       "override": "OK",
-      "resolution": "NENHUMA"
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
     },
     "colab_branch-3_255_2026-10-21": {
-      "note": "Dia futuro em aberto (desmarcado)",
+      "note": "OK em massa pelo cabeçalho da data",
       "punches": {
-        "em": "",
-        "et": "",
-        "sm": "",
-        "st": ""
+        "em": "08:00",
+        "et": "13:00",
+        "sm": "12:00",
+        "st": "17:00"
       },
-      "override": "VAZIO",
+      "override": "OK",
       "override2": "",
       "resolution": "NENHUMA",
       "atrasoMaiorMin": 0,
       "atrasoPequenoMin": 0
     },
     "colab_branch-3_255_2026-10-22": {
-      "note": "Dia futuro em aberto (desmarcado)",
+      "note": "OK em massa pelo cabeçalho da data",
       "punches": {
-        "em": "",
-        "et": "",
-        "sm": "",
-        "st": ""
+        "em": "08:00",
+        "et": "13:00",
+        "sm": "12:00",
+        "st": "17:00"
       },
-      "override": "VAZIO",
+      "override": "ST",
       "override2": "",
       "resolution": "NENHUMA",
+      "atrasoMaior": "",
+      "atrasoPequeno": "",
       "atrasoMaiorMin": 0,
       "atrasoPequenoMin": 0
     },
@@ -53453,7 +54283,7 @@ root.GOLD_RECOVERY_DATA = {
         "sm": "",
         "st": ""
       },
-      "override": "OK",
+      "override": "SM",
       "override2": "",
       "resolution": "NENHUMA",
       "atrasoMaior": "",
@@ -53469,7 +54299,7 @@ root.GOLD_RECOVERY_DATA = {
         "sm": "",
         "st": ""
       },
-      "override": "OK",
+      "override": "EM",
       "override2": "",
       "resolution": "NENHUMA",
       "atrasoMaior": "",
@@ -53532,6 +54362,8 @@ root.GOLD_RECOVERY_DATA = {
       "override": "FM",
       "override2": "",
       "resolution": "NENHUMA",
+      "atrasoMaior": "",
+      "atrasoPequeno": "",
       "atrasoMaiorMin": 0,
       "atrasoPequenoMin": 0
     },
@@ -53546,6 +54378,8 @@ root.GOLD_RECOVERY_DATA = {
       "override": "OK",
       "override2": "",
       "resolution": "NENHUMA",
+      "atrasoMaior": "",
+      "atrasoPequeno": "",
       "atrasoMaiorMin": 0,
       "atrasoPequenoMin": 0
     },
@@ -53557,7 +54391,7 @@ root.GOLD_RECOVERY_DATA = {
         "sm": "",
         "st": ""
       },
-      "override": "OK",
+      "override": "EM",
       "override2": "",
       "resolution": "NENHUMA",
       "atrasoMaior": "",
@@ -53644,7 +54478,10 @@ root.GOLD_RECOVERY_DATA = {
         "st": "17:00"
       },
       "override": "OK",
-      "resolution": "NENHUMA"
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
     },
     "colab_branch-3_294_2026-10-20": {
       "note": "OK em massa pelo cabeçalho da data",
@@ -53654,7 +54491,7 @@ root.GOLD_RECOVERY_DATA = {
         "sm": "12:00",
         "st": "17:00"
       },
-      "override": "EM",
+      "override": "OK",
       "override2": "",
       "resolution": "NENHUMA",
       "atrasoMaior": "",
@@ -53663,28 +54500,30 @@ root.GOLD_RECOVERY_DATA = {
       "atrasoPequenoMin": 0
     },
     "colab_branch-3_294_2026-10-21": {
-      "note": "Dia futuro em aberto (desmarcado)",
+      "note": "OK em massa pelo cabeçalho da data",
       "punches": {
-        "em": "",
-        "et": "",
-        "sm": "",
-        "st": ""
+        "em": "08:00",
+        "et": "13:00",
+        "sm": "12:00",
+        "st": "17:00"
       },
-      "override": "VAZIO",
+      "override": "ET",
       "override2": "",
       "resolution": "NENHUMA",
+      "atrasoMaior": "",
+      "atrasoPequeno": "",
       "atrasoMaiorMin": 0,
       "atrasoPequenoMin": 0
     },
     "colab_branch-3_294_2026-10-22": {
-      "note": "Dia futuro em aberto (desmarcado)",
+      "note": "OK em massa pelo cabeçalho da data",
       "punches": {
-        "em": "",
-        "et": "",
-        "sm": "",
-        "st": ""
+        "em": "08:00",
+        "et": "13:00",
+        "sm": "12:00",
+        "st": "17:00"
       },
-      "override": "VAZIO",
+      "override": "OK",
       "override2": "",
       "resolution": "NENHUMA",
       "atrasoMaiorMin": 0,
@@ -53814,6 +54653,7 @@ root.GOLD_RECOVERY_DATA = {
       "override2": "",
       "resolution": "NENHUMA",
       "atrasoMaior": "00:17",
+      "atrasoPequeno": "",
       "atrasoMaiorMin": 17,
       "atrasoPequenoMin": 0
     },
@@ -53853,7 +54693,7 @@ root.GOLD_RECOVERY_DATA = {
         "sm": "",
         "st": ""
       },
-      "override": "OK",
+      "override": "FT",
       "override2": "",
       "resolution": "NENHUMA",
       "atrasoMaior": "",
@@ -53945,7 +54785,7 @@ root.GOLD_RECOVERY_DATA = {
         "sm": "12:00",
         "st": "17:00"
       },
-      "override": "OK",
+      "override": "EM",
       "override2": "",
       "resolution": "NENHUMA",
       "atrasoMaior": "",
@@ -53964,10 +54804,10 @@ root.GOLD_RECOVERY_DATA = {
       "override": "OK",
       "override2": "",
       "resolution": "NENHUMA",
-      "atrasoMaior": "",
-      "atrasoPequeno": "00:06",
-      "atrasoMaiorMin": 0,
-      "atrasoPequenoMin": 6
+      "atrasoMaior": "00:06",
+      "atrasoPequeno": "",
+      "atrasoMaiorMin": 6,
+      "atrasoPequenoMin": 0
     },
     "colab_branch-3_295_2026-10-15": {
       "note": "OK em massa pelo cabeçalho da data",
@@ -53996,9 +54836,9 @@ root.GOLD_RECOVERY_DATA = {
       "override": "AUTO",
       "override2": "",
       "resolution": "NENHUMA",
-      "atrasoMaior": "00:19",
+      "atrasoMaior": "",
       "atrasoPequeno": "",
-      "atrasoMaiorMin": 19,
+      "atrasoMaiorMin": 0,
       "atrasoPequenoMin": 0
     },
     "colab_branch-3_295_2026-10-17": {
@@ -54010,7 +54850,10 @@ root.GOLD_RECOVERY_DATA = {
         "st": "17:00"
       },
       "override": "OK",
-      "resolution": "NENHUMA"
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
     },
     "colab_branch-3_295_2026-10-19": {
       "note": "OK em massa pelo cabeçalho da data",
@@ -54020,7 +54863,7 @@ root.GOLD_RECOVERY_DATA = {
         "sm": "12:00",
         "st": "17:00"
       },
-      "override": "ET",
+      "override": "OK",
       "override2": "",
       "resolution": "NENHUMA",
       "atrasoMaior": "",
@@ -54029,14 +54872,14 @@ root.GOLD_RECOVERY_DATA = {
       "atrasoPequenoMin": 0
     },
     "colab_branch-3_295_2026-10-20": {
-      "note": "OK em massa pelo cabeçalho da data",
+      "note": "OK em massa pelo cabeçalho da data (Replicado de 19/10/2026)",
       "punches": {
         "em": "08:00",
         "et": "13:00",
         "sm": "12:00",
         "st": "17:00"
       },
-      "override": "ET",
+      "override": "OK",
       "override2": "",
       "resolution": "NENHUMA",
       "atrasoMaior": "",
@@ -54045,28 +54888,30 @@ root.GOLD_RECOVERY_DATA = {
       "atrasoPequenoMin": 0
     },
     "colab_branch-3_295_2026-10-21": {
-      "note": "Dia futuro em aberto (desmarcado)",
+      "note": "OK em massa pelo cabeçalho da data",
       "punches": {
-        "em": "",
-        "et": "",
-        "sm": "",
-        "st": ""
+        "em": "08:00",
+        "et": "13:00",
+        "sm": "12:00",
+        "st": "17:00"
       },
-      "override": "VAZIO",
+      "override": "SM",
       "override2": "",
       "resolution": "NENHUMA",
+      "atrasoMaior": "",
+      "atrasoPequeno": "",
       "atrasoMaiorMin": 0,
       "atrasoPequenoMin": 0
     },
     "colab_branch-3_295_2026-10-22": {
-      "note": "Dia futuro em aberto (desmarcado)",
+      "note": "OK em massa pelo cabeçalho da data",
       "punches": {
-        "em": "",
-        "et": "",
-        "sm": "",
-        "st": ""
+        "em": "08:00",
+        "et": "13:00",
+        "sm": "12:00",
+        "st": "17:00"
       },
-      "override": "VAZIO",
+      "override": "OK",
       "override2": "",
       "resolution": "NENHUMA",
       "atrasoMaiorMin": 0,
@@ -54343,7 +55188,10 @@ root.GOLD_RECOVERY_DATA = {
         "st": "17:00"
       },
       "override": "OK",
-      "resolution": "NENHUMA"
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
     },
     "colab_branch-3_313_2026-10-16": {
       "note": "OK em massa pelo cabeçalho da data",
@@ -54354,7 +55202,10 @@ root.GOLD_RECOVERY_DATA = {
         "st": "17:00"
       },
       "override": "OK",
-      "resolution": "NENHUMA"
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
     },
     "colab_branch-3_313_2026-10-17": {
       "note": "OK em massa pelo cabeçalho da data",
@@ -54365,7 +55216,10 @@ root.GOLD_RECOVERY_DATA = {
         "st": "17:00"
       },
       "override": "OK",
-      "resolution": "NENHUMA"
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
     },
     "colab_branch-3_313_2026-10-19": {
       "note": "OK em massa pelo cabeçalho da data",
@@ -54376,7 +55230,10 @@ root.GOLD_RECOVERY_DATA = {
         "st": "17:00"
       },
       "override": "OK",
-      "resolution": "NENHUMA"
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
     },
     "colab_branch-3_313_2026-10-20": {
       "note": "OK em massa pelo cabeçalho da data",
@@ -54389,34 +55246,34 @@ root.GOLD_RECOVERY_DATA = {
       "override": "AUTO",
       "override2": "",
       "resolution": "NENHUMA",
-      "atrasoMaior": "00:30",
+      "atrasoMaior": "",
       "atrasoPequeno": "",
-      "atrasoMaiorMin": 30,
+      "atrasoMaiorMin": 0,
       "atrasoPequenoMin": 0
     },
     "colab_branch-3_313_2026-10-21": {
-      "note": "Dia futuro em aberto (desmarcado)",
+      "note": "OK em massa pelo cabeçalho da data",
       "punches": {
-        "em": "",
-        "et": "",
-        "sm": "",
-        "st": ""
+        "em": "08:00",
+        "et": "13:00",
+        "sm": "12:00",
+        "st": "17:00"
       },
-      "override": "VAZIO",
+      "override": "OK",
       "override2": "",
       "resolution": "NENHUMA",
       "atrasoMaiorMin": 0,
       "atrasoPequenoMin": 0
     },
     "colab_branch-3_313_2026-10-22": {
-      "note": "Dia futuro em aberto (desmarcado)",
+      "note": "OK em massa pelo cabeçalho da data",
       "punches": {
-        "em": "",
-        "et": "",
-        "sm": "",
-        "st": ""
+        "em": "08:00",
+        "et": "13:00",
+        "sm": "12:00",
+        "st": "17:00"
       },
-      "override": "VAZIO",
+      "override": "OK",
       "override2": "",
       "resolution": "NENHUMA",
       "atrasoMaiorMin": 0,
@@ -54560,6 +55417,7 @@ root.GOLD_RECOVERY_DATA = {
       "override2": "",
       "resolution": "NENHUMA",
       "atrasoMaior": "00:20",
+      "atrasoPequeno": "",
       "atrasoMaiorMin": 20,
       "atrasoPequenoMin": 0
     },
@@ -54680,7 +55538,7 @@ root.GOLD_RECOVERY_DATA = {
         "sm": "12:00",
         "st": "17:00"
       },
-      "override": "OK",
+      "override": "FALTA",
       "override2": "",
       "resolution": "NENHUMA",
       "atrasoMaior": "",
@@ -54763,34 +55621,34 @@ root.GOLD_RECOVERY_DATA = {
       "override": "AUTO",
       "override2": "",
       "resolution": "NENHUMA",
-      "atrasoMaior": "00:17",
+      "atrasoMaior": "",
       "atrasoPequeno": "",
-      "atrasoMaiorMin": 17,
+      "atrasoMaiorMin": 0,
       "atrasoPequenoMin": 0
     },
     "colab_branch-3_335_2026-10-21": {
-      "note": "Dia futuro em aberto (desmarcado)",
+      "note": "OK em massa pelo cabeçalho da data",
       "punches": {
-        "em": "",
-        "et": "",
-        "sm": "",
-        "st": ""
+        "em": "08:00",
+        "et": "13:00",
+        "sm": "12:00",
+        "st": "17:00"
       },
-      "override": "VAZIO",
+      "override": "OK",
       "override2": "",
       "resolution": "NENHUMA",
       "atrasoMaiorMin": 0,
       "atrasoPequenoMin": 0
     },
     "colab_branch-3_335_2026-10-22": {
-      "note": "Dia futuro em aberto (desmarcado)",
+      "note": "OK em massa pelo cabeçalho da data",
       "punches": {
-        "em": "",
-        "et": "",
-        "sm": "",
-        "st": ""
+        "em": "08:00",
+        "et": "13:00",
+        "sm": "12:00",
+        "st": "17:00"
       },
-      "override": "VAZIO",
+      "override": "OK",
       "override2": "",
       "resolution": "NENHUMA",
       "atrasoMaiorMin": 0,
@@ -54908,6 +55766,566 @@ root.GOLD_RECOVERY_DATA = {
       "atrasoMaiorMin": 0,
       "atrasoPequenoMin": 0
     },
+    "colab_branch-3_336_2026-10-01": {
+      "note": "",
+      "punches": {
+        "em": "08:00",
+        "et": "13:00",
+        "sm": "12:00",
+        "st": "17:00"
+      },
+      "override": "AFASTADO",
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaior": "",
+      "atrasoPequeno": "",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
+    },
+    "colab_branch-3_336_2026-10-02": {
+      "note": " (Replicado de 01/10/2026)",
+      "punches": {
+        "em": "08:00",
+        "et": "13:00",
+        "sm": "12:00",
+        "st": "17:00"
+      },
+      "override": "AFASTADO",
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaior": "",
+      "atrasoPequeno": "",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
+    },
+    "colab_branch-3_336_2026-10-03": {
+      "note": " (Replicado de 01/10/2026)",
+      "punches": {
+        "em": "08:00",
+        "et": "13:00",
+        "sm": "12:00",
+        "st": "17:00"
+      },
+      "override": "AFASTADO",
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaior": "",
+      "atrasoPequeno": "",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
+    },
+    "colab_branch-3_336_2026-10-05": {
+      "note": " (Replicado de 01/10/2026)",
+      "punches": {
+        "em": "08:00",
+        "et": "13:00",
+        "sm": "12:00",
+        "st": "17:00"
+      },
+      "override": "AFASTADO",
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaior": "",
+      "atrasoPequeno": "",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
+    },
+    "colab_branch-3_336_2026-10-06": {
+      "note": " (Replicado de 01/10/2026)",
+      "punches": {
+        "em": "08:00",
+        "et": "13:00",
+        "sm": "12:00",
+        "st": "17:00"
+      },
+      "override": "AFASTADO",
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaior": "",
+      "atrasoPequeno": "",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
+    },
+    "colab_branch-3_336_2026-10-07": {
+      "note": " (Replicado de 01/10/2026)",
+      "punches": {
+        "em": "08:00",
+        "et": "13:00",
+        "sm": "12:00",
+        "st": "17:00"
+      },
+      "override": "AFASTADO",
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaior": "",
+      "atrasoPequeno": "",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
+    },
+    "colab_branch-3_336_2026-10-08": {
+      "note": " (Replicado de 01/10/2026)",
+      "punches": {
+        "em": "08:00",
+        "et": "13:00",
+        "sm": "12:00",
+        "st": "17:00"
+      },
+      "override": "AFASTADO",
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaior": "",
+      "atrasoPequeno": "",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
+    },
+    "colab_branch-3_336_2026-10-09": {
+      "note": " (Replicado de 01/10/2026)",
+      "punches": {
+        "em": "08:00",
+        "et": "13:00",
+        "sm": "12:00",
+        "st": "17:00"
+      },
+      "override": "AFASTADO",
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaior": "",
+      "atrasoPequeno": "",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
+    },
+    "colab_branch-3_336_2026-10-10": {
+      "note": " (Replicado de 01/10/2026)",
+      "punches": {
+        "em": "08:00",
+        "et": "13:00",
+        "sm": "12:00",
+        "st": "17:00"
+      },
+      "override": "AFASTADO",
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaior": "",
+      "atrasoPequeno": "",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
+    },
+    "colab_branch-3_336_2026-10-12": {
+      "note": " (Replicado de 01/10/2026)",
+      "punches": {
+        "em": "08:00",
+        "et": "13:00",
+        "sm": "12:00",
+        "st": "17:00"
+      },
+      "override": "AFASTADO",
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaior": "",
+      "atrasoPequeno": "",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
+    },
+    "colab_branch-3_336_2026-10-13": {
+      "note": " (Replicado de 01/10/2026)",
+      "punches": {
+        "em": "08:00",
+        "et": "13:00",
+        "sm": "12:00",
+        "st": "17:00"
+      },
+      "override": "AFASTADO",
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaior": "",
+      "atrasoPequeno": "",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
+    },
+    "colab_branch-3_336_2026-10-14": {
+      "note": " (Replicado de 01/10/2026)",
+      "punches": {
+        "em": "08:00",
+        "et": "13:00",
+        "sm": "12:00",
+        "st": "17:00"
+      },
+      "override": "AFASTADO",
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaior": "",
+      "atrasoPequeno": "",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
+    },
+    "colab_branch-3_336_2026-10-15": {
+      "note": " (Replicado de 01/10/2026)",
+      "punches": {
+        "em": "08:00",
+        "et": "13:00",
+        "sm": "12:00",
+        "st": "17:00"
+      },
+      "override": "AFASTADO",
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaior": "",
+      "atrasoPequeno": "",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
+    },
+    "colab_branch-3_336_2026-10-16": {
+      "note": " (Replicado de 01/10/2026)",
+      "punches": {
+        "em": "08:00",
+        "et": "13:00",
+        "sm": "12:00",
+        "st": "17:00"
+      },
+      "override": "AFASTADO",
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaior": "",
+      "atrasoPequeno": "",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
+    },
+    "colab_branch-3_336_2026-10-17": {
+      "note": " (Replicado de 01/10/2026)",
+      "punches": {
+        "em": "08:00",
+        "et": "13:00",
+        "sm": "12:00",
+        "st": "17:00"
+      },
+      "override": "AFASTADO",
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaior": "",
+      "atrasoPequeno": "",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
+    },
+    "colab_branch-3_336_2026-10-19": {
+      "note": " (Replicado de 01/10/2026)",
+      "punches": {
+        "em": "08:00",
+        "et": "13:00",
+        "sm": "12:00",
+        "st": "17:00"
+      },
+      "override": "AFASTADO",
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaior": "",
+      "atrasoPequeno": "",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
+    },
+    "colab_branch-3_336_2026-10-20": {
+      "note": " (Replicado de 01/10/2026)",
+      "punches": {
+        "em": "08:00",
+        "et": "13:00",
+        "sm": "12:00",
+        "st": "17:00"
+      },
+      "override": "AFASTADO",
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaior": "",
+      "atrasoPequeno": "",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
+    },
+    "colab_branch-3_336_2026-10-21": {
+      "note": " (Replicado de 01/10/2026)",
+      "punches": {
+        "em": "08:00",
+        "et": "13:00",
+        "sm": "12:00",
+        "st": "17:00"
+      },
+      "override": "AFASTADO",
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaior": "",
+      "atrasoPequeno": "",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
+    },
+    "colab_branch-3_336_2026-10-22": {
+      "note": " (Replicado de 01/10/2026)",
+      "punches": {
+        "em": "08:00",
+        "et": "13:00",
+        "sm": "12:00",
+        "st": "17:00"
+      },
+      "override": "AFASTADO",
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaior": "",
+      "atrasoPequeno": "",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
+    },
+    "colab_branch-3_336_2026-10-23": {
+      "note": " (Replicado de 01/10/2026)",
+      "punches": {
+        "em": "08:00",
+        "et": "13:00",
+        "sm": "12:00",
+        "st": "17:00"
+      },
+      "override": "AFASTADO",
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaior": "",
+      "atrasoPequeno": "",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
+    },
+    "colab_branch-3_336_2026-10-24": {
+      "note": " (Replicado de 01/10/2026)",
+      "punches": {
+        "em": "08:00",
+        "et": "13:00",
+        "sm": "12:00",
+        "st": "17:00"
+      },
+      "override": "AFASTADO",
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaior": "",
+      "atrasoPequeno": "",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
+    },
+    "colab_branch-3_336_2026-10-26": {
+      "note": " (Replicado de 01/10/2026)",
+      "punches": {
+        "em": "08:00",
+        "et": "13:00",
+        "sm": "12:00",
+        "st": "17:00"
+      },
+      "override": "AFASTADO",
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaior": "",
+      "atrasoPequeno": "",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
+    },
+    "colab_branch-3_336_2026-10-27": {
+      "note": " (Replicado de 01/10/2026)",
+      "punches": {
+        "em": "08:00",
+        "et": "13:00",
+        "sm": "12:00",
+        "st": "17:00"
+      },
+      "override": "AFASTADO",
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaior": "",
+      "atrasoPequeno": "",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
+    },
+    "colab_branch-3_336_2026-10-28": {
+      "note": " (Replicado de 01/10/2026)",
+      "punches": {
+        "em": "08:00",
+        "et": "13:00",
+        "sm": "12:00",
+        "st": "17:00"
+      },
+      "override": "AFASTADO",
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaior": "",
+      "atrasoPequeno": "",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
+    },
+    "colab_branch-3_336_2026-10-29": {
+      "note": " (Replicado de 01/10/2026)",
+      "punches": {
+        "em": "08:00",
+        "et": "13:00",
+        "sm": "12:00",
+        "st": "17:00"
+      },
+      "override": "AFASTADO",
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaior": "",
+      "atrasoPequeno": "",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
+    },
+    "colab_branch-3_336_2026-10-30": {
+      "note": " (Replicado de 01/10/2026)",
+      "punches": {
+        "em": "08:00",
+        "et": "13:00",
+        "sm": "12:00",
+        "st": "17:00"
+      },
+      "override": "AFASTADO",
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaior": "",
+      "atrasoPequeno": "",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
+    },
+    "colab_branch-3_336_2026-10-31": {
+      "note": " (Replicado de 01/10/2026)",
+      "punches": {
+        "em": "08:00",
+        "et": "13:00",
+        "sm": "12:00",
+        "st": "17:00"
+      },
+      "override": "AFASTADO",
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaior": "",
+      "atrasoPequeno": "",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
+    },
+    "colab_branch-3_336_2026-11-02": {
+      "note": " (Replicado de 01/10/2026)",
+      "punches": {
+        "em": "08:00",
+        "et": "13:00",
+        "sm": "12:00",
+        "st": "17:00"
+      },
+      "override": "AFASTADO",
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaior": "",
+      "atrasoPequeno": "",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
+    },
+    "colab_branch-3_336_2026-11-03": {
+      "note": " (Replicado de 01/10/2026)",
+      "punches": {
+        "em": "08:00",
+        "et": "13:00",
+        "sm": "12:00",
+        "st": "17:00"
+      },
+      "override": "AFASTADO",
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaior": "",
+      "atrasoPequeno": "",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
+    },
+    "colab_branch-3_336_2026-11-04": {
+      "note": " (Replicado de 01/10/2026)",
+      "punches": {
+        "em": "08:00",
+        "et": "13:00",
+        "sm": "12:00",
+        "st": "17:00"
+      },
+      "override": "AFASTADO",
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaior": "",
+      "atrasoPequeno": "",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
+    },
+    "colab_branch-3_336_2026-11-05": {
+      "note": " (Replicado de 01/10/2026)",
+      "punches": {
+        "em": "08:00",
+        "et": "13:00",
+        "sm": "12:00",
+        "st": "17:00"
+      },
+      "override": "AFASTADO",
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaior": "",
+      "atrasoPequeno": "",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
+    },
+    "colab_branch-3_336_2026-11-06": {
+      "note": " (Replicado de 01/10/2026)",
+      "punches": {
+        "em": "08:00",
+        "et": "13:00",
+        "sm": "12:00",
+        "st": "17:00"
+      },
+      "override": "AFASTADO",
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaior": "",
+      "atrasoPequeno": "",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
+    },
+    "colab_branch-3_336_2026-11-07": {
+      "note": " (Replicado de 01/10/2026)",
+      "punches": {
+        "em": "08:00",
+        "et": "13:00",
+        "sm": "12:00",
+        "st": "17:00"
+      },
+      "override": "AFASTADO",
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaior": "",
+      "atrasoPequeno": "",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
+    },
+    "colab_branch-3_336_2026-11-09": {
+      "note": " (Replicado de 01/10/2026)",
+      "punches": {
+        "em": "08:00",
+        "et": "13:00",
+        "sm": "12:00",
+        "st": "17:00"
+      },
+      "override": "AFASTADO",
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaior": "",
+      "atrasoPequeno": "",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
+    },
+    "colab_branch-3_336_2026-11-10": {
+      "note": " (Replicado de 01/10/2026)",
+      "punches": {
+        "em": "08:00",
+        "et": "13:00",
+        "sm": "12:00",
+        "st": "17:00"
+      },
+      "override": "AFASTADO",
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaior": "",
+      "atrasoPequeno": "",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
+    },
     "colab_branch-3_343_2026-10-01": {
       "note": "Pendência SM (Planilha)",
       "punches": {
@@ -54916,7 +56334,7 @@ root.GOLD_RECOVERY_DATA = {
         "sm": "",
         "st": ""
       },
-      "override": "OK",
+      "override": "SM",
       "override2": "",
       "resolution": "NENHUMA",
       "atrasoMaior": "",
@@ -54946,7 +56364,7 @@ root.GOLD_RECOVERY_DATA = {
         "sm": "",
         "st": ""
       },
-      "override": "OK",
+      "override": "FALTA",
       "override2": "",
       "resolution": "NENHUMA",
       "atrasoMaior": "",
@@ -55048,7 +56466,7 @@ root.GOLD_RECOVERY_DATA = {
         "sm": "12:00",
         "st": "17:00"
       },
-      "override": "OK",
+      "override": "FT",
       "override2": "",
       "resolution": "NENHUMA",
       "atrasoMaior": "",
@@ -55076,7 +56494,10 @@ root.GOLD_RECOVERY_DATA = {
         "st": "17:00"
       },
       "override": "OK",
-      "resolution": "NENHUMA"
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
     },
     "colab_branch-3_343_2026-10-16": {
       "note": "OK em massa pelo cabeçalho da data",
@@ -55087,7 +56508,10 @@ root.GOLD_RECOVERY_DATA = {
         "st": "17:00"
       },
       "override": "OK",
-      "resolution": "NENHUMA"
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
     },
     "colab_branch-3_343_2026-10-17": {
       "note": "OK em massa pelo cabeçalho da data",
@@ -55130,33 +56554,38 @@ root.GOLD_RECOVERY_DATA = {
         "st": "17:00"
       },
       "override": "OK",
-      "resolution": "NENHUMA"
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
     },
     "colab_branch-3_343_2026-10-21": {
-      "note": "Dia futuro em aberto (desmarcado)",
+      "note": "OK em massa pelo cabeçalho da data",
       "punches": {
-        "em": "",
-        "et": "",
-        "sm": "",
-        "st": ""
+        "em": "08:00",
+        "et": "13:00",
+        "sm": "12:00",
+        "st": "17:00"
       },
-      "override": "VAZIO",
+      "override": "OK",
       "override2": "",
       "resolution": "NENHUMA",
       "atrasoMaiorMin": 0,
       "atrasoPequenoMin": 0
     },
     "colab_branch-3_343_2026-10-22": {
-      "note": "Dia futuro em aberto (desmarcado)",
+      "note": "OK em massa pelo cabeçalho da data",
       "punches": {
-        "em": "",
-        "et": "",
-        "sm": "",
-        "st": ""
+        "em": "08:00",
+        "et": "13:00",
+        "sm": "12:00",
+        "st": "17:00"
       },
-      "override": "VAZIO",
+      "override": "ST",
       "override2": "",
       "resolution": "NENHUMA",
+      "atrasoMaior": "",
+      "atrasoPequeno": "",
       "atrasoMaiorMin": 0,
       "atrasoPequenoMin": 0
     },
@@ -55294,8 +56723,8 @@ root.GOLD_RECOVERY_DATA = {
         "sm": "",
         "st": ""
       },
-      "override": "OK",
-      "override2": "",
+      "override": "EM",
+      "override2": "ET",
       "resolution": "NENHUMA",
       "atrasoMaior": "",
       "atrasoPequeno": "",
@@ -55366,7 +56795,7 @@ root.GOLD_RECOVERY_DATA = {
         "sm": "",
         "st": ""
       },
-      "override": "OK",
+      "override": "FT",
       "override2": "",
       "resolution": "NENHUMA",
       "atrasoMaior": "",
@@ -55382,8 +56811,8 @@ root.GOLD_RECOVERY_DATA = {
         "sm": "",
         "st": ""
       },
-      "override": "OK",
-      "override2": "",
+      "override": "FM",
+      "override2": "ST",
       "resolution": "NENHUMA",
       "atrasoMaior": "",
       "atrasoPequeno": "",
@@ -55435,7 +56864,10 @@ root.GOLD_RECOVERY_DATA = {
         "st": "17:00"
       },
       "override": "OK",
-      "resolution": "NENHUMA"
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
     },
     "colab_branch-3_344_2026-10-16": {
       "note": "OK em massa pelo cabeçalho da data",
@@ -55446,7 +56878,10 @@ root.GOLD_RECOVERY_DATA = {
         "st": "17:00"
       },
       "override": "OK",
-      "resolution": "NENHUMA"
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
     },
     "colab_branch-3_344_2026-10-17": {
       "note": "OK em massa pelo cabeçalho da data",
@@ -55457,7 +56892,10 @@ root.GOLD_RECOVERY_DATA = {
         "st": "17:00"
       },
       "override": "OK",
-      "resolution": "NENHUMA"
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
     },
     "colab_branch-3_344_2026-10-19": {
       "note": "OK em massa pelo cabeçalho da data",
@@ -55468,7 +56906,10 @@ root.GOLD_RECOVERY_DATA = {
         "st": "17:00"
       },
       "override": "OK",
-      "resolution": "NENHUMA"
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
     },
     "colab_branch-3_344_2026-10-20": {
       "note": "OK em massa pelo cabeçalho da data",
@@ -55479,31 +56920,34 @@ root.GOLD_RECOVERY_DATA = {
         "st": "17:00"
       },
       "override": "OK",
-      "resolution": "NENHUMA"
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
     },
     "colab_branch-3_344_2026-10-21": {
-      "note": "Dia futuro em aberto (desmarcado)",
+      "note": "OK em massa pelo cabeçalho da data",
       "punches": {
-        "em": "",
-        "et": "",
-        "sm": "",
-        "st": ""
+        "em": "08:00",
+        "et": "13:00",
+        "sm": "12:00",
+        "st": "17:00"
       },
-      "override": "VAZIO",
+      "override": "OK",
       "override2": "",
       "resolution": "NENHUMA",
       "atrasoMaiorMin": 0,
       "atrasoPequenoMin": 0
     },
     "colab_branch-3_344_2026-10-22": {
-      "note": "Dia futuro em aberto (desmarcado)",
+      "note": "OK em massa pelo cabeçalho da data",
       "punches": {
-        "em": "",
-        "et": "",
-        "sm": "",
-        "st": ""
+        "em": "08:00",
+        "et": "13:00",
+        "sm": "12:00",
+        "st": "17:00"
       },
-      "override": "VAZIO",
+      "override": "OK",
       "override2": "",
       "resolution": "NENHUMA",
       "atrasoMaiorMin": 0,
@@ -55730,9 +57174,9 @@ root.GOLD_RECOVERY_DATA = {
       "override": "AUTO",
       "override2": "",
       "resolution": "NENHUMA",
-      "atrasoMaior": "",
+      "atrasoMaior": "00:30",
       "atrasoPequeno": "",
-      "atrasoMaiorMin": 0,
+      "atrasoMaiorMin": 30,
       "atrasoPequenoMin": 0
     },
     "colab_branch-3_350_2026-10-10": {
@@ -55780,7 +57224,10 @@ root.GOLD_RECOVERY_DATA = {
         "st": "17:00"
       },
       "override": "OK",
-      "resolution": "NENHUMA"
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
     },
     "colab_branch-3_350_2026-10-16": {
       "note": "OK em massa pelo cabeçalho da data",
@@ -55807,7 +57254,10 @@ root.GOLD_RECOVERY_DATA = {
         "st": "17:00"
       },
       "override": "OK",
-      "resolution": "NENHUMA"
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
     },
     "colab_branch-3_350_2026-10-19": {
       "note": "OK em massa pelo cabeçalho da data",
@@ -55834,31 +57284,34 @@ root.GOLD_RECOVERY_DATA = {
         "st": "17:00"
       },
       "override": "OK",
-      "resolution": "NENHUMA"
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
     },
     "colab_branch-3_350_2026-10-21": {
-      "note": "Dia futuro em aberto (desmarcado)",
+      "note": "OK em massa pelo cabeçalho da data",
       "punches": {
-        "em": "",
-        "et": "",
-        "sm": "",
-        "st": ""
+        "em": "08:00",
+        "et": "13:00",
+        "sm": "12:00",
+        "st": "17:00"
       },
-      "override": "VAZIO",
+      "override": "OK",
       "override2": "",
       "resolution": "NENHUMA",
       "atrasoMaiorMin": 0,
       "atrasoPequenoMin": 0
     },
     "colab_branch-3_350_2026-10-22": {
-      "note": "Dia futuro em aberto (desmarcado)",
+      "note": "OK em massa pelo cabeçalho da data",
       "punches": {
-        "em": "",
-        "et": "",
-        "sm": "",
-        "st": ""
+        "em": "08:00",
+        "et": "13:00",
+        "sm": "12:00",
+        "st": "17:00"
       },
-      "override": "VAZIO",
+      "override": "OK",
       "override2": "",
       "resolution": "NENHUMA",
       "atrasoMaiorMin": 0,
@@ -56136,7 +57589,7 @@ root.GOLD_RECOVERY_DATA = {
         "sm": "12:00",
         "st": "17:00"
       },
-      "override": "VAZIO",
+      "override": "OK",
       "override2": "",
       "resolution": "NENHUMA",
       "atrasoMaior": "",
@@ -56152,7 +57605,7 @@ root.GOLD_RECOVERY_DATA = {
         "sm": "12:00",
         "st": "17:00"
       },
-      "override": "VAZIO",
+      "override": "OK",
       "override2": "",
       "resolution": "NENHUMA",
       "atrasoMaior": "",
@@ -56168,7 +57621,7 @@ root.GOLD_RECOVERY_DATA = {
         "sm": "12:00",
         "st": "17:00"
       },
-      "override": "VAZIO",
+      "override": "OK",
       "override2": "",
       "resolution": "NENHUMA",
       "atrasoMaior": "",
@@ -56184,7 +57637,7 @@ root.GOLD_RECOVERY_DATA = {
         "sm": "12:00",
         "st": "17:00"
       },
-      "override": "VAZIO",
+      "override": "OK",
       "override2": "",
       "resolution": "NENHUMA",
       "atrasoMaior": "",
@@ -56200,7 +57653,7 @@ root.GOLD_RECOVERY_DATA = {
         "sm": "12:00",
         "st": "17:00"
       },
-      "override": "VAZIO",
+      "override": "OK",
       "override2": "",
       "resolution": "NENHUMA",
       "atrasoMaior": "",
@@ -56209,30 +57662,34 @@ root.GOLD_RECOVERY_DATA = {
       "atrasoPequenoMin": 0
     },
     "colab_branch-3_356_2026-10-21": {
-      "note": "Dia futuro em aberto (desmarcado)",
+      "note": "OK em massa pelo cabeçalho da data",
       "punches": {
-        "em": "",
-        "et": "",
-        "sm": "",
-        "st": ""
+        "em": "08:00",
+        "et": "13:00",
+        "sm": "12:00",
+        "st": "17:00"
       },
-      "override": "VAZIO",
+      "override": "OK",
       "override2": "",
       "resolution": "NENHUMA",
+      "atrasoMaior": "",
+      "atrasoPequeno": "",
       "atrasoMaiorMin": 0,
       "atrasoPequenoMin": 0
     },
     "colab_branch-3_356_2026-10-22": {
-      "note": "Dia futuro em aberto (desmarcado)",
+      "note": "OK em massa pelo cabeçalho da data (Replicado de 21/10/2026)",
       "punches": {
-        "em": "",
-        "et": "",
-        "sm": "",
-        "st": ""
+        "em": "08:00",
+        "et": "13:00",
+        "sm": "12:00",
+        "st": "17:00"
       },
-      "override": "VAZIO",
+      "override": "OK",
       "override2": "",
       "resolution": "NENHUMA",
+      "atrasoMaior": "",
+      "atrasoPequeno": "",
       "atrasoMaiorMin": 0,
       "atrasoPequenoMin": 0
     },
@@ -56454,7 +57911,7 @@ root.GOLD_RECOVERY_DATA = {
         "sm": "",
         "st": ""
       },
-      "override": "OK",
+      "override": "ET",
       "override2": "",
       "resolution": "NENHUMA",
       "atrasoMaior": "",
@@ -56484,7 +57941,7 @@ root.GOLD_RECOVERY_DATA = {
         "sm": "12:00",
         "st": "17:00"
       },
-      "override": "OK",
+      "override": "FALTA",
       "override2": "",
       "resolution": "NENHUMA",
       "atrasoMaior": "",
@@ -56512,7 +57969,10 @@ root.GOLD_RECOVERY_DATA = {
         "st": "17:00"
       },
       "override": "OK",
-      "resolution": "NENHUMA"
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
     },
     "colab_branch-3_358_2026-10-16": {
       "note": "OK em massa pelo cabeçalho da data",
@@ -56539,7 +57999,10 @@ root.GOLD_RECOVERY_DATA = {
         "st": "17:00"
       },
       "override": "OK",
-      "resolution": "NENHUMA"
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
     },
     "colab_branch-3_358_2026-10-19": {
       "note": "OK em massa pelo cabeçalho da data",
@@ -56549,7 +58012,7 @@ root.GOLD_RECOVERY_DATA = {
         "sm": "12:00",
         "st": "17:00"
       },
-      "override": "EM",
+      "override": "OK",
       "override2": "",
       "resolution": "NENHUMA",
       "atrasoMaior": "",
@@ -56566,31 +58029,34 @@ root.GOLD_RECOVERY_DATA = {
         "st": "17:00"
       },
       "override": "OK",
-      "resolution": "NENHUMA"
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
     },
     "colab_branch-3_358_2026-10-21": {
-      "note": "Dia futuro em aberto (desmarcado)",
+      "note": "OK em massa pelo cabeçalho da data",
       "punches": {
-        "em": "",
-        "et": "",
-        "sm": "",
-        "st": ""
+        "em": "08:00",
+        "et": "13:00",
+        "sm": "12:00",
+        "st": "17:00"
       },
-      "override": "VAZIO",
+      "override": "OK",
       "override2": "",
       "resolution": "NENHUMA",
       "atrasoMaiorMin": 0,
       "atrasoPequenoMin": 0
     },
     "colab_branch-3_358_2026-10-22": {
-      "note": "Dia futuro em aberto (desmarcado)",
+      "note": "OK em massa pelo cabeçalho da data",
       "punches": {
-        "em": "",
-        "et": "",
-        "sm": "",
-        "st": ""
+        "em": "08:00",
+        "et": "13:00",
+        "sm": "12:00",
+        "st": "17:00"
       },
-      "override": "VAZIO",
+      "override": "OK",
       "override2": "",
       "resolution": "NENHUMA",
       "atrasoMaiorMin": 0,
@@ -56716,13 +58182,13 @@ root.GOLD_RECOVERY_DATA = {
         "sm": "",
         "st": ""
       },
-      "override": "AUTO",
+      "override": "SM",
       "override2": "",
       "resolution": "NENHUMA",
       "atrasoMaior": "",
       "atrasoPequeno": "00:18",
       "atrasoMaiorMin": 0,
-      "atrasoPequenoMin": 18
+      "atrasoPequenoMin": 0
     },
     "colab_branch-3_360_2026-10-02": {
       "note": "Presença regular (Planilha)",
@@ -56808,13 +58274,13 @@ root.GOLD_RECOVERY_DATA = {
         "sm": "",
         "st": ""
       },
-      "override": "AUTO",
+      "override": "ST",
       "override2": "",
       "resolution": "NENHUMA",
       "atrasoMaior": "00:15",
       "atrasoPequeno": "00:08",
-      "atrasoMaiorMin": 15,
-      "atrasoPequenoMin": 8
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
     },
     "colab_branch-3_360_2026-10-09": {
       "note": "Atraso A.16 + Pendência FT (Planilha)",
@@ -56828,6 +58294,7 @@ root.GOLD_RECOVERY_DATA = {
       "override2": "",
       "resolution": "NENHUMA",
       "atrasoMaior": "16",
+      "atrasoPequeno": "",
       "atrasoMaiorMin": 16,
       "atrasoPequenoMin": 0
     },
@@ -56976,30 +58443,34 @@ root.GOLD_RECOVERY_DATA = {
       "atrasoPequenoMin": 0
     },
     "colab_branch-3_360_2026-10-21": {
-      "note": "Dia futuro em aberto (desmarcado)",
+      "note": "OK em massa pelo cabeçalho da data",
       "punches": {
-        "em": "",
-        "et": "",
-        "sm": "",
-        "st": ""
+        "em": "08:00",
+        "et": "13:00",
+        "sm": "12:00",
+        "st": "17:00"
       },
-      "override": "VAZIO",
+      "override": "FALTA",
       "override2": "",
       "resolution": "NENHUMA",
+      "atrasoMaior": "",
+      "atrasoPequeno": "",
       "atrasoMaiorMin": 0,
       "atrasoPequenoMin": 0
     },
     "colab_branch-3_360_2026-10-22": {
-      "note": "Dia futuro em aberto (desmarcado)",
+      "note": "OK em massa pelo cabeçalho da data (Replicado de 21/10/2026)",
       "punches": {
-        "em": "",
-        "et": "",
-        "sm": "",
-        "st": ""
+        "em": "08:00",
+        "et": "13:00",
+        "sm": "12:00",
+        "st": "17:00"
       },
-      "override": "VAZIO",
+      "override": "FALTA",
       "override2": "",
       "resolution": "NENHUMA",
+      "atrasoMaior": "",
+      "atrasoPequeno": "",
       "atrasoMaiorMin": 0,
       "atrasoPequenoMin": 0
     },
@@ -57112,6 +58583,348 @@ root.GOLD_RECOVERY_DATA = {
       "override": "VAZIO",
       "override2": "",
       "resolution": "NENHUMA",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
+    },
+    "colab_branch-3_361_2026-10-07": {
+      "note": "",
+      "punches": {
+        "em": "08:00",
+        "et": "13:00",
+        "sm": "12:00",
+        "st": "17:00"
+      },
+      "override": "OK",
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaior": "",
+      "atrasoPequeno": "",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
+    },
+    "colab_branch-3_361_2026-10-08": {
+      "note": " (Replicado de 07/10/2026)",
+      "punches": {
+        "em": "08:00",
+        "et": "13:00",
+        "sm": "12:00",
+        "st": "17:00"
+      },
+      "override": "OK",
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaior": "",
+      "atrasoPequeno": "",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
+    },
+    "colab_branch-3_361_2026-10-09": {
+      "note": " (Replicado de 07/10/2026)",
+      "punches": {
+        "em": "08:00",
+        "et": "13:00",
+        "sm": "12:00",
+        "st": "17:00"
+      },
+      "override": "OK",
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaior": "",
+      "atrasoPequeno": "",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
+    },
+    "colab_branch-3_361_2026-10-10": {
+      "note": " (Replicado de 07/10/2026)",
+      "punches": {
+        "em": "08:00",
+        "et": "13:00",
+        "sm": "12:00",
+        "st": "17:00"
+      },
+      "override": "OK",
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaior": "",
+      "atrasoPequeno": "",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
+    },
+    "colab_branch-3_361_2026-10-12": {
+      "note": " (Replicado de 07/10/2026)",
+      "punches": {
+        "em": "08:00",
+        "et": "13:00",
+        "sm": "12:00",
+        "st": "17:00"
+      },
+      "override": "OK",
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaior": "",
+      "atrasoPequeno": "",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
+    },
+    "colab_branch-3_361_2026-10-13": {
+      "note": " (Replicado de 07/10/2026)",
+      "punches": {
+        "em": "08:00",
+        "et": "13:00",
+        "sm": "12:00",
+        "st": "17:00"
+      },
+      "override": "OK",
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaior": "",
+      "atrasoPequeno": "",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
+    },
+    "colab_branch-3_361_2026-10-14": {
+      "note": " (Replicado de 07/10/2026)",
+      "punches": {
+        "em": "08:00",
+        "et": "13:00",
+        "sm": "12:00",
+        "st": "17:00"
+      },
+      "override": "OK",
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaior": "",
+      "atrasoPequeno": "",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
+    },
+    "colab_branch-3_361_2026-10-15": {
+      "note": " (Replicado de 07/10/2026)",
+      "punches": {
+        "em": "08:00",
+        "et": "13:00",
+        "sm": "12:00",
+        "st": "17:00"
+      },
+      "override": "OK",
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaior": "",
+      "atrasoPequeno": "",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
+    },
+    "colab_branch-3_361_2026-10-16": {
+      "note": "",
+      "punches": {
+        "em": "08:00",
+        "et": "13:00",
+        "sm": "12:00",
+        "st": "17:00"
+      },
+      "override": "OK",
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaior": "",
+      "atrasoPequeno": "",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
+    },
+    "colab_branch-3_361_2026-10-17": {
+      "note": " (Replicado de 16/10/2026)",
+      "punches": {
+        "em": "08:00",
+        "et": "13:00",
+        "sm": "12:00",
+        "st": "17:00"
+      },
+      "override": "OK",
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaior": "",
+      "atrasoPequeno": "",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
+    },
+    "colab_branch-3_361_2026-10-19": {
+      "note": " (Replicado de 16/10/2026)",
+      "punches": {
+        "em": "08:00",
+        "et": "13:00",
+        "sm": "12:00",
+        "st": "17:00"
+      },
+      "override": "OK",
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaior": "",
+      "atrasoPequeno": "",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
+    },
+    "colab_branch-3_361_2026-10-20": {
+      "note": " (Replicado de 16/10/2026)",
+      "punches": {
+        "em": "08:00",
+        "et": "13:00",
+        "sm": "12:00",
+        "st": "17:00"
+      },
+      "override": "OK",
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaior": "",
+      "atrasoPequeno": "",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
+    },
+    "colab_branch-3_361_2026-10-21": {
+      "note": "OK em massa pelo cabeçalho da data",
+      "punches": {
+        "em": "08:00",
+        "et": "13:00",
+        "sm": "12:00",
+        "st": "17:00"
+      },
+      "override": "OK",
+      "resolution": "NENHUMA"
+    },
+    "colab_branch-3_361_2026-10-22": {
+      "note": "OK em massa pelo cabeçalho da data",
+      "punches": {
+        "em": "08:00",
+        "et": "13:00",
+        "sm": "12:00",
+        "st": "17:00"
+      },
+      "override": "OK",
+      "resolution": "NENHUMA"
+    },
+    "colab_branch-3_361_2026-10-23": {
+      "note": " (Replicado de 21/10/2026)",
+      "punches": {
+        "em": "08:00",
+        "et": "13:00",
+        "sm": "12:00",
+        "st": "17:00"
+      },
+      "override": "AUTO",
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaior": "",
+      "atrasoPequeno": "",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
+    },
+    "colab_branch-3_361_2026-10-24": {
+      "note": " (Replicado de 21/10/2026)",
+      "punches": {
+        "em": "08:00",
+        "et": "13:00",
+        "sm": "12:00",
+        "st": "17:00"
+      },
+      "override": "AUTO",
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaior": "",
+      "atrasoPequeno": "",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
+    },
+    "colab_branch-3_361_2026-10-26": {
+      "note": " (Replicado de 21/10/2026)",
+      "punches": {
+        "em": "08:00",
+        "et": "13:00",
+        "sm": "12:00",
+        "st": "17:00"
+      },
+      "override": "AUTO",
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaior": "",
+      "atrasoPequeno": "",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
+    },
+    "colab_branch-3_361_2026-10-27": {
+      "note": " (Replicado de 21/10/2026)",
+      "punches": {
+        "em": "08:00",
+        "et": "13:00",
+        "sm": "12:00",
+        "st": "17:00"
+      },
+      "override": "AUTO",
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaior": "",
+      "atrasoPequeno": "",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
+    },
+    "colab_branch-3_361_2026-10-28": {
+      "note": " (Replicado de 21/10/2026)",
+      "punches": {
+        "em": "08:00",
+        "et": "13:00",
+        "sm": "12:00",
+        "st": "17:00"
+      },
+      "override": "AUTO",
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaior": "",
+      "atrasoPequeno": "",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
+    },
+    "colab_branch-3_361_2026-10-29": {
+      "note": " (Replicado de 21/10/2026)",
+      "punches": {
+        "em": "08:00",
+        "et": "13:00",
+        "sm": "12:00",
+        "st": "17:00"
+      },
+      "override": "AUTO",
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaior": "",
+      "atrasoPequeno": "",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
+    },
+    "colab_branch-3_361_2026-10-30": {
+      "note": " (Replicado de 21/10/2026)",
+      "punches": {
+        "em": "08:00",
+        "et": "13:00",
+        "sm": "12:00",
+        "st": "17:00"
+      },
+      "override": "AUTO",
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaior": "",
+      "atrasoPequeno": "",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
+    },
+    "colab_branch-3_361_2026-10-31": {
+      "note": "",
+      "punches": {
+        "em": "08:00",
+        "et": "13:00",
+        "sm": "12:00",
+        "st": "17:00"
+      },
+      "override": "AUTO",
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaior": "",
+      "atrasoPequeno": "",
       "atrasoMaiorMin": 0,
       "atrasoPequenoMin": 0
     },
@@ -57272,7 +59085,10 @@ root.GOLD_RECOVERY_DATA = {
         "st": "17:00"
       },
       "override": "OK",
-      "resolution": "NENHUMA"
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
     },
     "colab_branch-3_363_2026-10-16": {
       "note": "OK em massa pelo cabeçalho da data",
@@ -57283,7 +59099,10 @@ root.GOLD_RECOVERY_DATA = {
         "st": "17:00"
       },
       "override": "OK",
-      "resolution": "NENHUMA"
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
     },
     "colab_branch-3_363_2026-10-17": {
       "note": "OK em massa pelo cabeçalho da data",
@@ -57294,7 +59113,10 @@ root.GOLD_RECOVERY_DATA = {
         "st": "17:00"
       },
       "override": "OK",
-      "resolution": "NENHUMA"
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
     },
     "colab_branch-3_363_2026-10-19": {
       "note": "OK em massa pelo cabeçalho da data",
@@ -57305,7 +59127,10 @@ root.GOLD_RECOVERY_DATA = {
         "st": "17:00"
       },
       "override": "OK",
-      "resolution": "NENHUMA"
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
     },
     "colab_branch-3_363_2026-10-20": {
       "note": "OK em massa pelo cabeçalho da data",
@@ -57316,31 +59141,34 @@ root.GOLD_RECOVERY_DATA = {
         "st": "17:00"
       },
       "override": "OK",
-      "resolution": "NENHUMA"
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
     },
     "colab_branch-3_363_2026-10-21": {
-      "note": "Dia futuro em aberto (desmarcado)",
+      "note": "OK em massa pelo cabeçalho da data",
       "punches": {
-        "em": "",
-        "et": "",
-        "sm": "",
-        "st": ""
+        "em": "08:00",
+        "et": "13:00",
+        "sm": "12:00",
+        "st": "17:00"
       },
-      "override": "VAZIO",
+      "override": "OK",
       "override2": "",
       "resolution": "NENHUMA",
       "atrasoMaiorMin": 0,
       "atrasoPequenoMin": 0
     },
     "colab_branch-3_363_2026-10-22": {
-      "note": "Dia futuro em aberto (desmarcado)",
+      "note": "OK em massa pelo cabeçalho da data",
       "punches": {
-        "em": "",
-        "et": "",
-        "sm": "",
-        "st": ""
+        "em": "08:00",
+        "et": "13:00",
+        "sm": "12:00",
+        "st": "17:00"
       },
-      "override": "VAZIO",
+      "override": "OK",
       "override2": "",
       "resolution": "NENHUMA",
       "atrasoMaiorMin": 0,
@@ -57629,7 +59457,7 @@ root.GOLD_RECOVERY_DATA = {
         "sm": "12:00",
         "st": "17:00"
       },
-      "override": "VAZIO",
+      "override": "OK",
       "override2": "",
       "resolution": "NENHUMA",
       "atrasoMaior": "",
@@ -57645,7 +59473,7 @@ root.GOLD_RECOVERY_DATA = {
         "sm": "12:00",
         "st": "17:00"
       },
-      "override": "VAZIO",
+      "override": "OK",
       "override2": "",
       "resolution": "NENHUMA",
       "atrasoMaior": "",
@@ -57661,7 +59489,7 @@ root.GOLD_RECOVERY_DATA = {
         "sm": "12:00",
         "st": "17:00"
       },
-      "override": "VAZIO",
+      "override": "OK",
       "override2": "",
       "resolution": "NENHUMA",
       "atrasoMaior": "",
@@ -57677,7 +59505,7 @@ root.GOLD_RECOVERY_DATA = {
         "sm": "12:00",
         "st": "17:00"
       },
-      "override": "VAZIO",
+      "override": "OK",
       "override2": "",
       "resolution": "NENHUMA",
       "atrasoMaior": "",
@@ -57693,7 +59521,7 @@ root.GOLD_RECOVERY_DATA = {
         "sm": "12:00",
         "st": "17:00"
       },
-      "override": "VAZIO",
+      "override": "OK",
       "override2": "",
       "resolution": "NENHUMA",
       "atrasoMaior": "",
@@ -57702,30 +59530,34 @@ root.GOLD_RECOVERY_DATA = {
       "atrasoPequenoMin": 0
     },
     "colab_branch-3_364_2026-10-21": {
-      "note": "Dia futuro em aberto (desmarcado)",
+      "note": "OK em massa pelo cabeçalho da data",
       "punches": {
-        "em": "",
-        "et": "",
-        "sm": "",
-        "st": ""
+        "em": "08:00",
+        "et": "13:00",
+        "sm": "12:00",
+        "st": "17:00"
       },
-      "override": "VAZIO",
+      "override": "OK",
       "override2": "",
       "resolution": "NENHUMA",
+      "atrasoMaior": "",
+      "atrasoPequeno": "",
       "atrasoMaiorMin": 0,
       "atrasoPequenoMin": 0
     },
     "colab_branch-3_364_2026-10-22": {
-      "note": "Dia futuro em aberto (desmarcado)",
+      "note": "OK em massa pelo cabeçalho da data (Replicado de 21/10/2026)",
       "punches": {
-        "em": "",
-        "et": "",
-        "sm": "",
-        "st": ""
+        "em": "08:00",
+        "et": "13:00",
+        "sm": "12:00",
+        "st": "17:00"
       },
-      "override": "VAZIO",
+      "override": "OK",
       "override2": "",
       "resolution": "NENHUMA",
+      "atrasoMaior": "",
+      "atrasoPequeno": "",
       "atrasoMaiorMin": 0,
       "atrasoPequenoMin": 0
     },
@@ -57891,7 +59723,7 @@ root.GOLD_RECOVERY_DATA = {
         "sm": "",
         "st": ""
       },
-      "override": "OK",
+      "override": "ET",
       "override2": "",
       "resolution": "NENHUMA",
       "atrasoMaior": "",
@@ -57921,12 +59753,12 @@ root.GOLD_RECOVERY_DATA = {
         "sm": "",
         "st": ""
       },
-      "override": "OK",
+      "override": "AUTO",
       "override2": "",
       "resolution": "NENHUMA",
-      "atrasoMaior": "",
+      "atrasoMaior": "00:53",
       "atrasoPequeno": "",
-      "atrasoMaiorMin": 0,
+      "atrasoMaiorMin": 53,
       "atrasoPequenoMin": 0
     },
     "colab_branch-3_365_2026-10-08": {
@@ -57951,7 +59783,7 @@ root.GOLD_RECOVERY_DATA = {
         "sm": "",
         "st": ""
       },
-      "override": "OK",
+      "override": "ST",
       "override2": "",
       "resolution": "NENHUMA",
       "atrasoMaior": "",
@@ -58052,7 +59884,10 @@ root.GOLD_RECOVERY_DATA = {
         "st": "17:00"
       },
       "override": "OK",
-      "resolution": "NENHUMA"
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
     },
     "colab_branch-3_365_2026-10-20": {
       "note": "OK em massa pelo cabeçalho da data",
@@ -58063,31 +59898,34 @@ root.GOLD_RECOVERY_DATA = {
         "st": "17:00"
       },
       "override": "OK",
-      "resolution": "NENHUMA"
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
     },
     "colab_branch-3_365_2026-10-21": {
-      "note": "Dia futuro em aberto (desmarcado)",
+      "note": "OK em massa pelo cabeçalho da data",
       "punches": {
-        "em": "",
-        "et": "",
-        "sm": "",
-        "st": ""
+        "em": "08:00",
+        "et": "13:00",
+        "sm": "12:00",
+        "st": "17:00"
       },
-      "override": "VAZIO",
+      "override": "OK",
       "override2": "",
       "resolution": "NENHUMA",
       "atrasoMaiorMin": 0,
       "atrasoPequenoMin": 0
     },
     "colab_branch-3_365_2026-10-22": {
-      "note": "Dia futuro em aberto (desmarcado)",
+      "note": "OK em massa pelo cabeçalho da data",
       "punches": {
-        "em": "",
-        "et": "",
-        "sm": "",
-        "st": ""
+        "em": "08:00",
+        "et": "13:00",
+        "sm": "12:00",
+        "st": "17:00"
       },
-      "override": "VAZIO",
+      "override": "OK",
       "override2": "",
       "resolution": "NENHUMA",
       "atrasoMaiorMin": 0,
@@ -58233,14 +60071,14 @@ root.GOLD_RECOVERY_DATA = {
       "resolution": "NENHUMA"
     },
     "colab_branch-3_366_2026-10-21": {
-      "note": " (Replicado de 20/10/2026)",
+      "note": "OK em massa pelo cabeçalho da data",
       "punches": {
         "em": "08:00",
         "et": "13:00",
         "sm": "12:00",
         "st": "17:00"
       },
-      "override": "VAZIO",
+      "override": "OK",
       "override2": "",
       "resolution": "NENHUMA",
       "atrasoMaior": "",
@@ -58249,14 +60087,14 @@ root.GOLD_RECOVERY_DATA = {
       "atrasoPequenoMin": 0
     },
     "colab_branch-3_366_2026-10-22": {
-      "note": " (Replicado de 20/10/2026)",
+      "note": "OK em massa pelo cabeçalho da data",
       "punches": {
         "em": "08:00",
         "et": "13:00",
         "sm": "12:00",
         "st": "17:00"
       },
-      "override": "VAZIO",
+      "override": "OK",
       "override2": "",
       "resolution": "NENHUMA",
       "atrasoMaior": "",
@@ -58272,7 +60110,7 @@ root.GOLD_RECOVERY_DATA = {
         "sm": "12:00",
         "st": "17:00"
       },
-      "override": "VAZIO",
+      "override": "AUTO",
       "override2": "",
       "resolution": "NENHUMA",
       "atrasoMaior": "",
@@ -58288,7 +60126,7 @@ root.GOLD_RECOVERY_DATA = {
         "sm": "12:00",
         "st": "17:00"
       },
-      "override": "VAZIO",
+      "override": "AUTO",
       "override2": "",
       "resolution": "NENHUMA",
       "atrasoMaior": "",
@@ -58304,7 +60142,7 @@ root.GOLD_RECOVERY_DATA = {
         "sm": "12:00",
         "st": "17:00"
       },
-      "override": "VAZIO",
+      "override": "AUTO",
       "override2": "",
       "resolution": "NENHUMA",
       "atrasoMaior": "",
@@ -58320,7 +60158,7 @@ root.GOLD_RECOVERY_DATA = {
         "sm": "12:00",
         "st": "17:00"
       },
-      "override": "VAZIO",
+      "override": "AUTO",
       "override2": "",
       "resolution": "NENHUMA",
       "atrasoMaior": "",
@@ -58336,7 +60174,7 @@ root.GOLD_RECOVERY_DATA = {
         "sm": "12:00",
         "st": "17:00"
       },
-      "override": "VAZIO",
+      "override": "AUTO",
       "override2": "",
       "resolution": "NENHUMA",
       "atrasoMaior": "",
@@ -58352,7 +60190,7 @@ root.GOLD_RECOVERY_DATA = {
         "sm": "12:00",
         "st": "17:00"
       },
-      "override": "VAZIO",
+      "override": "AUTO",
       "override2": "",
       "resolution": "NENHUMA",
       "atrasoMaior": "",
@@ -58368,7 +60206,7 @@ root.GOLD_RECOVERY_DATA = {
         "sm": "12:00",
         "st": "17:00"
       },
-      "override": "VAZIO",
+      "override": "AUTO",
       "override2": "",
       "resolution": "NENHUMA",
       "atrasoMaior": "",
@@ -58384,7 +60222,7 @@ root.GOLD_RECOVERY_DATA = {
         "sm": "12:00",
         "st": "17:00"
       },
-      "override": "VAZIO",
+      "override": "AUTO",
       "override2": "",
       "resolution": "NENHUMA",
       "atrasoMaior": "",
@@ -58551,7 +60389,10 @@ root.GOLD_RECOVERY_DATA = {
         "st": "17:00"
       },
       "override": "OK",
-      "resolution": "NENHUMA"
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
     },
     "colab_branch-1_1000_2026-10-16": {
       "note": "OK em massa pelo cabeçalho da data",
@@ -58562,7 +60403,10 @@ root.GOLD_RECOVERY_DATA = {
         "st": "17:00"
       },
       "override": "OK",
-      "resolution": "NENHUMA"
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
     },
     "colab_branch-1_1000_2026-10-17": {
       "note": "OK em massa pelo cabeçalho da data",
@@ -58573,7 +60417,10 @@ root.GOLD_RECOVERY_DATA = {
         "st": "17:00"
       },
       "override": "OK",
-      "resolution": "NENHUMA"
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
     },
     "colab_branch-1_1000_2026-10-19": {
       "note": "OK em massa pelo cabeçalho da data",
@@ -58584,7 +60431,10 @@ root.GOLD_RECOVERY_DATA = {
         "st": "17:00"
       },
       "override": "OK",
-      "resolution": "NENHUMA"
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
     },
     "colab_branch-1_1000_2026-10-20": {
       "note": "OK em massa pelo cabeçalho da data",
@@ -58595,31 +60445,34 @@ root.GOLD_RECOVERY_DATA = {
         "st": "17:00"
       },
       "override": "OK",
-      "resolution": "NENHUMA"
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
     },
     "colab_branch-1_1000_2026-10-21": {
-      "note": "Dia futuro em aberto (desmarcado)",
+      "note": "OK em massa pelo cabeçalho da data",
       "punches": {
-        "em": "",
-        "et": "",
-        "sm": "",
-        "st": ""
+        "em": "08:00",
+        "et": "13:00",
+        "sm": "12:00",
+        "st": "17:00"
       },
-      "override": "VAZIO",
+      "override": "OK",
       "override2": "",
       "resolution": "NENHUMA",
       "atrasoMaiorMin": 0,
       "atrasoPequenoMin": 0
     },
     "colab_branch-1_1000_2026-10-22": {
-      "note": "Dia futuro em aberto (desmarcado)",
+      "note": "OK em massa pelo cabeçalho da data",
       "punches": {
-        "em": "",
-        "et": "",
-        "sm": "",
-        "st": ""
+        "em": "08:00",
+        "et": "13:00",
+        "sm": "12:00",
+        "st": "17:00"
       },
-      "override": "VAZIO",
+      "override": "OK",
       "override2": "",
       "resolution": "NENHUMA",
       "atrasoMaiorMin": 0,
@@ -58948,7 +60801,10 @@ root.GOLD_RECOVERY_DATA = {
         "st": "17:00"
       },
       "override": "OK",
-      "resolution": "NENHUMA"
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
     },
     "colab_branch-1_1008_2026-10-19": {
       "note": "OK em massa pelo cabeçalho da data",
@@ -58983,30 +60839,34 @@ root.GOLD_RECOVERY_DATA = {
       "atrasoPequenoMin": 17
     },
     "colab_branch-1_1008_2026-10-21": {
-      "note": "Dia futuro em aberto (desmarcado)",
+      "note": "OK em massa pelo cabeçalho da data",
       "punches": {
-        "em": "",
-        "et": "",
-        "sm": "",
-        "st": ""
+        "em": "08:00",
+        "et": "13:00",
+        "sm": "12:00",
+        "st": "17:00"
       },
-      "override": "VAZIO",
-      "override2": "",
+      "override": "SM",
+      "override2": "ST",
       "resolution": "NENHUMA",
+      "atrasoMaior": "",
+      "atrasoPequeno": "00:13",
       "atrasoMaiorMin": 0,
-      "atrasoPequenoMin": 0
+      "atrasoPequenoMin": 13
     },
     "colab_branch-1_1008_2026-10-22": {
-      "note": "Dia futuro em aberto (desmarcado)",
+      "note": "OK em massa pelo cabeçalho da data",
       "punches": {
-        "em": "",
-        "et": "",
-        "sm": "",
-        "st": ""
+        "em": "08:00",
+        "et": "13:00",
+        "sm": "12:00",
+        "st": "17:00"
       },
-      "override": "VAZIO",
+      "override": "ST",
       "override2": "",
       "resolution": "NENHUMA",
+      "atrasoMaior": "",
+      "atrasoPequeno": "",
       "atrasoMaiorMin": 0,
       "atrasoPequenoMin": 0
     },
@@ -59214,7 +61074,7 @@ root.GOLD_RECOVERY_DATA = {
         "sm": "",
         "st": ""
       },
-      "override": "1/2 ATESTADO",
+      "override": "FT",
       "override2": "",
       "resolution": "NENHUMA",
       "atrasoMaior": "",
@@ -59283,7 +61143,10 @@ root.GOLD_RECOVERY_DATA = {
         "st": "17:00"
       },
       "override": "OK",
-      "resolution": "NENHUMA"
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
     },
     "colab_branch-1_1013_2026-10-16": {
       "note": "OK em massa pelo cabeçalho da data",
@@ -59294,7 +61157,10 @@ root.GOLD_RECOVERY_DATA = {
         "st": "17:00"
       },
       "override": "OK",
-      "resolution": "NENHUMA"
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
     },
     "colab_branch-1_1013_2026-10-17": {
       "note": "OK em massa pelo cabeçalho da data",
@@ -59305,7 +61171,10 @@ root.GOLD_RECOVERY_DATA = {
         "st": "17:00"
       },
       "override": "OK",
-      "resolution": "NENHUMA"
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
     },
     "colab_branch-1_1013_2026-10-19": {
       "note": "OK em massa pelo cabeçalho da data",
@@ -59316,7 +61185,10 @@ root.GOLD_RECOVERY_DATA = {
         "st": "17:00"
       },
       "override": "OK",
-      "resolution": "NENHUMA"
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
     },
     "colab_branch-1_1013_2026-10-20": {
       "note": "OK em massa pelo cabeçalho da data",
@@ -59327,31 +61199,34 @@ root.GOLD_RECOVERY_DATA = {
         "st": "17:00"
       },
       "override": "OK",
-      "resolution": "NENHUMA"
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
     },
     "colab_branch-1_1013_2026-10-21": {
-      "note": "Dia futuro em aberto (desmarcado)",
+      "note": "OK em massa pelo cabeçalho da data",
       "punches": {
-        "em": "",
-        "et": "",
-        "sm": "",
-        "st": ""
+        "em": "08:00",
+        "et": "13:00",
+        "sm": "12:00",
+        "st": "17:00"
       },
-      "override": "VAZIO",
+      "override": "OK",
       "override2": "",
       "resolution": "NENHUMA",
       "atrasoMaiorMin": 0,
       "atrasoPequenoMin": 0
     },
     "colab_branch-1_1013_2026-10-22": {
-      "note": "Dia futuro em aberto (desmarcado)",
+      "note": "OK em massa pelo cabeçalho da data",
       "punches": {
-        "em": "",
-        "et": "",
-        "sm": "",
-        "st": ""
+        "em": "08:00",
+        "et": "13:00",
+        "sm": "12:00",
+        "st": "17:00"
       },
-      "override": "VAZIO",
+      "override": "OK",
       "override2": "",
       "resolution": "NENHUMA",
       "atrasoMaiorMin": 0,
@@ -59700,33 +61575,40 @@ root.GOLD_RECOVERY_DATA = {
         "st": "17:00"
       },
       "override": "OK",
-      "resolution": "NENHUMA"
-    },
-    "colab_branch-1_1018_2026-10-21": {
-      "note": "Dia futuro em aberto (desmarcado)",
-      "punches": {
-        "em": "",
-        "et": "",
-        "sm": "",
-        "st": ""
-      },
-      "override": "VAZIO",
       "override2": "",
       "resolution": "NENHUMA",
       "atrasoMaiorMin": 0,
       "atrasoPequenoMin": 0
     },
-    "colab_branch-1_1018_2026-10-22": {
-      "note": "Dia futuro em aberto (desmarcado)",
+    "colab_branch-1_1018_2026-10-21": {
+      "note": "OK em massa pelo cabeçalho da data",
       "punches": {
-        "em": "",
-        "et": "",
-        "sm": "",
-        "st": ""
+        "em": "08:00",
+        "et": "13:00",
+        "sm": "12:00",
+        "st": "17:00"
       },
-      "override": "VAZIO",
+      "override": "FT",
       "override2": "",
       "resolution": "NENHUMA",
+      "atrasoMaior": "",
+      "atrasoPequeno": "",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
+    },
+    "colab_branch-1_1018_2026-10-22": {
+      "note": "OK em massa pelo cabeçalho da data",
+      "punches": {
+        "em": "08:00",
+        "et": "13:00",
+        "sm": "12:00",
+        "st": "17:00"
+      },
+      "override": "FALTA",
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaior": "",
+      "atrasoPequeno": "",
       "atrasoMaiorMin": 0,
       "atrasoPequenoMin": 0
     },
@@ -59873,7 +61755,10 @@ root.GOLD_RECOVERY_DATA = {
         "st": "17:00"
       },
       "override": "OK",
-      "resolution": "NENHUMA"
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
     },
     "colab_branch-1_1020_2026-10-16": {
       "note": "OK em massa pelo cabeçalho da data",
@@ -59884,7 +61769,10 @@ root.GOLD_RECOVERY_DATA = {
         "st": "17:00"
       },
       "override": "OK",
-      "resolution": "NENHUMA"
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
     },
     "colab_branch-1_1020_2026-10-17": {
       "note": "OK em massa pelo cabeçalho da data",
@@ -59895,7 +61783,10 @@ root.GOLD_RECOVERY_DATA = {
         "st": "17:00"
       },
       "override": "OK",
-      "resolution": "NENHUMA"
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
     },
     "colab_branch-1_1020_2026-10-19": {
       "note": "OK em massa pelo cabeçalho da data",
@@ -59906,7 +61797,10 @@ root.GOLD_RECOVERY_DATA = {
         "st": "17:00"
       },
       "override": "OK",
-      "resolution": "NENHUMA"
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
     },
     "colab_branch-1_1020_2026-10-20": {
       "note": "OK em massa pelo cabeçalho da data",
@@ -59917,7 +61811,10 @@ root.GOLD_RECOVERY_DATA = {
         "st": "17:00"
       },
       "override": "OK",
-      "resolution": "NENHUMA"
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
     },
     "colab_branch-1_1020_2026-10-21": {
       "note": "Dia futuro em aberto (desmarcado)",
@@ -60179,7 +62076,7 @@ root.GOLD_RECOVERY_DATA = {
         "sm": "12:00",
         "st": "17:00"
       },
-      "override": "VAZIO",
+      "override": "AUTO",
       "override2": "",
       "resolution": "NENHUMA",
       "atrasoMaior": "",
@@ -60211,7 +62108,7 @@ root.GOLD_RECOVERY_DATA = {
         "sm": "12:00",
         "st": "17:00"
       },
-      "override": "VAZIO",
+      "override": "OK",
       "override2": "",
       "resolution": "NENHUMA",
       "atrasoMaior": "",
@@ -60276,7 +62173,10 @@ root.GOLD_RECOVERY_DATA = {
         "st": "17:00"
       },
       "override": "OK",
-      "resolution": "NENHUMA"
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
     },
     "colab_branch-1_1025_2026-10-20": {
       "note": "Dia futuro em aberto (desmarcado)",
@@ -60591,7 +62491,10 @@ root.GOLD_RECOVERY_DATA = {
         "st": "17:00"
       },
       "override": "OK",
-      "resolution": "NENHUMA"
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
     },
     "colab_branch-1_1026_2026-10-16": {
       "note": "OK em massa pelo cabeçalho da data",
@@ -60602,7 +62505,10 @@ root.GOLD_RECOVERY_DATA = {
         "st": "17:00"
       },
       "override": "OK",
-      "resolution": "NENHUMA"
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
     },
     "colab_branch-1_1026_2026-10-17": {
       "note": "OK em massa pelo cabeçalho da data",
@@ -60613,7 +62519,10 @@ root.GOLD_RECOVERY_DATA = {
         "st": "17:00"
       },
       "override": "OK",
-      "resolution": "NENHUMA"
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
     },
     "colab_branch-1_1026_2026-10-19": {
       "note": "OK em massa pelo cabeçalho da data",
@@ -60624,7 +62533,10 @@ root.GOLD_RECOVERY_DATA = {
         "st": "17:00"
       },
       "override": "OK",
-      "resolution": "NENHUMA"
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
     },
     "colab_branch-1_1026_2026-10-20": {
       "note": "OK em massa pelo cabeçalho da data",
@@ -60635,31 +62547,34 @@ root.GOLD_RECOVERY_DATA = {
         "st": "17:00"
       },
       "override": "OK",
-      "resolution": "NENHUMA"
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
     },
     "colab_branch-1_1026_2026-10-21": {
-      "note": "Dia futuro em aberto (desmarcado)",
+      "note": "OK em massa pelo cabeçalho da data",
       "punches": {
-        "em": "",
-        "et": "",
-        "sm": "",
-        "st": ""
+        "em": "08:00",
+        "et": "13:00",
+        "sm": "12:00",
+        "st": "17:00"
       },
-      "override": "VAZIO",
+      "override": "OK",
       "override2": "",
       "resolution": "NENHUMA",
       "atrasoMaiorMin": 0,
       "atrasoPequenoMin": 0
     },
     "colab_branch-1_1026_2026-10-22": {
-      "note": "Dia futuro em aberto (desmarcado)",
+      "note": "OK em massa pelo cabeçalho da data",
       "punches": {
-        "em": "",
-        "et": "",
-        "sm": "",
-        "st": ""
+        "em": "08:00",
+        "et": "13:00",
+        "sm": "12:00",
+        "st": "17:00"
       },
-      "override": "VAZIO",
+      "override": "OK",
       "override2": "",
       "resolution": "NENHUMA",
       "atrasoMaiorMin": 0,
@@ -60808,7 +62723,10 @@ root.GOLD_RECOVERY_DATA = {
         "st": "17:00"
       },
       "override": "OK",
-      "resolution": "NENHUMA"
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
     },
     "colab_branch-1_1027_2026-10-16": {
       "note": "OK em massa pelo cabeçalho da data",
@@ -60819,7 +62737,10 @@ root.GOLD_RECOVERY_DATA = {
         "st": "17:00"
       },
       "override": "OK",
-      "resolution": "NENHUMA"
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
     },
     "colab_branch-1_1027_2026-10-17": {
       "note": "OK em massa pelo cabeçalho da data",
@@ -60830,7 +62751,10 @@ root.GOLD_RECOVERY_DATA = {
         "st": "17:00"
       },
       "override": "OK",
-      "resolution": "NENHUMA"
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
     },
     "colab_branch-1_1027_2026-10-19": {
       "note": "OK em massa pelo cabeçalho da data",
@@ -60841,7 +62765,10 @@ root.GOLD_RECOVERY_DATA = {
         "st": "17:00"
       },
       "override": "OK",
-      "resolution": "NENHUMA"
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
     },
     "colab_branch-1_1027_2026-10-20": {
       "note": "OK em massa pelo cabeçalho da data",
@@ -60852,7 +62779,10 @@ root.GOLD_RECOVERY_DATA = {
         "st": "17:00"
       },
       "override": "OK",
-      "resolution": "NENHUMA"
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
     },
     "colab_branch-1_1027_2026-10-21": {
       "note": "Dia futuro em aberto (desmarcado)",
@@ -61025,7 +62955,10 @@ root.GOLD_RECOVERY_DATA = {
         "st": "17:00"
       },
       "override": "OK",
-      "resolution": "NENHUMA"
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
     },
     "colab_branch-1_1031_2026-10-16": {
       "note": "OK em massa pelo cabeçalho da data",
@@ -61036,7 +62969,10 @@ root.GOLD_RECOVERY_DATA = {
         "st": "17:00"
       },
       "override": "OK",
-      "resolution": "NENHUMA"
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
     },
     "colab_branch-1_1031_2026-10-17": {
       "note": "OK em massa pelo cabeçalho da data",
@@ -61047,7 +62983,10 @@ root.GOLD_RECOVERY_DATA = {
         "st": "17:00"
       },
       "override": "OK",
-      "resolution": "NENHUMA"
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
     },
     "colab_branch-1_1031_2026-10-19": {
       "note": "OK em massa pelo cabeçalho da data",
@@ -61058,7 +62997,10 @@ root.GOLD_RECOVERY_DATA = {
         "st": "17:00"
       },
       "override": "OK",
-      "resolution": "NENHUMA"
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
     },
     "colab_branch-1_1031_2026-10-20": {
       "note": "OK em massa pelo cabeçalho da data",
@@ -61069,7 +63011,10 @@ root.GOLD_RECOVERY_DATA = {
         "st": "17:00"
       },
       "override": "OK",
-      "resolution": "NENHUMA"
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
     },
     "colab_branch-1_1031_2026-10-21": {
       "note": "Dia futuro em aberto (desmarcado)",
@@ -61242,7 +63187,10 @@ root.GOLD_RECOVERY_DATA = {
         "st": "17:00"
       },
       "override": "OK",
-      "resolution": "NENHUMA"
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
     },
     "colab_branch-1_1032_2026-10-16": {
       "note": "OK em massa pelo cabeçalho da data",
@@ -61253,7 +63201,10 @@ root.GOLD_RECOVERY_DATA = {
         "st": "17:00"
       },
       "override": "OK",
-      "resolution": "NENHUMA"
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
     },
     "colab_branch-1_1032_2026-10-17": {
       "note": "OK em massa pelo cabeçalho da data",
@@ -61264,7 +63215,10 @@ root.GOLD_RECOVERY_DATA = {
         "st": "17:00"
       },
       "override": "OK",
-      "resolution": "NENHUMA"
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
     },
     "colab_branch-1_1032_2026-10-19": {
       "note": "OK em massa pelo cabeçalho da data",
@@ -61275,7 +63229,10 @@ root.GOLD_RECOVERY_DATA = {
         "st": "17:00"
       },
       "override": "OK",
-      "resolution": "NENHUMA"
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
     },
     "colab_branch-1_1032_2026-10-20": {
       "note": "OK em massa pelo cabeçalho da data",
@@ -61286,7 +63243,10 @@ root.GOLD_RECOVERY_DATA = {
         "st": "17:00"
       },
       "override": "OK",
-      "resolution": "NENHUMA"
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
     },
     "colab_branch-1_1032_2026-10-21": {
       "note": "Dia futuro em aberto (desmarcado)",
@@ -61436,7 +63396,7 @@ root.GOLD_RECOVERY_DATA = {
         "sm": "12:00",
         "st": "17:00"
       },
-      "override": "VAZIO",
+      "override": "AUTO",
       "override2": "",
       "resolution": "NENHUMA",
       "atrasoMaior": "",
@@ -61452,7 +63412,7 @@ root.GOLD_RECOVERY_DATA = {
         "sm": "12:00",
         "st": "17:00"
       },
-      "override": "VAZIO",
+      "override": "AUTO",
       "override2": "",
       "resolution": "NENHUMA",
       "atrasoMaior": "",
@@ -61468,7 +63428,7 @@ root.GOLD_RECOVERY_DATA = {
         "sm": "12:00",
         "st": "17:00"
       },
-      "override": "VAZIO",
+      "override": "AUTO",
       "override2": "",
       "resolution": "NENHUMA",
       "atrasoMaior": "",
@@ -61484,7 +63444,7 @@ root.GOLD_RECOVERY_DATA = {
         "sm": "12:00",
         "st": "17:00"
       },
-      "override": "VAZIO",
+      "override": "AUTO",
       "override2": "",
       "resolution": "NENHUMA",
       "atrasoMaior": "",
@@ -61523,7 +63483,10 @@ root.GOLD_RECOVERY_DATA = {
         "st": "17:00"
       },
       "override": "OK",
-      "resolution": "NENHUMA"
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
     },
     "colab_branch-1_1033_2026-10-16": {
       "note": "OK em massa pelo cabeçalho da data",
@@ -61582,31 +63545,36 @@ root.GOLD_RECOVERY_DATA = {
         "st": "17:00"
       },
       "override": "OK",
-      "resolution": "NENHUMA"
-    },
-    "colab_branch-1_1033_2026-10-21": {
-      "note": "Dia futuro em aberto (desmarcado)",
-      "punches": {
-        "em": "",
-        "et": "",
-        "sm": "",
-        "st": ""
-      },
-      "override": "VAZIO",
       "override2": "",
       "resolution": "NENHUMA",
       "atrasoMaiorMin": 0,
       "atrasoPequenoMin": 0
     },
-    "colab_branch-1_1033_2026-10-22": {
-      "note": "Dia futuro em aberto (desmarcado)",
+    "colab_branch-1_1033_2026-10-21": {
+      "note": "OK em massa pelo cabeçalho da data",
       "punches": {
-        "em": "",
-        "et": "",
-        "sm": "",
-        "st": ""
+        "em": "08:00",
+        "et": "13:00",
+        "sm": "12:00",
+        "st": "17:00"
       },
-      "override": "VAZIO",
+      "override": "FALTA",
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaior": "",
+      "atrasoPequeno": "",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
+    },
+    "colab_branch-1_1033_2026-10-22": {
+      "note": "OK em massa pelo cabeçalho da data",
+      "punches": {
+        "em": "08:00",
+        "et": "13:00",
+        "sm": "12:00",
+        "st": "17:00"
+      },
+      "override": "OK",
       "override2": "",
       "resolution": "NENHUMA",
       "atrasoMaiorMin": 0,
@@ -61732,7 +63700,7 @@ root.GOLD_RECOVERY_DATA = {
         "sm": "12:00",
         "st": "17:00"
       },
-      "override": "VAZIO",
+      "override": "AUTO",
       "override2": "",
       "resolution": "NENHUMA",
       "atrasoMaior": "",
@@ -61748,7 +63716,7 @@ root.GOLD_RECOVERY_DATA = {
         "sm": "12:00",
         "st": "17:00"
       },
-      "override": "VAZIO",
+      "override": "AUTO",
       "override2": "",
       "resolution": "NENHUMA",
       "atrasoMaior": "",
@@ -61787,7 +63755,10 @@ root.GOLD_RECOVERY_DATA = {
         "st": "17:00"
       },
       "override": "OK",
-      "resolution": "NENHUMA"
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
     },
     "colab_branch-1_1034_2026-10-16": {
       "note": "OK em massa pelo cabeçalho da data",
@@ -61798,7 +63769,10 @@ root.GOLD_RECOVERY_DATA = {
         "st": "17:00"
       },
       "override": "OK",
-      "resolution": "NENHUMA"
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
     },
     "colab_branch-1_1034_2026-10-17": {
       "note": "OK em massa pelo cabeçalho da data",
@@ -61825,7 +63799,10 @@ root.GOLD_RECOVERY_DATA = {
         "st": "17:00"
       },
       "override": "OK",
-      "resolution": "NENHUMA"
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
     },
     "colab_branch-1_1034_2026-10-20": {
       "note": "OK em massa pelo cabeçalho da data",
@@ -61836,31 +63813,34 @@ root.GOLD_RECOVERY_DATA = {
         "st": "17:00"
       },
       "override": "OK",
-      "resolution": "NENHUMA"
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
     },
     "colab_branch-1_1034_2026-10-21": {
-      "note": "Dia futuro em aberto (desmarcado)",
+      "note": "OK em massa pelo cabeçalho da data",
       "punches": {
-        "em": "",
-        "et": "",
-        "sm": "",
-        "st": ""
+        "em": "08:00",
+        "et": "13:00",
+        "sm": "12:00",
+        "st": "17:00"
       },
-      "override": "VAZIO",
+      "override": "OK",
       "override2": "",
       "resolution": "NENHUMA",
       "atrasoMaiorMin": 0,
       "atrasoPequenoMin": 0
     },
     "colab_branch-1_1034_2026-10-22": {
-      "note": "Dia futuro em aberto (desmarcado)",
+      "note": "OK em massa pelo cabeçalho da data",
       "punches": {
-        "em": "",
-        "et": "",
-        "sm": "",
-        "st": ""
+        "em": "08:00",
+        "et": "13:00",
+        "sm": "12:00",
+        "st": "17:00"
       },
-      "override": "VAZIO",
+      "override": "OK",
       "override2": "",
       "resolution": "NENHUMA",
       "atrasoMaiorMin": 0,
@@ -62028,14 +64008,14 @@ root.GOLD_RECOVERY_DATA = {
       "atrasoPequenoMin": 0
     },
     "colab_branch-1_1035_2026-10-21": {
-      "note": " (Replicado de 16/10/2026)",
+      "note": "OK em massa pelo cabeçalho da data",
       "punches": {
         "em": "08:00",
         "et": "13:00",
         "sm": "12:00",
         "st": "17:00"
       },
-      "override": "VAZIO",
+      "override": "OK",
       "override2": "",
       "resolution": "NENHUMA",
       "atrasoMaior": "",
@@ -62051,7 +64031,7 @@ root.GOLD_RECOVERY_DATA = {
         "sm": "12:00",
         "st": "17:00"
       },
-      "override": "VAZIO",
+      "override": "AUTO",
       "override2": "",
       "resolution": "NENHUMA",
       "atrasoMaior": "",
@@ -62067,7 +64047,7 @@ root.GOLD_RECOVERY_DATA = {
         "sm": "12:00",
         "st": "17:00"
       },
-      "override": "VAZIO",
+      "override": "AUTO",
       "override2": "",
       "resolution": "NENHUMA",
       "atrasoMaior": "",
@@ -62083,7 +64063,7 @@ root.GOLD_RECOVERY_DATA = {
         "sm": "12:00",
         "st": "17:00"
       },
-      "override": "VAZIO",
+      "override": "AUTO",
       "override2": "",
       "resolution": "NENHUMA",
       "atrasoMaior": "",
@@ -62099,7 +64079,7 @@ root.GOLD_RECOVERY_DATA = {
         "sm": "12:00",
         "st": "17:00"
       },
-      "override": "VAZIO",
+      "override": "AUTO",
       "override2": "",
       "resolution": "NENHUMA",
       "atrasoMaior": "",
@@ -62115,7 +64095,7 @@ root.GOLD_RECOVERY_DATA = {
         "sm": "12:00",
         "st": "17:00"
       },
-      "override": "VAZIO",
+      "override": "AUTO",
       "override2": "",
       "resolution": "NENHUMA",
       "atrasoMaior": "",
@@ -62131,7 +64111,7 @@ root.GOLD_RECOVERY_DATA = {
         "sm": "12:00",
         "st": "17:00"
       },
-      "override": "VAZIO",
+      "override": "AUTO",
       "override2": "",
       "resolution": "NENHUMA",
       "atrasoMaior": "",
@@ -62147,7 +64127,7 @@ root.GOLD_RECOVERY_DATA = {
         "sm": "12:00",
         "st": "17:00"
       },
-      "override": "VAZIO",
+      "override": "AUTO",
       "override2": "",
       "resolution": "NENHUMA",
       "atrasoMaior": "",
@@ -62163,7 +64143,7 @@ root.GOLD_RECOVERY_DATA = {
         "sm": "12:00",
         "st": "17:00"
       },
-      "override": "VAZIO",
+      "override": "AUTO",
       "override2": "",
       "resolution": "NENHUMA",
       "atrasoMaior": "",
@@ -62179,7 +64159,7 @@ root.GOLD_RECOVERY_DATA = {
         "sm": "12:00",
         "st": "17:00"
       },
-      "override": "VAZIO",
+      "override": "AUTO",
       "override2": "",
       "resolution": "NENHUMA",
       "atrasoMaior": "",
@@ -62232,14 +64212,14 @@ root.GOLD_RECOVERY_DATA = {
       "resolution": "NENHUMA"
     },
     "colab_branch-1_1036_2026-10-21": {
-      "note": " (Replicado de 16/10/2026)",
+      "note": "OK em massa pelo cabeçalho da data",
       "punches": {
         "em": "08:00",
         "et": "13:00",
         "sm": "12:00",
         "st": "17:00"
       },
-      "override": "VAZIO",
+      "override": "OK",
       "override2": "",
       "resolution": "NENHUMA",
       "atrasoMaior": "",
@@ -62248,14 +64228,14 @@ root.GOLD_RECOVERY_DATA = {
       "atrasoPequenoMin": 0
     },
     "colab_branch-1_1036_2026-10-22": {
-      "note": " (Replicado de 16/10/2026)",
+      "note": "OK em massa pelo cabeçalho da data",
       "punches": {
         "em": "08:00",
         "et": "13:00",
         "sm": "12:00",
         "st": "17:00"
       },
-      "override": "VAZIO",
+      "override": "OK",
       "override2": "",
       "resolution": "NENHUMA",
       "atrasoMaior": "",
@@ -62271,7 +64251,7 @@ root.GOLD_RECOVERY_DATA = {
         "sm": "12:00",
         "st": "17:00"
       },
-      "override": "VAZIO",
+      "override": "AUTO",
       "override2": "",
       "resolution": "NENHUMA",
       "atrasoMaior": "",
@@ -62287,7 +64267,7 @@ root.GOLD_RECOVERY_DATA = {
         "sm": "12:00",
         "st": "17:00"
       },
-      "override": "VAZIO",
+      "override": "AUTO",
       "override2": "",
       "resolution": "NENHUMA",
       "atrasoMaior": "",
@@ -62303,7 +64283,7 @@ root.GOLD_RECOVERY_DATA = {
         "sm": "12:00",
         "st": "17:00"
       },
-      "override": "VAZIO",
+      "override": "AUTO",
       "override2": "",
       "resolution": "NENHUMA",
       "atrasoMaior": "",
@@ -62319,7 +64299,7 @@ root.GOLD_RECOVERY_DATA = {
         "sm": "12:00",
         "st": "17:00"
       },
-      "override": "VAZIO",
+      "override": "AUTO",
       "override2": "",
       "resolution": "NENHUMA",
       "atrasoMaior": "",
@@ -62335,7 +64315,7 @@ root.GOLD_RECOVERY_DATA = {
         "sm": "12:00",
         "st": "17:00"
       },
-      "override": "VAZIO",
+      "override": "AUTO",
       "override2": "",
       "resolution": "NENHUMA",
       "atrasoMaior": "",
@@ -62351,7 +64331,7 @@ root.GOLD_RECOVERY_DATA = {
         "sm": "12:00",
         "st": "17:00"
       },
-      "override": "VAZIO",
+      "override": "AUTO",
       "override2": "",
       "resolution": "NENHUMA",
       "atrasoMaior": "",
@@ -62367,7 +64347,7 @@ root.GOLD_RECOVERY_DATA = {
         "sm": "12:00",
         "st": "17:00"
       },
-      "override": "VAZIO",
+      "override": "AUTO",
       "override2": "",
       "resolution": "NENHUMA",
       "atrasoMaior": "",
@@ -62383,7 +64363,7 @@ root.GOLD_RECOVERY_DATA = {
         "sm": "12:00",
         "st": "17:00"
       },
-      "override": "VAZIO",
+      "override": "AUTO",
       "override2": "",
       "resolution": "NENHUMA",
       "atrasoMaior": "",
@@ -62399,7 +64379,7 @@ root.GOLD_RECOVERY_DATA = {
         "sm": "12:00",
         "st": "17:00"
       },
-      "override": "VAZIO",
+      "override": "OK",
       "override2": "",
       "resolution": "NENHUMA",
       "atrasoMaior": "",
@@ -62408,14 +64388,14 @@ root.GOLD_RECOVERY_DATA = {
       "atrasoPequenoMin": 0
     },
     "colab_branch-1_1037_2026-10-21": {
-      "note": "",
+      "note": "OK em massa pelo cabeçalho da data",
       "punches": {
         "em": "08:00",
         "et": "13:00",
         "sm": "12:00",
         "st": "17:00"
       },
-      "override": "VAZIO",
+      "override": "OK",
       "override2": "",
       "resolution": "NENHUMA",
       "atrasoMaior": "",
@@ -62424,14 +64404,14 @@ root.GOLD_RECOVERY_DATA = {
       "atrasoPequenoMin": 0
     },
     "colab_branch-1_1037_2026-10-22": {
-      "note": " (Replicado de 21/10/2026)",
+      "note": "OK em massa pelo cabeçalho da data",
       "punches": {
         "em": "08:00",
         "et": "13:00",
         "sm": "12:00",
         "st": "17:00"
       },
-      "override": "VAZIO",
+      "override": "OK",
       "override2": "",
       "resolution": "NENHUMA",
       "atrasoMaior": "",
@@ -62447,7 +64427,7 @@ root.GOLD_RECOVERY_DATA = {
         "sm": "12:00",
         "st": "17:00"
       },
-      "override": "VAZIO",
+      "override": "AUTO",
       "override2": "",
       "resolution": "NENHUMA",
       "atrasoMaior": "",
@@ -62463,7 +64443,7 @@ root.GOLD_RECOVERY_DATA = {
         "sm": "12:00",
         "st": "17:00"
       },
-      "override": "VAZIO",
+      "override": "AUTO",
       "override2": "",
       "resolution": "NENHUMA",
       "atrasoMaior": "",
@@ -62479,7 +64459,7 @@ root.GOLD_RECOVERY_DATA = {
         "sm": "12:00",
         "st": "17:00"
       },
-      "override": "VAZIO",
+      "override": "AUTO",
       "override2": "",
       "resolution": "NENHUMA",
       "atrasoMaior": "",
@@ -62495,7 +64475,7 @@ root.GOLD_RECOVERY_DATA = {
         "sm": "12:00",
         "st": "17:00"
       },
-      "override": "VAZIO",
+      "override": "AUTO",
       "override2": "",
       "resolution": "NENHUMA",
       "atrasoMaior": "",
@@ -62511,7 +64491,7 @@ root.GOLD_RECOVERY_DATA = {
         "sm": "12:00",
         "st": "17:00"
       },
-      "override": "VAZIO",
+      "override": "AUTO",
       "override2": "",
       "resolution": "NENHUMA",
       "atrasoMaior": "",
@@ -62527,7 +64507,7 @@ root.GOLD_RECOVERY_DATA = {
         "sm": "12:00",
         "st": "17:00"
       },
-      "override": "VAZIO",
+      "override": "AUTO",
       "override2": "",
       "resolution": "NENHUMA",
       "atrasoMaior": "",
@@ -62543,7 +64523,7 @@ root.GOLD_RECOVERY_DATA = {
         "sm": "12:00",
         "st": "17:00"
       },
-      "override": "VAZIO",
+      "override": "AUTO",
       "override2": "",
       "resolution": "NENHUMA",
       "atrasoMaior": "",
@@ -62559,7 +64539,146 @@ root.GOLD_RECOVERY_DATA = {
         "sm": "12:00",
         "st": "17:00"
       },
-      "override": "VAZIO",
+      "override": "AUTO",
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaior": "",
+      "atrasoPequeno": "",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
+    },
+    "colab_branch-1_1038_2026-10-22": {
+      "note": "OK em massa pelo cabeçalho da data",
+      "punches": {
+        "em": "08:00",
+        "et": "13:00",
+        "sm": "12:00",
+        "st": "17:00"
+      },
+      "override": "OK",
+      "resolution": "NENHUMA"
+    },
+    "colab_branch-1_1038_2026-10-23": {
+      "note": "",
+      "punches": {
+        "em": "08:00",
+        "et": "13:00",
+        "sm": "12:00",
+        "st": "17:00"
+      },
+      "override": "AUTO",
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaior": "",
+      "atrasoPequeno": "",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
+    },
+    "colab_branch-1_1038_2026-10-24": {
+      "note": " (Replicado de 23/10/2026)",
+      "punches": {
+        "em": "08:00",
+        "et": "13:00",
+        "sm": "12:00",
+        "st": "17:00"
+      },
+      "override": "AUTO",
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaior": "",
+      "atrasoPequeno": "",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
+    },
+    "colab_branch-1_1038_2026-10-26": {
+      "note": " (Replicado de 23/10/2026)",
+      "punches": {
+        "em": "08:00",
+        "et": "13:00",
+        "sm": "12:00",
+        "st": "17:00"
+      },
+      "override": "AUTO",
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaior": "",
+      "atrasoPequeno": "",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
+    },
+    "colab_branch-1_1038_2026-10-27": {
+      "note": " (Replicado de 23/10/2026)",
+      "punches": {
+        "em": "08:00",
+        "et": "13:00",
+        "sm": "12:00",
+        "st": "17:00"
+      },
+      "override": "AUTO",
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaior": "",
+      "atrasoPequeno": "",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
+    },
+    "colab_branch-1_1038_2026-10-28": {
+      "note": " (Replicado de 23/10/2026)",
+      "punches": {
+        "em": "08:00",
+        "et": "13:00",
+        "sm": "12:00",
+        "st": "17:00"
+      },
+      "override": "AUTO",
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaior": "",
+      "atrasoPequeno": "",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
+    },
+    "colab_branch-1_1038_2026-10-29": {
+      "note": " (Replicado de 23/10/2026)",
+      "punches": {
+        "em": "08:00",
+        "et": "13:00",
+        "sm": "12:00",
+        "st": "17:00"
+      },
+      "override": "AUTO",
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaior": "",
+      "atrasoPequeno": "",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
+    },
+    "colab_branch-1_1038_2026-10-30": {
+      "note": " (Replicado de 23/10/2026)",
+      "punches": {
+        "em": "08:00",
+        "et": "13:00",
+        "sm": "12:00",
+        "st": "17:00"
+      },
+      "override": "AUTO",
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaior": "",
+      "atrasoPequeno": "",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
+    },
+    "colab_branch-1_1038_2026-10-31": {
+      "note": " (Replicado de 23/10/2026)",
+      "punches": {
+        "em": "08:00",
+        "et": "13:00",
+        "sm": "12:00",
+        "st": "17:00"
+      },
+      "override": "AUTO",
       "override2": "",
       "resolution": "NENHUMA",
       "atrasoMaior": "",
@@ -62725,7 +64844,7 @@ root.GOLD_RECOVERY_DATA = {
         "sm": "12:00",
         "st": "17:00"
       },
-      "override": "ST",
+      "override": "OK",
       "override2": "",
       "resolution": "NENHUMA",
       "atrasoMaior": "",
@@ -62742,7 +64861,10 @@ root.GOLD_RECOVERY_DATA = {
         "st": "17:00"
       },
       "override": "OK",
-      "resolution": "NENHUMA"
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
     },
     "colab_branch-1_1173_2026-10-17": {
       "note": "OK em massa pelo cabeçalho da data",
@@ -62753,7 +64875,10 @@ root.GOLD_RECOVERY_DATA = {
         "st": "17:00"
       },
       "override": "OK",
-      "resolution": "NENHUMA"
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
     },
     "colab_branch-1_1173_2026-10-19": {
       "note": "OK em massa pelo cabeçalho da data",
@@ -62764,7 +64889,10 @@ root.GOLD_RECOVERY_DATA = {
         "st": "17:00"
       },
       "override": "OK",
-      "resolution": "NENHUMA"
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
     },
     "colab_branch-1_1173_2026-10-20": {
       "note": "OK em massa pelo cabeçalho da data",
@@ -62774,7 +64902,7 @@ root.GOLD_RECOVERY_DATA = {
         "sm": "12:00",
         "st": "17:00"
       },
-      "override": "ST",
+      "override": "OK",
       "override2": "",
       "resolution": "NENHUMA",
       "atrasoMaior": "",
@@ -62783,28 +64911,28 @@ root.GOLD_RECOVERY_DATA = {
       "atrasoPequenoMin": 0
     },
     "colab_branch-1_1173_2026-10-21": {
-      "note": "Dia futuro em aberto (desmarcado)",
+      "note": "OK em massa pelo cabeçalho da data",
       "punches": {
-        "em": "",
-        "et": "",
-        "sm": "",
-        "st": ""
+        "em": "08:00",
+        "et": "13:00",
+        "sm": "12:00",
+        "st": "17:00"
       },
-      "override": "VAZIO",
+      "override": "OK",
       "override2": "",
       "resolution": "NENHUMA",
       "atrasoMaiorMin": 0,
       "atrasoPequenoMin": 0
     },
     "colab_branch-1_1173_2026-10-22": {
-      "note": "Dia futuro em aberto (desmarcado)",
+      "note": "OK em massa pelo cabeçalho da data",
       "punches": {
-        "em": "",
-        "et": "",
-        "sm": "",
-        "st": ""
+        "em": "08:00",
+        "et": "13:00",
+        "sm": "12:00",
+        "st": "17:00"
       },
-      "override": "VAZIO",
+      "override": "OK",
       "override2": "",
       "resolution": "NENHUMA",
       "atrasoMaiorMin": 0,
@@ -63079,7 +65207,10 @@ root.GOLD_RECOVERY_DATA = {
         "st": "17:00"
       },
       "override": "OK",
-      "resolution": "NENHUMA"
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
     },
     "colab_branch-1_1405_2026-10-16": {
       "note": "OK em massa pelo cabeçalho da data",
@@ -63090,7 +65221,10 @@ root.GOLD_RECOVERY_DATA = {
         "st": "17:00"
       },
       "override": "OK",
-      "resolution": "NENHUMA"
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
     },
     "colab_branch-1_1405_2026-10-17": {
       "note": "OK em massa pelo cabeçalho da data",
@@ -63101,7 +65235,10 @@ root.GOLD_RECOVERY_DATA = {
         "st": "17:00"
       },
       "override": "OK",
-      "resolution": "NENHUMA"
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
     },
     "colab_branch-1_1405_2026-10-19": {
       "note": "OK em massa pelo cabeçalho da data",
@@ -63112,7 +65249,10 @@ root.GOLD_RECOVERY_DATA = {
         "st": "17:00"
       },
       "override": "OK",
-      "resolution": "NENHUMA"
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
     },
     "colab_branch-1_1405_2026-10-20": {
       "note": "OK em massa pelo cabeçalho da data",
@@ -63123,34 +65263,39 @@ root.GOLD_RECOVERY_DATA = {
         "st": "17:00"
       },
       "override": "OK",
-      "resolution": "NENHUMA"
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
     },
     "colab_branch-1_1405_2026-10-21": {
-      "note": "Dia futuro em aberto (desmarcado)",
+      "note": "OK em massa pelo cabeçalho da data",
       "punches": {
-        "em": "",
-        "et": "",
-        "sm": "",
-        "st": ""
+        "em": "08:00",
+        "et": "13:00",
+        "sm": "12:00",
+        "st": "17:00"
       },
-      "override": "VAZIO",
+      "override": "OK",
       "override2": "",
       "resolution": "NENHUMA",
       "atrasoMaiorMin": 0,
       "atrasoPequenoMin": 0
     },
     "colab_branch-1_1405_2026-10-22": {
-      "note": "Dia futuro em aberto (desmarcado)",
+      "note": "OK em massa pelo cabeçalho da data",
       "punches": {
-        "em": "",
-        "et": "",
-        "sm": "",
-        "st": ""
+        "em": "08:00",
+        "et": "13:00",
+        "sm": "12:00",
+        "st": "17:00"
       },
-      "override": "VAZIO",
+      "override": "AUTO",
       "override2": "",
       "resolution": "NENHUMA",
-      "atrasoMaiorMin": 0,
+      "atrasoMaior": "00:17",
+      "atrasoPequeno": "",
+      "atrasoMaiorMin": 17,
       "atrasoPequenoMin": 0
     },
     "colab_branch-1_1405_2026-10-23": {
@@ -63265,6 +65410,150 @@ root.GOLD_RECOVERY_DATA = {
       "atrasoMaiorMin": 0,
       "atrasoPequenoMin": 0
     },
+    "colab_branch-1_1406_2026-10-22": {
+      "note": "",
+      "punches": {
+        "em": "08:00",
+        "et": "13:00",
+        "sm": "12:00",
+        "st": "17:00"
+      },
+      "override": "AUTO",
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaior": "",
+      "atrasoPequeno": "",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
+    },
+    "colab_branch-1_1406_2026-10-23": {
+      "note": " (Replicado de 22/10/2026)",
+      "punches": {
+        "em": "08:00",
+        "et": "13:00",
+        "sm": "12:00",
+        "st": "17:00"
+      },
+      "override": "AUTO",
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaior": "",
+      "atrasoPequeno": "",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
+    },
+    "colab_branch-1_1406_2026-10-24": {
+      "note": " (Replicado de 22/10/2026)",
+      "punches": {
+        "em": "08:00",
+        "et": "13:00",
+        "sm": "12:00",
+        "st": "17:00"
+      },
+      "override": "AUTO",
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaior": "",
+      "atrasoPequeno": "",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
+    },
+    "colab_branch-1_1406_2026-10-26": {
+      "note": " (Replicado de 22/10/2026)",
+      "punches": {
+        "em": "08:00",
+        "et": "13:00",
+        "sm": "12:00",
+        "st": "17:00"
+      },
+      "override": "AUTO",
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaior": "",
+      "atrasoPequeno": "",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
+    },
+    "colab_branch-1_1406_2026-10-27": {
+      "note": " (Replicado de 22/10/2026)",
+      "punches": {
+        "em": "08:00",
+        "et": "13:00",
+        "sm": "12:00",
+        "st": "17:00"
+      },
+      "override": "AUTO",
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaior": "",
+      "atrasoPequeno": "",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
+    },
+    "colab_branch-1_1406_2026-10-28": {
+      "note": " (Replicado de 22/10/2026)",
+      "punches": {
+        "em": "08:00",
+        "et": "13:00",
+        "sm": "12:00",
+        "st": "17:00"
+      },
+      "override": "AUTO",
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaior": "",
+      "atrasoPequeno": "",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
+    },
+    "colab_branch-1_1406_2026-10-29": {
+      "note": " (Replicado de 22/10/2026)",
+      "punches": {
+        "em": "08:00",
+        "et": "13:00",
+        "sm": "12:00",
+        "st": "17:00"
+      },
+      "override": "AUTO",
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaior": "",
+      "atrasoPequeno": "",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
+    },
+    "colab_branch-1_1406_2026-10-30": {
+      "note": "",
+      "punches": {
+        "em": "08:00",
+        "et": "13:00",
+        "sm": "12:00",
+        "st": "17:00"
+      },
+      "override": "AUTO",
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaior": "",
+      "atrasoPequeno": "",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
+    },
+    "colab_branch-1_1406_2026-10-31": {
+      "note": " (Replicado de 30/10/2026)",
+      "punches": {
+        "em": "08:00",
+        "et": "13:00",
+        "sm": "12:00",
+        "st": "17:00"
+      },
+      "override": "AUTO",
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaior": "",
+      "atrasoPequeno": "",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
+    },
     "colab_branch-2_1009_2026-10-01": {
       "note": "Presença regular (Planilha)",
       "punches": {
@@ -63308,19 +65597,19 @@ root.GOLD_RECOVERY_DATA = {
       "atrasoPequenoMin": 0
     },
     "colab_branch-2_1009_2026-10-05": {
+      "note": "Atraso registrado A.03:18 (Planilha)",
+      "punches": {
+        "em": "",
+        "et": "",
+        "sm": "",
+        "st": ""
+      },
       "override": "AUTO",
       "override2": "",
       "resolution": "NENHUMA",
-      "punches": {
-        "em": "",
-        "sm": "",
-        "et": "",
-        "st": ""
-      },
-      "note": "Atraso registrado A.03:18 (Planilha)",
-      "atrasoMaior": "",
-      "atrasoMaiorMin": 0,
+      "atrasoMaior": "03:18",
       "atrasoPequeno": "",
+      "atrasoMaiorMin": 198,
       "atrasoPequenoMin": 0
     },
     "colab_branch-2_1009_2026-10-06": {
@@ -63338,19 +65627,19 @@ root.GOLD_RECOVERY_DATA = {
       "atrasoPequenoMin": 0
     },
     "colab_branch-2_1009_2026-10-07": {
+      "note": "Atraso registrado A.00:49 (Planilha)",
+      "punches": {
+        "em": "",
+        "et": "",
+        "sm": "",
+        "st": ""
+      },
       "override": "AUTO",
       "override2": "",
       "resolution": "NENHUMA",
-      "punches": {
-        "em": "",
-        "sm": "",
-        "et": "",
-        "st": ""
-      },
-      "note": "Atraso registrado A.00:49 (Planilha)",
-      "atrasoMaior": "",
-      "atrasoMaiorMin": 0,
+      "atrasoMaior": "00:49",
       "atrasoPequeno": "",
+      "atrasoMaiorMin": 49,
       "atrasoPequenoMin": 0
     },
     "colab_branch-2_1009_2026-10-08": {
@@ -63426,7 +65715,10 @@ root.GOLD_RECOVERY_DATA = {
         "st": "17:00"
       },
       "override": "OK",
-      "resolution": "NENHUMA"
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
     },
     "colab_branch-2_1009_2026-10-16": {
       "note": "OK em massa pelo cabeçalho da data",
@@ -63437,7 +65729,10 @@ root.GOLD_RECOVERY_DATA = {
         "st": "17:00"
       },
       "override": "OK",
-      "resolution": "NENHUMA"
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
     },
     "colab_branch-2_1009_2026-10-17": {
       "note": "OK em massa pelo cabeçalho da data",
@@ -63448,7 +65743,10 @@ root.GOLD_RECOVERY_DATA = {
         "st": "17:00"
       },
       "override": "OK",
-      "resolution": "NENHUMA"
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
     },
     "colab_branch-2_1009_2026-10-19": {
       "note": "OK em massa pelo cabeçalho da data",
@@ -63459,7 +65757,10 @@ root.GOLD_RECOVERY_DATA = {
         "st": "17:00"
       },
       "override": "OK",
-      "resolution": "NENHUMA"
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
     },
     "colab_branch-2_1009_2026-10-20": {
       "note": "OK em massa pelo cabeçalho da data",
@@ -63470,31 +65771,34 @@ root.GOLD_RECOVERY_DATA = {
         "st": "17:00"
       },
       "override": "OK",
-      "resolution": "NENHUMA"
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
     },
     "colab_branch-2_1009_2026-10-21": {
-      "note": "Dia futuro em aberto (desmarcado)",
+      "note": "OK em massa pelo cabeçalho da data",
       "punches": {
-        "em": "",
-        "et": "",
-        "sm": "",
-        "st": ""
+        "em": "08:00",
+        "et": "13:00",
+        "sm": "12:00",
+        "st": "17:00"
       },
-      "override": "VAZIO",
+      "override": "OK",
       "override2": "",
       "resolution": "NENHUMA",
       "atrasoMaiorMin": 0,
       "atrasoPequenoMin": 0
     },
     "colab_branch-2_1009_2026-10-22": {
-      "note": "Dia futuro em aberto (desmarcado)",
+      "note": "OK em massa pelo cabeçalho da data",
       "punches": {
-        "em": "",
-        "et": "",
-        "sm": "",
-        "st": ""
+        "em": "08:00",
+        "et": "13:00",
+        "sm": "12:00",
+        "st": "17:00"
       },
-      "override": "VAZIO",
+      "override": "OK",
       "override2": "",
       "resolution": "NENHUMA",
       "atrasoMaiorMin": 0,
@@ -63648,7 +65952,7 @@ root.GOLD_RECOVERY_DATA = {
         "sm": "12:00",
         "st": "17:00"
       },
-      "override": "VAZIO",
+      "override": "AUTO",
       "override2": "",
       "resolution": "NENHUMA",
       "atrasoMaior": "",
@@ -63757,7 +66061,10 @@ root.GOLD_RECOVERY_DATA = {
         "st": "17:00"
       },
       "override": "OK",
-      "resolution": "NENHUMA"
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
     },
     "colab_branch-2_1016_2026-10-16": {
       "note": "OK em massa pelo cabeçalho da data",
@@ -63768,7 +66075,10 @@ root.GOLD_RECOVERY_DATA = {
         "st": "17:00"
       },
       "override": "OK",
-      "resolution": "NENHUMA"
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
     },
     "colab_branch-2_1016_2026-10-17": {
       "note": "Dia futuro em aberto (desmarcado)",
@@ -63793,7 +66103,10 @@ root.GOLD_RECOVERY_DATA = {
         "st": "17:00"
       },
       "override": "OK",
-      "resolution": "NENHUMA"
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
     },
     "colab_branch-2_1016_2026-10-20": {
       "note": "OK em massa pelo cabeçalho da data",
@@ -63804,17 +66117,20 @@ root.GOLD_RECOVERY_DATA = {
         "st": "17:00"
       },
       "override": "OK",
-      "resolution": "NENHUMA"
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
     },
     "colab_branch-2_1016_2026-10-21": {
-      "note": "Dia futuro em aberto (desmarcado)",
+      "note": "OK em massa pelo cabeçalho da data",
       "punches": {
-        "em": "",
-        "et": "",
-        "sm": "",
-        "st": ""
+        "em": "08:00",
+        "et": "13:00",
+        "sm": "12:00",
+        "st": "17:00"
       },
-      "override": "VAZIO",
+      "override": "OK",
       "override2": "",
       "resolution": "NENHUMA",
       "atrasoMaiorMin": 0,
@@ -63828,9 +66144,11 @@ root.GOLD_RECOVERY_DATA = {
         "sm": "",
         "st": ""
       },
-      "override": "VAZIO",
+      "override": "OK",
       "override2": "",
       "resolution": "NENHUMA",
+      "atrasoMaior": "",
+      "atrasoPequeno": "",
       "atrasoMaiorMin": 0,
       "atrasoPequenoMin": 0
     },
@@ -64421,784 +66739,11 @@ root.GOLD_RECOVERY_DATA = {
       "resolution": "NENHUMA",
       "atrasoMaiorMin": 0,
       "atrasoPequenoMin": 0
-    },
-    "colab_branch-3_336_2026-10-01": {
-      "note": "",
-      "punches": {
-        "em": "08:00",
-        "et": "13:00",
-        "sm": "12:00",
-        "st": "17:00"
-      },
-      "override": "AFASTADO",
-      "override2": "",
-      "resolution": "NENHUMA",
-      "atrasoMaior": "",
-      "atrasoPequeno": "",
-      "atrasoMaiorMin": 0,
-      "atrasoPequenoMin": 0
-    },
-    "colab_branch-3_336_2026-10-02": {
-      "note": " (Replicado de 01/10/2026)",
-      "punches": {
-        "em": "08:00",
-        "et": "13:00",
-        "sm": "12:00",
-        "st": "17:00"
-      },
-      "override": "AFASTADO",
-      "override2": "",
-      "resolution": "NENHUMA",
-      "atrasoMaior": "",
-      "atrasoPequeno": "",
-      "atrasoMaiorMin": 0,
-      "atrasoPequenoMin": 0
-    },
-    "colab_branch-3_336_2026-10-03": {
-      "note": " (Replicado de 01/10/2026)",
-      "punches": {
-        "em": "08:00",
-        "et": "13:00",
-        "sm": "12:00",
-        "st": "17:00"
-      },
-      "override": "AFASTADO",
-      "override2": "",
-      "resolution": "NENHUMA",
-      "atrasoMaior": "",
-      "atrasoPequeno": "",
-      "atrasoMaiorMin": 0,
-      "atrasoPequenoMin": 0
-    },
-    "colab_branch-3_336_2026-10-05": {
-      "note": " (Replicado de 01/10/2026)",
-      "punches": {
-        "em": "08:00",
-        "et": "13:00",
-        "sm": "12:00",
-        "st": "17:00"
-      },
-      "override": "AFASTADO",
-      "override2": "",
-      "resolution": "NENHUMA",
-      "atrasoMaior": "",
-      "atrasoPequeno": "",
-      "atrasoMaiorMin": 0,
-      "atrasoPequenoMin": 0
-    },
-    "colab_branch-3_336_2026-10-06": {
-      "note": " (Replicado de 01/10/2026)",
-      "punches": {
-        "em": "08:00",
-        "et": "13:00",
-        "sm": "12:00",
-        "st": "17:00"
-      },
-      "override": "AFASTADO",
-      "override2": "",
-      "resolution": "NENHUMA",
-      "atrasoMaior": "",
-      "atrasoPequeno": "",
-      "atrasoMaiorMin": 0,
-      "atrasoPequenoMin": 0
-    },
-    "colab_branch-3_336_2026-10-07": {
-      "note": " (Replicado de 01/10/2026)",
-      "punches": {
-        "em": "08:00",
-        "et": "13:00",
-        "sm": "12:00",
-        "st": "17:00"
-      },
-      "override": "AFASTADO",
-      "override2": "",
-      "resolution": "NENHUMA",
-      "atrasoMaior": "",
-      "atrasoPequeno": "",
-      "atrasoMaiorMin": 0,
-      "atrasoPequenoMin": 0
-    },
-    "colab_branch-3_336_2026-10-08": {
-      "note": " (Replicado de 01/10/2026)",
-      "punches": {
-        "em": "08:00",
-        "et": "13:00",
-        "sm": "12:00",
-        "st": "17:00"
-      },
-      "override": "AFASTADO",
-      "override2": "",
-      "resolution": "NENHUMA",
-      "atrasoMaior": "",
-      "atrasoPequeno": "",
-      "atrasoMaiorMin": 0,
-      "atrasoPequenoMin": 0
-    },
-    "colab_branch-3_336_2026-10-09": {
-      "note": " (Replicado de 01/10/2026)",
-      "punches": {
-        "em": "08:00",
-        "et": "13:00",
-        "sm": "12:00",
-        "st": "17:00"
-      },
-      "override": "AFASTADO",
-      "override2": "",
-      "resolution": "NENHUMA",
-      "atrasoMaior": "",
-      "atrasoPequeno": "",
-      "atrasoMaiorMin": 0,
-      "atrasoPequenoMin": 0
-    },
-    "colab_branch-3_336_2026-10-10": {
-      "note": " (Replicado de 01/10/2026)",
-      "punches": {
-        "em": "08:00",
-        "et": "13:00",
-        "sm": "12:00",
-        "st": "17:00"
-      },
-      "override": "AFASTADO",
-      "override2": "",
-      "resolution": "NENHUMA",
-      "atrasoMaior": "",
-      "atrasoPequeno": "",
-      "atrasoMaiorMin": 0,
-      "atrasoPequenoMin": 0
-    },
-    "colab_branch-3_336_2026-10-12": {
-      "note": " (Replicado de 01/10/2026)",
-      "punches": {
-        "em": "08:00",
-        "et": "13:00",
-        "sm": "12:00",
-        "st": "17:00"
-      },
-      "override": "AFASTADO",
-      "override2": "",
-      "resolution": "NENHUMA",
-      "atrasoMaior": "",
-      "atrasoPequeno": "",
-      "atrasoMaiorMin": 0,
-      "atrasoPequenoMin": 0
-    },
-    "colab_branch-3_336_2026-10-13": {
-      "note": " (Replicado de 01/10/2026)",
-      "punches": {
-        "em": "08:00",
-        "et": "13:00",
-        "sm": "12:00",
-        "st": "17:00"
-      },
-      "override": "AFASTADO",
-      "override2": "",
-      "resolution": "NENHUMA",
-      "atrasoMaior": "",
-      "atrasoPequeno": "",
-      "atrasoMaiorMin": 0,
-      "atrasoPequenoMin": 0
-    },
-    "colab_branch-3_336_2026-10-14": {
-      "note": " (Replicado de 01/10/2026)",
-      "punches": {
-        "em": "08:00",
-        "et": "13:00",
-        "sm": "12:00",
-        "st": "17:00"
-      },
-      "override": "AFASTADO",
-      "override2": "",
-      "resolution": "NENHUMA",
-      "atrasoMaior": "",
-      "atrasoPequeno": "",
-      "atrasoMaiorMin": 0,
-      "atrasoPequenoMin": 0
-    },
-    "colab_branch-3_336_2026-10-15": {
-      "note": " (Replicado de 01/10/2026)",
-      "punches": {
-        "em": "08:00",
-        "et": "13:00",
-        "sm": "12:00",
-        "st": "17:00"
-      },
-      "override": "AFASTADO",
-      "override2": "",
-      "resolution": "NENHUMA",
-      "atrasoMaior": "",
-      "atrasoPequeno": "",
-      "atrasoMaiorMin": 0,
-      "atrasoPequenoMin": 0
-    },
-    "colab_branch-3_336_2026-10-16": {
-      "note": " (Replicado de 01/10/2026)",
-      "punches": {
-        "em": "08:00",
-        "et": "13:00",
-        "sm": "12:00",
-        "st": "17:00"
-      },
-      "override": "AFASTADO",
-      "override2": "",
-      "resolution": "NENHUMA",
-      "atrasoMaior": "",
-      "atrasoPequeno": "",
-      "atrasoMaiorMin": 0,
-      "atrasoPequenoMin": 0
-    },
-    "colab_branch-3_336_2026-10-17": {
-      "note": " (Replicado de 01/10/2026)",
-      "punches": {
-        "em": "08:00",
-        "et": "13:00",
-        "sm": "12:00",
-        "st": "17:00"
-      },
-      "override": "AFASTADO",
-      "override2": "",
-      "resolution": "NENHUMA",
-      "atrasoMaior": "",
-      "atrasoPequeno": "",
-      "atrasoMaiorMin": 0,
-      "atrasoPequenoMin": 0
-    },
-    "colab_branch-3_336_2026-10-19": {
-      "note": " (Replicado de 01/10/2026)",
-      "punches": {
-        "em": "08:00",
-        "et": "13:00",
-        "sm": "12:00",
-        "st": "17:00"
-      },
-      "override": "AFASTADO",
-      "override2": "",
-      "resolution": "NENHUMA",
-      "atrasoMaior": "",
-      "atrasoPequeno": "",
-      "atrasoMaiorMin": 0,
-      "atrasoPequenoMin": 0
-    },
-    "colab_branch-3_336_2026-10-20": {
-      "note": " (Replicado de 01/10/2026)",
-      "punches": {
-        "em": "08:00",
-        "et": "13:00",
-        "sm": "12:00",
-        "st": "17:00"
-      },
-      "override": "AFASTADO",
-      "override2": "",
-      "resolution": "NENHUMA",
-      "atrasoMaior": "",
-      "atrasoPequeno": "",
-      "atrasoMaiorMin": 0,
-      "atrasoPequenoMin": 0
-    },
-    "colab_branch-3_336_2026-10-21": {
-      "note": " (Replicado de 01/10/2026)",
-      "punches": {
-        "em": "08:00",
-        "et": "13:00",
-        "sm": "12:00",
-        "st": "17:00"
-      },
-      "override": "AFASTADO",
-      "override2": "",
-      "resolution": "NENHUMA",
-      "atrasoMaior": "",
-      "atrasoPequeno": "",
-      "atrasoMaiorMin": 0,
-      "atrasoPequenoMin": 0
-    },
-    "colab_branch-3_336_2026-10-22": {
-      "note": " (Replicado de 01/10/2026)",
-      "punches": {
-        "em": "08:00",
-        "et": "13:00",
-        "sm": "12:00",
-        "st": "17:00"
-      },
-      "override": "AFASTADO",
-      "override2": "",
-      "resolution": "NENHUMA",
-      "atrasoMaior": "",
-      "atrasoPequeno": "",
-      "atrasoMaiorMin": 0,
-      "atrasoPequenoMin": 0
-    },
-    "colab_branch-3_336_2026-10-23": {
-      "note": " (Replicado de 01/10/2026)",
-      "punches": {
-        "em": "08:00",
-        "et": "13:00",
-        "sm": "12:00",
-        "st": "17:00"
-      },
-      "override": "AFASTADO",
-      "override2": "",
-      "resolution": "NENHUMA",
-      "atrasoMaior": "",
-      "atrasoPequeno": "",
-      "atrasoMaiorMin": 0,
-      "atrasoPequenoMin": 0
-    },
-    "colab_branch-3_336_2026-10-24": {
-      "note": " (Replicado de 01/10/2026)",
-      "punches": {
-        "em": "08:00",
-        "et": "13:00",
-        "sm": "12:00",
-        "st": "17:00"
-      },
-      "override": "AFASTADO",
-      "override2": "",
-      "resolution": "NENHUMA",
-      "atrasoMaior": "",
-      "atrasoPequeno": "",
-      "atrasoMaiorMin": 0,
-      "atrasoPequenoMin": 0
-    },
-    "colab_branch-3_336_2026-10-26": {
-      "note": " (Replicado de 01/10/2026)",
-      "punches": {
-        "em": "08:00",
-        "et": "13:00",
-        "sm": "12:00",
-        "st": "17:00"
-      },
-      "override": "AFASTADO",
-      "override2": "",
-      "resolution": "NENHUMA",
-      "atrasoMaior": "",
-      "atrasoPequeno": "",
-      "atrasoMaiorMin": 0,
-      "atrasoPequenoMin": 0
-    },
-    "colab_branch-3_336_2026-10-27": {
-      "note": " (Replicado de 01/10/2026)",
-      "punches": {
-        "em": "08:00",
-        "et": "13:00",
-        "sm": "12:00",
-        "st": "17:00"
-      },
-      "override": "AFASTADO",
-      "override2": "",
-      "resolution": "NENHUMA",
-      "atrasoMaior": "",
-      "atrasoPequeno": "",
-      "atrasoMaiorMin": 0,
-      "atrasoPequenoMin": 0
-    },
-    "colab_branch-3_336_2026-10-28": {
-      "note": " (Replicado de 01/10/2026)",
-      "punches": {
-        "em": "08:00",
-        "et": "13:00",
-        "sm": "12:00",
-        "st": "17:00"
-      },
-      "override": "AFASTADO",
-      "override2": "",
-      "resolution": "NENHUMA",
-      "atrasoMaior": "",
-      "atrasoPequeno": "",
-      "atrasoMaiorMin": 0,
-      "atrasoPequenoMin": 0
-    },
-    "colab_branch-3_336_2026-10-29": {
-      "note": " (Replicado de 01/10/2026)",
-      "punches": {
-        "em": "08:00",
-        "et": "13:00",
-        "sm": "12:00",
-        "st": "17:00"
-      },
-      "override": "AFASTADO",
-      "override2": "",
-      "resolution": "NENHUMA",
-      "atrasoMaior": "",
-      "atrasoPequeno": "",
-      "atrasoMaiorMin": 0,
-      "atrasoPequenoMin": 0
-    },
-    "colab_branch-3_336_2026-10-30": {
-      "note": " (Replicado de 01/10/2026)",
-      "punches": {
-        "em": "08:00",
-        "et": "13:00",
-        "sm": "12:00",
-        "st": "17:00"
-      },
-      "override": "AFASTADO",
-      "override2": "",
-      "resolution": "NENHUMA",
-      "atrasoMaior": "",
-      "atrasoPequeno": "",
-      "atrasoMaiorMin": 0,
-      "atrasoPequenoMin": 0
-    },
-    "colab_branch-3_336_2026-10-31": {
-      "note": " (Replicado de 01/10/2026)",
-      "punches": {
-        "em": "08:00",
-        "et": "13:00",
-        "sm": "12:00",
-        "st": "17:00"
-      },
-      "override": "AFASTADO",
-      "override2": "",
-      "resolution": "NENHUMA",
-      "atrasoMaior": "",
-      "atrasoPequeno": "",
-      "atrasoMaiorMin": 0,
-      "atrasoPequenoMin": 0
-    },
-    "colab_branch-3_336_2026-11-02": {
-      "note": " (Replicado de 01/10/2026)",
-      "punches": {
-        "em": "08:00",
-        "et": "13:00",
-        "sm": "12:00",
-        "st": "17:00"
-      },
-      "override": "AFASTADO",
-      "override2": "",
-      "resolution": "NENHUMA",
-      "atrasoMaior": "",
-      "atrasoPequeno": "",
-      "atrasoMaiorMin": 0,
-      "atrasoPequenoMin": 0
-    },
-    "colab_branch-3_336_2026-11-03": {
-      "note": " (Replicado de 01/10/2026)",
-      "punches": {
-        "em": "08:00",
-        "et": "13:00",
-        "sm": "12:00",
-        "st": "17:00"
-      },
-      "override": "AFASTADO",
-      "override2": "",
-      "resolution": "NENHUMA",
-      "atrasoMaior": "",
-      "atrasoPequeno": "",
-      "atrasoMaiorMin": 0,
-      "atrasoPequenoMin": 0
-    },
-    "colab_branch-3_336_2026-11-04": {
-      "note": " (Replicado de 01/10/2026)",
-      "punches": {
-        "em": "08:00",
-        "et": "13:00",
-        "sm": "12:00",
-        "st": "17:00"
-      },
-      "override": "AFASTADO",
-      "override2": "",
-      "resolution": "NENHUMA",
-      "atrasoMaior": "",
-      "atrasoPequeno": "",
-      "atrasoMaiorMin": 0,
-      "atrasoPequenoMin": 0
-    },
-    "colab_branch-3_336_2026-11-05": {
-      "note": " (Replicado de 01/10/2026)",
-      "punches": {
-        "em": "08:00",
-        "et": "13:00",
-        "sm": "12:00",
-        "st": "17:00"
-      },
-      "override": "AFASTADO",
-      "override2": "",
-      "resolution": "NENHUMA",
-      "atrasoMaior": "",
-      "atrasoPequeno": "",
-      "atrasoMaiorMin": 0,
-      "atrasoPequenoMin": 0
-    },
-    "colab_branch-3_336_2026-11-06": {
-      "note": " (Replicado de 01/10/2026)",
-      "punches": {
-        "em": "08:00",
-        "et": "13:00",
-        "sm": "12:00",
-        "st": "17:00"
-      },
-      "override": "AFASTADO",
-      "override2": "",
-      "resolution": "NENHUMA",
-      "atrasoMaior": "",
-      "atrasoPequeno": "",
-      "atrasoMaiorMin": 0,
-      "atrasoPequenoMin": 0
-    },
-    "colab_branch-3_336_2026-11-07": {
-      "note": " (Replicado de 01/10/2026)",
-      "punches": {
-        "em": "08:00",
-        "et": "13:00",
-        "sm": "12:00",
-        "st": "17:00"
-      },
-      "override": "AFASTADO",
-      "override2": "",
-      "resolution": "NENHUMA",
-      "atrasoMaior": "",
-      "atrasoPequeno": "",
-      "atrasoMaiorMin": 0,
-      "atrasoPequenoMin": 0
-    },
-    "colab_branch-3_336_2026-11-09": {
-      "note": " (Replicado de 01/10/2026)",
-      "punches": {
-        "em": "08:00",
-        "et": "13:00",
-        "sm": "12:00",
-        "st": "17:00"
-      },
-      "override": "AFASTADO",
-      "override2": "",
-      "resolution": "NENHUMA",
-      "atrasoMaior": "",
-      "atrasoPequeno": "",
-      "atrasoMaiorMin": 0,
-      "atrasoPequenoMin": 0
-    },
-    "colab_branch-3_336_2026-11-10": {
-      "note": " (Replicado de 01/10/2026)",
-      "punches": {
-        "em": "08:00",
-        "et": "13:00",
-        "sm": "12:00",
-        "st": "17:00"
-      },
-      "override": "AFASTADO",
-      "override2": "",
-      "resolution": "NENHUMA",
-      "atrasoMaior": "",
-      "atrasoPequeno": "",
-      "atrasoMaiorMin": 0,
-      "atrasoPequenoMin": 0
-    },
-    "colab_branch-3_361_2026-10-21": {
-      "note": "",
-      "punches": {
-        "em": "08:00",
-        "et": "13:00",
-        "sm": "12:00",
-        "st": "17:00"
-      },
-      "override": "VAZIO",
-      "override2": "",
-      "resolution": "NENHUMA",
-      "atrasoMaior": "",
-      "atrasoPequeno": "",
-      "atrasoMaiorMin": 0,
-      "atrasoPequenoMin": 0
-    },
-    "colab_branch-3_361_2026-10-22": {
-      "note": " (Replicado de 21/10/2026)",
-      "punches": {
-        "em": "08:00",
-        "et": "13:00",
-        "sm": "12:00",
-        "st": "17:00"
-      },
-      "override": "VAZIO",
-      "override2": "",
-      "resolution": "NENHUMA",
-      "atrasoMaior": "",
-      "atrasoPequeno": "",
-      "atrasoMaiorMin": 0,
-      "atrasoPequenoMin": 0
-    },
-    "colab_branch-3_361_2026-10-23": {
-      "note": " (Replicado de 21/10/2026)",
-      "punches": {
-        "em": "08:00",
-        "et": "13:00",
-        "sm": "12:00",
-        "st": "17:00"
-      },
-      "override": "VAZIO",
-      "override2": "",
-      "resolution": "NENHUMA",
-      "atrasoMaior": "",
-      "atrasoPequeno": "",
-      "atrasoMaiorMin": 0,
-      "atrasoPequenoMin": 0
-    },
-    "colab_branch-3_361_2026-10-24": {
-      "note": " (Replicado de 21/10/2026)",
-      "punches": {
-        "em": "08:00",
-        "et": "13:00",
-        "sm": "12:00",
-        "st": "17:00"
-      },
-      "override": "VAZIO",
-      "override2": "",
-      "resolution": "NENHUMA",
-      "atrasoMaior": "",
-      "atrasoPequeno": "",
-      "atrasoMaiorMin": 0,
-      "atrasoPequenoMin": 0
-    },
-    "colab_branch-3_361_2026-10-26": {
-      "note": " (Replicado de 21/10/2026)",
-      "punches": {
-        "em": "08:00",
-        "et": "13:00",
-        "sm": "12:00",
-        "st": "17:00"
-      },
-      "override": "VAZIO",
-      "override2": "",
-      "resolution": "NENHUMA",
-      "atrasoMaior": "",
-      "atrasoPequeno": "",
-      "atrasoMaiorMin": 0,
-      "atrasoPequenoMin": 0
-    },
-    "colab_branch-3_361_2026-10-27": {
-      "note": " (Replicado de 21/10/2026)",
-      "punches": {
-        "em": "08:00",
-        "et": "13:00",
-        "sm": "12:00",
-        "st": "17:00"
-      },
-      "override": "VAZIO",
-      "override2": "",
-      "resolution": "NENHUMA",
-      "atrasoMaior": "",
-      "atrasoPequeno": "",
-      "atrasoMaiorMin": 0,
-      "atrasoPequenoMin": 0
-    },
-    "colab_branch-3_361_2026-10-28": {
-      "note": " (Replicado de 21/10/2026)",
-      "punches": {
-        "em": "08:00",
-        "et": "13:00",
-        "sm": "12:00",
-        "st": "17:00"
-      },
-      "override": "VAZIO",
-      "override2": "",
-      "resolution": "NENHUMA",
-      "atrasoMaior": "",
-      "atrasoPequeno": "",
-      "atrasoMaiorMin": 0,
-      "atrasoPequenoMin": 0
-    },
-    "colab_branch-3_361_2026-10-29": {
-      "note": " (Replicado de 21/10/2026)",
-      "punches": {
-        "em": "08:00",
-        "et": "13:00",
-        "sm": "12:00",
-        "st": "17:00"
-      },
-      "override": "VAZIO",
-      "override2": "",
-      "resolution": "NENHUMA",
-      "atrasoMaior": "",
-      "atrasoPequeno": "",
-      "atrasoMaiorMin": 0,
-      "atrasoPequenoMin": 0
-    },
-    "colab_branch-3_361_2026-10-30": {
-      "note": " (Replicado de 21/10/2026)",
-      "punches": {
-        "em": "08:00",
-        "et": "13:00",
-        "sm": "12:00",
-        "st": "17:00"
-      },
-      "override": "VAZIO",
-      "override2": "",
-      "resolution": "NENHUMA",
-      "atrasoMaior": "",
-      "atrasoPequeno": "",
-      "atrasoMaiorMin": 0,
-      "atrasoPequenoMin": 0
-    },
-    "colab_branch-3_361_2026-10-31": {
-      "note": "",
-      "punches": {
-        "em": "08:00",
-        "et": "13:00",
-        "sm": "12:00",
-        "st": "17:00"
-      },
-      "override": "VAZIO",
-      "override2": "",
-      "resolution": "NENHUMA",
-      "atrasoMaior": "",
-      "atrasoPequeno": "",
-      "atrasoMaiorMin": 0,
-      "atrasoPequenoMin": 0
-    },
-    "colab_branch-3_361_2026-10-07": {
-      "note": "",
-      "punches": {
-        "em": "08:00",
-        "et": "13:00",
-        "sm": "12:00",
-        "st": "17:00"
-      },
-      "override": "AUTO",
-      "override2": "",
-      "resolution": "NENHUMA",
-      "atrasoMaior": "01:10",
-      "atrasoPequeno": "",
-      "atrasoMaiorMin": 70,
-      "atrasoPequenoMin": 0
-    },
-    "colab_branch-3_361_2026-10-13": {
-      "note": "",
-      "punches": {
-        "em": "08:00",
-        "et": "13:00",
-        "sm": "12:00",
-        "st": "17:00"
-      },
-      "override": "AUTO",
-      "override2": "",
-      "resolution": "NENHUMA",
-      "atrasoMaior": "00:18",
-      "atrasoPequeno": "",
-      "atrasoMaiorMin": 18,
-      "atrasoPequenoMin": 0
-    },
-    "colab_branch-2_561_2026-10-12": {
-      "override": "OK",
-      "override2": "",
-      "resolution": "NENHUMA",
-      "punches": {
-        "em": "",
-        "sm": "",
-        "et": "",
-        "st": ""
-      },
-      "note": "Falta integral (Planilha) (Replicado de 01/10/2026)",
-      "atrasoMaior": "",
-      "atrasoMaiorMin": 0,
-      "atrasoPequeno": "",
-      "atrasoPequenoMin": 0
     }
   },
-  "carryOverDsr": {},
-  "activeBranchId": "branch-1",
-  "currentYear": 2026,
-  "currentMonth": 9,
-  "statusFilter": "ativos",
-  "departmentFilter": "todos",
-  "calFilterDept": "todos",
-  "focusMode": false,
-  "sortBy": "nome",
-  "updatedAt": "2026-10-21T21:55:45.191Z"
+  "departmentFilter": "todos"
 };
+  if (typeof module !== 'undefined' && module.exports) {
+    module.exports = root.GOLD_RECOVERY_DATA;
+  }
+})();

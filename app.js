@@ -1541,6 +1541,22 @@ function migrateAppState(state) {
     return { ...a, colabId };
   });
 
+  // Cura automática e definitiva de registros com batidas ou nota de OK que ficaram com override VAZIO
+  Object.keys(newRp).forEach(k => {
+    const reg = newRp[k];
+    if (reg && reg.override === 'VAZIO') {
+      const hasPunches = reg.punches && (reg.punches.em || reg.punches.sm || reg.punches.et || reg.punches.st);
+      const isMassOk = reg.note && reg.note.includes('OK em massa');
+      if (isMassOk) {
+        reg.override = 'OK';
+        hasChanges = true;
+      } else if (hasPunches) {
+        reg.override = 'AUTO';
+        hasChanges = true;
+      }
+    }
+  });
+
   state.colaboradores = updatedColabs;
   state.registrosPonto = newRp;
   state.avisos = updatedAvisos;
@@ -1904,10 +1920,27 @@ function applyRemoteState(incoming, force = false) {
     // Se o estado atual tiver registros substanciais e o recebido for vazio ou insignificante, JAMAIS esvaziar!
     if (curCount > 100 && incCount < 100) {
       console.warn(`PROTEÇÃO ATIVA: Ignorando tentativa remota de esvaziar batidas (${curCount} locais vs ${incCount} recebidas).`);
-    } else if (force && incCount >= curCount) {
-      appState.registrosPonto = { ...incoming.registrosPonto };
     } else {
-      appState.registrosPonto = { ...appState.registrosPonto, ...incoming.registrosPonto };
+      // Mescla inteligente: une os registros locais e remotos, preservando batidas preenchidas
+      const merged = { ...appState.registrosPonto, ...incoming.registrosPonto };
+      Object.keys(appState.registrosPonto || {}).forEach(k => {
+        const localItem = appState.registrosPonto[k];
+        const remoteItem = incoming.registrosPonto[k];
+        if (localItem && remoteItem) {
+          const localHasPunches = localItem.punches && Object.values(localItem.punches).some(p => !!p);
+          const remoteHasPunches = remoteItem.punches && Object.values(remoteItem.punches).some(p => !!p);
+          if (localHasPunches && !remoteHasPunches) {
+            merged[k] = localItem;
+          }
+        }
+      });
+      appState.registrosPonto = merged;
+    }
+  }
+
+  if (incoming.activeBranchId && appState.filiais && appState.filiais.some(f => f.id === incoming.activeBranchId)) {
+    if (force || !appState.activeBranchId) {
+      appState.activeBranchId = incoming.activeBranchId;
     }
   }
 
@@ -2057,20 +2090,37 @@ async function syncFromCloudOnStart() {
         appState._cloudHadPontos = true;
       }
 
+      // REGRA DE OURO 3: Se a nuvem possui MAIS batidas do que o armazenamento local
+      // (ex: batidas inseridas em outro computador, navegador ou celular), a nuvem sempre é aplicada!
+      if (cloudPontoCount > localPontoCount) {
+        console.log(`Nuvem possui mais batidas (${cloudPontoCount} vs ${localPontoCount} locais). Atualizando para a versão da nuvem...`);
+        applyRemoteState(cloud, true);
+        appState.updatedAt = data.updated_at || cloud.updatedAt || new Date().toISOString();
+        saveStateToStorage(false, false, false);
+        renderCurrentView();
+        showToast(`Base atualizada com a nuvem: ${cloudPontoCount} batidas e ${cloud.colaboradores?.length || 100} colaboradores ativos!`, 'success');
+        return;
+      }
+
       // CASO 1: LOCAL MAIS RECENTE QUE A NUVEM
       // Se os dados locais tiverem sido modificados antes de fechar a aba e ainda não subiram:
-      // NUNCA sobrescreve o local com os dados velhos da nuvem!
+      // Preserva local e sincroniza para a nuvem, garantindo não perder nada
       if (localTime > cloudTime + 2000) {
         console.log('ALTERAÇÕES LOCAIS SÃO MAIS RECENTES. Preservando trabalho e sincronizando nuvem...');
+        // Garante que batidas da nuvem que não estejam no local não sejam apagadas
+        Object.keys(cloud.registrosPonto || {}).forEach(k => {
+          if (!appState.registrosPonto[k]) {
+            appState.registrosPonto[k] = cloud.registrosPonto[k];
+          }
+        });
         const payload = getStoragePayload();
         triggerCloudSync(payload, true);
         showToast('Suas alterações locais mais recentes foram mantidas e sincronizadas com a nuvem.', 'info');
         return;
       }
 
-      // CASO 2: NUVEM É MAIS NOVA (Ex: alterações feitas em outro dispositivo)
-      // Só aplica se a nuvem não tiver perdido dados de ponto em relação ao local
-      if (cloudTime > localTime + 2000 && cloudPontoCount >= localPontoCount) {
+      // CASO 2: NUVEM É MAIS NOVA OU IGUAL
+      if (cloudTime >= localTime && cloudPontoCount >= localPontoCount) {
         applyRemoteState(cloud, true);
         appState.updatedAt = data.updated_at || cloud.updatedAt || new Date().toISOString();
         saveStateToStorage(false, false, false);
@@ -2476,17 +2526,21 @@ function getDayStatus(colabId, isoStr, branchId) {
     const resolution = reg.resolution || 'NENHUMA';
 
     if (override === 'VAZIO') {
-      return {
-        type: 'VAZIO',
-        display: '',
-        cssClass: 'status-empty',
-        isPending: false,
-        isWorkingDay: false,
-        isSunday: false,
-        isHoliday: !!holiday,
-        isEmptyDay: true,
-        resolution
-      };
+      const hasPunches = reg.punches && (reg.punches.em || reg.punches.sm || reg.punches.et || reg.punches.st);
+      const isMassOk = reg.note && reg.note.includes('OK em massa');
+      if (!hasPunches && !isMassOk) {
+        return {
+          type: 'VAZIO',
+          display: '',
+          cssClass: 'status-empty',
+          isPending: false,
+          isWorkingDay: false,
+          isSunday: false,
+          isHoliday: !!holiday,
+          isEmptyDay: true,
+          resolution
+        };
+      }
     }
 
     if (override === 'OK' || resolution === 'ABONAR') {
@@ -3877,7 +3931,11 @@ function openCellDetailModal(colabId, isoDate) {
   document.getElementById('punch-et').value = reg.punches?.et || '';
   document.getElementById('punch-st').value = reg.punches?.st || '';
 
-  document.getElementById('select-override-status').value = reg.override || 'AUTO';
+  let initialOverride = reg.override || 'AUTO';
+  if (initialOverride === 'VAZIO') {
+    initialOverride = 'AUTO';
+  }
+  document.getElementById('select-override-status').value = initialOverride;
   const selOverride2 = document.getElementById('select-override-status-2');
   if (selOverride2) selOverride2.value = reg.override2 || '';
   syncPendencia2State();
@@ -3947,7 +4005,7 @@ document.getElementById('btn-save-cell-detail')?.addEventListener('click', () =>
 
   const colab = appState.colaboradores.find(c => c.id === colabId);
 
-  const override = document.getElementById('select-override-status').value;
+  let override = document.getElementById('select-override-status').value;
   let override2 = document.getElementById('select-override-status-2')?.value || '';
   if (['AUTO', 'OK', 'FÉRIAS', 'AFASTADO'].includes(override) || override2 === override) override2 = '';
   const resolution = document.getElementById('select-resolution').value;
@@ -3965,6 +4023,12 @@ document.getElementById('btn-save-cell-detail')?.addEventListener('click', () =>
     et: document.getElementById('punch-et').value,
     st: document.getElementById('punch-st').value
   };
+
+  // Se o usuário preencheu batidas e o override ainda estiver VAZIO, ajusta automaticamente para AUTO
+  const hasPunches = punches.em || punches.sm || punches.et || punches.st;
+  if (override === 'VAZIO' && hasPunches) {
+    override = 'AUTO';
+  }
 
   const regKey = colabId + '_' + isoDate;
   appState.registrosPonto[regKey] = {
