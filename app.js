@@ -2152,7 +2152,7 @@ function loadStateFromStorage() {
         appState.carryOverDsr = parsed.carryOverDsr || {};
 
         if (parsed.activeBranchId && appState.filiais.some(f => f.id === parsed.activeBranchId)) {
-          if (parsed.activeBranchId === 'branch-4' && rawPontosCount < 100) {
+          if (parsed.activeBranchId === 'branch-4' && localPontosCount < 100) {
             appState.activeBranchId = 'branch-1';
           } else {
             appState.activeBranchId = parsed.activeBranchId;
