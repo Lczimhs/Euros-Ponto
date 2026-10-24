@@ -3392,22 +3392,18 @@ function getFilteredAndSortedEmployees(isForPonto = false) {
 
     // 2. Filtro de Situação (Ativos / Demitidos / Todos)
     const stFilter = appState.statusFilter || 'ativos';
-    const monthStart = formatDateISO(appState.currentYear, appState.currentMonth, 1);
     if (stFilter === 'ativos') {
-      // Exibe ativos E quem foi demitido durante o próprio mês (para apuração das batidas até a data da demissão)
-      list = list.filter(c => c.status !== 'demitido' || (c.dataDemissao && c.dataDemissao >= monthStart));
+      list = list.filter(c => c.status !== 'demitido' && !c.dataDemissao);
     } else if (stFilter === 'demitidos') {
-      list = list.filter(c => c.status === 'demitido');
+      list = list.filter(c => c.status === 'demitido' || !!c.dataDemissao);
     }
   } else {
-    // No Vale Alimentação: respeita o filtro de situação se selecionado 'demitidos'
+    // No Vale Alimentação: respeita estritamente o filtro de situação
     const stFilter = appState.statusFilter || 'ativos';
-    if (stFilter === 'demitidos') {
-      list = list.filter(c => c.status === 'demitido');
-    } else if (stFilter === 'ativos') {
-      // Ativos + quem foi demitido dentro do mês corrente (para apuração dos dias trabalhados)
-      const monthStart = formatDateISO(appState.currentYear, appState.currentMonth, 1);
-      list = list.filter(c => c.status !== 'demitido' || (c.dataDemissao && c.dataDemissao >= monthStart));
+    if (stFilter === 'ativos') {
+      list = list.filter(c => c.status !== 'demitido' && !c.dataDemissao);
+    } else if (stFilter === 'demitidos') {
+      list = list.filter(c => c.status === 'demitido' || !!c.dataDemissao);
     }
   }
 
@@ -5253,9 +5249,9 @@ function renderColaboradoresView() {
   const statusSelect = document.getElementById('colab-filter-status');
   if (statusSelect && statusSelect.value !== 'todos') {
     if (statusSelect.value === 'ativo') {
-      list = list.filter(c => c.status !== 'demitido');
+      list = list.filter(c => c.status !== 'demitido' && !c.dataDemissao);
     } else if (statusSelect.value === 'demitido') {
-      list = list.filter(c => c.status === 'demitido');
+      list = list.filter(c => c.status === 'demitido' || !!c.dataDemissao);
     }
   }
 
