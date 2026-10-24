@@ -2450,6 +2450,29 @@ function pendenciaCssClass(primary, count) {
   return count > 1 ? cls + ' status-combo' : cls;
 }
 
+// Função unificada para buscar o registro de ponto sob qualquer formato de chave (colabId_data ou colab-cracha_data)
+function getPontoRecord(colabId, isoStr) {
+  if (!appState || !appState.registrosPonto) return null;
+  const regKey = colabId + '_' + isoStr;
+  let reg = appState.registrosPonto[regKey];
+  if (reg) return reg;
+
+  if (colabId && colabId.startsWith('colab_')) {
+    const parts = colabId.split('_');
+    const cracha = parts[2];
+    if (cracha && appState.registrosPonto[`colab-${cracha}_${isoStr}`]) {
+      return appState.registrosPonto[`colab-${cracha}_${isoStr}`];
+    }
+  } else if (colabId && colabId.startsWith('colab-')) {
+    const cracha = colabId.replace('colab-', '');
+    const cObj = appState.colaboradores?.find(c => Number(c.cracha) === Number(cracha));
+    if (cObj && appState.registrosPonto[`${cObj.id}_${isoStr}`]) {
+      return appState.registrosPonto[`${cObj.id}_${isoStr}`];
+    }
+  }
+  return null;
+}
+
 /**
  * Determina o status consolidado de um colaborador em um dia específico
  */
@@ -2503,29 +2526,6 @@ function getDayStatus(colabId, isoStr, branchId) {
       isHoliday: false
     };
   }
-
-// Função unificada para buscar o registro de ponto sob qualquer formato de chave (colabId_data ou colab-cracha_data)
-function getPontoRecord(colabId, isoStr) {
-  if (!appState || !appState.registrosPonto) return null;
-  const regKey = colabId + '_' + isoStr;
-  let reg = appState.registrosPonto[regKey];
-  if (reg) return reg;
-
-  if (colabId && colabId.startsWith('colab_')) {
-    const parts = colabId.split('_');
-    const cracha = parts[2];
-    if (cracha && appState.registrosPonto[`colab-${cracha}_${isoStr}`]) {
-      return appState.registrosPonto[`colab-${cracha}_${isoStr}`];
-    }
-  } else if (colabId && colabId.startsWith('colab-')) {
-    const cracha = colabId.replace('colab-', '');
-    const cObj = appState.colaboradores?.find(c => Number(c.cracha) === Number(cracha));
-    if (cObj && appState.registrosPonto[`${cObj.id}_${isoStr}`]) {
-      return appState.registrosPonto[`${cObj.id}_${isoStr}`];
-    }
-  }
-  return null;
-}
 
   // Verificar feriado
   const holiday = isHoliday(isoStr, branchId);
