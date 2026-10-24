@@ -5175,9 +5175,20 @@ function setupColabFiltersDropdowns() {
     appState.departamentos.map(d => `<option value="${d.id}">${d.nome}</option>`).join('');
   if (currentDeptVal) deptSelect.value = currentDeptVal;
 
+  // Filiais (adicionado seletor para permitir ver Todas as Filiais ou alternar diretamente)
+  const filialSelect = document.getElementById('colab-filter-filial');
+  if (filialSelect) {
+    const currentFilialVal = filialSelect.value || 'ativa';
+    filialSelect.innerHTML = '<option value="ativa">📍 Filial Selecionada no Topo</option>' +
+      '<option value="todas">🌐 Todas as Filiais (Geral)</option>' +
+      appState.filiais.map(f => `<option value="${f.id}">${f.nome}</option>`).join('');
+    if (currentFilialVal) filialSelect.value = currentFilialVal;
+  }
+
   if (!colabFiltersInitialized) {
     colabFiltersInitialized = true;
     document.getElementById('colab-search-input')?.addEventListener('input', () => renderColaboradoresView());
+    document.getElementById('colab-filter-filial')?.addEventListener('change', () => renderColaboradoresView());
     deptSelect.addEventListener('change', () => renderColaboradoresView());
     document.getElementById('colab-filter-status')?.addEventListener('change', () => renderColaboradoresView());
     document.getElementById('colab-filter-ponto')?.addEventListener('change', () => renderColaboradoresView());
@@ -5185,6 +5196,8 @@ function setupColabFiltersDropdowns() {
     document.getElementById('btn-colab-reset-filters')?.addEventListener('click', () => {
       const searchIn = document.getElementById('colab-search-input');
       if (searchIn) searchIn.value = '';
+      const filEl = document.getElementById('colab-filter-filial');
+      if (filEl) filEl.value = 'ativa';
       deptSelect.value = 'todos';
       const stEl = document.getElementById('colab-filter-status');
       if (stEl) stEl.value = 'ativo';
@@ -5205,18 +5218,30 @@ function renderColaboradoresView() {
   const branchMap = Object.fromEntries(appState.filiais.map(f => [f.id, f.nome]));
   const deptMap = Object.fromEntries(appState.departamentos.map(d => [d.id, d.nome]));
 
-  // Subtítulo indicador da filial ativa selecionada no topo
-  const subEl = document.getElementById('colab-branch-subtitle');
-  if (subEl) {
-    const curBranch = branchMap[appState.activeBranchId] || 'Filial Selecionada';
-    subEl.textContent = '📍 Filial Ativa: ' + curBranch;
-  }
-
   // Preenche filtros
   setupColabFiltersDropdowns();
 
-  // 1. FILTRAGEM ESTRITA PELA FILIAL ATIVA SELECIONADA NO TOPO (IGUAL AO DASHBOARD DE PONTO)
-  let list = appState.colaboradores.filter(c => c.filialId === appState.activeBranchId);
+  // 1. FILTRAGEM POR FILIAL (Se 'ativa', segue a aba do topo; se 'todas', consolida todas as 4 filiais; ou filtra por filial específica)
+  const filialSelect = document.getElementById('colab-filter-filial');
+  const filialFilterVal = filialSelect ? filialSelect.value : 'ativa';
+
+  // Subtítulo indicador da filial ativa selecionada
+  const subEl = document.getElementById('colab-branch-subtitle');
+  if (subEl) {
+    if (filialFilterVal === 'todas') {
+      subEl.textContent = '🌐 Visão Geral: Todas as Filiais (Geral)';
+    } else {
+      const curBranch = branchMap[filialFilterVal === 'ativa' ? appState.activeBranchId : filialFilterVal] || 'Filial Selecionada';
+      subEl.textContent = '📍 Filial: ' + curBranch;
+    }
+  }
+
+  let list = appState.colaboradores;
+  if (filialFilterVal === 'ativa') {
+    list = list.filter(c => c.filialId === appState.activeBranchId);
+  } else if (filialFilterVal !== 'todas') {
+    list = list.filter(c => c.filialId === filialFilterVal);
+  }
 
   // 2. Departamento
   const deptSelect = document.getElementById('colab-filter-dept');
@@ -5274,13 +5299,25 @@ function renderColaboradoresView() {
   // Contador de resultados
   const countEl = document.getElementById('colab-stats-count');
   if (countEl) {
-    const totalBranchColabs = appState.colaboradores.filter(c => c.filialId === appState.activeBranchId).length;
-    countEl.innerHTML = `<span>Exibindo <strong>${list.length}</strong> de ${totalBranchColabs} colaborador(es) desta empresa (Total no sistema: ${appState.colaboradores.length})</span><span style="color:var(--color-text-muted);">* Alterne a filial acima na barra para ver outra empresa</span>`;
+    const isTodas = filialFilterVal === 'todas';
+    const totalScope = isTodas 
+      ? appState.colaboradores.length 
+      : (filialFilterVal === 'ativa' 
+          ? appState.colaboradores.filter(c => c.filialId === appState.activeBranchId).length 
+          : appState.colaboradores.filter(c => c.filialId === filialFilterVal).length);
+    const scopeLabel = isTodas 
+      ? 'Todas as Filiais (Geral)' 
+      : (branchMap[filialFilterVal === 'ativa' ? appState.activeBranchId : filialFilterVal] || 'Filial Selecionada');
+    const demitidosScope = isTodas
+      ? appState.colaboradores.filter(c => c.status === 'demitido').length
+      : appState.colaboradores.filter(c => (c.filialId === (filialFilterVal === 'ativa' ? appState.activeBranchId : filialFilterVal)) && c.status === 'demitido').length;
+    
+    countEl.innerHTML = `<span>Exibindo <strong>${list.length}</strong> de ${totalScope} colaborador(es) em <em>${scopeLabel}</em> (${demitidosScope} demitido(s) no escopo)</span><span style="color:var(--color-text-muted); font-size:11px;">* Para ver demitidos de todas as filiais juntos, selecione "Todas as Filiais"</span>`;
   }
 
   tbody.innerHTML = '';
   if (list.length === 0) {
-    tbody.innerHTML = '<tr><td colspan="8" style="text-align:center; padding: 24px; color: var(--color-text-sub);">Nenhum colaborador encontrado para os filtros selecionados nesta filial.</td></tr>';
+    tbody.innerHTML = '<tr><td colspan="8" style="text-align:center; padding: 24px; color: var(--color-text-sub);">Nenhum colaborador encontrado para os filtros selecionados.</td></tr>';
     return;
   }
 
