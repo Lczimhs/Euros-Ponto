@@ -66732,6 +66732,600 @@
       "resolution": "NENHUMA",
       "atrasoMaiorMin": 0,
       "atrasoPequenoMin": 0
+    },
+    "colab-561_2026-10-12": {
+      "note": "Falta integral (Planilha) (Replicado de 01/10/2026)",
+      "punches": {
+        "em": "",
+        "et": "",
+        "sm": "",
+        "st": ""
+      },
+      "override": "OK",
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaior": "",
+      "atrasoPequeno": "",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
+    },
+    "colab-613_2026-10-12": {
+      "note": "Presença regular (Planilha) (Replicado de 01/10/2026)",
+      "punches": {
+        "em": "08:00",
+        "et": "13:00",
+        "sm": "12:00",
+        "st": "17:00"
+      },
+      "override": "OK",
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaior": "",
+      "atrasoPequeno": "",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
+    },
+    "colab_branch-3_234_2026-10-01": {
+      "note": "Presença regular (Planilha)",
+      "punches": {
+        "em": "08:00",
+        "et": "13:00",
+        "sm": "12:00",
+        "st": "17:00"
+      },
+      "override": "OK",
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
+    },
+    "colab_branch-3_234_2026-10-02": {
+      "note": "Presença regular (Planilha)",
+      "punches": {
+        "em": "08:00",
+        "et": "13:00",
+        "sm": "12:00",
+        "st": "17:00"
+      },
+      "override": "OK",
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
+    },
+    "colab_branch-3_234_2026-10-03": {
+      "note": "Presença regular (Planilha)",
+      "punches": {
+        "em": "08:00",
+        "et": "13:00",
+        "sm": "12:00",
+        "st": "17:00"
+      },
+      "override": "OK",
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
+    },
+    "colab_branch-3_234_2026-10-05": {
+      "note": "Presença regular (Planilha)",
+      "punches": {
+        "em": "08:00",
+        "et": "13:00",
+        "sm": "12:00",
+        "st": "17:00"
+      },
+      "override": "OK",
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
+    },
+    "colab_branch-3_234_2026-10-06": {
+      "note": "Presença regular (Planilha)",
+      "punches": {
+        "em": "08:00",
+        "et": "13:00",
+        "sm": "12:00",
+        "st": "17:00"
+      },
+      "override": "AUTO",
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaior": "",
+      "atrasoPequeno": "",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
+    },
+    "colab_branch-3_234_2026-10-07": {
+      "note": "Presença regular (Planilha)",
+      "punches": {
+        "em": "08:00",
+        "et": "13:00",
+        "sm": "12:00",
+        "st": "17:00"
+      },
+      "override": "OK",
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaior": "",
+      "atrasoPequeno": "00:06",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 6
+    },
+    "colab_branch-3_234_2026-10-08": {
+      "note": "Presença regular (Planilha)",
+      "punches": {
+        "em": "08:00",
+        "et": "13:00",
+        "sm": "12:00",
+        "st": "17:00"
+      },
+      "override": "OK",
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
+    },
+    "colab_branch-3_234_2026-10-09": {
+      "note": "Pendência EM (Planilha)",
+      "punches": {
+        "em": "",
+        "et": "",
+        "sm": "",
+        "st": ""
+      },
+      "override": "OK",
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaior": "",
+      "atrasoPequeno": "",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
+    },
+    "colab_branch-3_234_2026-10-10": {
+      "note": "Pendência SM (Planilha)",
+      "punches": {
+        "em": "",
+        "et": "",
+        "sm": "",
+        "st": ""
+      },
+      "override": "OK",
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaior": "",
+      "atrasoPequeno": "",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
+    },
+    "colab_branch-3_234_2026-10-13": {
+      "note": "Abono/OK em massa pelo cabeçalho da data",
+      "punches": {
+        "em": "08:00",
+        "et": "13:00",
+        "sm": "12:00",
+        "st": "17:00"
+      },
+      "override": "OK",
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaior": "",
+      "atrasoPequeno": "",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
+    },
+    "colab_branch-3_234_2026-10-14": {
+      "note": "OK em massa pelo cabeçalho da data",
+      "punches": {
+        "em": "08:00",
+        "et": "13:00",
+        "sm": "12:00",
+        "st": "17:00"
+      },
+      "override": "OK",
+      "resolution": "NENHUMA"
+    },
+    "colab_branch-3_234_2026-10-23": {
+      "note": "Dia futuro em aberto (desmarcado)",
+      "punches": {
+        "em": "",
+        "et": "",
+        "sm": "",
+        "st": ""
+      },
+      "override": "VAZIO",
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
+    },
+    "colab_branch-3_234_2026-10-24": {
+      "note": "Dia futuro em aberto (desmarcado)",
+      "punches": {
+        "em": "",
+        "et": "",
+        "sm": "",
+        "st": ""
+      },
+      "override": "VAZIO",
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
+    },
+    "colab_branch-3_234_2026-10-26": {
+      "note": "Dia futuro em aberto (desmarcado)",
+      "punches": {
+        "em": "",
+        "et": "",
+        "sm": "",
+        "st": ""
+      },
+      "override": "VAZIO",
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
+    },
+    "colab_branch-3_234_2026-10-27": {
+      "note": "Dia futuro em aberto (desmarcado)",
+      "punches": {
+        "em": "",
+        "et": "",
+        "sm": "",
+        "st": ""
+      },
+      "override": "VAZIO",
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
+    },
+    "colab_branch-3_234_2026-10-28": {
+      "note": "Dia futuro em aberto (desmarcado)",
+      "punches": {
+        "em": "",
+        "et": "",
+        "sm": "",
+        "st": ""
+      },
+      "override": "VAZIO",
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
+    },
+    "colab_branch-3_234_2026-10-29": {
+      "note": "Dia futuro em aberto (desmarcado)",
+      "punches": {
+        "em": "",
+        "et": "",
+        "sm": "",
+        "st": ""
+      },
+      "override": "VAZIO",
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
+    },
+    "colab_branch-3_234_2026-10-30": {
+      "note": "Dia futuro em aberto (desmarcado)",
+      "punches": {
+        "em": "",
+        "et": "",
+        "sm": "",
+        "st": ""
+      },
+      "override": "VAZIO",
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
+    },
+    "colab_branch-3_234_2026-10-31": {
+      "note": "Dia futuro em aberto (desmarcado)",
+      "punches": {
+        "em": "",
+        "et": "",
+        "sm": "",
+        "st": ""
+      },
+      "override": "VAZIO",
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
+    },
+    "colab-336_2026-11-06": {
+      "note": " (Replicado de 01/10/2026)",
+      "punches": {
+        "em": "08:00",
+        "et": "13:00",
+        "sm": "12:00",
+        "st": "17:00"
+      },
+      "override": "AFASTADO",
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaior": "",
+      "atrasoPequeno": "",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
+    },
+    "colab-336_2026-11-07": {
+      "note": " (Replicado de 01/10/2026)",
+      "punches": {
+        "em": "08:00",
+        "et": "13:00",
+        "sm": "12:00",
+        "st": "17:00"
+      },
+      "override": "AFASTADO",
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaior": "",
+      "atrasoPequeno": "",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
+    },
+    "colab-336_2026-11-09": {
+      "note": " (Replicado de 01/10/2026)",
+      "punches": {
+        "em": "08:00",
+        "et": "13:00",
+        "sm": "12:00",
+        "st": "17:00"
+      },
+      "override": "AFASTADO",
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaior": "",
+      "atrasoPequeno": "",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
+    },
+    "colab-336_2026-11-10": {
+      "note": " (Replicado de 01/10/2026)",
+      "punches": {
+        "em": "08:00",
+        "et": "13:00",
+        "sm": "12:00",
+        "st": "17:00"
+      },
+      "override": "AFASTADO",
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaior": "",
+      "atrasoPequeno": "",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
+    },
+    "colab_branch-3_361_2026-10-01": {
+      "note": "Presença regular (Planilha)",
+      "punches": {
+        "em": "08:00",
+        "et": "13:00",
+        "sm": "12:00",
+        "st": "17:00"
+      },
+      "override": "OK",
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
+    },
+    "colab_branch-3_361_2026-10-02": {
+      "note": "Presença regular (Planilha)",
+      "punches": {
+        "em": "08:00",
+        "et": "13:00",
+        "sm": "12:00",
+        "st": "17:00"
+      },
+      "override": "OK",
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
+    },
+    "colab_branch-3_361_2026-10-03": {
+      "note": "Presença regular (Planilha)",
+      "punches": {
+        "em": "08:00",
+        "et": "13:00",
+        "sm": "12:00",
+        "st": "17:00"
+      },
+      "override": "OK",
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
+    },
+    "colab_branch-3_361_2026-10-05": {
+      "note": "Presença regular (Planilha)",
+      "punches": {
+        "em": "08:00",
+        "et": "13:00",
+        "sm": "12:00",
+        "st": "17:00"
+      },
+      "override": "OK",
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
+    },
+    "colab_branch-3_361_2026-10-06": {
+      "note": "Presença regular (Planilha)",
+      "punches": {
+        "em": "08:00",
+        "et": "13:00",
+        "sm": "12:00",
+        "st": "17:00"
+      },
+      "override": "OK",
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
+    },
+    "colab-361_2026-10-12": {
+      "note": " (Replicado de 07/10/2026)",
+      "punches": {
+        "em": "08:00",
+        "et": "13:00",
+        "sm": "12:00",
+        "st": "17:00"
+      },
+      "override": "OK",
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaior": "",
+      "atrasoPequeno": "",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
+    },
+    "colab-1038_2026-10-22": {
+      "note": "OK em massa pelo cabeçalho da data",
+      "punches": {
+        "em": "08:00",
+        "et": "13:00",
+        "sm": "12:00",
+        "st": "17:00"
+      },
+      "override": "OK",
+      "resolution": "NENHUMA"
+    },
+    "colab-1038_2026-10-23": {
+      "note": "",
+      "punches": {
+        "em": "08:00",
+        "et": "13:00",
+        "sm": "12:00",
+        "st": "17:00"
+      },
+      "override": "AUTO",
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaior": "",
+      "atrasoPequeno": "",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
+    },
+    "colab-1038_2026-10-24": {
+      "note": " (Replicado de 23/10/2026)",
+      "punches": {
+        "em": "08:00",
+        "et": "13:00",
+        "sm": "12:00",
+        "st": "17:00"
+      },
+      "override": "AUTO",
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaior": "",
+      "atrasoPequeno": "",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
+    },
+    "colab-1038_2026-10-26": {
+      "note": " (Replicado de 23/10/2026)",
+      "punches": {
+        "em": "08:00",
+        "et": "13:00",
+        "sm": "12:00",
+        "st": "17:00"
+      },
+      "override": "AUTO",
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaior": "",
+      "atrasoPequeno": "",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
+    },
+    "colab-1038_2026-10-27": {
+      "note": " (Replicado de 23/10/2026)",
+      "punches": {
+        "em": "08:00",
+        "et": "13:00",
+        "sm": "12:00",
+        "st": "17:00"
+      },
+      "override": "AUTO",
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaior": "",
+      "atrasoPequeno": "",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
+    },
+    "colab-1038_2026-10-28": {
+      "note": " (Replicado de 23/10/2026)",
+      "punches": {
+        "em": "08:00",
+        "et": "13:00",
+        "sm": "12:00",
+        "st": "17:00"
+      },
+      "override": "AUTO",
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaior": "",
+      "atrasoPequeno": "",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
+    },
+    "colab-1038_2026-10-29": {
+      "note": " (Replicado de 23/10/2026)",
+      "punches": {
+        "em": "08:00",
+        "et": "13:00",
+        "sm": "12:00",
+        "st": "17:00"
+      },
+      "override": "AUTO",
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaior": "",
+      "atrasoPequeno": "",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
+    },
+    "colab-1038_2026-10-30": {
+      "note": " (Replicado de 23/10/2026)",
+      "punches": {
+        "em": "08:00",
+        "et": "13:00",
+        "sm": "12:00",
+        "st": "17:00"
+      },
+      "override": "AUTO",
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaior": "",
+      "atrasoPequeno": "",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
+    },
+    "colab-1038_2026-10-31": {
+      "note": " (Replicado de 23/10/2026)",
+      "punches": {
+        "em": "08:00",
+        "et": "13:00",
+        "sm": "12:00",
+        "st": "17:00"
+      },
+      "override": "AUTO",
+      "override2": "",
+      "resolution": "NENHUMA",
+      "atrasoMaior": "",
+      "atrasoPequeno": "",
+      "atrasoMaiorMin": 0,
+      "atrasoPequenoMin": 0
     }
   },
   "departmentFilter": "todos"

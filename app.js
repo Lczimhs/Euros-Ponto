@@ -2504,21 +2504,32 @@ function getDayStatus(colabId, isoStr, branchId) {
     };
   }
 
-  // Verificar feriado
-  const holiday = isHoliday(isoStr, branchId);
+// Função unificada para buscar o registro de ponto sob qualquer formato de chave (colabId_data ou colab-cracha_data)
+function getPontoRecord(colabId, isoStr) {
+  if (!appState || !appState.registrosPonto) return null;
   const regKey = colabId + '_' + isoStr;
   let reg = appState.registrosPonto[regKey];
-  if (!reg) {
-    if (colabId && colabId.startsWith('colab_')) {
-      const parts = colabId.split('_');
-      const cracha = parts[2];
-      if (cracha) reg = appState.registrosPonto[`colab-${cracha}_${isoStr}`];
-    } else if (colabId && colabId.startsWith('colab-')) {
-      const cracha = colabId.replace('colab-', '');
-      const cObj = appState.colaboradores?.find(c => Number(c.cracha) === Number(cracha));
-      if (cObj) reg = appState.registrosPonto[`${cObj.id}_${isoStr}`];
+  if (reg) return reg;
+
+  if (colabId && colabId.startsWith('colab_')) {
+    const parts = colabId.split('_');
+    const cracha = parts[2];
+    if (cracha && appState.registrosPonto[`colab-${cracha}_${isoStr}`]) {
+      return appState.registrosPonto[`colab-${cracha}_${isoStr}`];
+    }
+  } else if (colabId && colabId.startsWith('colab-')) {
+    const cracha = colabId.replace('colab-', '');
+    const cObj = appState.colaboradores?.find(c => Number(c.cracha) === Number(cracha));
+    if (cObj && appState.registrosPonto[`${cObj.id}_${isoStr}`]) {
+      return appState.registrosPonto[`${cObj.id}_${isoStr}`];
     }
   }
+  return null;
+}
+
+  // Verificar feriado
+  const holiday = isHoliday(isoStr, branchId);
+  let reg = getPontoRecord(colabId, isoStr);
 
   // Se houver override manual
   if (reg && reg.override && reg.override !== 'AUTO') {
@@ -2774,8 +2785,7 @@ function calculateDsrAndOccurrences(colabId, year, month, branchId) {
 
   for (let d = 1; d <= daysInMonth; d++) {
     const isoStr = formatDateISO(year, month, d);
-    const regKey = colabId + '_' + isoStr;
-    const reg = appState.registrosPonto[regKey] || null;
+    const reg = getPontoRecord(colabId, isoStr);
     const resolved = getResolvedDayStatus(colabId, isoStr, branchId);
 
     // Ignora dias desabilitados, demissão e domingos
@@ -3848,7 +3858,7 @@ function openMassOverrideModal(isoDate) {
  * Afastamento, abono etc.). Nesses casos o "OK em massa" NÃO sobrepõe o registro existente.
  */
 function dayHasExistingRecord(colabId, isoDate) {
-  const reg = appState.registrosPonto[colabId + '_' + isoDate];
+  const reg = getPontoRecord(colabId, isoDate);
   if (reg) {
     if (reg.override && !['AUTO', 'OK', 'VAZIO'].includes(reg.override)) return true;
     if (reg.resolution && reg.resolution !== 'NENHUMA') return true;
@@ -3920,8 +3930,7 @@ function openCellDetailModal(colabId, isoDate) {
   document.getElementById('modal-colab-sub').textContent = 'Crachá: ' + colab.cracha + ' • Depto: ' + (dept ? dept.nome : '') + ' • Filial: ' + (branch ? branch.nome : '');
   document.getElementById('modal-date-display').textContent = formatDateBR(isoDate) + ' (' + dayOfWeekName + ')';
 
-  const regKey = colabId + '_' + isoDate;
-  const reg = appState.registrosPonto[regKey] || {
+  const reg = getPontoRecord(colabId, isoDate) || {
     override: 'AUTO',
     resolution: 'NENHUMA',
     punches: { em: '08:00', sm: '12:00', et: '13:00', st: '17:00' },
@@ -4033,7 +4042,7 @@ document.getElementById('btn-save-cell-detail')?.addEventListener('click', () =>
   }
 
   const regKey = colabId + '_' + isoDate;
-  appState.registrosPonto[regKey] = {
+  const regPayload = {
     override,
     override2,
     resolution,
@@ -4044,6 +4053,10 @@ document.getElementById('btn-save-cell-detail')?.addEventListener('click', () =>
     atrasoPequeno: atrasoPequenoRaw,
     atrasoPequenoMin
   };
+  appState.registrosPonto[regKey] = regPayload;
+  if (colab && colab.cracha) {
+    appState.registrosPonto['colab-' + colab.cracha + '_' + isoDate] = regPayload;
+  }
 
   // Replicação para os próximos dias
   const shouldReplicate = document.getElementById('check-replicate-days').checked;
@@ -4066,7 +4079,7 @@ document.getElementById('btn-save-cell-detail')?.addEventListener('click', () =>
       if (colab && colab.status === 'demitido' && colab.dataDemissao && nextIso > colab.dataDemissao) continue;
 
       const nextKey = colabId + '_' + nextIso;
-      appState.registrosPonto[nextKey] = {
+      const nextPayload = {
         override,
         override2,
         resolution,
@@ -4077,6 +4090,10 @@ document.getElementById('btn-save-cell-detail')?.addEventListener('click', () =>
         atrasoPequeno: atrasoPequenoRaw,
         atrasoPequenoMin
       };
+      appState.registrosPonto[nextKey] = nextPayload;
+      if (colab && colab.cracha) {
+        appState.registrosPonto['colab-' + colab.cracha + '_' + nextIso] = nextPayload;
+      }
       added++;
     }
   }
