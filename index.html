@@ -64,6 +64,9 @@
         <button class="btn btn-secondary btn-sm" id="btn-import-backup" title="Carregar arquivo de backup JSON">
           <span>📥</span> Importar Backup
         </button>
+        <button class="btn btn-primary btn-sm" id="btn-restore-master" title="Restaurar a Base Mestra Oficial 100% Salva (100 Colaboradores, todas as batidas e ajustes)">
+          <span>🔄</span> Restaurar Base Oficial
+        </button>
         <input type="file" id="input-import-file" style="display:none;" accept=".json">
         <div id="supabase-sync-badge" class="cloud-badge" title="Conectado e 100% sincronizado com o Supabase Cloud">
           <span class="cloud-dot"></span> <span>Supabase Nuvem</span>
@@ -1264,8 +1267,8 @@
   <!-- Supabase JS Client SDK -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <!-- Base de Dados Originais Recuperados (Carga Instantânea Garantida) -->
-  <script src="backup_data.js?v=20261024_v4"></script>
+  <script src="backup_data.js?v=20261024_v5"></script>
   <!-- Main JavaScript Logic -->
-  <script src="app.js?v=20261024_v4"></script>
+  <script src="app.js?v=20261024_v5"></script>
 </body>
 </html>

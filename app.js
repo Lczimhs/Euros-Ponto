@@ -3,8 +3,9 @@
  * Motor Completo de Ponto, Apuração de VA, DSR e Gestão
  */
 
-// Chave do LocalStorage
+// Chave do LocalStorage e Versão Mestra de Segurança
 const STORAGE_KEY = 'appLucas_ponto_va_v5_data';
+const MASTER_RECOVERY_VERSION = 2026102402;
 
 // ==========================================================================
 // 1. ESTADO GLOBAL DA APLICAÇÃO
@@ -52,6 +53,11 @@ try {
 // 2. DADOS PADRÃO DE DEMONSTRAÇÃO (SEED COM DADOS REAIS DA EMPRESA)
 // ==========================================================================
 function getDefaultSeedData() {
+  const master = (typeof window !== 'undefined') ? (window.GOLD_RECOVERY_DATA || window.BACKUP_DATA) : null;
+  if (master && master.colaboradores && master.colaboradores.length >= 100) {
+    return JSON.parse(JSON.stringify(master));
+  }
+
   const filiais = [
     {
       "id": "branch-1",
@@ -1605,6 +1611,7 @@ const MAX_BACKUP_SNAPSHOTS = 50;
  */
 function getStoragePayload() {
   return {
+    _masterVersion: MASTER_RECOVERY_VERSION,
     filiais: appState.filiais || [],
     departamentos: normalizeDepartamentos(appState.departamentos || []),
     colaboradores: (appState.colaboradores || []).map(normalizeColaborador),
@@ -1648,14 +1655,11 @@ function saveStateToStorage(syncCloud = true, immediateCloud = false, isUserActi
       }
     }
 
-    // Salvamento automático de rascunhos no histórico desativado a pedido do usuário
-    // (snapshots agora são manuais via botão ou restauração)
-
     if (syncCloud && supabaseClient) {
-      // Proteção: Nunca enviar estado zerado para a nuvem se a nuvem tiver dados reais
+      // Proteção Estrita: Nunca enviar base incompleta ou corrompida para proteger a nuvem
       const localPontos = Object.keys(payload.registrosPonto || {}).length;
-      if (localPontos === 0 && appState._cloudHadPontos) {
-        console.warn('Bloqueado envio de estado zerado para proteger a nuvem.');
+      if (localPontos < 4000) {
+        console.warn(`PROTEÇÃO ATIVA: Bloqueado envio de base incompleta (${localPontos} batidas) para proteger a nuvem.`);
         return;
       }
       triggerCloudSync(payload, immediateCloud);
@@ -2053,83 +2057,54 @@ async function syncFromCloudOnStart() {
 
     if (data && data.data) {
       const cloud = data.data;
+      const cloudVersion = Number(cloud._masterVersion) || 0;
+      const localVersion = Number(appState._masterVersion) || 0;
       const cloudTime = new Date(data.updated_at || cloud.updatedAt || 0).getTime();
       const localTime = new Date(appState.updatedAt || 0).getTime();
-
-      console.log('Verificação de Sincronização na Inicialização:');
-      console.log(' - Nuvem:', new Date(cloudTime).toISOString(), cloudTime);
-      console.log(' - Local:', new Date(localTime).toISOString(), localTime);
 
       const cloudPontoCount = Object.keys(cloud.registrosPonto || {}).length;
       const localPontoCount = Object.keys(appState.registrosPonto || {}).length;
 
-      // REGRA DE OURO 1: Se a nuvem tem registros reais de ponto e o local está zerado/insuficiente,
-      // a nuvem SEMPRE vence, independentemente de timestamps!
-      if (cloudPontoCount > 100 && localPontoCount < 100) {
-        console.log(`Nuvem possui ${cloudPontoCount} batidas de ponto e o local está zerado/insuficiente. Restaurando da nuvem...`);
+      console.log('Verificação de Sincronização na Inicialização:');
+      console.log(` - Nuvem: v:${cloudVersion}, batidas:${cloudPontoCount}, time:${new Date(cloudTime).toISOString()}`);
+      console.log(` - Local: v:${localVersion}, batidas:${localPontoCount}, time:${new Date(localTime).toISOString()}`);
+
+      // REGRA DE OURO 1: Se a nuvem tem a versão mestra oficial e o local não, a nuvem vence imediatamente!
+      if (cloudVersion >= MASTER_RECOVERY_VERSION && (localVersion < MASTER_RECOVERY_VERSION || localPontoCount < cloudPontoCount)) {
+        console.log(`Nuvem possui versão mestra consolidada (${cloudPontoCount} batidas). Aplicando localmente...`);
         applyRemoteState(cloud, true);
+        appState._masterVersion = MASTER_RECOVERY_VERSION;
         appState.updatedAt = data.updated_at || cloud.updatedAt || new Date().toISOString();
-        appState._cloudHadPontos = true;
         saveStateToStorage(false, false, false);
-        createAutoBackupSnapshot('Restauração Automática da Nuvem');
         renderCurrentView();
-        showToast(`Dados completos restaurados com sucesso (${cloudPontoCount} batidas de ponto)!`, 'success');
+        showToast(`Base Mestra Oficial sincronizada da nuvem (${cloudPontoCount} batidas)!`, 'success');
         return;
       }
 
-      // REGRA DE OURO 2: Se o local possui registros reais e a nuvem está zerada/insuficiente,
-      // o local NUNCA pode ser sobrescrito! Ele deve imediatamente sincronizar com a nuvem!
-      if (localPontoCount > 100 && cloudPontoCount < 100) {
-        console.warn(`PROTEÇÃO ATIVA: Nuvem incompleta (${cloudPontoCount} batidas). Preservando ${localPontoCount} batidas locais e enviando para a nuvem...`);
+      // REGRA DE OURO 2: Se o local tem a versão mestra oficial e a nuvem está desatualizada, atualiza a nuvem imediatamente!
+      if (localVersion >= MASTER_RECOVERY_VERSION && (cloudVersion < MASTER_RECOVERY_VERSION || cloudPontoCount < 4500)) {
+        console.warn(`Nuvem desatualizada (v:${cloudVersion}, batidas:${cloudPontoCount}). Enviando Base Mestra Oficial para a nuvem...`);
         const payload = getStoragePayload();
+        payload._masterVersion = MASTER_RECOVERY_VERSION;
         triggerCloudSync(payload, true);
         return;
       }
 
-      if (cloudPontoCount > 0) {
-        appState._cloudHadPontos = true;
-      }
-
-      // REGRA DE OURO 3: Se a nuvem possui MAIS batidas do que o armazenamento local
-      // (ex: batidas inseridas em outro computador, navegador ou celular), a nuvem sempre é aplicada!
+      // REGRA DE OURO 3: Se ambas possuem versão mestra, aplica quem tiver mais batidas ou horário mais recente
       if (cloudPontoCount > localPontoCount) {
-        console.log(`Nuvem possui mais batidas (${cloudPontoCount} vs ${localPontoCount} locais). Atualizando para a versão da nuvem...`);
         applyRemoteState(cloud, true);
-        appState.updatedAt = data.updated_at || cloud.updatedAt || new Date().toISOString();
         saveStateToStorage(false, false, false);
         renderCurrentView();
-        showToast(`Base atualizada com a nuvem: ${cloudPontoCount} batidas e ${cloud.colaboradores?.length || 100} colaboradores ativos!`, 'success');
         return;
       }
 
-      // CASO 1: LOCAL MAIS RECENTE QUE A NUVEM
-      // Se os dados locais tiverem sido modificados antes de fechar a aba e ainda não subiram:
-      // Preserva local e sincroniza para a nuvem, garantindo não perder nada
-      if (localTime > cloudTime + 2000) {
-        console.log('ALTERAÇÕES LOCAIS SÃO MAIS RECENTES. Preservando trabalho e sincronizando nuvem...');
-        // Garante que batidas da nuvem que não estejam no local não sejam apagadas
-        Object.keys(cloud.registrosPonto || {}).forEach(k => {
-          if (!appState.registrosPonto[k]) {
-            appState.registrosPonto[k] = cloud.registrosPonto[k];
-          }
-        });
-        const payload = getStoragePayload();
-        triggerCloudSync(payload, true);
-        showToast('Suas alterações locais mais recentes foram mantidas e sincronizadas com a nuvem.', 'info');
-        return;
-      }
-
-      // CASO 2: NUVEM É MAIS NOVA OU IGUAL
       if (cloudTime >= localTime && cloudPontoCount >= localPontoCount) {
         applyRemoteState(cloud, true);
-        appState.updatedAt = data.updated_at || cloud.updatedAt || new Date().toISOString();
         saveStateToStorage(false, false, false);
         renderCurrentView();
-        console.log('Dados atualizados da nuvem Supabase com sucesso.');
         return;
       }
 
-      // CASO 3: Nuvem e local já estão equivalentes
       console.log('Nuvem e local estão sincronizados.');
     }
   } catch (e) {
@@ -2140,26 +2115,28 @@ async function syncFromCloudOnStart() {
 // Carregar dados locais na inicialização
 function loadStateFromStorage() {
   try {
+    const masterSource = (typeof window !== 'undefined') ? (window.GOLD_RECOVERY_DATA || window.BACKUP_DATA) : null;
+    const masterPontosCount = masterSource ? Object.keys(masterSource.registrosPonto || {}).length : 0;
+
     let raw = localStorage.getItem(STORAGE_KEY);
-    
+    let parsed = raw ? JSON.parse(raw) : null;
 
-    if (raw) {
-      let parsed = JSON.parse(raw);
+    const localVersion = parsed ? (Number(parsed._masterVersion) || 0) : 0;
+    const localPontosCount = parsed ? Object.keys(parsed.registrosPonto || {}).length : 0;
+
+    // REGRA DE SEGURANÇA MÁXIMA: Se o localStorage local estiver desatualizado, sem dados, ou com versão inferior:
+    if (masterSource && (localVersion < MASTER_RECOVERY_VERSION || localPontosCount < 4500)) {
+      console.warn(`UPGRADE DE SEGURANÇA: LocalStorage desatualizado (v:${localVersion}, batidas:${localPontosCount}). Aplicando Base Mestra Oficial v:${MASTER_RECOVERY_VERSION} (${masterPontosCount} batidas)...`);
+      parsed = JSON.parse(JSON.stringify(masterSource));
+      parsed._masterVersion = MASTER_RECOVERY_VERSION;
+      parsed.updatedAt = new Date().toISOString();
       parsed = migrateAppState(parsed);
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(parsed));
+    }
 
-      const rawPontosCount = Object.keys(parsed.registrosPonto || {}).length;
-      const goldPontosCount = (typeof window !== 'undefined' && window.GOLD_RECOVERY_DATA)
-        ? Object.keys(window.GOLD_RECOVERY_DATA.registrosPonto || {}).length
-        : 0;
-
-      if (goldPontosCount > 100 && rawPontosCount < 100) {
-        console.log(`Detectado storage local com dados insuficientes (${rawPontosCount} vs ${goldPontosCount} no Gold). Restaurando automaticamente base completa...`);
-        parsed = JSON.parse(JSON.stringify(window.GOLD_RECOVERY_DATA));
-        parsed.activeBranchId = 'branch-1';
-        parsed = migrateAppState(parsed);
-      }
-
+    if (parsed) {
       if (parsed.filiais && parsed.filiais.length > 0 && parsed.colaboradores && parsed.colaboradores.length > 0) {
+        appState._masterVersion = Number(parsed._masterVersion) || MASTER_RECOVERY_VERSION;
         appState.filiais = parsed.filiais;
         appState.departamentos = normalizeDepartamentos(parsed.departamentos);
         appState.colaboradores = (parsed.colaboradores || []).map(normalizeColaborador);
@@ -6227,6 +6204,27 @@ document.getElementById('input-import-file')?.addEventListener('change', (e) => 
     }
   };
   reader.readAsText(file);
+});
+
+// Restaurar Base Mestra Oficial (100% Salva e Consolidada)
+document.getElementById('btn-restore-master')?.addEventListener('click', () => {
+  const master = (typeof window !== 'undefined') ? (window.GOLD_RECOVERY_DATA || window.BACKUP_DATA) : null;
+  if (!master) {
+    showToast('Base mestra não encontrada na memória.', 'warning');
+    return;
+  }
+
+  const restored = JSON.parse(JSON.stringify(master));
+  restored._masterVersion = MASTER_RECOVERY_VERSION;
+  restored.updatedAt = new Date().toISOString();
+
+  applyRemoteState(restored, true);
+  appState._masterVersion = MASTER_RECOVERY_VERSION;
+  appState.updatedAt = restored.updatedAt;
+
+  saveStateToStorage(true, true, true);
+  renderCurrentView();
+  showToast('Base Mestra Oficial 100% restaurada e sincronizada!', 'success');
 });
 
 // ==========================================================================

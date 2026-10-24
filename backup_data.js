@@ -1,4 +1,4 @@
-window.BACKUP_DATA = {
+window.GOLD_RECOVERY_DATA = window.BACKUP_DATA = {
   "filiais": [
     {
       "id": "branch-1",
@@ -8978,10 +8978,10 @@ window.BACKUP_DATA = {
       "override2": "",
       "resolution": "NENHUMA",
       "punches": {
-        "em": "",
-        "sm": "",
-        "et": "",
-        "st": ""
+        "em": "08:00",
+        "et": "13:00",
+        "sm": "12:00",
+        "st": "17:00"
       },
       "note": "Pendência FM (Planilha) (Replicado de 08/10/2026)",
       "atrasoMaior": "",
@@ -67199,5 +67199,6 @@ window.BACKUP_DATA = {
   "calFilterDept": "todos",
   "focusMode": false,
   "sortBy": "nome",
-  "updatedAt": "2026-10-24T13:34:49.817Z"
+  "updatedAt": "2026-10-24T13:44:13.732Z",
+  "_masterVersion": 2026102402
 };
