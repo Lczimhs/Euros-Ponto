@@ -3405,8 +3405,10 @@ function getFilteredAndSortedEmployees(isForPonto = false) {
 
     // 2. Filtro de Situação (Ativos / Demitidos / Todos)
     const stFilter = appState.statusFilter || 'ativos';
+    const monthStart = formatDateISO(appState.currentYear, appState.currentMonth, 1);
     if (stFilter === 'ativos') {
-      list = list.filter(c => c.status !== 'demitido');
+      // Exibe ativos E quem foi demitido durante o próprio mês (para apuração das batidas até a data da demissão)
+      list = list.filter(c => c.status !== 'demitido' || (c.dataDemissao && c.dataDemissao >= monthStart));
     } else if (stFilter === 'demitidos') {
       list = list.filter(c => c.status === 'demitido');
     }
