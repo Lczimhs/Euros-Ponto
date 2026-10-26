@@ -1011,10 +1011,26 @@ html.ponto-scroll-mode body::-webkit-scrollbar {
 }
 
 /* Status: FERIADO */
-.status-feriado {
+.status-feriado,
+.cell-ponto[data-holiday="1"] {
   background: var(--color-feriado-bg);
   color: var(--color-feriado-text);
   border: 1px solid var(--color-feriado-border);
+  cursor: not-allowed !important;
+}
+
+.status-feriado:hover,
+.cell-ponto[data-holiday="1"]:hover {
+  transform: none !important;
+  box-shadow: none !important;
+}
+
+/* Input com Máscara de Tempo (HH:MM) */
+.time-mask-input {
+  letter-spacing: 1.5px;
+  font-weight: 700;
+  text-align: center;
+  font-family: var(--font-mono) !important;
 }
 
 /* Status: DOMINGO & SÁBADO (Descanso obrigatório / folga travada) */

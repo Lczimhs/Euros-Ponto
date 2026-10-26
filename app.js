@@ -1547,17 +1547,16 @@ function migrateAppState(state) {
     return { ...a, colabId };
   });
 
-  // Cura automática e definitiva de registros com batidas ou nota de OK que ficaram com override VAZIO
+  // Tratamento de registros com override VAZIO (garante batidas limpas e preserva status VAZIO)
   Object.keys(newRp).forEach(k => {
     const reg = newRp[k];
     if (reg && reg.override === 'VAZIO') {
-      const hasPunches = reg.punches && (reg.punches.em || reg.punches.sm || reg.punches.et || reg.punches.st);
       const isMassOk = reg.note && reg.note.includes('OK em massa');
       if (isMassOk) {
         reg.override = 'OK';
         hasChanges = true;
-      } else if (hasPunches) {
-        reg.override = 'AUTO';
+      } else if (reg.punches && (reg.punches.em || reg.punches.sm || reg.punches.et || reg.punches.st)) {
+        reg.punches = { em: '', sm: '', et: '', st: '' };
         hasChanges = true;
       }
     }
@@ -1767,25 +1766,40 @@ function saveActiveModalDraft() {
       const override = document.getElementById('select-override-status')?.value || 'AUTO';
       const override2 = document.getElementById('select-override-status-2')?.value || '';
       const resolution = document.getElementById('select-resolution')?.value || 'NENHUMA';
+      const colabDraft = appState.colaboradores.find(c => c.id === colabId);
+      const branchId = colabDraft?.filialId || appState.activeBranchId;
+      const isHol = isHoliday(isoDate, branchId);
+
       const note = (document.getElementById('input-cell-justificativa')?.value || '').trim();
-      const atrasoMaior = (document.getElementById('input-atraso-maior')?.value || '').trim();
-      const atrasoPequeno = (document.getElementById('input-atraso-pequeno')?.value || '').trim();
+      let atrasoMaior = normalizeTimeInput((document.getElementById('input-atraso-maior')?.value || '').trim());
+      let atrasoPequeno = normalizeTimeInput((document.getElementById('input-atraso-pequeno')?.value || '').trim());
+
+      if (override === 'VAZIO') {
+        punches.em = '';
+        punches.sm = '';
+        punches.et = '';
+        punches.st = '';
+        atrasoMaior = '';
+        atrasoPequeno = '';
+      }
 
       draft.data = { punches, override, override2, resolution, note, atrasoMaior, atrasoPequeno };
 
-      // Salva imediatamente no próprio registrosPonto em memória para não perder o que foi digitado!
-      const regKey = colabId + '_' + isoDate;
-      appState.registrosPonto[regKey] = {
-        override,
-        override2,
-        resolution,
-        punches: { ...punches },
-        note,
-        atrasoMaior,
-        atrasoMaiorMin: parseTimeToMinutes(atrasoMaior),
-        atrasoPequeno,
-        atrasoPequenoMin: parseTimeToMinutes(atrasoPequeno)
-      };
+      // Se não for feriado, salva no próprio registrosPonto em memória para não perder o que foi digitado!
+      if (!isHol) {
+        const regKey = colabId + '_' + isoDate;
+        appState.registrosPonto[regKey] = {
+          override,
+          override2,
+          resolution,
+          punches: { ...punches },
+          note,
+          atrasoMaior,
+          atrasoMaiorMin: parseTimeToMinutes(atrasoMaior),
+          atrasoPequeno,
+          atrasoPequenoMin: parseTimeToMinutes(atrasoPequeno)
+        };
+      }
     } else if (modalId === 'modal-employee') {
       draft.data = {
         id: document.getElementById('emp-id')?.value,
@@ -2304,19 +2318,240 @@ function timeToMinutes(timeStr) {
   return h * 60 + m;
 }
 
-// Interpreta entrada flexível de tempo (ex: "01:00", "1:30", "60", "15 min") para minutos inteiros
+// Interpreta entrada flexível de tempo (ex: "01:00", "1:30", "60", "15 min", ":15", "15") para minutos inteiros
 function parseTimeToMinutes(val) {
   if (val === null || val === undefined) return 0;
-  const str = String(val).trim().toLowerCase().replace('min', '').replace('m', '').replace('h', ':').trim();
+  let str = String(val).trim().toLowerCase().replace('min', '').replace('m', '').replace('h', ':').trim();
   if (!str) return 0;
+
+  // Se tiver formato com traços ou dois pontos com hora vazia (ex: "--:15", "__:15", " :15", ":15")
+  if (/^[\s\-_]*:(\d{1,2})$/.test(str)) {
+    const m = str.match(/^[\s\-_]*:(\d{1,2})$/);
+    str = '00:' + m[1];
+  } else if (str.startsWith(':')) {
+    str = '00' + str;
+  }
+
   if (str.includes(':')) {
     const parts = str.split(':');
     const h = parseInt(parts[0], 10) || 0;
     const m = parseInt(parts[1], 10) || 0;
     return Math.max(0, h * 60 + m);
   }
+
   const num = parseInt(str, 10);
   return isNaN(num) ? 0 : Math.max(0, num);
+}
+
+// Normaliza string de horário para formato "HH:MM", tratando minutos avulsos e horas vazias
+function normalizeTimeInput(val) {
+  if (!val) return '';
+  let str = String(val).trim().toLowerCase().replace('min', '').replace('m', '').replace('h', ':').trim();
+  if (!str) return '';
+
+  // Apenas 1 ou 2 dígitos (ex: "15" -> "00:15", "5" -> "00:05", se < 60 trata como minutos)
+  if (/^\d{1,2}$/.test(str)) {
+    const n = parseInt(str, 10);
+    if (n > 0 && n < 60) {
+      return '00:' + String(n).padStart(2, '0');
+    }
+  }
+
+  // Se começa com ":" ou tem traços/espaços antes dos minutos (ex: ":15", "--:15", " :15")
+  if (/^[\s\-_]*:(\d{1,2})$/.test(str)) {
+    const m = str.match(/^[\s\-_]*:(\d{1,2})$/);
+    const mins = parseInt(m[1], 10) || 0;
+    return '00:' + String(mins).padStart(2, '0');
+  }
+  if (str.startsWith(':')) {
+    const mins = parseInt(str.slice(1), 10) || 0;
+    return '00:' + String(mins).padStart(2, '0');
+  }
+
+  // Formato H:MM ou HH:MM
+  if (/^\d{1,2}:\d{1,2}$/.test(str)) {
+    const parts = str.split(':');
+    const h = parseInt(parts[0], 10) || 0;
+    const m = parseInt(parts[1], 10) || 0;
+    return String(h).padStart(2, '0') + ':' + String(m).padStart(2, '0');
+  }
+
+  // Formato 3 ou 4 dígitos sem dois pontos (ex: "130" -> "01:30", "0130" -> "01:30")
+  if (/^\d{3,4}$/.test(str)) {
+    const s = str.padStart(4, '0');
+    const h = parseInt(s.slice(0, 2), 10);
+    const m = parseInt(s.slice(2), 10);
+    if (h < 24 && m < 60) {
+      return String(h).padStart(2, '0') + ':' + String(m).padStart(2, '0');
+    }
+  }
+
+  return str;
+}
+
+// Máscara interativa inteligente para campos de horário de atraso (HH:MM)
+// - Ao focar ou clicar sem seleção prévia, sempre posiciona nas horas primeiro
+// - Digitação contínua preenche horas e depois minutos
+// - Clicar no lado dos minutos permite preencher apenas os minutos
+// - Minutos isolados com horas vazias são salvos perfeitamente como 00:MM
+function setupTimeMask(input) {
+  if (!input || input._timeMaskInitialized) return;
+  input._timeMaskInitialized = true;
+
+  // Ao focar pelo teclado (ex: Tab)
+  input.addEventListener('focus', () => {
+    if (!input.value) {
+      input.value = '00:00';
+    }
+    setTimeout(() => {
+      if (document.activeElement === input) {
+        if (input.selectionStart === input.selectionEnd) {
+          // Sempre começa nas horas por padrão!
+          input.setSelectionRange(0, 2);
+        }
+      }
+    }, 10);
+  });
+
+  // Ao clicar com o mouse
+  input.addEventListener('mouseup', () => {
+    setTimeout(() => {
+      if (!input.value) {
+        input.value = '00:00';
+      }
+      // Se for clique simples (sem arrastar seleção de texto)
+      if (input.selectionStart === input.selectionEnd) {
+        if (input.selectionStart >= 3) {
+          // Clicou especificamente nos minutos
+          input.setSelectionRange(3, 5);
+        } else {
+          // Clicou nas horas ou no campo geral -> seleciona horas primeiro!
+          input.setSelectionRange(0, 2);
+        }
+      }
+    }, 10);
+  });
+
+  input.addEventListener('keydown', (e) => {
+    if (e.ctrlKey || e.metaKey || e.altKey) return;
+    if (['Tab', 'Escape', 'Enter'].includes(e.key)) return;
+
+    if (!input.value || !input.value.includes(':')) {
+      input.value = '00:00';
+      input.setSelectionRange(0, 2);
+    }
+
+    const val = input.value;
+    let [hStr, mStr] = val.split(':');
+    hStr = (hStr || '00').padStart(2, '0');
+    mStr = (mStr || '00').padStart(2, '0');
+
+    // Navegação com setas e dois pontos
+    if (e.key === 'ArrowLeft') {
+      e.preventDefault();
+      input.setSelectionRange(0, 2);
+      return;
+    }
+    if (e.key === 'ArrowRight' || e.key === ':') {
+      e.preventDefault();
+      input.setSelectionRange(3, 5);
+      return;
+    }
+
+    // Tecla Backspace ou Delete
+    if (e.key === 'Backspace' || e.key === 'Delete') {
+      e.preventDefault();
+      const inMinutes = input.selectionStart >= 3;
+      if (inMinutes) {
+        mStr = '00';
+        input.value = hStr + ':' + mStr;
+        input.setSelectionRange(0, 2); // volta para as horas
+      } else {
+        if (hStr !== '00') {
+          hStr = '00';
+          input.value = hStr + ':' + mStr;
+          input.setSelectionRange(0, 2);
+        } else {
+          input.value = '';
+          delete input.dataset.hadInitialValue;
+        }
+      }
+      return;
+    }
+
+    // Se for dígito numérico (0 a 9)
+    if (/^[0-9]$/.test(e.key)) {
+      e.preventDefault();
+      const d = e.key;
+      const start = input.selectionStart;
+      const end = input.selectionEnd;
+      const inMinutes = start >= 3;
+
+      if (!inMinutes) {
+        // Editando Horas (0..2)
+        if ((start === 0 && end === 2) || start === 0) {
+          if (d >= '3') {
+            hStr = '0' + d;
+            input.value = hStr + ':' + mStr;
+            input.setSelectionRange(3, 5); // Avança direto para minutos
+          } else {
+            hStr = d + hStr[1];
+            input.value = hStr + ':' + mStr;
+            input.setSelectionRange(1, 2); // Aguarda segundo dígito
+          }
+        } else if (start === 1) {
+          let newH = parseInt(hStr[0] + d, 10);
+          if (newH > 23) newH = 23;
+          hStr = String(newH).padStart(2, '0');
+          input.value = hStr + ':' + mStr;
+          // Avança automaticamente para os minutos!
+          input.setSelectionRange(3, 5);
+        }
+      } else {
+        // Editando Minutos (3..5)
+        if ((start === 3 && end === 5) || start === 3) {
+          if (d >= '6') {
+            mStr = '0' + d;
+            input.value = hStr + ':' + mStr;
+            input.setSelectionRange(3, 5);
+          } else {
+            mStr = d + mStr[1];
+            input.value = hStr + ':' + mStr;
+            input.setSelectionRange(4, 5);
+          }
+        } else if (start === 4) {
+          let newM = parseInt(mStr[0] + d, 10);
+          if (newM > 59) newM = 59;
+          mStr = String(newM).padStart(2, '0');
+          input.value = hStr + ':' + mStr;
+          input.setSelectionRange(3, 5);
+        }
+      }
+      return;
+    }
+
+    e.preventDefault();
+  });
+
+  input.addEventListener('input', () => {
+    let val = input.value.trim();
+    if (!val) return;
+    const norm = normalizeTimeInput(val);
+    if (norm !== val) {
+      input.value = norm;
+    }
+  });
+
+  input.addEventListener('blur', () => {
+    let val = input.value.trim();
+    if (!val) return;
+    val = normalizeTimeInput(val);
+    if (val === '00:00' && !input.dataset.hadInitialValue) {
+      input.value = '';
+    } else {
+      input.value = val;
+    }
+  });
 }
 
 function minutesToTime(mins) {
@@ -2504,8 +2739,22 @@ function getDayStatus(colabId, isoStr, branchId) {
     };
   }
 
-  // Verificar feriado
+  // 1. Verificar Feriado: Feriados têm prioridade absoluta sobre qualquer modificação manual no dashboard.
+  // Impossível de modificar a menos que seja excluído no cadastro de feriados.
   const holiday = isHoliday(isoStr, branchId);
+  if (holiday) {
+    return {
+      type: 'FERIADO',
+      display: 'FERIADO',
+      cssClass: 'status-feriado',
+      isPending: false,
+      isWorkingDay: false,
+      isSunday: false,
+      isHoliday: true,
+      holidayName: holiday.nome
+    };
+  }
+
   let reg = getPontoRecord(colabId, isoStr);
 
   // Se houver override manual
@@ -2514,21 +2763,17 @@ function getDayStatus(colabId, isoStr, branchId) {
     const resolution = reg.resolution || 'NENHUMA';
 
     if (override === 'VAZIO') {
-      const hasPunches = reg.punches && (reg.punches.em || reg.punches.sm || reg.punches.et || reg.punches.st);
-      const isMassOk = reg.note && reg.note.includes('OK em massa');
-      if (!hasPunches && !isMassOk) {
-        return {
-          type: 'VAZIO',
-          display: '',
-          cssClass: 'status-empty',
-          isPending: false,
-          isWorkingDay: false,
-          isSunday: false,
-          isHoliday: !!holiday,
-          isEmptyDay: true,
-          resolution
-        };
-      }
+      return {
+        type: 'VAZIO',
+        display: '',
+        cssClass: 'status-empty',
+        isPending: false,
+        isWorkingDay: false,
+        isSunday: false,
+        isHoliday: false,
+        isEmptyDay: true,
+        resolution
+      };
     }
 
     if (override === 'OK' || resolution === 'ABONAR') {
@@ -2537,10 +2782,9 @@ function getDayStatus(colabId, isoStr, branchId) {
         display: 'OK',
         cssClass: 'status-ok',
         isPending: false,
-        isWorkingDay: !holiday,
+        isWorkingDay: true,
         isSunday: false,
-        isHoliday: !!holiday,
-        holidayName: holiday ? holiday.nome : undefined,
+        isHoliday: false,
         resolution
       };
     }
@@ -2557,7 +2801,7 @@ function getDayStatus(colabId, isoStr, branchId) {
         isPending: true,
         isWorkingDay: true,
         isSunday: false,
-        isHoliday: !!holiday,
+        isHoliday: false,
         resolution
       };
     }
@@ -2570,24 +2814,10 @@ function getDayStatus(colabId, isoStr, branchId) {
         isPending: false,
         isWorkingDay: false,
         isSunday: false,
-        isHoliday: !!holiday,
+        isHoliday: false,
         resolution
       };
     }
-  }
-
-  // Se for feriado e não houve falta/override
-  if (holiday) {
-    return {
-      type: 'FERIADO',
-      display: 'FERIADO',
-      cssClass: 'status-feriado',
-      isPending: false,
-      isWorkingDay: false,
-      isSunday: false,
-      isHoliday: true,
-      holidayName: holiday.nome
-    };
   }
 
   // Avaliação de Atrasos (Maior e Pequeno) ou por Batidas
@@ -3562,7 +3792,7 @@ function renderMatrixView() {
     }
 
     const dayNumStr = String(d).padStart(2, '0');
-    row1 += '<th class="' + thClass + '" data-date="' + isoStr + '" data-sunday="' + (isSunday ? '1' : '0') + '" title="' + titleHint + '">' + dayNumStr + '</th>';
+    row1 += '<th class="' + thClass + '" data-date="' + isoStr + '" data-sunday="' + (isSunday ? '1' : '0') + '" data-holiday="' + (holiday ? '1' : '0') + '" title="' + titleHint + '">' + dayNumStr + '</th>';
     row2 += '<th class="' + (isSunday ? 'th-sunday' : (holiday ? 'th-feriado' : '')) + '" data-date="' + isoStr + '">' + dayOfWeekName + '</th>';
   }
 
@@ -3577,8 +3807,11 @@ function renderMatrixView() {
       const isoDate = th.dataset.date;
       applyMatrixSelection(selectedMatrixColabId, isoDate);
 
-      if (th.classList.contains('th-date-clickable') && th.dataset.sunday !== '1') {
+      if (th.classList.contains('th-date-clickable') && th.dataset.sunday !== '1' && th.dataset.holiday !== '1') {
         openMassOverrideModal(isoDate);
+      } else if (th.dataset.holiday === '1') {
+        const hObj = isHoliday(isoDate, appState.activeBranchId);
+        showToast('Feriados cadastrados (' + (hObj?.nome || 'Feriado') + ') não permitem aplicação em massa. Para alterar, gerencie o feriado no cadastro de feriados.', 'info');
       }
     });
   });
@@ -3613,7 +3846,7 @@ function renderMatrixView() {
       const isoStr = formatDateISO(year, month, d);
       const resolved = getResolvedDayStatus(colab.id, isoStr, appState.activeBranchId);
 
-      html += '<td data-date="' + isoStr + '" data-colab-id="' + colab.id + '"><div class="cell-ponto ' + resolved.cssClass + '" data-colab-id="' + colab.id + '" data-colab-name="' + colab.nome + '" data-date="' + isoStr + '" data-sunday="' + (resolved.isSunday ? '1' : '0') + '" data-disabled="' + (resolved.isDisabled ? '1' : '0') + '" data-dismissed="' + (resolved.isDismissed ? '1' : '0') + '" title="' + colab.nome + ' - ' + formatDateBR(isoStr) + ': ' + resolved.display + (resolved.holidayName ? ' (' + resolved.holidayName + ')' : '') + '">' + resolved.display + '</div></td>';
+      html += '<td data-date="' + isoStr + '" data-colab-id="' + colab.id + '"><div class="cell-ponto ' + resolved.cssClass + '" data-colab-id="' + colab.id + '" data-colab-name="' + colab.nome + '" data-date="' + isoStr + '" data-sunday="' + (resolved.isSunday ? '1' : '0') + '" data-holiday="' + (resolved.isHoliday ? '1' : '0') + '" data-disabled="' + (resolved.isDisabled ? '1' : '0') + '" data-dismissed="' + (resolved.isDismissed ? '1' : '0') + '" title="' + colab.nome + ' - ' + formatDateBR(isoStr) + ': ' + resolved.display + (resolved.holidayName ? ' (' + resolved.holidayName + ')' : '') + '">' + resolved.display + '</div></td>';
     }
 
     // Coluna Congelada à Direita: Qtd. DSR
@@ -3659,6 +3892,11 @@ function renderMatrixView() {
       }
 
       // 3. Se o usuário clicou na célula que JÁ ESTÁ selecionada, aí sim abre o modal de pendências
+      if (cell.dataset.holiday === '1' || isHoliday(isoDate, appState.activeBranchId)) {
+        const hObj = isHoliday(isoDate, appState.activeBranchId);
+        showToast('Feriados cadastrados (' + (hObj?.nome || 'Feriado') + ') não podem ser modificados pelo dashboard. Para alterar este dia, exclua o feriado no cadastro de feriados.', 'warning');
+        return;
+      }
       if (cell.dataset.sunday === '1') {
         showToast('Dias de descanso obrigatório (DSR / Folga) não permitem alteração manual.', 'info');
         return;
@@ -3831,6 +4069,7 @@ function openMassOverrideModal(isoDate) {
  * Afastamento, abono etc.). Nesses casos o "OK em massa" NÃO sobrepõe o registro existente.
  */
 function dayHasExistingRecord(colabId, isoDate) {
+  if (isHoliday(isoDate, appState.activeBranchId)) return true;
   const reg = getPontoRecord(colabId, isoDate);
   if (reg) {
     if (reg.override && !['AUTO', 'OK', 'VAZIO'].includes(reg.override)) return true;
@@ -3855,6 +4094,7 @@ document.getElementById('btn-confirm-mass-ok')?.addEventListener('click', () => 
 
   filteredEmployees.forEach(colab => {
     if (colab.registraPonto === false) return;
+    if (isHoliday(activeMassDate, colab.filialId || appState.activeBranchId)) return;
     if (colab.status === 'demitido' && colab.dataDemissao && activeMassDate > colab.dataDemissao) return;
     if (colab.admissao && activeMassDate < colab.admissao) return;
 
@@ -3894,6 +4134,13 @@ function openCellDetailModal(colabId, isoDate) {
   const colab = appState.colaboradores.find(c => c.id === colabId);
   if (!colab) return;
 
+  const branchId = colab.filialId || appState.activeBranchId;
+  const holiday = isHoliday(isoDate, branchId);
+  if (holiday) {
+    showToast('Feriado cadastrado (' + holiday.nome + '): Não é permitido alterar manualmente pelo dashboard. Para modificar, exclua o feriado no cadastro de feriados.', 'warning');
+    return;
+  }
+
   const branch = appState.filiais.find(f => f.id === colab.filialId);
   const dept = appState.departamentos.find(d => d.id === colab.deptId);
   const dateObj = new Date(isoDate + 'T12:00:00');
@@ -3910,21 +4157,25 @@ function openCellDetailModal(colabId, isoDate) {
     note: ''
   };
 
-  document.getElementById('punch-em').value = reg.punches?.em || '';
-  document.getElementById('punch-sm').value = reg.punches?.sm || '';
-  document.getElementById('punch-et').value = reg.punches?.et || '';
-  document.getElementById('punch-st').value = reg.punches?.st || '';
-
   let initialOverride = reg.override || 'AUTO';
-  if (initialOverride === 'VAZIO') {
-    initialOverride = 'AUTO';
-  }
   document.getElementById('select-override-status').value = initialOverride;
   const selOverride2 = document.getElementById('select-override-status-2');
   if (selOverride2) selOverride2.value = reg.override2 || '';
   syncPendencia2State();
   document.getElementById('select-resolution').value = reg.resolution || 'NENHUMA';
   document.getElementById('input-cell-justificativa').value = reg.note || '';
+
+  if (initialOverride === 'VAZIO') {
+    document.getElementById('punch-em').value = '';
+    document.getElementById('punch-sm').value = '';
+    document.getElementById('punch-et').value = '';
+    document.getElementById('punch-st').value = '';
+  } else {
+    document.getElementById('punch-em').value = reg.punches?.em || '';
+    document.getElementById('punch-sm').value = reg.punches?.sm || '';
+    document.getElementById('punch-et').value = reg.punches?.et || '';
+    document.getElementById('punch-st').value = reg.punches?.st || '';
+  }
 
   // Carrega campos de atraso maior e pequeno atraso
   const inputAtrasoMaior = document.getElementById('input-atraso-maior');
@@ -3936,7 +4187,7 @@ function openCellDetailModal(colabId, isoDate) {
   } else if (reg.atrasoMaior) {
     const m = parseTimeToMinutes(reg.atrasoMaior);
     if (m > 0) defaultAtrasoMaior = minutesToTime(m);
-  } else if (!reg.atrasoPequeno && reg.punches) {
+  } else if (!reg.atrasoPequeno && reg.punches && initialOverride !== 'VAZIO') {
     const evalResult = evaluateDailyPunches(reg.punches);
     if (evalResult.status === 'ATRASO' && evalResult.delayMinutes > 0) {
       defaultAtrasoMaior = minutesToTime(evalResult.delayMinutes);
@@ -3951,8 +4202,16 @@ function openCellDetailModal(colabId, isoDate) {
     if (m > 0) defaultAtrasoPequeno = minutesToTime(m);
   }
 
-  if (inputAtrasoMaior) inputAtrasoMaior.value = defaultAtrasoMaior;
-  if (inputAtrasoPequeno) inputAtrasoPequeno.value = defaultAtrasoPequeno;
+  if (inputAtrasoMaior) {
+    inputAtrasoMaior.value = defaultAtrasoMaior;
+    if (defaultAtrasoMaior && defaultAtrasoMaior !== '00:00') inputAtrasoMaior.dataset.hadInitialValue = '1';
+    else delete inputAtrasoMaior.dataset.hadInitialValue;
+  }
+  if (inputAtrasoPequeno) {
+    inputAtrasoPequeno.value = defaultAtrasoPequeno;
+    if (defaultAtrasoPequeno && defaultAtrasoPequeno !== '00:00') inputAtrasoPequeno.dataset.hadInitialValue = '1';
+    else delete inputAtrasoPequeno.dataset.hadInitialValue;
+  }
 
   const currentStatus = getDayStatus(colabId, isoDate, appState.activeBranchId);
   document.getElementById('modal-status-badge').textContent = 'Status Apurado: ' + currentStatus.display;
@@ -3968,13 +4227,27 @@ function syncPendencia2State() {
   const p1 = document.getElementById('select-override-status')?.value;
   const sel2 = document.getElementById('select-override-status-2');
   if (!sel2) return;
-  const allowed = !!p1 && !['AUTO', 'OK', 'FÉRIAS', 'AFASTADO'].includes(p1);
+  const allowed = !!p1 && !['AUTO', 'OK', 'FÉRIAS', 'AFASTADO', 'VAZIO'].includes(p1);
   sel2.disabled = !allowed;
   if (!allowed) sel2.value = '';
   if (allowed && sel2.value === p1) sel2.value = '';
 }
 
-document.getElementById('select-override-status')?.addEventListener('change', syncPendencia2State);
+document.getElementById('select-override-status')?.addEventListener('change', (e) => {
+  if (e.target.value === 'VAZIO') {
+    // Ao selecionar VAZIO, limpa imediatamente os horários de batida e atrasos na interface
+    document.getElementById('punch-em').value = '';
+    document.getElementById('punch-sm').value = '';
+    document.getElementById('punch-et').value = '';
+    document.getElementById('punch-st').value = '';
+    const inMaior = document.getElementById('input-atraso-maior');
+    const inPequeno = document.getElementById('input-atraso-pequeno');
+    if (inMaior) { inMaior.value = ''; delete inMaior.dataset.hadInitialValue; }
+    if (inPequeno) { inPequeno.value = ''; delete inPequeno.dataset.hadInitialValue; }
+  }
+  syncPendencia2State();
+});
+
 document.getElementById('select-override-status-2')?.addEventListener('change', (e) => {
   const p1 = document.getElementById('select-override-status')?.value;
   if (e.target.value && e.target.value === p1) {
@@ -3988,30 +4261,40 @@ document.getElementById('btn-save-cell-detail')?.addEventListener('click', () =>
   if (!colabId || !isoDate) return;
 
   const colab = appState.colaboradores.find(c => c.id === colabId);
+  const branchId = colab?.filialId || appState.activeBranchId;
+
+  // Proteção: feriados cadastrados não podem ser modificados pelo dashboard
+  if (isHoliday(isoDate, branchId)) {
+    showToast('Não é permitido alterar manualmente registros em dias de feriado cadastrado. Exclua o feriado no cadastro caso deseje alterá-lo.', 'error');
+    return;
+  }
 
   let override = document.getElementById('select-override-status').value;
   let override2 = document.getElementById('select-override-status-2')?.value || '';
-  if (['AUTO', 'OK', 'FÉRIAS', 'AFASTADO'].includes(override) || override2 === override) override2 = '';
+  if (['AUTO', 'OK', 'FÉRIAS', 'AFASTADO', 'VAZIO'].includes(override) || override2 === override) override2 = '';
   const resolution = document.getElementById('select-resolution').value;
   const note = document.getElementById('input-cell-justificativa').value.trim();
 
-  const atrasoMaiorRaw = (document.getElementById('input-atraso-maior')?.value || '').trim();
-  const atrasoPequenoRaw = (document.getElementById('input-atraso-pequeno')?.value || '').trim();
+  let atrasoMaiorRaw = normalizeTimeInput((document.getElementById('input-atraso-maior')?.value || '').trim());
+  let atrasoPequenoRaw = normalizeTimeInput((document.getElementById('input-atraso-pequeno')?.value || '').trim());
 
-  const atrasoMaiorMin = parseTimeToMinutes(atrasoMaiorRaw);
-  const atrasoPequenoMin = parseTimeToMinutes(atrasoPequenoRaw);
+  let atrasoMaiorMin = parseTimeToMinutes(atrasoMaiorRaw);
+  let atrasoPequenoMin = parseTimeToMinutes(atrasoPequenoRaw);
 
-  const punches = {
+  let punches = {
     em: document.getElementById('punch-em').value,
     sm: document.getElementById('punch-sm').value,
     et: document.getElementById('punch-et').value,
     st: document.getElementById('punch-st').value
   };
 
-  // Se o usuário preencheu batidas e o override ainda estiver VAZIO, ajusta automaticamente para AUTO
-  const hasPunches = punches.em || punches.sm || punches.et || punches.st;
-  if (override === 'VAZIO' && hasPunches) {
-    override = 'AUTO';
+  // Se o usuário selecionou VAZIO, aplica diretamente e limpa batidas e atrasos
+  if (override === 'VAZIO') {
+    punches = { em: '', sm: '', et: '', st: '' };
+    atrasoMaiorRaw = '';
+    atrasoPequenoRaw = '';
+    atrasoMaiorMin = 0;
+    atrasoPequenoMin = 0;
   }
 
   const regKey = colabId + '_' + isoDate;
@@ -4047,6 +4330,9 @@ document.getElementById('btn-save-cell-detail')?.addEventListener('click', () =>
       if (nextDate.getDay() === 0) continue;
 
       const nextIso = nextDate.toISOString().split('T')[0];
+
+      // Pula feriados cadastrados (Nacional ou da filial do colaborador)
+      if (isHoliday(nextIso, branchId)) continue;
 
       // Pula dias após demissão
       if (colab && colab.status === 'demitido' && colab.dataDemissao && nextIso > colab.dataDemissao) continue;
@@ -6463,14 +6749,26 @@ function initEvents() {
     showToast('Filtros redefinidos: exibindo todos em ordem alfabética.', 'info');
   });
 
+  // Inicialização das Máscaras de Tempo Inteligentes para Atrasos
+  const inAtrasoMaior = document.getElementById('input-atraso-maior');
+  const inAtrasoPequeno = document.getElementById('input-atraso-pequeno');
+  if (inAtrasoMaior) setupTimeMask(inAtrasoMaior);
+  if (inAtrasoPequeno) setupTimeMask(inAtrasoPequeno);
+
   // Botões de Limpar Horário dos Atrasos no Modal do Dia
   document.getElementById('btn-clear-atraso-maior')?.addEventListener('click', () => {
     const el = document.getElementById('input-atraso-maior');
-    if (el) el.value = '';
+    if (el) {
+      el.value = '';
+      delete el.dataset.hadInitialValue;
+    }
   });
   document.getElementById('btn-clear-atraso-pequeno')?.addEventListener('click', () => {
     const el = document.getElementById('input-atraso-pequeno');
-    if (el) el.value = '';
+    if (el) {
+      el.value = '';
+      delete el.dataset.hadInitialValue;
+    }
   });
 
   // Atalhos Rápidos
@@ -6583,6 +6881,11 @@ document.addEventListener('keydown', (e) => {
     if (selectedMatrixColabId && selectedMatrixDate) {
       const cell = document.querySelector('.cell-ponto[data-colab-id="' + selectedMatrixColabId + '"][data-date="' + selectedMatrixDate + '"]');
       if (cell) {
+        if (cell.dataset.holiday === '1' || isHoliday(selectedMatrixDate, appState.activeBranchId)) {
+          const hObj = isHoliday(selectedMatrixDate, appState.activeBranchId);
+          showToast('Feriados cadastrados (' + (hObj?.nome || 'Feriado') + ') não podem ser modificados pelo dashboard. Para alterar este dia, exclua o feriado no cadastro de feriados.', 'warning');
+          return;
+        }
         if (cell.dataset.sunday === '1') {
           showToast('Dias de descanso obrigatório (DSR / Folga) não permitem alteração manual.', 'info');
           return;

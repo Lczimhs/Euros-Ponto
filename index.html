@@ -667,7 +667,7 @@
                 <span>⚠️</span> Atraso Maior (Análise / Pendência no Dashboard)
               </label>
               <div style="display:flex; gap:6px; align-items:center;">
-                <input type="time" class="form-control" id="input-atraso-maior" style="font-family: var(--font-mono); flex:1;">
+                <input type="text" inputmode="numeric" class="form-control time-mask-input" id="input-atraso-maior" placeholder="00:00" maxlength="5" style="font-family: var(--font-mono); flex:1;" autocomplete="off">
                 <button type="button" class="btn btn-secondary btn-sm" id="btn-clear-atraso-maior" title="Limpar horário do atraso maior" style="padding:5px 9px; font-size:11px;">✕</button>
               </div>
               <span style="font-size: 10px; color: var(--color-text-sub); display: block; margin-top: 3px;">
@@ -680,7 +680,7 @@
                 <span>⏱️</span> Pequeno Atraso (Sem Pendência no Dashboard)
               </label>
               <div style="display:flex; gap:6px; align-items:center;">
-                <input type="time" class="form-control" id="input-atraso-pequeno" style="font-family: var(--font-mono); flex:1;">
+                <input type="text" inputmode="numeric" class="form-control time-mask-input" id="input-atraso-pequeno" placeholder="00:00" maxlength="5" style="font-family: var(--font-mono); flex:1;" autocomplete="off">
                 <button type="button" class="btn btn-secondary btn-sm" id="btn-clear-atraso-pequeno" title="Limpar horário do pequeno atraso" style="padding:5px 9px; font-size:11px;">✕</button>
               </div>
               <span style="font-size: 10px; color: var(--color-text-sub); display: block; margin-top: 3px;">
