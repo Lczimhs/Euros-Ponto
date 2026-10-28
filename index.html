@@ -666,6 +666,29 @@
             </button>
           </div>
 
+          <!-- Seletor e Ação para Relógio Específico Individual -->
+          <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px; padding:10px 14px; background:rgba(37,99,235,0.06); border-radius:var(--radius-sm); border:1px solid rgba(37,99,235,0.25); margin-top:8px;">
+            <div style="display:flex; align-items:center; gap:8px; flex-wrap:wrap;">
+              <span style="font-size:12px; font-weight:700; color:var(--color-primary); display:flex; align-items:center; gap:5px;">
+                <span>🎯</span> Importar / Processar Relógio Específico:
+              </span>
+              <select id="select-imp-relogio-especifico" class="form-control" style="max-width:320px; font-size:12px; padding:4px 8px; font-weight:600;">
+                <option value="1">Relógio 1: Produção / Depósito I (Ji-Paraná)</option>
+                <option value="2">Relógio 2: ADM Ji-Paraná</option>
+                <option value="3">Relógio 3: Ind. Naviraí MS</option>
+                <option value="4">Relógio 4: Caiari</option>
+              </select>
+            </div>
+            <div style="display:flex; gap:8px;">
+              <button class="btn btn-secondary btn-sm" id="btn-imp-coletar-especifico" style="font-weight:600;">
+                <span>📥</span> Apenas Coletar
+              </button>
+              <button class="btn btn-primary btn-sm" id="btn-imp-processar-especifico" style="background:var(--color-primary); border-color:var(--color-primary); font-weight:700;">
+                <span>⚡</span> Coletar & Processar Este Relógio
+              </button>
+            </div>
+          </div>
+
           <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px; padding:10px 14px; background:rgba(30,27,46,0.6); border-radius:var(--radius-sm); border:1px solid var(--color-border);">
             <label class="custom-checkbox-container" style="margin:0; cursor:pointer;">
               <input type="checkbox" id="app-chkProcessarAposColeta" checked>
@@ -1647,6 +1670,6 @@
   <!-- Base de Dados Originais Recuperados (Carga Instantânea Garantida) -->
   <script src="backup_data.js?v=20261024_v5"></script>
   <!-- Main JavaScript Logic -->
-  <script src="app.js?v=20261024_v5"></script>
+  <script src="app.js?v=20261028_relogios_escalas_v1"></script>
 </body>
 </html>

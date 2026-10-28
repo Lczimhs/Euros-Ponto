@@ -57,7 +57,72 @@ window.GOLD_RECOVERY_DATA = window.BACKUP_DATA = {
       "naoRecebeVa": false,
       "dataDemissao": "",
       "registraPonto": true,
-      "trabalhaSabado": true
+      "trabalhaSabado": true,
+      "cpf": "08094115203",
+      "pis": "21485795143",
+      "cargo": "ASSISTENTE DE ADMINISTRAÇÃO APRENDIZ",
+      "idregistro": 5960,
+      "idowner": 7452,
+      "horariosSemana": {
+        "1": {
+          "diasemana": 1,
+          "e1": "",
+          "s1": "",
+          "e2": "",
+          "s2": "",
+          "descanso": true
+        },
+        "2": {
+          "diasemana": 2,
+          "e1": "14:00",
+          "s1": "18:00",
+          "e2": "",
+          "s2": "",
+          "descanso": false
+        },
+        "3": {
+          "diasemana": 3,
+          "e1": "14:00",
+          "s1": "18:00",
+          "e2": "",
+          "s2": "",
+          "descanso": false
+        },
+        "4": {
+          "diasemana": 4,
+          "e1": "14:00",
+          "s1": "18:00",
+          "e2": "",
+          "s2": "",
+          "descanso": false
+        },
+        "5": {
+          "diasemana": 5,
+          "e1": "14:00",
+          "s1": "18:00",
+          "e2": "",
+          "s2": "",
+          "descanso": false
+        },
+        "6": {
+          "diasemana": 6,
+          "e1": "14:00",
+          "s1": "18:00",
+          "e2": "",
+          "s2": "",
+          "descanso": false
+        },
+        "7": {
+          "diasemana": 7,
+          "e1": "08:00",
+          "s1": "12:00",
+          "e2": "",
+          "s2": "",
+          "descanso": false
+        }
+      },
+      "quadroNG": "14:00 18:00 / JOVEM APRENDIZ A TARDE",
+      "relogioVinculo": "relogio1_producao"
     },
     {
       "id": "colab_branch-1_1031",
@@ -71,8 +136,73 @@ window.GOLD_RECOVERY_DATA = window.BACKUP_DATA = {
       "recebeVa": true,
       "naoRecebeVa": false,
       "dataDemissao": "",
-      "registraPonto": true,
-      "trabalhaSabado": true
+      "registraPonto": false,
+      "trabalhaSabado": true,
+      "cpf": "81739095200",
+      "pis": "16245970025",
+      "cargo": "ZELADORA",
+      "idregistro": 5966,
+      "idowner": 7452,
+      "horariosSemana": {
+        "1": {
+          "diasemana": 1,
+          "e1": "",
+          "s1": "",
+          "e2": "",
+          "s2": "",
+          "descanso": true
+        },
+        "2": {
+          "diasemana": 2,
+          "e1": "07:00",
+          "s1": "11:00",
+          "e2": "13:00",
+          "s2": "17:00",
+          "descanso": false
+        },
+        "3": {
+          "diasemana": 3,
+          "e1": "07:00",
+          "s1": "11:00",
+          "e2": "13:00",
+          "s2": "17:00",
+          "descanso": false
+        },
+        "4": {
+          "diasemana": 4,
+          "e1": "07:00",
+          "s1": "11:00",
+          "e2": "13:00",
+          "s2": "17:00",
+          "descanso": false
+        },
+        "5": {
+          "diasemana": 5,
+          "e1": "07:00",
+          "s1": "11:00",
+          "e2": "13:00",
+          "s2": "17:00",
+          "descanso": false
+        },
+        "6": {
+          "diasemana": 6,
+          "e1": "07:00",
+          "s1": "11:00",
+          "e2": "13:00",
+          "s2": "17:00",
+          "descanso": false
+        },
+        "7": {
+          "diasemana": 7,
+          "e1": "07:00",
+          "s1": "11:00",
+          "e2": "",
+          "s2": "",
+          "descanso": false
+        }
+      },
+      "quadroNG": "07:00 11:00 / 13:00 17:00",
+      "relogioVinculo": "folha_manual"
     },
     {
       "id": "colab_branch-1_1",
@@ -87,7 +217,72 @@ window.GOLD_RECOVERY_DATA = window.BACKUP_DATA = {
       "naoRecebeVa": false,
       "dataDemissao": "",
       "registraPonto": false,
-      "trabalhaSabado": true
+      "trabalhaSabado": true,
+      "cpf": "05715185912",
+      "pis": "13212698534",
+      "cargo": "AUXILIAR ADMINISTRATIVO",
+      "idregistro": 1361,
+      "idowner": 7452,
+      "horariosSemana": {
+        "1": {
+          "diasemana": 1,
+          "e1": "",
+          "s1": "",
+          "e2": "",
+          "s2": "",
+          "descanso": true
+        },
+        "2": {
+          "diasemana": 2,
+          "e1": "08:15",
+          "s1": "13:00",
+          "e2": "15:00",
+          "s2": "18:15",
+          "descanso": false
+        },
+        "3": {
+          "diasemana": 3,
+          "e1": "08:15",
+          "s1": "13:00",
+          "e2": "15:00",
+          "s2": "18:15",
+          "descanso": false
+        },
+        "4": {
+          "diasemana": 4,
+          "e1": "08:15",
+          "s1": "13:00",
+          "e2": "15:00",
+          "s2": "18:15",
+          "descanso": false
+        },
+        "5": {
+          "diasemana": 5,
+          "e1": "08:15",
+          "s1": "13:00",
+          "e2": "15:00",
+          "s2": "18:15",
+          "descanso": false
+        },
+        "6": {
+          "diasemana": 6,
+          "e1": "08:15",
+          "s1": "13:00",
+          "e2": "15:00",
+          "s2": "18:15",
+          "descanso": false
+        },
+        "7": {
+          "diasemana": 7,
+          "e1": "08:00",
+          "s1": "12:00",
+          "e2": "",
+          "s2": "",
+          "descanso": false
+        }
+      },
+      "quadroNG": "08:15  13:00 / 15:00  18:15",
+      "relogioVinculo": "relogio4_caiari"
     },
     {
       "id": "colab_branch-1_218",
@@ -102,7 +297,72 @@ window.GOLD_RECOVERY_DATA = window.BACKUP_DATA = {
       "naoRecebeVa": false,
       "dataDemissao": "",
       "registraPonto": true,
-      "trabalhaSabado": true
+      "trabalhaSabado": true,
+      "cpf": "83176985215",
+      "pis": "16419557578",
+      "cargo": "AUXILIAR DE PRODUÇÃO",
+      "idregistro": 1764,
+      "idowner": 7452,
+      "horariosSemana": {
+        "1": {
+          "diasemana": 1,
+          "e1": "",
+          "s1": "",
+          "e2": "",
+          "s2": "",
+          "descanso": true
+        },
+        "2": {
+          "diasemana": 2,
+          "e1": "08:00",
+          "s1": "12:00",
+          "e2": "14:00",
+          "s2": "18:00",
+          "descanso": false
+        },
+        "3": {
+          "diasemana": 3,
+          "e1": "08:00",
+          "s1": "12:00",
+          "e2": "14:00",
+          "s2": "18:00",
+          "descanso": false
+        },
+        "4": {
+          "diasemana": 4,
+          "e1": "08:00",
+          "s1": "12:00",
+          "e2": "14:00",
+          "s2": "18:00",
+          "descanso": false
+        },
+        "5": {
+          "diasemana": 5,
+          "e1": "08:00",
+          "s1": "12:00",
+          "e2": "14:00",
+          "s2": "18:00",
+          "descanso": false
+        },
+        "6": {
+          "diasemana": 6,
+          "e1": "08:00",
+          "s1": "12:00",
+          "e2": "14:00",
+          "s2": "18:00",
+          "descanso": false
+        },
+        "7": {
+          "diasemana": 7,
+          "e1": "08:00",
+          "s1": "12:00",
+          "e2": "",
+          "s2": "",
+          "descanso": false
+        }
+      },
+      "quadroNG": "08:00 12:00 / 14:00 18:00",
+      "relogioVinculo": "relogio1_producao"
     },
     {
       "id": "colab_branch-1_234",
@@ -117,7 +377,72 @@ window.GOLD_RECOVERY_DATA = window.BACKUP_DATA = {
       "naoRecebeVa": false,
       "dataDemissao": "",
       "registraPonto": true,
-      "trabalhaSabado": true
+      "trabalhaSabado": true,
+      "cpf": "68376510215",
+      "pis": "12597087656",
+      "cargo": "OPERADOR DE EMPILHADEIRA II",
+      "idregistro": 1792,
+      "idowner": 7452,
+      "horariosSemana": {
+        "1": {
+          "diasemana": 1,
+          "e1": "",
+          "s1": "",
+          "e2": "",
+          "s2": "",
+          "descanso": true
+        },
+        "2": {
+          "diasemana": 2,
+          "e1": "08:00",
+          "s1": "12:00",
+          "e2": "14:00",
+          "s2": "18:00",
+          "descanso": false
+        },
+        "3": {
+          "diasemana": 3,
+          "e1": "08:00",
+          "s1": "12:00",
+          "e2": "14:00",
+          "s2": "18:00",
+          "descanso": false
+        },
+        "4": {
+          "diasemana": 4,
+          "e1": "08:00",
+          "s1": "12:00",
+          "e2": "14:00",
+          "s2": "18:00",
+          "descanso": false
+        },
+        "5": {
+          "diasemana": 5,
+          "e1": "08:00",
+          "s1": "12:00",
+          "e2": "14:00",
+          "s2": "18:00",
+          "descanso": false
+        },
+        "6": {
+          "diasemana": 6,
+          "e1": "08:00",
+          "s1": "12:00",
+          "e2": "14:00",
+          "s2": "18:00",
+          "descanso": false
+        },
+        "7": {
+          "diasemana": 7,
+          "e1": "08:00",
+          "s1": "12:00",
+          "e2": "",
+          "s2": "",
+          "descanso": false
+        }
+      },
+      "quadroNG": "08:00 12:00 / 14:00 18:00",
+      "relogioVinculo": "relogio4_caiari"
     },
     {
       "id": "colab_branch-1_325",
@@ -131,8 +456,73 @@ window.GOLD_RECOVERY_DATA = window.BACKUP_DATA = {
       "recebeVa": true,
       "naoRecebeVa": false,
       "dataDemissao": "",
-      "registraPonto": true,
-      "trabalhaSabado": true
+      "registraPonto": false,
+      "trabalhaSabado": true,
+      "cpf": "46419926653",
+      "pis": "10875623198",
+      "cargo": "PORTEIRO",
+      "idregistro": 1942,
+      "idowner": 7452,
+      "horariosSemana": {
+        "1": {
+          "diasemana": 1,
+          "e1": "06:00",
+          "s1": "11:00",
+          "e2": "12:00",
+          "s2": "18:00",
+          "descanso": true
+        },
+        "2": {
+          "diasemana": 2,
+          "e1": "06:00",
+          "s1": "11:00",
+          "e2": "12:00",
+          "s2": "18:00",
+          "descanso": false
+        },
+        "3": {
+          "diasemana": 3,
+          "e1": "06:00",
+          "s1": "11:00",
+          "e2": "12:00",
+          "s2": "18:00",
+          "descanso": false
+        },
+        "4": {
+          "diasemana": 4,
+          "e1": "06:00",
+          "s1": "11:00",
+          "e2": "12:00",
+          "s2": "18:00",
+          "descanso": false
+        },
+        "5": {
+          "diasemana": 5,
+          "e1": "06:00",
+          "s1": "11:00",
+          "e2": "12:00",
+          "s2": "18:00",
+          "descanso": false
+        },
+        "6": {
+          "diasemana": 6,
+          "e1": "06:00",
+          "s1": "11:00",
+          "e2": "12:00",
+          "s2": "18:00",
+          "descanso": false
+        },
+        "7": {
+          "diasemana": 7,
+          "e1": "",
+          "s1": "",
+          "e2": "",
+          "s2": "",
+          "descanso": false
+        }
+      },
+      "quadroNG": "06:00 às 18:00",
+      "relogioVinculo": "folha_manual"
     },
     {
       "id": "colab_branch-1_336",
@@ -146,8 +536,73 @@ window.GOLD_RECOVERY_DATA = window.BACKUP_DATA = {
       "recebeVa": true,
       "naoRecebeVa": false,
       "dataDemissao": "",
-      "registraPonto": true,
-      "trabalhaSabado": true
+      "registraPonto": false,
+      "trabalhaSabado": true,
+      "cpf": "61531138268",
+      "pis": "12647551407",
+      "cargo": "VENDEDOR ATACADISTA",
+      "idregistro": 1959,
+      "idowner": 7452,
+      "horariosSemana": {
+        "1": {
+          "diasemana": 1,
+          "e1": "",
+          "s1": "",
+          "e2": "",
+          "s2": "",
+          "descanso": true
+        },
+        "2": {
+          "diasemana": 2,
+          "e1": "08:00",
+          "s1": "12:00",
+          "e2": "14:00",
+          "s2": "18:00",
+          "descanso": false
+        },
+        "3": {
+          "diasemana": 3,
+          "e1": "08:00",
+          "s1": "12:00",
+          "e2": "14:00",
+          "s2": "18:00",
+          "descanso": false
+        },
+        "4": {
+          "diasemana": 4,
+          "e1": "08:00",
+          "s1": "12:00",
+          "e2": "14:00",
+          "s2": "18:00",
+          "descanso": false
+        },
+        "5": {
+          "diasemana": 5,
+          "e1": "08:00",
+          "s1": "12:00",
+          "e2": "14:00",
+          "s2": "18:00",
+          "descanso": false
+        },
+        "6": {
+          "diasemana": 6,
+          "e1": "08:00",
+          "s1": "12:00",
+          "e2": "14:00",
+          "s2": "18:00",
+          "descanso": false
+        },
+        "7": {
+          "diasemana": 7,
+          "e1": "08:00",
+          "s1": "12:00",
+          "e2": "",
+          "s2": "",
+          "descanso": false
+        }
+      },
+      "quadroNG": "08:00 12:00 / 14:00 18:00",
+      "relogioVinculo": "folha_manual"
     },
     {
       "id": "colab_branch-1_361",
@@ -162,7 +617,72 @@ window.GOLD_RECOVERY_DATA = window.BACKUP_DATA = {
       "naoRecebeVa": false,
       "dataDemissao": "",
       "registraPonto": true,
-      "trabalhaSabado": true
+      "trabalhaSabado": true,
+      "cpf": "94346542204",
+      "pis": "20749145670",
+      "cargo": "AUXILIAR FINANCEIRO III",
+      "idregistro": 1989,
+      "idowner": 7452,
+      "horariosSemana": {
+        "1": {
+          "diasemana": 1,
+          "e1": "",
+          "s1": "",
+          "e2": "",
+          "s2": "",
+          "descanso": true
+        },
+        "2": {
+          "diasemana": 2,
+          "e1": "08:00",
+          "s1": "12:00",
+          "e2": "14:00",
+          "s2": "18:00",
+          "descanso": false
+        },
+        "3": {
+          "diasemana": 3,
+          "e1": "08:00",
+          "s1": "12:00",
+          "e2": "14:00",
+          "s2": "18:00",
+          "descanso": false
+        },
+        "4": {
+          "diasemana": 4,
+          "e1": "08:00",
+          "s1": "12:00",
+          "e2": "14:00",
+          "s2": "18:00",
+          "descanso": false
+        },
+        "5": {
+          "diasemana": 5,
+          "e1": "08:00",
+          "s1": "12:00",
+          "e2": "14:00",
+          "s2": "18:00",
+          "descanso": false
+        },
+        "6": {
+          "diasemana": 6,
+          "e1": "08:00",
+          "s1": "12:00",
+          "e2": "14:00",
+          "s2": "18:00",
+          "descanso": false
+        },
+        "7": {
+          "diasemana": 7,
+          "e1": "08:00",
+          "s1": "12:00",
+          "e2": "",
+          "s2": "",
+          "descanso": false
+        }
+      },
+      "quadroNG": "08:00 12:00 / 14:00 18:00",
+      "relogioVinculo": "relogio4_caiari"
     },
     {
       "id": "colab_branch-1_431",
@@ -176,8 +696,73 @@ window.GOLD_RECOVERY_DATA = window.BACKUP_DATA = {
       "recebeVa": true,
       "naoRecebeVa": false,
       "dataDemissao": "",
-      "registraPonto": true,
-      "trabalhaSabado": true
+      "registraPonto": false,
+      "trabalhaSabado": true,
+      "cpf": "98230549249",
+      "pis": "16540625899",
+      "cargo": "VIGIA",
+      "idregistro": 3098,
+      "idowner": 7452,
+      "horariosSemana": {
+        "1": {
+          "diasemana": 1,
+          "e1": "18:00",
+          "s1": "23:30",
+          "e2": "00:30",
+          "s2": "06:00",
+          "descanso": true
+        },
+        "2": {
+          "diasemana": 2,
+          "e1": "18:00",
+          "s1": "23:30",
+          "e2": "00:30",
+          "s2": "06:00",
+          "descanso": false
+        },
+        "3": {
+          "diasemana": 3,
+          "e1": "18:00",
+          "s1": "23:30",
+          "e2": "00:30",
+          "s2": "06:00",
+          "descanso": false
+        },
+        "4": {
+          "diasemana": 4,
+          "e1": "18:00",
+          "s1": "23:30",
+          "e2": "00:30",
+          "s2": "06:00",
+          "descanso": false
+        },
+        "5": {
+          "diasemana": 5,
+          "e1": "18:00",
+          "s1": "23:30",
+          "e2": "00:30",
+          "s2": "06:00",
+          "descanso": false
+        },
+        "6": {
+          "diasemana": 6,
+          "e1": "18:00",
+          "s1": "23:30",
+          "e2": "00:30",
+          "s2": "06:00",
+          "descanso": false
+        },
+        "7": {
+          "diasemana": 7,
+          "e1": "18:00",
+          "s1": "23:30",
+          "e2": "00:30",
+          "s2": "06:00",
+          "descanso": false
+        }
+      },
+      "quadroNG": "Escala 12x36 18:00 as 06:00 / Noturno",
+      "relogioVinculo": "folha_manual"
     },
     {
       "id": "colab_branch-1_491",
@@ -192,7 +777,72 @@ window.GOLD_RECOVERY_DATA = window.BACKUP_DATA = {
       "naoRecebeVa": false,
       "dataDemissao": "",
       "registraPonto": true,
-      "trabalhaSabado": true
+      "trabalhaSabado": true,
+      "cpf": "89599861272",
+      "pis": "16234863028",
+      "cargo": "CONFERENTE DE CARGA E DESCARGA II",
+      "idregistro": 3188,
+      "idowner": 7452,
+      "horariosSemana": {
+        "1": {
+          "diasemana": 1,
+          "e1": "",
+          "s1": "",
+          "e2": "",
+          "s2": "",
+          "descanso": true
+        },
+        "2": {
+          "diasemana": 2,
+          "e1": "08:00",
+          "s1": "12:00",
+          "e2": "14:00",
+          "s2": "18:00",
+          "descanso": false
+        },
+        "3": {
+          "diasemana": 3,
+          "e1": "08:00",
+          "s1": "12:00",
+          "e2": "14:00",
+          "s2": "18:00",
+          "descanso": false
+        },
+        "4": {
+          "diasemana": 4,
+          "e1": "08:00",
+          "s1": "12:00",
+          "e2": "14:00",
+          "s2": "18:00",
+          "descanso": false
+        },
+        "5": {
+          "diasemana": 5,
+          "e1": "08:00",
+          "s1": "12:00",
+          "e2": "14:00",
+          "s2": "18:00",
+          "descanso": false
+        },
+        "6": {
+          "diasemana": 6,
+          "e1": "08:00",
+          "s1": "12:00",
+          "e2": "14:00",
+          "s2": "18:00",
+          "descanso": false
+        },
+        "7": {
+          "diasemana": 7,
+          "e1": "08:00",
+          "s1": "12:00",
+          "e2": "",
+          "s2": "",
+          "descanso": false
+        }
+      },
+      "quadroNG": "08:00 12:00 / 14:00 18:00",
+      "relogioVinculo": "relogio1_producao"
     },
     {
       "id": "colab_branch-1_540",
@@ -206,8 +856,73 @@ window.GOLD_RECOVERY_DATA = window.BACKUP_DATA = {
       "recebeVa": true,
       "naoRecebeVa": false,
       "dataDemissao": "",
-      "registraPonto": true,
-      "trabalhaSabado": true
+      "registraPonto": false,
+      "trabalhaSabado": true,
+      "cpf": "53202317253",
+      "pis": "16362488890",
+      "cargo": "MOTORISTA II",
+      "idregistro": 3256,
+      "idowner": 7452,
+      "horariosSemana": {
+        "1": {
+          "diasemana": 1,
+          "e1": "",
+          "s1": "",
+          "e2": "",
+          "s2": "",
+          "descanso": true
+        },
+        "2": {
+          "diasemana": 2,
+          "e1": "08:00",
+          "s1": "12:00",
+          "e2": "14:00",
+          "s2": "18:00",
+          "descanso": false
+        },
+        "3": {
+          "diasemana": 3,
+          "e1": "08:00",
+          "s1": "12:00",
+          "e2": "14:00",
+          "s2": "18:00",
+          "descanso": false
+        },
+        "4": {
+          "diasemana": 4,
+          "e1": "08:00",
+          "s1": "12:00",
+          "e2": "14:00",
+          "s2": "18:00",
+          "descanso": false
+        },
+        "5": {
+          "diasemana": 5,
+          "e1": "08:00",
+          "s1": "12:00",
+          "e2": "14:00",
+          "s2": "18:00",
+          "descanso": false
+        },
+        "6": {
+          "diasemana": 6,
+          "e1": "08:00",
+          "s1": "12:00",
+          "e2": "14:00",
+          "s2": "18:00",
+          "descanso": false
+        },
+        "7": {
+          "diasemana": 7,
+          "e1": "08:00",
+          "s1": "12:00",
+          "e2": "",
+          "s2": "",
+          "descanso": false
+        }
+      },
+      "quadroNG": "08:00 12:00 / 14:00 18:00",
+      "relogioVinculo": "folha_manual"
     },
     {
       "id": "colab_branch-1_545",
@@ -222,7 +937,72 @@ window.GOLD_RECOVERY_DATA = window.BACKUP_DATA = {
       "naoRecebeVa": false,
       "dataDemissao": "",
       "registraPonto": true,
-      "trabalhaSabado": true
+      "trabalhaSabado": true,
+      "cpf": "35175591215",
+      "pis": "12305362228",
+      "cargo": "Operador de Expedição",
+      "idregistro": 3264,
+      "idowner": 7452,
+      "horariosSemana": {
+        "1": {
+          "diasemana": 1,
+          "e1": "",
+          "s1": "",
+          "e2": "",
+          "s2": "",
+          "descanso": true
+        },
+        "2": {
+          "diasemana": 2,
+          "e1": "08:00",
+          "s1": "12:00",
+          "e2": "14:00",
+          "s2": "18:00",
+          "descanso": false
+        },
+        "3": {
+          "diasemana": 3,
+          "e1": "08:00",
+          "s1": "12:00",
+          "e2": "14:00",
+          "s2": "18:00",
+          "descanso": false
+        },
+        "4": {
+          "diasemana": 4,
+          "e1": "08:00",
+          "s1": "12:00",
+          "e2": "14:00",
+          "s2": "18:00",
+          "descanso": false
+        },
+        "5": {
+          "diasemana": 5,
+          "e1": "08:00",
+          "s1": "12:00",
+          "e2": "14:00",
+          "s2": "18:00",
+          "descanso": false
+        },
+        "6": {
+          "diasemana": 6,
+          "e1": "08:00",
+          "s1": "12:00",
+          "e2": "14:00",
+          "s2": "18:00",
+          "descanso": false
+        },
+        "7": {
+          "diasemana": 7,
+          "e1": "08:00",
+          "s1": "12:00",
+          "e2": "",
+          "s2": "",
+          "descanso": false
+        }
+      },
+      "quadroNG": "08:00 12:00 / 14:00 18:00",
+      "relogioVinculo": "relogio1_producao"
     },
     {
       "id": "colab_branch-1_663",
@@ -237,7 +1017,72 @@ window.GOLD_RECOVERY_DATA = window.BACKUP_DATA = {
       "naoRecebeVa": false,
       "dataDemissao": "",
       "registraPonto": false,
-      "trabalhaSabado": true
+      "trabalhaSabado": true,
+      "cpf": "03910588867",
+      "pis": "14301480435",
+      "cargo": "Supervisores em Manutenção",
+      "idregistro": 4454,
+      "idowner": 7452,
+      "horariosSemana": {
+        "1": {
+          "diasemana": 1,
+          "e1": "",
+          "s1": "",
+          "e2": "",
+          "s2": "",
+          "descanso": true
+        },
+        "2": {
+          "diasemana": 2,
+          "e1": "08:00",
+          "s1": "12:00",
+          "e2": "14:00",
+          "s2": "18:00",
+          "descanso": false
+        },
+        "3": {
+          "diasemana": 3,
+          "e1": "08:00",
+          "s1": "12:00",
+          "e2": "14:00",
+          "s2": "18:00",
+          "descanso": false
+        },
+        "4": {
+          "diasemana": 4,
+          "e1": "08:00",
+          "s1": "12:00",
+          "e2": "14:00",
+          "s2": "18:00",
+          "descanso": false
+        },
+        "5": {
+          "diasemana": 5,
+          "e1": "08:00",
+          "s1": "12:00",
+          "e2": "14:00",
+          "s2": "18:00",
+          "descanso": false
+        },
+        "6": {
+          "diasemana": 6,
+          "e1": "08:00",
+          "s1": "12:00",
+          "e2": "14:00",
+          "s2": "18:00",
+          "descanso": false
+        },
+        "7": {
+          "diasemana": 7,
+          "e1": "08:00",
+          "s1": "12:00",
+          "e2": "",
+          "s2": "",
+          "descanso": false
+        }
+      },
+      "quadroNG": "08:00 12:00 / 14:00 18:00",
+      "relogioVinculo": "relogio2_adm"
     },
     {
       "id": "colab_branch-1_668",
@@ -252,7 +1097,72 @@ window.GOLD_RECOVERY_DATA = window.BACKUP_DATA = {
       "naoRecebeVa": false,
       "dataDemissao": "",
       "registraPonto": true,
-      "trabalhaSabado": true
+      "trabalhaSabado": true,
+      "cpf": "38586592234",
+      "pis": "12305444518",
+      "cargo": "OPERADOR DE MAQUINAS I",
+      "idregistro": 4461,
+      "idowner": 7452,
+      "horariosSemana": {
+        "1": {
+          "diasemana": 1,
+          "e1": "",
+          "s1": "",
+          "e2": "",
+          "s2": "",
+          "descanso": true
+        },
+        "2": {
+          "diasemana": 2,
+          "e1": "08:00",
+          "s1": "12:00",
+          "e2": "14:00",
+          "s2": "18:00",
+          "descanso": false
+        },
+        "3": {
+          "diasemana": 3,
+          "e1": "08:00",
+          "s1": "12:00",
+          "e2": "14:00",
+          "s2": "18:00",
+          "descanso": false
+        },
+        "4": {
+          "diasemana": 4,
+          "e1": "08:00",
+          "s1": "12:00",
+          "e2": "14:00",
+          "s2": "18:00",
+          "descanso": false
+        },
+        "5": {
+          "diasemana": 5,
+          "e1": "08:00",
+          "s1": "12:00",
+          "e2": "14:00",
+          "s2": "18:00",
+          "descanso": false
+        },
+        "6": {
+          "diasemana": 6,
+          "e1": "08:00",
+          "s1": "12:00",
+          "e2": "14:00",
+          "s2": "18:00",
+          "descanso": false
+        },
+        "7": {
+          "diasemana": 7,
+          "e1": "08:00",
+          "s1": "12:00",
+          "e2": "",
+          "s2": "",
+          "descanso": false
+        }
+      },
+      "quadroNG": "08:00 12:00 / 14:00 18:00",
+      "relogioVinculo": "relogio1_producao"
     },
     {
       "id": "colab_branch-1_696",
@@ -266,8 +1176,73 @@ window.GOLD_RECOVERY_DATA = window.BACKUP_DATA = {
       "recebeVa": true,
       "naoRecebeVa": false,
       "dataDemissao": "",
-      "registraPonto": true,
-      "trabalhaSabado": true
+      "registraPonto": false,
+      "trabalhaSabado": true,
+      "cpf": "69663785268",
+      "pis": "12522925964",
+      "cargo": "VIGIA",
+      "idregistro": 4502,
+      "idowner": 7452,
+      "horariosSemana": {
+        "1": {
+          "diasemana": 1,
+          "e1": "18:00",
+          "s1": "23:30",
+          "e2": "00:30",
+          "s2": "06:00",
+          "descanso": true
+        },
+        "2": {
+          "diasemana": 2,
+          "e1": "18:00",
+          "s1": "23:30",
+          "e2": "00:30",
+          "s2": "06:00",
+          "descanso": false
+        },
+        "3": {
+          "diasemana": 3,
+          "e1": "18:00",
+          "s1": "23:30",
+          "e2": "00:30",
+          "s2": "06:00",
+          "descanso": false
+        },
+        "4": {
+          "diasemana": 4,
+          "e1": "18:00",
+          "s1": "23:30",
+          "e2": "00:30",
+          "s2": "06:00",
+          "descanso": false
+        },
+        "5": {
+          "diasemana": 5,
+          "e1": "18:00",
+          "s1": "23:30",
+          "e2": "00:30",
+          "s2": "06:00",
+          "descanso": false
+        },
+        "6": {
+          "diasemana": 6,
+          "e1": "18:00",
+          "s1": "23:30",
+          "e2": "00:30",
+          "s2": "06:00",
+          "descanso": false
+        },
+        "7": {
+          "diasemana": 7,
+          "e1": "18:00",
+          "s1": "23:30",
+          "e2": "00:30",
+          "s2": "06:00",
+          "descanso": false
+        }
+      },
+      "quadroNG": "Escala 12x36 18:00 as 06:00 / Noturno",
+      "relogioVinculo": "folha_manual"
     },
     {
       "id": "colab_branch-1_701",
@@ -282,7 +1257,72 @@ window.GOLD_RECOVERY_DATA = window.BACKUP_DATA = {
       "naoRecebeVa": false,
       "dataDemissao": "",
       "registraPonto": true,
-      "trabalhaSabado": true
+      "trabalhaSabado": true,
+      "cpf": "39035204204",
+      "pis": "12346230156",
+      "cargo": "OPERADOR DE MAQUINAS II",
+      "idregistro": 4515,
+      "idowner": 7452,
+      "horariosSemana": {
+        "1": {
+          "diasemana": 1,
+          "e1": "",
+          "s1": "",
+          "e2": "",
+          "s2": "",
+          "descanso": true
+        },
+        "2": {
+          "diasemana": 2,
+          "e1": "08:00",
+          "s1": "12:00",
+          "e2": "14:00",
+          "s2": "18:00",
+          "descanso": false
+        },
+        "3": {
+          "diasemana": 3,
+          "e1": "08:00",
+          "s1": "12:00",
+          "e2": "14:00",
+          "s2": "18:00",
+          "descanso": false
+        },
+        "4": {
+          "diasemana": 4,
+          "e1": "08:00",
+          "s1": "12:00",
+          "e2": "14:00",
+          "s2": "18:00",
+          "descanso": false
+        },
+        "5": {
+          "diasemana": 5,
+          "e1": "08:00",
+          "s1": "12:00",
+          "e2": "14:00",
+          "s2": "18:00",
+          "descanso": false
+        },
+        "6": {
+          "diasemana": 6,
+          "e1": "08:00",
+          "s1": "12:00",
+          "e2": "14:00",
+          "s2": "18:00",
+          "descanso": false
+        },
+        "7": {
+          "diasemana": 7,
+          "e1": "08:00",
+          "s1": "12:00",
+          "e2": "",
+          "s2": "",
+          "descanso": false
+        }
+      },
+      "quadroNG": "08:00 12:00 / 14:00 18:00",
+      "relogioVinculo": "relogio1_producao"
     },
     {
       "id": "colab_branch-1_702",
@@ -296,8 +1336,73 @@ window.GOLD_RECOVERY_DATA = window.BACKUP_DATA = {
       "recebeVa": true,
       "naoRecebeVa": false,
       "dataDemissao": "",
-      "registraPonto": true,
-      "trabalhaSabado": true
+      "registraPonto": false,
+      "trabalhaSabado": true,
+      "cpf": "03714024255",
+      "pis": "20749125017",
+      "cargo": "VENDEDOR ATACADISTA",
+      "idregistro": 4516,
+      "idowner": 7452,
+      "horariosSemana": {
+        "1": {
+          "diasemana": 1,
+          "e1": "",
+          "s1": "",
+          "e2": "",
+          "s2": "",
+          "descanso": true
+        },
+        "2": {
+          "diasemana": 2,
+          "e1": "08:00",
+          "s1": "12:00",
+          "e2": "14:00",
+          "s2": "18:00",
+          "descanso": false
+        },
+        "3": {
+          "diasemana": 3,
+          "e1": "08:00",
+          "s1": "12:00",
+          "e2": "14:00",
+          "s2": "18:00",
+          "descanso": false
+        },
+        "4": {
+          "diasemana": 4,
+          "e1": "08:00",
+          "s1": "12:00",
+          "e2": "14:00",
+          "s2": "18:00",
+          "descanso": false
+        },
+        "5": {
+          "diasemana": 5,
+          "e1": "08:00",
+          "s1": "12:00",
+          "e2": "14:00",
+          "s2": "18:00",
+          "descanso": false
+        },
+        "6": {
+          "diasemana": 6,
+          "e1": "08:00",
+          "s1": "12:00",
+          "e2": "14:00",
+          "s2": "18:00",
+          "descanso": false
+        },
+        "7": {
+          "diasemana": 7,
+          "e1": "08:00",
+          "s1": "12:00",
+          "e2": "",
+          "s2": "",
+          "descanso": false
+        }
+      },
+      "quadroNG": "08:00 12:00 / 14:00 18:00",
+      "relogioVinculo": "folha_manual"
     },
     {
       "id": "colab_branch-1_736",
@@ -312,7 +1417,72 @@ window.GOLD_RECOVERY_DATA = window.BACKUP_DATA = {
       "naoRecebeVa": false,
       "dataDemissao": "",
       "registraPonto": true,
-      "trabalhaSabado": true
+      "trabalhaSabado": true,
+      "cpf": "85383201220",
+      "pis": "21214601164",
+      "cargo": "ZELADORA",
+      "idregistro": 5564,
+      "idowner": 7452,
+      "horariosSemana": {
+        "1": {
+          "diasemana": 1,
+          "e1": "",
+          "s1": "",
+          "e2": "",
+          "s2": "",
+          "descanso": true
+        },
+        "2": {
+          "diasemana": 2,
+          "e1": "07:00",
+          "s1": "11:00",
+          "e2": "13:00",
+          "s2": "17:00",
+          "descanso": false
+        },
+        "3": {
+          "diasemana": 3,
+          "e1": "07:00",
+          "s1": "11:00",
+          "e2": "13:00",
+          "s2": "17:00",
+          "descanso": false
+        },
+        "4": {
+          "diasemana": 4,
+          "e1": "07:00",
+          "s1": "11:00",
+          "e2": "13:00",
+          "s2": "17:00",
+          "descanso": false
+        },
+        "5": {
+          "diasemana": 5,
+          "e1": "07:00",
+          "s1": "11:00",
+          "e2": "13:00",
+          "s2": "17:00",
+          "descanso": false
+        },
+        "6": {
+          "diasemana": 6,
+          "e1": "07:00",
+          "s1": "11:00",
+          "e2": "13:00",
+          "s2": "17:00",
+          "descanso": false
+        },
+        "7": {
+          "diasemana": 7,
+          "e1": "07:00",
+          "s1": "11:00",
+          "e2": "",
+          "s2": "",
+          "descanso": false
+        }
+      },
+      "quadroNG": "07:00 11:00 / 13:00 17:00",
+      "relogioVinculo": "relogio1_producao"
     },
     {
       "id": "colab_branch-1_778",
@@ -327,7 +1497,72 @@ window.GOLD_RECOVERY_DATA = window.BACKUP_DATA = {
       "naoRecebeVa": false,
       "dataDemissao": "",
       "registraPonto": true,
-      "trabalhaSabado": true
+      "trabalhaSabado": true,
+      "cpf": "03500602231",
+      "pis": "20089204705",
+      "cargo": "OPERADOR DE MAQUINAS II",
+      "idregistro": 5615,
+      "idowner": 7452,
+      "horariosSemana": {
+        "1": {
+          "diasemana": 1,
+          "e1": "",
+          "s1": "",
+          "e2": "",
+          "s2": "",
+          "descanso": true
+        },
+        "2": {
+          "diasemana": 2,
+          "e1": "07:00",
+          "s1": "11:00",
+          "e2": "13:00",
+          "s2": "17:00",
+          "descanso": false
+        },
+        "3": {
+          "diasemana": 3,
+          "e1": "07:00",
+          "s1": "11:00",
+          "e2": "13:00",
+          "s2": "17:00",
+          "descanso": false
+        },
+        "4": {
+          "diasemana": 4,
+          "e1": "07:00",
+          "s1": "11:00",
+          "e2": "13:00",
+          "s2": "17:00",
+          "descanso": false
+        },
+        "5": {
+          "diasemana": 5,
+          "e1": "07:00",
+          "s1": "11:00",
+          "e2": "13:00",
+          "s2": "17:00",
+          "descanso": false
+        },
+        "6": {
+          "diasemana": 6,
+          "e1": "07:00",
+          "s1": "11:00",
+          "e2": "13:00",
+          "s2": "17:00",
+          "descanso": false
+        },
+        "7": {
+          "diasemana": 7,
+          "e1": "07:00",
+          "s1": "11:00",
+          "e2": "",
+          "s2": "",
+          "descanso": false
+        }
+      },
+      "quadroNG": "07:00 11:00 / 13:00 17:00",
+      "relogioVinculo": "relogio2_adm"
     },
     {
       "id": "colab_branch-1_781",
@@ -341,8 +1576,73 @@ window.GOLD_RECOVERY_DATA = window.BACKUP_DATA = {
       "recebeVa": true,
       "naoRecebeVa": false,
       "dataDemissao": "",
-      "registraPonto": true,
-      "trabalhaSabado": true
+      "registraPonto": false,
+      "trabalhaSabado": true,
+      "cpf": "01129616223",
+      "pis": "16589562769",
+      "cargo": "VENDEDOR",
+      "idregistro": 5618,
+      "idowner": 7452,
+      "horariosSemana": {
+        "1": {
+          "diasemana": 1,
+          "e1": "",
+          "s1": "",
+          "e2": "",
+          "s2": "",
+          "descanso": true
+        },
+        "2": {
+          "diasemana": 2,
+          "e1": "08:00",
+          "s1": "12:00",
+          "e2": "14:00",
+          "s2": "18:00",
+          "descanso": false
+        },
+        "3": {
+          "diasemana": 3,
+          "e1": "08:00",
+          "s1": "12:00",
+          "e2": "14:00",
+          "s2": "18:00",
+          "descanso": false
+        },
+        "4": {
+          "diasemana": 4,
+          "e1": "08:00",
+          "s1": "12:00",
+          "e2": "14:00",
+          "s2": "18:00",
+          "descanso": false
+        },
+        "5": {
+          "diasemana": 5,
+          "e1": "08:00",
+          "s1": "12:00",
+          "e2": "14:00",
+          "s2": "18:00",
+          "descanso": false
+        },
+        "6": {
+          "diasemana": 6,
+          "e1": "08:00",
+          "s1": "12:00",
+          "e2": "14:00",
+          "s2": "18:00",
+          "descanso": false
+        },
+        "7": {
+          "diasemana": 7,
+          "e1": "08:00",
+          "s1": "12:00",
+          "e2": "",
+          "s2": "",
+          "descanso": false
+        }
+      },
+      "quadroNG": "08:00 12:00 / 14:00 18:00",
+      "relogioVinculo": "folha_manual"
     },
     {
       "id": "colab_branch-1_847",
@@ -357,7 +1657,72 @@ window.GOLD_RECOVERY_DATA = window.BACKUP_DATA = {
       "naoRecebeVa": false,
       "dataDemissao": "",
       "registraPonto": true,
-      "trabalhaSabado": true
+      "trabalhaSabado": true,
+      "cpf": "03224632208",
+      "pis": "15167732925",
+      "cargo": "OPERADOR DE MAQUINAS II",
+      "idregistro": 5702,
+      "idowner": 7452,
+      "horariosSemana": {
+        "1": {
+          "diasemana": 1,
+          "e1": "",
+          "s1": "",
+          "e2": "",
+          "s2": "",
+          "descanso": true
+        },
+        "2": {
+          "diasemana": 2,
+          "e1": "08:00",
+          "s1": "12:00",
+          "e2": "14:00",
+          "s2": "18:00",
+          "descanso": false
+        },
+        "3": {
+          "diasemana": 3,
+          "e1": "08:00",
+          "s1": "12:00",
+          "e2": "14:00",
+          "s2": "18:00",
+          "descanso": false
+        },
+        "4": {
+          "diasemana": 4,
+          "e1": "08:00",
+          "s1": "12:00",
+          "e2": "14:00",
+          "s2": "18:00",
+          "descanso": false
+        },
+        "5": {
+          "diasemana": 5,
+          "e1": "08:00",
+          "s1": "12:00",
+          "e2": "14:00",
+          "s2": "18:00",
+          "descanso": false
+        },
+        "6": {
+          "diasemana": 6,
+          "e1": "08:00",
+          "s1": "12:00",
+          "e2": "14:00",
+          "s2": "18:00",
+          "descanso": false
+        },
+        "7": {
+          "diasemana": 7,
+          "e1": "08:00",
+          "s1": "12:00",
+          "e2": "",
+          "s2": "",
+          "descanso": false
+        }
+      },
+      "quadroNG": "08:00 12:00 / 14:00 18:00",
+      "relogioVinculo": "relogio1_producao"
     },
     {
       "id": "colab_branch-1_858",
@@ -372,7 +1737,72 @@ window.GOLD_RECOVERY_DATA = window.BACKUP_DATA = {
       "naoRecebeVa": false,
       "dataDemissao": "",
       "registraPonto": false,
-      "trabalhaSabado": true
+      "trabalhaSabado": true,
+      "cpf": "01344339204",
+      "pis": "16457647511",
+      "cargo": "GERENTE DE PRODUÇÃO",
+      "idregistro": 5714,
+      "idowner": 7452,
+      "horariosSemana": {
+        "1": {
+          "diasemana": 1,
+          "e1": "",
+          "s1": "",
+          "e2": "",
+          "s2": "",
+          "descanso": true
+        },
+        "2": {
+          "diasemana": 2,
+          "e1": "08:00",
+          "s1": "12:00",
+          "e2": "14:00",
+          "s2": "18:00",
+          "descanso": false
+        },
+        "3": {
+          "diasemana": 3,
+          "e1": "08:00",
+          "s1": "12:00",
+          "e2": "14:00",
+          "s2": "18:00",
+          "descanso": false
+        },
+        "4": {
+          "diasemana": 4,
+          "e1": "08:00",
+          "s1": "12:00",
+          "e2": "14:00",
+          "s2": "18:00",
+          "descanso": false
+        },
+        "5": {
+          "diasemana": 5,
+          "e1": "08:00",
+          "s1": "12:00",
+          "e2": "14:00",
+          "s2": "18:00",
+          "descanso": false
+        },
+        "6": {
+          "diasemana": 6,
+          "e1": "08:00",
+          "s1": "12:00",
+          "e2": "14:00",
+          "s2": "18:00",
+          "descanso": false
+        },
+        "7": {
+          "diasemana": 7,
+          "e1": "08:00",
+          "s1": "12:00",
+          "e2": "",
+          "s2": "",
+          "descanso": false
+        }
+      },
+      "quadroNG": "08:00 12:00 / 14:00 18:00",
+      "relogioVinculo": "relogio2_adm"
     },
     {
       "id": "colab_branch-1_863",
@@ -387,7 +1817,72 @@ window.GOLD_RECOVERY_DATA = window.BACKUP_DATA = {
       "naoRecebeVa": false,
       "dataDemissao": "",
       "registraPonto": true,
-      "trabalhaSabado": true
+      "trabalhaSabado": true,
+      "cpf": "39916056862",
+      "pis": "20197860464",
+      "cargo": "OPERADOR DE MAQUINAS II",
+      "idregistro": 5719,
+      "idowner": 7452,
+      "horariosSemana": {
+        "1": {
+          "diasemana": 1,
+          "e1": "",
+          "s1": "",
+          "e2": "",
+          "s2": "",
+          "descanso": true
+        },
+        "2": {
+          "diasemana": 2,
+          "e1": "08:00",
+          "s1": "12:00",
+          "e2": "14:00",
+          "s2": "18:00",
+          "descanso": false
+        },
+        "3": {
+          "diasemana": 3,
+          "e1": "08:00",
+          "s1": "12:00",
+          "e2": "14:00",
+          "s2": "18:00",
+          "descanso": false
+        },
+        "4": {
+          "diasemana": 4,
+          "e1": "08:00",
+          "s1": "12:00",
+          "e2": "14:00",
+          "s2": "18:00",
+          "descanso": false
+        },
+        "5": {
+          "diasemana": 5,
+          "e1": "08:00",
+          "s1": "12:00",
+          "e2": "14:00",
+          "s2": "18:00",
+          "descanso": false
+        },
+        "6": {
+          "diasemana": 6,
+          "e1": "08:00",
+          "s1": "12:00",
+          "e2": "14:00",
+          "s2": "18:00",
+          "descanso": false
+        },
+        "7": {
+          "diasemana": 7,
+          "e1": "08:00",
+          "s1": "12:00",
+          "e2": "",
+          "s2": "",
+          "descanso": false
+        }
+      },
+      "quadroNG": "08:00 12:00 / 14:00 18:00",
+      "relogioVinculo": "relogio1_producao"
     },
     {
       "id": "colab_branch-1_898",
@@ -401,8 +1896,73 @@ window.GOLD_RECOVERY_DATA = window.BACKUP_DATA = {
       "recebeVa": true,
       "naoRecebeVa": false,
       "dataDemissao": "",
-      "registraPonto": true,
-      "trabalhaSabado": true
+      "registraPonto": false,
+      "trabalhaSabado": true,
+      "cpf": "41904087272",
+      "pis": "17064976054",
+      "cargo": "MOTORISTA II",
+      "idregistro": 5761,
+      "idowner": 7452,
+      "horariosSemana": {
+        "1": {
+          "diasemana": 1,
+          "e1": "",
+          "s1": "",
+          "e2": "",
+          "s2": "",
+          "descanso": true
+        },
+        "2": {
+          "diasemana": 2,
+          "e1": "08:00",
+          "s1": "12:00",
+          "e2": "14:00",
+          "s2": "18:00",
+          "descanso": false
+        },
+        "3": {
+          "diasemana": 3,
+          "e1": "08:00",
+          "s1": "12:00",
+          "e2": "14:00",
+          "s2": "18:00",
+          "descanso": false
+        },
+        "4": {
+          "diasemana": 4,
+          "e1": "08:00",
+          "s1": "12:00",
+          "e2": "14:00",
+          "s2": "18:00",
+          "descanso": false
+        },
+        "5": {
+          "diasemana": 5,
+          "e1": "08:00",
+          "s1": "12:00",
+          "e2": "14:00",
+          "s2": "18:00",
+          "descanso": false
+        },
+        "6": {
+          "diasemana": 6,
+          "e1": "08:00",
+          "s1": "12:00",
+          "e2": "14:00",
+          "s2": "18:00",
+          "descanso": false
+        },
+        "7": {
+          "diasemana": 7,
+          "e1": "08:00",
+          "s1": "12:00",
+          "e2": "",
+          "s2": "",
+          "descanso": false
+        }
+      },
+      "quadroNG": "08:00 12:00 / 14:00 18:00",
+      "relogioVinculo": "folha_manual"
     },
     {
       "id": "colab_branch-1_900",
@@ -417,7 +1977,72 @@ window.GOLD_RECOVERY_DATA = window.BACKUP_DATA = {
       "naoRecebeVa": false,
       "dataDemissao": "",
       "registraPonto": true,
-      "trabalhaSabado": true
+      "trabalhaSabado": true,
+      "cpf": "32838628852",
+      "pis": "20430420433",
+      "cargo": "AUXILIAR ADMINISTRATIVO I",
+      "idregistro": 5763,
+      "idowner": 7452,
+      "horariosSemana": {
+        "1": {
+          "diasemana": 1,
+          "e1": "",
+          "s1": "",
+          "e2": "",
+          "s2": "",
+          "descanso": true
+        },
+        "2": {
+          "diasemana": 2,
+          "e1": "08:00",
+          "s1": "12:00",
+          "e2": "14:00",
+          "s2": "18:00",
+          "descanso": false
+        },
+        "3": {
+          "diasemana": 3,
+          "e1": "08:00",
+          "s1": "12:00",
+          "e2": "14:00",
+          "s2": "18:00",
+          "descanso": false
+        },
+        "4": {
+          "diasemana": 4,
+          "e1": "08:00",
+          "s1": "12:00",
+          "e2": "14:00",
+          "s2": "18:00",
+          "descanso": false
+        },
+        "5": {
+          "diasemana": 5,
+          "e1": "08:00",
+          "s1": "12:00",
+          "e2": "14:00",
+          "s2": "18:00",
+          "descanso": false
+        },
+        "6": {
+          "diasemana": 6,
+          "e1": "08:00",
+          "s1": "12:00",
+          "e2": "14:00",
+          "s2": "18:00",
+          "descanso": false
+        },
+        "7": {
+          "diasemana": 7,
+          "e1": "08:00",
+          "s1": "12:00",
+          "e2": "",
+          "s2": "",
+          "descanso": false
+        }
+      },
+      "quadroNG": "08:00 12:00 / 14:00 18:00",
+      "relogioVinculo": "relogio2_adm"
     },
     {
       "id": "colab_branch-1_908",
@@ -432,7 +2057,72 @@ window.GOLD_RECOVERY_DATA = window.BACKUP_DATA = {
       "naoRecebeVa": false,
       "dataDemissao": "",
       "registraPonto": true,
-      "trabalhaSabado": true
+      "trabalhaSabado": true,
+      "cpf": "61260061272",
+      "pis": "12587280658",
+      "cargo": "ASSISTENTE CONTABIL",
+      "idregistro": 5779,
+      "idowner": 7452,
+      "horariosSemana": {
+        "1": {
+          "diasemana": 1,
+          "e1": "",
+          "s1": "",
+          "e2": "",
+          "s2": "",
+          "descanso": true
+        },
+        "2": {
+          "diasemana": 2,
+          "e1": "08:00",
+          "s1": "12:00",
+          "e2": "14:00",
+          "s2": "18:00",
+          "descanso": false
+        },
+        "3": {
+          "diasemana": 3,
+          "e1": "08:00",
+          "s1": "12:00",
+          "e2": "14:00",
+          "s2": "18:00",
+          "descanso": false
+        },
+        "4": {
+          "diasemana": 4,
+          "e1": "08:00",
+          "s1": "12:00",
+          "e2": "14:00",
+          "s2": "18:00",
+          "descanso": false
+        },
+        "5": {
+          "diasemana": 5,
+          "e1": "08:00",
+          "s1": "12:00",
+          "e2": "14:00",
+          "s2": "18:00",
+          "descanso": false
+        },
+        "6": {
+          "diasemana": 6,
+          "e1": "08:00",
+          "s1": "12:00",
+          "e2": "14:00",
+          "s2": "18:00",
+          "descanso": false
+        },
+        "7": {
+          "diasemana": 7,
+          "e1": "08:00",
+          "s1": "12:00",
+          "e2": "",
+          "s2": "",
+          "descanso": false
+        }
+      },
+      "quadroNG": "08:00 12:00 / 14:00 18:00",
+      "relogioVinculo": "relogio2_adm"
     },
     {
       "id": "colab_branch-1_917",
@@ -447,7 +2137,72 @@ window.GOLD_RECOVERY_DATA = window.BACKUP_DATA = {
       "naoRecebeVa": false,
       "dataDemissao": "",
       "registraPonto": true,
-      "trabalhaSabado": true
+      "trabalhaSabado": true,
+      "cpf": "03127156251",
+      "pis": "23792253735",
+      "cargo": "AUXILIAR FINANCEIRO I",
+      "idregistro": 5793,
+      "idowner": 7452,
+      "horariosSemana": {
+        "1": {
+          "diasemana": 1,
+          "e1": "",
+          "s1": "",
+          "e2": "",
+          "s2": "",
+          "descanso": true
+        },
+        "2": {
+          "diasemana": 2,
+          "e1": "08:00",
+          "s1": "12:00",
+          "e2": "14:00",
+          "s2": "18:00",
+          "descanso": false
+        },
+        "3": {
+          "diasemana": 3,
+          "e1": "08:00",
+          "s1": "12:00",
+          "e2": "14:00",
+          "s2": "18:00",
+          "descanso": false
+        },
+        "4": {
+          "diasemana": 4,
+          "e1": "08:00",
+          "s1": "12:00",
+          "e2": "14:00",
+          "s2": "18:00",
+          "descanso": false
+        },
+        "5": {
+          "diasemana": 5,
+          "e1": "08:00",
+          "s1": "12:00",
+          "e2": "14:00",
+          "s2": "18:00",
+          "descanso": false
+        },
+        "6": {
+          "diasemana": 6,
+          "e1": "08:00",
+          "s1": "12:00",
+          "e2": "14:00",
+          "s2": "18:00",
+          "descanso": false
+        },
+        "7": {
+          "diasemana": 7,
+          "e1": "08:00",
+          "s1": "12:00",
+          "e2": "",
+          "s2": "",
+          "descanso": false
+        }
+      },
+      "quadroNG": "08:00 12:00 / 14:00  18:00 - Flexivel",
+      "relogioVinculo": "relogio2_adm"
     },
     {
       "id": "colab_branch-1_1173",
@@ -462,7 +2217,72 @@ window.GOLD_RECOVERY_DATA = window.BACKUP_DATA = {
       "naoRecebeVa": false,
       "dataDemissao": "",
       "registraPonto": true,
-      "trabalhaSabado": true
+      "trabalhaSabado": true,
+      "cpf": "02873779209",
+      "pis": "14872115461",
+      "cargo": "AUXILIAR DE CONTROLE INTERNO",
+      "idregistro": 5816,
+      "idowner": 7452,
+      "horariosSemana": {
+        "1": {
+          "diasemana": 1,
+          "e1": "",
+          "s1": "",
+          "e2": "",
+          "s2": "",
+          "descanso": true
+        },
+        "2": {
+          "diasemana": 2,
+          "e1": "08:00",
+          "s1": "12:00",
+          "e2": "14:00",
+          "s2": "18:00",
+          "descanso": false
+        },
+        "3": {
+          "diasemana": 3,
+          "e1": "08:00",
+          "s1": "12:00",
+          "e2": "14:00",
+          "s2": "18:00",
+          "descanso": false
+        },
+        "4": {
+          "diasemana": 4,
+          "e1": "08:00",
+          "s1": "12:00",
+          "e2": "14:00",
+          "s2": "18:00",
+          "descanso": false
+        },
+        "5": {
+          "diasemana": 5,
+          "e1": "08:00",
+          "s1": "12:00",
+          "e2": "14:00",
+          "s2": "18:00",
+          "descanso": false
+        },
+        "6": {
+          "diasemana": 6,
+          "e1": "08:00",
+          "s1": "12:00",
+          "e2": "14:00",
+          "s2": "18:00",
+          "descanso": false
+        },
+        "7": {
+          "diasemana": 7,
+          "e1": "08:00",
+          "s1": "12:00",
+          "e2": "",
+          "s2": "",
+          "descanso": false
+        }
+      },
+      "quadroNG": "08:00 12:00 / 14:00 18:00",
+      "relogioVinculo": "relogio2_adm"
     },
     {
       "id": "colab_branch-1_1405",
@@ -477,7 +2297,72 @@ window.GOLD_RECOVERY_DATA = window.BACKUP_DATA = {
       "naoRecebeVa": false,
       "dataDemissao": "",
       "registraPonto": true,
-      "trabalhaSabado": true
+      "trabalhaSabado": true,
+      "cpf": "00071045295",
+      "pis": "20749123960",
+      "cargo": "ASSISTENTE CONTABIL",
+      "idregistro": 5818,
+      "idowner": 7452,
+      "horariosSemana": {
+        "1": {
+          "diasemana": 1,
+          "e1": "",
+          "s1": "",
+          "e2": "",
+          "s2": "",
+          "descanso": true
+        },
+        "2": {
+          "diasemana": 2,
+          "e1": "08:00",
+          "s1": "12:00",
+          "e2": "14:00",
+          "s2": "18:00",
+          "descanso": false
+        },
+        "3": {
+          "diasemana": 3,
+          "e1": "08:00",
+          "s1": "12:00",
+          "e2": "14:00",
+          "s2": "18:00",
+          "descanso": false
+        },
+        "4": {
+          "diasemana": 4,
+          "e1": "08:00",
+          "s1": "12:00",
+          "e2": "14:00",
+          "s2": "18:00",
+          "descanso": false
+        },
+        "5": {
+          "diasemana": 5,
+          "e1": "08:00",
+          "s1": "12:00",
+          "e2": "14:00",
+          "s2": "18:00",
+          "descanso": false
+        },
+        "6": {
+          "diasemana": 6,
+          "e1": "08:00",
+          "s1": "12:00",
+          "e2": "14:00",
+          "s2": "18:00",
+          "descanso": false
+        },
+        "7": {
+          "diasemana": 7,
+          "e1": "08:00",
+          "s1": "12:00",
+          "e2": "",
+          "s2": "",
+          "descanso": false
+        }
+      },
+      "quadroNG": "08:00 12:00 / 14:00 18:00",
+      "relogioVinculo": "relogio2_adm"
     },
     {
       "id": "colab_branch-1_937",
@@ -491,8 +2376,73 @@ window.GOLD_RECOVERY_DATA = window.BACKUP_DATA = {
       "recebeVa": true,
       "naoRecebeVa": false,
       "dataDemissao": "",
-      "registraPonto": true,
-      "trabalhaSabado": true
+      "registraPonto": false,
+      "trabalhaSabado": true,
+      "cpf": "03180036192",
+      "pis": "20723975730",
+      "cargo": "VENDEDOR",
+      "idregistro": 5821,
+      "idowner": 7452,
+      "horariosSemana": {
+        "1": {
+          "diasemana": 1,
+          "e1": "",
+          "s1": "",
+          "e2": "",
+          "s2": "",
+          "descanso": true
+        },
+        "2": {
+          "diasemana": 2,
+          "e1": "08:00",
+          "s1": "12:00",
+          "e2": "14:00",
+          "s2": "18:00",
+          "descanso": false
+        },
+        "3": {
+          "diasemana": 3,
+          "e1": "08:00",
+          "s1": "12:00",
+          "e2": "14:00",
+          "s2": "18:00",
+          "descanso": false
+        },
+        "4": {
+          "diasemana": 4,
+          "e1": "08:00",
+          "s1": "12:00",
+          "e2": "14:00",
+          "s2": "18:00",
+          "descanso": false
+        },
+        "5": {
+          "diasemana": 5,
+          "e1": "08:00",
+          "s1": "12:00",
+          "e2": "14:00",
+          "s2": "18:00",
+          "descanso": false
+        },
+        "6": {
+          "diasemana": 6,
+          "e1": "08:00",
+          "s1": "12:00",
+          "e2": "14:00",
+          "s2": "18:00",
+          "descanso": false
+        },
+        "7": {
+          "diasemana": 7,
+          "e1": "08:00",
+          "s1": "12:00",
+          "e2": "",
+          "s2": "",
+          "descanso": false
+        }
+      },
+      "quadroNG": "08:00 12:00 / 14:00 18:00",
+      "relogioVinculo": "folha_manual"
     },
     {
       "id": "colab_branch-1_942",
@@ -507,7 +2457,72 @@ window.GOLD_RECOVERY_DATA = window.BACKUP_DATA = {
       "naoRecebeVa": false,
       "dataDemissao": "",
       "registraPonto": true,
-      "trabalhaSabado": true
+      "trabalhaSabado": true,
+      "cpf": "67442293204",
+      "pis": "12609007657",
+      "cargo": "ASSISTENTE DE DEPARTAMENTO PESSOAL",
+      "idregistro": 5826,
+      "idowner": 7452,
+      "horariosSemana": {
+        "1": {
+          "diasemana": 1,
+          "e1": "",
+          "s1": "",
+          "e2": "",
+          "s2": "",
+          "descanso": true
+        },
+        "2": {
+          "diasemana": 2,
+          "e1": "08:00",
+          "s1": "12:00",
+          "e2": "14:00",
+          "s2": "18:00",
+          "descanso": false
+        },
+        "3": {
+          "diasemana": 3,
+          "e1": "08:00",
+          "s1": "12:00",
+          "e2": "14:00",
+          "s2": "18:00",
+          "descanso": false
+        },
+        "4": {
+          "diasemana": 4,
+          "e1": "08:00",
+          "s1": "12:00",
+          "e2": "14:00",
+          "s2": "18:00",
+          "descanso": false
+        },
+        "5": {
+          "diasemana": 5,
+          "e1": "08:00",
+          "s1": "12:00",
+          "e2": "14:00",
+          "s2": "18:00",
+          "descanso": false
+        },
+        "6": {
+          "diasemana": 6,
+          "e1": "08:00",
+          "s1": "12:00",
+          "e2": "14:00",
+          "s2": "18:00",
+          "descanso": false
+        },
+        "7": {
+          "diasemana": 7,
+          "e1": "08:00",
+          "s1": "12:00",
+          "e2": "",
+          "s2": "",
+          "descanso": false
+        }
+      },
+      "quadroNG": "08:00 12:00 / 14:00 18:00",
+      "relogioVinculo": "relogio2_adm"
     },
     {
       "id": "colab_branch-1_954",
@@ -522,7 +2537,72 @@ window.GOLD_RECOVERY_DATA = window.BACKUP_DATA = {
       "naoRecebeVa": false,
       "dataDemissao": "",
       "registraPonto": false,
-      "trabalhaSabado": true
+      "trabalhaSabado": true,
+      "cpf": "99545799234",
+      "pis": "20994504483",
+      "cargo": "SUPERVISOR PRODUÇÃO",
+      "idregistro": 5858,
+      "idowner": 7452,
+      "horariosSemana": {
+        "1": {
+          "diasemana": 1,
+          "e1": "",
+          "s1": "",
+          "e2": "",
+          "s2": "",
+          "descanso": true
+        },
+        "2": {
+          "diasemana": 2,
+          "e1": "08:00",
+          "s1": "12:00",
+          "e2": "14:00",
+          "s2": "18:00",
+          "descanso": false
+        },
+        "3": {
+          "diasemana": 3,
+          "e1": "08:00",
+          "s1": "12:00",
+          "e2": "14:00",
+          "s2": "18:00",
+          "descanso": false
+        },
+        "4": {
+          "diasemana": 4,
+          "e1": "08:00",
+          "s1": "12:00",
+          "e2": "14:00",
+          "s2": "18:00",
+          "descanso": false
+        },
+        "5": {
+          "diasemana": 5,
+          "e1": "08:00",
+          "s1": "12:00",
+          "e2": "14:00",
+          "s2": "18:00",
+          "descanso": false
+        },
+        "6": {
+          "diasemana": 6,
+          "e1": "08:00",
+          "s1": "12:00",
+          "e2": "14:00",
+          "s2": "18:00",
+          "descanso": false
+        },
+        "7": {
+          "diasemana": 7,
+          "e1": "08:00",
+          "s1": "12:00",
+          "e2": "",
+          "s2": "",
+          "descanso": false
+        }
+      },
+      "quadroNG": "08:00 12:00 / 14:00 18:00",
+      "relogioVinculo": "relogio2_adm"
     },
     {
       "id": "colab_branch-1_955",
@@ -537,7 +2617,72 @@ window.GOLD_RECOVERY_DATA = window.BACKUP_DATA = {
       "naoRecebeVa": false,
       "dataDemissao": "",
       "registraPonto": true,
-      "trabalhaSabado": true
+      "trabalhaSabado": true,
+      "cpf": "48630969253",
+      "pis": "12503451057",
+      "cargo": "AUXILIAR DE PRODUÇÃO",
+      "idregistro": 5861,
+      "idowner": 7452,
+      "horariosSemana": {
+        "1": {
+          "diasemana": 1,
+          "e1": "",
+          "s1": "",
+          "e2": "",
+          "s2": "",
+          "descanso": true
+        },
+        "2": {
+          "diasemana": 2,
+          "e1": "08:00",
+          "s1": "12:00",
+          "e2": "14:00",
+          "s2": "18:00",
+          "descanso": false
+        },
+        "3": {
+          "diasemana": 3,
+          "e1": "08:00",
+          "s1": "12:00",
+          "e2": "14:00",
+          "s2": "18:00",
+          "descanso": false
+        },
+        "4": {
+          "diasemana": 4,
+          "e1": "08:00",
+          "s1": "12:00",
+          "e2": "14:00",
+          "s2": "18:00",
+          "descanso": false
+        },
+        "5": {
+          "diasemana": 5,
+          "e1": "08:00",
+          "s1": "12:00",
+          "e2": "14:00",
+          "s2": "18:00",
+          "descanso": false
+        },
+        "6": {
+          "diasemana": 6,
+          "e1": "08:00",
+          "s1": "12:00",
+          "e2": "14:00",
+          "s2": "18:00",
+          "descanso": false
+        },
+        "7": {
+          "diasemana": 7,
+          "e1": "08:00",
+          "s1": "12:00",
+          "e2": "",
+          "s2": "",
+          "descanso": false
+        }
+      },
+      "quadroNG": "08:00 12:00 / 14:00 18:00",
+      "relogioVinculo": "relogio1_producao"
     },
     {
       "id": "colab_branch-1_961",
@@ -552,7 +2697,72 @@ window.GOLD_RECOVERY_DATA = window.BACKUP_DATA = {
       "naoRecebeVa": false,
       "dataDemissao": "",
       "registraPonto": true,
-      "trabalhaSabado": true
+      "trabalhaSabado": true,
+      "cpf": "00731094280",
+      "pis": "16807639504",
+      "cargo": "OPERADOR DE MAQUINAS I",
+      "idregistro": 5870,
+      "idowner": 7452,
+      "horariosSemana": {
+        "1": {
+          "diasemana": 1,
+          "e1": "",
+          "s1": "",
+          "e2": "",
+          "s2": "",
+          "descanso": true
+        },
+        "2": {
+          "diasemana": 2,
+          "e1": "08:00",
+          "s1": "12:00",
+          "e2": "14:00",
+          "s2": "18:00",
+          "descanso": false
+        },
+        "3": {
+          "diasemana": 3,
+          "e1": "08:00",
+          "s1": "12:00",
+          "e2": "14:00",
+          "s2": "18:00",
+          "descanso": false
+        },
+        "4": {
+          "diasemana": 4,
+          "e1": "08:00",
+          "s1": "12:00",
+          "e2": "14:00",
+          "s2": "18:00",
+          "descanso": false
+        },
+        "5": {
+          "diasemana": 5,
+          "e1": "08:00",
+          "s1": "12:00",
+          "e2": "14:00",
+          "s2": "18:00",
+          "descanso": false
+        },
+        "6": {
+          "diasemana": 6,
+          "e1": "08:00",
+          "s1": "12:00",
+          "e2": "14:00",
+          "s2": "18:00",
+          "descanso": false
+        },
+        "7": {
+          "diasemana": 7,
+          "e1": "08:00",
+          "s1": "12:00",
+          "e2": "",
+          "s2": "",
+          "descanso": false
+        }
+      },
+      "quadroNG": "08:00 12:00 / 14:00 18:00",
+      "relogioVinculo": "relogio1_producao"
     },
     {
       "id": "colab_branch-1_963",
@@ -567,7 +2777,72 @@ window.GOLD_RECOVERY_DATA = window.BACKUP_DATA = {
       "naoRecebeVa": false,
       "dataDemissao": "",
       "registraPonto": true,
-      "trabalhaSabado": true
+      "trabalhaSabado": true,
+      "cpf": "00216214203",
+      "pis": "16445981438",
+      "cargo": "AXILIAR CONTABIL",
+      "idregistro": 5871,
+      "idowner": 7452,
+      "horariosSemana": {
+        "1": {
+          "diasemana": 1,
+          "e1": "",
+          "s1": "",
+          "e2": "",
+          "s2": "",
+          "descanso": true
+        },
+        "2": {
+          "diasemana": 2,
+          "e1": "08:00",
+          "s1": "12:00",
+          "e2": "14:00",
+          "s2": "18:00",
+          "descanso": false
+        },
+        "3": {
+          "diasemana": 3,
+          "e1": "08:00",
+          "s1": "12:00",
+          "e2": "14:00",
+          "s2": "18:00",
+          "descanso": false
+        },
+        "4": {
+          "diasemana": 4,
+          "e1": "08:00",
+          "s1": "12:00",
+          "e2": "14:00",
+          "s2": "18:00",
+          "descanso": false
+        },
+        "5": {
+          "diasemana": 5,
+          "e1": "08:00",
+          "s1": "12:00",
+          "e2": "14:00",
+          "s2": "18:00",
+          "descanso": false
+        },
+        "6": {
+          "diasemana": 6,
+          "e1": "08:00",
+          "s1": "12:00",
+          "e2": "14:00",
+          "s2": "18:00",
+          "descanso": false
+        },
+        "7": {
+          "diasemana": 7,
+          "e1": "08:00",
+          "s1": "12:00",
+          "e2": "",
+          "s2": "",
+          "descanso": false
+        }
+      },
+      "quadroNG": "08:00 12:00 / 14:00 18:00",
+      "relogioVinculo": "relogio2_adm"
     },
     {
       "id": "colab_branch-1_965",
@@ -581,8 +2856,73 @@ window.GOLD_RECOVERY_DATA = window.BACKUP_DATA = {
       "recebeVa": true,
       "naoRecebeVa": false,
       "dataDemissao": "",
-      "registraPonto": true,
-      "trabalhaSabado": true
+      "registraPonto": false,
+      "trabalhaSabado": true,
+      "cpf": "00493696288",
+      "pis": "16403721128",
+      "cargo": "PORTEIRO",
+      "idregistro": 5875,
+      "idowner": 7452,
+      "horariosSemana": {
+        "1": {
+          "diasemana": 1,
+          "e1": "06:00",
+          "s1": "12:30",
+          "e2": "13:30",
+          "s2": "18:00",
+          "descanso": true
+        },
+        "2": {
+          "diasemana": 2,
+          "e1": "06:00",
+          "s1": "12:30",
+          "e2": "13:30",
+          "s2": "18:00",
+          "descanso": false
+        },
+        "3": {
+          "diasemana": 3,
+          "e1": "06:00",
+          "s1": "12:30",
+          "e2": "13:30",
+          "s2": "18:00",
+          "descanso": false
+        },
+        "4": {
+          "diasemana": 4,
+          "e1": "06:00",
+          "s1": "12:30",
+          "e2": "13:30",
+          "s2": "18:00",
+          "descanso": false
+        },
+        "5": {
+          "diasemana": 5,
+          "e1": "06:00",
+          "s1": "12:30",
+          "e2": "13:30",
+          "s2": "18:00",
+          "descanso": false
+        },
+        "6": {
+          "diasemana": 6,
+          "e1": "06:00",
+          "s1": "12:30",
+          "e2": "13:30",
+          "s2": "18:00",
+          "descanso": false
+        },
+        "7": {
+          "diasemana": 7,
+          "e1": "06:00",
+          "s1": "12:30",
+          "e2": "13:30",
+          "s2": "18:00",
+          "descanso": false
+        }
+      },
+      "quadroNG": "Escala 12x36 06:00 as 18:00 / Diurno",
+      "relogioVinculo": "folha_manual"
     },
     {
       "id": "colab_branch-1_970",
@@ -597,7 +2937,72 @@ window.GOLD_RECOVERY_DATA = window.BACKUP_DATA = {
       "naoRecebeVa": false,
       "dataDemissao": "",
       "registraPonto": true,
-      "trabalhaSabado": true
+      "trabalhaSabado": true,
+      "cpf": "96411830282",
+      "pis": "20749144704",
+      "cargo": "AUXILIAR DE PRODUÇÃO",
+      "idregistro": 5880,
+      "idowner": 7452,
+      "horariosSemana": {
+        "1": {
+          "diasemana": 1,
+          "e1": "",
+          "s1": "",
+          "e2": "",
+          "s2": "",
+          "descanso": true
+        },
+        "2": {
+          "diasemana": 2,
+          "e1": "08:00",
+          "s1": "12:00",
+          "e2": "14:00",
+          "s2": "18:00",
+          "descanso": false
+        },
+        "3": {
+          "diasemana": 3,
+          "e1": "08:00",
+          "s1": "12:00",
+          "e2": "14:00",
+          "s2": "18:00",
+          "descanso": false
+        },
+        "4": {
+          "diasemana": 4,
+          "e1": "08:00",
+          "s1": "12:00",
+          "e2": "14:00",
+          "s2": "18:00",
+          "descanso": false
+        },
+        "5": {
+          "diasemana": 5,
+          "e1": "08:00",
+          "s1": "12:00",
+          "e2": "14:00",
+          "s2": "18:00",
+          "descanso": false
+        },
+        "6": {
+          "diasemana": 6,
+          "e1": "08:00",
+          "s1": "12:00",
+          "e2": "14:00",
+          "s2": "18:00",
+          "descanso": false
+        },
+        "7": {
+          "diasemana": 7,
+          "e1": "08:00",
+          "s1": "12:00",
+          "e2": "",
+          "s2": "",
+          "descanso": false
+        }
+      },
+      "quadroNG": "08:00 12:00 / 14:00 18:00",
+      "relogioVinculo": "relogio1_producao"
     },
     {
       "id": "colab_branch-1_974",
@@ -611,8 +3016,73 @@ window.GOLD_RECOVERY_DATA = window.BACKUP_DATA = {
       "recebeVa": true,
       "naoRecebeVa": false,
       "dataDemissao": "",
-      "registraPonto": true,
-      "trabalhaSabado": true
+      "registraPonto": false,
+      "trabalhaSabado": true,
+      "cpf": "32659148287",
+      "pis": "12452783260",
+      "cargo": "MOTORISTA I",
+      "idregistro": 5885,
+      "idowner": 7452,
+      "horariosSemana": {
+        "1": {
+          "diasemana": 1,
+          "e1": "",
+          "s1": "",
+          "e2": "",
+          "s2": "",
+          "descanso": true
+        },
+        "2": {
+          "diasemana": 2,
+          "e1": "08:00",
+          "s1": "12:00",
+          "e2": "14:00",
+          "s2": "18:00",
+          "descanso": false
+        },
+        "3": {
+          "diasemana": 3,
+          "e1": "08:00",
+          "s1": "12:00",
+          "e2": "14:00",
+          "s2": "18:00",
+          "descanso": false
+        },
+        "4": {
+          "diasemana": 4,
+          "e1": "08:00",
+          "s1": "12:00",
+          "e2": "14:00",
+          "s2": "18:00",
+          "descanso": false
+        },
+        "5": {
+          "diasemana": 5,
+          "e1": "08:00",
+          "s1": "12:00",
+          "e2": "14:00",
+          "s2": "18:00",
+          "descanso": false
+        },
+        "6": {
+          "diasemana": 6,
+          "e1": "08:00",
+          "s1": "12:00",
+          "e2": "14:00",
+          "s2": "18:00",
+          "descanso": false
+        },
+        "7": {
+          "diasemana": 7,
+          "e1": "08:00",
+          "s1": "12:00",
+          "e2": "",
+          "s2": "",
+          "descanso": false
+        }
+      },
+      "quadroNG": "08:00 12:00 / 14:00 18:00",
+      "relogioVinculo": "folha_manual"
     },
     {
       "id": "colab_branch-1_975",
@@ -627,7 +3097,72 @@ window.GOLD_RECOVERY_DATA = window.BACKUP_DATA = {
       "naoRecebeVa": false,
       "dataDemissao": "",
       "registraPonto": true,
-      "trabalhaSabado": true
+      "trabalhaSabado": true,
+      "cpf": "04241480217",
+      "pis": "20721295066",
+      "cargo": "CONFERENTE DE CARGA E DESCARGA I",
+      "idregistro": 5886,
+      "idowner": 7452,
+      "horariosSemana": {
+        "1": {
+          "diasemana": 1,
+          "e1": "",
+          "s1": "",
+          "e2": "",
+          "s2": "",
+          "descanso": true
+        },
+        "2": {
+          "diasemana": 2,
+          "e1": "08:00",
+          "s1": "12:00",
+          "e2": "14:00",
+          "s2": "18:00",
+          "descanso": false
+        },
+        "3": {
+          "diasemana": 3,
+          "e1": "08:00",
+          "s1": "12:00",
+          "e2": "14:00",
+          "s2": "18:00",
+          "descanso": false
+        },
+        "4": {
+          "diasemana": 4,
+          "e1": "08:00",
+          "s1": "12:00",
+          "e2": "14:00",
+          "s2": "18:00",
+          "descanso": false
+        },
+        "5": {
+          "diasemana": 5,
+          "e1": "08:00",
+          "s1": "12:00",
+          "e2": "14:00",
+          "s2": "18:00",
+          "descanso": false
+        },
+        "6": {
+          "diasemana": 6,
+          "e1": "08:00",
+          "s1": "12:00",
+          "e2": "14:00",
+          "s2": "18:00",
+          "descanso": false
+        },
+        "7": {
+          "diasemana": 7,
+          "e1": "08:00",
+          "s1": "12:00",
+          "e2": "",
+          "s2": "",
+          "descanso": false
+        }
+      },
+      "quadroNG": "08:00 12:00 / 14:00 18:00",
+      "relogioVinculo": "relogio1_producao"
     },
     {
       "id": "colab_branch-1_986",
@@ -642,7 +3177,8 @@ window.GOLD_RECOVERY_DATA = window.BACKUP_DATA = {
       "naoRecebeVa": false,
       "dataDemissao": "2026-10-19",
       "registraPonto": true,
-      "trabalhaSabado": true
+      "trabalhaSabado": true,
+      "relogioVinculo": "relogio1_producao"
     },
     {
       "id": "colab_branch-1_989",
@@ -657,7 +3193,72 @@ window.GOLD_RECOVERY_DATA = window.BACKUP_DATA = {
       "naoRecebeVa": false,
       "dataDemissao": "",
       "registraPonto": true,
-      "trabalhaSabado": true
+      "trabalhaSabado": true,
+      "cpf": "00381442209",
+      "pis": "15630717980",
+      "cargo": "AUXILIAR ADMINISTRATIVO II",
+      "idregistro": 5907,
+      "idowner": 7452,
+      "horariosSemana": {
+        "1": {
+          "diasemana": 1,
+          "e1": "",
+          "s1": "",
+          "e2": "",
+          "s2": "",
+          "descanso": true
+        },
+        "2": {
+          "diasemana": 2,
+          "e1": "08:00",
+          "s1": "12:00",
+          "e2": "14:00",
+          "s2": "18:00",
+          "descanso": false
+        },
+        "3": {
+          "diasemana": 3,
+          "e1": "08:00",
+          "s1": "12:00",
+          "e2": "14:00",
+          "s2": "18:00",
+          "descanso": false
+        },
+        "4": {
+          "diasemana": 4,
+          "e1": "08:00",
+          "s1": "12:00",
+          "e2": "14:00",
+          "s2": "18:00",
+          "descanso": false
+        },
+        "5": {
+          "diasemana": 5,
+          "e1": "08:00",
+          "s1": "12:00",
+          "e2": "14:00",
+          "s2": "18:00",
+          "descanso": false
+        },
+        "6": {
+          "diasemana": 6,
+          "e1": "08:00",
+          "s1": "12:00",
+          "e2": "14:00",
+          "s2": "18:00",
+          "descanso": false
+        },
+        "7": {
+          "diasemana": 7,
+          "e1": "08:00",
+          "s1": "12:00",
+          "e2": "",
+          "s2": "",
+          "descanso": false
+        }
+      },
+      "quadroNG": "08:00 12:00 / 14:00 18:00",
+      "relogioVinculo": "relogio2_adm"
     },
     {
       "id": "colab_branch-1_997",
@@ -672,7 +3273,72 @@ window.GOLD_RECOVERY_DATA = window.BACKUP_DATA = {
       "naoRecebeVa": false,
       "dataDemissao": "",
       "registraPonto": true,
-      "trabalhaSabado": true
+      "trabalhaSabado": true,
+      "cpf": "01959155261",
+      "pis": "16614458788",
+      "cargo": "AUXILIAR DE PRODUÇÃO",
+      "idregistro": 5917,
+      "idowner": 7452,
+      "horariosSemana": {
+        "1": {
+          "diasemana": 1,
+          "e1": "",
+          "s1": "",
+          "e2": "",
+          "s2": "",
+          "descanso": true
+        },
+        "2": {
+          "diasemana": 2,
+          "e1": "08:00",
+          "s1": "12:00",
+          "e2": "14:00",
+          "s2": "18:00",
+          "descanso": false
+        },
+        "3": {
+          "diasemana": 3,
+          "e1": "08:00",
+          "s1": "12:00",
+          "e2": "14:00",
+          "s2": "18:00",
+          "descanso": false
+        },
+        "4": {
+          "diasemana": 4,
+          "e1": "08:00",
+          "s1": "12:00",
+          "e2": "14:00",
+          "s2": "18:00",
+          "descanso": false
+        },
+        "5": {
+          "diasemana": 5,
+          "e1": "08:00",
+          "s1": "12:00",
+          "e2": "14:00",
+          "s2": "18:00",
+          "descanso": false
+        },
+        "6": {
+          "diasemana": 6,
+          "e1": "08:00",
+          "s1": "12:00",
+          "e2": "14:00",
+          "s2": "18:00",
+          "descanso": false
+        },
+        "7": {
+          "diasemana": 7,
+          "e1": "08:00",
+          "s1": "12:00",
+          "e2": "",
+          "s2": "",
+          "descanso": false
+        }
+      },
+      "quadroNG": "08:00 12:00 / 14:00 18:00",
+      "relogioVinculo": "relogio1_producao"
     },
     {
       "id": "colab_branch-1_999",
@@ -687,7 +3353,72 @@ window.GOLD_RECOVERY_DATA = window.BACKUP_DATA = {
       "naoRecebeVa": false,
       "dataDemissao": "",
       "registraPonto": true,
-      "trabalhaSabado": true
+      "trabalhaSabado": true,
+      "cpf": "03678436250",
+      "pis": "16290734548",
+      "cargo": "OPERADOR DE MAQUINAS I",
+      "idregistro": 5919,
+      "idowner": 7452,
+      "horariosSemana": {
+        "1": {
+          "diasemana": 1,
+          "e1": "",
+          "s1": "",
+          "e2": "",
+          "s2": "",
+          "descanso": true
+        },
+        "2": {
+          "diasemana": 2,
+          "e1": "08:00",
+          "s1": "12:00",
+          "e2": "14:00",
+          "s2": "18:00",
+          "descanso": false
+        },
+        "3": {
+          "diasemana": 3,
+          "e1": "08:00",
+          "s1": "12:00",
+          "e2": "14:00",
+          "s2": "18:00",
+          "descanso": false
+        },
+        "4": {
+          "diasemana": 4,
+          "e1": "08:00",
+          "s1": "12:00",
+          "e2": "14:00",
+          "s2": "18:00",
+          "descanso": false
+        },
+        "5": {
+          "diasemana": 5,
+          "e1": "08:00",
+          "s1": "12:00",
+          "e2": "14:00",
+          "s2": "18:00",
+          "descanso": false
+        },
+        "6": {
+          "diasemana": 6,
+          "e1": "08:00",
+          "s1": "12:00",
+          "e2": "14:00",
+          "s2": "18:00",
+          "descanso": false
+        },
+        "7": {
+          "diasemana": 7,
+          "e1": "08:00",
+          "s1": "12:00",
+          "e2": "",
+          "s2": "",
+          "descanso": false
+        }
+      },
+      "quadroNG": "08:00 12:00 / 14:00 18:00",
+      "relogioVinculo": "relogio1_producao"
     },
     {
       "id": "colab_branch-1_1000",
@@ -702,7 +3433,72 @@ window.GOLD_RECOVERY_DATA = window.BACKUP_DATA = {
       "naoRecebeVa": false,
       "dataDemissao": "",
       "registraPonto": true,
-      "trabalhaSabado": true
+      "trabalhaSabado": true,
+      "cpf": "07184471237",
+      "pis": "27092081160",
+      "cargo": "AUXILIAR DE DEPARTAMENTO PESSOAL",
+      "idregistro": 5921,
+      "idowner": 7452,
+      "horariosSemana": {
+        "1": {
+          "diasemana": 1,
+          "e1": "",
+          "s1": "",
+          "e2": "",
+          "s2": "",
+          "descanso": true
+        },
+        "2": {
+          "diasemana": 2,
+          "e1": "08:00",
+          "s1": "12:00",
+          "e2": "14:00",
+          "s2": "18:00",
+          "descanso": false
+        },
+        "3": {
+          "diasemana": 3,
+          "e1": "08:00",
+          "s1": "12:00",
+          "e2": "14:00",
+          "s2": "18:00",
+          "descanso": false
+        },
+        "4": {
+          "diasemana": 4,
+          "e1": "08:00",
+          "s1": "12:00",
+          "e2": "14:00",
+          "s2": "18:00",
+          "descanso": false
+        },
+        "5": {
+          "diasemana": 5,
+          "e1": "08:00",
+          "s1": "12:00",
+          "e2": "14:00",
+          "s2": "18:00",
+          "descanso": false
+        },
+        "6": {
+          "diasemana": 6,
+          "e1": "08:00",
+          "s1": "12:00",
+          "e2": "14:00",
+          "s2": "18:00",
+          "descanso": false
+        },
+        "7": {
+          "diasemana": 7,
+          "e1": "08:00",
+          "s1": "12:00",
+          "e2": "",
+          "s2": "",
+          "descanso": false
+        }
+      },
+      "quadroNG": "08:00 12:00 / 14:00 18:00",
+      "relogioVinculo": "relogio2_adm"
     },
     {
       "id": "colab_branch-1_1008",
@@ -717,7 +3513,72 @@ window.GOLD_RECOVERY_DATA = window.BACKUP_DATA = {
       "naoRecebeVa": false,
       "dataDemissao": "",
       "registraPonto": true,
-      "trabalhaSabado": true
+      "trabalhaSabado": true,
+      "cpf": "06013845204",
+      "pis": "21210132844",
+      "cargo": "Mecânico de Manutenção de Máquinas Industriais II",
+      "idregistro": 5933,
+      "idowner": 7452,
+      "horariosSemana": {
+        "1": {
+          "diasemana": 1,
+          "e1": "",
+          "s1": "",
+          "e2": "",
+          "s2": "",
+          "descanso": true
+        },
+        "2": {
+          "diasemana": 2,
+          "e1": "08:00",
+          "s1": "12:00",
+          "e2": "14:00",
+          "s2": "18:00",
+          "descanso": false
+        },
+        "3": {
+          "diasemana": 3,
+          "e1": "08:00",
+          "s1": "12:00",
+          "e2": "14:00",
+          "s2": "18:00",
+          "descanso": false
+        },
+        "4": {
+          "diasemana": 4,
+          "e1": "08:00",
+          "s1": "12:00",
+          "e2": "14:00",
+          "s2": "18:00",
+          "descanso": false
+        },
+        "5": {
+          "diasemana": 5,
+          "e1": "08:00",
+          "s1": "12:00",
+          "e2": "14:00",
+          "s2": "18:00",
+          "descanso": false
+        },
+        "6": {
+          "diasemana": 6,
+          "e1": "08:00",
+          "s1": "12:00",
+          "e2": "14:00",
+          "s2": "18:00",
+          "descanso": false
+        },
+        "7": {
+          "diasemana": 7,
+          "e1": "08:00",
+          "s1": "12:00",
+          "e2": "",
+          "s2": "",
+          "descanso": false
+        }
+      },
+      "quadroNG": "08:00 12:00 / 14:00 18:00",
+      "relogioVinculo": "relogio1_producao"
     },
     {
       "id": "colab_branch-1_1013",
@@ -732,7 +3593,72 @@ window.GOLD_RECOVERY_DATA = window.BACKUP_DATA = {
       "naoRecebeVa": false,
       "dataDemissao": "",
       "registraPonto": true,
-      "trabalhaSabado": true
+      "trabalhaSabado": true,
+      "cpf": "04255582238",
+      "pis": "21494238464",
+      "cargo": "AUXILIAR DE PRODUÇÃO",
+      "idregistro": 5941,
+      "idowner": 7452,
+      "horariosSemana": {
+        "1": {
+          "diasemana": 1,
+          "e1": "",
+          "s1": "",
+          "e2": "",
+          "s2": "",
+          "descanso": true
+        },
+        "2": {
+          "diasemana": 2,
+          "e1": "08:00",
+          "s1": "12:00",
+          "e2": "14:00",
+          "s2": "18:00",
+          "descanso": false
+        },
+        "3": {
+          "diasemana": 3,
+          "e1": "08:00",
+          "s1": "12:00",
+          "e2": "14:00",
+          "s2": "18:00",
+          "descanso": false
+        },
+        "4": {
+          "diasemana": 4,
+          "e1": "08:00",
+          "s1": "12:00",
+          "e2": "14:00",
+          "s2": "18:00",
+          "descanso": false
+        },
+        "5": {
+          "diasemana": 5,
+          "e1": "08:00",
+          "s1": "12:00",
+          "e2": "14:00",
+          "s2": "18:00",
+          "descanso": false
+        },
+        "6": {
+          "diasemana": 6,
+          "e1": "08:00",
+          "s1": "12:00",
+          "e2": "14:00",
+          "s2": "18:00",
+          "descanso": false
+        },
+        "7": {
+          "diasemana": 7,
+          "e1": "08:00",
+          "s1": "12:00",
+          "e2": "",
+          "s2": "",
+          "descanso": false
+        }
+      },
+      "quadroNG": "08:00 12:00 / 14:00 18:00",
+      "relogioVinculo": "relogio1_producao"
     },
     {
       "id": "colab_branch-1_1018",
@@ -747,7 +3673,72 @@ window.GOLD_RECOVERY_DATA = window.BACKUP_DATA = {
       "naoRecebeVa": false,
       "dataDemissao": "",
       "registraPonto": true,
-      "trabalhaSabado": true
+      "trabalhaSabado": true,
+      "cpf": "04873672279",
+      "pis": "16485160494",
+      "cargo": "AUXILIAR DE PRODUÇÃO",
+      "idregistro": 5948,
+      "idowner": 7452,
+      "horariosSemana": {
+        "1": {
+          "diasemana": 1,
+          "e1": "",
+          "s1": "",
+          "e2": "",
+          "s2": "",
+          "descanso": true
+        },
+        "2": {
+          "diasemana": 2,
+          "e1": "08:00",
+          "s1": "12:00",
+          "e2": "14:00",
+          "s2": "18:00",
+          "descanso": false
+        },
+        "3": {
+          "diasemana": 3,
+          "e1": "08:00",
+          "s1": "12:00",
+          "e2": "14:00",
+          "s2": "18:00",
+          "descanso": false
+        },
+        "4": {
+          "diasemana": 4,
+          "e1": "08:00",
+          "s1": "12:00",
+          "e2": "14:00",
+          "s2": "18:00",
+          "descanso": false
+        },
+        "5": {
+          "diasemana": 5,
+          "e1": "08:00",
+          "s1": "12:00",
+          "e2": "14:00",
+          "s2": "18:00",
+          "descanso": false
+        },
+        "6": {
+          "diasemana": 6,
+          "e1": "08:00",
+          "s1": "12:00",
+          "e2": "14:00",
+          "s2": "18:00",
+          "descanso": false
+        },
+        "7": {
+          "diasemana": 7,
+          "e1": "08:00",
+          "s1": "12:00",
+          "e2": "",
+          "s2": "",
+          "descanso": false
+        }
+      },
+      "quadroNG": "08:00 12:00 / 14:00 18:00",
+      "relogioVinculo": "relogio1_producao"
     },
     {
       "id": "colab_branch-1_1020",
@@ -761,8 +3752,73 @@ window.GOLD_RECOVERY_DATA = window.BACKUP_DATA = {
       "recebeVa": true,
       "naoRecebeVa": false,
       "dataDemissao": "",
-      "registraPonto": true,
-      "trabalhaSabado": true
+      "registraPonto": false,
+      "trabalhaSabado": true,
+      "cpf": "02917581263",
+      "pis": "20749083780",
+      "cargo": "VENDEDOR",
+      "idregistro": 5953,
+      "idowner": 7452,
+      "horariosSemana": {
+        "1": {
+          "diasemana": 1,
+          "e1": "",
+          "s1": "",
+          "e2": "",
+          "s2": "",
+          "descanso": true
+        },
+        "2": {
+          "diasemana": 2,
+          "e1": "08:00",
+          "s1": "12:00",
+          "e2": "14:00",
+          "s2": "18:00",
+          "descanso": false
+        },
+        "3": {
+          "diasemana": 3,
+          "e1": "08:00",
+          "s1": "12:00",
+          "e2": "14:00",
+          "s2": "18:00",
+          "descanso": false
+        },
+        "4": {
+          "diasemana": 4,
+          "e1": "08:00",
+          "s1": "12:00",
+          "e2": "14:00",
+          "s2": "18:00",
+          "descanso": false
+        },
+        "5": {
+          "diasemana": 5,
+          "e1": "08:00",
+          "s1": "12:00",
+          "e2": "14:00",
+          "s2": "18:00",
+          "descanso": false
+        },
+        "6": {
+          "diasemana": 6,
+          "e1": "08:00",
+          "s1": "12:00",
+          "e2": "14:00",
+          "s2": "18:00",
+          "descanso": false
+        },
+        "7": {
+          "diasemana": 7,
+          "e1": "08:00",
+          "s1": "12:00",
+          "e2": "",
+          "s2": "",
+          "descanso": false
+        }
+      },
+      "quadroNG": "08:00 12:00 / 14:00 18:00",
+      "relogioVinculo": "folha_manual"
     },
     {
       "id": "colab_branch-1_1025",
@@ -777,7 +3833,8 @@ window.GOLD_RECOVERY_DATA = window.BACKUP_DATA = {
       "naoRecebeVa": false,
       "dataDemissao": "2026-10-19",
       "registraPonto": true,
-      "trabalhaSabado": true
+      "trabalhaSabado": true,
+      "relogioVinculo": "relogio1_producao"
     },
     {
       "id": "colab_branch-1_1027",
@@ -791,8 +3848,73 @@ window.GOLD_RECOVERY_DATA = window.BACKUP_DATA = {
       "recebeVa": true,
       "naoRecebeVa": false,
       "dataDemissao": "",
-      "registraPonto": true,
-      "trabalhaSabado": true
+      "registraPonto": false,
+      "trabalhaSabado": true,
+      "cpf": "04626097235",
+      "pis": "20749050114",
+      "cargo": "MOTORISTA I",
+      "idregistro": 5961,
+      "idowner": 7452,
+      "horariosSemana": {
+        "1": {
+          "diasemana": 1,
+          "e1": "",
+          "s1": "",
+          "e2": "",
+          "s2": "",
+          "descanso": true
+        },
+        "2": {
+          "diasemana": 2,
+          "e1": "08:00",
+          "s1": "12:00",
+          "e2": "14:00",
+          "s2": "18:00",
+          "descanso": false
+        },
+        "3": {
+          "diasemana": 3,
+          "e1": "08:00",
+          "s1": "12:00",
+          "e2": "14:00",
+          "s2": "18:00",
+          "descanso": false
+        },
+        "4": {
+          "diasemana": 4,
+          "e1": "08:00",
+          "s1": "12:00",
+          "e2": "14:00",
+          "s2": "18:00",
+          "descanso": false
+        },
+        "5": {
+          "diasemana": 5,
+          "e1": "08:00",
+          "s1": "12:00",
+          "e2": "14:00",
+          "s2": "18:00",
+          "descanso": false
+        },
+        "6": {
+          "diasemana": 6,
+          "e1": "08:00",
+          "s1": "12:00",
+          "e2": "14:00",
+          "s2": "18:00",
+          "descanso": false
+        },
+        "7": {
+          "diasemana": 7,
+          "e1": "08:00",
+          "s1": "12:00",
+          "e2": "",
+          "s2": "",
+          "descanso": false
+        }
+      },
+      "quadroNG": "08:00 12:00 / 14:00 18:00",
+      "relogioVinculo": "folha_manual"
     },
     {
       "id": "colab_branch-1_1032",
@@ -806,8 +3928,73 @@ window.GOLD_RECOVERY_DATA = window.BACKUP_DATA = {
       "recebeVa": true,
       "naoRecebeVa": false,
       "dataDemissao": "",
-      "registraPonto": true,
-      "trabalhaSabado": true
+      "registraPonto": false,
+      "trabalhaSabado": true,
+      "cpf": "96196220225",
+      "pis": "12858947653",
+      "cargo": "MOTORISTA I",
+      "idregistro": 5967,
+      "idowner": 7452,
+      "horariosSemana": {
+        "1": {
+          "diasemana": 1,
+          "e1": "",
+          "s1": "",
+          "e2": "",
+          "s2": "",
+          "descanso": true
+        },
+        "2": {
+          "diasemana": 2,
+          "e1": "08:00",
+          "s1": "12:00",
+          "e2": "14:00",
+          "s2": "18:00",
+          "descanso": false
+        },
+        "3": {
+          "diasemana": 3,
+          "e1": "08:00",
+          "s1": "12:00",
+          "e2": "14:00",
+          "s2": "18:00",
+          "descanso": false
+        },
+        "4": {
+          "diasemana": 4,
+          "e1": "08:00",
+          "s1": "12:00",
+          "e2": "14:00",
+          "s2": "18:00",
+          "descanso": false
+        },
+        "5": {
+          "diasemana": 5,
+          "e1": "08:00",
+          "s1": "12:00",
+          "e2": "14:00",
+          "s2": "18:00",
+          "descanso": false
+        },
+        "6": {
+          "diasemana": 6,
+          "e1": "08:00",
+          "s1": "12:00",
+          "e2": "14:00",
+          "s2": "18:00",
+          "descanso": false
+        },
+        "7": {
+          "diasemana": 7,
+          "e1": "08:00",
+          "s1": "12:00",
+          "e2": "",
+          "s2": "",
+          "descanso": false
+        }
+      },
+      "quadroNG": "08:00 12:00 / 14:00 18:00",
+      "relogioVinculo": "folha_manual"
     },
     {
       "id": "colab_branch-1_1033",
@@ -822,7 +4009,72 @@ window.GOLD_RECOVERY_DATA = window.BACKUP_DATA = {
       "naoRecebeVa": false,
       "dataDemissao": "",
       "registraPonto": true,
-      "trabalhaSabado": true
+      "trabalhaSabado": true,
+      "cpf": "05082543296",
+      "pis": "23602982080",
+      "cargo": "AUXILIAR DE PRODUÇÃO",
+      "idregistro": 5968,
+      "idowner": 7452,
+      "horariosSemana": {
+        "1": {
+          "diasemana": 1,
+          "e1": "",
+          "s1": "",
+          "e2": "",
+          "s2": "",
+          "descanso": true
+        },
+        "2": {
+          "diasemana": 2,
+          "e1": "08:00",
+          "s1": "12:00",
+          "e2": "14:00",
+          "s2": "18:00",
+          "descanso": false
+        },
+        "3": {
+          "diasemana": 3,
+          "e1": "08:00",
+          "s1": "12:00",
+          "e2": "14:00",
+          "s2": "18:00",
+          "descanso": false
+        },
+        "4": {
+          "diasemana": 4,
+          "e1": "08:00",
+          "s1": "12:00",
+          "e2": "14:00",
+          "s2": "18:00",
+          "descanso": false
+        },
+        "5": {
+          "diasemana": 5,
+          "e1": "08:00",
+          "s1": "12:00",
+          "e2": "14:00",
+          "s2": "18:00",
+          "descanso": false
+        },
+        "6": {
+          "diasemana": 6,
+          "e1": "08:00",
+          "s1": "12:00",
+          "e2": "14:00",
+          "s2": "18:00",
+          "descanso": false
+        },
+        "7": {
+          "diasemana": 7,
+          "e1": "08:00",
+          "s1": "12:00",
+          "e2": "",
+          "s2": "",
+          "descanso": false
+        }
+      },
+      "quadroNG": "08:00 12:00 / 14:00 18:00",
+      "relogioVinculo": "relogio1_producao"
     },
     {
       "id": "colab_branch-1_1034",
@@ -837,7 +4089,72 @@ window.GOLD_RECOVERY_DATA = window.BACKUP_DATA = {
       "naoRecebeVa": false,
       "dataDemissao": "",
       "registraPonto": true,
-      "trabalhaSabado": true
+      "trabalhaSabado": true,
+      "cpf": "07193970224",
+      "pis": "16659450557",
+      "cargo": "AUXILIAR DE PRODUÇÃO",
+      "idregistro": 5969,
+      "idowner": 7452,
+      "horariosSemana": {
+        "1": {
+          "diasemana": 1,
+          "e1": "",
+          "s1": "",
+          "e2": "",
+          "s2": "",
+          "descanso": true
+        },
+        "2": {
+          "diasemana": 2,
+          "e1": "08:00",
+          "s1": "12:00",
+          "e2": "14:00",
+          "s2": "18:00",
+          "descanso": false
+        },
+        "3": {
+          "diasemana": 3,
+          "e1": "08:00",
+          "s1": "12:00",
+          "e2": "14:00",
+          "s2": "18:00",
+          "descanso": false
+        },
+        "4": {
+          "diasemana": 4,
+          "e1": "08:00",
+          "s1": "12:00",
+          "e2": "14:00",
+          "s2": "18:00",
+          "descanso": false
+        },
+        "5": {
+          "diasemana": 5,
+          "e1": "08:00",
+          "s1": "12:00",
+          "e2": "14:00",
+          "s2": "18:00",
+          "descanso": false
+        },
+        "6": {
+          "diasemana": 6,
+          "e1": "08:00",
+          "s1": "12:00",
+          "e2": "14:00",
+          "s2": "18:00",
+          "descanso": false
+        },
+        "7": {
+          "diasemana": 7,
+          "e1": "08:00",
+          "s1": "12:00",
+          "e2": "",
+          "s2": "",
+          "descanso": false
+        }
+      },
+      "quadroNG": "08:00 12:00 / 14:00 18:00",
+      "relogioVinculo": "relogio1_producao"
     },
     {
       "id": "colab_branch-2_1016",
@@ -852,7 +4169,72 @@ window.GOLD_RECOVERY_DATA = window.BACKUP_DATA = {
       "naoRecebeVa": false,
       "dataDemissao": "",
       "registraPonto": true,
-      "trabalhaSabado": false
+      "trabalhaSabado": false,
+      "cpf": "08230691177",
+      "pis": "16333658392",
+      "cargo": "Técnico em Planejamento e controle da produção - Apredíz",
+      "idregistro": 5946,
+      "idowner": 7452,
+      "horariosSemana": {
+        "1": {
+          "diasemana": 1,
+          "e1": "",
+          "s1": "",
+          "e2": "",
+          "s2": "",
+          "descanso": true
+        },
+        "2": {
+          "diasemana": 2,
+          "e1": "07:00",
+          "s1": "11:00",
+          "e2": "",
+          "s2": "",
+          "descanso": false
+        },
+        "3": {
+          "diasemana": 3,
+          "e1": "07:00",
+          "s1": "11:00",
+          "e2": "",
+          "s2": "",
+          "descanso": false
+        },
+        "4": {
+          "diasemana": 4,
+          "e1": "07:00",
+          "s1": "11:00",
+          "e2": "",
+          "s2": "",
+          "descanso": false
+        },
+        "5": {
+          "diasemana": 5,
+          "e1": "07:00",
+          "s1": "11:00",
+          "e2": "",
+          "s2": "",
+          "descanso": false
+        },
+        "6": {
+          "diasemana": 6,
+          "e1": "07:00",
+          "s1": "11:00",
+          "e2": "",
+          "s2": "",
+          "descanso": false
+        },
+        "7": {
+          "diasemana": 7,
+          "e1": "",
+          "s1": "",
+          "e2": "",
+          "s2": "",
+          "descanso": false
+        }
+      },
+      "quadroNG": "07:00 - 11:00",
+      "relogioVinculo": "relogio3_navirai"
     },
     {
       "id": "colab_branch-2_127",
@@ -867,7 +4249,72 @@ window.GOLD_RECOVERY_DATA = window.BACKUP_DATA = {
       "naoRecebeVa": false,
       "dataDemissao": "",
       "registraPonto": true,
-      "trabalhaSabado": true
+      "trabalhaSabado": true,
+      "cpf": "61474975100",
+      "pis": "12621150383",
+      "cargo": "OPERADOR DE MAQUINAS II",
+      "idregistro": 1619,
+      "idowner": 7452,
+      "horariosSemana": {
+        "1": {
+          "diasemana": 1,
+          "e1": "",
+          "s1": "",
+          "e2": "",
+          "s2": "",
+          "descanso": true
+        },
+        "2": {
+          "diasemana": 2,
+          "e1": "07:00",
+          "s1": "11:00",
+          "e2": "13:00",
+          "s2": "17:00",
+          "descanso": false
+        },
+        "3": {
+          "diasemana": 3,
+          "e1": "07:00",
+          "s1": "11:00",
+          "e2": "13:00",
+          "s2": "17:00",
+          "descanso": false
+        },
+        "4": {
+          "diasemana": 4,
+          "e1": "07:00",
+          "s1": "11:00",
+          "e2": "13:00",
+          "s2": "17:00",
+          "descanso": false
+        },
+        "5": {
+          "diasemana": 5,
+          "e1": "07:00",
+          "s1": "11:00",
+          "e2": "13:00",
+          "s2": "17:00",
+          "descanso": false
+        },
+        "6": {
+          "diasemana": 6,
+          "e1": "07:00",
+          "s1": "11:00",
+          "e2": "13:00",
+          "s2": "17:00",
+          "descanso": false
+        },
+        "7": {
+          "diasemana": 7,
+          "e1": "07:00",
+          "s1": "11:00",
+          "e2": "",
+          "s2": "",
+          "descanso": false
+        }
+      },
+      "quadroNG": "07:00 11:00 / 13:00 17:00",
+      "relogioVinculo": "relogio3_navirai"
     },
     {
       "id": "colab_branch-2_288",
@@ -882,7 +4329,72 @@ window.GOLD_RECOVERY_DATA = window.BACKUP_DATA = {
       "naoRecebeVa": false,
       "dataDemissao": "",
       "registraPonto": true,
-      "trabalhaSabado": true
+      "trabalhaSabado": true,
+      "cpf": "65247337115",
+      "pis": "12407936983",
+      "cargo": "MOTORISTA II",
+      "idregistro": 1884,
+      "idowner": 7452,
+      "horariosSemana": {
+        "1": {
+          "diasemana": 1,
+          "e1": "",
+          "s1": "",
+          "e2": "",
+          "s2": "",
+          "descanso": true
+        },
+        "2": {
+          "diasemana": 2,
+          "e1": "07:00",
+          "s1": "11:00",
+          "e2": "13:00",
+          "s2": "17:00",
+          "descanso": false
+        },
+        "3": {
+          "diasemana": 3,
+          "e1": "07:00",
+          "s1": "11:00",
+          "e2": "13:00",
+          "s2": "17:00",
+          "descanso": false
+        },
+        "4": {
+          "diasemana": 4,
+          "e1": "07:00",
+          "s1": "11:00",
+          "e2": "13:00",
+          "s2": "17:00",
+          "descanso": false
+        },
+        "5": {
+          "diasemana": 5,
+          "e1": "07:00",
+          "s1": "11:00",
+          "e2": "13:00",
+          "s2": "17:00",
+          "descanso": false
+        },
+        "6": {
+          "diasemana": 6,
+          "e1": "07:00",
+          "s1": "11:00",
+          "e2": "13:00",
+          "s2": "17:00",
+          "descanso": false
+        },
+        "7": {
+          "diasemana": 7,
+          "e1": "07:00",
+          "s1": "11:00",
+          "e2": "",
+          "s2": "",
+          "descanso": false
+        }
+      },
+      "quadroNG": "07:00 11:00 / 13:00 17:00",
+      "relogioVinculo": "relogio3_navirai"
     },
     {
       "id": "colab_branch-2_456",
@@ -897,7 +4409,72 @@ window.GOLD_RECOVERY_DATA = window.BACKUP_DATA = {
       "naoRecebeVa": false,
       "dataDemissao": "",
       "registraPonto": true,
-      "trabalhaSabado": true
+      "trabalhaSabado": true,
+      "cpf": "01072906180",
+      "pis": "12331545954",
+      "cargo": "AUXILIAR DE PRODUÇÃO",
+      "idregistro": 3135,
+      "idowner": 7452,
+      "horariosSemana": {
+        "1": {
+          "diasemana": 1,
+          "e1": "",
+          "s1": "",
+          "e2": "",
+          "s2": "",
+          "descanso": true
+        },
+        "2": {
+          "diasemana": 2,
+          "e1": "07:00",
+          "s1": "11:00",
+          "e2": "13:00",
+          "s2": "17:00",
+          "descanso": false
+        },
+        "3": {
+          "diasemana": 3,
+          "e1": "07:00",
+          "s1": "11:00",
+          "e2": "13:00",
+          "s2": "17:00",
+          "descanso": false
+        },
+        "4": {
+          "diasemana": 4,
+          "e1": "07:00",
+          "s1": "11:00",
+          "e2": "13:00",
+          "s2": "17:00",
+          "descanso": false
+        },
+        "5": {
+          "diasemana": 5,
+          "e1": "07:00",
+          "s1": "11:00",
+          "e2": "13:00",
+          "s2": "17:00",
+          "descanso": false
+        },
+        "6": {
+          "diasemana": 6,
+          "e1": "07:00",
+          "s1": "11:00",
+          "e2": "13:00",
+          "s2": "17:00",
+          "descanso": false
+        },
+        "7": {
+          "diasemana": 7,
+          "e1": "07:00",
+          "s1": "11:00",
+          "e2": "",
+          "s2": "",
+          "descanso": false
+        }
+      },
+      "quadroNG": "07:00 11:00 / 13:00 17:00",
+      "relogioVinculo": "relogio3_navirai"
     },
     {
       "id": "colab_branch-2_463",
@@ -912,7 +4489,72 @@ window.GOLD_RECOVERY_DATA = window.BACKUP_DATA = {
       "naoRecebeVa": false,
       "dataDemissao": "",
       "registraPonto": false,
-      "trabalhaSabado": true
+      "trabalhaSabado": true,
+      "cpf": "85648574134",
+      "pis": "26773958901",
+      "cargo": "GERENTE DE PRODUÇÃO",
+      "idregistro": 3143,
+      "idowner": 7452,
+      "horariosSemana": {
+        "1": {
+          "diasemana": 1,
+          "e1": "",
+          "s1": "",
+          "e2": "",
+          "s2": "",
+          "descanso": true
+        },
+        "2": {
+          "diasemana": 2,
+          "e1": "07:00",
+          "s1": "11:00",
+          "e2": "13:00",
+          "s2": "17:00",
+          "descanso": false
+        },
+        "3": {
+          "diasemana": 3,
+          "e1": "07:00",
+          "s1": "11:00",
+          "e2": "13:00",
+          "s2": "17:00",
+          "descanso": false
+        },
+        "4": {
+          "diasemana": 4,
+          "e1": "07:00",
+          "s1": "11:00",
+          "e2": "13:00",
+          "s2": "17:00",
+          "descanso": false
+        },
+        "5": {
+          "diasemana": 5,
+          "e1": "07:00",
+          "s1": "11:00",
+          "e2": "13:00",
+          "s2": "17:00",
+          "descanso": false
+        },
+        "6": {
+          "diasemana": 6,
+          "e1": "07:00",
+          "s1": "11:00",
+          "e2": "13:00",
+          "s2": "17:00",
+          "descanso": false
+        },
+        "7": {
+          "diasemana": 7,
+          "e1": "07:00",
+          "s1": "11:00",
+          "e2": "",
+          "s2": "",
+          "descanso": false
+        }
+      },
+      "quadroNG": "07:00 11:00 / 13:00 17:00",
+      "relogioVinculo": "relogio2_adm"
     },
     {
       "id": "colab_branch-2_561",
@@ -927,7 +4569,72 @@ window.GOLD_RECOVERY_DATA = window.BACKUP_DATA = {
       "naoRecebeVa": false,
       "dataDemissao": "",
       "registraPonto": true,
-      "trabalhaSabado": true
+      "trabalhaSabado": true,
+      "cpf": "06450483130",
+      "pis": "16081541151",
+      "cargo": "OPERADOR DE EMPILHADEIRA I",
+      "idregistro": 3291,
+      "idowner": 7452,
+      "horariosSemana": {
+        "1": {
+          "diasemana": 1,
+          "e1": "",
+          "s1": "",
+          "e2": "",
+          "s2": "",
+          "descanso": true
+        },
+        "2": {
+          "diasemana": 2,
+          "e1": "07:00",
+          "s1": "11:00",
+          "e2": "13:00",
+          "s2": "17:00",
+          "descanso": false
+        },
+        "3": {
+          "diasemana": 3,
+          "e1": "07:00",
+          "s1": "11:00",
+          "e2": "13:00",
+          "s2": "17:00",
+          "descanso": false
+        },
+        "4": {
+          "diasemana": 4,
+          "e1": "07:00",
+          "s1": "11:00",
+          "e2": "13:00",
+          "s2": "17:00",
+          "descanso": false
+        },
+        "5": {
+          "diasemana": 5,
+          "e1": "07:00",
+          "s1": "11:00",
+          "e2": "13:00",
+          "s2": "17:00",
+          "descanso": false
+        },
+        "6": {
+          "diasemana": 6,
+          "e1": "07:00",
+          "s1": "11:00",
+          "e2": "13:00",
+          "s2": "17:00",
+          "descanso": false
+        },
+        "7": {
+          "diasemana": 7,
+          "e1": "07:00",
+          "s1": "11:00",
+          "e2": "",
+          "s2": "",
+          "descanso": false
+        }
+      },
+      "quadroNG": "07:00 11:00 / 13:00 17:00",
+      "relogioVinculo": "relogio3_navirai"
     },
     {
       "id": "colab_branch-2_613",
@@ -942,7 +4649,72 @@ window.GOLD_RECOVERY_DATA = window.BACKUP_DATA = {
       "naoRecebeVa": false,
       "dataDemissao": "",
       "registraPonto": true,
-      "trabalhaSabado": true
+      "trabalhaSabado": true,
+      "cpf": "07069217129",
+      "pis": "14015582329",
+      "cargo": "OPERADOR DE MAQUINAS III",
+      "idregistro": 4368,
+      "idowner": 7452,
+      "horariosSemana": {
+        "1": {
+          "diasemana": 1,
+          "e1": "",
+          "s1": "",
+          "e2": "",
+          "s2": "",
+          "descanso": true
+        },
+        "2": {
+          "diasemana": 2,
+          "e1": "07:00",
+          "s1": "11:00",
+          "e2": "13:00",
+          "s2": "17:00",
+          "descanso": false
+        },
+        "3": {
+          "diasemana": 3,
+          "e1": "07:00",
+          "s1": "11:00",
+          "e2": "13:00",
+          "s2": "17:00",
+          "descanso": false
+        },
+        "4": {
+          "diasemana": 4,
+          "e1": "07:00",
+          "s1": "11:00",
+          "e2": "13:00",
+          "s2": "17:00",
+          "descanso": false
+        },
+        "5": {
+          "diasemana": 5,
+          "e1": "07:00",
+          "s1": "11:00",
+          "e2": "13:00",
+          "s2": "17:00",
+          "descanso": false
+        },
+        "6": {
+          "diasemana": 6,
+          "e1": "07:00",
+          "s1": "11:00",
+          "e2": "13:00",
+          "s2": "17:00",
+          "descanso": false
+        },
+        "7": {
+          "diasemana": 7,
+          "e1": "07:00",
+          "s1": "11:00",
+          "e2": "",
+          "s2": "",
+          "descanso": false
+        }
+      },
+      "quadroNG": "07:00 11:00 / 13:00 17:00",
+      "relogioVinculo": "relogio3_navirai"
     },
     {
       "id": "colab_branch-2_780",
@@ -957,7 +4729,72 @@ window.GOLD_RECOVERY_DATA = window.BACKUP_DATA = {
       "naoRecebeVa": false,
       "dataDemissao": "",
       "registraPonto": true,
-      "trabalhaSabado": true
+      "trabalhaSabado": true,
+      "cpf": "03768203140",
+      "pis": "16393069563",
+      "cargo": "OPERADOR DE MAQUINAS I",
+      "idregistro": 5617,
+      "idowner": 7452,
+      "horariosSemana": {
+        "1": {
+          "diasemana": 1,
+          "e1": "",
+          "s1": "",
+          "e2": "",
+          "s2": "",
+          "descanso": true
+        },
+        "2": {
+          "diasemana": 2,
+          "e1": "07:00",
+          "s1": "11:00",
+          "e2": "13:00",
+          "s2": "17:00",
+          "descanso": false
+        },
+        "3": {
+          "diasemana": 3,
+          "e1": "07:00",
+          "s1": "11:00",
+          "e2": "13:00",
+          "s2": "17:00",
+          "descanso": false
+        },
+        "4": {
+          "diasemana": 4,
+          "e1": "07:00",
+          "s1": "11:00",
+          "e2": "13:00",
+          "s2": "17:00",
+          "descanso": false
+        },
+        "5": {
+          "diasemana": 5,
+          "e1": "07:00",
+          "s1": "11:00",
+          "e2": "13:00",
+          "s2": "17:00",
+          "descanso": false
+        },
+        "6": {
+          "diasemana": 6,
+          "e1": "07:00",
+          "s1": "11:00",
+          "e2": "13:00",
+          "s2": "17:00",
+          "descanso": false
+        },
+        "7": {
+          "diasemana": 7,
+          "e1": "07:00",
+          "s1": "11:00",
+          "e2": "",
+          "s2": "",
+          "descanso": false
+        }
+      },
+      "quadroNG": "07:00 11:00 / 13:00 17:00",
+      "relogioVinculo": "relogio3_navirai"
     },
     {
       "id": "colab_branch-2_810",
@@ -972,7 +4809,72 @@ window.GOLD_RECOVERY_DATA = window.BACKUP_DATA = {
       "naoRecebeVa": false,
       "dataDemissao": "",
       "registraPonto": true,
-      "trabalhaSabado": true
+      "trabalhaSabado": true,
+      "cpf": "02588638112",
+      "pis": "16689891535",
+      "cargo": "ZELADORA",
+      "idregistro": 5657,
+      "idowner": 7452,
+      "horariosSemana": {
+        "1": {
+          "diasemana": 1,
+          "e1": "",
+          "s1": "",
+          "e2": "",
+          "s2": "",
+          "descanso": true
+        },
+        "2": {
+          "diasemana": 2,
+          "e1": "07:00",
+          "s1": "11:00",
+          "e2": "13:00",
+          "s2": "17:00",
+          "descanso": false
+        },
+        "3": {
+          "diasemana": 3,
+          "e1": "07:00",
+          "s1": "11:00",
+          "e2": "13:00",
+          "s2": "17:00",
+          "descanso": false
+        },
+        "4": {
+          "diasemana": 4,
+          "e1": "07:00",
+          "s1": "11:00",
+          "e2": "13:00",
+          "s2": "17:00",
+          "descanso": false
+        },
+        "5": {
+          "diasemana": 5,
+          "e1": "07:00",
+          "s1": "11:00",
+          "e2": "13:00",
+          "s2": "17:00",
+          "descanso": false
+        },
+        "6": {
+          "diasemana": 6,
+          "e1": "07:00",
+          "s1": "11:00",
+          "e2": "13:00",
+          "s2": "17:00",
+          "descanso": false
+        },
+        "7": {
+          "diasemana": 7,
+          "e1": "07:00",
+          "s1": "11:00",
+          "e2": "",
+          "s2": "",
+          "descanso": false
+        }
+      },
+      "quadroNG": "07:00 11:00 / 13:00 17:00",
+      "relogioVinculo": "relogio3_navirai"
     },
     {
       "id": "colab_branch-2_867",
@@ -987,7 +4889,72 @@ window.GOLD_RECOVERY_DATA = window.BACKUP_DATA = {
       "naoRecebeVa": false,
       "dataDemissao": "",
       "registraPonto": true,
-      "trabalhaSabado": true
+      "trabalhaSabado": true,
+      "cpf": "02783973103",
+      "pis": "23715713867",
+      "cargo": "MOTORISTA I",
+      "idregistro": 5723,
+      "idowner": 7452,
+      "horariosSemana": {
+        "1": {
+          "diasemana": 1,
+          "e1": "",
+          "s1": "",
+          "e2": "",
+          "s2": "",
+          "descanso": true
+        },
+        "2": {
+          "diasemana": 2,
+          "e1": "07:00",
+          "s1": "11:00",
+          "e2": "13:00",
+          "s2": "17:00",
+          "descanso": false
+        },
+        "3": {
+          "diasemana": 3,
+          "e1": "07:00",
+          "s1": "11:00",
+          "e2": "13:00",
+          "s2": "17:00",
+          "descanso": false
+        },
+        "4": {
+          "diasemana": 4,
+          "e1": "07:00",
+          "s1": "11:00",
+          "e2": "13:00",
+          "s2": "17:00",
+          "descanso": false
+        },
+        "5": {
+          "diasemana": 5,
+          "e1": "07:00",
+          "s1": "11:00",
+          "e2": "13:00",
+          "s2": "17:00",
+          "descanso": false
+        },
+        "6": {
+          "diasemana": 6,
+          "e1": "07:00",
+          "s1": "11:00",
+          "e2": "13:00",
+          "s2": "17:00",
+          "descanso": false
+        },
+        "7": {
+          "diasemana": 7,
+          "e1": "07:00",
+          "s1": "11:00",
+          "e2": "",
+          "s2": "",
+          "descanso": false
+        }
+      },
+      "quadroNG": "07:00 11:00 / 13:00 17:00",
+      "relogioVinculo": "relogio3_navirai"
     },
     {
       "id": "colab_branch-2_890",
@@ -1002,7 +4969,8 @@ window.GOLD_RECOVERY_DATA = window.BACKUP_DATA = {
       "naoRecebeVa": false,
       "dataDemissao": "",
       "registraPonto": true,
-      "trabalhaSabado": true
+      "trabalhaSabado": true,
+      "relogioVinculo": "relogio3_navirai"
     },
     {
       "id": "colab_branch-2_946",
@@ -1017,7 +4985,72 @@ window.GOLD_RECOVERY_DATA = window.BACKUP_DATA = {
       "naoRecebeVa": false,
       "dataDemissao": "",
       "registraPonto": true,
-      "trabalhaSabado": true
+      "trabalhaSabado": true,
+      "cpf": "04362317198",
+      "pis": "23772567777",
+      "cargo": "AUXILIAR FINANCEIRO",
+      "idregistro": 5848,
+      "idowner": 7452,
+      "horariosSemana": {
+        "1": {
+          "diasemana": 1,
+          "e1": "",
+          "s1": "",
+          "e2": "",
+          "s2": "",
+          "descanso": true
+        },
+        "2": {
+          "diasemana": 2,
+          "e1": "07:00",
+          "s1": "11:00",
+          "e2": "13:00",
+          "s2": "17:00",
+          "descanso": false
+        },
+        "3": {
+          "diasemana": 3,
+          "e1": "07:00",
+          "s1": "11:00",
+          "e2": "13:00",
+          "s2": "17:00",
+          "descanso": false
+        },
+        "4": {
+          "diasemana": 4,
+          "e1": "07:00",
+          "s1": "11:00",
+          "e2": "13:00",
+          "s2": "17:00",
+          "descanso": false
+        },
+        "5": {
+          "diasemana": 5,
+          "e1": "07:00",
+          "s1": "11:00",
+          "e2": "13:00",
+          "s2": "17:00",
+          "descanso": false
+        },
+        "6": {
+          "diasemana": 6,
+          "e1": "07:00",
+          "s1": "11:00",
+          "e2": "13:00",
+          "s2": "17:00",
+          "descanso": false
+        },
+        "7": {
+          "diasemana": 7,
+          "e1": "07:00",
+          "s1": "11:00",
+          "e2": "",
+          "s2": "",
+          "descanso": false
+        }
+      },
+      "quadroNG": "07:00 11:00 / 13:00 17:00",
+      "relogioVinculo": "relogio3_navirai"
     },
     {
       "id": "colab_branch-2_952",
@@ -1032,7 +5065,72 @@ window.GOLD_RECOVERY_DATA = window.BACKUP_DATA = {
       "naoRecebeVa": false,
       "dataDemissao": "",
       "registraPonto": true,
-      "trabalhaSabado": true
+      "trabalhaSabado": true,
+      "cpf": "04877920846",
+      "pis": "12721685386",
+      "cargo": "VENDEDOR VAREJISTA",
+      "idregistro": 5856,
+      "idowner": 7452,
+      "horariosSemana": {
+        "1": {
+          "diasemana": 1,
+          "e1": "",
+          "s1": "",
+          "e2": "",
+          "s2": "",
+          "descanso": true
+        },
+        "2": {
+          "diasemana": 2,
+          "e1": "07:00",
+          "s1": "11:00",
+          "e2": "13:00",
+          "s2": "17:00",
+          "descanso": false
+        },
+        "3": {
+          "diasemana": 3,
+          "e1": "07:00",
+          "s1": "11:00",
+          "e2": "13:00",
+          "s2": "17:00",
+          "descanso": false
+        },
+        "4": {
+          "diasemana": 4,
+          "e1": "07:00",
+          "s1": "11:00",
+          "e2": "13:00",
+          "s2": "17:00",
+          "descanso": false
+        },
+        "5": {
+          "diasemana": 5,
+          "e1": "07:00",
+          "s1": "11:00",
+          "e2": "13:00",
+          "s2": "17:00",
+          "descanso": false
+        },
+        "6": {
+          "diasemana": 6,
+          "e1": "07:00",
+          "s1": "11:00",
+          "e2": "13:00",
+          "s2": "17:00",
+          "descanso": false
+        },
+        "7": {
+          "diasemana": 7,
+          "e1": "07:00",
+          "s1": "11:00",
+          "e2": "",
+          "s2": "",
+          "descanso": false
+        }
+      },
+      "quadroNG": "07:00 11:00 / 13:00 17:00",
+      "relogioVinculo": "relogio3_navirai"
     },
     {
       "id": "colab_branch-2_964",
@@ -1047,7 +5145,72 @@ window.GOLD_RECOVERY_DATA = window.BACKUP_DATA = {
       "naoRecebeVa": false,
       "dataDemissao": "",
       "registraPonto": false,
-      "trabalhaSabado": true
+      "trabalhaSabado": true,
+      "cpf": "04121220145",
+      "pis": "20952782213",
+      "cargo": "SUPERVISOR PRODUÇÃO",
+      "idregistro": 5874,
+      "idowner": 7452,
+      "horariosSemana": {
+        "1": {
+          "diasemana": 1,
+          "e1": "",
+          "s1": "",
+          "e2": "",
+          "s2": "",
+          "descanso": true
+        },
+        "2": {
+          "diasemana": 2,
+          "e1": "07:00",
+          "s1": "11:00",
+          "e2": "13:00",
+          "s2": "17:00",
+          "descanso": false
+        },
+        "3": {
+          "diasemana": 3,
+          "e1": "07:00",
+          "s1": "11:00",
+          "e2": "13:00",
+          "s2": "17:00",
+          "descanso": false
+        },
+        "4": {
+          "diasemana": 4,
+          "e1": "07:00",
+          "s1": "11:00",
+          "e2": "13:00",
+          "s2": "17:00",
+          "descanso": false
+        },
+        "5": {
+          "diasemana": 5,
+          "e1": "07:00",
+          "s1": "11:00",
+          "e2": "13:00",
+          "s2": "17:00",
+          "descanso": false
+        },
+        "6": {
+          "diasemana": 6,
+          "e1": "07:00",
+          "s1": "11:00",
+          "e2": "13:00",
+          "s2": "17:00",
+          "descanso": false
+        },
+        "7": {
+          "diasemana": 7,
+          "e1": "07:00",
+          "s1": "11:00",
+          "e2": "",
+          "s2": "",
+          "descanso": false
+        }
+      },
+      "quadroNG": "07:00 11:00 / 13:00 17:00",
+      "relogioVinculo": "relogio3_navirai"
     },
     {
       "id": "colab_branch-2_977",
@@ -1062,7 +5225,72 @@ window.GOLD_RECOVERY_DATA = window.BACKUP_DATA = {
       "naoRecebeVa": false,
       "dataDemissao": "",
       "registraPonto": true,
-      "trabalhaSabado": true
+      "trabalhaSabado": true,
+      "cpf": "07362451113",
+      "pis": "16567579820",
+      "cargo": "AUXILIAR DE PRODUÇÃO",
+      "idregistro": 5890,
+      "idowner": 7452,
+      "horariosSemana": {
+        "1": {
+          "diasemana": 1,
+          "e1": "",
+          "s1": "",
+          "e2": "",
+          "s2": "",
+          "descanso": true
+        },
+        "2": {
+          "diasemana": 2,
+          "e1": "07:00",
+          "s1": "11:00",
+          "e2": "13:00",
+          "s2": "17:00",
+          "descanso": false
+        },
+        "3": {
+          "diasemana": 3,
+          "e1": "07:00",
+          "s1": "11:00",
+          "e2": "13:00",
+          "s2": "17:00",
+          "descanso": false
+        },
+        "4": {
+          "diasemana": 4,
+          "e1": "07:00",
+          "s1": "11:00",
+          "e2": "13:00",
+          "s2": "17:00",
+          "descanso": false
+        },
+        "5": {
+          "diasemana": 5,
+          "e1": "07:00",
+          "s1": "11:00",
+          "e2": "13:00",
+          "s2": "17:00",
+          "descanso": false
+        },
+        "6": {
+          "diasemana": 6,
+          "e1": "07:00",
+          "s1": "11:00",
+          "e2": "13:00",
+          "s2": "17:00",
+          "descanso": false
+        },
+        "7": {
+          "diasemana": 7,
+          "e1": "07:00",
+          "s1": "11:00",
+          "e2": "",
+          "s2": "",
+          "descanso": false
+        }
+      },
+      "quadroNG": "07:00 11:00 / 13:00 17:00",
+      "relogioVinculo": "relogio3_navirai"
     },
     {
       "id": "colab_branch-2_990",
@@ -1079,7 +5307,8 @@ window.GOLD_RECOVERY_DATA = window.BACKUP_DATA = {
       "registraPonto": true,
       "trabalhaSabado": true,
       "isAprendiz": false,
-      "isDemitido": true
+      "isDemitido": true,
+      "relogioVinculo": "relogio3_navirai"
     },
     {
       "id": "colab_branch-2_993",
@@ -1094,7 +5323,72 @@ window.GOLD_RECOVERY_DATA = window.BACKUP_DATA = {
       "naoRecebeVa": false,
       "dataDemissao": "",
       "registraPonto": true,
-      "trabalhaSabado": true
+      "trabalhaSabado": true,
+      "cpf": "00565077120",
+      "pis": "12871436381",
+      "cargo": "AUXILIAR DE PRODUÇÃO",
+      "idregistro": 5913,
+      "idowner": 7452,
+      "horariosSemana": {
+        "1": {
+          "diasemana": 1,
+          "e1": "",
+          "s1": "",
+          "e2": "",
+          "s2": "",
+          "descanso": true
+        },
+        "2": {
+          "diasemana": 2,
+          "e1": "07:00",
+          "s1": "11:00",
+          "e2": "13:00",
+          "s2": "17:00",
+          "descanso": false
+        },
+        "3": {
+          "diasemana": 3,
+          "e1": "07:00",
+          "s1": "11:00",
+          "e2": "13:00",
+          "s2": "17:00",
+          "descanso": false
+        },
+        "4": {
+          "diasemana": 4,
+          "e1": "07:00",
+          "s1": "11:00",
+          "e2": "13:00",
+          "s2": "17:00",
+          "descanso": false
+        },
+        "5": {
+          "diasemana": 5,
+          "e1": "07:00",
+          "s1": "11:00",
+          "e2": "13:00",
+          "s2": "17:00",
+          "descanso": false
+        },
+        "6": {
+          "diasemana": 6,
+          "e1": "07:00",
+          "s1": "11:00",
+          "e2": "13:00",
+          "s2": "17:00",
+          "descanso": false
+        },
+        "7": {
+          "diasemana": 7,
+          "e1": "07:00",
+          "s1": "11:00",
+          "e2": "",
+          "s2": "",
+          "descanso": false
+        }
+      },
+      "quadroNG": "07:00 11:00 / 13:00 17:00",
+      "relogioVinculo": "relogio3_navirai"
     },
     {
       "id": "colab_branch-2_994",
@@ -1109,7 +5403,72 @@ window.GOLD_RECOVERY_DATA = window.BACKUP_DATA = {
       "naoRecebeVa": false,
       "dataDemissao": "",
       "registraPonto": true,
-      "trabalhaSabado": true
+      "trabalhaSabado": true,
+      "cpf": "07989779145",
+      "pis": "20758714089",
+      "cargo": "AUXILIAR FINANCEIRO",
+      "idregistro": 5914,
+      "idowner": 7452,
+      "horariosSemana": {
+        "1": {
+          "diasemana": 1,
+          "e1": "",
+          "s1": "",
+          "e2": "",
+          "s2": "",
+          "descanso": true
+        },
+        "2": {
+          "diasemana": 2,
+          "e1": "07:00",
+          "s1": "11:00",
+          "e2": "13:00",
+          "s2": "17:00",
+          "descanso": false
+        },
+        "3": {
+          "diasemana": 3,
+          "e1": "07:00",
+          "s1": "11:00",
+          "e2": "13:00",
+          "s2": "17:00",
+          "descanso": false
+        },
+        "4": {
+          "diasemana": 4,
+          "e1": "07:00",
+          "s1": "11:00",
+          "e2": "13:00",
+          "s2": "17:00",
+          "descanso": false
+        },
+        "5": {
+          "diasemana": 5,
+          "e1": "07:00",
+          "s1": "11:00",
+          "e2": "13:00",
+          "s2": "17:00",
+          "descanso": false
+        },
+        "6": {
+          "diasemana": 6,
+          "e1": "07:00",
+          "s1": "11:00",
+          "e2": "13:00",
+          "s2": "17:00",
+          "descanso": false
+        },
+        "7": {
+          "diasemana": 7,
+          "e1": "07:00",
+          "s1": "11:00",
+          "e2": "",
+          "s2": "",
+          "descanso": false
+        }
+      },
+      "quadroNG": "07:00 11:00 / 13:00 17:00",
+      "relogioVinculo": "relogio3_navirai"
     },
     {
       "id": "colab_branch-2_1009",
@@ -1124,7 +5483,72 @@ window.GOLD_RECOVERY_DATA = window.BACKUP_DATA = {
       "naoRecebeVa": false,
       "dataDemissao": "",
       "registraPonto": true,
-      "trabalhaSabado": true
+      "trabalhaSabado": true,
+      "cpf": "01230210148",
+      "pis": "12633501380",
+      "cargo": "SOLDADOR",
+      "idregistro": 5934,
+      "idowner": 7452,
+      "horariosSemana": {
+        "1": {
+          "diasemana": 1,
+          "e1": "",
+          "s1": "",
+          "e2": "",
+          "s2": "",
+          "descanso": true
+        },
+        "2": {
+          "diasemana": 2,
+          "e1": "07:00",
+          "s1": "11:00",
+          "e2": "13:00",
+          "s2": "17:00",
+          "descanso": false
+        },
+        "3": {
+          "diasemana": 3,
+          "e1": "07:00",
+          "s1": "11:00",
+          "e2": "13:00",
+          "s2": "17:00",
+          "descanso": false
+        },
+        "4": {
+          "diasemana": 4,
+          "e1": "07:00",
+          "s1": "11:00",
+          "e2": "13:00",
+          "s2": "17:00",
+          "descanso": false
+        },
+        "5": {
+          "diasemana": 5,
+          "e1": "07:00",
+          "s1": "11:00",
+          "e2": "13:00",
+          "s2": "17:00",
+          "descanso": false
+        },
+        "6": {
+          "diasemana": 6,
+          "e1": "07:00",
+          "s1": "11:00",
+          "e2": "13:00",
+          "s2": "17:00",
+          "descanso": false
+        },
+        "7": {
+          "diasemana": 7,
+          "e1": "07:00",
+          "s1": "11:00",
+          "e2": "",
+          "s2": "",
+          "descanso": false
+        }
+      },
+      "quadroNG": "07:00 11:00 / 13:00 17:00",
+      "relogioVinculo": "relogio3_navirai"
     },
     {
       "id": "colab_branch-3_363",
@@ -1139,7 +5563,72 @@ window.GOLD_RECOVERY_DATA = window.BACKUP_DATA = {
       "naoRecebeVa": false,
       "dataDemissao": "",
       "registraPonto": true,
-      "trabalhaSabado": true
+      "trabalhaSabado": true,
+      "cpf": "05048706293",
+      "pis": "26792369983",
+      "cargo": "ASSISTENTE ADMINISTRATIVO - APRENDIZ",
+      "idregistro": 5952,
+      "idowner": 6716,
+      "horariosSemana": {
+        "1": {
+          "diasemana": 1,
+          "e1": "",
+          "s1": "",
+          "e2": "",
+          "s2": "",
+          "descanso": true
+        },
+        "2": {
+          "diasemana": 2,
+          "e1": "08:00",
+          "s1": "12:00",
+          "e2": "",
+          "s2": "",
+          "descanso": false
+        },
+        "3": {
+          "diasemana": 3,
+          "e1": "08:00",
+          "s1": "12:00",
+          "e2": "",
+          "s2": "",
+          "descanso": false
+        },
+        "4": {
+          "diasemana": 4,
+          "e1": "08:00",
+          "s1": "12:00",
+          "e2": "",
+          "s2": "",
+          "descanso": false
+        },
+        "5": {
+          "diasemana": 5,
+          "e1": "08:00",
+          "s1": "12:00",
+          "e2": "",
+          "s2": "",
+          "descanso": false
+        },
+        "6": {
+          "diasemana": 6,
+          "e1": "08:00",
+          "s1": "12:00",
+          "e2": "",
+          "s2": "",
+          "descanso": false
+        },
+        "7": {
+          "diasemana": 7,
+          "e1": "08:00",
+          "s1": "12:00",
+          "e2": "",
+          "s2": "",
+          "descanso": false
+        }
+      },
+      "quadroNG": "08:00  12:00",
+      "relogioVinculo": "relogio4_caiari"
     },
     {
       "id": "colab_branch-3_234",
@@ -1154,7 +5643,72 @@ window.GOLD_RECOVERY_DATA = window.BACKUP_DATA = {
       "naoRecebeVa": false,
       "dataDemissao": "",
       "registraPonto": true,
-      "trabalhaSabado": true
+      "trabalhaSabado": true,
+      "cpf": "68376510215",
+      "pis": "12597087656",
+      "cargo": "OPERADOR DE EMPILHADEIRA II",
+      "idregistro": 1792,
+      "idowner": 7452,
+      "horariosSemana": {
+        "1": {
+          "diasemana": 1,
+          "e1": "",
+          "s1": "",
+          "e2": "",
+          "s2": "",
+          "descanso": true
+        },
+        "2": {
+          "diasemana": 2,
+          "e1": "08:00",
+          "s1": "12:00",
+          "e2": "14:00",
+          "s2": "18:00",
+          "descanso": false
+        },
+        "3": {
+          "diasemana": 3,
+          "e1": "08:00",
+          "s1": "12:00",
+          "e2": "14:00",
+          "s2": "18:00",
+          "descanso": false
+        },
+        "4": {
+          "diasemana": 4,
+          "e1": "08:00",
+          "s1": "12:00",
+          "e2": "14:00",
+          "s2": "18:00",
+          "descanso": false
+        },
+        "5": {
+          "diasemana": 5,
+          "e1": "08:00",
+          "s1": "12:00",
+          "e2": "14:00",
+          "s2": "18:00",
+          "descanso": false
+        },
+        "6": {
+          "diasemana": 6,
+          "e1": "08:00",
+          "s1": "12:00",
+          "e2": "14:00",
+          "s2": "18:00",
+          "descanso": false
+        },
+        "7": {
+          "diasemana": 7,
+          "e1": "08:00",
+          "s1": "12:00",
+          "e2": "",
+          "s2": "",
+          "descanso": false
+        }
+      },
+      "quadroNG": "08:00 12:00 / 14:00 18:00",
+      "relogioVinculo": "relogio4_caiari"
     },
     {
       "id": "colab_branch-3_241",
@@ -1169,7 +5723,72 @@ window.GOLD_RECOVERY_DATA = window.BACKUP_DATA = {
       "naoRecebeVa": false,
       "dataDemissao": "",
       "registraPonto": true,
-      "trabalhaSabado": true
+      "trabalhaSabado": true,
+      "cpf": "03449420232",
+      "pis": "16305043176",
+      "cargo": "AUXILIAR ADMINISTRATIVO",
+      "idregistro": 4440,
+      "idowner": 6716,
+      "horariosSemana": {
+        "1": {
+          "diasemana": 1,
+          "e1": "",
+          "s1": "",
+          "e2": "",
+          "s2": "",
+          "descanso": true
+        },
+        "2": {
+          "diasemana": 2,
+          "e1": "08:15",
+          "s1": "13:00",
+          "e2": "15:00",
+          "s2": "18:15",
+          "descanso": false
+        },
+        "3": {
+          "diasemana": 3,
+          "e1": "08:15",
+          "s1": "13:00",
+          "e2": "15:00",
+          "s2": "18:15",
+          "descanso": false
+        },
+        "4": {
+          "diasemana": 4,
+          "e1": "08:15",
+          "s1": "13:00",
+          "e2": "15:00",
+          "s2": "18:15",
+          "descanso": false
+        },
+        "5": {
+          "diasemana": 5,
+          "e1": "08:15",
+          "s1": "13:00",
+          "e2": "15:00",
+          "s2": "18:15",
+          "descanso": false
+        },
+        "6": {
+          "diasemana": 6,
+          "e1": "08:15",
+          "s1": "13:00",
+          "e2": "15:00",
+          "s2": "18:15",
+          "descanso": false
+        },
+        "7": {
+          "diasemana": 7,
+          "e1": "08:00",
+          "s1": "12:00",
+          "e2": "",
+          "s2": "",
+          "descanso": false
+        }
+      },
+      "quadroNG": "08:15  13:00 / 15:00  18:15",
+      "relogioVinculo": "relogio4_caiari"
     },
     {
       "id": "colab_branch-3_249",
@@ -1184,7 +5803,72 @@ window.GOLD_RECOVERY_DATA = window.BACKUP_DATA = {
       "naoRecebeVa": false,
       "dataDemissao": "",
       "registraPonto": true,
-      "trabalhaSabado": true
+      "trabalhaSabado": true,
+      "cpf": "02737680263",
+      "pis": "12087391175",
+      "cargo": "VENDEDOR NO COMERCIO VAREJISTA",
+      "idregistro": 4448,
+      "idowner": 6716,
+      "horariosSemana": {
+        "1": {
+          "diasemana": 1,
+          "e1": "",
+          "s1": "",
+          "e2": "",
+          "s2": "",
+          "descanso": true
+        },
+        "2": {
+          "diasemana": 2,
+          "e1": "07:30",
+          "s1": "12:00",
+          "e2": "14:00",
+          "s2": "17:30",
+          "descanso": false
+        },
+        "3": {
+          "diasemana": 3,
+          "e1": "07:30",
+          "s1": "12:00",
+          "e2": "14:00",
+          "s2": "17:30",
+          "descanso": false
+        },
+        "4": {
+          "diasemana": 4,
+          "e1": "07:30",
+          "s1": "12:00",
+          "e2": "14:00",
+          "s2": "17:30",
+          "descanso": false
+        },
+        "5": {
+          "diasemana": 5,
+          "e1": "07:30",
+          "s1": "12:00",
+          "e2": "14:00",
+          "s2": "17:30",
+          "descanso": false
+        },
+        "6": {
+          "diasemana": 6,
+          "e1": "07:30",
+          "s1": "12:00",
+          "e2": "14:00",
+          "s2": "17:30",
+          "descanso": false
+        },
+        "7": {
+          "diasemana": 7,
+          "e1": "07:30",
+          "s1": "11:30",
+          "e2": "",
+          "s2": "",
+          "descanso": false
+        }
+      },
+      "quadroNG": "07:30 12:00 / 14:00 17:30",
+      "relogioVinculo": "relogio4_caiari"
     },
     {
       "id": "colab_branch-3_250",
@@ -1199,7 +5883,72 @@ window.GOLD_RECOVERY_DATA = window.BACKUP_DATA = {
       "naoRecebeVa": false,
       "dataDemissao": "",
       "registraPonto": false,
-      "trabalhaSabado": true
+      "trabalhaSabado": true,
+      "cpf": "78338760200",
+      "pis": "20106456843",
+      "cargo": "ENCARREGADO DE DEPOSITO",
+      "idregistro": 4449,
+      "idowner": 6716,
+      "horariosSemana": {
+        "1": {
+          "diasemana": 1,
+          "e1": "",
+          "s1": "",
+          "e2": "",
+          "s2": "",
+          "descanso": true
+        },
+        "2": {
+          "diasemana": 2,
+          "e1": "08:00",
+          "s1": "13:00",
+          "e2": "15:00",
+          "s2": "18:00",
+          "descanso": false
+        },
+        "3": {
+          "diasemana": 3,
+          "e1": "08:00",
+          "s1": "13:00",
+          "e2": "15:00",
+          "s2": "18:00",
+          "descanso": false
+        },
+        "4": {
+          "diasemana": 4,
+          "e1": "08:00",
+          "s1": "13:00",
+          "e2": "15:00",
+          "s2": "18:00",
+          "descanso": false
+        },
+        "5": {
+          "diasemana": 5,
+          "e1": "08:00",
+          "s1": "13:00",
+          "e2": "15:00",
+          "s2": "18:00",
+          "descanso": false
+        },
+        "6": {
+          "diasemana": 6,
+          "e1": "08:00",
+          "s1": "13:00",
+          "e2": "15:00",
+          "s2": "18:00",
+          "descanso": false
+        },
+        "7": {
+          "diasemana": 7,
+          "e1": "08:00",
+          "s1": "12:00",
+          "e2": "",
+          "s2": "",
+          "descanso": false
+        }
+      },
+      "quadroNG": "08:00 13:00 / 15:00 18:00",
+      "relogioVinculo": "relogio4_caiari"
     },
     {
       "id": "colab_branch-3_255",
@@ -1214,7 +5963,72 @@ window.GOLD_RECOVERY_DATA = window.BACKUP_DATA = {
       "naoRecebeVa": false,
       "dataDemissao": "",
       "registraPonto": true,
-      "trabalhaSabado": true
+      "trabalhaSabado": true,
+      "cpf": "35112930225",
+      "pis": "12420766026",
+      "cargo": "ZELADORA",
+      "idregistro": 4459,
+      "idowner": 6716,
+      "horariosSemana": {
+        "1": {
+          "diasemana": 1,
+          "e1": "",
+          "s1": "",
+          "e2": "",
+          "s2": "",
+          "descanso": true
+        },
+        "2": {
+          "diasemana": 2,
+          "e1": "07:15",
+          "s1": "11:00",
+          "e2": "13:00",
+          "s2": "17:15",
+          "descanso": false
+        },
+        "3": {
+          "diasemana": 3,
+          "e1": "07:15",
+          "s1": "11:00",
+          "e2": "13:00",
+          "s2": "17:15",
+          "descanso": false
+        },
+        "4": {
+          "diasemana": 4,
+          "e1": "07:15",
+          "s1": "11:00",
+          "e2": "13:00",
+          "s2": "17:15",
+          "descanso": false
+        },
+        "5": {
+          "diasemana": 5,
+          "e1": "07:15",
+          "s1": "11:00",
+          "e2": "13:00",
+          "s2": "17:15",
+          "descanso": false
+        },
+        "6": {
+          "diasemana": 6,
+          "e1": "07:15",
+          "s1": "11:00",
+          "e2": "13:00",
+          "s2": "17:15",
+          "descanso": false
+        },
+        "7": {
+          "diasemana": 7,
+          "e1": "07:15",
+          "s1": "11:15",
+          "e2": "",
+          "s2": "",
+          "descanso": false
+        }
+      },
+      "quadroNG": "07:15 11:00 / 13:00 17:15",
+      "relogioVinculo": "relogio4_caiari"
     },
     {
       "id": "colab_branch-3_256",
@@ -1229,7 +6043,72 @@ window.GOLD_RECOVERY_DATA = window.BACKUP_DATA = {
       "naoRecebeVa": false,
       "dataDemissao": "",
       "registraPonto": false,
-      "trabalhaSabado": true
+      "trabalhaSabado": true,
+      "cpf": "63593416620",
+      "pis": "12079726724",
+      "cargo": "VENDEDOR NO COMERCIO VAREJISTA",
+      "idregistro": 4460,
+      "idowner": 6716,
+      "horariosSemana": {
+        "1": {
+          "diasemana": 1,
+          "e1": "",
+          "s1": "",
+          "e2": "",
+          "s2": "",
+          "descanso": true
+        },
+        "2": {
+          "diasemana": 2,
+          "e1": "07:30",
+          "s1": "11:00",
+          "e2": "13:00",
+          "s2": "17:30",
+          "descanso": false
+        },
+        "3": {
+          "diasemana": 3,
+          "e1": "07:30",
+          "s1": "11:00",
+          "e2": "13:00",
+          "s2": "17:30",
+          "descanso": false
+        },
+        "4": {
+          "diasemana": 4,
+          "e1": "07:30",
+          "s1": "11:00",
+          "e2": "13:00",
+          "s2": "17:30",
+          "descanso": false
+        },
+        "5": {
+          "diasemana": 5,
+          "e1": "07:30",
+          "s1": "11:00",
+          "e2": "13:00",
+          "s2": "17:30",
+          "descanso": false
+        },
+        "6": {
+          "diasemana": 6,
+          "e1": "07:30",
+          "s1": "11:00",
+          "e2": "13:00",
+          "s2": "17:30",
+          "descanso": false
+        },
+        "7": {
+          "diasemana": 7,
+          "e1": "07:30",
+          "s1": "11:30",
+          "e2": "",
+          "s2": "",
+          "descanso": false
+        }
+      },
+      "quadroNG": "07:30  11:00 / 13:00  17:30",
+      "relogioVinculo": "relogio4_caiari"
     },
     {
       "id": "colab_branch-3_294",
@@ -1244,7 +6123,72 @@ window.GOLD_RECOVERY_DATA = window.BACKUP_DATA = {
       "naoRecebeVa": false,
       "dataDemissao": "",
       "registraPonto": true,
-      "trabalhaSabado": true
+      "trabalhaSabado": true,
+      "cpf": "28998650215",
+      "pis": "12819715658",
+      "cargo": "MOTORISTA DE FURGAO OU VEICULO SIMILAR",
+      "idregistro": 5637,
+      "idowner": 6716,
+      "horariosSemana": {
+        "1": {
+          "diasemana": 1,
+          "e1": "",
+          "s1": "",
+          "e2": "",
+          "s2": "",
+          "descanso": true
+        },
+        "2": {
+          "diasemana": 2,
+          "e1": "07:30",
+          "s1": "12:00",
+          "e2": "14:00",
+          "s2": "17:30",
+          "descanso": false
+        },
+        "3": {
+          "diasemana": 3,
+          "e1": "07:30",
+          "s1": "12:00",
+          "e2": "14:00",
+          "s2": "17:30",
+          "descanso": false
+        },
+        "4": {
+          "diasemana": 4,
+          "e1": "07:30",
+          "s1": "12:00",
+          "e2": "14:00",
+          "s2": "17:30",
+          "descanso": false
+        },
+        "5": {
+          "diasemana": 5,
+          "e1": "07:30",
+          "s1": "12:00",
+          "e2": "14:00",
+          "s2": "17:30",
+          "descanso": false
+        },
+        "6": {
+          "diasemana": 6,
+          "e1": "07:30",
+          "s1": "12:00",
+          "e2": "14:00",
+          "s2": "17:30",
+          "descanso": false
+        },
+        "7": {
+          "diasemana": 7,
+          "e1": "07:30",
+          "s1": "11:30",
+          "e2": "",
+          "s2": "",
+          "descanso": false
+        }
+      },
+      "quadroNG": "07:30 12:00 / 14:00 17:30",
+      "relogioVinculo": "relogio4_caiari"
     },
     {
       "id": "colab_branch-3_295",
@@ -1259,7 +6203,72 @@ window.GOLD_RECOVERY_DATA = window.BACKUP_DATA = {
       "naoRecebeVa": false,
       "dataDemissao": "",
       "registraPonto": true,
-      "trabalhaSabado": true
+      "trabalhaSabado": true,
+      "cpf": "04098189259",
+      "pis": "26893413376",
+      "cargo": "VENDEDOR NO COMERCIO VAREJISTA",
+      "idregistro": 5638,
+      "idowner": 6716,
+      "horariosSemana": {
+        "1": {
+          "diasemana": 1,
+          "e1": "",
+          "s1": "",
+          "e2": "",
+          "s2": "",
+          "descanso": true
+        },
+        "2": {
+          "diasemana": 2,
+          "e1": "08:15",
+          "s1": "13:00",
+          "e2": "15:00",
+          "s2": "18:15",
+          "descanso": false
+        },
+        "3": {
+          "diasemana": 3,
+          "e1": "08:15",
+          "s1": "13:00",
+          "e2": "15:00",
+          "s2": "18:15",
+          "descanso": false
+        },
+        "4": {
+          "diasemana": 4,
+          "e1": "08:15",
+          "s1": "13:00",
+          "e2": "15:00",
+          "s2": "18:15",
+          "descanso": false
+        },
+        "5": {
+          "diasemana": 5,
+          "e1": "08:15",
+          "s1": "13:00",
+          "e2": "15:00",
+          "s2": "18:15",
+          "descanso": false
+        },
+        "6": {
+          "diasemana": 6,
+          "e1": "08:15",
+          "s1": "13:00",
+          "e2": "15:00",
+          "s2": "18:15",
+          "descanso": false
+        },
+        "7": {
+          "diasemana": 7,
+          "e1": "08:00",
+          "s1": "12:00",
+          "e2": "",
+          "s2": "",
+          "descanso": false
+        }
+      },
+      "quadroNG": "08:15  13:00 / 15:00  18:15",
+      "relogioVinculo": "relogio4_caiari"
     },
     {
       "id": "colab_branch-3_313",
@@ -1274,7 +6283,72 @@ window.GOLD_RECOVERY_DATA = window.BACKUP_DATA = {
       "naoRecebeVa": false,
       "dataDemissao": "",
       "registraPonto": true,
-      "trabalhaSabado": true
+      "trabalhaSabado": true,
+      "cpf": "08556085105",
+      "pis": "16308436837",
+      "cargo": "VENDEDOR NO COMERCIO VAREJISTA",
+      "idregistro": 5746,
+      "idowner": 6716,
+      "horariosSemana": {
+        "1": {
+          "diasemana": 1,
+          "e1": "",
+          "s1": "",
+          "e2": "",
+          "s2": "",
+          "descanso": true
+        },
+        "2": {
+          "diasemana": 2,
+          "e1": "07:30",
+          "s1": "11:00",
+          "e2": "13:00",
+          "s2": "17:30",
+          "descanso": false
+        },
+        "3": {
+          "diasemana": 3,
+          "e1": "07:30",
+          "s1": "11:00",
+          "e2": "13:00",
+          "s2": "17:30",
+          "descanso": false
+        },
+        "4": {
+          "diasemana": 4,
+          "e1": "07:30",
+          "s1": "11:00",
+          "e2": "13:00",
+          "s2": "17:30",
+          "descanso": false
+        },
+        "5": {
+          "diasemana": 5,
+          "e1": "07:30",
+          "s1": "11:00",
+          "e2": "13:00",
+          "s2": "17:30",
+          "descanso": false
+        },
+        "6": {
+          "diasemana": 6,
+          "e1": "07:30",
+          "s1": "11:00",
+          "e2": "13:00",
+          "s2": "17:30",
+          "descanso": false
+        },
+        "7": {
+          "diasemana": 7,
+          "e1": "07:30",
+          "s1": "11:30",
+          "e2": "",
+          "s2": "",
+          "descanso": false
+        }
+      },
+      "quadroNG": "07:30  11:00 / 13:00  17:30",
+      "relogioVinculo": "relogio4_caiari"
     },
     {
       "id": "colab_branch-3_335",
@@ -1289,7 +6363,72 @@ window.GOLD_RECOVERY_DATA = window.BACKUP_DATA = {
       "naoRecebeVa": false,
       "dataDemissao": "",
       "registraPonto": true,
-      "trabalhaSabado": true
+      "trabalhaSabado": true,
+      "cpf": "79469671287",
+      "pis": "12774827657",
+      "cargo": "CONFERENTE DE CARGA E DESCARGA",
+      "idregistro": 5815,
+      "idowner": 6716,
+      "horariosSemana": {
+        "1": {
+          "diasemana": 1,
+          "e1": "",
+          "s1": "",
+          "e2": "",
+          "s2": "",
+          "descanso": true
+        },
+        "2": {
+          "diasemana": 2,
+          "e1": "08:00",
+          "s1": "12:00",
+          "e2": "14:00",
+          "s2": "18:00",
+          "descanso": false
+        },
+        "3": {
+          "diasemana": 3,
+          "e1": "08:00",
+          "s1": "12:00",
+          "e2": "14:00",
+          "s2": "18:00",
+          "descanso": false
+        },
+        "4": {
+          "diasemana": 4,
+          "e1": "08:00",
+          "s1": "12:00",
+          "e2": "14:00",
+          "s2": "18:00",
+          "descanso": false
+        },
+        "5": {
+          "diasemana": 5,
+          "e1": "08:00",
+          "s1": "12:00",
+          "e2": "14:00",
+          "s2": "18:00",
+          "descanso": false
+        },
+        "6": {
+          "diasemana": 6,
+          "e1": "08:00",
+          "s1": "12:00",
+          "e2": "14:00",
+          "s2": "18:00",
+          "descanso": false
+        },
+        "7": {
+          "diasemana": 7,
+          "e1": "08:00",
+          "s1": "12:00",
+          "e2": "",
+          "s2": "",
+          "descanso": false
+        }
+      },
+      "quadroNG": "08:00 12:00 / 14:00 18:00",
+      "relogioVinculo": "relogio4_caiari"
     },
     {
       "id": "colab_branch-3_336",
@@ -1304,7 +6443,72 @@ window.GOLD_RECOVERY_DATA = window.BACKUP_DATA = {
       "naoRecebeVa": false,
       "dataDemissao": "",
       "registraPonto": true,
-      "trabalhaSabado": true
+      "trabalhaSabado": true,
+      "cpf": "61531138268",
+      "pis": "12647551407",
+      "cargo": "VENDEDOR ATACADISTA",
+      "idregistro": 1959,
+      "idowner": 7452,
+      "horariosSemana": {
+        "1": {
+          "diasemana": 1,
+          "e1": "",
+          "s1": "",
+          "e2": "",
+          "s2": "",
+          "descanso": true
+        },
+        "2": {
+          "diasemana": 2,
+          "e1": "08:00",
+          "s1": "12:00",
+          "e2": "14:00",
+          "s2": "18:00",
+          "descanso": false
+        },
+        "3": {
+          "diasemana": 3,
+          "e1": "08:00",
+          "s1": "12:00",
+          "e2": "14:00",
+          "s2": "18:00",
+          "descanso": false
+        },
+        "4": {
+          "diasemana": 4,
+          "e1": "08:00",
+          "s1": "12:00",
+          "e2": "14:00",
+          "s2": "18:00",
+          "descanso": false
+        },
+        "5": {
+          "diasemana": 5,
+          "e1": "08:00",
+          "s1": "12:00",
+          "e2": "14:00",
+          "s2": "18:00",
+          "descanso": false
+        },
+        "6": {
+          "diasemana": 6,
+          "e1": "08:00",
+          "s1": "12:00",
+          "e2": "14:00",
+          "s2": "18:00",
+          "descanso": false
+        },
+        "7": {
+          "diasemana": 7,
+          "e1": "08:00",
+          "s1": "12:00",
+          "e2": "",
+          "s2": "",
+          "descanso": false
+        }
+      },
+      "quadroNG": "08:00 12:00 / 14:00 18:00",
+      "relogioVinculo": "folha_manual"
     },
     {
       "id": "colab_branch-3_343",
@@ -1319,7 +6523,72 @@ window.GOLD_RECOVERY_DATA = window.BACKUP_DATA = {
       "naoRecebeVa": false,
       "dataDemissao": "",
       "registraPonto": true,
-      "trabalhaSabado": true
+      "trabalhaSabado": true,
+      "cpf": "14421619736",
+      "pis": "13299034587",
+      "cargo": "VENDEDOR NO COMERCIO VAREJISTA",
+      "idregistro": 5872,
+      "idowner": 6716,
+      "horariosSemana": {
+        "1": {
+          "diasemana": 1,
+          "e1": "",
+          "s1": "",
+          "e2": "",
+          "s2": "",
+          "descanso": true
+        },
+        "2": {
+          "diasemana": 2,
+          "e1": "08:00",
+          "s1": "13:00",
+          "e2": "15:00",
+          "s2": "18:00",
+          "descanso": false
+        },
+        "3": {
+          "diasemana": 3,
+          "e1": "08:00",
+          "s1": "13:00",
+          "e2": "15:00",
+          "s2": "18:00",
+          "descanso": false
+        },
+        "4": {
+          "diasemana": 4,
+          "e1": "08:00",
+          "s1": "13:00",
+          "e2": "15:00",
+          "s2": "18:00",
+          "descanso": false
+        },
+        "5": {
+          "diasemana": 5,
+          "e1": "08:00",
+          "s1": "13:00",
+          "e2": "15:00",
+          "s2": "18:00",
+          "descanso": false
+        },
+        "6": {
+          "diasemana": 6,
+          "e1": "08:00",
+          "s1": "13:00",
+          "e2": "15:00",
+          "s2": "18:00",
+          "descanso": false
+        },
+        "7": {
+          "diasemana": 7,
+          "e1": "08:00",
+          "s1": "12:00",
+          "e2": "",
+          "s2": "",
+          "descanso": false
+        }
+      },
+      "quadroNG": "08:00 13:00 / 15:00 18:00",
+      "relogioVinculo": "relogio4_caiari"
     },
     {
       "id": "colab_branch-3_344",
@@ -1334,7 +6603,72 @@ window.GOLD_RECOVERY_DATA = window.BACKUP_DATA = {
       "naoRecebeVa": false,
       "dataDemissao": "",
       "registraPonto": true,
-      "trabalhaSabado": true
+      "trabalhaSabado": true,
+      "cpf": "71106481178",
+      "pis": "13161374745",
+      "cargo": "MOTORISTA DE FURGAO OU VEICULO SIMILAR",
+      "idregistro": 5884,
+      "idowner": 6716,
+      "horariosSemana": {
+        "1": {
+          "diasemana": 1,
+          "e1": "",
+          "s1": "",
+          "e2": "",
+          "s2": "",
+          "descanso": true
+        },
+        "2": {
+          "diasemana": 2,
+          "e1": "07:30",
+          "s1": "12:00",
+          "e2": "14:00",
+          "s2": "17:30",
+          "descanso": false
+        },
+        "3": {
+          "diasemana": 3,
+          "e1": "07:30",
+          "s1": "12:00",
+          "e2": "14:00",
+          "s2": "17:30",
+          "descanso": false
+        },
+        "4": {
+          "diasemana": 4,
+          "e1": "07:30",
+          "s1": "12:00",
+          "e2": "14:00",
+          "s2": "17:30",
+          "descanso": false
+        },
+        "5": {
+          "diasemana": 5,
+          "e1": "07:30",
+          "s1": "12:00",
+          "e2": "14:00",
+          "s2": "17:30",
+          "descanso": false
+        },
+        "6": {
+          "diasemana": 6,
+          "e1": "07:30",
+          "s1": "12:00",
+          "e2": "14:00",
+          "s2": "17:30",
+          "descanso": false
+        },
+        "7": {
+          "diasemana": 7,
+          "e1": "07:30",
+          "s1": "11:30",
+          "e2": "",
+          "s2": "",
+          "descanso": false
+        }
+      },
+      "quadroNG": "07:30 12:00 / 14:00 17:30",
+      "relogioVinculo": "relogio4_caiari"
     },
     {
       "id": "colab_branch-3_350",
@@ -1349,7 +6683,72 @@ window.GOLD_RECOVERY_DATA = window.BACKUP_DATA = {
       "naoRecebeVa": false,
       "dataDemissao": "",
       "registraPonto": true,
-      "trabalhaSabado": true
+      "trabalhaSabado": true,
+      "cpf": "03780144204",
+      "pis": "27147644501",
+      "cargo": "Aux. de Deposito",
+      "idregistro": 5905,
+      "idowner": 6716,
+      "horariosSemana": {
+        "1": {
+          "diasemana": 1,
+          "e1": "",
+          "s1": "",
+          "e2": "",
+          "s2": "",
+          "descanso": true
+        },
+        "2": {
+          "diasemana": 2,
+          "e1": "08:00",
+          "s1": "12:00",
+          "e2": "14:00",
+          "s2": "18:00",
+          "descanso": false
+        },
+        "3": {
+          "diasemana": 3,
+          "e1": "08:00",
+          "s1": "12:00",
+          "e2": "14:00",
+          "s2": "18:00",
+          "descanso": false
+        },
+        "4": {
+          "diasemana": 4,
+          "e1": "08:00",
+          "s1": "12:00",
+          "e2": "14:00",
+          "s2": "18:00",
+          "descanso": false
+        },
+        "5": {
+          "diasemana": 5,
+          "e1": "08:00",
+          "s1": "12:00",
+          "e2": "14:00",
+          "s2": "18:00",
+          "descanso": false
+        },
+        "6": {
+          "diasemana": 6,
+          "e1": "08:00",
+          "s1": "12:00",
+          "e2": "14:00",
+          "s2": "18:00",
+          "descanso": false
+        },
+        "7": {
+          "diasemana": 7,
+          "e1": "08:00",
+          "s1": "12:00",
+          "e2": "",
+          "s2": "",
+          "descanso": false
+        }
+      },
+      "quadroNG": "08:00 12:00 / 14:00 18:00",
+      "relogioVinculo": "relogio4_caiari"
     },
     {
       "id": "colab_branch-3_356",
@@ -1364,7 +6763,72 @@ window.GOLD_RECOVERY_DATA = window.BACKUP_DATA = {
       "naoRecebeVa": false,
       "dataDemissao": "",
       "registraPonto": true,
-      "trabalhaSabado": true
+      "trabalhaSabado": true,
+      "cpf": "00016592271",
+      "pis": "16018433592",
+      "cargo": "AUXILIAR FINANCEIRO",
+      "idregistro": 5932,
+      "idowner": 6716,
+      "horariosSemana": {
+        "1": {
+          "diasemana": 1,
+          "e1": "",
+          "s1": "",
+          "e2": "",
+          "s2": "",
+          "descanso": true
+        },
+        "2": {
+          "diasemana": 2,
+          "e1": "07:15",
+          "s1": "11:15",
+          "e2": "13:15",
+          "s2": "17:15",
+          "descanso": false
+        },
+        "3": {
+          "diasemana": 3,
+          "e1": "07:15",
+          "s1": "11:15",
+          "e2": "13:15",
+          "s2": "17:15",
+          "descanso": false
+        },
+        "4": {
+          "diasemana": 4,
+          "e1": "07:15",
+          "s1": "11:15",
+          "e2": "13:15",
+          "s2": "17:15",
+          "descanso": false
+        },
+        "5": {
+          "diasemana": 5,
+          "e1": "07:15",
+          "s1": "11:15",
+          "e2": "13:15",
+          "s2": "17:15",
+          "descanso": false
+        },
+        "6": {
+          "diasemana": 6,
+          "e1": "07:15",
+          "s1": "11:15",
+          "e2": "13:15",
+          "s2": "17:15",
+          "descanso": false
+        },
+        "7": {
+          "diasemana": 7,
+          "e1": "07:15",
+          "s1": "11:15",
+          "e2": "",
+          "s2": "",
+          "descanso": false
+        }
+      },
+      "quadroNG": "07:15 - 11:15 / 13:15 - 17:15",
+      "relogioVinculo": "relogio4_caiari"
     },
     {
       "id": "colab_branch-3_358",
@@ -1379,7 +6843,72 @@ window.GOLD_RECOVERY_DATA = window.BACKUP_DATA = {
       "naoRecebeVa": false,
       "dataDemissao": "",
       "registraPonto": true,
-      "trabalhaSabado": true
+      "trabalhaSabado": true,
+      "cpf": "01743035217",
+      "pis": "16494141065",
+      "cargo": "AUXILIAR DE ESTOQUE",
+      "idregistro": 5938,
+      "idowner": 6716,
+      "horariosSemana": {
+        "1": {
+          "diasemana": 1,
+          "e1": "",
+          "s1": "",
+          "e2": "",
+          "s2": "",
+          "descanso": true
+        },
+        "2": {
+          "diasemana": 2,
+          "e1": "07:30",
+          "s1": "12:00",
+          "e2": "14:00",
+          "s2": "17:30",
+          "descanso": false
+        },
+        "3": {
+          "diasemana": 3,
+          "e1": "07:30",
+          "s1": "12:00",
+          "e2": "14:00",
+          "s2": "17:30",
+          "descanso": false
+        },
+        "4": {
+          "diasemana": 4,
+          "e1": "07:30",
+          "s1": "12:00",
+          "e2": "14:00",
+          "s2": "17:30",
+          "descanso": false
+        },
+        "5": {
+          "diasemana": 5,
+          "e1": "07:30",
+          "s1": "12:00",
+          "e2": "14:00",
+          "s2": "17:30",
+          "descanso": false
+        },
+        "6": {
+          "diasemana": 6,
+          "e1": "07:30",
+          "s1": "12:00",
+          "e2": "14:00",
+          "s2": "17:30",
+          "descanso": false
+        },
+        "7": {
+          "diasemana": 7,
+          "e1": "07:30",
+          "s1": "11:30",
+          "e2": "",
+          "s2": "",
+          "descanso": false
+        }
+      },
+      "quadroNG": "07:30 12:00 / 14:00 17:30",
+      "relogioVinculo": "relogio4_caiari"
     },
     {
       "id": "colab_branch-3_360",
@@ -1394,7 +6923,72 @@ window.GOLD_RECOVERY_DATA = window.BACKUP_DATA = {
       "naoRecebeVa": false,
       "dataDemissao": "",
       "registraPonto": true,
-      "trabalhaSabado": true
+      "trabalhaSabado": true,
+      "cpf": "04387621265",
+      "pis": "21389011870",
+      "cargo": "AUXILIAR FINANCEIRO",
+      "idregistro": 5944,
+      "idowner": 6716,
+      "horariosSemana": {
+        "1": {
+          "diasemana": 1,
+          "e1": "",
+          "s1": "",
+          "e2": "",
+          "s2": "",
+          "descanso": true
+        },
+        "2": {
+          "diasemana": 2,
+          "e1": "08:15",
+          "s1": "13:15",
+          "e2": "15:15",
+          "s2": "18:15",
+          "descanso": false
+        },
+        "3": {
+          "diasemana": 3,
+          "e1": "08:15",
+          "s1": "13:15",
+          "e2": "15:15",
+          "s2": "18:15",
+          "descanso": false
+        },
+        "4": {
+          "diasemana": 4,
+          "e1": "08:15",
+          "s1": "13:15",
+          "e2": "15:15",
+          "s2": "18:15",
+          "descanso": false
+        },
+        "5": {
+          "diasemana": 5,
+          "e1": "08:15",
+          "s1": "13:15",
+          "e2": "15:15",
+          "s2": "18:15",
+          "descanso": false
+        },
+        "6": {
+          "diasemana": 6,
+          "e1": "08:15",
+          "s1": "13:15",
+          "e2": "15:15",
+          "s2": "18:15",
+          "descanso": false
+        },
+        "7": {
+          "diasemana": 7,
+          "e1": "08:15",
+          "s1": "12:15",
+          "e2": "",
+          "s2": "",
+          "descanso": false
+        }
+      },
+      "quadroNG": "08:15 13:15 / 15:15 18:15",
+      "relogioVinculo": "relogio4_caiari"
     },
     {
       "id": "colab_branch-3_361",
@@ -1409,7 +7003,72 @@ window.GOLD_RECOVERY_DATA = window.BACKUP_DATA = {
       "naoRecebeVa": false,
       "dataDemissao": "",
       "registraPonto": true,
-      "trabalhaSabado": true
+      "trabalhaSabado": true,
+      "cpf": "94346542204",
+      "pis": "20749145670",
+      "cargo": "AUXILIAR FINANCEIRO III",
+      "idregistro": 1989,
+      "idowner": 7452,
+      "horariosSemana": {
+        "1": {
+          "diasemana": 1,
+          "e1": "",
+          "s1": "",
+          "e2": "",
+          "s2": "",
+          "descanso": true
+        },
+        "2": {
+          "diasemana": 2,
+          "e1": "08:00",
+          "s1": "12:00",
+          "e2": "14:00",
+          "s2": "18:00",
+          "descanso": false
+        },
+        "3": {
+          "diasemana": 3,
+          "e1": "08:00",
+          "s1": "12:00",
+          "e2": "14:00",
+          "s2": "18:00",
+          "descanso": false
+        },
+        "4": {
+          "diasemana": 4,
+          "e1": "08:00",
+          "s1": "12:00",
+          "e2": "14:00",
+          "s2": "18:00",
+          "descanso": false
+        },
+        "5": {
+          "diasemana": 5,
+          "e1": "08:00",
+          "s1": "12:00",
+          "e2": "14:00",
+          "s2": "18:00",
+          "descanso": false
+        },
+        "6": {
+          "diasemana": 6,
+          "e1": "08:00",
+          "s1": "12:00",
+          "e2": "14:00",
+          "s2": "18:00",
+          "descanso": false
+        },
+        "7": {
+          "diasemana": 7,
+          "e1": "08:00",
+          "s1": "12:00",
+          "e2": "",
+          "s2": "",
+          "descanso": false
+        }
+      },
+      "quadroNG": "08:00 12:00 / 14:00 18:00",
+      "relogioVinculo": "relogio4_caiari"
     },
     {
       "id": "colab_branch-3_364",
@@ -1424,7 +7083,72 @@ window.GOLD_RECOVERY_DATA = window.BACKUP_DATA = {
       "naoRecebeVa": false,
       "dataDemissao": "",
       "registraPonto": true,
-      "trabalhaSabado": true
+      "trabalhaSabado": true,
+      "cpf": "04151161201",
+      "pis": "20749034666",
+      "cargo": "AUXILIAR FINANCEIRO",
+      "idregistro": 5955,
+      "idowner": 6716,
+      "horariosSemana": {
+        "1": {
+          "diasemana": 1,
+          "e1": "",
+          "s1": "",
+          "e2": "",
+          "s2": "",
+          "descanso": true
+        },
+        "2": {
+          "diasemana": 2,
+          "e1": "07:40",
+          "s1": "11:40",
+          "e2": "13:40",
+          "s2": "17:40",
+          "descanso": false
+        },
+        "3": {
+          "diasemana": 3,
+          "e1": "07:40",
+          "s1": "11:40",
+          "e2": "13:40",
+          "s2": "17:40",
+          "descanso": false
+        },
+        "4": {
+          "diasemana": 4,
+          "e1": "07:40",
+          "s1": "11:40",
+          "e2": "13:40",
+          "s2": "17:40",
+          "descanso": false
+        },
+        "5": {
+          "diasemana": 5,
+          "e1": "07:40",
+          "s1": "11:40",
+          "e2": "13:40",
+          "s2": "17:40",
+          "descanso": false
+        },
+        "6": {
+          "diasemana": 6,
+          "e1": "07:40",
+          "s1": "11:40",
+          "e2": "13:40",
+          "s2": "17:40",
+          "descanso": false
+        },
+        "7": {
+          "diasemana": 7,
+          "e1": "07:40",
+          "s1": "11:40",
+          "e2": "",
+          "s2": "",
+          "descanso": false
+        }
+      },
+      "quadroNG": "07:40  11:40 / 13:40  17:40",
+      "relogioVinculo": "relogio4_caiari"
     },
     {
       "id": "colab_branch-3_365",
@@ -1439,7 +7163,72 @@ window.GOLD_RECOVERY_DATA = window.BACKUP_DATA = {
       "naoRecebeVa": false,
       "dataDemissao": "",
       "registraPonto": true,
-      "trabalhaSabado": true
+      "trabalhaSabado": true,
+      "cpf": "08767735282",
+      "pis": "16490502187",
+      "cargo": "Aux. de Deposito",
+      "idregistro": 5963,
+      "idowner": 6716,
+      "horariosSemana": {
+        "1": {
+          "diasemana": 1,
+          "e1": "",
+          "s1": "",
+          "e2": "",
+          "s2": "",
+          "descanso": true
+        },
+        "2": {
+          "diasemana": 2,
+          "e1": "07:30",
+          "s1": "12:00",
+          "e2": "14:00",
+          "s2": "17:30",
+          "descanso": false
+        },
+        "3": {
+          "diasemana": 3,
+          "e1": "07:30",
+          "s1": "12:00",
+          "e2": "14:00",
+          "s2": "17:30",
+          "descanso": false
+        },
+        "4": {
+          "diasemana": 4,
+          "e1": "07:30",
+          "s1": "12:00",
+          "e2": "14:00",
+          "s2": "17:30",
+          "descanso": false
+        },
+        "5": {
+          "diasemana": 5,
+          "e1": "07:30",
+          "s1": "12:00",
+          "e2": "14:00",
+          "s2": "17:30",
+          "descanso": false
+        },
+        "6": {
+          "diasemana": 6,
+          "e1": "07:30",
+          "s1": "12:00",
+          "e2": "14:00",
+          "s2": "17:30",
+          "descanso": false
+        },
+        "7": {
+          "diasemana": 7,
+          "e1": "07:30",
+          "s1": "11:30",
+          "e2": "",
+          "s2": "",
+          "descanso": false
+        }
+      },
+      "quadroNG": "07:30 12:00 / 14:00 17:30",
+      "relogioVinculo": "relogio4_caiari"
     },
     {
       "id": "colab_branch-4_1491",
@@ -1454,7 +7243,8 @@ window.GOLD_RECOVERY_DATA = window.BACKUP_DATA = {
       "naoRecebeVa": false,
       "dataDemissao": "",
       "registraPonto": true,
-      "trabalhaSabado": true
+      "trabalhaSabado": true,
+      "relogioVinculo": "relogio4_caiari"
     },
     {
       "id": "colab_branch-4_1494",
@@ -1469,7 +7259,8 @@ window.GOLD_RECOVERY_DATA = window.BACKUP_DATA = {
       "naoRecebeVa": false,
       "dataDemissao": "",
       "registraPonto": true,
-      "trabalhaSabado": true
+      "trabalhaSabado": true,
+      "relogioVinculo": "relogio4_caiari"
     },
     {
       "id": "colab_branch-1_1035",
@@ -1486,7 +7277,8 @@ window.GOLD_RECOVERY_DATA = window.BACKUP_DATA = {
       "registraPonto": true,
       "trabalhaSabado": true,
       "isAprendiz": false,
-      "isDemitido": true
+      "isDemitido": true,
+      "relogioVinculo": "relogio1_producao"
     },
     {
       "id": "colab_branch-1_1036",
@@ -1501,7 +7293,72 @@ window.GOLD_RECOVERY_DATA = window.BACKUP_DATA = {
       "naoRecebeVa": false,
       "dataDemissao": "",
       "registraPonto": true,
-      "trabalhaSabado": true
+      "trabalhaSabado": true,
+      "cpf": "04962201280",
+      "pis": "21371937089",
+      "cargo": "AUXILIAR DE PRODUÇÃO",
+      "idregistro": 5971,
+      "idowner": 7452,
+      "horariosSemana": {
+        "1": {
+          "diasemana": 1,
+          "e1": "",
+          "s1": "",
+          "e2": "",
+          "s2": "",
+          "descanso": true
+        },
+        "2": {
+          "diasemana": 2,
+          "e1": "08:00",
+          "s1": "12:00",
+          "e2": "14:00",
+          "s2": "18:00",
+          "descanso": false
+        },
+        "3": {
+          "diasemana": 3,
+          "e1": "08:00",
+          "s1": "12:00",
+          "e2": "14:00",
+          "s2": "18:00",
+          "descanso": false
+        },
+        "4": {
+          "diasemana": 4,
+          "e1": "08:00",
+          "s1": "12:00",
+          "e2": "14:00",
+          "s2": "18:00",
+          "descanso": false
+        },
+        "5": {
+          "diasemana": 5,
+          "e1": "08:00",
+          "s1": "12:00",
+          "e2": "14:00",
+          "s2": "18:00",
+          "descanso": false
+        },
+        "6": {
+          "diasemana": 6,
+          "e1": "08:00",
+          "s1": "12:00",
+          "e2": "14:00",
+          "s2": "18:00",
+          "descanso": false
+        },
+        "7": {
+          "diasemana": 7,
+          "e1": "08:00",
+          "s1": "12:00",
+          "e2": "",
+          "s2": "",
+          "descanso": false
+        }
+      },
+      "quadroNG": "08:00 12:00 / 14:00 18:00",
+      "relogioVinculo": "relogio1_producao"
     },
     {
       "id": "colab_branch-3_366",
@@ -1516,7 +7373,72 @@ window.GOLD_RECOVERY_DATA = window.BACKUP_DATA = {
       "naoRecebeVa": false,
       "dataDemissao": "",
       "registraPonto": true,
-      "trabalhaSabado": true
+      "trabalhaSabado": true,
+      "cpf": "04243424217",
+      "pis": "16137213774",
+      "cargo": "AUXILIAR FINANCEIRO",
+      "idregistro": 5972,
+      "idowner": 6716,
+      "horariosSemana": {
+        "1": {
+          "diasemana": 1,
+          "e1": "",
+          "s1": "",
+          "e2": "",
+          "s2": "",
+          "descanso": true
+        },
+        "2": {
+          "diasemana": 2,
+          "e1": "08:15",
+          "s1": "13:15",
+          "e2": "15:15",
+          "s2": "18:15",
+          "descanso": false
+        },
+        "3": {
+          "diasemana": 3,
+          "e1": "08:15",
+          "s1": "13:15",
+          "e2": "15:15",
+          "s2": "18:15",
+          "descanso": false
+        },
+        "4": {
+          "diasemana": 4,
+          "e1": "08:15",
+          "s1": "13:15",
+          "e2": "15:15",
+          "s2": "18:15",
+          "descanso": false
+        },
+        "5": {
+          "diasemana": 5,
+          "e1": "08:15",
+          "s1": "13:15",
+          "e2": "15:15",
+          "s2": "18:15",
+          "descanso": false
+        },
+        "6": {
+          "diasemana": 6,
+          "e1": "08:15",
+          "s1": "13:15",
+          "e2": "15:15",
+          "s2": "18:15",
+          "descanso": false
+        },
+        "7": {
+          "diasemana": 7,
+          "e1": "08:15",
+          "s1": "12:15",
+          "e2": "",
+          "s2": "",
+          "descanso": false
+        }
+      },
+      "quadroNG": "08:15 13:15 / 15:15 18:15",
+      "relogioVinculo": "relogio4_caiari"
     },
     {
       "id": "colab_branch-1_1037",
@@ -1531,7 +7453,72 @@ window.GOLD_RECOVERY_DATA = window.BACKUP_DATA = {
       "naoRecebeVa": false,
       "dataDemissao": "",
       "registraPonto": true,
-      "trabalhaSabado": true
+      "trabalhaSabado": true,
+      "cpf": "53806328234",
+      "pis": "16596026478",
+      "cargo": "SOLDADOR",
+      "idregistro": 5973,
+      "idowner": 7452,
+      "horariosSemana": {
+        "1": {
+          "diasemana": 1,
+          "e1": "",
+          "s1": "",
+          "e2": "",
+          "s2": "",
+          "descanso": true
+        },
+        "2": {
+          "diasemana": 2,
+          "e1": "08:00",
+          "s1": "12:00",
+          "e2": "14:00",
+          "s2": "18:00",
+          "descanso": false
+        },
+        "3": {
+          "diasemana": 3,
+          "e1": "08:00",
+          "s1": "12:00",
+          "e2": "14:00",
+          "s2": "18:00",
+          "descanso": false
+        },
+        "4": {
+          "diasemana": 4,
+          "e1": "08:00",
+          "s1": "12:00",
+          "e2": "14:00",
+          "s2": "18:00",
+          "descanso": false
+        },
+        "5": {
+          "diasemana": 5,
+          "e1": "08:00",
+          "s1": "12:00",
+          "e2": "14:00",
+          "s2": "18:00",
+          "descanso": false
+        },
+        "6": {
+          "diasemana": 6,
+          "e1": "08:00",
+          "s1": "12:00",
+          "e2": "14:00",
+          "s2": "18:00",
+          "descanso": false
+        },
+        "7": {
+          "diasemana": 7,
+          "e1": "08:00",
+          "s1": "12:00",
+          "e2": "",
+          "s2": "",
+          "descanso": false
+        }
+      },
+      "quadroNG": "08:00 12:00 / 14:00 18:00",
+      "relogioVinculo": "relogio1_producao"
     },
     {
       "id": "colab_branch-1_1038",
@@ -1548,7 +7535,152 @@ window.GOLD_RECOVERY_DATA = window.BACKUP_DATA = {
       "registraPonto": true,
       "status": "ativo",
       "isDemitido": false,
-      "dataDemissao": ""
+      "dataDemissao": "",
+      "cpf": "05794766263",
+      "pis": "21272843701",
+      "cargo": "AUXILIAR DE PRODUÇÃO",
+      "idregistro": 5974,
+      "idowner": 7452,
+      "horariosSemana": {
+        "1": {
+          "diasemana": 1,
+          "e1": "",
+          "s1": "",
+          "e2": "",
+          "s2": "",
+          "descanso": true
+        },
+        "2": {
+          "diasemana": 2,
+          "e1": "08:00",
+          "s1": "12:00",
+          "e2": "14:00",
+          "s2": "18:00",
+          "descanso": false
+        },
+        "3": {
+          "diasemana": 3,
+          "e1": "08:00",
+          "s1": "12:00",
+          "e2": "14:00",
+          "s2": "18:00",
+          "descanso": false
+        },
+        "4": {
+          "diasemana": 4,
+          "e1": "08:00",
+          "s1": "12:00",
+          "e2": "14:00",
+          "s2": "18:00",
+          "descanso": false
+        },
+        "5": {
+          "diasemana": 5,
+          "e1": "08:00",
+          "s1": "12:00",
+          "e2": "14:00",
+          "s2": "18:00",
+          "descanso": false
+        },
+        "6": {
+          "diasemana": 6,
+          "e1": "08:00",
+          "s1": "12:00",
+          "e2": "14:00",
+          "s2": "18:00",
+          "descanso": false
+        },
+        "7": {
+          "diasemana": 7,
+          "e1": "08:00",
+          "s1": "12:00",
+          "e2": "",
+          "s2": "",
+          "descanso": false
+        }
+      },
+      "quadroNG": "08:00 12:00 / 14:00 18:00",
+      "relogioVinculo": "relogio1_producao"
+    },
+    {
+      "id": "colab_branch-1_1039",
+      "nome": "DANIELA DINIZ DA COSTA",
+      "cracha": 1039,
+      "deptId": "dept-admin",
+      "status": "ativo",
+      "admissao": "2026-10-26",
+      "aprendiz": false,
+      "filialId": "branch-1",
+      "recebeVa": true,
+      "naoRecebeVa": false,
+      "dataDemissao": "",
+      "registraPonto": true,
+      "trabalhaSabado": true,
+      "relogioVinculo": "relogio2_adm",
+      "cargo": "Auxiliar de Faturamento",
+      "cpf": "84548320253",
+      "pis": "16009750920",
+      "idregistro": 5975,
+      "idowner": 7452,
+      "quadroNG": "08:00 12:00 / 14:00 18:00",
+      "horariosSemana": {
+        "1": {
+          "diasemana": 1,
+          "e1": "",
+          "s1": "",
+          "e2": "",
+          "s2": "",
+          "descanso": true
+        },
+        "2": {
+          "diasemana": 2,
+          "e1": "08:00",
+          "s1": "12:00",
+          "e2": "14:00",
+          "s2": "18:00",
+          "descanso": false
+        },
+        "3": {
+          "diasemana": 3,
+          "e1": "08:00",
+          "s1": "12:00",
+          "e2": "14:00",
+          "s2": "18:00",
+          "descanso": false
+        },
+        "4": {
+          "diasemana": 4,
+          "e1": "08:00",
+          "s1": "12:00",
+          "e2": "14:00",
+          "s2": "18:00",
+          "descanso": false
+        },
+        "5": {
+          "diasemana": 5,
+          "e1": "08:00",
+          "s1": "12:00",
+          "e2": "14:00",
+          "s2": "18:00",
+          "descanso": false
+        },
+        "6": {
+          "diasemana": 6,
+          "e1": "08:00",
+          "s1": "12:00",
+          "e2": "14:00",
+          "s2": "18:00",
+          "descanso": false
+        },
+        "7": {
+          "diasemana": 7,
+          "e1": "08:00",
+          "s1": "12:00",
+          "e2": "",
+          "s2": "",
+          "descanso": false
+        }
+      }
     }
   ],
   "feriados": [
