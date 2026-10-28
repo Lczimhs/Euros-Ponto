@@ -187,18 +187,44 @@ body {
 }
 
 .brand-logo-icon {
-  width: 36px;
-  height: 36px;
-  border-radius: var(--radius-md);
-  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-border-bright) 100%);
+  width: 44px;
+  height: 44px;
+  border-radius: 11px;
+  background: linear-gradient(135deg, rgba(64, 21, 184, 0.45) 0%, rgba(21, 19, 27, 0.9) 100%);
   display: flex;
   align-items: center;
   justify-content: center;
-  color: var(--color-cyan);
-  font-size: 18px;
-  font-weight: 800;
-  border: 1px solid var(--color-cyan);
-  box-shadow: var(--shadow-glow);
+  border: 1.5px solid var(--color-cyan);
+  box-shadow: 0 0 15px rgba(0, 229, 255, 0.25);
+  padding: 5px;
+  box-sizing: border-box;
+  flex-shrink: 0;
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.2s ease, border-color 0.2s ease;
+  cursor: pointer;
+  overflow: hidden;
+}
+
+.brand-logo-icon:hover {
+  transform: scale(1.06);
+  border-color: #38bdf8;
+  box-shadow: 0 0 22px rgba(0, 229, 255, 0.45);
+}
+
+.brand-logo-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+  user-select: none;
+}
+
+.logo-dark-mode {
+  display: block;
+  filter: drop-shadow(0 0 2px rgba(0, 229, 255, 0.3));
+}
+
+.logo-light-mode {
+  display: none;
 }
 
 .brand-title-group h1 {
@@ -2516,10 +2542,22 @@ html.ponto-scroll-mode body::-webkit-scrollbar {
 }
 
 [data-theme="light"] .brand-logo-icon {
-  background: linear-gradient(135deg, #151733 0%, #090B33 100%);
-  color: #FFFFFF;
+  background: #FFFFFF;
+  border: 1.5px solid rgba(21, 23, 51, 0.16);
+  box-shadow: 0 3px 10px rgba(21, 23, 51, 0.12);
+}
+
+[data-theme="light"] .brand-logo-icon:hover {
   border-color: #151733;
-  box-shadow: 0 2px 8px rgba(21, 23, 51, 0.35);
+  box-shadow: 0 4px 14px rgba(21, 23, 51, 0.2);
+}
+
+[data-theme="light"] .logo-dark-mode {
+  display: none;
+}
+
+[data-theme="light"] .logo-light-mode {
+  display: block;
 }
 
 /* Nav Tabs */
