@@ -4443,6 +4443,139 @@ document.getElementById('btn-save-cell-detail')?.addEventListener('click', () =>
 });
 
 // ==========================================================================
+// 7.1 INTEGRAÇÃO DIRETA COM MOTOR NGPONTO (GRAVAÇÃO SQL & FOLHA MANUAL)
+// ==========================================================================
+
+/**
+ * Gravação direta de acerto de ponto no banco SQL do NGPonto (pto_movimentomarcacao)
+ * Recurso integrado ao modal de detalhes do dia (atualmente bloqueado no UI conforme instrução).
+ */
+async function salvarAcertoNoNGPonto() {
+  const { colabId, isoDate } = currentEditingCell;
+  if (!colabId || !isoDate) return;
+
+  const colab = appState.colaboradores.find(c => c.id === colabId);
+  if (!colab) {
+    showToast('Colaborador não identificado.', 'error');
+    return;
+  }
+
+  // Identifica idowner e idregistro no NGPonto
+  const idowner = colab.idowner || (colab.filialId === '6716' ? 6716 : 7452);
+  const idregistro = colab.idregistro || colab.registroId || colab.cracha;
+
+  if (!idregistro) {
+    showToast('Crachá/Registro do colaborador não localizado para envio ao NGPonto.', 'error');
+    return;
+  }
+
+  const em = (document.getElementById('punch-em')?.value || '').trim();
+  const sm = (document.getElementById('punch-sm')?.value || '').trim();
+  const et = (document.getElementById('punch-et')?.value || '').trim();
+  const st = (document.getElementById('punch-st')?.value || '').trim();
+
+  const batidas = [em, sm, et, st].filter(b => b && b.includes(':'));
+  const motivo = (document.getElementById('input-cell-justificativa')?.value || '').trim() || 'Acerto via AppLucas';
+  const shouldReplicate = document.getElementById('check-replicate-days')?.checked || false;
+  const replicateCount = shouldReplicate ? (parseInt(document.getElementById('input-replicate-count')?.value, 10) || 1) : 1;
+
+  const btn = document.getElementById('btn-save-and-inject-ng');
+  if (btn) btn.disabled = true;
+
+  try {
+    showToast('Enviando acerto para gravação direta no NGPonto...', 'info');
+    const res = await fetch(`${API_BASE}/api/salvar-acerto-dia`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        idowner: Number(idowner),
+        idregistro: Number(idregistro),
+        data: isoDate,
+        batidas,
+        idocorrencia: 0,
+        motivo,
+        replicarDias: replicateCount
+      })
+    }).then(r => r.json());
+
+    if (res && res.ok) {
+      showToast('✅ ' + (res.mensagem || 'Acerto gravado diretamente no SQL do NGPonto!'), 'success');
+      // Salva também as alterações na memória e no storage do AppLucas
+      document.getElementById('btn-save-cell-detail')?.click();
+    } else {
+      showToast('Erro ao gravar no NGPonto: ' + (res?.erro || 'Falha na resposta do servidor'), 'error');
+    }
+  } catch (err) {
+    console.error('Erro ao conectar ao motor NGPonto:', err);
+    showToast('Falha na comunicação com o Motor NGPonto: ' + err.message, 'error');
+  } finally {
+    // Mantém o estado desabilitado caso a trava continue ativa
+    const lockActive = true;
+    if (btn && lockActive) btn.disabled = true;
+  }
+}
+
+document.getElementById('btn-save-and-inject-ng')?.addEventListener('click', (e) => {
+  e.preventDefault();
+  if (e.currentTarget.disabled) {
+    showToast('A gravação direta no NGPonto está temporariamente bloqueada.', 'warning');
+    return;
+  }
+  salvarAcertoNoNGPonto();
+});
+
+/**
+ * Lançador de Folhas de Ponto Manuais em Lote no NGPonto (Motor Ponto SQL)
+ * Usado para registrar folhas físicas de motoristas e colaboradores sem relógio biométrico.
+ * 
+ * @param {Object} options
+ * @param {number|string} options.idowner - ID da empresa (ex: 7452 ou 6716)
+ * @param {number|string} options.idregistro - ID de registro do funcionário no NG (ou cracha)
+ * @param {string} [options.cpf] - CPF do colaborador
+ * @param {number} options.mes - Mês (1 a 12)
+ * @param {number} options.ano - Ano (ex: 2026)
+ * @param {Array<{dia: number, batidas: string[]}>} options.dias - Lista de dias e horários (ex: [{ dia: 1, batidas: ['07:30', '12:00', '13:00', '17:30'] }])
+ * @param {boolean} [options.limparAntes=true] - Se limpa marcações manuais anteriores antes de gravar
+ * @param {boolean} [options.importarMovimento=true] - Se roda importação de movimento logo após gravação
+ */
+async function lancarFolhaManualNG({ idowner, idregistro, cpf = '', mes, ano, dias = [], limparAntes = true, importarMovimento = true }) {
+  if (!idowner || !idregistro || !mes || !ano || !Array.isArray(dias) || dias.length === 0) {
+    throw new Error('Parâmetros obrigatórios ausentes: idowner, idregistro, mes, ano e dias.');
+  }
+
+  console.log(`[lancarFolhaManualNG] Enviando folha manual para Colab ID ${idregistro} (${mes}/${ano}) com ${dias.length} dias...`);
+  
+  const payload = {
+    idowner: Number(idowner),
+    idregistro: Number(idregistro),
+    cpf: String(cpf || ''),
+    mes: Number(mes),
+    ano: Number(ano),
+    limparAntes: Boolean(limparAntes),
+    importarMovimento: Boolean(importarMovimento),
+    dias
+  };
+
+  const res = await fetch(`${API_BASE}/api/lancar-manual`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(payload)
+  }).then(r => r.json());
+
+  if (!res.ok) {
+    throw new Error(res.erro || 'Falha ao lançar folha manual no NGPonto');
+  }
+
+  console.log('[lancarFolhaManualNG] Sucesso:', res);
+  return res;
+}
+
+if (typeof window !== 'undefined') {
+  window.lancarFolhaManualNG = lancarFolhaManualNG;
+  window.salvarAcertoNoNGPonto = salvarAcertoNoNGPonto;
+}
+
+// ==========================================================================
 // 8. MURAL DE AVISOS & COMUNICADOS (DASHBOARD PRINCIPAL)
 // ==========================================================================
 

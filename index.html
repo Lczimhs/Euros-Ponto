@@ -1108,9 +1108,14 @@
         </div>
 
       </div>
-      <div class="modal-footer">
-        <button class="btn btn-secondary" data-close="modal-cell-detail">Cancelar (Esc)</button>
-        <button class="btn btn-primary" id="btn-save-cell-detail">Salvar Alterações (Enter)</button>
+      <div class="modal-footer" style="display:flex; justify-content:space-between; align-items:center; width:100%;">
+        <button type="button" class="btn btn-secondary" data-close="modal-cell-detail">Cancelar (Esc)</button>
+        <div style="display:flex; gap:8px;">
+          <button type="button" class="btn btn-cyan" id="btn-save-and-inject-ng" disabled style="opacity:0.6; cursor:not-allowed;" title="Gravação Direta no SQL do NGPonto (Recurso bloqueado temporariamente)">
+            <span>🔒</span> Salvar e Gravar no NGPonto
+          </button>
+          <button type="button" class="btn btn-primary" id="btn-save-cell-detail">Salvar Alterações (Enter)</button>
+        </div>
       </div>
     </div>
   </div>
