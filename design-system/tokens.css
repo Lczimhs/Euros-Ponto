@@ -1,0 +1,46 @@
+/* ==========================================================================
+   EUROS PONTO & VALE ALIMENTAÇÃO (V4) — EXTRACTED DESIGN TOKENS
+   Generated via extract-design-system + frontend-design + web-design-guidelines
+   ========================================================================== */
+
+:root {
+  color-scheme: dark;
+  --color-bg-base: #0F0F11;
+  --color-bg-dark: #15131B;
+  --color-bg-panel: #1B1824;
+  --color-bg-card: #282433;
+  --color-bg-surface: #2F2D33;
+  --color-border: #342A52;
+  --color-border-bright: #422985;
+  --color-primary: #4015B8;
+  --color-primary-hover: #4e1cdb;
+  --color-primary-light: #5b28ea;
+  --color-cyan: #00E5FF;
+  --color-cyan-glow: rgba(0, 229, 255, 0.25);
+  --color-blue-bright: #38BDF8;
+  --color-blue-soft: #ADD8E6;
+  --color-text-main: #F3F4F6;
+  --color-text-sub: #B8B2C7;
+  --color-text-muted: #7E7790;
+}
+
+[data-theme="light"] {
+  color-scheme: light;
+  --color-bg-base: #F4F6F9;
+  --color-bg-dark: #EEF1F6;
+  --color-bg-panel: #E2E8F0;
+  --color-bg-card: #FFFFFF;
+  --color-bg-surface: #F8FAFC;
+  --color-border: #CBD5E1;
+  --color-border-bright: #94A3B8;
+  --color-primary: #4015B8;
+  --color-primary-hover: #331094;
+  --color-primary-light: #5B28EA;
+  --color-cyan: #1D4ED8;
+  --color-cyan-glow: rgba(64, 21, 184, 0.12);
+  --color-blue-bright: #0369A1;
+  --color-blue-soft: #475569;
+  --color-text-main: #0F172A;
+  --color-text-sub: #334155;
+  --color-text-muted: #64748B;
+}

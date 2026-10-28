@@ -70,35 +70,38 @@
 }
 
 /* ==========================================================================
-   MODO CLARO (LIGHT MODE) - Paleta Slate & Deep Midnight Navy (#8E8FA1, #595A61, #151733, #090B33)
+   MODO CLARO (LIGHT MODE) — Architectural Steel Slate & Electric Indigo
+   Extraído via extract-design-system • Validado por frontend-design & web-design-guidelines
+   Contraste WCAG AA/AAA (Texto principal 16.8:1, Secundário 9.8:1, Muted 4.76:1)
    ========================================================================== */
 [data-theme="light"] {
-  --color-bg-base: #AEE3F5;
-  --color-bg-dark: #E3E4EB;
+  color-scheme: light;
+  --color-bg-base: #F4F6F9;
+  --color-bg-dark: #EEF1F6;
   --color-bg-card: #FFFFFF;
-  --color-bg-surface: #EDEDF2;
-  --color-bg-panel: #E3E4EB;
-  --color-border: #C8C9D3;
-  --color-border-bright: #8E8FA1;
-  --color-primary: #151733;
-  --color-primary-hover: #090B33;
-  --color-primary-light: #595A61;
+  --color-bg-surface: #F8FAFC;
+  --color-bg-panel: #E2E8F0;
+  --color-border: #CBD5E1;
+  --color-border-bright: #94A3B8;
+  --color-primary: #4015B8;
+  --color-primary-hover: #331094;
+  --color-primary-light: #5B28EA;
 
-  --color-cyan: #3B82F6;
-  --color-cyan-glow: rgba(21, 23, 51, 0.20);
-  --color-blue-bright: #151733;
-  --color-blue-soft: #595A61;
+  --color-cyan: #1D4ED8;
+  --color-cyan-glow: rgba(64, 21, 184, 0.14);
+  --color-blue-bright: #0369A1;
+  --color-blue-soft: #475569;
 
-  --color-text-main: #090B33;
-  --color-text-sub: #595A61;
-  --color-text-muted: #8E8FA1;
+  --color-text-main: #0F172A;
+  --color-text-sub: #334155;
+  --color-text-muted: #64748B;
 
-  --color-sunday-bg: #D5D6E0;
-  --color-sunday-text: #090B33;
+  --color-sunday-bg: #E2E8F0;
+  --color-sunday-text: #334155;
 
-  --color-ok-bg: rgba(21, 23, 51, 0.08);
-  --color-ok-border: #8E8FA1;
-  --color-ok-text: #151733;
+  --color-ok-bg: #ECFDF5;
+  --color-ok-border: #6EE7B7;
+  --color-ok-text: #065F46;
 
   /* Falta Integral e Meio Período (FM / FT) */
   --color-falta-bg: #FEE2E2;
@@ -107,20 +110,20 @@
 
   --color-half-bg: #FFE4E6;
   --color-half-border: #F43F5E;
-  --color-half-text: #BE123C;
+  --color-half-text: #9F1239;
 
   /* Atrasos e Pendências de Batidas (EM, SM, ET, ST) */
   --color-atraso-bg: #FEF3C7;
   --color-atraso-border: #F59E0B;
   --color-atraso-text: #92400E;
 
-  --color-feriado-bg: #E3E4EB;
-  --color-feriado-border: #8E8FA1;
-  --color-feriado-text: #151733;
+  --color-feriado-bg: #EEF2FF;
+  --color-feriado-border: #818CF8;
+  --color-feriado-text: #312E81;
 
-  --shadow-glow: 0 2px 10px rgba(21, 23, 51, 0.15);
-  --shadow-purple: 0 4px 15px rgba(21, 23, 51, 0.12);
-  --shadow-card: 0 2px 8px rgba(9, 11, 51, 0.06);
+  --shadow-glow: 0 2px 8px rgba(64, 21, 184, 0.12);
+  --shadow-purple: 0 8px 24px rgba(15, 23, 42, 0.08);
+  --shadow-card: 0 1px 3px rgba(15, 23, 42, 0.06), 0 1px 2px rgba(15, 23, 42, 0.04);
 }
 
 * {
@@ -2494,62 +2497,93 @@ html.ponto-scroll-mode body::-webkit-scrollbar {
 }
 
 /* ==========================================================================
-   ESTILOS ESPECÍFICOS DO MODO CLARO (PALETA SLATE & MIDNIGHT NAVY: #8E8FA1, #595A61, #151733, #090B33)
+   MODO CLARO REDESENHADO (ARCHITECTURAL STEEL SLATE & ELECTRIC INDIGO)
+   Guiado por: extract-design-system + frontend-design + web-design-guidelines + impeccable
+   Foco: Hierarquia de Superfícies Táteis, Contraste WCAG AA/AAA, Zero Poluição Visual
    ========================================================================== */
+
+/* 1. Base Canvas, Seleção, Scrollbars & Foco de Acessibilidade (WCAG 2.4.7) */
 [data-theme="light"] ::-webkit-scrollbar-track {
-  background: #EDEDF2;
+  background: #EEF1F6;
 }
 
 [data-theme="light"] ::-webkit-scrollbar-thumb {
-  background: #C8C9D3;
-  border-radius: 4px;
+  background: #CBD5E1;
+  border-radius: 5px;
+  border: 2px solid #EEF1F6;
 }
 
 [data-theme="light"] ::-webkit-scrollbar-thumb:hover {
-  background: #8E8FA1;
+  background: #94A3B8;
+}
+
+[data-theme="light"] ::selection {
+  background: rgba(64, 21, 184, 0.16);
+  color: #0F172A;
+}
+
+[data-theme="light"] :focus-visible {
+  outline: 2px solid #4015B8 !important;
+  outline-offset: 2px !important;
 }
 
 [data-theme="light"] body,
 [data-theme="light"] .app-view {
-  background-color: #AEE3F5 !important;
+  background-color: #F4F6F9 !important;
+  color: #0F172A;
 }
 
-/* Header & Top Navigation */
+/* Tabular Numerals para dados financeiros, horários e contadores (web-design-guidelines) */
+[data-theme="light"] .kpi-value,
+[data-theme="light"] .cal-day-number,
+[data-theme="light"] .cell-ponto,
+[data-theme="light"] .col-badge,
+[data-theme="light"] .col-dsr,
+[data-theme="light"] .styled-table td,
+[data-theme="light"] .data-table td,
+[data-theme="light"] .table td,
+[data-theme="light"] .relogio-stat-val {
+  font-variant-numeric: tabular-nums;
+}
+
+/* 2. Header & Navegação Principal (Superfície Branca Pura Elevada) */
 [data-theme="light"] .app-header {
-  background: #CAF0FC !important;
-  border-bottom: 1px solid #A5E2F5 !important;
-  box-shadow: 0 2px 10px rgba(9, 11, 51, 0.05);
+  background: #FFFFFF !important;
+  border-bottom: 1px solid #DCE2EC !important;
+  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04), 0 4px 12px rgba(15, 23, 42, 0.03) !important;
 }
 
 [data-theme="light"] .brand-title-group h1 {
-  color: #090B33;
+  color: #0F172A;
+  letter-spacing: -0.3px;
 }
 
 [data-theme="light"] .brand-title-group h1 span {
-  color: #034870;
+  color: #4015B8;
   text-shadow: none;
 }
 
 [data-theme="light"] .brand-title-group h1 span[style*="background"] {
-  background: #FFFFFF !important;
-  border-color: #A5E2F5 !important;
-  color: #090B33 !important;
+  background: #EEF2FF !important;
+  border: 1px solid #C7D2FE !important;
+  color: #4015B8 !important;
+  font-weight: 700 !important;
 }
 
 [data-theme="light"] .brand-subtitle {
-  color: #1E3A4B;
+  color: #475569;
   font-weight: 500;
 }
 
 [data-theme="light"] .brand-logo-icon {
   background: #FFFFFF;
-  border: 1.5px solid rgba(21, 23, 51, 0.16);
-  box-shadow: 0 3px 10px rgba(21, 23, 51, 0.12);
+  border: 1.5px solid #DCE2EC;
+  box-shadow: 0 2px 6px rgba(15, 23, 42, 0.06);
 }
 
 [data-theme="light"] .brand-logo-icon:hover {
-  border-color: #151733;
-  box-shadow: 0 4px 14px rgba(21, 23, 51, 0.2);
+  border-color: #4015B8;
+  box-shadow: 0 4px 12px rgba(64, 21, 184, 0.14);
 }
 
 [data-theme="light"] .logo-dark-mode {
@@ -2560,561 +2594,679 @@ html.ponto-scroll-mode body::-webkit-scrollbar {
   display: block;
 }
 
-/* Nav Tabs */
+/* Nav Tabs (Trilho Recuado Tátil #EEF1F6) */
 [data-theme="light"] .header-nav-views {
-  background: rgba(255, 255, 255, 0.80);
-  border-color: rgba(9, 11, 51, 0.12);
+  background: #EEF1F6;
+  border: 1px solid #DCE2EC;
+  padding: 4px;
+  border-radius: 10px;
 }
 
 [data-theme="light"] .nav-tab-btn {
-  color: #1E3A4B;
+  color: #334155;
   font-weight: 600;
+  border-radius: 7px;
 }
 
 [data-theme="light"] .nav-tab-btn:hover {
-  background: rgba(255, 255, 255, 0.95);
-  color: #090B33;
+  background: #FFFFFF;
+  color: #0F172A;
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.05);
 }
 
 [data-theme="light"] .nav-tab-btn.active {
-  background: #151733;
+  background: #4015B8;
   color: #FFFFFF;
-  border-color: #151733;
-  box-shadow: 0 2px 8px rgba(21, 23, 51, 0.35);
+  border-color: #35109E;
+  box-shadow: 0 2px 6px rgba(64, 21, 184, 0.28);
 }
 
-/* Branch Tabs */
+/* Abas de Filiais (Branch Tabs) */
 [data-theme="light"] .branch-tabs-container {
-  border-top: 1px solid rgba(9, 11, 51, 0.10) !important;
+  border-top: 1px solid #E2E8F0 !important;
 }
 
 [data-theme="light"] .branch-tab-label {
-  color: #090B33 !important;
+  color: #475569 !important;
   font-weight: 700 !important;
 }
 
 [data-theme="light"] .branch-tab-item {
-  background: #FFFFFF;
-  border-color: #A5E2F5;
-  color: #090B33;
+  background: #F8FAFC;
+  border: 1px solid #CBD5E1;
+  color: #334155;
+  font-weight: 600;
 }
 
 [data-theme="light"] .branch-tab-item:hover {
-  border-color: #090B33;
-  color: #090B33;
+  background: #FFFFFF;
+  border-color: #64748B;
+  color: #0F172A;
 }
 
 [data-theme="light"] .branch-tab-item.active {
-  background: linear-gradient(135deg, #151733 0%, #090B33 100%);
+  background: #0F172A;
   color: #FFFFFF;
-  border-color: #151733;
-  box-shadow: 0 2px 8px rgba(21, 23, 51, 0.25);
+  border-color: #0F172A;
+  box-shadow: 0 2px 6px rgba(15, 23, 42, 0.18);
 }
 
 [data-theme="light"] .branch-tab-item .branch-badge {
-  background: rgba(9, 11, 51, 0.08);
-  color: #090B33;
+  background: #E2E8F0;
+  color: #1E293B;
+  font-weight: 700;
+}
+
+[data-theme="light"] .branch-tab-item.active .branch-badge {
+  background: rgba(255, 255, 255, 0.22);
+  color: #FFFFFF;
 }
 
 [data-theme="light"] #btn-quick-new-branch {
   background: #FFFFFF !important;
-  color: #034870 !important;
-  border: 1px solid #A5E2F5 !important;
+  color: #4015B8 !important;
+  border: 1px dashed #A5B4FC !important;
   font-weight: 700 !important;
 }
 
 [data-theme="light"] #btn-quick-new-branch:hover {
-  background: #034870 !important;
-  color: #FFFFFF !important;
+  background: #EEF2FF !important;
+  border-style: solid !important;
+  border-color: #4015B8 !important;
+  color: #35109E !important;
 }
 
-[data-theme="light"] .branch-tab-item.active .branch-badge {
-  background: rgba(255, 255, 255, 0.25);
-  color: #FFFFFF;
+/* Cloud Badge & Header Utilities */
+[data-theme="light"] .cloud-badge {
+  background: #ECFDF5 !important;
+  color: #065F46 !important;
+  border: 1px solid #A7F3D0 !important;
+  font-weight: 600;
+  box-shadow: none;
 }
 
-/* Toolbar & Filter Bar */
+[data-theme="light"] .cloud-dot {
+  background: #059669;
+  box-shadow: 0 0 0 3px rgba(5, 150, 105, 0.18);
+}
+
+/* 3. Toolbars, Filtros & Controles de Busca */
 [data-theme="light"] .toolbar-container,
 [data-theme="light"] .colab-filter-bar,
 [data-theme="light"] .filters-bar,
 [data-theme="light"] .calendar-filters-bar {
   background: #FFFFFF !important;
-  border-bottom: 1px solid #C8C9D3 !important;
-  box-shadow: 0 1px 4px rgba(9, 11, 51, 0.04);
+  border-bottom: 1px solid #DCE2EC !important;
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.03);
 }
 
 [data-theme="light"] .toolbar-container .sort-select-box,
 [data-theme="light"] .colab-filter-bar .sort-select-box {
-  background: #F8F9FA !important;
-  border: 1px solid #B0B3C6 !important;
-  box-shadow: 0 1px 2px rgba(9, 11, 51, 0.04);
+  background: #F8FAFC !important;
+  border: 1px solid #CBD5E1 !important;
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.02);
+  transition: border-color 0.15s ease, background-color 0.15s ease;
+}
+
+[data-theme="light"] .toolbar-container .sort-select-box:hover,
+[data-theme="light"] .colab-filter-bar .sort-select-box:hover {
+  border-color: #94A3B8 !important;
+  background: #FFFFFF !important;
 }
 
 [data-theme="light"] .toolbar-container .sort-select-box label,
 [data-theme="light"] .colab-filter-bar .sort-select-box label {
-  color: #151733 !important;
+  color: #475569 !important;
   font-weight: 700 !important;
 }
 
 [data-theme="light"] .toolbar-container .sort-select,
 [data-theme="light"] .colab-filter-bar .sort-select {
-  color: #1D4ED8 !important;
+  color: #0F172A !important;
   font-weight: 700 !important;
+  background: transparent !important;
+}
+
+[data-theme="light"] .toolbar-container .sort-select option,
+[data-theme="light"] .colab-filter-bar .sort-select option,
+[data-theme="light"] select.form-control option {
+  background: #FFFFFF;
+  color: #0F172A;
 }
 
 [data-theme="light"] .toolbar-container .search-input,
 [data-theme="light"] .colab-filter-bar .search-input {
-  background: #F8F9FA !important;
-  border: 1px solid #B0B3C6 !important;
-  color: #090B33 !important;
-  font-weight: 600 !important;
-  box-shadow: 0 1px 2px rgba(9, 11, 51, 0.04);
+  background: #F8FAFC !important;
+  border: 1px solid #CBD5E1 !important;
+  color: #0F172A !important;
+  font-weight: 500 !important;
+  box-shadow: inset 0 1px 2px rgba(15, 23, 42, 0.03);
+}
+
+[data-theme="light"] .toolbar-container .search-input:focus,
+[data-theme="light"] .colab-filter-bar .search-input:focus {
+  background: #FFFFFF !important;
+  border-color: #4015B8 !important;
+  box-shadow: 0 0 0 3px rgba(64, 21, 184, 0.12) !important;
 }
 
 [data-theme="light"] .toolbar-container .search-input::placeholder,
 [data-theme="light"] .colab-filter-bar .search-input::placeholder {
-  color: #595A61 !important;
-  font-weight: 500;
+  color: #64748B !important;
+  font-weight: 400;
 }
 
 [data-theme="light"] .toolbar-container .search-icon,
 [data-theme="light"] .colab-filter-bar .search-icon {
-  color: #151733 !important;
+  color: #64748B !important;
 }
 
-[data-theme="light"] .toolbar-container .month-selector {
-  background: #F8F9FA !important;
-  border: 1px solid #B0B3C6 !important;
-  box-shadow: 0 1px 2px rgba(9, 11, 51, 0.04);
+[data-theme="light"] .toolbar-container .month-selector,
+[data-theme="light"] .month-selector {
+  background: #F8FAFC !important;
+  border: 1px solid #CBD5E1 !important;
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.02);
 }
 
-[data-theme="light"] .toolbar-container .current-month-display {
-  color: #090B33 !important;
+[data-theme="light"] .toolbar-container .current-month-display,
+[data-theme="light"] .current-month-display {
+  color: #0F172A !important;
   font-weight: 700 !important;
 }
 
-[data-theme="light"] .toolbar-container .month-nav-btn {
+[data-theme="light"] .toolbar-container .month-nav-btn,
+[data-theme="light"] .month-nav-btn {
   background: transparent !important;
-  color: #151733 !important;
+  color: #334155 !important;
   font-weight: 700 !important;
+  border-color: transparent !important;
 }
 
-[data-theme="light"] .toolbar-container .month-nav-btn:hover {
-  background: #E3E4EB !important;
-  color: #090B33 !important;
+[data-theme="light"] .toolbar-container .month-nav-btn:hover,
+[data-theme="light"] .month-nav-btn:hover {
+  background: #E2E8F0 !important;
+  color: #0F172A !important;
 }
 
 [data-theme="light"] .toolbar-container .focus-toggle-box {
-  background: #F8F9FA !important;
-  border: 1px solid #B0B3C6 !important;
-  box-shadow: 0 1px 2px rgba(9, 11, 51, 0.04);
+  background: #F8FAFC !important;
+  border: 1px solid #CBD5E1 !important;
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.02);
 }
 
 [data-theme="light"] .toolbar-container .focus-toggle-text {
-  color: #151733 !important;
-  font-weight: 700 !important;
+  color: #334155 !important;
+  font-weight: 600 !important;
 }
 
 [data-theme="light"] .toolbar-container .focus-toggle-box .toggle-switch {
-  background: #D8D9E4 !important;
-  border: 1px solid #B0B3C6 !important;
+  background: #CBD5E1 !important;
+  border: 1px solid #94A3B8 !important;
 }
 
 [data-theme="light"] .toolbar-container .focus-toggle-box.active {
-  background: #EFF6FF !important;
-  border-color: #2563EB !important;
+  background: #EEF2FF !important;
+  border-color: #4015B8 !important;
 }
 
 [data-theme="light"] .toolbar-container .focus-toggle-box.active .focus-toggle-text {
-  color: #1D4ED8 !important;
+  color: #4015B8 !important;
+  font-weight: 700 !important;
 }
 
+[data-theme="light"] .toolbar-container .focus-toggle-box.active .toggle-switch {
+  background: #4015B8 !important;
+  border-color: #35109E !important;
+}
+
+/* Sistema de Botões no Modo Claro */
 [data-theme="light"] .btn-secondary {
-  background: #F8F9FA !important;
-  color: #151733 !important;
-  border: 1px solid #B0B3C6 !important;
-  font-weight: 700 !important;
-  box-shadow: 0 1px 2px rgba(9, 11, 51, 0.04);
+  background: #FFFFFF !important;
+  color: #1E293B !important;
+  border: 1px solid #CBD5E1 !important;
+  font-weight: 600 !important;
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04);
 }
 
 [data-theme="light"] .btn-secondary:hover {
-  background: #E3E4EB !important;
-  color: #090B33 !important;
-  border-color: #151733 !important;
+  background: #F8FAFC !important;
+  color: #0F172A !important;
+  border-color: #64748B !important;
+  box-shadow: 0 2px 4px rgba(15, 23, 42, 0.06);
 }
 
+[data-theme="light"] #btn-novo-aviso,
+[data-theme="light"] .btn-primary,
 [data-theme="light"] .toolbar-container #btn-novo-colaborador-quick {
-  background: linear-gradient(135deg, #3B82F6 0%, #2563EB 100%) !important;
+  background: linear-gradient(135deg, #4015B8 0%, #311094 100%) !important;
   color: #FFFFFF !important;
-  border: 1px solid #2563EB !important;
-  box-shadow: 0 2px 6px rgba(37, 99, 235, 0.35) !important;
-  font-weight: 700 !important;
+  border: 1px solid #311094 !important;
+  box-shadow: 0 2px 6px rgba(64, 21, 184, 0.26) !important;
+  font-weight: 600 !important;
+}
+
+[data-theme="light"] #btn-novo-aviso:hover,
+[data-theme="light"] .btn-primary:hover,
+[data-theme="light"] .toolbar-container #btn-novo-colaborador-quick:hover {
+  background: linear-gradient(135deg, #35109E 0%, #260B7A 100%) !important;
+  box-shadow: 0 4px 12px rgba(64, 21, 184, 0.36) !important;
 }
 
 [data-theme="light"] .btn-cyan {
-  background: #E3E4EB;
-  color: #151733;
-  border-color: #8E8FA1;
+  background: #EFF6FF;
+  color: #1D4ED8;
+  border: 1px solid #BFDBFE;
+  font-weight: 600;
 }
 
 [data-theme="light"] .btn-cyan:hover {
-  background: #D5D6DF;
-  border-color: #595A61;
-}
-
-[data-theme="light"] .cloud-badge {
-  background: #FFFFFF !important;
-  color: #090B33 !important;
-  border-color: #A5E2F5 !important;
-  box-shadow: 0 1px 4px rgba(9, 11, 51, 0.06);
-}
-
-[data-theme="light"] .cloud-dot {
-  background: #10B981;
-  box-shadow: 0 0 6px rgba(16, 185, 129, 0.4);
-}
-
-[data-theme="light"] .month-nav-btn {
-  background: #FFFFFF;
-  border-color: #C8C9D3;
-  color: #090B33;
-}
-
-[data-theme="light"] .month-nav-btn:hover {
-  border-color: #8E8FA1;
-  color: #151733;
-  background: #E3E4EB;
-}
-
-[data-theme="light"] .current-month-display {
-  color: #090B33;
+  background: #DBEAFE;
+  border-color: #93C5FD;
+  color: #1E40AF;
 }
 
 /* ==========================================================================
-   VIEW 0: CALENDÁRIO DE AVISOS E PRAZOS (DESIGN EXECUTIVO SLATE & NAVY)
+   VIEW 0: CALENDÁRIO DE AVISOS E PRAZOS LEGAIS
    ========================================================================== */
-/* Hero Section (Painel Principal de Prazos Legais) */
 [data-theme="light"] .cal-hero-section {
   background: #FFFFFF !important;
-  border: 1px solid #8FD2E8 !important;
-  box-shadow: 0 4px 16px rgba(9, 11, 51, 0.06);
+  border: 1px solid #DCE2EC !important;
+  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04), 0 4px 12px rgba(15, 23, 42, 0.03);
 }
 
 [data-theme="light"] .cal-badge-pill {
-  background: #E3E4EB !important;
-  color: #151733 !important;
-  border: 1px solid #8E8FA1 !important;
+  background: #EEF2FF !important;
+  color: #4015B8 !important;
+  border: 1px solid #C7D2FE !important;
   font-weight: 700;
   letter-spacing: 0.5px;
 }
 
 [data-theme="light"] .cal-title-group h2,
 [data-theme="light"] .cal-hero-left h1 {
-  color: #090B33 !important;
+  color: #0F172A !important;
   font-weight: 800;
 }
 
 [data-theme="light"] .cal-branch-indicator,
 [data-theme="light"] .cal-hero-left p {
-  color: #595A61 !important;
+  color: #475569 !important;
 }
 
 [data-theme="light"] .cal-branch-indicator strong {
-  color: #151733 !important;
+  color: #0F172A !important;
 }
 
-/* Manter o Botão "+ Novo Aviso / Prazo Legal" com destaque visual */
-[data-theme="light"] #btn-novo-aviso,
-[data-theme="light"] .btn-primary {
-  background: linear-gradient(135deg, #3B82F6 0%, #2563EB 100%) !important;
-  color: #FFFFFF !important;
-  border: 1px solid #2563EB !important;
-  box-shadow: 0 3px 10px rgba(37, 99, 235, 0.35) !important;
+/* KPI Cards do Calendário e do VA (Contraste AA/AAA verificado) */
+[data-theme="light"] .kpi-card {
+  background: #FFFFFF !important;
+  border: 1px solid #DCE2EC !important;
+  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04), 0 4px 10px rgba(15, 23, 42, 0.02) !important;
+}
+
+[data-theme="light"] .kpi-card::before {
+  background: linear-gradient(90deg, #4015B8 0%, #1D4ED8 100%);
+}
+
+[data-theme="light"] .kpi-title {
+  color: #475569 !important;
   font-weight: 700;
 }
 
-[data-theme="light"] #btn-novo-aviso:hover,
-[data-theme="light"] .btn-primary:hover {
-  background: linear-gradient(135deg, #2563EB 0%, #1D4ED8 100%) !important;
-  box-shadow: 0 4px 14px rgba(37, 99, 235, 0.45) !important;
+[data-theme="light"] .kpi-value {
+  color: #0F172A;
+}
+
+[data-theme="light"] .kpi-value.cyan {
+  color: #1D4ED8 !important;
+  text-shadow: none !important;
+}
+
+[data-theme="light"] .kpi-value.purple {
+  color: #4015B8 !important;
+  text-shadow: none !important;
+}
+
+[data-theme="light"] .kpi-value.yellow {
+  color: #B45309 !important;
+  text-shadow: none !important;
+}
+
+[data-theme="light"] .kpi-value.green-done {
+  color: #047857 !important;
+  text-shadow: none !important;
+}
+
+[data-theme="light"] .kpi-value.red-urgent {
+  color: #B91C1C !important;
+  text-shadow: none !important;
+}
+
+[data-theme="light"] .kpi-helper {
+  color: #64748B !important;
 }
 
 /* Card Principal do Calendário */
 [data-theme="light"] .cal-reference-card {
   background: #FFFFFF;
-  border: 1px solid #C8C9D3;
-  box-shadow: 0 8px 24px rgba(9, 11, 51, 0.06);
+  border: 1px solid #DCE2EC;
+  box-shadow: 0 4px 16px rgba(15, 23, 42, 0.05);
 }
 
-/* Topo do Calendário (Mês/Ano e Navegação) - Deep Midnight Navy */
+/* Topo do Calendário (Mês/Ano e Navegação) - Superfície Clara Executiva */
 [data-theme="light"] .cal-ref-header {
-  background: linear-gradient(135deg, #151733 0%, #090B33 100%);
-  border-bottom: 1px solid #090B33;
-  box-shadow: 0 2px 8px rgba(9, 11, 51, 0.2);
+  background: #FFFFFF;
+  border-bottom: 1px solid #DCE2EC;
+  box-shadow: none;
 }
 
 [data-theme="light"] .cal-ref-center-title {
-  color: #FFFFFF !important;
-  font-weight: 700;
+  color: #0F172A !important;
+  font-weight: 800;
   font-size: 19px;
-  letter-spacing: 0.5px;
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.25);
+  letter-spacing: -0.2px;
+  text-shadow: none;
 }
 
 [data-theme="light"] .cal-ref-arrow-group {
-  background: rgba(255, 255, 255, 0.14);
-  border: 1px solid rgba(255, 255, 255, 0.28);
+  background: #F8FAFC;
+  border: 1px solid #CBD5E1;
   border-radius: 6px;
 }
 
 [data-theme="light"] .cal-ref-arrow-btn {
-  color: #FFFFFF;
+  color: #334155;
 }
 
 [data-theme="light"] .cal-ref-arrow-btn:hover {
-  background: rgba(255, 255, 255, 0.25);
-  color: #FFFFFF;
+  background: #E2E8F0;
+  color: #0F172A;
 }
 
 [data-theme="light"] .cal-ref-arrow-btn:first-child {
-  border-right: 1px solid rgba(255, 255, 255, 0.25);
+  border-right: 1px solid #CBD5E1;
 }
 
 [data-theme="light"] .cal-ref-today-btn {
-  background: rgba(255, 255, 255, 0.16);
-  color: #FFFFFF;
-  border: 1px solid rgba(255, 255, 255, 0.3);
+  background: #F8FAFC;
+  color: #1E293B;
+  border: 1px solid #CBD5E1;
   font-weight: 700;
 }
 
 [data-theme="light"] .cal-ref-today-btn:hover {
-  background: #FFFFFF;
-  color: #090B33;
-  border-color: #FFFFFF;
+  background: #0F172A;
+  color: #FFFFFF;
+  border-color: #0F172A;
 }
 
 [data-theme="light"] .cal-ref-views-toggle {
-  background: rgba(0, 0, 0, 0.25);
-  border: 1px solid rgba(255, 255, 255, 0.22);
-  border-radius: 6px;
+  background: #EEF1F6;
+  border: 1px solid #DCE2EC;
+  border-radius: 7px;
+  padding: 2px;
 }
 
 [data-theme="light"] .cal-view-btn {
-  color: rgba(255, 255, 255, 0.88);
+  color: #475569;
+  font-weight: 600;
 }
 
 [data-theme="light"] .cal-view-btn:hover {
-  color: #FFFFFF;
-  background: rgba(255, 255, 255, 0.16);
+  color: #0F172A;
+  background: rgba(255, 255, 255, 0.6);
 }
 
 [data-theme="light"] .cal-view-btn.active {
   background: #FFFFFF;
-  color: #090B33;
+  color: #4015B8;
   font-weight: 700;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.1);
 }
 
 /* Barra Secundária de Filtros do Calendário */
 [data-theme="light"] .cal-ref-subbar {
-  background: #FFFFFF !important;
-  border-bottom: 1px solid #C8C9D3 !important;
-  box-shadow: 0 1px 4px rgba(9, 11, 51, 0.04);
+  background: #F8FAFC !important;
+  border-bottom: 1px solid #DCE2EC !important;
 }
 
 [data-theme="light"] .cal-ref-subbar .sort-select-box {
-  background: #F8F9FA !important;
-  border: 1px solid #B0B3C6 !important;
-  box-shadow: 0 1px 2px rgba(9, 11, 51, 0.04);
+  background: #FFFFFF !important;
+  border: 1px solid #CBD5E1 !important;
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.02);
 }
 
 [data-theme="light"] .cal-ref-subbar label {
-  color: #151733 !important;
+  color: #475569 !important;
   font-weight: 700 !important;
 }
 
 [data-theme="light"] .cal-ref-subbar .sort-select {
   background: transparent !important;
-  color: #1D4ED8 !important;
+  color: #0F172A !important;
   border: none !important;
   font-weight: 700 !important;
 }
 
-[data-theme="light"] .cal-ref-subbar .sort-select:focus {
-  border-color: #151733;
-  box-shadow: 0 0 0 2px rgba(21, 23, 51, 0.15);
-}
-
 [data-theme="light"] .cal-legend-quick {
-  color: #151733 !important;
+  color: #334155 !important;
   font-weight: 600 !important;
 }
 
-/* Linha com os Dias da Semana (seg, ter, qua, qui, sex, sáb, dom) */
+/* Linha com os Dias da Semana */
 [data-theme="light"] .cal-weekdays-row {
-  background: #E3E4EB;
-  border-bottom: 1px solid #C8C9D3;
+  background: #EEF1F6;
+  border-bottom: 1px solid #DCE2EC;
 }
 
 [data-theme="light"] .cal-weekday-col {
-  color: #151733;
+  color: #334155;
   font-weight: 700;
-  font-size: 12px;
+  font-size: 11.5px;
   text-transform: uppercase;
-  letter-spacing: 0.5px;
+  letter-spacing: 0.6px;
 }
 
 [data-theme="light"] .cal-weekday-col.weekend {
-  color: #595A61;
-  background: rgba(142, 143, 161, 0.25);
+  color: #64748B;
+  background: rgba(203, 213, 225, 0.3);
 }
 
 /* Grade de Dias do Calendário */
 [data-theme="light"] .cal-days-grid {
-  background: #C8C9D3;
+  background: #DCE2EC;
 }
 
 [data-theme="light"] .cal-day-cell {
   background: #FFFFFF;
-  border-color: #C8C9D3;
+  border-color: #E2E8F0;
 }
 
 [data-theme="light"] .cal-day-cell:hover {
-  background: #F4F4F7;
-  box-shadow: inset 0 0 0 1.5px #8E8FA1;
+  background: #F8FAFC;
+  box-shadow: inset 0 0 0 1.5px #94A3B8;
 }
 
 [data-theme="light"] .cal-day-number {
-  color: #090B33;
+  color: #0F172A;
   font-weight: 700;
 }
 
 [data-theme="light"] .cal-day-cell.other-month {
-  background: #FAFAFB;
-  opacity: 0.55;
+  background: #F8FAFC;
+  opacity: 0.6;
 }
 
 [data-theme="light"] .cal-day-cell.other-month .cal-day-number {
-  color: #8E8FA1;
+  color: #94A3B8;
 }
 
 /* Dia de Hoje Destaque */
 [data-theme="light"] .cal-day-cell.today {
-  background: #EDEDF2;
-  box-shadow: inset 0 0 0 2px #151733 !important;
+  background: #F5F3FF;
+  box-shadow: inset 0 0 0 2px #4015B8 !important;
 }
 
 [data-theme="light"] .cal-day-cell.today .cal-day-number {
-  color: #151733;
+  color: #4015B8;
   font-weight: 800;
 }
 
+/* CORREÇÃO CRÍTICA DE CONTRASTE: Células do Calendário com Prazos Ativos (.has-*) */
+[data-theme="light"] .cal-day-cell.has-rescisao {
+  background: linear-gradient(180deg, rgba(254, 226, 226, 0.75) 0%, #FFFFFF 100%) !important;
+  box-shadow: inset 0 0 0 1.5px #FCA5A5 !important;
+}
+[data-theme="light"] .cal-day-cell.has-rescisao .cal-day-number {
+  color: #991B1B !important;
+}
+
+[data-theme="light"] .cal-day-cell.has-ponto {
+  background: linear-gradient(180deg, rgba(219, 234, 254, 0.75) 0%, #FFFFFF 100%) !important;
+  box-shadow: inset 0 0 0 1.5px #93C5FD !important;
+}
+[data-theme="light"] .cal-day-cell.has-ponto .cal-day-number {
+  color: #1E40AF !important;
+}
+
+[data-theme="light"] .cal-day-cell.has-salario {
+  background: linear-gradient(180deg, rgba(254, 243, 199, 0.8) 0%, #FFFFFF 100%) !important;
+  box-shadow: inset 0 0 0 1.5px #FCD34D !important;
+}
+[data-theme="light"] .cal-day-cell.has-salario .cal-day-number {
+  color: #92400E !important;
+}
+
+[data-theme="light"] .cal-day-cell.has-ferias {
+  background: linear-gradient(180deg, rgba(243, 232, 255, 0.8) 0%, #FFFFFF 100%) !important;
+  box-shadow: inset 0 0 0 1.5px #D8B4FE !important;
+}
+[data-theme="light"] .cal-day-cell.has-ferias .cal-day-number {
+  color: #5B21B6 !important;
+}
+
+[data-theme="light"] .cal-day-cell.has-fgts {
+  background: linear-gradient(180deg, rgba(209, 250, 229, 0.75) 0%, #FFFFFF 100%) !important;
+  box-shadow: inset 0 0 0 1.5px #6EE7B7 !important;
+}
+[data-theme="light"] .cal-day-cell.has-fgts .cal-day-number {
+  color: #065F46 !important;
+}
+
+[data-theme="light"] .cal-day-cell.all-done {
+  background: #F8FAFC !important;
+  box-shadow: inset 0 0 0 1px #CBD5E1 !important;
+}
+[data-theme="light"] .cal-day-cell.all-done .cal-day-number {
+  color: #64748B !important;
+}
+
 [data-theme="light"] .cal-day-add-btn {
-  background: #E3E4EB;
-  color: #151733;
-  border: 1px solid #C8C9D3;
+  background: #F1F5F9;
+  color: #334155;
+  border: 1px solid #CBD5E1;
 }
 
 [data-theme="light"] .cal-day-add-btn:hover {
-  background: #151733;
+  background: #4015B8;
   color: #FFFFFF;
+  border-color: #4015B8;
 }
 
-/* Faixas e Pílulas de Avisos no Calendário (Cores Vivas e Legíveis) */
+/* Faixas e Pílulas de Avisos no Calendário (WCAG AA Semântico) */
 [data-theme="light"] .notice-pill-rescisao {
-  background: #FEE2E2 !important;
+  background: #FEF2F2 !important;
   color: #991B1B !important;
   border: 1px solid #FCA5A5 !important;
   font-weight: 600;
 }
 
 [data-theme="light"] .notice-pill-assinatura {
-  background: #FCE7F3 !important;
+  background: #FDF2F8 !important;
   color: #9D174D !important;
   border: 1px solid #F9A8D4 !important;
   font-weight: 600;
 }
 
 [data-theme="light"] .notice-pill-salario {
-  background: #FEF3C7 !important;
+  background: #FFFBEB !important;
   color: #92400E !important;
   border: 1px solid #FCD34D !important;
   font-weight: 600;
 }
 
 [data-theme="light"] .notice-pill-ferias {
-  background: #F3E8FF !important;
-  color: #6B21A8 !important;
-  border: 1px solid #D8B4FE !important;
+  background: #F5F3FF !important;
+  color: #5B21B6 !important;
+  border: 1px solid #DDD6FE !important;
   font-weight: 600;
 }
 
 [data-theme="light"] .notice-pill-ponto {
-  background: #E3E4EB !important;
-  color: #151733 !important;
-  border: 1px solid #8E8FA1 !important;
+  background: #EFF6FF !important;
+  color: #1E40AF !important;
+  border: 1px solid #BFDBFE !important;
   font-weight: 600;
 }
 
 [data-theme="light"] .notice-pill-fgts {
-  background: #DCFCE7 !important;
-  color: #166534 !important;
-  border: 1px solid #86EFAC !important;
+  background: #ECFDF5 !important;
+  color: #065F46 !important;
+  border: 1px solid #A7F3D0 !important;
   font-weight: 600;
 }
 
 [data-theme="light"] .notice-pill-outros {
   background: #F1F5F9 !important;
-  color: #595A61 !important;
-  border: 1px solid #C8C9D3 !important;
+  color: #334155 !important;
+  border: 1px solid #CBD5E1 !important;
   font-weight: 600;
 }
 
 [data-theme="light"] .cal-notice-pill.is-done {
-  background: #F1F5F9 !important;
-  color: #8E8FA1 !important;
-  border-color: #C8C9D3 !important;
+  background: #F8FAFC !important;
+  color: #64748B !important;
+  border-color: #CBD5E1 !important;
   text-decoration: line-through;
   opacity: 0.85;
 }
 
 [data-theme="light"] .cal-notice-more-badge {
-  background: #EDEDF2 !important;
-  color: #151733 !important;
-  border: 1px solid #8E8FA1 !important;
+  background: #EEF2FF !important;
+  color: #4015B8 !important;
+  border: 1px solid #C7D2FE !important;
   font-weight: 700;
 }
 
 /* Modal de Avisos do Dia */
 [data-theme="light"] .day-summary-bar {
-  background: #EDEDF2 !important;
-  border: 1px solid #C8C9D3 !important;
-  color: #090B33 !important;
+  background: #F8FAFC !important;
+  border: 1px solid #DCE2EC !important;
+  color: #0F172A !important;
 }
 
 [data-theme="light"] .day-summary-bar div {
-  color: #090B33 !important;
+  color: #0F172A !important;
 }
 
 [data-theme="light"] .day-notice-card {
-  background: #EDEDF2 !important;
-  border: 1px solid #C8C9D3 !important;
-  box-shadow: 0 1px 4px rgba(9, 11, 51, 0.04);
+  background: #FFFFFF !important;
+  border: 1px solid #DCE2EC !important;
+  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04);
   opacity: 1 !important;
 }
 
 [data-theme="light"] .day-notice-card:hover {
-  border-color: #8E8FA1 !important;
-  box-shadow: 0 3px 8px rgba(9, 11, 51, 0.08);
+  border-color: #94A3B8 !important;
+  box-shadow: 0 4px 10px rgba(15, 23, 42, 0.07);
 }
 
 [data-theme="light"] .day-notice-card.is-done {
-  background: #EDEDF2 !important;
-  border-color: #C8C9D3 !important;
+  background: #F8FAFC !important;
+  border-color: #E2E8F0 !important;
   opacity: 1 !important;
 }
 
-/* Bordas de tipo com cores mais vivas e definidas no modo claro */
 [data-theme="light"] .day-notice-card.type-salario {
   border-left: 5px solid #D97706 !important;
 }
@@ -3125,7 +3277,7 @@ html.ponto-scroll-mode body::-webkit-scrollbar {
   border-left: 5px solid #7C3AED !important;
 }
 [data-theme="light"] .day-notice-card.type-ponto {
-  border-left: 5px solid #0284C7 !important;
+  border-left: 5px solid #2563EB !important;
 }
 [data-theme="light"] .day-notice-card.type-fgts {
   border-left: 5px solid #059669 !important;
@@ -3134,113 +3286,89 @@ html.ponto-scroll-mode body::-webkit-scrollbar {
   border-left: 5px solid #475569 !important;
 }
 
-/* Tipografia nítida, escura e de alto contraste no modal de avisos */
 [data-theme="light"] .day-notice-title {
-  color: #090B33 !important;
+  color: #0F172A !important;
   font-weight: 700 !important;
   font-size: 15px !important;
   opacity: 1 !important;
 }
 
 [data-theme="light"] .day-notice-card.is-done .day-notice-title {
-  color: #090B33 !important;
+  color: #475569 !important;
   text-decoration: line-through !important;
   text-decoration-color: #64748B !important;
   text-decoration-thickness: 1.5px !important;
   font-weight: 700 !important;
-  opacity: 1 !important;
 }
 
 [data-theme="light"] .day-notice-desc {
-  color: #1E293B !important;
+  color: #334155 !important;
   font-weight: 500 !important;
   font-size: 13px !important;
   line-height: 1.5 !important;
-  opacity: 1 !important;
 }
 
 [data-theme="light"] .day-notice-header > div:last-child {
-  color: #334155 !important;
+  color: #475569 !important;
   font-weight: 700 !important;
   font-size: 12px !important;
-  opacity: 1 !important;
 }
 
-/* Badges do card de aviso com alto contraste */
 [data-theme="light"] .badge-aviso-cat,
-[data-theme="light"] .badge-cat-informativo {
-  background: #FFFFFF !important;
-  color: #090B33 !important;
-  border: 1px solid #94A3B8 !important;
-  font-weight: 700 !important;
-  border-radius: 4px;
-}
-
+[data-theme="light"] .badge-cat-informativo,
 [data-theme="light"] .badge-aviso-scope {
-  background: #FFFFFF !important;
-  color: #090B33 !important;
-  border: 1px solid #94A3B8 !important;
+  background: #F1F5F9 !important;
+  color: #1E293B !important;
+  border: 1px solid #CBD5E1 !important;
   font-weight: 700 !important;
   border-radius: 4px;
 }
 
 [data-theme="light"] .status-badge-done {
-  background: #DCFCE7 !important;
-  color: #14532D !important;
-  border: 1px solid #86EFAC !important;
+  background: #ECFDF5 !important;
+  color: #065F46 !important;
+  border: 1px solid #A7F3D0 !important;
   font-weight: 700 !important;
 }
 
 [data-theme="light"] .status-badge-pending {
-  background: #FEE2E2 !important;
-  color: #7F1D1D !important;
+  background: #FEF2F2 !important;
+  color: #991B1B !important;
   border: 1px solid #FCA5A5 !important;
   font-weight: 700 !important;
 }
 
-/* Ações e botões no rodapé do card */
 [data-theme="light"] .day-notice-actions {
-  border-top: 1px solid #C8C9D3 !important;
+  border-top: 1px solid #E2E8F0 !important;
 }
 
-[data-theme="light"] .btn-toggle-done.reopen {
+[data-theme="light"] .btn-toggle-done.reopen,
+[data-theme="light"] .btn-edit-day-notice {
   background: #FFFFFF !important;
-  color: #090B33 !important;
-  border: 1px solid #94A3B8 !important;
-  font-weight: 700 !important;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08) !important;
+  color: #1E293B !important;
+  border: 1px solid #CBD5E1 !important;
+  font-weight: 600 !important;
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.05) !important;
 }
 
-[data-theme="light"] .btn-toggle-done.reopen:hover {
-  background: #E2E8F0 !important;
-  color: #000000 !important;
-  border-color: #64748B !important;
+[data-theme="light"] .btn-toggle-done.reopen:hover,
+[data-theme="light"] .btn-edit-day-notice:hover {
+  background: #F1F5F9 !important;
+  color: #0F172A !important;
+  border-color: #94A3B8 !important;
 }
 
 [data-theme="light"] .btn-toggle-done.mark-done {
-  background: linear-gradient(135deg, #10B981, #059669) !important;
+  background: linear-gradient(135deg, #059669, #047857) !important;
   color: #FFFFFF !important;
-  box-shadow: 0 2px 6px rgba(16, 185, 129, 0.25) !important;
-}
-
-[data-theme="light"] .btn-edit-day-notice {
-  background: #FFFFFF !important;
-  color: #090B33 !important;
-  border: 1px solid #94A3B8 !important;
-  font-weight: 700 !important;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08) !important;
-}
-
-[data-theme="light"] .btn-edit-day-notice:hover {
-  background: #E2E8F0 !important;
-  border-color: #64748B !important;
+  box-shadow: 0 2px 6px rgba(5, 150, 105, 0.25) !important;
 }
 
 [data-theme="light"] .btn-delete-day-notice {
-  background: #FEE2E2 !important;
-  color: #DC2626 !important;
+  background: #FEF2F2 !important;
+  color: #B91C1C !important;
   border: 1px solid #FCA5A5 !important;
-  font-weight: 700 !important;
+  font-weight: 600 !important;
 }
 
 [data-theme="light"] .btn-delete-day-notice:hover {
@@ -3250,57 +3378,65 @@ html.ponto-scroll-mode body::-webkit-scrollbar {
 
 [data-theme="light"] #btn-day-add-new-notice {
   background: #FFFFFF !important;
-  color: #151733 !important;
-  border: 1px solid #8E8FA1 !important;
+  color: #4015B8 !important;
+  border: 1px dashed #A5B4FC !important;
   font-weight: 700 !important;
 }
 
 [data-theme="light"] #btn-day-add-new-notice:hover {
-  background: #EDEDF2 !important;
-  border-color: #151733 !important;
+  background: #EEF2FF !important;
+  border-style: solid !important;
+  border-color: #4015B8 !important;
 }
 
-/* Matriz de Ponto (Tabela, Cabeçalhos e Colunas Sticky) */
+/* ==========================================================================
+   VIEW 1: MATRIZ DE PONTO (TABELA DE ALTA DENSIDADE & CÉLULAS SEMÂNTICAS)
+   ========================================================================== */
 [data-theme="light"] .matrix-container {
-  background: #F4F4F7;
+  background: #F4F6F9;
 }
 
 [data-theme="light"] .matrix-table thead tr th {
-  background: #151733 !important;
+  background: #0F172A !important;
   color: #FFFFFF !important;
-  border-color: #595A61 !important;
+  border-color: #334155 !important;
 }
 
 [data-theme="light"] .matrix-table thead tr:first-child th {
-  background: #151733 !important;
+  background: #0F172A !important;
   color: #FFFFFF !important;
 }
 
 [data-theme="light"] .matrix-table thead tr:last-child th {
-  background: #E3E4EB !important;
-  color: #090B33 !important;
-  border-bottom: 2px solid #151733 !important;
+  background: #EEF1F6 !important;
+  color: #1E293B !important;
+  border-bottom: 2px solid #CBD5E1 !important;
 }
 
 [data-theme="light"] .col-dept,
 [data-theme="light"] .col-badge,
 [data-theme="light"] .col-name {
   background: #FFFFFF !important;
-  color: #090B33 !important;
-  border-right: 1px solid #C8C9D3 !important;
-  box-shadow: 2px 0 6px rgba(9, 11, 51, 0.05);
+  color: #0F172A !important;
+  border-right: 1px solid #DCE2EC !important;
+  box-shadow: 2px 0 6px rgba(15, 23, 42, 0.04);
+}
+
+[data-theme="light"] .col-badge {
+  color: #334155 !important;
+  font-weight: 600;
 }
 
 [data-theme="light"] .col-name {
-  border-right: 2px solid #151733 !important;
-  color: #090B33 !important;
+  border-right: 2px solid #CBD5E1 !important;
+  color: #0F172A !important;
 }
 
 [data-theme="light"] .col-dsr {
-  background: #EDEDF2 !important;
-  color: #090B33 !important;
-  border-left: 2px solid #151733 !important;
-  box-shadow: -4px 0 10px rgba(9, 11, 51, 0.04);
+  background: #F8FAFC !important;
+  color: #0F172A !important;
+  border-left: 2px solid #CBD5E1 !important;
+  box-shadow: -4px 0 10px rgba(15, 23, 42, 0.04);
 }
 
 [data-theme="light"] .matrix-table thead tr:first-child th.col-dept,
@@ -3308,7 +3444,7 @@ html.ponto-scroll-mode body::-webkit-scrollbar {
 [data-theme="light"] .matrix-table thead tr:first-child th.col-name,
 [data-theme="light"] .matrix-table thead tr:first-child th.col-dsr,
 [data-theme="light"] .matrix-table thead th.col-corner-top {
-  background: #151733 !important;
+  background: #0F172A !important;
   color: #FFFFFF !important;
   border-bottom: none !important;
 }
@@ -3318,168 +3454,180 @@ html.ponto-scroll-mode body::-webkit-scrollbar {
 [data-theme="light"] .matrix-table thead tr:last-child th.col-name,
 [data-theme="light"] .matrix-table thead tr:last-child th.col-dsr,
 [data-theme="light"] .matrix-table thead th.col-corner-sub {
-  background: #151733 !important;
-  color: #FFFFFF !important;
+  background: #1E293B !important;
+  color: #F8FAFC !important;
   border-top: none !important;
-  border-bottom: 2px solid #595A61 !important;
+  border-bottom: 2px solid #0F172A !important;
 }
 
 [data-theme="light"] .matrix-table thead th.col-dsr {
-  background: #151733 !important;
+  background: #0F172A !important;
   color: #FFFFFF !important;
-  border-left: 2px solid #595A61 !important;
-  box-shadow: -4px 0 10px rgba(9, 11, 51, 0.12) !important;
+  border-left: 2px solid #334155 !important;
+  box-shadow: -4px 0 10px rgba(15, 23, 42, 0.12) !important;
+}
+
+/* Linha divisória de Setor/Departamento na Matriz */
+[data-theme="light"] .row-dept-group td {
+  background: #EEF2FF !important;
+  color: #311094 !important;
+  border-top: 1px solid #C7D2FE !important;
+  border-bottom: 1px solid #C7D2FE !important;
+  font-weight: 700;
 }
 
 [data-theme="light"] .matrix-table tbody tr:nth-child(even) td.col-dept,
 [data-theme="light"] .matrix-table tbody tr:nth-child(even) td.col-badge,
 [data-theme="light"] .matrix-table tbody tr:nth-child(even) td.col-name {
-  background: #F8F8FA !important;
+  background: #F8FAFC !important;
 }
 
 [data-theme="light"] .matrix-table tbody tr:hover td.col-dept,
 [data-theme="light"] .matrix-table tbody tr:hover td.col-badge,
 [data-theme="light"] .matrix-table tbody tr:hover td.col-name {
-  background: #E3E4EB !important;
+  background: #EEF2FF !important;
 }
 
 [data-theme="light"] .matrix-table tbody tr:nth-child(even) {
-  background: rgba(227, 228, 235, 0.35);
+  background: rgba(241, 245, 249, 0.65);
 }
 
 [data-theme="light"] .matrix-table tbody tr:hover {
-  background: rgba(142, 143, 161, 0.20);
+  background: rgba(64, 21, 184, 0.05);
 }
 
 [data-theme="light"] .th-date-clickable.th-sunday,
 [data-theme="light"] .matrix-table thead tr th.th-sunday {
-  background: #8E8FA1 !important;
-  color: #FFFFFF !important;
-  text-shadow: 0 1px 2px rgba(9, 11, 51, 0.35);
+  background: #334155 !important;
+  color: #F1F5F9 !important;
 }
 
 [data-theme="light"] .th-date-clickable.th-feriado,
 [data-theme="light"] .matrix-table thead tr th.th-feriado {
-  background: #151733 !important;
-  color: #8E8FA1 !important;
-  border-bottom-color: #8E8FA1 !important;
+  background: #311094 !important;
+  color: #E0E7FF !important;
+  border-bottom-color: #818CF8 !important;
 }
 
-/* Interatividade de seleção no Modo Claro */
+/* Seleção de Linha e Coluna na Matriz */
 [data-theme="light"] .matrix-table tbody tr.selected-row {
-  background: rgba(142, 143, 161, 0.25) !important;
+  background: rgba(64, 21, 184, 0.08) !important;
 }
 
 [data-theme="light"] .matrix-table tbody tr.selected-row td {
-  border-top: 1px solid #8E8FA1 !important;
-  border-bottom: 1px solid #8E8FA1 !important;
+  border-top: 1px solid #A5B4FC !important;
+  border-bottom: 1px solid #A5B4FC !important;
 }
 
 [data-theme="light"] .matrix-table tbody tr.selected-row td.col-dept {
-  background: #E3E4EB !important;
-  border-left: 4px solid #151733 !important;
-  color: #090B33 !important;
+  background: #EEF2FF !important;
+  border-left: 4px solid #4015B8 !important;
+  color: #0F172A !important;
 }
 
 [data-theme="light"] .matrix-table tbody tr.selected-row td.col-badge {
-  background: #E3E4EB !important;
-  color: #151733 !important;
+  background: #EEF2FF !important;
+  color: #4015B8 !important;
   font-weight: 800 !important;
 }
 
 [data-theme="light"] .matrix-table tbody tr.selected-row td.col-name {
-  background: #E3E4EB !important;
-  color: #090B33 !important;
+  background: #EEF2FF !important;
+  color: #0F172A !important;
   font-weight: 700 !important;
 }
 
 [data-theme="light"] .matrix-table tbody tr.selected-row td.col-name strong {
-  color: #151733 !important;
+  color: #4015B8 !important;
 }
 
 [data-theme="light"] .matrix-table tbody tr.selected-row td.col-dsr {
-  background: #E3E4EB !important;
-  color: #090B33 !important;
+  background: #EEF2FF !important;
+  color: #0F172A !important;
 }
 
 [data-theme="light"] .matrix-table thead th.selected-col {
-  background: #151733 !important;
+  background: #4015B8 !important;
   color: #FFFFFF !important;
-  box-shadow: inset 0 -3px 0 #8E8FA1, 0 0 10px rgba(21, 23, 51, 0.4) !important;
+  box-shadow: inset 0 -3px 0 #A5B4FC !important;
 }
 
 [data-theme="light"] .matrix-table tbody td.selected-col {
-  background: rgba(142, 143, 161, 0.15) !important;
+  background: rgba(64, 21, 184, 0.06) !important;
 }
 
 [data-theme="light"] .cell-ponto.cell-selected {
-  outline: 2px solid #151733 !important;
+  outline: 2px solid #4015B8 !important;
   outline-offset: 1px;
-  box-shadow: 0 0 10px rgba(21, 23, 51, 0.4) !important;
+  box-shadow: 0 0 8px rgba(64, 21, 184, 0.35) !important;
 }
 
-/* Células de Status no Modo Claro */
+/* Células de Status na Matriz (Semântica Inconfundível & Alto Contraste WCAG AA) */
 [data-theme="light"] .status-ok {
-  background: #EDEDF2 !important;
-  color: #151733 !important;
-  border: 1px solid #8E8FA1 !important;
+  background: #ECFDF5 !important;
+  color: #065F46 !important;
+  border: 1px solid #6EE7B7 !important;
+  font-weight: 700;
 }
 
 [data-theme="light"] .status-falta {
-  background: #FEE2E2 !important;
+  background: #FEF2F2 !important;
   color: #991B1B !important;
-  border: 1px solid #EF4444 !important;
-  box-shadow: inset 0 0 4px rgba(239, 68, 68, 0.2) !important;
+  border: 1px solid #F87171 !important;
+  font-weight: 700;
 }
 
 [data-theme="light"] .status-half {
-  background: #FFE4E6 !important;
-  color: #BE123C !important;
-  border: 1px dashed #F43F5E !important;
-  box-shadow: inset 0 0 4px rgba(244, 63, 94, 0.2) !important;
+  background: #FFF1F2 !important;
+  color: #9F1239 !important;
+  border: 1.5px dashed #FB7185 !important;
+  font-weight: 700;
 }
 
 [data-theme="light"] .status-atraso {
-  background: #FEF3C7 !important;
+  background: #FFFBEB !important;
   color: #92400E !important;
-  border: 1px solid #F59E0B !important;
-  box-shadow: inset 0 0 4px rgba(245, 158, 11, 0.2) !important;
+  border: 1px solid #FBBF24 !important;
+  font-weight: 700;
 }
 
 [data-theme="light"] .status-atestado {
-  background: #EDEDF2 !important;
-  color: #151733 !important;
-  border: 1px solid #8E8FA1 !important;
+  background: #F5F3FF !important;
+  color: #5B21B6 !important;
+  border: 1px solid #C4B5FD !important;
+  font-weight: 700;
 }
 
 [data-theme="light"] .status-ferias {
-  background: #F1F5F9 !important;
-  color: #595A61 !important;
-  border: 1px solid #CBD5E1 !important;
+  background: #F0F9FF !important;
+  color: #075985 !important;
+  border: 1px solid #7DD3FC !important;
+  font-weight: 700;
 }
 
 [data-theme="light"] .status-domingo {
-  background: #D5D6E0 !important;
-  color: #090B33 !important;
-  border: 1px solid #B4B6C4 !important;
+  background: #E2E8F0 !important;
+  color: #334155 !important;
+  border: 1px solid #CBD5E1 !important;
   font-weight: 700;
 }
 
 [data-theme="light"] .matrix-table tbody td:has(.status-domingo) {
-  background: rgba(213, 214, 224, 0.40) !important;
+  background: rgba(226, 232, 240, 0.45) !important;
 }
 
 [data-theme="light"] .status-feriado {
-  background: #E3E4EB !important;
-  color: #151733 !important;
-  border: 1px solid #8E8FA1 !important;
+  background: #EEF2FF !important;
+  color: #3730A3 !important;
+  border: 1px solid #A5B4FC !important;
+  font-weight: 700;
 }
 
 /* Status: DISABLED (Dias antes da admissão do colaborador - Bloqueado) */
 [data-theme="light"] .status-disabled {
-  background: repeating-linear-gradient(135deg, #E2E4EC, #E2E4EC 4px, #D1D4E0 4px, #D1D4E0 8px) !important;
-  color: #475569 !important;
-  border: 1px solid #B4B6C4 !important;
+  background: repeating-linear-gradient(135deg, #F1F5F9, #F1F5F9 4px, #E2E8F0 4px, #E2E8F0 8px) !important;
+  color: #64748B !important;
+  border: 1px solid #CBD5E1 !important;
   font-weight: 700 !important;
   opacity: 1 !important;
   cursor: not-allowed !important;
@@ -3491,28 +3639,28 @@ html.ponto-scroll-mode body::-webkit-scrollbar {
   box-shadow: none !important;
 }
 
-/* Status: VAZIO / DESMARCADO (Campos Vazio / Em Branco) */
+/* Status: VAZIO / DESMARCADO */
 [data-theme="light"] .status-empty {
   background: #FFFFFF !important;
   color: transparent !important;
-  border: 1.5px dashed #8E8FA1 !important;
-  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.04) !important;
+  border: 1.5px dashed #CBD5E1 !important;
+  box-shadow: none !important;
   opacity: 1 !important;
   cursor: pointer !important;
 }
 
 [data-theme="light"] .status-empty:hover {
-  background: #F4F4F7 !important;
-  border-color: #0284C7 !important;
-  box-shadow: 0 0 6px rgba(2, 132, 199, 0.25) !important;
+  background: #F8FAFC !important;
+  border-color: #4015B8 !important;
+  box-shadow: 0 0 0 2px rgba(64, 21, 184, 0.15) !important;
 }
 
 /* Status: DEMITIDO (Dias posteriores à rescisão) */
 [data-theme="light"] .status-demitido {
-  background: #FEE2E2 !important;
-  color: #DC2626 !important;
-  border: 1px dashed #EF4444 !important;
-  opacity: 0.85 !important;
+  background: #FEF2F2 !important;
+  color: #B91C1C !important;
+  border: 1px dashed #F87171 !important;
+  opacity: 0.9 !important;
   cursor: not-allowed !important;
   font-size: 9px !important;
   font-weight: 700 !important;
@@ -3523,143 +3671,184 @@ html.ponto-scroll-mode body::-webkit-scrollbar {
   box-shadow: none !important;
 }
 
-/* Badges Registra Ponto */
+/* Badges Registra Ponto & Badges de Colaboradores */
 [data-theme="light"] .badge-ponto-sim {
-  background: #E3E4EB !important;
-  border: 1.5px solid #151733 !important;
-  color: #151733 !important;
+  background: #EFF6FF !important;
+  border: 1px solid #93C5FD !important;
+  color: #1E40AF !important;
   font-weight: 700 !important;
 }
 
 [data-theme="light"] .badge-ponto-nao {
-  background: #FEF3C7 !important;
-  border: 1.5px solid #D97706 !important;
-  color: #D97706 !important;
+  background: #FFFBEB !important;
+  border: 1px solid #FCD34D !important;
+  color: #92400E !important;
   font-weight: 700 !important;
 }
 
-/* Modais e Formulários */
+[data-theme="light"] .badge-ativo {
+  background: #ECFDF5 !important;
+  color: #065F46 !important;
+  border: 1px solid #6EE7B7 !important;
+}
+
+[data-theme="light"] .badge-demitido {
+  background: #FEF2F2 !important;
+  color: #991B1B !important;
+  border: 1px solid #FCA5A5 !important;
+}
+
+[data-theme="light"] .badge-aprendiz {
+  background: #FFFBEB !important;
+  color: #92400E !important;
+  border: 1px solid #FCD34D !important;
+}
+
+[data-theme="light"] .badge-sabado-folga {
+  background: #EFF6FF !important;
+  color: #1E40AF !important;
+  border: 1px solid #BFDBFE !important;
+}
+
+[data-theme="light"] .badge-sem-va {
+  background: #F5F3FF !important;
+  color: #5B21B6 !important;
+  border: 1px solid #DDD6FE !important;
+}
+
+/* Modais, Formulários e Tabelas Gerais */
+[data-theme="light"] .modal-backdrop {
+  background: rgba(15, 23, 42, 0.48);
+  backdrop-filter: blur(4px);
+}
+
 [data-theme="light"] .modal-card {
   background: #FFFFFF;
-  border: 1px solid #C8C9D3;
-  box-shadow: 0 10px 30px rgba(9, 11, 51, 0.15);
+  border: 1px solid #DCE2EC;
+  box-shadow: 0 20px 40px -8px rgba(15, 23, 42, 0.18), 0 8px 16px -6px rgba(15, 23, 42, 0.08);
 }
 
 [data-theme="light"] .modal-header {
-  background: linear-gradient(135deg, #151733 0%, #090B33 100%);
-  border-bottom: 1px solid #090B33;
+  background: #F8FAFC;
+  border-bottom: 1px solid #DCE2EC;
 }
 
 [data-theme="light"] .modal-header h3 {
-  color: #FFFFFF;
+  color: #0F172A;
+  font-weight: 800;
 }
 
 [data-theme="light"] .modal-footer {
-  background: #EDEDF2;
-  border-top: 1px solid #C8C9D3;
+  background: #F8FAFC;
+  border-top: 1px solid #DCE2EC;
 }
 
 [data-theme="light"] .modal-close-btn {
-  color: #C8C9D3;
+  color: #64748B;
 }
 
 [data-theme="light"] .modal-close-btn:hover {
-  color: #FFFFFF;
+  color: #0F172A;
+}
+
+[data-theme="light"] .form-group label {
+  color: #334155;
+  font-weight: 600;
 }
 
 [data-theme="light"] .form-control {
   background: #FFFFFF;
-  border: 1px solid #C8C9D3;
-  color: #090B33;
+  border: 1px solid #CBD5E1;
+  color: #0F172A;
 }
 
 [data-theme="light"] .form-control:focus {
-  border-color: #151733;
-  box-shadow: 0 0 6px rgba(21, 23, 51, 0.25);
+  border-color: #4015B8;
+  box-shadow: 0 0 0 3px rgba(64, 21, 184, 0.12);
 }
 
 [data-theme="light"] .punches-box {
-  background: #EDEDF2;
-  border: 1px solid #C8C9D3;
+  background: #F8FAFC;
+  border: 1px solid #DCE2EC;
 }
 
-/* Fechamento VA e KPIs */
+[data-theme="light"] .punch-chip {
+  background: #EEF2FF;
+  color: #311094;
+  border: 1px solid #C7D2FE;
+}
+
+/* Fechamento VA, Colaboradores, Estrutura e Feriados */
+[data-theme="light"] .va-table-card {
+  background: #FFFFFF;
+  border: 1px solid #DCE2EC;
+  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04), 0 4px 12px rgba(15, 23, 42, 0.02);
+}
+
 [data-theme="light"] .va-card-header {
-  background: linear-gradient(135deg, #151733 0%, #090B33 100%);
-  border-bottom: 1px solid #090B33;
+  background: #FFFFFF;
+  border-bottom: 1px solid #DCE2EC;
 }
 
 [data-theme="light"] .va-card-header h2 {
-  color: #FFFFFF;
+  color: #0F172A;
+  font-weight: 800;
 }
 
 [data-theme="light"] .va-card-header h2 span {
-  color: #8E8FA1;
+  color: #4015B8;
 }
 
-[data-theme="light"] .styled-table th {
-  background: #EDEDF2;
-  color: #090B33;
-  border-bottom: 1px solid #C8C9D3;
+[data-theme="light"] .styled-table th,
+[data-theme="light"] .data-table th,
+[data-theme="light"] .table th {
+  background: #EEF1F6 !important;
+  color: #334155 !important;
+  border-bottom: 1px solid #CBD5E1 !important;
+  font-weight: 700;
 }
 
-[data-theme="light"] .styled-table td {
-  border-bottom: 1px solid #EAEBEF;
-  color: #090B33;
+[data-theme="light"] .styled-table td,
+[data-theme="light"] .data-table td,
+[data-theme="light"] .table td {
+  border-bottom: 1px solid #E2E8F0;
+  color: #0F172A;
 }
 
-[data-theme="light"] .styled-table tr:hover td {
-  background: #EDEDF2;
-}
-
-[data-theme="light"] .kpi-card {
-  background: #FFFFFF;
-  border-color: #C8C9D3;
-  box-shadow: 0 2px 8px rgba(9, 11, 51, 0.05);
-}
-
-[data-theme="light"] .kpi-card::before {
-  background: linear-gradient(90deg, #151733 0%, #8E8FA1 100%);
-}
-
-[data-theme="light"] .kpi-value.cyan {
-  color: #151733;
-  text-shadow: none;
-}
-
-[data-theme="light"] .kpi-value.purple {
-  color: #090B33;
-}
-
-[data-theme="light"] .kpi-helper {
-  color: #595A61;
+[data-theme="light"] .styled-table tr:hover td,
+[data-theme="light"] .data-table tbody tr:hover td,
+[data-theme="light"] .table tbody tr:hover td {
+  background: #F8FAFC;
 }
 
 [data-theme="light"] .val-liquido {
-  color: #151733 !important;
+  color: #047857 !important;
+  font-weight: 800;
 }
 
 [data-theme="light"] .val-desconto {
-  color: #595A61 !important;
+  color: #B91C1C !important;
+  font-weight: 700;
 }
 
-/* Colaboradores e Outros Cards */
 [data-theme="light"] .colab-card,
 [data-theme="light"] .agenda-card,
 [data-theme="light"] .notice-card,
 [data-theme="light"] .avisos-calendar-card,
 [data-theme="light"] .calendar-card {
   background: #FFFFFF;
-  border-color: #C8C9D3;
+  border-color: #DCE2EC;
+  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04);
 }
 
 [data-theme="light"] .legend-bar {
-  background: #EDEDF2;
-  border-color: #C8C9D3;
+  background: #FFFFFF;
+  border-top: 1px solid #DCE2EC;
 }
 
 [data-theme="light"] .legend-item {
-  color: #090B33;
+  color: #334155;
+  font-weight: 500;
 }
 
 /* Print View Styles */
@@ -3696,14 +3885,22 @@ html.ponto-scroll-mode body::-webkit-scrollbar {
    DSR - VARIAÇÕES NO MODO CLARO
    ========================================================================== */
 [data-theme="light"] .matrix-table tbody td.col-dsr:hover {
-  background-color: #DCDDE6 !important;
+  background-color: #E2E8F0 !important;
+}
+
+[data-theme="light"] .dsr-full {
+  color: #047857 !important;
+}
+
+[data-theme="light"] .dsr-partial {
+  color: #B45309 !important;
 }
 
 [data-theme="light"] .dsr-zero.dsr-has-desconto {
   color: #B91C1C !important;
-  background: #FEE2E2;
-  border: 2px solid #EF4444;
-  box-shadow: 0 0 6px rgba(239, 68, 68, 0.35);
+  background: #FEF2F2;
+  border: 1.5px solid #EF4444;
+  box-shadow: 0 1px 4px rgba(239, 68, 68, 0.2);
 }
 
 /* ==========================================================================
@@ -3840,19 +4037,30 @@ html.ponto-scroll-mode body::-webkit-scrollbar {
   border-radius: var(--radius-sm);
 }
 
+[data-theme="light"] .emp-ferias-box {
+  background: linear-gradient(135deg, #EFF6FF 0%, #EEF2FF 100%) !important;
+  border: 1px solid #BFDBFE !important;
+}
+
 [data-theme="light"] .ferias-colab-header {
-  background: #EDEDF2;
-  border-color: #C8C9D3;
+  background: #F8FAFC;
+  border-color: #DCE2EC;
 }
 
 [data-theme="light"] .ferias-colab-header strong,
 [data-theme="light"] .emp-ferias-box-info strong,
 [data-theme="light"] .ferias-item-periodo {
-  color: #151733;
+  color: #4015B8;
+}
+
+[data-theme="light"] .ferias-preview {
+  background: #EEF2FF;
+  border-left: 4px solid #4015B8;
+  color: #1E293B;
 }
 
 [data-theme="light"] .ferias-preview strong {
-  color: #151733;
+  color: #311094;
 }
 
 /* ==========================================================================
@@ -3965,22 +4173,30 @@ html.ponto-scroll-mode body::-webkit-scrollbar {
 }
 
 [data-theme="light"] .backup-protection-box {
-  background: #F4F4F8;
-  border-color: #D3D4E0;
+  background: #F8FAFC;
+  border-color: #DCE2EC;
+}
+
+[data-theme="light"] .custom-switch input:checked + .slider {
+  background-color: #4015B8;
+}
+
+[data-theme="light"] .custom-switch input:checked + .slider:before {
+  background-color: #FFFFFF;
 }
 
 [data-theme="light"] .backup-history-item {
   background: #FFFFFF;
-  border-color: #D3D4E0;
+  border-color: #DCE2EC;
 }
 
 [data-theme="light"] .backup-history-item:hover {
-  background: #F0F4FF;
-  border-color: var(--color-primary);
+  background: #F8FAFC;
+  border-color: #4015B8;
 }
 
 [data-theme="light"] .backup-item-title {
-  color: #151733;
+  color: #0F172A;
 }
 
 /* ==========================================================================
@@ -4074,4 +4290,363 @@ html.ponto-scroll-mode body::-webkit-scrollbar {
   font-family: var(--font-mono);
   font-weight: 600;
   color: var(--color-cyan);
-}
+}
+
+/* Layout Base para .data-table e .table (Vínculos de Relógios e DSR Ocorrências) */
+.data-table,
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+
+.data-table th,
+.table th {
+  background: rgba(15, 13, 21, 0.7);
+  color: var(--color-text-sub);
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 11px;
+  letter-spacing: 0.5px;
+  padding: 11px 14px;
+  text-align: left;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.data-table td,
+.table td {
+  padding: 10px 14px;
+  border-bottom: 1px solid rgba(49, 43, 69, 0.5);
+  color: var(--color-text-main);
+  vertical-align: middle;
+}
+
+/* ==========================================================================
+   MODO CLARO: CENTRAL DE IMPORTAÇÃO & OVERRIDES DE INLINE STYLES ESCUROS
+   (Auditoria Impeccable Critique & Polish — Zero Vazamento de Dark Mode)
+   ========================================================================== */
+
+/* Painel Superior e Sub-Abas de Importação (#view-importacao) */
+[data-theme="light"] .importacao-header-panel {
+  background: #FFFFFF !important;
+  border: 1px solid #DCE2EC !important;
+  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04), 0 4px 12px rgba(15, 23, 42, 0.02) !important;
+}
+
+[data-theme="light"] .importacao-subtabs {
+  border-top: 1px solid #E2E8F0 !important;
+}
+
+[data-theme="light"] .imp-subtab-btn {
+  color: #475569;
+  font-weight: 600;
+}
+
+[data-theme="light"] .imp-subtab-btn:hover {
+  color: #0F172A;
+  background: #F1F5F9;
+}
+
+[data-theme="light"] .imp-subtab-btn.active {
+  color: #4015B8;
+  background: #EEF2FF;
+  border: 1px solid #C7D2FE;
+  box-shadow: 0 1px 3px rgba(64, 21, 184, 0.12);
+}
+
+[data-theme="light"] #imp-motor-status-pill[style*="rgba(255,255,255"] {
+  background: #F1F5F9 !important;
+  color: #334155 !important;
+  border: 1px solid #CBD5E1 !important;
+}
+
+/* Cards dos 4 Relógios REP Control iD */
+[data-theme="light"] .relogio-card {
+  background: #FFFFFF !important;
+  border: 1px solid #DCE2EC !important;
+  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04), 0 4px 10px rgba(15, 23, 42, 0.02);
+}
+
+[data-theme="light"] .relogio-card:hover {
+  border-color: #94A3B8 !important;
+  box-shadow: 0 6px 16px rgba(15, 23, 42, 0.08);
+}
+
+[data-theme="light"] .relogio-card-title {
+  color: #0F172A;
+}
+
+[data-theme="light"] .relogio-card-sub {
+  color: #64748B;
+}
+
+[data-theme="light"] .relogio-card div[style*="rgba(0,0,0,0.25)"] {
+  background: #F8FAFC !important;
+  border: 1px solid #E2E8F0 !important;
+}
+
+[data-theme="light"] .relogio-stat-row {
+  border-bottom: 1px solid #E2E8F0;
+}
+
+[data-theme="light"] .relogio-stat-label {
+  color: #475569;
+}
+
+[data-theme="light"] .relogio-stat-val {
+  color: #1D4ED8;
+  font-weight: 700;
+}
+
+/* Console de Log de Sincronização dos Relógios */
+[data-theme="light"] #app-logRelogiosBox {
+  background: #FFFFFF !important;
+  border: 1px solid #DCE2EC !important;
+  box-shadow: 0 2px 8px rgba(15, 23, 42, 0.05) !important;
+}
+
+[data-theme="light"] #app-logRelogiosTexto {
+  background: #0F172A !important;
+  color: #E2E8F0 !important;
+  border-radius: 6px;
+}
+
+/* Sub-Aba 2: Relatório Diário & E-mail + Sub-Aba 3: Vínculos de Relógios */
+[data-theme="light"] #subtab-relatorio > div[style*="rgba(30, 27, 46"],
+[data-theme="light"] #subtab-vinculos > div[style*="rgba(30, 27, 46"],
+[data-theme="light"] #imp-painel-email[style*="rgba(30, 27, 46"] {
+  background: #FFFFFF !important;
+  border: 1px solid #DCE2EC !important;
+  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04), 0 4px 12px rgba(15, 23, 42, 0.02) !important;
+}
+
+/* 6 Mini KPI Cards de Resumo de Importação */
+[data-theme="light"] #imp-kpis-resumo > div[style*="rgba(30, 27, 46"] {
+  background: #FFFFFF !important;
+  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04), 0 4px 10px rgba(15, 23, 42, 0.02) !important;
+}
+
+[data-theme="light"] #imp-kpi-total {
+  color: #1D4ED8 !important;
+}
+
+[data-theme="light"] #imp-kpi-ok {
+  color: #047857 !important;
+}
+
+[data-theme="light"] #imp-kpi-faltas {
+  color: #B91C1C !important;
+}
+
+[data-theme="light"] #imp-kpi-parciais {
+  color: #B45309 !important;
+}
+
+[data-theme="light"] #imp-kpi-atrasos {
+  color: #6D28D9 !important;
+}
+
+[data-theme="light"] #imp-kpi-extras {
+  color: #0369A1 !important;
+}
+
+[data-theme="light"] #email-corpo-textarea {
+  background: #F8FAFC !important;
+  color: #0F172A !important;
+  border: 1px solid #CBD5E1 !important;
+}
+
+[data-theme="light"] #email-corpo-textarea:focus {
+  background: #FFFFFF !important;
+  border-color: #4015B8 !important;
+}
+
+/* ==========================================================================
+   OVERRIDES DE INLINE STYLES ESCUROS EM MODAIS (100% Legibilidade no Claro)
+   ========================================================================== */
+[data-theme="light"] .modal-body div[style*="#1C1827"],
+[data-theme="light"] .modal-body div[style*="#1E182B"],
+[data-theme="light"] .modal-body div[style*="rgba(30, 27, 46"] {
+  background: #F8FAFC !important;
+  border-color: #DCE2EC !important;
+  color: #0F172A !important;
+}
+
+[data-theme="light"] .modal-body div[style*="rgba(0, 229, 255, 0.08)"] {
+  background: #EFF6FF !important;
+  border-color: #93C5FD !important;
+}
+
+[data-theme="light"] .modal-body div[style*="rgba(255, 68, 68, 0.08)"],
+[data-theme="light"] .modal-body div[style*="rgba(239, 68, 68, 0.1)"] {
+  background: #FEF2F2 !important;
+  border-color: #FCA5A5 !important;
+}
+
+[data-theme="light"] .modal-body div[style*="rgba(234, 179, 8, 0.1)"] {
+  background: #FFFBEB !important;
+  border-color: #FCD34D !important;
+}
+
+[data-theme="light"] .modal-body div[style*="rgba(99, 102, 241, 0.1)"] {
+  background: #EEF2FF !important;
+  border-color: #C7D2FE !important;
+}
+
+/* Textos inline claros pensados para fundo escuro convertidos para tons de alto contraste WCAG AA */
+[data-theme="light"] .modal-body [style*="color: #FCA5A5"],
+[data-theme="light"] .modal-body [style*="color:#FCA5A5"],
+[data-theme="light"] .modal-body [style*="color: #F87171"],
+[data-theme="light"] .modal-body [style*="color:#F87171"] {
+  color: #991B1B !important;
+}
+
+[data-theme="light"] .modal-body [style*="color: #FDE047"],
+[data-theme="light"] .modal-body [style*="color:#FDE047"],
+[data-theme="light"] .modal-body [style*="color: #FACC15"] {
+  color: #92400E !important;
+}
+
+[data-theme="light"] .modal-body [style*="color: #C7D2FE"],
+[data-theme="light"] .modal-body [style*="color:#C7D2FE"],
+[data-theme="light"] .modal-body [style*="color: #818CF8"] {
+  color: #3730A3 !important;
+}
+
+[data-theme="light"] .modal-body [style*="color: #E2D9F3"],
+[data-theme="light"] .modal-body [style*="color:#E2D9F3"] {
+  color: #1E293B !important;
+}
+
+[data-theme="light"] .modal-body [style*="color: #7DD3FC"],
+[data-theme="light"] .modal-body [style*="color:#7DD3FC"] {
+  color: #1E40AF !important;
+}
+
+/* Polimento Final Impeccable (Agenda, Rollover Badges, VA Audit, DSR e Relógios Dinâmicos) */
+[data-theme="light"] .cal-notice-pill {
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.06);
+}
+
+[data-theme="light"] .cal-notice-pill:hover {
+  filter: brightness(0.96);
+}
+
+[data-theme="light"] .badge-rollover-daily {
+  background: #FFFBEB !important;
+  border: 1px solid #FCD34D !important;
+  color: #92400E !important;
+}
+
+[data-theme="light"] .legal-preset-box {
+  background: #EEF2FF !important;
+  border: 1px solid #C7D2FE !important;
+}
+
+[data-theme="light"] .legal-preset-box label {
+  color: #4015B8 !important;
+}
+
+[data-theme="light"] .cal-agenda-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  padding: 14px 18px;
+  background: #FFFFFF;
+  border: 1px solid #DCE2EC;
+  border-radius: 8px;
+  margin-bottom: 10px;
+  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04);
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+[data-theme="light"] .cal-agenda-item:hover {
+  border-color: #94A3B8;
+  box-shadow: 0 4px 10px rgba(15, 23, 42, 0.06);
+}
+
+[data-theme="light"] .cal-agenda-item.is-done {
+  background: #F8FAFC;
+  opacity: 0.85;
+}
+
+[data-theme="light"] .cal-agenda-date-box {
+  background: #EEF2FF;
+  border: 1px solid #C7D2FE;
+  border-radius: 8px;
+  min-width: 52px;
+  padding: 6px 10px;
+  text-align: center;
+}
+
+[data-theme="light"] .cal-agenda-date-box .day-num {
+  font-size: 18px;
+  font-weight: 800;
+  color: #4015B8;
+  line-height: 1.1;
+}
+
+[data-theme="light"] .cal-agenda-date-box .day-week {
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: #475569;
+}
+
+[data-theme="light"] .cal-agenda-item [style*="#FBBF24"] {
+  color: #B45309 !important;
+  font-weight: 600;
+}
+
+[data-theme="light"] #modal-day-summary-bar [style*="#F87171"] {
+  color: #B91C1C !important;
+}
+
+[data-theme="light"] #modal-day-summary-bar [style*="#34D399"] {
+  color: #047857 !important;
+}
+
+[data-theme="light"] .day-notice-card div[style*="rgba(245, 158, 11"] {
+  background: #FFFBEB !important;
+  border-color: #FCD34D !important;
+  color: #92400E !important;
+}
+
+[data-theme="light"] .modal-body [style*="#A5B4FC"] {
+  color: #3730A3 !important;
+}
+
+[data-theme="light"] .modal-body [style*="#B4A6CF"] {
+  color: #475569 !important;
+}
+
+[data-theme="light"] #va-audit-tbody span[style*="#2F2D33"] {
+  background: #EEF2FF !important;
+  color: #311094 !important;
+  border: 1px solid #C7D2FE !important;
+}
+
+[data-theme="light"] #dsr-rules-box div[style*="#6EE7B7"] {
+  background: #ECFDF5 !important;
+  color: #065F46 !important;
+}
+
+[data-theme="light"] .relogio-card div[style*="rgba(255,255,255,0.02)"] {
+  background: #F8FAFC !important;
+  border: 1px solid #E2E8F0 !important;
+}
+
+[data-theme="light"] .relogio-card .badge-success {
+  background: #ECFDF5 !important;
+  color: #047857 !important;
+  border-color: #6EE7B7 !important;
+}
+
+[data-theme="light"] .relogio-card .badge-danger {
+  background: #FEF2F2 !important;
+  color: #B91C1C !important;
+  border-color: #FCA5A5 !important;
+}
+
+
