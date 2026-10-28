@@ -262,6 +262,8 @@ body {
   border-radius: var(--radius-md);
   border: 1px solid var(--color-border);
   gap: 4px;
+  position: relative;
+  z-index: 50;
 }
 
 .nav-tab-btn {
@@ -277,6 +279,10 @@ body {
   align-items: center;
   gap: 6px;
   transition: all 0.2s ease;
+  pointer-events: auto !important;
+  user-select: none;
+  position: relative;
+  z-index: 51;
 }
 
 .nav-tab-btn:hover {

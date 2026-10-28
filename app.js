@@ -11,7 +11,7 @@ const MASTER_RECOVERY_VERSION = 2026102402;
 // 1. ESTADO GLOBAL DA APLICAÇÃO
 // ==========================================================================
 let appState = {
-  activeView: 'view-avisos',
+  activeView: 'view-ponto',
   activeBranchId: 'branch-1',
   currentYear: 2026,
   currentMonth: 9, // Outubro (0-indexed: 9 = Outubro)
@@ -1309,7 +1309,7 @@ function normalizeColaborador(c) {
     c.isAprendiz === true
   );
 
-  const registraPonto = !(
+  let registraPonto = !(
     c.registraPonto === false ||
     c.registraPonto === 'nao' ||
     c.registraPonto === 'false' ||
@@ -1337,6 +1337,10 @@ function normalizeColaborador(c) {
   }
 
   const crachaNum = Number(c.cracha);
+  let filialId = c.filialId || 'branch-1';
+  let crachaFinal = isNaN(crachaNum) ? c.cracha : crachaNum;
+  let admissao = c.admissao || '2026-01-01';
+  let nome = (c.nome || '').trim();
 
   // Unifica e normaliza ID do departamento (legado ou novo)
   let deptId = c.deptId || 'dept-admin';
@@ -1346,7 +1350,7 @@ function normalizeColaborador(c) {
 
   // Regra Estrita de Escala e Ponto: Motoristas, vendedores, vigias e guardas da administração/indústria de Ji-Paraná NÃO batem ponto (folha manual)
   const spontoCrachas = [325, 336, 431, 540, 696, 702, 736, 781, 898, 937, 965, 974, 1020, 1027, 1031, 1032];
-  if (spontoCrachas.includes(crachaNum) && (c.filialId === 'branch-1' || !c.filialId)) {
+  if (spontoCrachas.includes(crachaNum) && (filialId === 'branch-1' || !c.filialId)) {
     deptId = 'dept-admin-sponto';
     registraPonto = false;
   }
@@ -1362,11 +1366,6 @@ function normalizeColaborador(c) {
     registraPonto = true;
     admissao = '2026-10-26';
   }
-
-  let filialId = c.filialId || 'branch-1';
-  let crachaFinal = isNaN(crachaNum) ? c.cracha : crachaNum;
-  let admissao = c.admissao || '2026-01-01';
-  let nome = (c.nome || '').trim();
 
   // Tratamento específico para garantir separação de homônimos de crachá
   if (nome.includes('FERNANDA CRISTINA PAIXAO DE ALMEIDA')) {
@@ -3494,6 +3493,9 @@ function calculateVAForEmployee(colabId, year, month, branchId) {
 // ==========================================================================
 
 function updateNavTabsActive(targetView) {
+  if (!targetView) targetView = 'view-ponto';
+  appState.activeView = targetView;
+
   document.querySelectorAll('.nav-tab-btn').forEach(btn => {
     if (btn.dataset.view === targetView) {
       btn.classList.add('active');
@@ -3503,8 +3505,17 @@ function updateNavTabsActive(targetView) {
   });
 
   document.querySelectorAll('.app-view').forEach(view => {
-    view.style.display = (view.id === targetView) ? 'block' : 'none';
+    if (view.id === targetView) {
+      view.style.display = 'block';
+      view.classList.add('active-view');
+    } else {
+      view.style.display = 'none';
+      view.classList.remove('active-view');
+    }
   });
+
+  // Fecha eventuais modais que tenham ficado abertos ao trocar de tela
+  document.querySelectorAll('.modal-overlay.active').forEach(m => m.classList.remove('active'));
 
   // Toolbar visibilidade (apenas ponto e va utilizam a toolbar global)
   const toolbar = document.getElementById('main-toolbar');
@@ -3520,16 +3531,30 @@ function updateNavTabsActive(targetView) {
   const isPonto = targetView === 'view-ponto';
   document.body.classList.toggle('ponto-scroll-mode', isPonto);
   document.documentElement.classList.toggle('ponto-scroll-mode', isPonto);
+
+  // Persistir última tela ativa
+  try {
+    localStorage.setItem('ponto_app_last_active_view', targetView);
+  } catch (e) {}
 }
 
 function setupNavigation() {
   const navBtns = document.querySelectorAll('.nav-tab-btn');
   navBtns.forEach(btn => {
-    btn.addEventListener('click', () => {
+    btn.addEventListener('click', (e) => {
+      if (e) {
+        e.preventDefault();
+        e.stopPropagation();
+      }
       const targetView = btn.dataset.view;
+      if (!targetView) return;
       appState.activeView = targetView;
       updateNavTabsActive(targetView);
-      renderCurrentView();
+      try {
+        renderCurrentView();
+      } catch (err) {
+        console.error('Erro ao renderizar tela ' + targetView + ':', err);
+      }
     });
   });
 }
@@ -5061,7 +5086,7 @@ function createDayCellElement({ dateStr, dayNum, isOtherMonth, filterTipo, filte
   cell.appendChild(noticesContainer);
 
   // Handler do botão "+"
-  topDiv.querySelector('.cal-day-add-btn').addEventListener('click', (e) => {
+  topDiv.querySelector('.cal-day-add-btn')?.addEventListener('click', (e) => {
     e.stopPropagation();
     openAvisoModal(null, dateStr);
   });
@@ -7112,14 +7137,18 @@ function initEvents() {
 
 // Inicialização Geral ao Carregar a Página
 document.addEventListener('DOMContentLoaded', () => {
-  initTheme();
+  try { initTheme(); } catch (e) { console.warn('initTheme error:', e); }
   try { localStorage.removeItem('ponto_app_backup_history'); } catch (e) {}
-  loadStateFromStorage();
-  checkModalDraftOnLoad();
-  setupNavigation();
-  initEvents();
 
-  // Restaurar estado visual inicial
+  // 1. Inicializa navegação e eventos primeiro com segurança absoluta
+  try { setupNavigation(); } catch (e) { console.error('setupNavigation error:', e); }
+  try { initEvents(); } catch (e) { console.error('initEvents error:', e); }
+
+  // 2. Carrega estado do storage
+  try { loadStateFromStorage(); } catch (e) { console.error('loadStateFromStorage error:', e); }
+  try { checkModalDraftOnLoad(); } catch (e) {}
+
+  // 3. Restaurar estado visual inicial
   if (appState.focusMode) {
     document.getElementById('focus-toggle-btn')?.classList.add('active');
   }
@@ -7136,16 +7165,30 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('search-filter-input').value = appState.searchFilter || '';
   }
 
-  updateNavTabsActive(appState.activeView || 'view-avisos');
-  renderCurrentView();
+  // 4. Determina tela inicial salva ou padrão (view-ponto)
+  let initialView = 'view-ponto';
+  try {
+    const saved = localStorage.getItem('ponto_app_last_active_view');
+    if (saved && document.getElementById(saved)) {
+      initialView = saved;
+    }
+  } catch (e) {}
+  appState.activeView = initialView;
+  updateNavTabsActive(initialView);
+
+  try {
+    renderCurrentView();
+  } catch (e) {
+    console.error('renderCurrentView error on startup:', e);
+  }
 
   // Sincronização automática em segundo plano com a nuvem Supabase
-  syncFromCloudOnStart();
-  initSupabaseRealtime();
+  try { syncFromCloudOnStart(); } catch (e) {}
+  try { initSupabaseRealtime(); } catch (e) {}
 
   // Atualização automática em segundo plano das escalas e dados via NGPonto
   setTimeout(() => {
-    aplicarEscalasNGPontoParaTodos(false);
+    try { aplicarEscalasNGPontoParaTodos(false); } catch (e) {}
   }, 1200);
 });
 

@@ -39,11 +39,11 @@
 
       <!-- Main Navigation Views -->
       <nav class="header-nav-views">
-        <button class="nav-tab-btn active" data-view="view-avisos" id="nav-btn-avisos">
-          <span>📢</span> Mural de Avisos
-        </button>
-        <button class="nav-tab-btn" data-view="view-ponto" id="nav-btn-ponto">
+        <button class="nav-tab-btn active" data-view="view-ponto" id="nav-btn-ponto">
           <span>📊</span> Matriz de Ponto
+        </button>
+        <button class="nav-tab-btn" data-view="view-avisos" id="nav-btn-avisos">
+          <span>📢</span> Mural de Avisos
         </button>
         <button class="nav-tab-btn" data-view="view-importacao" id="nav-btn-importacao">
           <span>📡</span> Importação/Processamento
@@ -94,7 +94,7 @@
   </header>
 
   <!-- Global Toolbar (for Ponto and VA) -->
-  <div class="toolbar-container" id="main-toolbar" style="display:none;">
+  <div class="toolbar-container" id="main-toolbar">
     <div class="toolbar-left">
       <!-- Month/Year Selector -->
       <div class="month-selector">
@@ -167,7 +167,7 @@
   <!-- ========================================================================
        VIEW 0: DASHBOARD PRINCIPAL - CALENDÁRIO DE AVISOS & PRAZOS LEGAIS (DP / CLT)
        ======================================================================== -->
-  <main id="view-avisos" class="app-view active-view">
+  <main id="view-avisos" class="app-view" style="display:none;">
     <div class="avisos-calendar-container">
 
       <!-- Header & Hero Section -->
@@ -320,7 +320,7 @@
   <!-- ========================================================================
        VIEW 1: MATRIZ DE PONTO (DASHBOARD EXCEL-LIKE)
        ======================================================================== -->
-  <main id="view-ponto" class="app-view" style="display:none;">
+  <main id="view-ponto" class="app-view active-view">
     <div class="matrix-container" id="matrix-scroll-wrapper">
       <table class="matrix-table" id="matrix-table">
         <thead id="matrix-thead">
@@ -1670,6 +1670,6 @@
   <!-- Base de Dados Originais Recuperados (Carga Instantânea Garantida) -->
   <script src="backup_data.js?v=20261024_v5"></script>
   <!-- Main JavaScript Logic -->
-  <script src="app.js?v=20261028_relogios_escalas_v1"></script>
+  <script src="app.js?v=20261028_nav_fix_v2"></script>
 </body>
 </html>
