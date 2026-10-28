@@ -70,58 +70,61 @@
 }
 
 /* ==========================================================================
-   MODO CLARO (LIGHT MODE) — Architectural Steel Slate & Electric Indigo
-   Extraído via extract-design-system • Validado por frontend-design & web-design-guidelines
-   Contraste WCAG AA/AAA (Texto principal 16.8:1, Secundário 9.8:1, Muted 4.76:1)
+   MODO CLARO (LIGHT MODE) — Azul Corporativo & Branco Puro (Clean Blue & White)
+   Superfícies: Branco Puro (#FFFFFF) e Fundo Suave (#F0F4F9)
+   Destaque da Marca: Azul Real (#2563EB) & Azul Marinho Executivo (#1E40AF / #1E293B)
+   Cores Padrão Mantidas: Vermelho (Urgente/Faltas/Pendências), Amarelo (Atrasos), Verde (OK/Feito)
    ========================================================================== */
 [data-theme="light"] {
   color-scheme: light;
-  --color-bg-base: #F4F6F9;
-  --color-bg-dark: #EEF1F6;
+  --color-bg-base: #F0F4F9;
+  --color-bg-dark: #E2E8F0;
   --color-bg-card: #FFFFFF;
   --color-bg-surface: #F8FAFC;
   --color-bg-panel: #E2E8F0;
-  --color-border: #CBD5E1;
-  --color-border-bright: #94A3B8;
-  --color-primary: #4015B8;
-  --color-primary-hover: #331094;
-  --color-primary-light: #5B28EA;
+  --color-border: #E2E8F0;
+  --color-border-bright: #CBD5E1;
+  --color-primary: #2563EB;
+  --color-primary-hover: #1D4ED8;
+  --color-primary-light: #3B82F6;
 
-  --color-cyan: #1D4ED8;
-  --color-cyan-glow: rgba(64, 21, 184, 0.14);
-  --color-blue-bright: #0369A1;
+  --color-cyan: #2563EB;
+  --color-cyan-glow: rgba(37, 99, 235, 0.14);
+  --color-blue-bright: #0284C7;
   --color-blue-soft: #475569;
 
   --color-text-main: #0F172A;
   --color-text-sub: #334155;
   --color-text-muted: #64748B;
 
-  --color-sunday-bg: #E2E8F0;
-  --color-sunday-text: #334155;
+  --color-sunday-bg: #F1F5F9;
+  --color-sunday-text: #475569;
 
+  /* Verde Padrão (Concluído / OK / Feito / FGTS) */
   --color-ok-bg: #ECFDF5;
-  --color-ok-border: #6EE7B7;
+  --color-ok-border: #86EFAC;
   --color-ok-text: #065F46;
 
-  /* Falta Integral e Meio Período (FM / FT) */
-  --color-falta-bg: #FEE2E2;
-  --color-falta-border: #EF4444;
+  /* Vermelho Padrão (Falta Integral e Meio Período FM / FT / Urgências) */
+  --color-falta-bg: #FEF2F2;
+  --color-falta-border: #F87171;
   --color-falta-text: #991B1B;
 
-  --color-half-bg: #FFE4E6;
-  --color-half-border: #F43F5E;
+  --color-half-bg: #FFF1F2;
+  --color-half-border: #FDA4AF;
   --color-half-text: #9F1239;
 
-  /* Atrasos e Pendências de Batidas (EM, SM, ET, ST) */
-  --color-atraso-bg: #FEF3C7;
-  --color-atraso-border: #F59E0B;
+  /* Amarelo/Laranja Padrão (Atrasos e Pendências de Batidas EM, SM, ET, ST) */
+  --color-atraso-bg: #FFFBEB;
+  --color-atraso-border: #FCD34D;
   --color-atraso-text: #92400E;
 
-  --color-feriado-bg: #EEF2FF;
-  --color-feriado-border: #818CF8;
-  --color-feriado-text: #312E81;
+  /* Roxo Padrão (Férias) */
+  --color-feriado-bg: #EFF6FF;
+  --color-feriado-border: #BFDBFE;
+  --color-feriado-text: #1E40AF;
 
-  --shadow-glow: 0 2px 8px rgba(64, 21, 184, 0.12);
+  --shadow-glow: 0 2px 8px rgba(37, 99, 235, 0.12);
   --shadow-purple: 0 8px 24px rgba(15, 23, 42, 0.08);
   --shadow-card: 0 1px 3px rgba(15, 23, 42, 0.06), 0 1px 2px rgba(15, 23, 42, 0.04);
 }
@@ -2497,20 +2500,21 @@ html.ponto-scroll-mode body::-webkit-scrollbar {
 }
 
 /* ==========================================================================
-   MODO CLARO REDESENHADO (ARCHITECTURAL STEEL SLATE & ELECTRIC INDIGO)
-   Guiado por: extract-design-system + frontend-design + web-design-guidelines + impeccable
-   Foco: Hierarquia de Superfícies Táteis, Contraste WCAG AA/AAA, Zero Poluição Visual
+   MODO CLARO REFORMULADO (AZUL CORPORATIVO & BRANCO PURO — CLEAN BLUE & WHITE)
+   Superfícies: Branco Puro (#FFFFFF) e Fundo Suave (#F0F4F9)
+   Destaque da Marca: Azul Real (#2563EB) & Azul Marinho Executivo (#1E40AF / #1E293B)
+   Cores Padrão: Vermelho (Urgente/Faltas), Amarelo (Atrasos), Verde (OK/Feito)
    ========================================================================== */
 
 /* 1. Base Canvas, Seleção, Scrollbars & Foco de Acessibilidade (WCAG 2.4.7) */
 [data-theme="light"] ::-webkit-scrollbar-track {
-  background: #EEF1F6;
+  background: #F0F4F9;
 }
 
 [data-theme="light"] ::-webkit-scrollbar-thumb {
   background: #CBD5E1;
   border-radius: 5px;
-  border: 2px solid #EEF1F6;
+  border: 2px solid #F0F4F9;
 }
 
 [data-theme="light"] ::-webkit-scrollbar-thumb:hover {
@@ -2518,18 +2522,18 @@ html.ponto-scroll-mode body::-webkit-scrollbar {
 }
 
 [data-theme="light"] ::selection {
-  background: rgba(64, 21, 184, 0.16);
+  background: rgba(37, 99, 235, 0.16);
   color: #0F172A;
 }
 
 [data-theme="light"] :focus-visible {
-  outline: 2px solid #4015B8 !important;
+  outline: 2px solid #2563EB !important;
   outline-offset: 2px !important;
 }
 
 [data-theme="light"] body,
 [data-theme="light"] .app-view {
-  background-color: #F4F6F9 !important;
+  background-color: #F0F4F9 !important;
   color: #0F172A;
 }
 
@@ -2549,7 +2553,7 @@ html.ponto-scroll-mode body::-webkit-scrollbar {
 /* 2. Header & Navegação Principal (Superfície Branca Pura Elevada) */
 [data-theme="light"] .app-header {
   background: #FFFFFF !important;
-  border-bottom: 1px solid #DCE2EC !important;
+  border-bottom: 1px solid #E2E8F0 !important;
   box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04), 0 4px 12px rgba(15, 23, 42, 0.03) !important;
 }
 
@@ -2559,14 +2563,14 @@ html.ponto-scroll-mode body::-webkit-scrollbar {
 }
 
 [data-theme="light"] .brand-title-group h1 span {
-  color: #4015B8;
+  color: #2563EB;
   text-shadow: none;
 }
 
 [data-theme="light"] .brand-title-group h1 span[style*="background"] {
-  background: #EEF2FF !important;
-  border: 1px solid #C7D2FE !important;
-  color: #4015B8 !important;
+  background: #EFF6FF !important;
+  border: 1px solid #BFDBFE !important;
+  color: #2563EB !important;
   font-weight: 700 !important;
 }
 
@@ -2577,13 +2581,13 @@ html.ponto-scroll-mode body::-webkit-scrollbar {
 
 [data-theme="light"] .brand-logo-icon {
   background: #FFFFFF;
-  border: 1.5px solid #DCE2EC;
+  border: 1.5px solid #E2E8F0;
   box-shadow: 0 2px 6px rgba(15, 23, 42, 0.06);
 }
 
 [data-theme="light"] .brand-logo-icon:hover {
-  border-color: #4015B8;
-  box-shadow: 0 4px 12px rgba(64, 21, 184, 0.14);
+  border-color: #2563EB;
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.16);
 }
 
 [data-theme="light"] .logo-dark-mode {
@@ -2594,10 +2598,10 @@ html.ponto-scroll-mode body::-webkit-scrollbar {
   display: block;
 }
 
-/* Nav Tabs (Trilho Recuado Tátil #EEF1F6) */
+/* Nav Tabs (Trilho Recuado Tátil #F0F4F9) */
 [data-theme="light"] .header-nav-views {
-  background: #EEF1F6;
-  border: 1px solid #DCE2EC;
+  background: #F0F4F9;
+  border: 1px solid #E2E8F0;
   padding: 4px;
   border-radius: 10px;
 }
@@ -2615,10 +2619,10 @@ html.ponto-scroll-mode body::-webkit-scrollbar {
 }
 
 [data-theme="light"] .nav-tab-btn.active {
-  background: #4015B8;
+  background: #2563EB;
   color: #FFFFFF;
-  border-color: #35109E;
-  box-shadow: 0 2px 6px rgba(64, 21, 184, 0.28);
+  border-color: #1D4ED8;
+  box-shadow: 0 2px 6px rgba(37, 99, 235, 0.28);
 }
 
 /* Abas de Filiais (Branch Tabs) */
@@ -2664,16 +2668,16 @@ html.ponto-scroll-mode body::-webkit-scrollbar {
 
 [data-theme="light"] #btn-quick-new-branch {
   background: #FFFFFF !important;
-  color: #4015B8 !important;
-  border: 1px dashed #A5B4FC !important;
+  color: #2563EB !important;
+  border: 1px dashed #93C5FD !important;
   font-weight: 700 !important;
 }
 
 [data-theme="light"] #btn-quick-new-branch:hover {
-  background: #EEF2FF !important;
+  background: #EFF6FF !important;
   border-style: solid !important;
-  border-color: #4015B8 !important;
-  color: #35109E !important;
+  border-color: #2563EB !important;
+  color: #1D4ED8 !important;
 }
 
 /* Cloud Badge & Header Utilities */
@@ -2696,7 +2700,7 @@ html.ponto-scroll-mode body::-webkit-scrollbar {
 [data-theme="light"] .filters-bar,
 [data-theme="light"] .calendar-filters-bar {
   background: #FFFFFF !important;
-  border-bottom: 1px solid #DCE2EC !important;
+  border-bottom: 1px solid #E2E8F0 !important;
   box-shadow: 0 1px 2px rgba(15, 23, 42, 0.03);
 }
 
@@ -2746,8 +2750,8 @@ html.ponto-scroll-mode body::-webkit-scrollbar {
 [data-theme="light"] .toolbar-container .search-input:focus,
 [data-theme="light"] .colab-filter-bar .search-input:focus {
   background: #FFFFFF !important;
-  border-color: #4015B8 !important;
-  box-shadow: 0 0 0 3px rgba(64, 21, 184, 0.12) !important;
+  border-color: #2563EB !important;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.14) !important;
 }
 
 [data-theme="light"] .toolbar-container .search-input::placeholder,
@@ -2805,18 +2809,18 @@ html.ponto-scroll-mode body::-webkit-scrollbar {
 }
 
 [data-theme="light"] .toolbar-container .focus-toggle-box.active {
-  background: #EEF2FF !important;
-  border-color: #4015B8 !important;
+  background: #EFF6FF !important;
+  border-color: #2563EB !important;
 }
 
 [data-theme="light"] .toolbar-container .focus-toggle-box.active .focus-toggle-text {
-  color: #4015B8 !important;
+  color: #2563EB !important;
   font-weight: 700 !important;
 }
 
 [data-theme="light"] .toolbar-container .focus-toggle-box.active .toggle-switch {
-  background: #4015B8 !important;
-  border-color: #35109E !important;
+  background: #2563EB !important;
+  border-color: #1D4ED8 !important;
 }
 
 /* Sistema de Botões no Modo Claro */
@@ -2838,18 +2842,18 @@ html.ponto-scroll-mode body::-webkit-scrollbar {
 [data-theme="light"] #btn-novo-aviso,
 [data-theme="light"] .btn-primary,
 [data-theme="light"] .toolbar-container #btn-novo-colaborador-quick {
-  background: linear-gradient(135deg, #4015B8 0%, #311094 100%) !important;
+  background: linear-gradient(135deg, #2563EB 0%, #1E40AF 100%) !important;
   color: #FFFFFF !important;
-  border: 1px solid #311094 !important;
-  box-shadow: 0 2px 6px rgba(64, 21, 184, 0.26) !important;
+  border: 1px solid #1E40AF !important;
+  box-shadow: 0 2px 6px rgba(37, 99, 235, 0.26) !important;
   font-weight: 600 !important;
 }
 
 [data-theme="light"] #btn-novo-aviso:hover,
 [data-theme="light"] .btn-primary:hover,
 [data-theme="light"] .toolbar-container #btn-novo-colaborador-quick:hover {
-  background: linear-gradient(135deg, #35109E 0%, #260B7A 100%) !important;
-  box-shadow: 0 4px 12px rgba(64, 21, 184, 0.36) !important;
+  background: linear-gradient(135deg, #1D4ED8 0%, #1E3A8A 100%) !important;
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.36) !important;
 }
 
 [data-theme="light"] .btn-cyan {
@@ -2870,14 +2874,14 @@ html.ponto-scroll-mode body::-webkit-scrollbar {
    ========================================================================== */
 [data-theme="light"] .cal-hero-section {
   background: #FFFFFF !important;
-  border: 1px solid #DCE2EC !important;
+  border: 1px solid #E2E8F0 !important;
   box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04), 0 4px 12px rgba(15, 23, 42, 0.03);
 }
 
 [data-theme="light"] .cal-badge-pill {
-  background: #EEF2FF !important;
-  color: #4015B8 !important;
-  border: 1px solid #C7D2FE !important;
+  background: #EFF6FF !important;
+  color: #2563EB !important;
+  border: 1px solid #BFDBFE !important;
   font-weight: 700;
   letter-spacing: 0.5px;
 }
@@ -2900,12 +2904,12 @@ html.ponto-scroll-mode body::-webkit-scrollbar {
 /* KPI Cards do Calendário e do VA (Contraste AA/AAA verificado) */
 [data-theme="light"] .kpi-card {
   background: #FFFFFF !important;
-  border: 1px solid #DCE2EC !important;
+  border: 1px solid #E2E8F0 !important;
   box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04), 0 4px 10px rgba(15, 23, 42, 0.02) !important;
 }
 
 [data-theme="light"] .kpi-card::before {
-  background: linear-gradient(90deg, #4015B8 0%, #1D4ED8 100%);
+  background: linear-gradient(90deg, #2563EB 0%, #1D4ED8 100%);
 }
 
 [data-theme="light"] .kpi-title {
@@ -2923,22 +2927,22 @@ html.ponto-scroll-mode body::-webkit-scrollbar {
 }
 
 [data-theme="light"] .kpi-value.purple {
-  color: #4015B8 !important;
+  color: #2563EB !important;
   text-shadow: none !important;
 }
 
 [data-theme="light"] .kpi-value.yellow {
-  color: #B45309 !important;
+  color: #D97706 !important; /* Amarelo Padrão */
   text-shadow: none !important;
 }
 
 [data-theme="light"] .kpi-value.green-done {
-  color: #047857 !important;
+  color: #16A34A !important; /* Verde Padrão */
   text-shadow: none !important;
 }
 
 [data-theme="light"] .kpi-value.red-urgent {
-  color: #B91C1C !important;
+  color: #DC2626 !important; /* Vermelho Padrão */
   text-shadow: none !important;
 }
 
@@ -2949,14 +2953,14 @@ html.ponto-scroll-mode body::-webkit-scrollbar {
 /* Card Principal do Calendário */
 [data-theme="light"] .cal-reference-card {
   background: #FFFFFF;
-  border: 1px solid #DCE2EC;
+  border: 1px solid #E2E8F0;
   box-shadow: 0 4px 16px rgba(15, 23, 42, 0.05);
 }
 
 /* Topo do Calendário (Mês/Ano e Navegação) - Superfície Clara Executiva */
 [data-theme="light"] .cal-ref-header {
   background: #FFFFFF;
-  border-bottom: 1px solid #DCE2EC;
+  border-bottom: 1px solid #E2E8F0;
   box-shadow: none;
 }
 
@@ -3001,8 +3005,8 @@ html.ponto-scroll-mode body::-webkit-scrollbar {
 }
 
 [data-theme="light"] .cal-ref-views-toggle {
-  background: #EEF1F6;
-  border: 1px solid #DCE2EC;
+  background: #F0F4F9;
+  border: 1px solid #E2E8F0;
   border-radius: 7px;
   padding: 2px;
 }
@@ -3019,7 +3023,7 @@ html.ponto-scroll-mode body::-webkit-scrollbar {
 
 [data-theme="light"] .cal-view-btn.active {
   background: #FFFFFF;
-  color: #4015B8;
+  color: #2563EB;
   font-weight: 700;
   box-shadow: 0 1px 3px rgba(15, 23, 42, 0.1);
 }
@@ -3027,7 +3031,7 @@ html.ponto-scroll-mode body::-webkit-scrollbar {
 /* Barra Secundária de Filtros do Calendário */
 [data-theme="light"] .cal-ref-subbar {
   background: #F8FAFC !important;
-  border-bottom: 1px solid #DCE2EC !important;
+  border-bottom: 1px solid #E2E8F0 !important;
 }
 
 [data-theme="light"] .cal-ref-subbar .sort-select-box {
@@ -3055,8 +3059,8 @@ html.ponto-scroll-mode body::-webkit-scrollbar {
 
 /* Linha com os Dias da Semana */
 [data-theme="light"] .cal-weekdays-row {
-  background: #EEF1F6;
-  border-bottom: 1px solid #DCE2EC;
+  background: #F0F4F9;
+  border-bottom: 1px solid #E2E8F0;
 }
 
 [data-theme="light"] .cal-weekday-col {
@@ -3074,7 +3078,7 @@ html.ponto-scroll-mode body::-webkit-scrollbar {
 
 /* Grade de Dias do Calendário */
 [data-theme="light"] .cal-days-grid {
-  background: #DCE2EC;
+  background: #E2E8F0;
 }
 
 [data-theme="light"] .cal-day-cell {
@@ -3104,11 +3108,11 @@ html.ponto-scroll-mode body::-webkit-scrollbar {
 /* Dia de Hoje Destaque */
 [data-theme="light"] .cal-day-cell.today {
   background: #F5F3FF;
-  box-shadow: inset 0 0 0 2px #4015B8 !important;
+  box-shadow: inset 0 0 0 2px #2563EB !important;
 }
 
 [data-theme="light"] .cal-day-cell.today .cal-day-number {
-  color: #4015B8;
+  color: #2563EB;
   font-weight: 800;
 }
 
@@ -3168,9 +3172,9 @@ html.ponto-scroll-mode body::-webkit-scrollbar {
 }
 
 [data-theme="light"] .cal-day-add-btn:hover {
-  background: #4015B8;
+  background: #2563EB;
   color: #FFFFFF;
-  border-color: #4015B8;
+  border-color: #2563EB;
 }
 
 /* Faixas e Pílulas de Avisos no Calendário (WCAG AA Semântico) */
@@ -3232,16 +3236,16 @@ html.ponto-scroll-mode body::-webkit-scrollbar {
 }
 
 [data-theme="light"] .cal-notice-more-badge {
-  background: #EEF2FF !important;
-  color: #4015B8 !important;
-  border: 1px solid #C7D2FE !important;
+  background: #EFF6FF !important;
+  color: #2563EB !important;
+  border: 1px solid #BFDBFE !important;
   font-weight: 700;
 }
 
 /* Modal de Avisos do Dia */
 [data-theme="light"] .day-summary-bar {
   background: #F8FAFC !important;
-  border: 1px solid #DCE2EC !important;
+  border: 1px solid #E2E8F0 !important;
   color: #0F172A !important;
 }
 
@@ -3251,7 +3255,7 @@ html.ponto-scroll-mode body::-webkit-scrollbar {
 
 [data-theme="light"] .day-notice-card {
   background: #FFFFFF !important;
-  border: 1px solid #DCE2EC !important;
+  border: 1px solid #E2E8F0 !important;
   box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04);
   opacity: 1 !important;
 }
@@ -3378,22 +3382,22 @@ html.ponto-scroll-mode body::-webkit-scrollbar {
 
 [data-theme="light"] #btn-day-add-new-notice {
   background: #FFFFFF !important;
-  color: #4015B8 !important;
-  border: 1px dashed #A5B4FC !important;
+  color: #2563EB !important;
+  border: 1px dashed #93C5FD !important;
   font-weight: 700 !important;
 }
 
 [data-theme="light"] #btn-day-add-new-notice:hover {
-  background: #EEF2FF !important;
+  background: #EFF6FF !important;
   border-style: solid !important;
-  border-color: #4015B8 !important;
+  border-color: #2563EB !important;
 }
 
 /* ==========================================================================
    VIEW 1: MATRIZ DE PONTO (TABELA DE ALTA DENSIDADE & CÉLULAS SEMÂNTICAS)
    ========================================================================== */
 [data-theme="light"] .matrix-container {
-  background: #F4F6F9;
+  background: #F0F4F9;
 }
 
 [data-theme="light"] .matrix-table thead tr th {
@@ -3408,7 +3412,7 @@ html.ponto-scroll-mode body::-webkit-scrollbar {
 }
 
 [data-theme="light"] .matrix-table thead tr:last-child th {
-  background: #EEF1F6 !important;
+  background: #F0F4F9 !important;
   color: #1E293B !important;
   border-bottom: 2px solid #CBD5E1 !important;
 }
@@ -3418,7 +3422,7 @@ html.ponto-scroll-mode body::-webkit-scrollbar {
 [data-theme="light"] .col-name {
   background: #FFFFFF !important;
   color: #0F172A !important;
-  border-right: 1px solid #DCE2EC !important;
+  border-right: 1px solid #E2E8F0 !important;
   box-shadow: 2px 0 6px rgba(15, 23, 42, 0.04);
 }
 
@@ -3469,10 +3473,10 @@ html.ponto-scroll-mode body::-webkit-scrollbar {
 
 /* Linha divisória de Setor/Departamento na Matriz */
 [data-theme="light"] .row-dept-group td {
-  background: #EEF2FF !important;
-  color: #311094 !important;
-  border-top: 1px solid #C7D2FE !important;
-  border-bottom: 1px solid #C7D2FE !important;
+  background: #EFF6FF !important;
+  color: #1E40AF !important;
+  border-top: 1px solid #BFDBFE !important;
+  border-bottom: 1px solid #BFDBFE !important;
   font-weight: 700;
 }
 
@@ -3485,7 +3489,7 @@ html.ponto-scroll-mode body::-webkit-scrollbar {
 [data-theme="light"] .matrix-table tbody tr:hover td.col-dept,
 [data-theme="light"] .matrix-table tbody tr:hover td.col-badge,
 [data-theme="light"] .matrix-table tbody tr:hover td.col-name {
-  background: #EEF2FF !important;
+  background: #EFF6FF !important;
 }
 
 [data-theme="light"] .matrix-table tbody tr:nth-child(even) {
@@ -3493,7 +3497,7 @@ html.ponto-scroll-mode body::-webkit-scrollbar {
 }
 
 [data-theme="light"] .matrix-table tbody tr:hover {
-  background: rgba(64, 21, 184, 0.05);
+  background: rgba(37, 99, 235, 0.04);
 }
 
 [data-theme="light"] .th-date-clickable.th-sunday,
@@ -3504,62 +3508,62 @@ html.ponto-scroll-mode body::-webkit-scrollbar {
 
 [data-theme="light"] .th-date-clickable.th-feriado,
 [data-theme="light"] .matrix-table thead tr th.th-feriado {
-  background: #311094 !important;
+  background: #1E40AF !important;
   color: #E0E7FF !important;
   border-bottom-color: #818CF8 !important;
 }
 
 /* Seleção de Linha e Coluna na Matriz */
 [data-theme="light"] .matrix-table tbody tr.selected-row {
-  background: rgba(64, 21, 184, 0.08) !important;
+  background: rgba(37, 99, 235, 0.08) !important;
 }
 
 [data-theme="light"] .matrix-table tbody tr.selected-row td {
-  border-top: 1px solid #A5B4FC !important;
-  border-bottom: 1px solid #A5B4FC !important;
+  border-top: 1px solid #93C5FD !important;
+  border-bottom: 1px solid #93C5FD !important;
 }
 
 [data-theme="light"] .matrix-table tbody tr.selected-row td.col-dept {
-  background: #EEF2FF !important;
-  border-left: 4px solid #4015B8 !important;
+  background: #EFF6FF !important;
+  border-left: 4px solid #2563EB !important;
   color: #0F172A !important;
 }
 
 [data-theme="light"] .matrix-table tbody tr.selected-row td.col-badge {
-  background: #EEF2FF !important;
-  color: #4015B8 !important;
+  background: #EFF6FF !important;
+  color: #2563EB !important;
   font-weight: 800 !important;
 }
 
 [data-theme="light"] .matrix-table tbody tr.selected-row td.col-name {
-  background: #EEF2FF !important;
+  background: #EFF6FF !important;
   color: #0F172A !important;
   font-weight: 700 !important;
 }
 
 [data-theme="light"] .matrix-table tbody tr.selected-row td.col-name strong {
-  color: #4015B8 !important;
+  color: #2563EB !important;
 }
 
 [data-theme="light"] .matrix-table tbody tr.selected-row td.col-dsr {
-  background: #EEF2FF !important;
+  background: #EFF6FF !important;
   color: #0F172A !important;
 }
 
 [data-theme="light"] .matrix-table thead th.selected-col {
-  background: #4015B8 !important;
+  background: #2563EB !important;
   color: #FFFFFF !important;
-  box-shadow: inset 0 -3px 0 #A5B4FC !important;
+  box-shadow: inset 0 -3px 0 #93C5FD !important;
 }
 
 [data-theme="light"] .matrix-table tbody td.selected-col {
-  background: rgba(64, 21, 184, 0.06) !important;
+  background: rgba(37, 99, 235, 0.05) !important;
 }
 
 [data-theme="light"] .cell-ponto.cell-selected {
-  outline: 2px solid #4015B8 !important;
+  outline: 2px solid #2563EB !important;
   outline-offset: 1px;
-  box-shadow: 0 0 8px rgba(64, 21, 184, 0.35) !important;
+  box-shadow: 0 0 8px rgba(37, 99, 235, 0.35) !important;
 }
 
 /* Células de Status na Matriz (Semântica Inconfundível & Alto Contraste WCAG AA) */
@@ -3617,9 +3621,9 @@ html.ponto-scroll-mode body::-webkit-scrollbar {
 }
 
 [data-theme="light"] .status-feriado {
-  background: #EEF2FF !important;
+  background: #EFF6FF !important;
   color: #3730A3 !important;
-  border: 1px solid #A5B4FC !important;
+  border: 1px solid #93C5FD !important;
   font-weight: 700;
 }
 
@@ -3651,8 +3655,8 @@ html.ponto-scroll-mode body::-webkit-scrollbar {
 
 [data-theme="light"] .status-empty:hover {
   background: #F8FAFC !important;
-  border-color: #4015B8 !important;
-  box-shadow: 0 0 0 2px rgba(64, 21, 184, 0.15) !important;
+  border-color: #2563EB !important;
+  box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.15) !important;
 }
 
 /* Status: DEMITIDO (Dias posteriores à rescisão) */
@@ -3724,13 +3728,13 @@ html.ponto-scroll-mode body::-webkit-scrollbar {
 
 [data-theme="light"] .modal-card {
   background: #FFFFFF;
-  border: 1px solid #DCE2EC;
+  border: 1px solid #E2E8F0;
   box-shadow: 0 20px 40px -8px rgba(15, 23, 42, 0.18), 0 8px 16px -6px rgba(15, 23, 42, 0.08);
 }
 
 [data-theme="light"] .modal-header {
   background: #F8FAFC;
-  border-bottom: 1px solid #DCE2EC;
+  border-bottom: 1px solid #E2E8F0;
 }
 
 [data-theme="light"] .modal-header h3 {
@@ -3740,7 +3744,7 @@ html.ponto-scroll-mode body::-webkit-scrollbar {
 
 [data-theme="light"] .modal-footer {
   background: #F8FAFC;
-  border-top: 1px solid #DCE2EC;
+  border-top: 1px solid #E2E8F0;
 }
 
 [data-theme="light"] .modal-close-btn {
@@ -3763,31 +3767,31 @@ html.ponto-scroll-mode body::-webkit-scrollbar {
 }
 
 [data-theme="light"] .form-control:focus {
-  border-color: #4015B8;
-  box-shadow: 0 0 0 3px rgba(64, 21, 184, 0.12);
+  border-color: #2563EB;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.14);
 }
 
 [data-theme="light"] .punches-box {
   background: #F8FAFC;
-  border: 1px solid #DCE2EC;
+  border: 1px solid #E2E8F0;
 }
 
 [data-theme="light"] .punch-chip {
-  background: #EEF2FF;
-  color: #311094;
-  border: 1px solid #C7D2FE;
+  background: #EFF6FF;
+  color: #1E40AF;
+  border: 1px solid #BFDBFE;
 }
 
 /* Fechamento VA, Colaboradores, Estrutura e Feriados */
 [data-theme="light"] .va-table-card {
   background: #FFFFFF;
-  border: 1px solid #DCE2EC;
+  border: 1px solid #E2E8F0;
   box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04), 0 4px 12px rgba(15, 23, 42, 0.02);
 }
 
 [data-theme="light"] .va-card-header {
   background: #FFFFFF;
-  border-bottom: 1px solid #DCE2EC;
+  border-bottom: 1px solid #E2E8F0;
 }
 
 [data-theme="light"] .va-card-header h2 {
@@ -3796,13 +3800,13 @@ html.ponto-scroll-mode body::-webkit-scrollbar {
 }
 
 [data-theme="light"] .va-card-header h2 span {
-  color: #4015B8;
+  color: #2563EB;
 }
 
 [data-theme="light"] .styled-table th,
 [data-theme="light"] .data-table th,
 [data-theme="light"] .table th {
-  background: #EEF1F6 !important;
+  background: #F0F4F9 !important;
   color: #334155 !important;
   border-bottom: 1px solid #CBD5E1 !important;
   font-weight: 700;
@@ -3837,13 +3841,13 @@ html.ponto-scroll-mode body::-webkit-scrollbar {
 [data-theme="light"] .avisos-calendar-card,
 [data-theme="light"] .calendar-card {
   background: #FFFFFF;
-  border-color: #DCE2EC;
+  border-color: #E2E8F0;
   box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04);
 }
 
 [data-theme="light"] .legend-bar {
   background: #FFFFFF;
-  border-top: 1px solid #DCE2EC;
+  border-top: 1px solid #E2E8F0;
 }
 
 [data-theme="light"] .legend-item {
@@ -4038,29 +4042,29 @@ html.ponto-scroll-mode body::-webkit-scrollbar {
 }
 
 [data-theme="light"] .emp-ferias-box {
-  background: linear-gradient(135deg, #EFF6FF 0%, #EEF2FF 100%) !important;
+  background: linear-gradient(135deg, #EFF6FF 0%, #EFF6FF 100%) !important;
   border: 1px solid #BFDBFE !important;
 }
 
 [data-theme="light"] .ferias-colab-header {
   background: #F8FAFC;
-  border-color: #DCE2EC;
+  border-color: #E2E8F0;
 }
 
 [data-theme="light"] .ferias-colab-header strong,
 [data-theme="light"] .emp-ferias-box-info strong,
 [data-theme="light"] .ferias-item-periodo {
-  color: #4015B8;
+  color: #2563EB;
 }
 
 [data-theme="light"] .ferias-preview {
-  background: #EEF2FF;
-  border-left: 4px solid #4015B8;
+  background: #EFF6FF;
+  border-left: 4px solid #2563EB;
   color: #1E293B;
 }
 
 [data-theme="light"] .ferias-preview strong {
-  color: #311094;
+  color: #1E40AF;
 }
 
 /* ==========================================================================
@@ -4174,11 +4178,11 @@ html.ponto-scroll-mode body::-webkit-scrollbar {
 
 [data-theme="light"] .backup-protection-box {
   background: #F8FAFC;
-  border-color: #DCE2EC;
+  border-color: #E2E8F0;
 }
 
 [data-theme="light"] .custom-switch input:checked + .slider {
-  background-color: #4015B8;
+  background-color: #2563EB;
 }
 
 [data-theme="light"] .custom-switch input:checked + .slider:before {
@@ -4187,12 +4191,12 @@ html.ponto-scroll-mode body::-webkit-scrollbar {
 
 [data-theme="light"] .backup-history-item {
   background: #FFFFFF;
-  border-color: #DCE2EC;
+  border-color: #E2E8F0;
 }
 
 [data-theme="light"] .backup-history-item:hover {
   background: #F8FAFC;
-  border-color: #4015B8;
+  border-color: #2563EB;
 }
 
 [data-theme="light"] .backup-item-title {
@@ -4329,7 +4333,7 @@ html.ponto-scroll-mode body::-webkit-scrollbar {
 /* Painel Superior e Sub-Abas de Importação (#view-importacao) */
 [data-theme="light"] .importacao-header-panel {
   background: #FFFFFF !important;
-  border: 1px solid #DCE2EC !important;
+  border: 1px solid #E2E8F0 !important;
   box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04), 0 4px 12px rgba(15, 23, 42, 0.02) !important;
 }
 
@@ -4348,10 +4352,10 @@ html.ponto-scroll-mode body::-webkit-scrollbar {
 }
 
 [data-theme="light"] .imp-subtab-btn.active {
-  color: #4015B8;
-  background: #EEF2FF;
-  border: 1px solid #C7D2FE;
-  box-shadow: 0 1px 3px rgba(64, 21, 184, 0.12);
+  color: #2563EB;
+  background: #EFF6FF;
+  border: 1px solid #BFDBFE;
+  box-shadow: 0 1px 3px rgba(37, 99, 235, 0.14);
 }
 
 [data-theme="light"] #imp-motor-status-pill[style*="rgba(255,255,255"] {
@@ -4363,7 +4367,7 @@ html.ponto-scroll-mode body::-webkit-scrollbar {
 /* Cards dos 4 Relógios REP Control iD */
 [data-theme="light"] .relogio-card {
   background: #FFFFFF !important;
-  border: 1px solid #DCE2EC !important;
+  border: 1px solid #E2E8F0 !important;
   box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04), 0 4px 10px rgba(15, 23, 42, 0.02);
 }
 
@@ -4401,7 +4405,7 @@ html.ponto-scroll-mode body::-webkit-scrollbar {
 /* Console de Log de Sincronização dos Relógios */
 [data-theme="light"] #app-logRelogiosBox {
   background: #FFFFFF !important;
-  border: 1px solid #DCE2EC !important;
+  border: 1px solid #E2E8F0 !important;
   box-shadow: 0 2px 8px rgba(15, 23, 42, 0.05) !important;
 }
 
@@ -4416,7 +4420,7 @@ html.ponto-scroll-mode body::-webkit-scrollbar {
 [data-theme="light"] #subtab-vinculos > div[style*="rgba(30, 27, 46"],
 [data-theme="light"] #imp-painel-email[style*="rgba(30, 27, 46"] {
   background: #FFFFFF !important;
-  border: 1px solid #DCE2EC !important;
+  border: 1px solid #E2E8F0 !important;
   box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04), 0 4px 12px rgba(15, 23, 42, 0.02) !important;
 }
 
@@ -4431,15 +4435,15 @@ html.ponto-scroll-mode body::-webkit-scrollbar {
 }
 
 [data-theme="light"] #imp-kpi-ok {
-  color: #047857 !important;
+  color: #16A34A !important; /* Verde Padrão */
 }
 
 [data-theme="light"] #imp-kpi-faltas {
-  color: #B91C1C !important;
+  color: #DC2626 !important; /* Vermelho Padrão */
 }
 
 [data-theme="light"] #imp-kpi-parciais {
-  color: #B45309 !important;
+  color: #D97706 !important; /* Amarelo Padrão */
 }
 
 [data-theme="light"] #imp-kpi-atrasos {
@@ -4458,7 +4462,7 @@ html.ponto-scroll-mode body::-webkit-scrollbar {
 
 [data-theme="light"] #email-corpo-textarea:focus {
   background: #FFFFFF !important;
-  border-color: #4015B8 !important;
+  border-color: #2563EB !important;
 }
 
 /* ==========================================================================
@@ -4468,7 +4472,7 @@ html.ponto-scroll-mode body::-webkit-scrollbar {
 [data-theme="light"] .modal-body div[style*="#1E182B"],
 [data-theme="light"] .modal-body div[style*="rgba(30, 27, 46"] {
   background: #F8FAFC !important;
-  border-color: #DCE2EC !important;
+  border-color: #E2E8F0 !important;
   color: #0F172A !important;
 }
 
@@ -4489,8 +4493,8 @@ html.ponto-scroll-mode body::-webkit-scrollbar {
 }
 
 [data-theme="light"] .modal-body div[style*="rgba(99, 102, 241, 0.1)"] {
-  background: #EEF2FF !important;
-  border-color: #C7D2FE !important;
+  background: #EFF6FF !important;
+  border-color: #BFDBFE !important;
 }
 
 /* Textos inline claros pensados para fundo escuro convertidos para tons de alto contraste WCAG AA */
@@ -4509,8 +4513,10 @@ html.ponto-scroll-mode body::-webkit-scrollbar {
 
 [data-theme="light"] .modal-body [style*="color: #C7D2FE"],
 [data-theme="light"] .modal-body [style*="color:#C7D2FE"],
+[data-theme="light"] .modal-body [style*="color: #BFDBFE"],
+[data-theme="light"] .modal-body [style*="color:#BFDBFE"],
 [data-theme="light"] .modal-body [style*="color: #818CF8"] {
-  color: #3730A3 !important;
+  color: #1E40AF !important;
 }
 
 [data-theme="light"] .modal-body [style*="color: #E2D9F3"],
@@ -4539,12 +4545,12 @@ html.ponto-scroll-mode body::-webkit-scrollbar {
 }
 
 [data-theme="light"] .legal-preset-box {
-  background: #EEF2FF !important;
-  border: 1px solid #C7D2FE !important;
+  background: #EFF6FF !important;
+  border: 1px solid #BFDBFE !important;
 }
 
 [data-theme="light"] .legal-preset-box label {
-  color: #4015B8 !important;
+  color: #2563EB !important;
 }
 
 [data-theme="light"] .cal-agenda-item {
@@ -4554,7 +4560,7 @@ html.ponto-scroll-mode body::-webkit-scrollbar {
   gap: 16px;
   padding: 14px 18px;
   background: #FFFFFF;
-  border: 1px solid #DCE2EC;
+  border: 1px solid #E2E8F0;
   border-radius: 8px;
   margin-bottom: 10px;
   box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04);
@@ -4572,8 +4578,8 @@ html.ponto-scroll-mode body::-webkit-scrollbar {
 }
 
 [data-theme="light"] .cal-agenda-date-box {
-  background: #EEF2FF;
-  border: 1px solid #C7D2FE;
+  background: #EFF6FF;
+  border: 1px solid #BFDBFE;
   border-radius: 8px;
   min-width: 52px;
   padding: 6px 10px;
@@ -4583,7 +4589,7 @@ html.ponto-scroll-mode body::-webkit-scrollbar {
 [data-theme="light"] .cal-agenda-date-box .day-num {
   font-size: 18px;
   font-weight: 800;
-  color: #4015B8;
+  color: #2563EB;
   line-height: 1.1;
 }
 
@@ -4613,8 +4619,9 @@ html.ponto-scroll-mode body::-webkit-scrollbar {
   color: #92400E !important;
 }
 
-[data-theme="light"] .modal-body [style*="#A5B4FC"] {
-  color: #3730A3 !important;
+[data-theme="light"] .modal-body [style*="#A5B4FC"],
+[data-theme="light"] .modal-body [style*="#93C5FD"] {
+  color: #1E40AF !important;
 }
 
 [data-theme="light"] .modal-body [style*="#B4A6CF"] {
@@ -4622,9 +4629,9 @@ html.ponto-scroll-mode body::-webkit-scrollbar {
 }
 
 [data-theme="light"] #va-audit-tbody span[style*="#2F2D33"] {
-  background: #EEF2FF !important;
-  color: #311094 !important;
-  border: 1px solid #C7D2FE !important;
+  background: #EFF6FF !important;
+  color: #1E40AF !important;
+  border: 1px solid #BFDBFE !important;
 }
 
 [data-theme="light"] #dsr-rules-box div[style*="#6EE7B7"] {
@@ -4639,13 +4646,13 @@ html.ponto-scroll-mode body::-webkit-scrollbar {
 
 [data-theme="light"] .relogio-card .badge-success {
   background: #ECFDF5 !important;
-  color: #047857 !important;
-  border-color: #6EE7B7 !important;
+  color: #16A34A !important; /* Verde Padrão */
+  border-color: #86EFAC !important;
 }
 
 [data-theme="light"] .relogio-card .badge-danger {
   background: #FEF2F2 !important;
-  color: #B91C1C !important;
+  color: #DC2626 !important; /* Vermelho Padrão */
   border-color: #FCA5A5 !important;
 }
 
