@@ -3943,4 +3943,97 @@ html.ponto-scroll-mode body::-webkit-scrollbar {
 
 [data-theme="light"] .backup-item-title {
   color: #151733;
+}
+
+/* ==========================================================================
+   ESTILOS: CENTRAL DE IMPORTAÇÃO & PROCESSAMENTO (NGPONTO / CONTROL ID)
+   ========================================================================== */
+.importacao-view-container {
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.imp-subtab-btn {
+  background: transparent;
+  border: none;
+  color: var(--color-text-sub);
+  font-size: 13px;
+  font-weight: 600;
+  padding: 8px 16px;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.2s ease;
+}
+
+.imp-subtab-btn:hover {
+  color: var(--color-text-main);
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.imp-subtab-btn.active {
+  color: var(--color-cyan);
+  background: rgba(0, 229, 255, 0.12);
+  border: 1px solid rgba(0, 229, 255, 0.3);
+  box-shadow: 0 0 10px rgba(0, 229, 255, 0.15);
+}
+
+.relogio-card {
+  background: var(--color-bg-card);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: transform 0.2s ease, border-color 0.2s ease;
+}
+
+.relogio-card:hover {
+  border-color: var(--color-border-bright);
+  transform: translateY(-2px);
+}
+
+.relogio-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 12px;
+}
+
+.relogio-card-title {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--color-text-main);
+  margin: 0 0 2px 0;
+}
+
+.relogio-card-sub {
+  font-size: 11px;
+  color: var(--color-text-muted);
+}
+
+.relogio-stat-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 11.5px;
+  padding: 5px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+}
+
+.relogio-stat-row:last-child {
+  border-bottom: none;
+}
+
+.relogio-stat-label {
+  color: var(--color-text-sub);
+}
+
+.relogio-stat-val {
+  font-family: var(--font-mono);
+  font-weight: 600;
+  color: var(--color-cyan);
 }

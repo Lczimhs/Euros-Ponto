@@ -32,6 +32,13 @@ let appState = {
   carryOverDsr: {}    // chave: colabId_YYYY-MM => número de DSRs transferidos
 };
 
+// ==========================================================================
+// CONFIGURAÇÃO DO MOTOR DE AUTOMAÇÃO NGPONTO / CONTROL ID (PORTA 3050)
+// ==========================================================================
+const API_BASE = (typeof window !== 'undefined' && (window.location.port === '3050' || window.location.port === '3000'))
+  ? ''
+  : 'http://localhost:3050';
+
 
 // ==========================================================================
 // CONFIGURAÇÃO DO SUPABASE CLOUD
@@ -1322,6 +1329,9 @@ function normalizeColaborador(c) {
   let trabalhaSabado;
   if (c.trabalhaSabado !== undefined && c.trabalhaSabado !== null) {
     trabalhaSabado = (c.trabalhaSabado === true || c.trabalhaSabado === 'sim' || c.trabalhaSabado === 'true' || c.trabalhaSabado === 1);
+  } else if (c.horariosSemana && c.horariosSemana['7']) {
+    const s7 = c.horariosSemana['7'];
+    trabalhaSabado = !s7.descanso && Boolean(s7.e1 || s7.s1);
   } else {
     trabalhaSabado = !isAp;
   }
@@ -2576,11 +2586,18 @@ function formatMinutesFriendly(mins) {
  *   EM (08:00), SM (12:00), ET (13:00), ST (17:00)
  * Regra de Tolerância: 5 minutos de tolerância por período (não cumulativa).
  */
-function evaluateDailyPunches(punches) {
-  const refEM = 8 * 60;   // 08:00
-  const refSM = 12 * 60;  // 12:00
-  const refET = 13 * 60;  // 13:00
-  const refST = 17 * 60;  // 17:00
+function evaluateDailyPunches(punches, customSchedule) {
+  let refEM = 8 * 60;   // 08:00
+  let refSM = 12 * 60;  // 12:00
+  let refET = 13 * 60;  // 13:00
+  let refST = 17 * 60;  // 17:00
+
+  if (customSchedule) {
+    if (customSchedule.e1) refEM = timeToMinutes(customSchedule.e1) || refEM;
+    if (customSchedule.s1) refSM = timeToMinutes(customSchedule.s1) || refSM;
+    if (customSchedule.e2) refET = timeToMinutes(customSchedule.e2) || refET;
+    if (customSchedule.s2) refST = timeToMinutes(customSchedule.s2) || refST;
+  }
 
   const pEM = timeToMinutes(punches.em);
   const pSM = timeToMinutes(punches.sm);
@@ -2600,14 +2617,18 @@ function evaluateDailyPunches(punches) {
     if (diff > 5) atrasoManha += diff;
   }
 
-  // Tarde
-  if (pET !== null && pET > refET) {
-    const diff = pET - refET;
-    if (diff > 5) atrasoTarde += diff;
-  }
-  if (pST !== null && pST < refST) {
-    const diff = refST - pST;
-    if (diff > 5) atrasoTarde += diff;
+  // Tarde (somente quando previsto na escala)
+  if (customSchedule && !customSchedule.e2 && !customSchedule.s2) {
+    // Escala de turno único (meio período / sábado)
+  } else {
+    if (pET !== null && pET > refET) {
+      const diff = pET - refET;
+      if (diff > 5) atrasoTarde += diff;
+    }
+    if (pST !== null && pST < refST) {
+      const diff = refST - pST;
+      if (diff > 5) atrasoTarde += diff;
+    }
   }
 
   const totalAtraso = atrasoManha + atrasoTarde;
@@ -3513,6 +3534,8 @@ function renderCurrentView() {
     renderEstruturaView();
   } else if (appState.activeView === 'view-feriados') {
     renderFeriadosView();
+  } else if (appState.activeView === 'view-importacao') {
+    renderImportacaoView();
   }
 }
 
@@ -4150,6 +4173,54 @@ function openCellDetailModal(colabId, isoDate) {
   document.getElementById('modal-colab-sub').textContent = 'Crachá: ' + colab.cracha + ' • Depto: ' + (dept ? dept.nome : '') + ' • Filial: ' + (branch ? branch.nome : '');
   document.getElementById('modal-date-display').textContent = formatDateBR(isoDate) + ' (' + dayOfWeekName + ')';
 
+  // Configurar exibição dinâmica do Quadro de Horário do NGPonto
+  const dw = dateObj.getDay() + 1; // 1=Dom .. 7=Sab
+  let horarioDia = null;
+  if (colab.horariosSemana) {
+    horarioDia = colab.horariosSemana[dw] || colab.horariosSemana[String(dw)];
+  }
+
+  const qTextEl = document.getElementById('modal-quadro-text');
+  const hintEmEl = document.getElementById('hint-em');
+  const hintSmEl = document.getElementById('hint-sm');
+  const hintEtEl = document.getElementById('hint-et');
+  const hintStEl = document.getElementById('hint-st');
+
+  let expE1 = '08:00', expS1 = '12:00', expE2 = '13:00', expS2 = '17:00', expDesc = (dw === 1);
+
+  if (horarioDia) {
+    expE1 = horarioDia.e1 || '';
+    expS1 = horarioDia.s1 || '';
+    expE2 = horarioDia.e2 || '';
+    expS2 = horarioDia.s2 || '';
+    expDesc = !!horarioDia.descanso;
+  } else if (colab.quadroNG) {
+    const parts = colab.quadroNG.split(/\s+/).filter(Boolean);
+    if (parts.length >= 4) {
+      expE1 = parts[0]; expS1 = parts[1]; expE2 = parts[2]; expS2 = parts[3];
+    }
+  }
+
+  if (qTextEl) {
+    if (expDesc) {
+      qTextEl.textContent = 'Descanso Semanal Remunerado (DSR / Folga)';
+    } else if (expE1 && expS1 && expE2 && expS2) {
+      qTextEl.textContent = `${expE1} às ${expS1} / ${expE2} às ${expS2}`;
+    } else if (expE1 && expS1) {
+      qTextEl.textContent = `${expE1} às ${expS1} (Meio Período)`;
+    } else {
+      qTextEl.textContent = '08:00 às 12:00 / 13:00 às 17:00 (Padrão)';
+    }
+  }
+
+  if (hintEmEl) hintEmEl.textContent = 'Quadro: ' + (expE1 || '--:--');
+  if (hintSmEl) hintSmEl.textContent = 'Quadro: ' + (expS1 || '--:--');
+  if (hintEtEl) hintEtEl.textContent = 'Quadro: ' + (expE2 || '--:--');
+  if (hintStEl) hintStEl.textContent = 'Quadro: ' + (expS2 || '--:--');
+
+  // Armazena no modal para uso dos botões de preenchimento rápido
+  currentEditingCell.quadroDia = { e1: expE1, s1: expS1, e2: expE2, s2: expS2, descanso: expDesc };
+
   const reg = getPontoRecord(colabId, isoDate) || {
     override: 'AUTO',
     resolution: 'NENHUMA',
@@ -4360,6 +4431,14 @@ document.getElementById('btn-save-cell-detail')?.addEventListener('click', () =>
   saveStateToStorage();
   clearModalDraft(); closeModal('modal-cell-detail');
   renderCurrentView();
+
+  // Se o relatório de pendências estiver carregado, re-filtra com o novo status da célula
+  if (typeof impState !== 'undefined' && impState.pendenciasRaw) {
+    impState.pendenciasCache = filtrarPendenciasComDashboardApp(impState.pendenciasRaw);
+    if (impState.pendenciasCache.resumo) atualizarKpisCards(impState.pendenciasCache.resumo);
+    atualizarTextoEmailApp();
+  }
+
   showToast('Registro de ponto atualizado com sucesso!', 'success');
 });
 
@@ -5654,6 +5733,10 @@ function openEmployeeModal(empId = null) {
   branchSelect.innerHTML = appState.filiais.map(f => '<option value="' + f.id + '">' + f.nome + '</option>').join('');
   deptSelect.innerHTML = appState.departamentos.map(d => '<option value="' + d.id + '">' + d.nome + '</option>').join('');
 
+  const syncInfo = document.getElementById('emp-ng-sync-info');
+  const badgeTxt = document.getElementById('emp-ng-status-badge');
+  const detLine = document.getElementById('emp-ng-details-line');
+
   if (empId) {
     const emp = appState.colaboradores.find(c => c.id === empId);
     if (!emp) return;
@@ -5691,6 +5774,30 @@ function openEmployeeModal(empId = null) {
     if (demissaoGroup) demissaoGroup.style.display = isDemitido ? 'block' : 'none';
     if (demissaoInput) demissaoInput.value = emp.dataDemissao || '';
 
+    // Campos estendidos NGPonto (armazenados de forma limpa nos inputs ocultos)
+    const inCpf = document.getElementById('emp-cpf'); if (inCpf) inCpf.value = emp.cpf || '';
+    const inPis = document.getElementById('emp-pis'); if (inPis) inPis.value = emp.pis || '';
+    const inCargo = document.getElementById('emp-cargo'); if (inCargo) inCargo.value = emp.cargo || '';
+    const inRel = document.getElementById('emp-relogio-vinculo'); if (inRel) inRel.value = emp.relogioVinculo || 'relogio1_producao';
+    const inQ = document.getElementById('emp-quadro-ng'); if (inQ) inQ.value = emp.quadroNG || emp.horario1 || '';
+    const inIdR = document.getElementById('emp-idregistro-ng'); if (inIdR) inIdR.value = emp.idregistro || emp.idregistroNG || '';
+    const inIdOw = document.getElementById('emp-idowner-ng'); if (inIdOw) inIdOw.value = emp.idowner || emp.idownerNG || '';
+
+    // Indicador compacto de integração NGPonto
+    if (syncInfo) {
+      if (emp.cargo || emp.cpf || emp.quadroNG) {
+        syncInfo.style.display = 'block';
+        if (badgeTxt) badgeTxt.textContent = '✨ Integrado com NGPonto';
+        if (detLine) {
+          const sabTxt = trabalhaSab ? 'Trabalha Sábado' : 'Folga Sábado';
+          const cpfFmt = emp.cpf ? (emp.cpf.length >= 11 ? `${emp.cpf.slice(0,3)}.${emp.cpf.slice(3,6)}.${emp.cpf.slice(6,9)}-${emp.cpf.slice(9)}` : emp.cpf) : 'Não informado';
+          detLine.textContent = `Cargo: ${emp.cargo || 'Não informado'} • CPF: ${cpfFmt} • Escala: ${sabTxt}${isAp ? ' • Aprendiz' : ''}`;
+        }
+      } else {
+        syncInfo.style.display = 'none';
+      }
+    }
+
     document.getElementById('modal-employee-title').innerHTML = '<span>👤</span> Editar Funcionário';
     updateEmpFeriasResumo(emp);
   } else {
@@ -5703,6 +5810,14 @@ function openEmployeeModal(empId = null) {
     document.getElementById('emp-admission').value = new Date().toISOString().split('T')[0];
     document.getElementById('emp-branch').value = appState.activeBranchId;
 
+    const inCpf = document.getElementById('emp-cpf'); if (inCpf) inCpf.value = '';
+    const inPis = document.getElementById('emp-pis'); if (inPis) inPis.value = '';
+    const inCargo = document.getElementById('emp-cargo'); if (inCargo) inCargo.value = '';
+    const inRel = document.getElementById('emp-relogio-vinculo'); if (inRel) inRel.value = 'relogio1_producao';
+    const inQ = document.getElementById('emp-quadro-ng'); if (inQ) inQ.value = '';
+    const inIdR = document.getElementById('emp-idregistro-ng'); if (inIdR) inIdR.value = '';
+    const inIdOw = document.getElementById('emp-idowner-ng'); if (inIdOw) inIdOw.value = '';
+
     if (checkRegistra) checkRegistra.checked = true;
     if (checkNaoRecebeVa) checkNaoRecebeVa.checked = false;
     if (checkTrabalhaSabado) checkTrabalhaSabado.checked = true;
@@ -5711,11 +5826,18 @@ function openEmployeeModal(empId = null) {
     if (demissaoGroup) demissaoGroup.style.display = 'none';
     if (demissaoInput) demissaoInput.value = '';
 
+    if (syncInfo) syncInfo.style.display = 'none';
+
     document.getElementById('modal-employee-title').innerHTML = '<span>👤</span> Cadastrar Funcionário';
     updateEmpFeriasResumo(null);
   }
 
   openModal('modal-employee');
+
+  // Para novos cadastros, se o crachá padrão já existir no NGPonto, puxa silenciosamente
+  if (!empId) {
+    autoBuscarDadosNGPonto(true);
+  }
 }
 
 // Ao marcar como Jovem Aprendiz, sugere desmarcar o sábado por padrão
@@ -5767,6 +5889,14 @@ document.getElementById('btn-save-employee')?.addEventListener('click', () => {
     return;
   }
 
+  const cpf = (document.getElementById('emp-cpf')?.value || '').trim();
+  const pis = (document.getElementById('emp-pis')?.value || '').trim();
+  const cargo = (document.getElementById('emp-cargo')?.value || '').trim();
+  const relogioVinculo = document.getElementById('emp-relogio-vinculo')?.value || 'relogio1_producao';
+  const quadroNG = (document.getElementById('emp-quadro-ng')?.value || '').trim();
+  const idregistroNG = document.getElementById('emp-idregistro-ng')?.value || '';
+  const idownerNG = document.getElementById('emp-idowner-ng')?.value || '';
+
   // Preserva campos extras do cadastro existente (ex: períodos de férias programados)
   const existingEmp = id ? appState.colaboradores.find(c => c.id === id) : null;
   const colabObj = normalizeColaborador({
@@ -5774,6 +5904,15 @@ document.getElementById('btn-save-employee')?.addEventListener('click', () => {
     id: id || ('colab-' + cracha),
     nome,
     cracha,
+    cpf,
+    pis,
+    cargo,
+    relogioVinculo,
+    quadroNG,
+    idregistro: idregistroNG || existingEmp?.idregistro,
+    idregistroNG: idregistroNG || existingEmp?.idregistroNG,
+    idowner: idownerNG || existingEmp?.idowner,
+    idownerNG: idownerNG || existingEmp?.idownerNG,
     admissao,
     filialId,
     deptId,
@@ -6784,6 +6923,9 @@ function initEvents() {
   document.getElementById('btn-export-va-csv')?.addEventListener('click', exportVACSV);
   document.getElementById('btn-print-va')?.addEventListener('click', () => window.print());
 
+  // Inicialização dos eventos da Central de Importação / Processamento NGPonto
+  initImportacaoEvents();
+
   // Rolagem única do Dashboard de Ponto
   initMatrixUnifiedScroll();
 }
@@ -6820,6 +6962,11 @@ document.addEventListener('DOMContentLoaded', () => {
   // Sincronização automática em segundo plano com a nuvem Supabase
   syncFromCloudOnStart();
   initSupabaseRealtime();
+
+  // Atualização automática em segundo plano das escalas e dados via NGPonto
+  setTimeout(() => {
+    aplicarEscalasNGPontoParaTodos(false);
+  }, 1200);
 });
 
 // Navegação pelo teclado na Matriz de Ponto (Setas Cima/Baixo/Esquerda/Direita e Enter)
@@ -7040,5 +7187,1278 @@ window.addEventListener('keydown', (e) => {
   e.stopPropagation();
   action();
 }, true);
+
+// ==========================================================================
+// 12. CENTRAL DE IMPORTAÇÃO, COLETA DOS 4 RELÓGIOS & PROCESSAMENTO NGPONTO
+// ==========================================================================
+
+const DESTINATARIOS_FILIAIS_PADRAO = {
+  'Produção - Depósito I (7452)': {
+    to: 'wallyson.euros@gmail.com',
+    cc: 'contabilidade.euros@gmail.com, luciana.euros@gmail.com'
+  },
+  'Ind. Naviraí - MS (7452)': {
+    to: 'rh.ms@euros.ind.br',
+    cc: 'contabilidade.euros@gmail.com, fabio.euros@gmail.com'
+  },
+  'Relógio Caiari (6716)': {
+    to: 'auxiliaradm@caiari.com',
+    cc: 'contabilidade.euros@gmail.com'
+  },
+  'ADM Ji-Paraná (7452)': {
+    to: '',
+    cc: ''
+  },
+  'TODOS': {
+    to: 'wallyson.euros@gmail.com, rh.ms@euros.ind.br, auxiliaradm@caiari.com',
+    cc: 'contabilidade.euros@gmail.com'
+  }
+};
+
+let impState = {
+  activeSubtab: 'subtab-coleta',
+  relogios: [],
+  vinculos: null,
+  pendenciasCache: null,
+  filtroVinculo: 'TODOS',
+  buscaVinculo: ''
+};
+
+function initImportacaoEvents() {
+  // Alternância das 3 Sub-abas da Central
+  document.querySelectorAll('.imp-subtab-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const target = btn.dataset.subtab;
+      impState.activeSubtab = target;
+      document.querySelectorAll('.imp-subtab-btn').forEach(b => b.classList.toggle('active', b === btn));
+      document.querySelectorAll('.imp-subtab-panel').forEach(p => p.style.display = (p.id === target ? 'block' : 'none'));
+      if (target === 'subtab-relatorio') carregarPendenciasRelatorioApp();
+      if (target === 'subtab-vinculos') carregarVinculosRelogiosApp();
+    });
+  });
+
+  // Toolbar Coleta & Processamento
+  document.getElementById('btn-imp-calcular-datas')?.addEventListener('click', () => calcularDatasRelogioApp());
+  document.getElementById('btn-imp-ler-nsr')?.addEventListener('click', () => carregarStatusRelogiosApp(true));
+  document.getElementById('btn-imp-coletar-todos')?.addEventListener('click', () => coletarRelogioApp(0));
+  document.getElementById('btn-imp-processar-duplo')?.addEventListener('click', () => processarDuploApp());
+  document.getElementById('btn-imp-rotina-matinal')?.addEventListener('click', () => executarRotinaMatinalApp());
+  document.getElementById('btn-imp-sincronizar-matriz')?.addEventListener('click', () => sincronizarBatidasNGParaMatriz());
+  document.getElementById('btn-app-limpar-log')?.addEventListener('click', () => {
+    const box = document.getElementById('app-logRelogiosBox');
+    const txt = document.getElementById('app-logRelogiosTexto');
+    if (txt) txt.textContent = '';
+    if (box) box.style.display = 'none';
+  });
+
+  // Subtab 2: Relatório & E-mail Diário
+  document.getElementById('btn-app-atualizar-relatorio-email')?.addEventListener('click', () => carregarPendenciasRelatorioApp(true));
+  document.getElementById('email-filial-select')?.addEventListener('change', () => atualizarTextoEmailApp());
+  document.getElementById('email-dia-ref')?.addEventListener('input', () => atualizarTextoEmailApp());
+  document.getElementById('btn-email-data-ontem')?.addEventListener('click', () => definirDataEmailRelativaApp(-1));
+  document.getElementById('btn-email-data-hoje')?.addEventListener('click', () => definirDataEmailRelativaApp(0));
+  document.getElementById('btn-email-data-ant')?.addEventListener('click', () => definirDataEmailRelativaApp(-2));
+  document.getElementById('btn-app-abrir-gmail')?.addEventListener('click', () => abrirGmailApp());
+  document.getElementById('btn-app-abrir-whatsapp')?.addEventListener('click', () => abrirWhatsAppApp());
+  document.getElementById('btn-app-copiar-email')?.addEventListener('click', () => copiarTextoEmailApp());
+  document.getElementById('btn-app-salvar-destinatarios')?.addEventListener('click', () => salvarDestinatariosApp());
+
+  // Subtab 3: Vínculos de Relógios
+  document.getElementById('busca-vinculo-colab')?.addEventListener('input', (e) => {
+    impState.buscaVinculo = e.target.value.toLowerCase().trim();
+    renderRelogiosVinculosTable();
+  });
+  document.getElementById('filtro-vinculo-categoria')?.addEventListener('change', (e) => {
+    impState.filtroVinculo = e.target.value;
+    renderRelogiosVinculosTable();
+  });
+  document.getElementById('btn-salvar-vinculos-relogios')?.addEventListener('click', () => salvarVinculosRelogiosApp());
+
+  // Ações nos Modais: Detalhe do Dia (Cell)
+  document.getElementById('btn-preencher-previsto-cell')?.addEventListener('click', () => {
+    if (!currentEditingCell || !currentEditingCell.quadroDia) {
+      showToast('Nenhum horário previsto encontrado para este dia.', 'warning');
+      return;
+    }
+    const q = currentEditingCell.quadroDia;
+    const emInput = document.getElementById('punch-em');
+    const smInput = document.getElementById('punch-sm');
+    const etInput = document.getElementById('punch-et');
+    const stInput = document.getElementById('punch-st');
+    if (emInput) emInput.value = q.e1 || '';
+    if (smInput) smInput.value = q.s1 || '';
+    if (etInput) etInput.value = q.e2 || '';
+    if (stInput) stInput.value = q.s2 || '';
+
+    const selSt = document.getElementById('select-override-status');
+    if (selSt && selSt.value !== 'VAZIO') selSt.value = 'OK';
+    const selSt2 = document.getElementById('select-override-status-2');
+    if (selSt2) selSt2.value = '';
+
+    const inMaior = document.getElementById('input-atraso-maior');
+    const inPequeno = document.getElementById('input-atraso-pequeno');
+    if (inMaior) inMaior.value = '';
+    if (inPequeno) inPequeno.value = '';
+
+    showToast('⚡ Horários previstos do quadro NGPonto preenchidos!', 'info');
+  });
+
+  document.getElementById('btn-puxar-ng-cell')?.addEventListener('click', async () => {
+    const { colabId, isoDate } = currentEditingCell || {};
+    if (!colabId || !isoDate) return;
+    const colab = appState.colaboradores.find(c => c.id === colabId);
+    if (!colab) return;
+
+    showToast(`🔄 Consultando espelho de batidas do NGPonto para ${colab.nome}...`);
+    try {
+      const dt = new Date(isoDate + 'T12:00:00');
+      const mes = dt.getMonth() + 1;
+      const ano = dt.getFullYear();
+      const idowner = colab.idowner || (colab.filialId === 'branch-3' ? 6716 : 7452);
+      const idregistro = colab.idregistro || colab.idregistroNG || colab.cracha;
+
+      const res = await fetch(`${API_BASE}/api/espelho?idowner=${idowner}&idregistro=${idregistro}&mes=${mes}&ano=${ano}`).then(r => r.json());
+      if (res.ok && res.dias) {
+        const dInfo = res.dias.find(d => d.dataIso === isoDate);
+        if (dInfo && dInfo.batidas) {
+          const b = dInfo.batidas;
+          document.getElementById('punch-em').value = b[0] || '';
+          document.getElementById('punch-sm').value = b[1] || '';
+          document.getElementById('punch-et').value = b[2] || '';
+          document.getElementById('punch-st').value = b[3] || '';
+          if (dInfo.status && dInfo.status !== 'AUTO') {
+            document.getElementById('select-override-status').value = dInfo.status;
+          }
+          if (dInfo.justificativa) {
+            document.getElementById('input-cell-justificativa').value = dInfo.justificativa;
+          }
+          showToast(`✅ Batidas do NGPonto carregadas: ${b.join(', ') || 'Nenhuma batida'}`);
+        } else {
+          showToast('Nenhuma marcação encontrada no banco para esta data.', 'info');
+        }
+      } else {
+        showToast('Não foi possível carregar do NGPonto: ' + (res.erro || 'Falha na resposta'), 'warning');
+      }
+    } catch (e) {
+      showToast('Erro ao conectar ao motor NGPonto: ' + e.message, 'error');
+    }
+  });
+
+  // Ações nos Modais: Funcionário (Buscar e Salvar+Puxar)
+  document.getElementById('btn-emp-buscar-ng')?.addEventListener('click', () => buscarDadosNGPontoParaModalColab());
+  document.getElementById('btn-save-and-sync-employee')?.addEventListener('click', async () => {
+    const btnSave = document.getElementById('btn-save-employee');
+    if (btnSave) btnSave.click();
+    showToast('⚡ Cadastro salvo! Iniciando sincronização do ponto deste funcionário no NGPonto...');
+    await sincronizarBatidasNGParaMatriz();
+  });
+
+  // Lookup automático de Crachá/Filial para o modal limpo de funcionário
+  setupAutoLookupNGPonto();
+  document.getElementById('btn-sincronizar-escalas-ng')?.addEventListener('click', () => aplicarEscalasNGPontoParaTodos(true));
+}
+
+function renderImportacaoView() {
+  calcularDatasRelogioApp();
+  if (impState.activeSubtab === 'subtab-coleta') {
+    carregarStatusRelogiosApp();
+  } else if (impState.activeSubtab === 'subtab-relatorio') {
+    carregarPendenciasRelatorioApp();
+  } else if (impState.activeSubtab === 'subtab-vinculos') {
+    carregarVinculosRelogiosApp();
+  }
+}
+
+function calcularDatasRelogioApp() {
+  const hoje = new Date();
+  const yyyy = hoje.getFullYear();
+  const mm = String(hoje.getMonth() + 1).padStart(2, '0');
+  const dd = String(hoje.getDate()).padStart(2, '0');
+  const sHoje = `${yyyy}-${mm}-${dd}`;
+
+  // -1 dia útil (sábado é considerado dia útil na empresa)
+  let d1 = new Date(hoje);
+  d1.setDate(d1.getDate() - 1);
+  if (d1.getDay() === 0) d1.setDate(d1.getDate() - 1);
+  const s1 = `${d1.getFullYear()}-${String(d1.getMonth() + 1).padStart(2, '0')}-${String(d1.getDate()).padStart(2, '0')}`;
+
+  // -2 dias úteis
+  let d2 = new Date(d1);
+  d2.setDate(d2.getDate() - 1);
+  if (d2.getDay() === 0) d2.setDate(d2.getDate() - 1);
+  const s2 = `${d2.getFullYear()}-${String(d2.getMonth() + 1).padStart(2, '0')}-${String(d2.getDate()).padStart(2, '0')}`;
+
+  const inIni = document.getElementById('app-relInicio');
+  const inFim = document.getElementById('app-relFim');
+  const inNsr = document.getElementById('app-relNsr');
+  if (inIni && !inIni.value) inIni.value = s1;
+  if (inFim && !inFim.value) inFim.value = sHoje;
+  if (inNsr && !inNsr.value) inNsr.value = s2;
+}
+
+async function carregarStatusRelogiosApp(completo = false) {
+  try {
+    if (completo) showToast('🔍 Conectando aos 4 relógios Control iD via TCP/IP para ler os NSRs atuais...');
+    const res = await fetch(`${API_BASE}/api/status${completo ? '?completo=1' : ''}`).then(r => r.json());
+    if (res.ok && res.relogios) {
+      impState.relogios = res.relogios;
+      renderizarCardsRelogiosApp(res.relogios);
+      if (completo) showToast('✅ NSRs e status dos 4 relógios lidos com sucesso!');
+    }
+  } catch (e) {
+    console.warn('Erro ao carregar status dos relógios:', e);
+  }
+}
+
+function renderizarCardsRelogiosApp(relogios) {
+  const grid = document.getElementById('app-cardsRelogios');
+  if (!grid) return;
+  grid.innerHTML = (relogios || []).map(r => `
+    <div class="relogio-card">
+      <div>
+        <div class="relogio-card-header">
+          <div>
+            <h4 class="relogio-card-title">${r.nome}</h4>
+            <span class="relogio-card-sub">${r.empresaNome}</span>
+          </div>
+          <span class="badge ${r.online ? 'badge-success' : 'badge-danger'}" style="font-size:10.5px; padding:3px 8px; border-radius:12px; background:${r.online ? 'rgba(16,185,129,0.15)' : 'rgba(239,68,68,0.15)'}; color:${r.online ? '#10B981' : '#EF4444'}; border:1px solid ${r.online ? 'rgba(16,185,129,0.4)' : 'rgba(239,68,68,0.4)'};">
+            ${r.online ? '🟢 Online' : '🔴 Offline'}
+          </span>
+        </div>
+        <div style="background:rgba(255,255,255,0.02); padding:8px 10px; border-radius:6px; margin-bottom:12px; border:1px solid rgba(255,255,255,0.05);">
+          <div class="relogio-stat-row">
+            <span class="relogio-stat-label">IP & Porta:</span>
+            <span class="relogio-stat-val"><code>${r.ip}:${r.porta}</code></span>
+          </div>
+          <div class="relogio-stat-row">
+            <span class="relogio-stat-label">NSR Atual no Relógio:</span>
+            <span class="relogio-stat-val" style="color:var(--color-cyan);">${r.nsrAtual || 'N/D'}</span>
+          </div>
+          <div class="relogio-stat-row">
+            <span class="relogio-stat-label">Último NSR Banco:</span>
+            <span class="relogio-stat-val">${r.ultimoNsrBanco || 'N/D'}</span>
+          </div>
+          <div class="relogio-stat-row">
+            <span class="relogio-stat-label">Última Batida Banco:</span>
+            <span class="relogio-stat-val">${r.ultimaDataBanco || 'N/D'}</span>
+          </div>
+        </div>
+      </div>
+      <button class="btn btn-secondary btn-sm" style="width:100%; justify-content:center; font-weight:600;" onclick="coletarRelogioApp(${r.etapa})">
+        <span>📥</span> Coletar e Importar Etapa ${r.etapa}
+      </button>
+    </div>
+  `).join('');
+}
+
+async function coletarRelogioApp(etapa = 0) {
+  const inicio = document.getElementById('app-relInicio')?.value || '';
+  const fim = document.getElementById('app-relFim')?.value || '';
+  const nsr = document.getElementById('app-relNsr')?.value || '';
+  const autoProcessar = !!document.getElementById('app-chkProcessarAposColeta')?.checked;
+
+  const descRelogio = etapa === 0 ? 'TODOS os 4 Relógios' : `Relógio Etapa ${etapa}`;
+  showToast(`📡 [1/2] Conectando aos relógios via RepCid.dll e coletando ${descRelogio} (${inicio} a ${fim})... Aguarde.`);
+
+  try {
+    const res = await fetch(`${API_BASE}/api/coletar-relogios`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ etapa, inicio, fim, nsr })
+    }).then(r => r.json());
+
+    if (res.ok) {
+      const box = document.getElementById('app-logRelogiosBox');
+      const txt = document.getElementById('app-logRelogiosTexto');
+      if (box) box.style.display = 'block';
+      if (txt) {
+        txt.textContent = res.resultados.map(x =>
+          x.ok
+            ? `✅ [Etapa ${x.etapa}] ${x.relogio} (${x.empresa})\n   NSR lido: ${x.nsrInicial} até ${x.nsrAtual} | Batidas coletadas: ${x.batidasLidasRelogio} | Colaboradores Vinculados: ${x.colaboradoresVinculados}`
+            : `❌ [Etapa ${x.etapa}] ${x.relogio}: ${x.erro}`
+        ).join('\n\n');
+      }
+
+      if (autoProcessar) {
+        showToast('⚡ [2/2] Coleta concluída com sucesso! Processando marcações em 2 ciclos no NGPonto...');
+        await processarDuploApp(false);
+      } else {
+        showToast('✅ Coleta e importação concluídas no NGPonto!');
+        await carregarStatusRelogiosApp();
+      }
+    } else {
+      showToast('Erro na coleta: ' + res.erro, 'error');
+    }
+  } catch (e) {
+    showToast('Erro ao comunicar com o motor de coleta: ' + e.message, 'error');
+  }
+}
+
+async function processarDuploApp(comToast = true) {
+  if (comToast) showToast('⚡ Processando marcações em 2 ciclos no NGPonto (Euros Aço 7452 e Caiari 6716)...');
+  try {
+    const mes = appState.currentMonth + 1;
+    const ano = appState.currentYear;
+    const res = await fetch(`${API_BASE}/api/processar-duplo`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ idowner: 0, mes, ano })
+    }).then(r => r.json());
+
+    if (res.ok) {
+      showToast('🎉 Marcações processadas com sucesso em 2 ciclos no NGPonto!');
+      await carregarPendenciasRelatorioApp();
+      await carregarStatusRelogiosApp();
+    } else {
+      showToast('Erro no processamento: ' + res.erro, 'error');
+    }
+  } catch (e) {
+    showToast('Erro ao processar marcações: ' + e.message, 'error');
+  }
+}
+
+async function executarRotinaMatinalApp() {
+  if (!confirm('Deseja executar a Rotina Matinal Completa do DP para os 4 RELÓGIOS?\n\n1. Coleta simultânea dos 4 relógios Control iD:\n   • Depósito I - Produção (192.168.0.121)\n   • ADM Ji-Paraná (192.168.0.122)\n   • Ind. Naviraí - MS (192.168.1.48)\n   • Caiari Distribuidora (192.168.0.250)\n2. Processamento em 2 ciclos no NGPonto (7452 e 6716)\n3. Sincronização direta com a Matriz de Ponto\n4. Geração do relatório e e-mail de pendências de ontem')) {
+    return;
+  }
+
+  showToast('🌅 [1/4] Disparando Rotina Matinal: Conectando aos 4 relógios REP...');
+  await coletarRelogioApp(0);
+
+  showToast('📊 [3/4] Sincronizando batidas e quadros com a Matriz de Ponto do dashboard...');
+  await sincronizarBatidasNGParaMatriz();
+
+  showToast('✉️ [4/4] Abrindo painel de envio de e-mails com as pendências de ontem formatadas...');
+  const btnRel = document.getElementById('subtab-btn-relatorio');
+  if (btnRel) btnRel.click();
+  definirDataEmailRelativaApp(-1);
+  showToast('🎉 Rotina Matinal concluída com sucesso!');
+}
+
+async function sincronizarBatidasNGParaMatriz(mes, ano) {
+  const m = mes || (appState.currentMonth + 1);
+  const a = ano || appState.currentYear;
+  showToast(`🔄 [Sincronismo NGPonto] Carregando matriz consolidada do mês ${String(m).padStart(2,'0')}/${a}...`);
+
+  try {
+    const res = await fetch(`${API_BASE}/api/sincronizar-matriz?mes=${m}&ano=${a}`).then(r => r.json());
+    if (res.ok) {
+      // 1. Atualizar colaboradores com quadros e dados NGPonto
+      if (res.colaboradores && Array.isArray(res.colaboradores)) {
+        res.colaboradores.forEach(c => {
+          const codNum = parseInt(c.codigo, 10);
+          const colab = appState.colaboradores.find(x => x.cracha === codNum);
+          if (colab) {
+            colab.cpf = c.cpf || colab.cpf || '';
+            colab.pis = c.pis || colab.pis || '';
+            colab.cargo = c.cargo || colab.cargo || '';
+            colab.quadroNG = c.horario1 || c.codigoQuadro || colab.quadroNG || '';
+            colab.horariosSemana = c.horariosSemana || colab.horariosSemana;
+            colab.idregistroNG = c.idregistro;
+            colab.idownerNG = c.idowner;
+            colab.setor = c.setor || colab.setor;
+
+            // Escala Sábado e Aprendiz a partir do NGPonto
+            const isAuto = c.tipoFuncionario === 'Autônomo';
+            const isAp = (c.cargo && /aprendi/i.test(c.cargo)) || (c.horario1 === '14:00 18:00');
+            if (c.horariosSemana && c.horariosSemana['7']) {
+              const s7 = c.horariosSemana['7'];
+              colab.trabalhaSabado = !s7.descanso && Boolean(s7.e1 || s7.s1);
+            } else if (isAp || isAuto) {
+              colab.trabalhaSabado = false;
+            }
+            if (isAp) {
+              colab.aprendiz = true;
+              colab.isAprendiz = true;
+            }
+            if (isAuto) {
+              colab.registraPonto = false;
+              colab.naoRecebeVa = true;
+              colab.recebeVa = false;
+            }
+          }
+        });
+      }
+
+      // 2. Atualizar registrosPonto com as batidas reais e status apurados no banco
+      if (res.matriz) {
+        let countAtualizados = 0;
+        Object.keys(res.matriz).forEach(key => {
+          const cell = res.matriz[key];
+          // Chave pode ser '1026_2026-10-23' ou idregistro
+          const parts = key.split('_');
+          if (parts.length === 2) {
+            const cod = parts[0];
+            const iso = parts[1];
+            const colab = appState.colaboradores.find(x => String(x.cracha) === String(cod));
+            if (colab) {
+              const regKey = colab.id + '_' + iso;
+              const regPayload = {
+                override: cell.overrideStatus || 'AUTO',
+                override2: cell.overrideStatus2 || '',
+                resolution: cell.resolution || 'NENHUMA',
+                punches: cell.punches || { em: '', sm: '', et: '', st: '' },
+                note: cell.note || '',
+                atrasoMaior: cell.atrasoMaior || '',
+                atrasoMaiorMin: cell.atrasoMaiorMin || 0,
+                atrasoPequeno: '',
+                atrasoPequenoMin: 0,
+                esperado: cell.esperado
+              };
+              appState.registrosPonto[regKey] = regPayload;
+              appState.registrosPonto['colab-' + colab.cracha + '_' + iso] = regPayload;
+              countAtualizados++;
+            }
+          }
+        });
+        console.log(`[Sincronismo NGPonto] ${countAtualizados} dias de ponto sincronizados com sucesso.`);
+      }
+
+      saveStateToStorage();
+
+      // Atualiza KPIs
+      if (res.resumo) {
+        atualizarKpisCards(res.resumo);
+      }
+
+      if (appState.activeView === 'view-ponto') {
+        renderMatrixView();
+      }
+
+      showToast(`🎉 Sincronização concluída! ${res.colaboradores?.length || 0} colaboradores atualizados com o banco NGPonto.`);
+    } else {
+      showToast('Erro ao sincronizar com NGPonto: ' + res.erro, 'error');
+    }
+  } catch (e) {
+    showToast('Erro de comunicação com o motor de sincronismo: ' + e.message, 'error');
+  }
+}
+
+/**
+ * Verifica se um dia específico no dashboard do colaborador NÃO é referente a pendência
+ * (Ex: VAZIO, FÉRIAS, ATESTADO, 1/2 ATESTADO, OK, ABONADO, AFASTADO, DOMINGO, SÁBADO folga, FERIADO, etc.)
+ * ou se o colaborador está registrado no AppLucas como "não bate ponto".
+ */
+function isDiaNaoReferenteAPendencia(appColab, isoStr) {
+  if (!appColab) return false;
+
+  // 1. Colaborador registrado no AppLucas que NÃO bate ponto (excluído de pendências)
+  const naoBate = appColab.registraPonto === false 
+    || appColab.registraPonto === 'nao' 
+    || appColab.registraPonto === 'false' 
+    || appColab.registraPonto === 0 
+    || appColab.registraPonto === '0';
+  if (naoBate) return true;
+
+  if (!isoStr) return false;
+
+  // 2. Data fora do período contratual (antes da admissão ou após demissão)
+  if (appColab.admissao && isoStr < appColab.admissao) return true;
+  if (appColab.status === 'demitido' && appColab.dataDemissao && isoStr > appColab.dataDemissao) return true;
+
+  // 3. Feriado registrado no calendário do sistema
+  if (typeof isHoliday === 'function' && isHoliday(isoStr, appColab.filialId)) return true;
+
+  // 4. Domingo ou Sábado sem expediente (folga de sábado)
+  const dt = new Date(isoStr + 'T12:00:00');
+  const dw = dt.getDay();
+  if (dw === 0) return true;
+  if (dw === 6 && typeof isColabFolgaSabado === 'function' && isColabFolgaSabado(appColab)) return true;
+
+  // 5. Status consolidado do dia no Dashboard de Ponto (getDayStatus)
+  if (typeof getDayStatus === 'function') {
+    const dayStatus = getDayStatus(appColab.id, isoStr, appColab.filialId);
+    if (dayStatus) {
+      const st = (dayStatus.type || '').toUpperCase();
+      if (st === 'VAZIO' || dayStatus.isEmptyDay) return true;
+      if (st === 'FÉRIAS' || st === 'FERIAS') return true;
+      if (st === 'ATESTADO' || st === '1/2 ATESTADO') return true;
+      if (st === 'OK' || dayStatus.resolution === 'ABONAR') return true;
+      if (st === 'AFASTADO' || st === 'AFAST') return true;
+      if (st === 'DOMINGO' || st === 'SÁBADO') return true;
+      if (dayStatus.isHoliday || dayStatus.isDisabled || dayStatus.isDismissed) return true;
+    }
+  }
+
+  // 6. Override direto nos registros de ponto do AppLucas
+  if (typeof getPontoRecord === 'function') {
+    const reg = getPontoRecord(appColab.id, isoStr);
+    if (reg) {
+      const ov = (reg.override || '').toUpperCase();
+      const res = (reg.resolution || '').toUpperCase();
+      if (ov === 'VAZIO') return true;
+      if (ov === 'FÉRIAS' || ov === 'FERIAS') return true;
+      if (ov === 'ATESTADO' || ov === '1/2 ATESTADO') return true;
+      if (ov === 'AFASTADO' || ov === 'AFAST') return true;
+      if (ov === 'OK' || res === 'ABONAR') return true;
+    }
+  }
+
+  return false;
+}
+
+/**
+ * Filtra as pendências brutas do NGPonto cruzando com o dashboard do AppLucas:
+ * - Exclui colaboradores que NÃO batem ponto (registraPonto === false)
+ * - Exclui dias com VAZIO, FÉRIAS, ATESTADO ou qualquer justificativa
+ * - Recalcula resumo de KPIs fielmente
+ */
+function filtrarPendenciasComDashboardApp(dadosMotor) {
+  if (!dadosMotor || !Array.isArray(dadosMotor.colaboradores)) return dadosMotor;
+
+  const resultado = JSON.parse(JSON.stringify(dadosMotor));
+
+  let totalFaltas = 0;
+  let totalFaltasMeio = 0;
+  let totalBatidasAusentes = 0;
+  let totalAtrasos = 0;
+  let comPendencias = 0;
+  let totalValidos = 0;
+
+  resultado.colaboradores = resultado.colaboradores.filter(c => {
+    const codNum = parseInt(c.codigo, 10);
+    const appColab = appState.colaboradores.find(x => x.cracha === codNum && (c.idowner === 6716 ? x.filialId === 'branch-4' : x.filialId !== 'branch-4'))
+      || appState.colaboradores.find(x => x.cracha === codNum);
+
+    // REGRA 1: Colaboradores no AppLucas que NÃO batem ponto
+    if (appColab) {
+      const naoBate = appColab.registraPonto === false 
+        || appColab.registraPonto === 'nao' 
+        || appColab.registraPonto === 'false' 
+        || appColab.registraPonto === 0 
+        || appColab.registraPonto === '0';
+      if (naoBate) {
+        c.temPendencia = false;
+        c.pendencias = [];
+        c.qtdPendencias = 0;
+        return false;
+      }
+    }
+
+    totalValidos++;
+
+    // REGRA 2: Filtra dias com VAZIO, FÉRIAS, ATESTADO ou não-pendência
+    if (c.pendencias && Array.isArray(c.pendencias)) {
+      c.pendencias = c.pendencias.filter(p => {
+        const iso = p.dataIso || (p.data && p.data.includes('/') ? p.data.split('/').reverse().join('-') : p.data);
+        if (!iso) return true;
+
+        if (isDiaNaoReferenteAPendencia(appColab, iso)) {
+          return false;
+        }
+        return true;
+      });
+
+      c.temPendencia = c.pendencias.length > 0;
+      c.qtdPendencias = c.pendencias.length;
+
+      if (c.temPendencia) {
+        comPendencias++;
+        c.pendencias.forEach(p => {
+          const st = (p.status || '').toUpperCase();
+          if (st === 'FALTA') totalFaltas++;
+          else if (st === 'FM' || st === 'FT') totalFaltasMeio++;
+          else if (['EM', 'SM', 'ET', 'ST'].includes(st) || st.includes('+')) totalBatidasAusentes++;
+          if (p.atrasoMinutos && p.atrasoMinutos > 5) totalAtrasos++;
+        });
+      }
+    }
+
+    return true;
+  });
+
+  resultado.resumo = {
+    totalColaboradores: totalValidos,
+    comPendencias: comPendencias,
+    totalFaltas: totalFaltas,
+    totalFaltasMeio: totalFaltasMeio,
+    totalBatidasAusentes: totalBatidasAusentes,
+    totalAtrasos: totalAtrasos
+  };
+
+  return resultado;
+}
+
+async function carregarPendenciasRelatorioApp(forcar = false) {
+  try {
+    const mes = appState.currentMonth + 1;
+    const ano = appState.currentYear;
+    const res = await fetch(`${API_BASE}/api/pendencias?idowner=0&mes=${mes}&ano=${ano}${forcar ? '&refresh=1' : ''}`).then(r => r.json());
+    if (res && res.ok) {
+      impState.pendenciasRaw = res;
+      impState.pendenciasCache = filtrarPendenciasComDashboardApp(res);
+      if (impState.pendenciasCache.resumo) {
+        atualizarKpisCards(impState.pendenciasCache.resumo);
+      }
+      atualizarTextoEmailApp();
+      if (forcar) showToast('✅ Relatório de pendências atualizado e sincronizado com o dashboard!');
+    }
+  } catch (e) {
+    console.warn('Erro ao carregar pendências:', e);
+  }
+}
+
+function atualizarKpisCards(resumo) {
+  const elTot = document.getElementById('kpi-total-colabs');
+  const elCom = document.getElementById('kpi-com-pendencias');
+  const elFal = document.getElementById('kpi-faltas-integrais');
+  const elMei = document.getElementById('kpi-meio-periodo');
+  const elBat = document.getElementById('kpi-batidas-ausentes');
+  const elAtr = document.getElementById('kpi-atrasos-apurados');
+
+  if (elTot) elTot.textContent = resumo.totalColaboradores ?? '--';
+  if (elCom) elCom.textContent = resumo.comPendencias ?? '--';
+  if (elFal) elFal.textContent = resumo.totalFaltas ?? '--';
+  if (elMei) elMei.textContent = resumo.totalFaltasMeio ?? '--';
+  if (elBat) elBat.textContent = resumo.totalBatidasAusentes ?? '--';
+  if (elAtr) elAtr.textContent = resumo.totalAtrasos ?? '--';
+}
+
+function definirDataEmailRelativaApp(offset = -1) {
+  const d = new Date();
+  d.setDate(d.getDate() + offset);
+  if (d.getDay() === 0) d.setDate(d.getDate() - 1); // Se cair domingo, pula pro sábado
+  const dd = String(d.getDate()).padStart(2, '0');
+  const mm = String(d.getMonth() + 1).padStart(2, '0');
+  const inDia = document.getElementById('email-dia-ref');
+  if (inDia) {
+    inDia.value = `${dd}/${mm}`;
+    atualizarTextoEmailApp();
+  }
+}
+
+function atualizarTextoEmailApp() {
+  const selSetor = document.getElementById('email-filial-select');
+  const inDia = document.getElementById('email-dia-ref');
+  if (!selSetor || !inDia) return;
+
+  const setor = selSetor.value;
+  let diaRef = inDia.value.trim();
+
+  // Carrega destinatários salvos (limpa cache antigo se tiver emails fictícios/antigos)
+  let salvos = {};
+  try {
+    const raw = localStorage.getItem('destinatarios_pendencias_email');
+    if (raw && (raw.includes('pedro@') || raw.includes('gerenciams@') || raw.includes('dp@caiari') || raw.includes('edson@'))) {
+      localStorage.removeItem('destinatarios_pendencias_email');
+    } else if (raw) {
+      salvos = JSON.parse(raw);
+    }
+  } catch (e) {}
+
+  const cfg = salvos[setor] || DESTINATARIOS_FILIAIS_PADRAO[setor] || { to: '', cc: '' };
+
+  const inTo = document.getElementById('email-destinatario-input');
+  const inCc = document.getElementById('email-copia-input');
+  const inAss = document.getElementById('email-assunto-input');
+  const inCorpo = document.getElementById('email-corpo-textarea');
+
+  if (inTo) inTo.value = cfg.to || '';
+  if (inCc) inCc.value = cfg.cc || '';
+  if (inAss) inAss.value = `PENDENCIAS ${diaRef || 'DO DIA'}`;
+  if (inCorpo) inCorpo.value = gerarTextoEmailPendenciasApp(setor, diaRef);
+}
+
+function gerarTextoEmailPendenciasApp(setorFiltro, diaRef) {
+  if (setorFiltro === 'ADM Ji-Paraná (7452)') {
+    const countEl = document.getElementById('email-contagem-pendencias');
+    if (countEl) countEl.textContent = '0 (Setor ADM não envia pendências)';
+    return 'Conforme acordado, o setor Administrativo de Ji-Paraná não possui envio de pendências por e-mail.';
+  }
+
+  if (!impState.pendenciasCache || !impState.pendenciasCache.colaboradores) {
+    return 'Nenhum dado de pendência carregado ainda. Clique em "Atualizar Relatório" acima.';
+  }
+
+  let filtrados = impState.pendenciasCache.colaboradores.filter(c => c.temPendencia);
+  if (setorFiltro && setorFiltro !== 'TODOS') {
+    filtrados = filtrados.filter(c => c.setor === setorFiltro);
+  }
+
+  let todosColabsDoSetor = impState.pendenciasCache.colaboradores || [];
+  if (setorFiltro && setorFiltro !== 'TODOS') {
+    todosColabsDoSetor = todosColabsDoSetor.filter(c => c.setor === setorFiltro);
+  }
+
+  const linhas = [];
+
+  filtrados.forEach((c) => {
+    const codNum = parseInt(c.codigo, 10);
+    const appColab = appState.colaboradores.find(x => x.cracha === codNum && (c.idowner === 6716 ? x.filialId === 'branch-4' : x.filialId !== 'branch-4'))
+      || appState.colaboradores.find(x => x.cracha === codNum);
+
+    // Garante que colaborador registrado no AppLucas como não bate ponto nunca entre no email
+    if (appColab) {
+      const naoBate = appColab.registraPonto === false 
+        || appColab.registraPonto === 'nao' 
+        || appColab.registraPonto === 'false' 
+        || appColab.registraPonto === 0 
+        || appColab.registraPonto === '0';
+      if (naoBate) return;
+    }
+
+    let pendsColab = c.pendencias || [];
+    if (diaRef) {
+      const dRef = diaRef.trim();
+      pendsColab = pendsColab.filter(p => {
+        const matchesDate = (p.data && p.data.startsWith(dRef)) 
+          || (p.dataIso && (p.dataIso.endsWith(dRef.replace('/', '-')) || p.dataIso === dRef));
+        if (!matchesDate) return false;
+
+        const iso = p.dataIso || (p.data && p.data.includes('/') ? p.data.split('/').reverse().join('-') : p.data);
+        if (isDiaNaoReferenteAPendencia(appColab, iso)) {
+          return false;
+        }
+        return true;
+      });
+    }
+
+    if (pendsColab.length > 0) {
+      const nomeFormatado = formatarNomeColaboradorApp(c, todosColabsDoSetor);
+      const pendDesc = pendsColab.map(p => formatarDescricaoPendenciaApp(p)).join(' + ');
+      linhas.push({
+        codigoNum: parseInt(c.codigo, 10) || 0,
+        linha: `${nomeFormatado} - ${pendDesc}`
+      });
+    }
+  });
+
+  const countEl = document.getElementById('email-contagem-pendencias');
+  if (countEl) countEl.textContent = `${linhas.length} pendências encontradas`;
+
+  if (linhas.length === 0) {
+    return 'Nenhuma pendência encontrada para esta data/filial.';
+  }
+
+  const ehProducao = setorFiltro && (setorFiltro.toLowerCase().includes('produção') || setorFiltro.toLowerCase().includes('producao'));
+  if (ehProducao) {
+    linhas.sort((a, b) => a.codigoNum - b.codigoNum);
+  } else {
+    linhas.sort((a, b) => a.linha.localeCompare(b.linha, 'pt-BR'));
+  }
+
+  return linhas.map(x => x.linha).join('\n\n');
+}
+
+function formatarNomeColaboradorApp(colab, listaSetor) {
+  if (!colab || !colab.nome) return 'Colaborador';
+  const partes = colab.nome.trim().split(/\s+/).map(p => p.charAt(0).toUpperCase() + p.slice(1).toLowerCase());
+  if (partes.length === 0) return 'Colaborador';
+
+  const primeiroNome = partes[0];
+
+  const outrosComMesmoNome = (listaSetor || []).filter(c => {
+    if (c.idregistro === colab.idregistro) return false;
+    const outroPrimeiro = c.nome.trim().split(/\s+/)[0].toLowerCase();
+    return outroPrimeiro === primeiroNome.toLowerCase();
+  });
+
+  if (outrosComMesmoNome.length > 0 && partes.length > 1) {
+    return `${primeiroNome} ${partes[1]}`;
+  }
+
+  if (partes.length > 1 && ['Paulo', 'Joao', 'Jose', 'Maria', 'Ana', 'Pedro', 'Luiz', 'Vitor'].includes(primeiroNome)) {
+    return `${primeiroNome} ${partes[1]}`;
+  }
+
+  return primeiroNome;
+}
+
+function formatarDescricaoPendenciaApp(p) {
+  const partes = [];
+
+  if (p.atrasoMinutos && p.atrasoMinutos > 5) {
+    if (p.atrasoMinutos >= 60) {
+      const h = String(Math.floor(p.atrasoMinutos / 60)).padStart(2, '0');
+      const m = String(p.atrasoMinutos % 60).padStart(2, '0');
+      partes.push(`Atraso ${h}:${m}`);
+    } else {
+      partes.push(`Atraso ${p.atrasoMinutos} Minutos`);
+    }
+  }
+
+  const st = (p.status || '').toUpperCase();
+  if (st === 'FALTA') partes.push('Falta');
+  else if (st === 'FM') partes.push('Falta periodo manhã');
+  else if (st === 'FT') partes.push('Falta periodo da tarde');
+  else if (st === 'EM') partes.push('Entrada manhã');
+  else if (st === 'SM') partes.push('Saida manhã');
+  else if (st === 'ET') partes.push('Entrada da tarde');
+  else if (st === 'ST') partes.push('Saida da tarde');
+  else if (st.includes('+')) {
+    const sub = st.split('+').map(s => s.trim());
+    sub.forEach(s => {
+      if (s === 'EM') partes.push('Entrada manhã');
+      else if (s === 'SM') partes.push('Saida manhã');
+      else if (s === 'ET') partes.push('Entrada da tarde');
+      else if (s === 'ST') partes.push('Saida da tarde');
+      else if (s === 'FM') partes.push('Falta periodo manhã');
+      else if (s === 'FT') partes.push('Falta periodo da tarde');
+      else if (s === 'FALTA') partes.push('Falta');
+    });
+  }
+
+  const unicos = [];
+  partes.forEach(x => { if (!unicos.includes(x)) unicos.push(x); });
+
+  if (unicos.length === 0) {
+    return (p.status && p.status !== 'OK') ? p.status : 'Pendente';
+  }
+
+  return unicos.join(' + ');
+}
+
+function abrirGmailApp() {
+  const to = document.getElementById('email-destinatario-input')?.value.trim() || '';
+  const cc = document.getElementById('email-copia-input')?.value.trim() || '';
+  const su = document.getElementById('email-assunto-input')?.value.trim() || '';
+  const body = document.getElementById('email-corpo-textarea')?.value || '';
+
+  const url = `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(to)}&cc=${encodeURIComponent(cc)}&su=${encodeURIComponent(su)}&body=${encodeURIComponent(body)}`;
+  window.open(url, '_blank');
+  showToast('🚀 Nova guia aberta no Google Chrome com o Gmail preenchido!');
+}
+
+function abrirWhatsAppApp() {
+  const body = document.getElementById('email-corpo-textarea')?.value || '';
+  const su = document.getElementById('email-assunto-input')?.value || '';
+  const texto = `*${su}*\n\n${body}`;
+  const url = `https://api.whatsapp.com/send?text=${encodeURIComponent(texto)}`;
+  window.open(url, '_blank');
+  showToast('📱 WhatsApp Web aberto com as pendências pré-formatadas!');
+}
+
+function copiarTextoEmailApp() {
+  const txt = document.getElementById('email-corpo-textarea')?.value || '';
+  navigator.clipboard.writeText(txt).then(() => {
+    showToast('📋 Texto do e-mail copiado para a área de transferência!');
+  }).catch(() => {
+    const tArea = document.getElementById('email-corpo-textarea');
+    if (tArea) {
+      tArea.select();
+      document.execCommand('copy');
+      showToast('📋 Texto copiado!');
+    }
+  });
+}
+
+function salvarDestinatariosApp() {
+  const setor = document.getElementById('email-filial-select')?.value;
+  const to = document.getElementById('email-destinatario-input')?.value.trim() || '';
+  const cc = document.getElementById('email-copia-input')?.value.trim() || '';
+
+  let salvos = {};
+  try { salvos = JSON.parse(localStorage.getItem('destinatarios_pendencias_email') || '{}'); } catch (e) {}
+  salvos[setor] = { to, cc };
+  localStorage.setItem('destinatarios_pendencias_email', JSON.stringify(salvos));
+  showToast(`💾 Destinatários da filial "${setor}" salvos como padrão no seu navegador!`);
+}
+
+async function carregarVinculosRelogiosApp() {
+  try {
+    const res = await fetch(`${API_BASE}/api/relogios-vinculos`).then(r => r.json());
+    if (res.ok && res.vinculos) {
+      impState.vinculos = res.vinculos;
+      atualizarContadoresVinculosApp(res.vinculos);
+      renderRelogiosVinculosTable();
+    }
+  } catch (e) {
+    console.warn('Erro ao carregar vínculos de relógios:', e);
+  }
+}
+
+function atualizarContadoresVinculosApp(vinculos) {
+  const c1 = document.getElementById('count-relogio1');
+  const c2 = document.getElementById('count-relogio2');
+  const c3 = document.getElementById('count-relogio3');
+  const c4 = document.getElementById('count-relogio4');
+  const cMan = document.getElementById('count-folha-manual');
+  const cIse = document.getElementById('count-isentos');
+
+  if (c1) c1.textContent = (vinculos.relogio1_producao || []).length;
+  if (c2) c2.textContent = (vinculos.relogio2_adm || []).length;
+  if (c3) c3.textContent = (vinculos.relogio3_navirai || []).length;
+  if (c4) c4.textContent = (vinculos.relogio4_caiari || []).length;
+  if (cMan) cMan.textContent = (vinculos.folha_manual || []).length;
+  if (cIse) cIse.textContent = (vinculos.isentos || []).length;
+}
+
+function renderRelogiosVinculosTable() {
+  const tbody = document.getElementById('tb-vinculos-relogios');
+  if (!tbody) return;
+
+  const vinculos = impState.vinculos || {};
+  const mapCodToRel = new Map();
+
+  ['relogio1_producao', 'relogio2_adm', 'relogio3_navirai', 'relogio4_caiari', 'folha_manual', 'isentos'].forEach(grupo => {
+    (vinculos[grupo] || []).forEach(item => {
+      mapCodToRel.set(Number(item.cod), grupo);
+    });
+  });
+
+  const filtro = impState.filtroVinculo || 'TODOS';
+  const busca = impState.buscaVinculo || '';
+
+  const colabsFiltrados = appState.colaboradores.filter(c => {
+    const cod = Number(c.cracha);
+    const grupo = mapCodToRel.get(cod) || 'relogio1_producao';
+
+    if (filtro !== 'TODOS' && grupo !== filtro) return false;
+
+    if (busca) {
+      const matchNome = (c.nome || '').toLowerCase().includes(busca);
+      const matchCod = String(c.cracha).includes(busca);
+      const matchCargo = (c.cargo || '').toLowerCase().includes(busca);
+      if (!matchNome && !matchCod && !matchCargo) return false;
+    }
+
+    return true;
+  });
+
+  colabsFiltrados.sort((a, b) => Number(a.cracha) - Number(b.cracha));
+
+  tbody.innerHTML = colabsFiltrados.map(c => {
+    const cod = Number(c.cracha);
+    const grupoAtual = mapCodToRel.get(cod) || 'relogio1_producao';
+    const filial = appState.filiais.find(f => f.id === c.filialId);
+    const nomeFilial = filial ? filial.nome : 'Matriz';
+
+    return `
+      <tr data-cod="${cod}" data-nome="${escapeHtml(c.nome)}" data-cargo="${escapeHtml(c.cargo || '')}">
+        <td><strong>${c.cracha}</strong></td>
+        <td>
+          <div style="font-weight:600; color:var(--color-cyan);">${escapeHtml(c.nome)}</div>
+          <small style="color:var(--color-text-sub);">${c.cpf ? 'CPF: ' + c.cpf : ''}</small>
+        </td>
+        <td>${escapeHtml(nomeFilial)}</td>
+        <td>${escapeHtml(c.cargo || 'Não informado')}</td>
+        <td>
+          <select class="form-control select-vinculo-relogio" style="padding:4px 8px; font-size:12px;">
+            <option value="relogio1_producao" ${grupoAtual === 'relogio1_producao' ? 'selected' : ''}>Relógio 1: Produção Depósito I (14)</option>
+            <option value="relogio2_adm" ${grupoAtual === 'relogio2_adm' ? 'selected' : ''}>Relógio 2: ADM Ji-Paraná (9)</option>
+            <option value="relogio3_navirai" ${grupoAtual === 'relogio3_navirai' ? 'selected' : ''}>Relógio 3: Ind. Naviraí MS (13)</option>
+            <option value="relogio4_caiari" ${grupoAtual === 'relogio4_caiari' ? 'selected' : ''}>Relógio 4: Caiari (18)</option>
+            <option value="folha_manual" ${grupoAtual === 'folha_manual' ? 'selected' : ''}>Folha Manual (Sem REP)</option>
+            <option value="isentos" ${grupoAtual === 'isentos' ? 'selected' : ''}>Isento / Autônomo</option>
+          </select>
+        </td>
+      </tr>
+    `;
+  }).join('');
+}
+
+async function salvarVinculosRelogiosApp() {
+  showToast('💾 Gravando novos vínculos de relógios no NGPonto...');
+  const novosVinculos = {
+    relogio1_producao: [],
+    relogio2_adm: [],
+    relogio3_navirai: [],
+    relogio4_caiari: [],
+    folha_manual: [],
+    isentos: []
+  };
+
+  const rows = document.querySelectorAll('#tb-vinculos-relogios tr');
+  rows.forEach(tr => {
+    const cod = parseInt(tr.dataset.cod, 10);
+    const nome = tr.dataset.nome || '';
+    const cargo = tr.dataset.cargo || '';
+    const sel = tr.querySelector('.select-vinculo-relogio');
+    const grupo = sel ? sel.value : 'relogio1_producao';
+
+    if (novosVinculos[grupo]) {
+      novosVinculos[grupo].push({ cod, nome, cargo });
+    }
+  });
+
+  // Também preserva os colaboradores que não estavam visíveis no filtro atual
+  if (impState.vinculos) {
+    const jaAdicionados = new Set();
+    Object.keys(novosVinculos).forEach(g => {
+      novosVinculos[g].forEach(item => jaAdicionados.add(item.cod));
+    });
+
+    Object.keys(impState.vinculos).forEach(g => {
+      (impState.vinculos[g] || []).forEach(item => {
+        if (!jaAdicionados.has(item.cod) && novosVinculos[g]) {
+          novosVinculos[g].push(item);
+          jaAdicionados.add(item.cod);
+        }
+      });
+    });
+  }
+
+  try {
+    const res = await fetch(`${API_BASE}/api/relogios-vinculos`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ vinculos: novosVinculos })
+    }).then(r => r.json());
+
+    if (res.ok) {
+      impState.vinculos = novosVinculos;
+      atualizarContadoresVinculosApp(novosVinculos);
+      showToast('🎉 Vínculos de relógios atualizados e gravados com sucesso!');
+    } else {
+      showToast('Erro ao salvar vínculos: ' + res.erro, 'error');
+    }
+  } catch (e) {
+    showToast('Erro de comunicação: ' + e.message, 'error');
+  }
+}
+
+let debounceTimerNG = null;
+
+function setupAutoLookupNGPonto() {
+  const badgeInput = document.getElementById('emp-badge');
+  const branchSelect = document.getElementById('emp-branch');
+
+  const triggerLookup = () => {
+    clearTimeout(debounceTimerNG);
+    debounceTimerNG = setTimeout(() => {
+      autoBuscarDadosNGPonto(false);
+    }, 350);
+  };
+
+  badgeInput?.addEventListener('input', triggerLookup);
+  branchSelect?.addEventListener('change', triggerLookup);
+}
+
+function formatNgDateToIso(str) {
+  if (!str) return '';
+  if (str.includes('/')) {
+    const parts = str.split('/');
+    if (parts.length === 3) {
+      return `${parts[2]}-${parts[1].padStart(2, '0')}-${parts[0].padStart(2, '0')}`;
+    }
+  }
+  return str;
+}
+
+function formatarCpfParcial(cpf) {
+  if (!cpf) return 'Não informado';
+  const clean = cpf.replace(/\D/g, '').padStart(11, '0');
+  return `${clean.slice(0, 3)}.${clean.slice(3, 6)}.${clean.slice(6, 9)}-${clean.slice(9, 11)}`;
+}
+
+async function autoBuscarDadosNGPonto(silencioso = false) {
+  const badgeInput = document.getElementById('emp-badge');
+  const branchSelect = document.getElementById('emp-branch');
+  const editId = document.getElementById('emp-edit-id')?.value;
+
+  const cod = badgeInput ? parseInt(badgeInput.value, 10) : 0;
+  if (!cod || isNaN(cod) || cod <= 0) {
+    const syncInfo = document.getElementById('emp-ng-sync-info');
+    if (syncInfo && !editId) syncInfo.style.display = 'none';
+    return;
+  }
+
+  const filialId = branchSelect ? branchSelect.value : (appState.activeBranchId || 'branch-1');
+
+  // Garante cache da lista de colaboradores NGPonto para agilidade máxima
+  if (!impState.colaboradoresNGCache || impState.colaboradoresNGCache.length === 0) {
+    try {
+      const res = await fetch(`${API_BASE}/api/colaboradores`).then(r => r.json());
+      if (res && res.ok && Array.isArray(res.colaboradores)) {
+        impState.colaboradoresNGCache = res.colaboradores;
+      }
+    } catch (e) {
+      console.warn('Erro ao consultar /api/colaboradores:', e);
+      return;
+    }
+  }
+
+  if (!impState.colaboradoresNGCache || impState.colaboradoresNGCache.length === 0) return;
+
+  // Priorização por filial: Caiari (branch-4) usa idowner 6716; Ji-Paraná / Naviraí usam 7452
+  const preferredOwner = filialId === 'branch-4' ? 6716 : 7452;
+  let c = impState.colaboradoresNGCache.find(x => parseInt(x.codigo, 10) === cod && x.idowner === preferredOwner);
+  if (!c) {
+    c = impState.colaboradoresNGCache.find(x => parseInt(x.codigo, 10) === cod);
+  }
+
+  const syncInfo = document.getElementById('emp-ng-sync-info');
+  const badgeTxt = document.getElementById('emp-ng-status-badge');
+  const detLine = document.getElementById('emp-ng-details-line');
+
+  if (c) {
+    // 1. Preenche Nome
+    const nameInput = document.getElementById('emp-name');
+    if (nameInput && (!editId || !nameInput.value.trim())) {
+      nameInput.value = c.nome || '';
+    }
+
+    // 2. Preenche Admissão
+    const admInput = document.getElementById('emp-admission');
+    if (admInput && (!editId || !admInput.value)) {
+      const isoAdm = formatNgDateToIso(c.admissao);
+      if (isoAdm) admInput.value = isoAdm;
+    }
+
+    // 3. Preenche Campos Ocultos (desnecessários na visualização principal, salvos automaticamente)
+    const inCpf = document.getElementById('emp-cpf'); if (inCpf) inCpf.value = c.cpf || '';
+    const inPis = document.getElementById('emp-pis'); if (inPis) inPis.value = c.pis || '';
+    const inCargo = document.getElementById('emp-cargo'); if (inCargo) inCargo.value = c.cargo || '';
+    const inIdR = document.getElementById('emp-idregistro-ng'); if (inIdR) inIdR.value = c.idregistro || '';
+    const inIdOw = document.getElementById('emp-idowner-ng'); if (inIdOw) inIdOw.value = c.idowner || '';
+    const inQ = document.getElementById('emp-quadro-ng');
+    const qTxt = `${c.horario1 || ''}${c.horario2 ? ' / Sáb: ' + c.horario2 : ''}`.trim() || c.codigoQuadro || '';
+    if (inQ) inQ.value = qTxt;
+
+    const inRel = document.getElementById('emp-relogio-vinculo');
+    if (inRel) {
+      if (c.idowner === 6716) inRel.value = 'relogio4_caiari';
+      else if (c.setor?.includes('Naviraí')) inRel.value = 'relogio3_navirai';
+      else if (c.setor?.includes('ADM')) inRel.value = 'relogio2_adm';
+      else if (c.setor?.includes('Manual')) inRel.value = 'folha_manual';
+      else if (c.tipoFuncionario === 'Autônomo') inRel.value = 'isentos';
+      else inRel.value = 'relogio1_producao';
+    }
+
+    // 4. Preenche Escalas de Trabalho (Sábado, Aprendiz, Autônomo) a partir do NGPonto
+    const isAuto = c.tipoFuncionario === 'Autônomo';
+    const isAp = (c.cargo && /aprendi/i.test(c.cargo)) || (c.horario1 === '14:00 18:00');
+
+    let trabalhaSabado = true;
+    if (c.horariosSemana && c.horariosSemana['7']) {
+      const s7 = c.horariosSemana['7'];
+      trabalhaSabado = !s7.descanso && Boolean(s7.e1 || s7.s1);
+    } else if (isAp || isAuto) {
+      trabalhaSabado = false;
+    }
+
+    const checkRegistra = document.getElementById('emp-check-registra-ponto');
+    const checkNaoRecebeVa = document.getElementById('emp-check-nao-recebe-va');
+    const checkTrabalhaSabado = document.getElementById('emp-check-trabalha-sabado') || document.getElementById('emp-check-aprendiz-sabado');
+    const checkAprendiz = document.getElementById('emp-check-aprendiz');
+
+    if (isAuto) {
+      if (checkRegistra) checkRegistra.checked = false;
+      if (checkNaoRecebeVa) checkNaoRecebeVa.checked = true;
+      if (checkTrabalhaSabado) checkTrabalhaSabado.checked = false;
+      if (checkAprendiz) checkAprendiz.checked = false;
+    } else if (isAp) {
+      if (checkRegistra) checkRegistra.checked = true;
+      if (checkNaoRecebeVa) checkNaoRecebeVa.checked = false;
+      if (checkAprendiz) checkAprendiz.checked = true;
+      if (checkTrabalhaSabado) checkTrabalhaSabado.checked = trabalhaSabado;
+    } else {
+      if (checkRegistra) checkRegistra.checked = true;
+      if (checkNaoRecebeVa) checkNaoRecebeVa.checked = false;
+      if (checkAprendiz) checkAprendiz.checked = false;
+      if (checkTrabalhaSabado) checkTrabalhaSabado.checked = trabalhaSabado;
+    }
+
+    // 5. Exibe Feedback Visual Compacto
+    if (syncInfo) {
+      syncInfo.style.display = 'block';
+      if (badgeTxt) badgeTxt.textContent = '✨ Sincronizado do NGPonto';
+      if (detLine) {
+        const cpfFmt = formatarCpfParcial(c.cpf);
+        const sabTxt = trabalhaSabado ? 'Trabalha' : 'Folga';
+        detLine.textContent = `Cargo: ${c.cargo || 'Não informado'} • CPF: ${cpfFmt} • Escala Sábado: ${sabTxt}${isAp ? ' (Aprendiz)' : ''}`;
+      }
+    }
+
+    if (!silencioso) {
+      showToast(`✨ Colaborador "${c.nome}" identificado no NGPonto! Dados e escala carregados.`);
+    }
+  } else {
+    if (syncInfo && !editId) {
+      syncInfo.style.display = 'none';
+    }
+  }
+}
+
+async function buscarDadosNGPontoParaModalColab() {
+  await autoBuscarDadosNGPonto(false);
+}
+
+async function aplicarEscalasNGPontoParaTodos(showFeedback = true) {
+  if (showFeedback) showToast('🔄 Sincronizando escalas e dados de todos os funcionários com o NGPonto...');
+  try {
+    const res = await fetch(`${API_BASE}/api/colaboradores`).then(r => r.json());
+    if (!res || !res.ok || !Array.isArray(res.colaboradores)) {
+      if (showFeedback) showToast('Não foi possível obter dados do NGPonto.', 'warning');
+      return;
+    }
+
+    const ngColabs = res.colaboradores;
+    impState.colaboradoresNGCache = ngColabs;
+
+    let alterados = 0;
+    appState.colaboradores.forEach(colab => {
+      const preferredOwner = colab.filialId === 'branch-4' ? 6716 : 7452;
+      let match = ngColabs.find(c => parseInt(c.codigo, 10) === colab.cracha && c.idowner === preferredOwner);
+      if (!match) {
+        match = ngColabs.find(c => parseInt(c.codigo, 10) === colab.cracha);
+      }
+
+      if (match) {
+        let mudou = false;
+
+        // Dados complementares NGPonto (salvos no colaborador)
+        if (match.cpf && colab.cpf !== match.cpf) { colab.cpf = match.cpf; mudou = true; }
+        if (match.pis && colab.pis !== match.pis) { colab.pis = match.pis; mudou = true; }
+        if (match.cargo && colab.cargo !== match.cargo) { colab.cargo = match.cargo; mudou = true; }
+        if (match.idregistro) colab.idregistroNG = match.idregistro;
+        if (match.idowner) colab.idownerNG = match.idowner;
+        if (match.horariosSemana) colab.horariosSemana = match.horariosSemana;
+
+        const qTxt = `${match.horario1 || ''}${match.horario2 ? ' / Sáb: ' + match.horario2 : ''}`.trim() || match.codigoQuadro || '';
+        if (qTxt && colab.quadroNG !== qTxt) { colab.quadroNG = qTxt; mudou = true; }
+
+        // Escalas automáticas derivadas do NGPonto
+        const isAuto = match.tipoFuncionario === 'Autônomo';
+        const isAp = (match.cargo && /aprendi/i.test(match.cargo)) || (match.horario1 === '14:00 18:00');
+
+        let trabalhaSabado = true;
+        if (match.horariosSemana && match.horariosSemana['7']) {
+          const s7 = match.horariosSemana['7'];
+          trabalhaSabado = !s7.descanso && Boolean(s7.e1 || s7.s1);
+        } else if (isAp || isAuto) {
+          trabalhaSabado = false;
+        }
+
+        if (colab.trabalhaSabado !== trabalhaSabado) {
+          colab.trabalhaSabado = trabalhaSabado;
+          mudou = true;
+        }
+
+        if (isAp && !colab.aprendiz) {
+          colab.aprendiz = true;
+          colab.isAprendiz = true;
+          mudou = true;
+        }
+
+        if (isAuto) {
+          if (colab.registraPonto !== false) { colab.registraPonto = false; mudou = true; }
+          if (!colab.naoRecebeVa) { colab.naoRecebeVa = true; colab.recebeVa = false; mudou = true; }
+        }
+
+        if (mudou) alterados++;
+      }
+    });
+
+    if (alterados > 0) {
+      saveStateToStorage();
+      if (appState.activeView === 'view-ponto') {
+        renderMatrix();
+      } else if (appState.activeView === 'view-colaboradores') {
+        renderEmployeesList();
+      }
+      if (showFeedback) {
+        showToast(`✨ Escalas e dados de ${alterados} colaboradores atualizados a partir do NGPonto!`);
+      }
+    } else {
+      if (showFeedback) {
+        showToast('Todas as escalas dos colaboradores já estão sincronizadas com o NGPonto.');
+      }
+    }
+  } catch (e) {
+    console.error('Erro em aplicarEscalasNGPontoParaTodos:', e);
+    if (showFeedback) showToast('Erro ao sincronizar escalas: ' + e.message, 'error');
+  }
+}
 
 

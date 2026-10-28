@@ -39,6 +39,9 @@
         <button class="nav-tab-btn" data-view="view-ponto" id="nav-btn-ponto">
           <span>📊</span> Matriz de Ponto
         </button>
+        <button class="nav-tab-btn" data-view="view-importacao" id="nav-btn-importacao">
+          <span>📡</span> Importação/Processamento
+        </button>
         <button class="nav-tab-btn" data-view="view-va" id="nav-btn-va">
           <span>💳</span> Fechamento de VA
         </button>
@@ -414,7 +417,12 @@
               📍 Filial Ativa: Euros Ind. e Comércio de Aço - Matriz
             </p>
           </div>
-          <button class="btn btn-primary" id="btn-abrir-novo-colab">+ Cadastrar Funcionário</button>
+          <div style="display:flex; gap:8px;">
+            <button class="btn btn-secondary" id="btn-sincronizar-escalas-ng" title="Preencher e sincronizar escalas de todos os funcionários a partir do NGPonto">
+              <span>🔄</span> Sincronizar Escalas NG
+            </button>
+            <button class="btn btn-primary" id="btn-abrir-novo-colab">+ Cadastrar Funcionário</button>
+          </div>
         </div>
 
         <!-- Colaboradores Filtering Toolbar -->
@@ -580,6 +588,316 @@
   </main>
 
   <!-- ========================================================================
+       VIEW: IMPORTAÇÃO & PROCESSAMENTO (NGPONTO / CONTROL ID)
+       ======================================================================== -->
+  <main id="view-importacao" class="app-view" style="display:none;">
+    <div class="manage-view-container importacao-view-container">
+      
+      <!-- Cabeçalho da Central -->
+      <div class="card-panel importacao-header-panel" style="margin-bottom: 16px; background: linear-gradient(135deg, rgba(64,21,184,0.35) 0%, rgba(21,19,27,0.85) 100%); border: 1px solid var(--color-border-bright);">
+        <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px;">
+          <div>
+            <h2 style="font-size:20px; font-weight:800; color:var(--color-cyan); display:flex; align-items:center; gap:10px; margin:0 0 4px 0;">
+              <span>📡</span> Central de Importação & Processamento NGPonto
+            </h2>
+            <p style="font-size:12.5px; color:var(--color-text-sub); margin:0;">
+              Coleta direta dos 4 Relógios REP Control iD • Pareamento Duplo (2 Ciclos) • Vínculos de Relógios • Relatório & E-mail de Pendências
+            </p>
+          </div>
+          <div style="display:flex; gap:8px; align-items:center;">
+            <button class="btn btn-cyan btn-sm" id="btn-imp-rotina-matinal" title="Executa Coleta dos 4 Relógios + Processamento 2x + Sincronização da Matriz">
+              <span>🌅</span> Rotina Matinal (1-Clique)
+            </button>
+            <button class="btn btn-primary btn-sm" id="btn-imp-sincronizar-matriz" title="Puxa todas as batidas e quadros do NGPonto diretamente para a Matriz de Ponto">
+              <span>🔄</span> Sincronizar com Matriz de Ponto
+            </button>
+          </div>
+        </div>
+
+        <!-- Sub-Navegação em Abas Internas -->
+        <div class="imp-subtabs-nav" style="display:flex; gap:10px; margin-top:16px; border-top:1px solid rgba(255,255,255,0.08); padding-top:12px;">
+          <button class="imp-subtab-btn active" data-subtab="subtab-coleta" id="subtab-btn-coleta">
+            <span>📡</span> 1. Coleta & Processamento (4 Relógios)
+          </button>
+          <button class="imp-subtab-btn" data-subtab="subtab-relatorio" id="subtab-btn-relatorio">
+            <span>✉️</span> 2. Relatório de Pendências & E-mail Diário
+          </button>
+          <button class="imp-subtab-btn" data-subtab="subtab-vinculos" id="subtab-btn-vinculos">
+            <span>👥</span> 3. Vínculo de Funcionários por Relógio
+          </button>
+        </div>
+      </div>
+
+      <!-- ================================================================== -->
+      <!-- SUBTAB 1: COLETA & PROCESSAMENTO DOS 4 RELÓGIOS                     -->
+      <!-- ================================================================== -->
+      <section id="subtab-coleta" class="imp-subtab-panel">
+        <div class="card-panel" style="margin-bottom: 16px;">
+          <div class="form-row" style="align-items:flex-end; margin-bottom: 12px; gap: 12px;">
+            <div class="form-group" style="margin-bottom:0;">
+              <label for="app-relInicio" style="font-size:12px;">Início Importação (-1d útil):</label>
+              <input type="date" class="form-control" id="app-relInicio" style="width:145px;">
+            </div>
+            <div class="form-group" style="margin-bottom:0;">
+              <label for="app-relFim" style="font-size:12px;">Fim Importação (Hoje):</label>
+              <input type="date" class="form-control" id="app-relFim" style="width:145px;">
+            </div>
+            <div class="form-group" style="margin-bottom:0;">
+              <label for="app-relNsr" style="font-size:12px;">A partir de NSR (-2d úteis):</label>
+              <input type="date" class="form-control" id="app-relNsr" style="width:145px;">
+            </div>
+            <button class="btn btn-secondary btn-sm" id="btn-imp-calcular-datas" title="Ajusta datas considerando Sábado como dia útil normal">
+              <span>📅</span> Recalcular Datas
+            </button>
+            <button class="btn btn-secondary btn-sm" id="btn-imp-ler-nsr" title="Conecta nos relógios via RepCid.dll e traz o NSR atual">
+              <span>🔍</span> Ler NSRs nos 4 Relógios
+            </button>
+            <button class="btn btn-primary" id="btn-imp-coletar-todos" style="background:#5B21B6; border-color:#7C3AED;">
+              <span>🚀</span> Coletar e Importar TODOS os 4 Relógios
+            </button>
+            <button class="btn btn-cyan" id="btn-imp-processar-duplo" title="Executa 2 ciclos seguidos no banco NG_PONTO">
+              <span>⚡</span> Processar Marcações (2x)
+            </button>
+          </div>
+
+          <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px; padding:10px 14px; background:rgba(30,27,46,0.6); border-radius:var(--radius-sm); border:1px solid var(--color-border);">
+            <label class="custom-checkbox-container" style="margin:0; cursor:pointer;">
+              <input type="checkbox" id="app-chkProcessarAposColeta" checked>
+              <span>⚡ <strong>Processar marcações automaticamente (2 vezes seguidas)</strong> após a coleta e importação</span>
+            </label>
+            <span style="font-size:11.5px; color:var(--color-text-sub);">
+              Pareia entradas/saídas e consolida totais trabalhados no NGPonto sem cliques manuais.
+            </span>
+          </div>
+        </div>
+
+        <!-- Grade com os 4 Cards dos Relógios -->
+        <div class="relogios-cards-grid" id="app-cardsRelogios" style="display:grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap:14px; margin-bottom:16px;">
+          <!-- Preenchido dinamicamente via JS -->
+        </div>
+
+        <!-- Terminal de Logs ao Vivo -->
+        <div class="card-panel" id="app-logRelogiosBox" style="display:none; margin-top:16px; background:#0B0A0F; border:1px solid #3B2A63;">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+            <h3 style="font-size:13px; margin:0; color:var(--color-cyan); display:flex; align-items:center; gap:6px;">
+              <span>📋</span> Registro da Coleta e Importação Direta Control iD (RepCid.dll)
+            </h3>
+            <button type="button" class="btn btn-secondary btn-sm" id="btn-app-limpar-log" style="padding:2px 8px; font-size:10px;">Limpar Log</button>
+          </div>
+          <pre id="app-logRelogiosTexto" style="font-family:var(--font-mono); font-size:12px; color:#A7F3D0; background:#0F0D15; padding:12px; border-radius:6px; max-height:260px; overflow-y:auto; white-space:pre-wrap; margin:0;"></pre>
+        </div>
+      </section>
+
+      <!-- ================================================================== -->
+      <!-- SUBTAB 2: RELATÓRIO DE PENDÊNCIAS & ENVIO DE E-MAIL DIÁRIO         -->
+      <!-- ================================================================== -->
+      <section id="subtab-relatorio" class="imp-subtab-panel" style="display:none;">
+        
+        <!-- 6 KPI Summary Cards -->
+        <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap:12px; margin-bottom:16px;">
+          <div class="card-panel" style="padding:14px; border-left:4px solid var(--color-cyan); background:rgba(30,27,46,0.65);">
+            <div style="font-size:11px; text-transform:uppercase; color:var(--color-text-sub); font-weight:700;">👥 Total Colaboradores</div>
+            <div style="font-size:26px; font-weight:800; color:var(--color-cyan); margin-top:4px;" id="kpi-total-colabs">--</div>
+            <div style="font-size:11px; color:var(--color-text-muted);">Ativos nas empresas</div>
+          </div>
+          <div class="card-panel" style="padding:14px; border-left:4px solid #F59E0B; background:rgba(30,27,46,0.65);">
+            <div style="font-size:11px; text-transform:uppercase; color:var(--color-text-sub); font-weight:700;">⚠️ Com Pendências</div>
+            <div style="font-size:26px; font-weight:800; color:#F59E0B; margin-top:4px;" id="kpi-com-pendencias">--</div>
+            <div style="font-size:11px; color:var(--color-text-muted);">Exigem acerto/justificativa</div>
+          </div>
+          <div class="card-panel" style="padding:14px; border-left:4px solid #EF4444; background:rgba(30,27,46,0.65);">
+            <div style="font-size:11px; text-transform:uppercase; color:var(--color-text-sub); font-weight:700;">🔴 Faltas Integrais</div>
+            <div style="font-size:26px; font-weight:800; color:#EF4444; margin-top:4px;" id="kpi-faltas-integrais">--</div>
+            <div style="font-size:11px; color:var(--color-text-muted);">Ausência sem batidas</div>
+          </div>
+          <div class="card-panel" style="padding:14px; border-left:4px solid #F43F5E; background:rgba(30,27,46,0.65);">
+            <div style="font-size:11px; text-transform:uppercase; color:var(--color-text-sub); font-weight:700;">🟠 Meio Período (FM/FT)</div>
+            <div style="font-size:26px; font-weight:800; color:#FDA4AF; margin-top:4px;" id="kpi-meio-periodo">--</div>
+            <div style="font-size:11px; color:var(--color-text-muted);">Falta Manhã ou Tarde</div>
+          </div>
+          <div class="card-panel" style="padding:14px; border-left:4px solid #EAB308; background:rgba(30,27,46,0.65);">
+            <div style="font-size:11px; text-transform:uppercase; color:var(--color-text-sub); font-weight:700;">🟡 Batidas Ausentes</div>
+            <div style="font-size:26px; font-weight:800; color:#FDE047; margin-top:4px;" id="kpi-batidas-ausentes">--</div>
+            <div style="font-size:11px; color:var(--color-text-muted);">EM, SM, ET ou ST</div>
+          </div>
+          <div class="card-panel" style="padding:14px; border-left:4px solid var(--color-blue-bright); background:rgba(30,27,46,0.65);">
+            <div style="font-size:11px; text-transform:uppercase; color:var(--color-text-sub); font-weight:700;">⏱️ Atrasos Apurados</div>
+            <div style="font-size:26px; font-weight:800; color:var(--color-blue-bright); margin-top:4px;" id="kpi-atrasos-apurados">--</div>
+            <div style="font-size:11px; color:var(--color-text-muted);">Dias com atraso &gt; 5 min</div>
+          </div>
+        </div>
+
+        <!-- Painel de Disparo de E-mail Diário -->
+        <div class="card-panel" style="background: rgba(21,19,27,0.95); border: 1px solid var(--color-border-bright);">
+          <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; margin-bottom:14px; gap:8px;">
+            <div>
+              <h3 style="font-size:15px; font-weight:700; color:var(--color-cyan); margin:0 0 2px 0; display:flex; align-items:center; gap:8px;">
+                <span>✉️</span> Disparo de Pendências Diárias por Filial (Gmail / WhatsApp)
+              </h3>
+              <p style="font-size:12px; color:var(--color-text-sub); margin:0;">
+                Gera o e-mail no formato oficial do DP com destinatários, cópias e texto pré-formatados.
+              </p>
+            </div>
+            <button type="button" class="btn btn-secondary btn-sm" id="btn-app-atualizar-relatorio-email">
+              <span>🔄</span> Atualizar Relatório
+            </button>
+          </div>
+
+          <div class="form-row" style="margin-bottom:12px;">
+            <div class="form-group" style="flex:1;">
+              <label for="email-filial-select" style="font-size:12px; font-weight:700;">Filial / Setor Responsável:</label>
+              <select class="form-control" id="email-filial-select">
+                <option value="Produção - Depósito I (7452)">Produção / Depósito I (7452)</option>
+                <option value="Ind. Naviraí - MS (7452)">Ind. Naviraí - MS (7452)</option>
+                <option value="Relógio Caiari (6716)">Caiari Distribuidora (6716)</option>
+                <option value="ADM Ji-Paraná (7452)">ADM Ji-Paraná (7452) — (Não envia pendências)</option>
+                <option value="TODOS">Todas as Filiais Consolidadas</option>
+              </select>
+            </div>
+            <div class="form-group" style="width:280px;">
+              <label for="email-dia-ref" style="font-size:12px; font-weight:700;">Data da Pendência (Dia/Mês):</label>
+              <div style="display:flex; gap:6px; align-items:center;">
+                <input type="text" class="form-control" id="email-dia-ref" placeholder="DD/MM" style="font-family:var(--font-mono); width:95px; text-align:center;">
+                <button type="button" class="btn btn-secondary btn-sm" id="btn-email-data-ontem" style="padding:6px 10px; font-size:11px;">Ontem</button>
+                <button type="button" class="btn btn-secondary btn-sm" id="btn-email-data-hoje" style="padding:6px 10px; font-size:11px;">Hoje</button>
+                <button type="button" class="btn btn-secondary btn-sm" id="btn-email-data-ant" style="padding:6px 10px; font-size:11px;">-2d</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-row" style="margin-bottom:12px;">
+            <div class="form-group" style="flex:1;">
+              <label for="email-destinatario-input" style="font-size:12px;">Para (Destinatários Principais):</label>
+              <input type="text" class="form-control" id="email-destinatario-input" placeholder="email@empresa.com" style="font-family:var(--font-mono); font-size:12px;">
+            </div>
+            <div class="form-group" style="flex:1;">
+              <label for="email-copia-input" style="font-size:12px;">Em Cópia (CC):</label>
+              <input type="text" class="form-control" id="email-copia-input" placeholder="dp@empresa.com, drh@empresa.com" style="font-family:var(--font-mono); font-size:12px;">
+            </div>
+          </div>
+
+          <div class="form-group" style="margin-bottom:12px;">
+            <label for="email-assunto-input" style="font-size:12px;">Assunto do E-mail:</label>
+            <input type="text" class="form-control" id="email-assunto-input" style="font-weight:700; font-family:var(--font-mono);">
+          </div>
+
+          <div class="form-group" style="margin-bottom:14px;">
+            <label for="email-corpo-textarea" style="font-size:12px; display:flex; justify-content:space-between;">
+              <span>Corpo do E-mail (Prévia Formatada - Editável):</span>
+              <span style="color:var(--color-cyan); font-size:11px;" id="email-contagem-pendencias">0 pendências encontradas</span>
+            </label>
+            <textarea class="form-control" id="email-corpo-textarea" rows="11" style="font-family:var(--font-mono); font-size:12.5px; line-height:1.6; background:#0F0D15; color:#F3F4F6; resize:vertical;"></textarea>
+          </div>
+
+          <!-- Ações de Envio -->
+          <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px; padding-top:10px; border-top:1px solid rgba(255,255,255,0.08);">
+            <div style="display:flex; gap:8px;">
+              <button type="button" class="btn btn-secondary btn-sm" id="btn-app-salvar-destinatarios" title="Salva os destinatários digitados como padrão para esta filial">
+                <span>⚙️</span> Salvar Destinatários Desta Filial
+              </button>
+              <button type="button" class="btn btn-secondary btn-sm" id="btn-app-copiar-email" title="Copia o texto formatado para a área de transferência">
+                <span>📋</span> Copiar Texto Formatado
+              </button>
+            </div>
+            <div style="display:flex; gap:10px;">
+              <button type="button" class="btn btn-cyan" id="btn-app-abrir-whatsapp" style="background:#10B981; border-color:#059669;">
+                <span>📱</span> WhatsApp Web
+              </button>
+              <button type="button" class="btn btn-primary" id="btn-app-abrir-gmail" style="background:#0284C7; border-color:#0369A1; font-weight:700;">
+                <span>🚀</span> Abrir no Gmail (Chrome)
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================================================================== -->
+      <!-- SUBTAB 3: VÍNCULO DE FUNCIONÁRIOS POR RELÓGIO                       -->
+      <!-- ================================================================== -->
+      <section id="subtab-vinculos" class="imp-subtab-panel" style="display:none;">
+        
+        <!-- Cards de resumo de alocação -->
+        <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap:12px; margin-bottom:16px;">
+          <div class="card-panel" style="padding:12px; border-left:4px solid #10B981;">
+            <div style="font-size:11px; text-transform:uppercase; color:var(--color-text-sub);">Relógio 1: Produção</div>
+            <div style="font-size:22px; font-weight:800; color:#10B981;" id="count-relogio1">0</div>
+            <div style="font-size:10px; color:var(--color-text-muted);">Depósito I (7452)</div>
+          </div>
+          <div class="card-panel" style="padding:12px; border-left:4px solid #38BDF8;">
+            <div style="font-size:11px; text-transform:uppercase; color:var(--color-text-sub);">Relógio 2: ADM Ji-Paraná</div>
+            <div style="font-size:22px; font-weight:800; color:#38BDF8;" id="count-relogio2">0</div>
+            <div style="font-size:10px; color:var(--color-text-muted);">Escritório Matriz (7452)</div>
+          </div>
+          <div class="card-panel" style="padding:12px; border-left:4px solid #A855F7;">
+            <div style="font-size:11px; text-transform:uppercase; color:var(--color-text-sub);">Relógio 3: Ind. Naviraí</div>
+            <div style="font-size:22px; font-weight:800; color:#A855F7;" id="count-relogio3">0</div>
+            <div style="font-size:10px; color:var(--color-text-muted);">Filial MS (7452)</div>
+          </div>
+          <div class="card-panel" style="padding:12px; border-left:4px solid #EC4899;">
+            <div style="font-size:11px; text-transform:uppercase; color:var(--color-text-sub);">Relógio 4: Caiari</div>
+            <div style="font-size:22px; font-weight:800; color:#EC4899;" id="count-relogio4">0</div>
+            <div style="font-size:10px; color:var(--color-text-muted);">Distribuidora (6716)</div>
+          </div>
+          <div class="card-panel" style="padding:12px; border-left:4px solid #F59E0B;">
+            <div style="font-size:11px; text-transform:uppercase; color:var(--color-text-sub);">Folha Manual</div>
+            <div style="font-size:22px; font-weight:800; color:#F59E0B;" id="count-folha-manual">0</div>
+            <div style="font-size:10px; color:var(--color-text-muted);">Motoristas/Vendas Ji-Paraná</div>
+          </div>
+          <div class="card-panel" style="padding:12px; border-left:4px solid var(--color-text-muted);">
+            <div style="font-size:11px; text-transform:uppercase; color:var(--color-text-sub);">Isentos / Autônomos</div>
+            <div style="font-size:22px; font-weight:800; color:var(--color-text-muted);" id="count-isentos">0</div>
+            <div style="font-size:10px; color:var(--color-text-muted);">Sem Registro de Ponto</div>
+          </div>
+        </div>
+
+        <!-- Filtros e Barra de Ação -->
+        <div class="card-panel" style="margin-bottom:14px;">
+          <div class="form-row" style="margin-bottom:0; align-items:center;">
+            <div class="form-group" style="margin-bottom:0; flex:1;">
+              <input type="text" class="form-control" id="busca-vinculo-colab" placeholder="🔍 Buscar por nome, crachá/código ou cargo...">
+            </div>
+            <div class="form-group" style="margin-bottom:0; width:260px;">
+              <select class="form-control" id="filtro-vinculo-categoria">
+                <option value="TODOS">Todos os Relógios / Grupos</option>
+                <option value="relogio1_producao">Relógio 1: Produção Depósito I</option>
+                <option value="relogio2_adm">Relógio 2: ADM Ji-Paraná</option>
+                <option value="relogio3_navirai">Relógio 3: Ind. Naviraí MS</option>
+                <option value="relogio4_caiari">Relógio 4: Caiari (6716)</option>
+                <option value="folha_manual">Folha Manual (Ji-Paraná)</option>
+                <option value="isentos">Isentos / Autônomos</option>
+              </select>
+            </div>
+            <button type="button" class="btn btn-cyan" id="btn-salvar-vinculos-relogios" style="white-space:nowrap;">
+              <span>💾</span> Gravar Vínculos de Relógios
+            </button>
+          </div>
+        </div>
+
+        <!-- Tabela de Alocação de Relógios -->
+        <div class="card-panel" style="padding:0; overflow:hidden;">
+          <div class="table-responsive" style="max-height: 520px; overflow-y:auto;">
+            <table class="data-table" style="width:100%; margin:0;">
+              <thead>
+                <tr>
+                  <th style="width:80px;">Crachá</th>
+                  <th>Colaborador</th>
+                  <th>Empresa / Filial</th>
+                  <th>Cargo / Função</th>
+                  <th style="width:280px;">Relógio REP / Destino</th>
+                </tr>
+              </thead>
+              <tbody id="tb-vinculos-relogios">
+                <!-- Rendered dynamically via JS -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <!-- ========================================================================
        MODAL 1: AÇÃO EM MASSA POR DATA
        ======================================================================== -->
   <div class="modal-overlay" id="modal-mass-override">
@@ -626,6 +944,22 @@
           <div style="text-align:right;">
             <div id="modal-date-display" style="font-family:var(--font-mono); font-weight:700; color:var(--color-blue-bright); font-size:13px;">01/10/2026 (QUI)</div>
             <div id="modal-status-badge" style="font-size:11px;">Status Atual: OK</div>
+          </div>
+        </div>
+
+        <!-- Quadro de Horário do Colaborador no NGPonto -->
+        <div style="background:rgba(0, 229, 255, 0.08); padding:10px 14px; border-radius:var(--radius-sm); border:1px solid rgba(0, 229, 255, 0.25); margin: 12px 0; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px;">
+          <div>
+            <span style="font-size:11px; text-transform:uppercase; color:var(--color-text-sub); display:block; font-weight:700;">🕒 Quadro de Horário Cadastrado (NGPonto):</span>
+            <strong id="modal-quadro-text" style="color:var(--color-cyan); font-size:13px; font-family:var(--font-mono);">08:00 às 12:00 / 13:00 às 17:00</strong>
+          </div>
+          <div style="display:flex; gap:6px;">
+            <button type="button" class="btn btn-secondary btn-sm" id="btn-preencher-previsto-cell" style="padding:4px 10px; font-size:11px;" title="Preenche os 4 campos de batida com o horário exato previsto no quadro para este dia da semana">
+              <span>⚡</span> Preencher Previsto do Quadro
+            </button>
+            <button type="button" class="btn btn-secondary btn-sm" id="btn-puxar-ng-cell" style="padding:4px 10px; font-size:11px;" title="Consulta novamente o banco de dados do NGPonto para este dia">
+              <span>🔄</span> Puxar do NGPonto
+            </button>
           </div>
         </div>
 
@@ -870,26 +1204,47 @@
       </div>
       <div class="modal-body">
         <input type="hidden" id="emp-edit-id">
-        <div class="form-group">
-          <label for="emp-name">Nome Completo:</label>
-          <input type="text" class="form-control" id="emp-name" placeholder="Ex: Carlos Eduardo Silva" required>
-        </div>
+        <input type="hidden" id="emp-cpf">
+        <input type="hidden" id="emp-pis">
+        <input type="hidden" id="emp-cargo">
+        <input type="hidden" id="emp-relogio-vinculo">
+        <input type="hidden" id="emp-quadro-ng">
+        <input type="hidden" id="emp-idregistro-ng">
+        <input type="hidden" id="emp-idowner-ng">
+
         <div class="form-row">
-          <div class="form-group">
-            <label for="emp-badge">Código do Crachá (Numérico):</label>
-            <input type="number" class="form-control" id="emp-badge" placeholder="Ex: 104" required>
-          </div>
-          <div class="form-group">
-            <label for="emp-admission">Data Inicial (Admissão):</label>
-            <input type="date" class="form-control" id="emp-admission" required>
-          </div>
-        </div>
-        <div class="form-row">
-          <div class="form-group">
+          <div class="form-group" style="flex:1;">
             <label for="emp-branch">Filial:</label>
             <select class="form-control" id="emp-branch" required>
               <!-- Filled via JS -->
             </select>
+          </div>
+          <div class="form-group" style="width:170px;">
+            <label for="emp-badge">Crachá / Código:</label>
+            <input type="number" class="form-control" id="emp-badge" placeholder="Ex: 104" required autocomplete="off">
+          </div>
+        </div>
+
+        <!-- Indicador Compacto de Auto-Sincronismo NGPonto -->
+        <div id="emp-ng-sync-info" style="display:none; margin-bottom:14px; background:rgba(0, 229, 255, 0.08); padding:8px 12px; border-radius:var(--radius-sm); border:1px solid rgba(0, 229, 255, 0.25);">
+          <div style="display:flex; justify-content:space-between; align-items:center;">
+            <span style="color:var(--color-cyan); font-weight:700; font-size:12px;">✨ NGPonto Conectado</span>
+            <span id="emp-ng-status-badge" style="color:var(--color-blue-bright); font-size:11px;">Dados e Escala Carregados</span>
+          </div>
+          <div id="emp-ng-details-line" style="color:var(--color-text-main); font-size:11.5px; margin-top:3px; font-family:var(--font-mono);">
+            Cargo: Operador • CPF: 000.000.000-00 • Horário: 07:00-11:00 / 13:00-17:00
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="emp-name">Nome Completo:</label>
+          <input type="text" class="form-control" id="emp-name" placeholder="Ex: Carlos Eduardo Silva" required>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="emp-admission">Data Inicial (Admissão):</label>
+            <input type="date" class="form-control" id="emp-admission" required>
           </div>
           <div class="form-group">
             <label for="emp-dept">Departamento:</label>
@@ -957,9 +1312,14 @@
           </small>
         </div>
       </div>
-      <div class="modal-footer">
+      <div class="modal-footer" style="display:flex; justify-content:space-between; align-items:center;">
         <button class="btn btn-secondary" data-close="modal-employee">Cancelar</button>
-        <button class="btn btn-primary" id="btn-save-employee">Salvar Colaborador</button>
+        <div style="display:flex; gap:8px;">
+          <button type="button" class="btn btn-cyan" id="btn-save-and-sync-employee" title="Salva o cadastro e imediatamente sincroniza o espelho de ponto deste funcionário">
+            <span>⚡</span> Salvar e Já Puxar Ponto
+          </button>
+          <button class="btn btn-primary" id="btn-save-employee">Salvar Colaborador</button>
+        </div>
       </div>
     </div>
   </div>

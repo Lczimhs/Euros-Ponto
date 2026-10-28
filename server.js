@@ -25,6 +25,26 @@ const MIME_TYPES = {
 };
 
 const server = http.createServer((req, res) => {
+  // Proxy de requisições /api/ diretamente para o motor de automação NGPonto (porta 3050)
+  if (req.url.startsWith('/api/')) {
+    const proxyReq = http.request({
+      host: '127.0.0.1',
+      port: 3050,
+      path: req.url,
+      method: req.method,
+      headers: req.headers
+    }, (proxyRes) => {
+      res.writeHead(proxyRes.statusCode, proxyRes.headers);
+      proxyRes.pipe(res);
+    });
+    proxyReq.on('error', (err) => {
+      res.writeHead(502, { 'Content-Type': 'application/json; charset=utf-8' });
+      res.end(JSON.stringify({ ok: false, erro: 'Motor de automação (porta 3050) indisponível: ' + err.message }));
+    });
+    req.pipe(proxyReq);
+    return;
+  }
+
   let reqUrl = req.url.split('?')[0];
   if (reqUrl === '/' || reqUrl === '') {
     reqUrl = '/index.html';

@@ -1,0 +1,861 @@
+{
+  "relogio1_producao": [
+    {
+      "cod": 218,
+      "nome": "MARCOS BATISTA GONCALVES",
+      "cargo": "AUXILIAR DE PRODUÇÃO",
+      "idowner": 7452,
+      "idregistro": 1764
+    },
+    {
+      "cod": 234,
+      "nome": "GILMAR SABINO DA SILVA",
+      "cargo": "OPERADOR DE EMPILHADEIRA II",
+      "idowner": 7452,
+      "idregistro": 1792
+    },
+    {
+      "cod": 491,
+      "nome": "GILMAR OTERIO DA SILVA DACOL",
+      "cargo": "CONFERENTE DE CARGA E DESCARGA II",
+      "idowner": 7452,
+      "idregistro": 3188
+    },
+    {
+      "cod": 545,
+      "nome": "ANTONIO BRITO SANTOS",
+      "cargo": "Operador de Expedição",
+      "idowner": 7452,
+      "idregistro": 3264
+    },
+    {
+      "cod": 668,
+      "nome": "JURANDI CAETANO SOARES",
+      "cargo": "OPERADOR DE MAQUINAS I",
+      "idowner": 7452,
+      "idregistro": 4461
+    },
+    {
+      "cod": 701,
+      "nome": "ANTONIO GOMES COELHO",
+      "cargo": "OPERADOR DE MAQUINAS II",
+      "idowner": 7452,
+      "idregistro": 4515
+    },
+    {
+      "cod": 736,
+      "nome": "EDINEIA CELIA DOS SANTOS",
+      "cargo": "ZELADORA",
+      "idowner": 7452,
+      "idregistro": 5564
+    },
+    {
+      "cod": 847,
+      "nome": "HEBER LUCAS LEONEL FONESI",
+      "cargo": "OPERADOR DE MAQUINAS II",
+      "idowner": 7452,
+      "idregistro": 5702
+    },
+    {
+      "cod": 863,
+      "nome": "KELVY ALVES COELHO",
+      "cargo": "OPERADOR DE MAQUINAS II",
+      "idowner": 7452,
+      "idregistro": 5719
+    },
+    {
+      "cod": 955,
+      "nome": "JOSE LUIZ DA SILVA",
+      "cargo": "AUXILIAR DE PRODUÇÃO",
+      "idowner": 7452,
+      "idregistro": 5861
+    },
+    {
+      "cod": 961,
+      "nome": "LEONARDO VIEIRA DOS SANTOS",
+      "cargo": "OPERADOR DE MAQUINAS I",
+      "idowner": 7452,
+      "idregistro": 5870
+    },
+    {
+      "cod": 970,
+      "nome": "ANTONIO ALVES DE SOUZA",
+      "cargo": "AUXILIAR DE PRODUÇÃO",
+      "idowner": 7452,
+      "idregistro": 5880
+    },
+    {
+      "cod": 975,
+      "nome": "EDUARDO DE OLIVEIRA SILVA",
+      "cargo": "CONFERENTE DE CARGA E DESCARGA I",
+      "idowner": 7452,
+      "idregistro": 5886
+    },
+    {
+      "cod": 997,
+      "nome": "PATRICIA BARROSO PINHEIRO",
+      "cargo": "AUXILIAR DE PRODUÇÃO",
+      "idowner": 7452,
+      "idregistro": 5917
+    },
+    {
+      "cod": 999,
+      "nome": "JOSEFA JANAINA RODRIGUES DE SOUZA",
+      "cargo": "OPERADOR DE MAQUINAS I",
+      "idowner": 7452,
+      "idregistro": 5919
+    },
+    {
+      "cod": 1008,
+      "nome": "BRUNO PHELIPE VICENTE MACHADO",
+      "cargo": "Mecânico de Manutenção de Máquinas Industriais II",
+      "idowner": 7452,
+      "idregistro": 5933
+    },
+    {
+      "cod": 1013,
+      "nome": "RIQUELME ALMEIDA PINHEIRO",
+      "cargo": "AUXILIAR DE PRODUÇÃO",
+      "idowner": 7452,
+      "idregistro": 5941
+    },
+    {
+      "cod": 1018,
+      "nome": "LEONARDO SILVA KIKO",
+      "cargo": "AUXILIAR DE PRODUÇÃO",
+      "idowner": 7452,
+      "idregistro": 5948
+    },
+    {
+      "cod": 1026,
+      "nome": "IAN VINICIUS NERES LEITE",
+      "cargo": "ASSISTENTE DE ADMINISTRAÇÃO APRENDIZ",
+      "idowner": 7452,
+      "idregistro": 5960
+    },
+    {
+      "cod": 1033,
+      "nome": "PEDRO HENRIQUE DAMASCENO MELO",
+      "cargo": "AUXILIAR DE PRODUÇÃO",
+      "idowner": 7452,
+      "idregistro": 5968
+    },
+    {
+      "cod": 1034,
+      "nome": "WESLEY PATRICK FERNANDES DE OLIVEIRA",
+      "cargo": "AUXILIAR DE PRODUÇÃO",
+      "idowner": 7452,
+      "idregistro": 5969
+    },
+    {
+      "cod": 1036,
+      "nome": "JOAO VITOR MAGALHAES LEAO",
+      "cargo": "AUXILIAR DE PRODUÇÃO",
+      "idowner": 7452,
+      "idregistro": 5971
+    },
+    {
+      "cod": 1037,
+      "nome": "WESLEY RIBEIRO SANTIAGO",
+      "cargo": "SOLDADOR",
+      "idowner": 7452,
+      "idregistro": 5973
+    },
+    {
+      "cod": 1038,
+      "nome": "EDSON FERREIRA MOTA JUNIOR",
+      "cargo": "AUXILIAR DE PRODUÇÃO",
+      "idowner": 7452,
+      "idregistro": 5974
+    }
+  ],
+  "relogio2_adm": [
+    {
+      "cod": 1,
+      "nome": "DICEFANI MACEDO FERRARINI",
+      "cargo": "AUXILIAR ADMINISTRATIVO",
+      "idowner": 7452,
+      "idregistro": 1361
+    },
+    {
+      "cod": 354,
+      "nome": "JOSE MARIA ALVES DA CRUZ",
+      "cargo": "SOLDADOR",
+      "idowner": 7452,
+      "idregistro": 1981
+    },
+    {
+      "cod": 361,
+      "nome": "FERNANDA CRISTINA PAIXAO DE ALMEIDA",
+      "cargo": "AUXILIAR FINANCEIRO III",
+      "idowner": 7452,
+      "idregistro": 1989
+    },
+    {
+      "cod": 463,
+      "nome": "FABIO FARIAS",
+      "cargo": "GERENTE DE PRODUÇÃO",
+      "idowner": 7452,
+      "idregistro": 3143
+    },
+    {
+      "cod": 663,
+      "nome": "DEVAIR DUARTE SANCHES",
+      "cargo": "Supervisores em Manutenção",
+      "idowner": 7452,
+      "idregistro": 4454
+    },
+    {
+      "cod": 778,
+      "nome": "ANGELICA DA SILVA GAMA",
+      "cargo": "OPERADOR DE MAQUINAS II",
+      "idowner": 7452,
+      "idregistro": 5615
+    },
+    {
+      "cod": 858,
+      "nome": "LUCIANA GUIMARÃES DOS SANTOS",
+      "cargo": "GERENTE DE PRODUÇÃO",
+      "idowner": 7452,
+      "idregistro": 5714
+    },
+    {
+      "cod": 900,
+      "nome": "JANAINA CARDOSO DA SILVA",
+      "cargo": "AUXILIAR ADMINISTRATIVO I",
+      "idowner": 7452,
+      "idregistro": 5763
+    },
+    {
+      "cod": 908,
+      "nome": "ADRIANA DE SOUZA",
+      "cargo": "ASSISTENTE CONTABIL",
+      "idowner": 7452,
+      "idregistro": 5779
+    },
+    {
+      "cod": 914,
+      "nome": "DANILO NATA DA SILVA SANTOS",
+      "cargo": "AUXILIAR DE PRODUÇÃO",
+      "idowner": 7452,
+      "idregistro": 5788
+    },
+    {
+      "cod": 917,
+      "nome": "PATRICIA MARTINS BENEDITO",
+      "cargo": "AUXILIAR FINANCEIRO I",
+      "idowner": 7452,
+      "idregistro": 5793
+    },
+    {
+      "cod": 942,
+      "nome": "USIEL OLIVEIRA",
+      "cargo": "ASSISTENTE DE DEPARTAMENTO PESSOAL",
+      "idowner": 7452,
+      "idregistro": 5826
+    },
+    {
+      "cod": 954,
+      "nome": "WALLYSON PEREIRA DE MELO",
+      "cargo": "SUPERVISOR PRODUÇÃO",
+      "idowner": 7452,
+      "idregistro": 5858
+    },
+    {
+      "cod": 963,
+      "nome": "KELIANE GONCALVES DE SOUZA",
+      "cargo": "AXILIAR CONTABIL",
+      "idowner": 7452,
+      "idregistro": 5871
+    },
+    {
+      "cod": 989,
+      "nome": "LUCAS DOS SANTOS ABREU",
+      "cargo": "AUXILIAR ADMINISTRATIVO II",
+      "idowner": 7452,
+      "idregistro": 5907
+    },
+    {
+      "cod": 1000,
+      "nome": "LUCAS VILAS BOAS BRITO",
+      "cargo": "AUXILIAR DE DEPARTAMENTO PESSOAL",
+      "idowner": 7452,
+      "idregistro": 5921
+    },
+    {
+      "cod": 1039,
+      "nome": "DANIELA DINIZ DA COSTA",
+      "cargo": "Auxiliar de Faturamento",
+      "idowner": 7452,
+      "idregistro": 5975
+    },
+    {
+      "cod": 1040,
+      "nome": "FRANCISMAR SOUZA DA SILVA",
+      "cargo": "SUPERVISOR PRODUÇÃO",
+      "idowner": 7452,
+      "idregistro": 5976
+    },
+    {
+      "cod": 1173,
+      "nome": "LUANA CAMILO DE MORAES",
+      "cargo": "AUXILIAR DE CONTROLE INTERNO",
+      "idowner": 7452,
+      "idregistro": 5816
+    },
+    {
+      "cod": 1405,
+      "nome": "LUCAS TUPAN DA SILVA",
+      "cargo": "ASSISTENTE CONTABIL",
+      "idowner": 7452,
+      "idregistro": 5818
+    }
+  ],
+  "relogio3_navirai": [
+    {
+      "cod": 127,
+      "nome": "LEONICE DA SILVA MOURA DE SOUZA",
+      "cargo": "OPERADOR DE MAQUINAS II",
+      "idowner": 7452,
+      "idregistro": 1619
+    },
+    {
+      "cod": 288,
+      "nome": "SERGIO RIBEIRO",
+      "cargo": "MOTORISTA II",
+      "idowner": 7452,
+      "idregistro": 1884
+    },
+    {
+      "cod": 456,
+      "nome": "PAULO SERGIO FERREIRA DA SILVA",
+      "cargo": "AUXILIAR DE PRODUÇÃO",
+      "idowner": 7452,
+      "idregistro": 3135
+    },
+    {
+      "cod": 561,
+      "nome": "LUCAS DE PAULA CARVALHO",
+      "cargo": "OPERADOR DE EMPILHADEIRA I",
+      "idowner": 7452,
+      "idregistro": 3291
+    },
+    {
+      "cod": 613,
+      "nome": "MARCO ANTONIO OLIVEIRA DE SOUZA",
+      "cargo": "OPERADOR DE MAQUINAS III",
+      "idowner": 7452,
+      "idregistro": 4368
+    },
+    {
+      "cod": 780,
+      "nome": "LEONARDO MARINHO CARIS",
+      "cargo": "OPERADOR DE MAQUINAS I",
+      "idowner": 7452,
+      "idregistro": 5617
+    },
+    {
+      "cod": 810,
+      "nome": "ROSANA SANABRIA FERREIRA DA SILVA",
+      "cargo": "ZELADORA",
+      "idowner": 7452,
+      "idregistro": 5657
+    },
+    {
+      "cod": 867,
+      "nome": "APARICIO AMARILLA",
+      "cargo": "MOTORISTA I",
+      "idowner": 7452,
+      "idregistro": 5723
+    },
+    {
+      "cod": 946,
+      "nome": "EVELYN GABRIELE HARADA MANDUCO PRIORI",
+      "cargo": "AUXILIAR FINANCEIRO",
+      "idowner": 7452,
+      "idregistro": 5848
+    },
+    {
+      "cod": 952,
+      "nome": "ROBSON DA SILVA LUIZ",
+      "cargo": "VENDEDOR VAREJISTA",
+      "idowner": 7452,
+      "idregistro": 5856
+    },
+    {
+      "cod": 964,
+      "nome": "WELLINGTON MARCELINO DOS SANTOS",
+      "cargo": "SUPERVISOR PRODUÇÃO",
+      "idowner": 7452,
+      "idregistro": 5874
+    },
+    {
+      "cod": 977,
+      "nome": "PAULO HENRIQUE CARVALHO BENTO",
+      "cargo": "AUXILIAR DE PRODUÇÃO",
+      "idowner": 7452,
+      "idregistro": 5890
+    },
+    {
+      "cod": 993,
+      "nome": "PAULO LIMA DA SILVA",
+      "cargo": "AUXILIAR DE PRODUÇÃO",
+      "idowner": 7452,
+      "idregistro": 5913
+    },
+    {
+      "cod": 994,
+      "nome": "TAMIRES TONINI DE MORAES",
+      "cargo": "AUXILIAR FINANCEIRO",
+      "idowner": 7452,
+      "idregistro": 5914
+    },
+    {
+      "cod": 1009,
+      "nome": "MARTA APARECIDA DE SOUZA",
+      "cargo": "SOLDADOR",
+      "idowner": 7452,
+      "idregistro": 5934
+    },
+    {
+      "cod": 1016,
+      "nome": "GUILHERME ANTONIO DOS SANTOS",
+      "cargo": "Técnico em Planejamento e controle da produção - Apredíz",
+      "idowner": 7452,
+      "idregistro": 5946
+    }
+  ],
+  "relogio4_caiari": [
+    {
+      "cod": 1,
+      "nome": "SILVANA MARIA MOREIRA FERRARINI",
+      "cargo": "GERENTE ADM. E FINANCEIRO",
+      "idowner": 6716,
+      "idregistro": 1112
+    },
+    {
+      "cod": 2,
+      "nome": "MARCELO ROQUE DE OLIVEIRA",
+      "cargo": "CONTADOR",
+      "idowner": 6716,
+      "idregistro": 1113
+    },
+    {
+      "cod": 29,
+      "nome": "WALDENIR ANTONIO TRAMONTINA GRAVENA",
+      "cargo": "MOTORISTA DE FURGAO OU VEICULO SIMILAR",
+      "idowner": 6716,
+      "idregistro": 1138
+    },
+    {
+      "cod": 57,
+      "nome": "JOSE IREMAR DOS SANTOS ALVES",
+      "cargo": "CONFERENTE DE CARGA E DESCARGA",
+      "idowner": 6716,
+      "idregistro": 1166
+    },
+    {
+      "cod": 184,
+      "nome": "ROBERTO MARQUES DE SOUZA",
+      "cargo": "ENGENHEIRO AMBIENTAL",
+      "idowner": 6716,
+      "idregistro": 1966
+    },
+    {
+      "cod": 234,
+      "nome": "BRUNO WINICIUS DE SOUZA",
+      "cargo": "VENDEDOR NO COMERCIO VAREJISTA",
+      "idowner": 6716,
+      "idregistro": 4433
+    },
+    {
+      "cod": 241,
+      "nome": "JHELKISSAN WOLKYN BARBOSA RUEDA",
+      "cargo": "AUXILIAR ADMINISTRATIVO",
+      "idowner": 6716,
+      "idregistro": 4440
+    },
+    {
+      "cod": 249,
+      "nome": "RAIMUNDO MONTEIRO DE ARAUJO MELO",
+      "cargo": "VENDEDOR NO COMERCIO VAREJISTA",
+      "idowner": 6716,
+      "idregistro": 4448
+    },
+    {
+      "cod": 250,
+      "nome": "RONALDO DE ASSIS MELO",
+      "cargo": "ENCARREGADO DE DEPOSITO",
+      "idowner": 6716,
+      "idregistro": 4449
+    },
+    {
+      "cod": 255,
+      "nome": "NILZA MARTINS DOS SANTOS",
+      "cargo": "ZELADORA",
+      "idowner": 6716,
+      "idregistro": 4459
+    },
+    {
+      "cod": 256,
+      "nome": "DAVID JOSE NOGUEIRA DE SOUZA",
+      "cargo": "VENDEDOR NO COMERCIO VAREJISTA",
+      "idowner": 6716,
+      "idregistro": 4460
+    },
+    {
+      "cod": 294,
+      "nome": "MALALIEL RODRIGUES",
+      "cargo": "MOTORISTA DE FURGAO OU VEICULO SIMILAR",
+      "idowner": 6716,
+      "idregistro": 5637
+    },
+    {
+      "cod": 295,
+      "nome": "GABRIEL FELIPE DOS SANTOS",
+      "cargo": "VENDEDOR NO COMERCIO VAREJISTA",
+      "idowner": 6716,
+      "idregistro": 5638
+    },
+    {
+      "cod": 313,
+      "nome": "JHENIFER LOPES FERREIRA",
+      "cargo": "VENDEDOR NO COMERCIO VAREJISTA",
+      "idowner": 6716,
+      "idregistro": 5746
+    },
+    {
+      "cod": 335,
+      "nome": "ADEMILSON MARCELO VILETE",
+      "cargo": "CONFERENTE DE CARGA E DESCARGA",
+      "idowner": 6716,
+      "idregistro": 5815
+    },
+    {
+      "cod": 336,
+      "nome": "JHONATAN JULIO DA SILVA REIS",
+      "cargo": "Aux. de Deposito",
+      "idowner": 6716,
+      "idregistro": 5830
+    },
+    {
+      "cod": 343,
+      "nome": "GUILHERME HENRIQUE MELO COUTINHO",
+      "cargo": "VENDEDOR NO COMERCIO VAREJISTA",
+      "idowner": 6716,
+      "idregistro": 5872
+    },
+    {
+      "cod": 344,
+      "nome": "WEVERTON SEBASTIAO FIGUEIREDO SOUZA",
+      "cargo": "MOTORISTA DE FURGAO OU VEICULO SIMILAR",
+      "idowner": 6716,
+      "idregistro": 5884
+    },
+    {
+      "cod": 350,
+      "nome": "GABRIEL BARBOSA LOPES",
+      "cargo": "Aux. de Deposito",
+      "idowner": 6716,
+      "idregistro": 5905
+    },
+    {
+      "cod": 356,
+      "nome": "FABIANA RODRIGUES DE JESUS",
+      "cargo": "AUXILIAR FINANCEIRO",
+      "idowner": 6716,
+      "idregistro": 5932
+    },
+    {
+      "cod": 358,
+      "nome": "MELQUISEDEQUE ABRANJO DE OLIVEIRA",
+      "cargo": "AUXILIAR DE ESTOQUE",
+      "idowner": 6716,
+      "idregistro": 5938
+    },
+    {
+      "cod": 360,
+      "nome": "ISABELA VIDAL MARTINS",
+      "cargo": "AUXILIAR FINANCEIRO",
+      "idowner": 6716,
+      "idregistro": 5944
+    },
+    {
+      "cod": 361,
+      "nome": "MAYCK CANDIDO DE JESUS",
+      "cargo": "AUXILIAR DE ESTOQUE",
+      "idowner": 6716,
+      "idregistro": 5949
+    },
+    {
+      "cod": 363,
+      "nome": "EMILLYN KAROLYNY GARCIA DE OLIVEIRA",
+      "cargo": "ASSISTENTE ADMINISTRATIVO - APRENDIZ",
+      "idowner": 6716,
+      "idregistro": 5952
+    },
+    {
+      "cod": 364,
+      "nome": "NARA LORENA PEREIRA RODRIGUES DA SILVA",
+      "cargo": "AUXILIAR FINANCEIRO",
+      "idowner": 6716,
+      "idregistro": 5955
+    },
+    {
+      "cod": 365,
+      "nome": "LEONARDO DE SOUZA SANTOS",
+      "cargo": "Aux. de Deposito",
+      "idowner": 6716,
+      "idregistro": 5963
+    },
+    {
+      "cod": 366,
+      "nome": "ALINE DA SILVA",
+      "cargo": "AUXILIAR FINANCEIRO",
+      "idowner": 6716,
+      "idregistro": 5972
+    }
+  ],
+  "folha_manual": [
+    {
+      "cod": 325,
+      "nome": "JORGE LUIZ DE ANDRADE",
+      "cargo": "PORTEIRO",
+      "idowner": 7452,
+      "idregistro": 1942
+    },
+    {
+      "cod": 336,
+      "nome": "CLAUDINEI RIBEIRO FERNANDES",
+      "cargo": "VENDEDOR ATACADISTA",
+      "idowner": 7452,
+      "idregistro": 1959
+    },
+    {
+      "cod": 431,
+      "nome": "RONALDO RIBEIRO DE ARAUJO",
+      "cargo": "VIGIA",
+      "idowner": 7452,
+      "idregistro": 3098
+    },
+    {
+      "cod": 540,
+      "nome": "LEONILDO TABORDA BARBOSA",
+      "cargo": "MOTORISTA II",
+      "idowner": 7452,
+      "idregistro": 3256
+    },
+    {
+      "cod": 696,
+      "nome": "ANTONIO DA SILVA",
+      "cargo": "VIGIA",
+      "idowner": 7452,
+      "idregistro": 4502
+    },
+    {
+      "cod": 702,
+      "nome": "BRUNO RIBEIRO DA SILVA",
+      "cargo": "VENDEDOR ATACADISTA",
+      "idowner": 7452,
+      "idregistro": 4516
+    },
+    {
+      "cod": 781,
+      "nome": "RAFAEL DE JESUS CARDOSO",
+      "cargo": "VENDEDOR",
+      "idowner": 7452,
+      "idregistro": 5618
+    },
+    {
+      "cod": 898,
+      "nome": "JOSÉ PAULO DO NASCIMENTO",
+      "cargo": "MOTORISTA II",
+      "idowner": 7452,
+      "idregistro": 5761
+    },
+    {
+      "cod": 937,
+      "nome": "HUGO HENRIQUE CIONI",
+      "cargo": "VENDEDOR",
+      "idowner": 7452,
+      "idregistro": 5821
+    },
+    {
+      "cod": 965,
+      "nome": "LEANDRO MARTINS DO NASCIMENTO",
+      "cargo": "PORTEIRO",
+      "idowner": 7452,
+      "idregistro": 5875
+    },
+    {
+      "cod": 974,
+      "nome": "EUCLIDES NUNES DOS SANTOS",
+      "cargo": "MOTORISTA I",
+      "idowner": 7452,
+      "idregistro": 5885
+    },
+    {
+      "cod": 1020,
+      "nome": "CARLOS HENRIQUE ANGELICO",
+      "cargo": "VENDEDOR",
+      "idowner": 7452,
+      "idregistro": 5953
+    },
+    {
+      "cod": 1027,
+      "nome": "VANDEILSON DIAS DE MATOS",
+      "cargo": "MOTORISTA I",
+      "idowner": 7452,
+      "idregistro": 5961
+    },
+    {
+      "cod": 1031,
+      "nome": "IRACI EVANGELISTA DOS SANTOS",
+      "cargo": "ZELADORA",
+      "idowner": 7452,
+      "idregistro": 5966
+    },
+    {
+      "cod": 1032,
+      "nome": "RAUL FERNANDO MENEGUETTI JACOB",
+      "cargo": "MOTORISTA I",
+      "idowner": 7452,
+      "idregistro": 5967
+    }
+  ],
+  "isentos": [
+    {
+      "cod": 103,
+      "nome": "FELIPE AUGUSTO GALVÃO DO NASCIMENTO",
+      "cargo": "ENGENHEIRO AMBIENTAL",
+      "idowner": 7452,
+      "idregistro": 1579
+    },
+    {
+      "cod": 131,
+      "nome": "LUANA DE OLIVEIRA E SILVA",
+      "cargo": "ENGENHEIRO AMBIENTAL",
+      "idowner": 7452,
+      "idregistro": 1624
+    },
+    {
+      "cod": 231,
+      "nome": "CARINA STRE HOLANDA",
+      "cargo": "ENGENHEIRO AMBIENTAL",
+      "idowner": 7452,
+      "idregistro": 1787
+    },
+    {
+      "cod": 233,
+      "nome": "DIEGO GARCIA GALVAO COSTA",
+      "cargo": "ARQUITETO",
+      "idowner": 7452,
+      "idregistro": 1790
+    },
+    {
+      "cod": 341,
+      "nome": "ARTUR GUILHERME RODRIGUES TROMBETI",
+      "cargo": "ADVOGADO",
+      "idowner": 7452,
+      "idregistro": 1964
+    },
+    {
+      "cod": 342,
+      "nome": "ROBERTO MARQUES DE SOUZA",
+      "cargo": "ENGENHEIRO AMBIENTAL",
+      "idowner": 7452,
+      "idregistro": 1965
+    },
+    {
+      "cod": 425,
+      "nome": "VICENTE FELIZARI FILHO",
+      "cargo": "ADVOGADO",
+      "idowner": 7452,
+      "idregistro": 2088
+    },
+    {
+      "cod": 568,
+      "nome": "FÁBIO PINHEIRO BRAGA",
+      "cargo": "ARQUITETO",
+      "idowner": 7452,
+      "idregistro": 3305
+    },
+    {
+      "cod": 588,
+      "nome": "FRANCISCO AIRAO DE ARAUJO",
+      "cargo": "ENGENHEIRO AMBIENTAL",
+      "idowner": 7452,
+      "idregistro": 3333
+    },
+    {
+      "cod": 611,
+      "nome": "HELIO APARECIDO FERREIRA",
+      "cargo": "Mecânicos de manutenção de veículos automotores",
+      "idowner": 7452,
+      "idregistro": 4365
+    },
+    {
+      "cod": 614,
+      "nome": "RENAN PIRES MACIEL",
+      "cargo": "OPERADOR DE MAQUINAS PESADAS",
+      "idowner": 7452,
+      "idregistro": 4369
+    },
+    {
+      "cod": 625,
+      "nome": "Caroline Horana Luiz Pinheiro",
+      "cargo": "ENGENHEIRO AMBIENTAL",
+      "idowner": 7452,
+      "idregistro": 4385
+    },
+    {
+      "cod": 626,
+      "nome": "CLEOMAR FERREIRA ALVES",
+      "cargo": "JARDINEIRO",
+      "idowner": 7452,
+      "idregistro": 4386
+    },
+    {
+      "cod": 628,
+      "nome": "ERIKSOM DE JESUS ALENCASTRO",
+      "cargo": "Eletricista",
+      "idowner": 7452,
+      "idregistro": 4389
+    },
+    {
+      "cod": 641,
+      "nome": "FRANCISCO SILVA",
+      "cargo": "PEDREIRO",
+      "idowner": 7452,
+      "idregistro": 4407
+    },
+    {
+      "cod": 660,
+      "nome": "Adalmir Gomes de Almeida",
+      "cargo": "PEDREIRO",
+      "idowner": 7452,
+      "idregistro": 4429
+    },
+    {
+      "cod": 673,
+      "nome": "RICARDO ALMEIDA DE ANDRADE",
+      "cargo": "ADVOGADO",
+      "idowner": 7452,
+      "idregistro": 4469
+    },
+    {
+      "cod": 678,
+      "nome": "VANESSA OLIVEIRA DE FARIA RODRIGUES",
+      "cargo": "Personal treanning",
+      "idowner": 7452,
+      "idregistro": 4477
+    },
+    {
+      "cod": 903,
+      "nome": "RENAN SANTANA DO NASCIMENTO",
+      "cargo": "PEDREIRO",
+      "idowner": 7452,
+      "idregistro": 5769
+    }
+  ]
+}
