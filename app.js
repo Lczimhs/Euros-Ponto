@@ -39,6 +39,13 @@ const API_BASE = (typeof window !== 'undefined' && (window.location.port === '30
   ? ''
   : 'http://localhost:3050';
 
+function formatMotorErrorMessage(e, defaultPrefix = 'Erro ao comunicar com o motor') {
+  if (typeof window !== 'undefined' && window.location.protocol === 'https:') {
+    return `${defaultPrefix}: O navegador bloqueou o acesso local porque esta página está na Nuvem HTTPS (Vercel). Para integrar com os relógios físicos e NGPonto local, abra o painel pelo atalho 'Euros Ponto' na Área de Trabalho ou acesse http://localhost:3000`;
+  }
+  return `${defaultPrefix}: ${e?.message || e}`;
+}
+
 
 // ==========================================================================
 // CONFIGURAÇÃO DO SUPABASE CLOUD
@@ -4579,7 +4586,7 @@ async function salvarAcertoNoNGPonto() {
     }
   } catch (err) {
     console.error('Erro ao conectar ao motor NGPonto:', err);
-    showToast('Falha na comunicação com o Motor NGPonto: ' + err.message, 'error');
+    showToast(formatMotorErrorMessage(err, 'Falha na comunicação com o Motor NGPonto'), 'error');
   } finally {
     // Mantém o estado desabilitado caso a trava continue ativa
     const lockActive = true;
@@ -7518,7 +7525,7 @@ async function coletarEProcessarRelogioApp(etapa) {
       showToast('Coleta concluída, mas erro ao processar: ' + (resProc?.erro || 'Erro no NGPonto'), 'warning');
     }
   } catch (e) {
-    showToast('Erro na operação do relógio: ' + e.message, 'error');
+    showToast(formatMotorErrorMessage(e, 'Erro na operação do relógio'), 'error');
   }
 }
 
@@ -7650,7 +7657,7 @@ function initImportacaoEvents() {
         showToast('Não foi possível carregar do NGPonto: ' + (res.erro || 'Falha na resposta'), 'warning');
       }
     } catch (e) {
-      showToast('Erro ao conectar ao motor NGPonto: ' + e.message, 'error');
+      showToast(formatMotorErrorMessage(e, 'Erro ao conectar ao motor NGPonto'), 'error');
     }
   });
 
@@ -7805,7 +7812,7 @@ async function coletarRelogioApp(etapa = 0) {
       showToast('Erro na coleta: ' + res.erro, 'error');
     }
   } catch (e) {
-    showToast('Erro ao comunicar com o motor de coleta: ' + e.message, 'error');
+    showToast(formatMotorErrorMessage(e, 'Erro ao comunicar com o motor de coleta'), 'error');
   }
 }
 
@@ -7828,7 +7835,7 @@ async function processarDuploApp(comToast = true) {
       showToast('Erro no processamento: ' + res.erro, 'error');
     }
   } catch (e) {
-    showToast('Erro ao processar marcações: ' + e.message, 'error');
+    showToast(formatMotorErrorMessage(e, 'Erro ao processar marcações'), 'error');
   }
 }
 
@@ -7945,7 +7952,7 @@ async function sincronizarBatidasNGParaMatriz(mes, ano) {
       showToast('Erro ao sincronizar com NGPonto: ' + res.erro, 'error');
     }
   } catch (e) {
-    showToast('Erro de comunicação com o motor de sincronismo: ' + e.message, 'error');
+    showToast(formatMotorErrorMessage(e, 'Erro de comunicação com o motor de sincronismo'), 'error');
   }
 }
 

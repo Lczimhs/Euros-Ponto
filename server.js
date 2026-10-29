@@ -73,6 +73,19 @@ const server = http.createServer((req, res) => {
   });
 });
 
+server.on('error', (err) => {
+  if (err.code === 'EADDRINUSE') {
+    const url = `http://localhost:${PORT}`;
+    console.log(`Porta ${PORT} já está em uso pelo Motor Integrado. Abrindo navegador...`);
+    if (process.platform === 'win32') {
+      exec(`start ${url}`);
+    }
+    setTimeout(() => process.exit(0), 1000);
+  } else {
+    console.error('Erro no servidor web local:', err);
+  }
+});
+
 server.listen(PORT, () => {
   const url = `http://localhost:${PORT}`;
   console.log('================================================================');
