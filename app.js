@@ -40,15 +40,12 @@ const API_BASE = (typeof window !== 'undefined' && (window.location.port === '30
   : 'http://localhost:3050';
 
 function formatMotorErrorMessage(e, defaultPrefix = 'Erro ao comunicar com o motor') {
-  if (typeof window !== 'undefined' && window.location.protocol === 'https:') {
-    return `${defaultPrefix}: O navegador bloqueou o acesso local porque esta página está na Nuvem HTTPS (Vercel). Para integrar com os relógios físicos e NGPonto local, abra o painel pelo atalho 'Euros Ponto' na Área de Trabalho ou acesse http://localhost:3000`;
-  }
   return `${defaultPrefix}: ${e?.message || e}`;
 }
 
 
 // ==========================================================================
-// CONFIGURAÇÃO DO SUPABASE CLOUD
+// CONFIGURAÇÃO DO SUPABASE CLOUD + PONTE REMOTA PARA VERCEL -> MOTOR LOCAL
 // ==========================================================================
 const SUPABASE_URL = 'https://isuynftkmcdaymczhckx.supabase.co';
 const SUPABASE_KEY = 'sb_publishable_QJeX4fW2543ePivoeZzmzQ__u3AFLhY';
@@ -61,6 +58,94 @@ try {
   }
 } catch (e) {
   console.warn('Erro ao inicializar Supabase client:', e);
+}
+
+async function fetchViaSupabaseBridge(urlStr, init = {}, nativeFetchFn = fetch) {
+  let pathAndQuery = urlStr;
+  try {
+    if (urlStr.startsWith('http://') || urlStr.startsWith('https://')) {
+      const u = new URL(urlStr);
+      pathAndQuery = u.pathname + u.search;
+    }
+  } catch (e) {}
+
+  const reqId = 'rpc_' + Date.now() + '_' + Math.random().toString(36).slice(2, 8);
+  const method = (init.method || 'GET').toUpperCase();
+  let bodyData = null;
+  if (init.body) {
+    try { bodyData = JSON.parse(init.body); } catch (e) { bodyData = init.body; }
+  }
+
+  const sbHeaders = {
+    'apikey': SUPABASE_KEY,
+    'Authorization': 'Bearer ' + SUPABASE_KEY,
+    'Content-Type': 'application/json'
+  };
+
+  const postRes = await nativeFetchFn(`${SUPABASE_URL}/rest/v1/config_app`, {
+    method: 'POST',
+    headers: { ...sbHeaders, 'Prefer': 'resolution=merge-duplicates' },
+    body: JSON.stringify({
+      id: reqId,
+      data: {
+        type: 'motor_rpc_request',
+        status: 'pending',
+        method,
+        url: pathAndQuery,
+        body: bodyData,
+        createdAt: Date.now()
+      },
+      updated_at: new Date().toISOString()
+    })
+  });
+
+  if (!postRes.ok) {
+    throw new Error('Falha ao enviar comando pela Ponte Cloud (' + postRes.status + ')');
+  }
+
+  const timeoutMs = 150 * 1000;
+  const start = Date.now();
+  while (Date.now() - start < timeoutMs) {
+    await new Promise(r => setTimeout(r, 900));
+    const pollRes = await nativeFetchFn(`${SUPABASE_URL}/rest/v1/config_app?id=eq.${encodeURIComponent(reqId)}&select=data`, {
+      method: 'GET',
+      headers: sbHeaders
+    });
+    if (!pollRes.ok) continue;
+    const rows = await pollRes.json();
+    const row = Array.isArray(rows) ? rows[0] : null;
+    if (row && row.data && row.data.status === 'done') {
+      nativeFetchFn(`${SUPABASE_URL}/rest/v1/config_app?id=eq.${encodeURIComponent(reqId)}`, {
+        method: 'DELETE',
+        headers: sbHeaders
+      }).catch(() => {});
+
+      return new Response(JSON.stringify(row.data.response || { ok: false, erro: 'Resposta vazia do motor' }), {
+        status: row.data.httpStatus || 200,
+        headers: { 'Content-Type': 'application/json' }
+      });
+    }
+  }
+
+  throw new Error('O Motor Local (servidor.js) não respondeu. Verifique se o computador do DP está ligado.');
+}
+
+if (typeof window !== 'undefined' && typeof window.fetch === 'function') {
+  const _nativeFetch = window.fetch.bind(window);
+  window._nativeFetch = _nativeFetch;
+  window.fetch = async function(input, init) {
+    const urlStr = typeof input === 'string' ? input : (input?.url || String(input));
+    const isMotorApi = urlStr.includes('/api/') && !urlStr.includes('supabase.co');
+    if (!isMotorApi) {
+      return _nativeFetch(input, init);
+    }
+    try {
+      return await _nativeFetch(input, init);
+    } catch (localErr) {
+      console.log('Ponte Cloud Supabase acionada automaticamente para:', urlStr);
+      return await fetchViaSupabaseBridge(urlStr, init, _nativeFetch);
+    }
+  };
 }
 
 // ==========================================================================

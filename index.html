@@ -23,20 +23,6 @@
 </head>
 <body>
 
-  <!-- Aviso de bloqueio HTTPS quando aberto via Vercel -->
-  <div id="https-local-warning-banner" style="display:none; background:linear-gradient(90deg, #1e3a8a, #2563eb); color:#fff; padding:8px 16px; font-size:12.5px; font-weight:600; text-align:center; border-bottom:1px solid #60a5fa; align-items:center; justify-content:center; gap:12px; flex-wrap:wrap; z-index:9999; position:relative;">
-    <span>⚠️ <strong>Modo Nuvem (HTTPS):</strong> O navegador bloqueia a comunicação direta com os Relógios REP e o NGPonto local em páginas HTTPS.</span>
-    <a href="http://localhost:3000" style="background:#fff; color:#1e3a8a; font-weight:700; text-decoration:none; padding:4px 12px; border-radius:4px; display:inline-flex; align-items:center; gap:5px; box-shadow:0 2px 4px rgba(0,0,0,0.2);">
-      <span>🚀</span> Abrir Painel Local Integrado (http://localhost:3000)
-    </a>
-  </div>
-  <script>
-    if (window.location.protocol === 'https:') {
-      var b = document.getElementById('https-local-warning-banner');
-      if (b) b.style.display = 'flex';
-    }
-  </script>
-
   <!-- App Header -->
   <header class="app-header">
     <div class="header-top">
@@ -1684,6 +1670,6 @@
   <!-- Base de Dados Originais Recuperados (Carga Instantânea Garantida) -->
   <script src="backup_data.js?v=20261024_v5"></script>
   <!-- Main JavaScript Logic -->
-  <script src="app.js?v=20261028_nav_fix_v2"></script>
+  <script src="app.js?v=20261029_vercel_bridge_v1"></script>
 </body>
 </html>
