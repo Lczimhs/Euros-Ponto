@@ -2899,9 +2899,12 @@ function getDayStatus(colabId, isoStr, branchId) {
   }
 
   let reg = getPontoRecord(colabId, isoStr);
+  const _now = new Date();
+  const _todayIso = `${_now.getFullYear()}-${String(_now.getMonth() + 1).padStart(2, '0')}-${String(_now.getDate()).padStart(2, '0')}`;
+  const _isStaleFutureEmpty = reg && reg.override === 'VAZIO' && reg.note === 'Dia futuro em aberto (desmarcado)' && isoStr <= _todayIso;
 
   // Se houver override manual
-  if (reg && reg.override && reg.override !== 'AUTO') {
+  if (reg && reg.override && reg.override !== 'AUTO' && !_isStaleFutureEmpty) {
     const override = reg.override;
     const resolution = reg.resolution || 'NENHUMA';
 
@@ -7914,7 +7917,8 @@ async function processarDuploApp(comToast = true) {
 
     if (res.ok) {
       showToast('🎉 Marcações processadas com sucesso em 2 ciclos no NGPonto!');
-      await carregarPendenciasRelatorioApp();
+      await sincronizarBatidasNGParaMatriz();
+      await carregarPendenciasRelatorioApp(true);
       await carregarStatusRelogiosApp();
     } else {
       showToast('Erro no processamento: ' + res.erro, 'error');
@@ -7943,8 +7947,8 @@ async function executarRotinaMatinalApp() {
 }
 
 async function sincronizarBatidasNGParaMatriz(mes, ano) {
-  const m = mes || (appState.currentMonth + 1);
-  const a = ano || appState.currentYear;
+  const m = (typeof mes === 'number' && mes > 0) ? mes : (appState.currentMonth + 1);
+  const a = (typeof ano === 'number' && ano > 0) ? ano : appState.currentYear;
   showToast(`🔄 [Sincronismo NGPonto] Carregando matriz consolidada do mês ${String(m).padStart(2,'0')}/${a}...`);
 
   try {
@@ -7954,7 +7958,8 @@ async function sincronizarBatidasNGParaMatriz(mes, ano) {
       if (res.colaboradores && Array.isArray(res.colaboradores)) {
         res.colaboradores.forEach(c => {
           const codNum = parseInt(c.codigo, 10);
-          const colab = appState.colaboradores.find(x => x.cracha === codNum);
+          const colab = appState.colaboradores.find(x => Number(x.cracha) === codNum && (c.idowner === 6716 ? x.filialId === 'branch-4' : x.filialId !== 'branch-4'))
+            || appState.colaboradores.find(x => Number(x.cracha) === codNum);
           if (colab) {
             colab.cpf = c.cpf || colab.cpf || '';
             colab.pis = c.pis || colab.pis || '';
@@ -7992,29 +7997,43 @@ async function sincronizarBatidasNGParaMatriz(mes, ano) {
         let countAtualizados = 0;
         Object.keys(res.matriz).forEach(key => {
           const cell = res.matriz[key];
-          // Chave pode ser '1026_2026-10-23' ou idregistro
+          // Chave pode ser '7452_001008_2026-10-28' ou '001008_2026-10-28'
           const parts = key.split('_');
-          if (parts.length === 2) {
-            const cod = parts[0];
-            const iso = parts[1];
-            const colab = appState.colaboradores.find(x => String(x.cracha) === String(cod));
+          const iso = cell.data || parts[parts.length - 1];
+          const codStr = cell.codigo || (parts.length >= 3 ? parts[1] : parts[0]);
+          const codNum = parseInt(codStr, 10);
+          const ownerNum = cell.idowner || (parts.length >= 3 ? parseInt(parts[0], 10) : 0);
+
+          if (codNum && iso) {
+            const colab = appState.colaboradores.find(x => Number(x.cracha) === codNum && (ownerNum === 6716 ? x.filialId === 'branch-4' : (ownerNum === 7452 ? x.filialId !== 'branch-4' : true)))
+              || appState.colaboradores.find(x => Number(x.cracha) === codNum);
             if (colab) {
               const regKey = colab.id + '_' + iso;
-              const regPayload = {
-                override: cell.overrideStatus || 'AUTO',
-                override2: cell.overrideStatus2 || '',
-                resolution: cell.resolution || 'NENHUMA',
-                punches: cell.punches || { em: '', sm: '', et: '', st: '' },
-                note: cell.note || '',
-                atrasoMaior: cell.atrasoMaior || '',
-                atrasoMaiorMin: cell.atrasoMaiorMin || 0,
-                atrasoPequeno: '',
-                atrasoPequenoMin: 0,
-                esperado: cell.esperado
-              };
-              appState.registrosPonto[regKey] = regPayload;
-              appState.registrosPonto['colab-' + colab.cracha + '_' + iso] = regPayload;
-              countAtualizados++;
+              const existing = appState.registrosPonto[regKey];
+              // Preserva apenas abonos/justificativas manuais explícitas (FÉRIAS, ATESTADO, ABONAR)
+              const hasManualJustification = existing && !existing.sincronizadoNG && existing.note !== 'Dia futuro em aberto (desmarcado)' && (
+                existing.resolution === 'ABONAR' ||
+                ['FÉRIAS', 'FERIAS', 'ATESTADO', '1/2 ATESTADO', 'AFASTADO', 'AFAST'].includes((existing.override || '').toUpperCase())
+              );
+
+              if (!hasManualJustification) {
+                const regPayload = {
+                  override: cell.overrideStatus || 'AUTO',
+                  override2: cell.overrideStatus2 || '',
+                  resolution: cell.resolution || 'NENHUMA',
+                  punches: cell.punches || { em: '', sm: '', et: '', st: '' },
+                  note: cell.note || '',
+                  atrasoMaior: cell.atrasoMaior || '',
+                  atrasoMaiorMin: cell.atrasoMaiorMin || 0,
+                  atrasoPequeno: '',
+                  atrasoPequenoMin: 0,
+                  esperado: cell.esperado,
+                  sincronizadoNG: true
+                };
+                appState.registrosPonto[regKey] = regPayload;
+                appState.registrosPonto['colab-' + colab.cracha + '_' + iso] = regPayload;
+                countAtualizados++;
+              }
             }
           }
         });
@@ -8043,10 +8062,10 @@ async function sincronizarBatidasNGParaMatriz(mes, ano) {
 
 /**
  * Verifica se um dia específico no dashboard do colaborador NÃO é referente a pendência
- * (Ex: VAZIO, FÉRIAS, ATESTADO, 1/2 ATESTADO, OK, ABONADO, AFASTADO, DOMINGO, SÁBADO folga, FERIADO, etc.)
+ * (Ex: FÉRIAS, ATESTADO, 1/2 ATESTADO, ABONADO, AFASTADO, DOMINGO, SÁBADO folga, FERIADO, etc.)
  * ou se o colaborador está registrado no AppLucas como "não bate ponto".
  */
-function isDiaNaoReferenteAPendencia(appColab, isoStr) {
+function isDiaNaoReferenteAPendencia(appColab, isoStr, fromNGMotor = false) {
   if (!appColab) return false;
 
   // 1. Colaborador registrado no AppLucas que NÃO bate ponto (excluído de pendências)
@@ -8072,32 +8091,36 @@ function isDiaNaoReferenteAPendencia(appColab, isoStr) {
   if (dw === 0) return true;
   if (dw === 6 && typeof isColabFolgaSabado === 'function' && isColabFolgaSabado(appColab)) return true;
 
-  // 5. Status consolidado do dia no Dashboard de Ponto (getDayStatus)
-  if (typeof getDayStatus === 'function') {
+  const hoje = new Date();
+  const todayIso = `${hoje.getFullYear()}-${String(hoje.getMonth() + 1).padStart(2, '0')}-${String(hoje.getDate()).padStart(2, '0')}`;
+  const reg = typeof getPontoRecord === 'function' ? getPontoRecord(appColab.id, isoStr) : null;
+  const isStaleFutureEmpty = reg && reg.note === 'Dia futuro em aberto (desmarcado)' && isoStr <= todayIso;
+
+  // 5. Override direto nos registros de ponto do AppLucas
+  if (reg && !isStaleFutureEmpty) {
+    const ov = (reg.override || '').toUpperCase();
+    const res = (reg.resolution || '').toUpperCase();
+    if (ov === 'FÉRIAS' || ov === 'FERIAS') return true;
+    if (ov === 'ATESTADO' || ov === '1/2 ATESTADO') return true;
+    if (ov === 'AFASTADO' || ov === 'AFAST') return true;
+    if (res === 'ABONAR') return true;
+    // Se veio do motor NGPonto com pendência real (atraso/batida faltante), só ignora se foi abonado/OK manualmente pelo usuário
+    if (!fromNGMotor && ov === 'VAZIO') return true;
+    if (ov === 'OK' && !reg.sincronizadoNG && !(reg.atrasoMaiorMin > 5)) return true;
+  }
+
+  // 6. Status consolidado do dia no Dashboard de Ponto (getDayStatus)
+  if (typeof getDayStatus === 'function' && !isStaleFutureEmpty) {
     const dayStatus = getDayStatus(appColab.id, isoStr, appColab.filialId);
     if (dayStatus) {
       const st = (dayStatus.type || '').toUpperCase();
-      if (st === 'VAZIO' || dayStatus.isEmptyDay) return true;
       if (st === 'FÉRIAS' || st === 'FERIAS') return true;
       if (st === 'ATESTADO' || st === '1/2 ATESTADO') return true;
-      if (st === 'OK' || dayStatus.resolution === 'ABONAR') return true;
+      if (dayStatus.resolution === 'ABONAR') return true;
       if (st === 'AFASTADO' || st === 'AFAST') return true;
       if (st === 'DOMINGO' || st === 'SÁBADO') return true;
       if (dayStatus.isHoliday || dayStatus.isDisabled || dayStatus.isDismissed) return true;
-    }
-  }
-
-  // 6. Override direto nos registros de ponto do AppLucas
-  if (typeof getPontoRecord === 'function') {
-    const reg = getPontoRecord(appColab.id, isoStr);
-    if (reg) {
-      const ov = (reg.override || '').toUpperCase();
-      const res = (reg.resolution || '').toUpperCase();
-      if (ov === 'VAZIO') return true;
-      if (ov === 'FÉRIAS' || ov === 'FERIAS') return true;
-      if (ov === 'ATESTADO' || ov === '1/2 ATESTADO') return true;
-      if (ov === 'AFASTADO' || ov === 'AFAST') return true;
-      if (ov === 'OK' || res === 'ABONAR') return true;
+      if (!fromNGMotor && (st === 'VAZIO' || dayStatus.isEmptyDay)) return true;
     }
   }
 
@@ -8150,7 +8173,7 @@ function filtrarPendenciasComDashboardApp(dadosMotor) {
         const iso = p.dataIso || (p.data && p.data.includes('/') ? p.data.split('/').reverse().join('-') : p.data);
         if (!iso) return true;
 
-        if (isDiaNaoReferenteAPendencia(appColab, iso)) {
+        if (isDiaNaoReferenteAPendencia(appColab, iso, true)) {
           return false;
         }
         return true;
@@ -8205,11 +8228,12 @@ function gerarPendenciasDoDashboardLocal() {
   const listaColabs = [];
 
   const getSetorColab = (c) => {
-    if (c.filialId === 'branch-4') return 'Caiari (6716)';
-    if (c.filialId === 'branch-2') return 'Naviraí - MS (7452)';
+    if (c.setor && c.setor.includes('(')) return c.setor;
+    if (c.filialId === 'branch-4') return 'Relógio Caiari (6716)';
+    if (c.filialId === 'branch-2') return 'Ind. Naviraí - MS (7452)';
     if (c.deptId === 'dept-admin-sponto' || c.relogioVinculo === 'folha_manual') return 'Folha Manual (7452)';
     if (c.deptId === 'dept-admin' || c.relogioVinculo === 'relogio2_adm') return 'ADM Ji-Paraná (7452)';
-    return 'Produção / Depósito I (7452)';
+    return 'Produção - Depósito I (7452)';
   };
 
   const folhaManualCrachas = [325, 336, 431, 540, 696, 702, 736, 781, 898, 937, 965, 974, 1020, 1027, 1031, 1032];
