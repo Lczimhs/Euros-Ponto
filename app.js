@@ -1974,6 +1974,18 @@ function saveActiveModalDraft() {
         punches.st = '';
         atrasoMaior = '';
         atrasoPequeno = '';
+      } else if (override === 'OK') {
+        atrasoMaior = '';
+        atrasoPequeno = '';
+      } else if (override === 'AUTO') {
+        const dw = (new Date(isoDate + 'T12:00:00')).getDay() + 1;
+        const colabSchedule = colabDraft?.horariosSemana ? (colabDraft.horariosSemana[dw] || colabDraft.horariosSemana[String(dw)]) : (colabDraft?.quadroNG || null);
+        const evalRes = evaluateDailyPunches(punches, colabSchedule);
+        if (evalRes.status === 'ATRASO' && evalRes.delayMinutes > 0) {
+          atrasoMaior = minutesToTime(evalRes.delayMinutes);
+        } else {
+          atrasoMaior = '';
+        }
       }
 
       draft.data = { punches, override, override2, resolution, note, atrasoMaior, atrasoPequeno };
@@ -2763,27 +2775,66 @@ function formatMinutesFriendly(mins) {
 
 /**
  * Avaliação Diária por Batidas:
- * Horários de Referência Padrão:
- *   EM (08:00), SM (12:00), ET (13:00), ST (17:00)
+ * Horários de Referência Padrão Euros Aço:
+ *   EM (08:00), SM (12:00), ET (14:00), ST (18:00) - Intervalo de 2h de almoço
+ *   Produção Depósito I: EM (07:00), SM (11:00), ET (13:00), ST (17:00)
  * Regra de Tolerância: 5 minutos de tolerância por período (não cumulativa).
  */
 function evaluateDailyPunches(punches, customSchedule) {
   let refEM = 8 * 60;   // 08:00
   let refSM = 12 * 60;  // 12:00
-  let refET = 13 * 60;  // 13:00
-  let refST = 17 * 60;  // 17:00
+  let refET = 14 * 60;  // 14:00 (Padrão Euros Aço: 08:00-12:00 / 14:00-18:00 com 2h de almoço)
+  let refST = 18 * 60;  // 18:00
+
+  let isTurnoUnico = false;
 
   if (customSchedule) {
-    if (customSchedule.e1) refEM = timeToMinutes(customSchedule.e1) || refEM;
-    if (customSchedule.s1) refSM = timeToMinutes(customSchedule.s1) || refSM;
-    if (customSchedule.e2) refET = timeToMinutes(customSchedule.e2) || refET;
-    if (customSchedule.s2) refST = timeToMinutes(customSchedule.s2) || refST;
+    if (Array.isArray(customSchedule)) {
+      if (customSchedule[0]) refEM = timeToMinutes(customSchedule[0]) || refEM;
+      if (customSchedule[1]) refSM = timeToMinutes(customSchedule[1]) || refSM;
+      if (customSchedule[2]) refET = timeToMinutes(customSchedule[2]) || refET;
+      if (customSchedule[3]) refST = timeToMinutes(customSchedule[3]) || refST;
+      if (!customSchedule[2] && !customSchedule[3]) isTurnoUnico = true;
+    } else if (typeof customSchedule === 'string') {
+      const parts = customSchedule.replace(/às/g, ' ').replace(/\//g, ' ').replace(/-/g, ' ').split(/\s+/).filter(Boolean);
+      if (parts.length >= 2) {
+        refEM = timeToMinutes(parts[0]) || refEM;
+        refSM = timeToMinutes(parts[1]) || refSM;
+      }
+      if (parts.length >= 4) {
+        refET = timeToMinutes(parts[2]) || refET;
+        refST = timeToMinutes(parts[3]) || refST;
+      } else if (parts.length === 2) {
+        isTurnoUnico = true;
+      }
+    } else if (typeof customSchedule === 'object') {
+      if (customSchedule.descanso) {
+        return { status: 'OK', delayMinutes: 0, delayText: '' };
+      }
+      if (customSchedule.e1) refEM = timeToMinutes(customSchedule.e1) || refEM;
+      if (customSchedule.s1) refSM = timeToMinutes(customSchedule.s1) || refSM;
+      if (customSchedule.e2) refET = timeToMinutes(customSchedule.e2) || refET;
+      if (customSchedule.s2) refST = timeToMinutes(customSchedule.s2) || refST;
+      if (!customSchedule.e2 && !customSchedule.s2) isTurnoUnico = true;
+    }
   }
 
-  const pEM = timeToMinutes(punches.em);
-  const pSM = timeToMinutes(punches.sm);
-  const pET = timeToMinutes(punches.et);
-  const pST = timeToMinutes(punches.st);
+  // Ajuste inteligente: se não foi informado horário da tarde, mas a manhã é 07:00 / 11:00 (Produção Depósito I):
+  if (!isTurnoUnico && (!customSchedule || (!customSchedule.e2 && !Array.isArray(customSchedule)))) {
+    if (refEM <= 7 * 60 + 30 && refSM <= 11 * 60 + 30) {
+      refET = 13 * 60; // 13:00
+      refST = 17 * 60; // 17:00
+    } else if (refSM > 0) {
+      // Regra padrão de 2h de intervalo: se saiu às 12:00, volta às 14:00 (nunca às 13:00)
+      refET = refSM + 120;
+      refST = refET + 240;
+    }
+  }
+
+  const pEM = timeToMinutes(punches?.em);
+  const pSM = timeToMinutes(punches?.sm);
+  const pET = timeToMinutes(punches?.et);
+  const pST = timeToMinutes(punches?.st);
 
   let atrasoManha = 0;
   let atrasoTarde = 0;
@@ -2799,8 +2850,8 @@ function evaluateDailyPunches(punches, customSchedule) {
   }
 
   // Tarde (somente quando previsto na escala)
-  if (customSchedule && !customSchedule.e2 && !customSchedule.s2) {
-    // Escala de turno único (meio período / sábado)
+  if (isTurnoUnico || (customSchedule && !customSchedule.e2 && !customSchedule.s2)) {
+    // Escala de turno único (meio período / aprendiz / sábado)
   } else {
     if (pET !== null && pET > refET) {
       const diff = pET - refET;
@@ -3030,10 +3081,23 @@ function getDayStatus(colabId, isoStr, branchId) {
   let atrasoPequenoMin = 0;
 
   if (reg) {
-    if (reg.atrasoMaiorMin !== undefined && reg.atrasoMaiorMin !== null) {
-      atrasoMaiorMin = reg.atrasoMaiorMin;
-    } else if (reg.atrasoMaior) {
-      atrasoMaiorMin = parseTimeToMinutes(reg.atrasoMaior);
+    if (reg.override === 'AUTO' && reg.punches) {
+      const dw = dateObj.getDay() + 1;
+      let colabSchedule = colab?.horariosSemana ? (colab.horariosSemana[dw] || colab.horariosSemana[String(dw)]) : null;
+      if (!colabSchedule && reg?.esperado) colabSchedule = reg.esperado;
+      if (!colabSchedule && colab?.quadroNG) colabSchedule = colab.quadroNG;
+      const evalResult = evaluateDailyPunches(reg.punches, colabSchedule);
+      if (evalResult.status === 'ATRASO') {
+        atrasoMaiorMin = evalResult.delayMinutes;
+      } else {
+        atrasoMaiorMin = 0;
+      }
+    } else {
+      if (reg.atrasoMaiorMin !== undefined && reg.atrasoMaiorMin !== null) {
+        atrasoMaiorMin = reg.atrasoMaiorMin;
+      } else if (reg.atrasoMaior) {
+        atrasoMaiorMin = parseTimeToMinutes(reg.atrasoMaior);
+      }
     }
 
     if (reg.atrasoPequenoMin !== undefined && reg.atrasoPequenoMin !== null) {
@@ -3043,10 +3107,12 @@ function getDayStatus(colabId, isoStr, branchId) {
     }
   }
 
-  // Se não foi informado atraso manual, avalia batidas se existirem
-  if (atrasoMaiorMin === 0 && atrasoPequenoMin === 0 && reg && reg.punches) {
+  // Se não foi informado atraso manual e ainda não avaliou batidas
+  if (atrasoMaiorMin === 0 && atrasoPequenoMin === 0 && reg && reg.punches && reg.override !== 'AUTO') {
     const dw = dateObj.getDay() + 1;
-    const colabSchedule = colab?.horariosSemana ? (colab.horariosSemana[dw] || colab.horariosSemana[String(dw)]) : null;
+    let colabSchedule = colab?.horariosSemana ? (colab.horariosSemana[dw] || colab.horariosSemana[String(dw)]) : null;
+    if (!colabSchedule && reg?.esperado) colabSchedule = reg.esperado;
+    if (!colabSchedule && colab?.quadroNG) colabSchedule = colab.quadroNG;
     const evalResult = evaluateDailyPunches(reg.punches, colabSchedule);
     if (evalResult.status === 'ATRASO') {
       atrasoMaiorMin = evalResult.delayMinutes;
@@ -3270,7 +3336,9 @@ function calculateDsrAndOccurrences(colabId, year, month, branchId) {
     let pequenoMin = 0;
 
     if (reg) {
-      if (reg.atrasoMaiorMin !== undefined && reg.atrasoMaiorMin !== null) {
+      if (reg.override === 'AUTO') {
+        maiorMin = (resolved.type === 'ATRASO' && resolved.delayMinutes) ? resolved.delayMinutes : 0;
+      } else if (reg.atrasoMaiorMin !== undefined && reg.atrasoMaiorMin !== null) {
         maiorMin = reg.atrasoMaiorMin;
       } else if (reg.atrasoMaior) {
         maiorMin = parseTimeToMinutes(reg.atrasoMaior);
@@ -4309,8 +4377,10 @@ function dayHasExistingRecord(colabId, isoDate) {
   if (reg) {
     if (reg.override && !['AUTO', 'OK', 'VAZIO'].includes(reg.override)) return true;
     if (reg.resolution && reg.resolution !== 'NENHUMA') return true;
-    if ((Number(reg.atrasoMaiorMin) || 0) > 0 || (Number(reg.atrasoPequenoMin) || 0) > 0) return true;
-    if (parseTimeToMinutes(reg.atrasoMaior || '') > 0 || parseTimeToMinutes(reg.atrasoPequeno || '') > 0) return true;
+    if (reg.override !== 'AUTO') {
+      if ((Number(reg.atrasoMaiorMin) || 0) > 0 || (Number(reg.atrasoPequenoMin) || 0) > 0) return true;
+      if (parseTimeToMinutes(reg.atrasoMaior || '') > 0 || parseTimeToMinutes(reg.atrasoPequeno || '') > 0) return true;
+    }
   }
   const status = getDayStatus(colabId, isoDate, appState.activeBranchId);
   return !(status.type === 'OK' || status.type === 'VAZIO');
@@ -4346,10 +4416,17 @@ document.getElementById('btn-confirm-mass-ok')?.addEventListener('click', () => 
     }
     if (existing && existing.override === 'OK') return; // Já está OK
 
+    const dw = massDateObj.getDay() + 1;
+    const colabSchedule = colab?.horariosSemana ? (colab.horariosSemana[dw] || colab.horariosSemana[String(dw)]) : null;
+    let mE1 = colabSchedule?.e1 || '08:00';
+    let mS1 = colabSchedule?.s1 || '12:00';
+    let mE2 = colabSchedule?.e2 || (mS1 === '11:00' ? '13:00' : (isSaturday ? '' : '14:00'));
+    let mS2 = colabSchedule?.s2 || (mE2 === '13:00' ? '17:00' : (isSaturday ? '' : '18:00'));
+
     appState.registrosPonto[regKey] = {
       override: 'OK',
       resolution: 'NENHUMA',
-      punches: { em: '08:00', sm: '12:00', et: '13:00', st: '17:00' },
+      punches: { em: mE1, sm: mS1, et: mE2, st: mS2 },
       note: 'OK em massa pelo cabeçalho da data'
     };
     applied++;
@@ -4398,7 +4475,7 @@ function openCellDetailModal(colabId, isoDate) {
   const hintEtEl = document.getElementById('hint-et');
   const hintStEl = document.getElementById('hint-st');
 
-  let expE1 = '08:00', expS1 = '12:00', expE2 = '13:00', expS2 = '17:00', expDesc = (dw === 1);
+  let expE1 = '08:00', expS1 = '12:00', expE2 = '14:00', expS2 = '18:00', expDesc = (dw === 1);
 
   if (horarioDia) {
     expE1 = horarioDia.e1 || '';
@@ -4421,7 +4498,7 @@ function openCellDetailModal(colabId, isoDate) {
     } else if (expE1 && expS1) {
       qTextEl.textContent = `${expE1} às ${expS1} (Meio Período)`;
     } else {
-      qTextEl.textContent = '08:00 às 12:00 / 13:00 às 17:00 (Padrão)';
+      qTextEl.textContent = '08:00 às 12:00 / 14:00 às 18:00 (Padrão)';
     }
   }
 
@@ -4465,13 +4542,18 @@ function openCellDetailModal(colabId, isoDate) {
   const inputAtrasoPequeno = document.getElementById('input-atraso-pequeno');
 
   let defaultAtrasoMaior = '';
-  if (reg.atrasoMaiorMin > 0) {
+  if (initialOverride === 'AUTO' && reg.punches) {
+    const evalResult = evaluateDailyPunches(reg.punches, horarioDia || reg?.esperado || colab?.quadroNG);
+    if (evalResult.status === 'ATRASO' && evalResult.delayMinutes > 0) {
+      defaultAtrasoMaior = minutesToTime(evalResult.delayMinutes);
+    }
+  } else if (reg.atrasoMaiorMin > 0) {
     defaultAtrasoMaior = minutesToTime(reg.atrasoMaiorMin);
   } else if (reg.atrasoMaior) {
     const m = parseTimeToMinutes(reg.atrasoMaior);
     if (m > 0) defaultAtrasoMaior = minutesToTime(m);
   } else if (!reg.atrasoPequeno && reg.punches && initialOverride !== 'VAZIO') {
-    const evalResult = evaluateDailyPunches(reg.punches);
+    const evalResult = evaluateDailyPunches(reg.punches, horarioDia || reg?.esperado || colab?.quadroNG);
     if (evalResult.status === 'ATRASO' && evalResult.delayMinutes > 0) {
       defaultAtrasoMaior = minutesToTime(evalResult.delayMinutes);
     }
@@ -4516,6 +4598,39 @@ function syncPendencia2State() {
   if (allowed && sel2.value === p1) sel2.value = '';
 }
 
+function recalculateModalDelayIfAuto() {
+  const selStatus = document.getElementById('select-override-status')?.value;
+  if (selStatus !== 'AUTO') return;
+  const inMaior = document.getElementById('input-atraso-maior');
+  if (!inMaior) return;
+
+  const curPunches = {
+    em: document.getElementById('punch-em')?.value || '',
+    sm: document.getElementById('punch-sm')?.value || '',
+    et: document.getElementById('punch-et')?.value || '',
+    st: document.getElementById('punch-st')?.value || ''
+  };
+  const q = currentEditingCell?.quadroDia;
+  const colab = appState.colaboradores.find(c => c.id === currentEditingCell?.colabId);
+  const dw = currentEditingCell?.isoDate ? (new Date(currentEditingCell.isoDate + 'T12:00:00')).getDay() + 1 : 1;
+  const colabSchedule = q || (colab?.horariosSemana ? (colab.horariosSemana[dw] || colab.horariosSemana[String(dw)]) : null) || colab?.quadroNG;
+
+  const evalResult = evaluateDailyPunches(curPunches, colabSchedule);
+  if (evalResult.status === 'ATRASO' && evalResult.delayMinutes > 0) {
+    inMaior.value = minutesToTime(evalResult.delayMinutes);
+  } else {
+    inMaior.value = '';
+  }
+}
+
+['punch-em', 'punch-sm', 'punch-et', 'punch-st'].forEach(id => {
+  const el = document.getElementById(id);
+  if (el) {
+    el.addEventListener('input', recalculateModalDelayIfAuto);
+    el.addEventListener('change', recalculateModalDelayIfAuto);
+  }
+});
+
 document.getElementById('select-override-status')?.addEventListener('change', (e) => {
   const val = e.target.value;
   if (val === 'VAZIO') {
@@ -4541,6 +4656,8 @@ document.getElementById('select-override-status')?.addEventListener('change', (e
     const inPequeno = document.getElementById('input-atraso-pequeno');
     if (inMaior) { inMaior.value = ''; delete inMaior.dataset.hadInitialValue; }
     if (inPequeno) { inPequeno.value = ''; delete inPequeno.dataset.hadInitialValue; }
+  } else if (val === 'AUTO') {
+    recalculateModalDelayIfAuto();
   }
   syncPendencia2State();
 });
@@ -4592,6 +4709,23 @@ document.getElementById('btn-save-cell-detail')?.addEventListener('click', () =>
     atrasoPequenoRaw = '';
     atrasoMaiorMin = 0;
     atrasoPequenoMin = 0;
+  } else if (override === 'OK') {
+    atrasoMaiorRaw = '';
+    atrasoPequenoRaw = '';
+    atrasoMaiorMin = 0;
+    atrasoPequenoMin = 0;
+  } else if (override === 'AUTO') {
+    const dw = (new Date(isoDate + 'T12:00:00')).getDay() + 1;
+    const q = currentEditingCell?.quadroDia;
+    const colabSchedule = q || (colab?.horariosSemana ? (colab.horariosSemana[dw] || colab.horariosSemana[String(dw)]) : null) || colab?.quadroNG;
+    const evalRes = evaluateDailyPunches(punches, colabSchedule);
+    if (evalRes.status === 'ATRASO' && evalRes.delayMinutes > 0) {
+      atrasoMaiorMin = evalRes.delayMinutes;
+      atrasoMaiorRaw = minutesToTime(evalRes.delayMinutes);
+    } else {
+      atrasoMaiorMin = 0;
+      atrasoMaiorRaw = '';
+    }
   }
 
   const regKey = colabId + '_' + isoDate;
@@ -7825,6 +7959,8 @@ function initImportacaoEvents() {
           if (dInfo.status && dInfo.status !== 'AUTO') {
             document.getElementById('select-override-status').value = dInfo.status;
           }
+          const inMaior = document.getElementById('input-atraso-maior');
+          if (inMaior) inMaior.value = (dInfo.atraso && dInfo.atraso !== '00:00') ? dInfo.atraso : '';
           if (dInfo.justificativa) {
             document.getElementById('input-cell-justificativa').value = dInfo.justificativa;
           }
@@ -8357,11 +8493,11 @@ function gerarPendenciasDoDashboardLocal() {
       const stObj = getDayStatus(c.id, isoDate, c.filialId);
       const st = (stObj?.type || reg?.override || '').toUpperCase();
 
-      const isAtraso = st === 'ATRASO' || (stObj?.delayMinutes > 5) || (reg?.atrasoMaiorMin > 5) || (reg?.atrasoMaior && parseTimeToMinutes(reg.atrasoMaior) > 5);
+      const isAtraso = st === 'ATRASO' || (stObj?.delayMinutes > 5) || (reg?.override !== 'AUTO' && ((reg?.atrasoMaiorMin > 5) || (reg?.atrasoMaior && parseTimeToMinutes(reg.atrasoMaior) > 5)));
 
       if (['FALTA', 'FM', 'FT', 'EM', 'SM', 'ET', 'ST'].includes(st) || st.includes('+')) {
-        let atrasoMin = reg?.atrasoMaiorMin || stObj?.delayMinutes || 0;
-        if (!atrasoMin && reg?.atrasoMaior) atrasoMin = parseTimeToMinutes(reg.atrasoMaior);
+        let atrasoMin = (reg?.override === 'AUTO') ? (stObj?.delayMinutes || 0) : (reg?.atrasoMaiorMin || stObj?.delayMinutes || 0);
+        if (!atrasoMin && reg?.override !== 'AUTO' && reg?.atrasoMaior) atrasoMin = parseTimeToMinutes(reg.atrasoMaior);
 
         pendencias.push({
           data: formatDateBR(isoDate),
@@ -8377,7 +8513,7 @@ function gerarPendenciasDoDashboardLocal() {
         else totalBatidasAusentes++;
         if (atrasoMin > 5) totalAtrasos++;
       } else if (isAtraso) {
-        const aMin = reg?.atrasoMaiorMin || stObj?.delayMinutes || parseTimeToMinutes(reg?.atrasoMaior || '00:00');
+        const aMin = (reg?.override === 'AUTO') ? (stObj?.delayMinutes || 0) : (reg?.atrasoMaiorMin || stObj?.delayMinutes || parseTimeToMinutes(reg?.atrasoMaior || '00:00'));
         pendencias.push({
           data: formatDateBR(isoDate),
           dataIso: isoDate,
