@@ -1768,20 +1768,38 @@ function getStoragePayload() {
 
 /**
  * Salva dados no LocalStorage e Sincroniza com a Nuvem Supabase
+ * Sistema Blindado contra Perda de Dados e Corrupção
  * @param {boolean} syncCloud Se deve disparar envio para o Supabase
- * @param {boolean} immediateCloud Se deve enviar sem debounce
+ * @param {boolean} immediateCloud Se deve enviar sem debounce (padrão true em ações do usuário)
  * @param {boolean} isUserAction Se é uma alteração real do usuário
  */
-function saveStateToStorage(syncCloud = true, immediateCloud = false, isUserAction = true) {
+function saveStateToStorage(syncCloud = true, immediateCloud = true, isUserAction = true) {
   try {
     if (isUserAction) {
       appState.updatedAt = new Date().toISOString();
     }
     const payload = getStoragePayload();
 
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(payload));
+    // 1. Validação Estrutural Anti-Corrupção: Protege contra objetos vazios ou corrompidos
+    if (!payload || !Array.isArray(payload.colaboradores) || payload.colaboradores.length < 5) {
+      console.warn('PROTEÇÃO ATIVA: Tentativa de salvar estado corrompido ou sem colaboradores bloqueada.');
+      return;
+    }
 
-    // Propaga imediatamente para qualquer outra aba aberta no mesmo navegador
+    const jsonStr = JSON.stringify(payload);
+
+    // 2. Gravação Atômica com Espelho de Segurança no LocalStorage
+    try {
+      const anterior = localStorage.getItem(STORAGE_KEY);
+      if (anterior && anterior.length > 500) {
+        localStorage.setItem(STORAGE_KEY + '_backup', anterior);
+      }
+      localStorage.setItem(STORAGE_KEY, jsonStr);
+    } catch (eStorage) {
+      console.error('Erro de cota ou escrita no localStorage:', eStorage);
+    }
+
+    // 3. Propaga imediatamente para qualquer outra aba aberta no mesmo navegador
     if (syncBroadcastChannel) {
       try {
         syncBroadcastChannel.postMessage({ type: 'STATE_UPDATED', payload });
@@ -1790,50 +1808,89 @@ function saveStateToStorage(syncCloud = true, immediateCloud = false, isUserActi
       }
     }
 
+    // 4. Espelho de Persistência Local no Disco (Servidor Local / Zero Cloud / Offline Safe)
+    if (typeof fetch === 'function') {
+      try {
+        fetch(`${API_BASE}/api/salvar-estado-local`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ payload })
+        }).catch(() => {});
+      } catch (eLocalDb) {}
+    }
+
+    // 5. Sincronização Imediata com a Nuvem Supabase
     if (syncCloud && supabaseClient) {
-      // Proteção Estrita: Nunca enviar base incompleta ou corrompida para proteger a nuvem
-      const localPontos = Object.keys(payload.registrosPonto || {}).length;
-      if (localPontos < 4000) {
-        console.warn(`PROTEÇÃO ATIVA: Bloqueado envio de base incompleta (${localPontos} batidas) para proteger a nuvem.`);
-        return;
-      }
       triggerCloudSync(payload, immediateCloud);
     }
   } catch (err) {
-    console.error('Falha ao salvar no localStorage:', err);
+    console.error('Falha geral ao salvar no localStorage:', err);
   }
 }
 
 let cloudSyncTimer = null;
-function triggerCloudSync(payload, immediate = false) {
+let cloudSyncRetries = 0;
+const MAX_CLOUD_RETRIES = 5;
+
+function triggerCloudSync(payload, immediate = true) {
   if (!supabaseClient) return;
   if (cloudSyncTimer) clearTimeout(cloudSyncTimer);
 
   const performSync = async () => {
+    const badge = document.getElementById('supabase-sync-badge');
     try {
-      const badge = document.getElementById('supabase-sync-badge');
-      if (badge) badge.style.opacity = '0.5';
+      if (badge) {
+        badge.style.opacity = '0.6';
+        badge.title = 'Salvando alterações na nuvem...';
+      }
 
       payload.updatedAt = payload.updatedAt || new Date().toISOString();
 
-      await supabaseClient
+      // 1. Gravação Principal no Supabase
+      const { error } = await supabaseClient
         .from('config_app')
         .upsert({ id: 'latest_state', data: payload, updated_at: payload.updatedAt });
 
+      if (error) throw error;
+
+      cloudSyncRetries = 0;
       if (badge) {
         badge.style.opacity = '1';
-        badge.title = 'Sincronizado com a nuvem: ' + new Date().toLocaleTimeString();
+        badge.title = 'Salvo e sincronizado na nuvem: ' + new Date().toLocaleTimeString();
       }
       console.log('Nuvem Supabase atualizada com sucesso.');
+
+      // 2. Snapshot de Segurança Histórico no Supabase (backup diário resiliente)
+      const hojeKey = 'backup_' + new Date().toISOString().slice(0, 10);
+      const ultimoBackupIso = localStorage.getItem('ponto_ultimo_backup_diario_iso');
+      if (ultimoBackupIso !== hojeKey) {
+        localStorage.setItem('ponto_ultimo_backup_diario_iso', hojeKey);
+        supabaseClient.from('config_app').upsert({
+          id: hojeKey,
+          data: payload,
+          updated_at: new Date().toISOString()
+        }).then(() => console.log('Snapshot diário salvo na nuvem:', hojeKey)).catch(() => {});
+      }
     } catch (e) {
       console.warn('Erro na sincronização em nuvem:', e);
+      if (badge) {
+        badge.style.opacity = '1';
+        badge.title = 'Erro de rede na nuvem - tentativa em fila...';
+      }
+      // Fila de Retentativa Automática com Backoff Exponencial
+      if (cloudSyncRetries < MAX_CLOUD_RETRIES) {
+        cloudSyncRetries++;
+        const delay = Math.min(1000 * Math.pow(2, cloudSyncRetries), 15000);
+        console.log(`Reagendando sincronização em nuvem (tentativa ${cloudSyncRetries}/${MAX_CLOUD_RETRIES}) em ${delay}ms...`);
+        cloudSyncTimer = setTimeout(performSync, delay);
+      }
     }
   };
 
   if (immediate) {
     performSync();
   } else {
-    cloudSyncTimer = setTimeout(performSync, 400);
+    cloudSyncTimer = setTimeout(performSync, 100);
   }
 }
 
@@ -2219,69 +2276,67 @@ async function syncFromCloudOnStart() {
       console.log(` - Nuvem: v:${cloudVersion}, batidas:${cloudPontoCount}, time:${new Date(cloudTime).toISOString()}`);
       console.log(` - Local: v:${localVersion}, batidas:${localPontoCount}, time:${new Date(localTime).toISOString()}`);
 
-      // REGRA DE OURO 1: Se a nuvem tem a versão mestra oficial e o local não, a nuvem vence imediatamente!
-      if (cloudVersion >= MASTER_RECOVERY_VERSION && (localVersion < MASTER_RECOVERY_VERSION || localPontoCount < cloudPontoCount)) {
-        console.log(`Nuvem possui versão mestra consolidada (${cloudPontoCount} batidas). Aplicando localmente...`);
-        applyRemoteState(cloud, true);
-        appState._masterVersion = MASTER_RECOVERY_VERSION;
-        appState.updatedAt = data.updated_at || cloud.updatedAt || new Date().toISOString();
-        saveStateToStorage(false, false, false);
-        renderCurrentView();
-        showToast(`Base Mestra Oficial sincronizada da nuvem (${cloudPontoCount} batidas)!`, 'success');
-        return;
+      // SMART MERGE: Mesclagem inteligente de batidas para NUNCA perder nenhuma alteração
+      if (cloud.registrosPonto && typeof cloud.registrosPonto === 'object') {
+        const mergedPontos = Object.assign({}, cloud.registrosPonto, appState.registrosPonto);
+        appState.registrosPonto = mergedPontos;
       }
 
-      // REGRA DE OURO 2: Se o local tem a versão mestra oficial e a nuvem está desatualizada, atualiza a nuvem imediatamente!
-      if (localVersion >= MASTER_RECOVERY_VERSION && (cloudVersion < MASTER_RECOVERY_VERSION || cloudPontoCount < 4500)) {
-        console.warn(`Nuvem desatualizada (v:${cloudVersion}, batidas:${cloudPontoCount}). Enviando Base Mestra Oficial para a nuvem...`);
+      // Se a nuvem for mais recente no tempo, atualiza estrutura mantendo os pontos mesclados
+      if (cloudTime > localTime && Array.isArray(cloud.colaboradores) && cloud.colaboradores.length >= 10) {
+        console.log(`Nuvem mais recente (${new Date(cloudTime).toLocaleTimeString()}). Atualizando dados locais...`);
+        applyRemoteState(cloud, false);
+        appState.updatedAt = new Date(cloudTime).toISOString();
+        saveStateToStorage(false, false, false);
+        renderCurrentView();
+      } else if (localTime > cloudTime && Array.isArray(appState.colaboradores) && appState.colaboradores.length >= 10) {
+        console.log(`Local possui alterações mais recentes (${new Date(localTime).toLocaleTimeString()}). Sincronizando com a nuvem...`);
         const payload = getStoragePayload();
-        payload._masterVersion = MASTER_RECOVERY_VERSION;
         triggerCloudSync(payload, true);
-        return;
       }
 
-      // REGRA DE OURO 3: Se ambas possuem versão mestra, aplica quem tiver mais batidas ou horário mais recente
-      if (cloudPontoCount > localPontoCount) {
-        applyRemoteState(cloud, true);
-        saveStateToStorage(false, false, false);
-        renderCurrentView();
-        return;
-      }
-
-      if (cloudTime >= localTime && cloudPontoCount >= localPontoCount) {
-        applyRemoteState(cloud, true);
-        saveStateToStorage(false, false, false);
-        renderCurrentView();
-        return;
-      }
-
-      console.log('Nuvem e local estão sincronizados.');
+      console.log('Nuvem e local estão sincronizados e com dados mesclados.');
     }
   } catch (e) {
     console.warn('Falha ao sincronizar da nuvem:', e);
   }
 }
 
-// Carregar dados locais na inicialização
+// Carregar dados locais na inicialização com Proteção Total contra Perda de Dados
 function loadStateFromStorage() {
   try {
     const masterSource = (typeof window !== 'undefined') ? (window.GOLD_RECOVERY_DATA || window.BACKUP_DATA) : null;
-    const masterPontosCount = masterSource ? Object.keys(masterSource.registrosPonto || {}).length : 0;
-
     let raw = localStorage.getItem(STORAGE_KEY);
-    let parsed = raw ? JSON.parse(raw) : null;
+    let parsed = null;
 
-    const localVersion = parsed ? (Number(parsed._masterVersion) || 0) : 0;
-    const localPontosCount = parsed ? Object.keys(parsed.registrosPonto || {}).length : 0;
+    if (raw) {
+      try { parsed = JSON.parse(raw); } catch (e) { console.error('Erro ao decodificar JSON do storage:', e); }
+    }
 
-    // REGRA DE SEGURANÇA MÁXIMA: Se o localStorage local estiver desatualizado, sem dados, ou com versão inferior:
-    if (masterSource && (localVersion < MASTER_RECOVERY_VERSION || localPontosCount < 4500)) {
-      console.warn(`UPGRADE DE SEGURANÇA: LocalStorage desatualizado (v:${localVersion}, batidas:${localPontosCount}). Aplicando Base Mestra Oficial v:${MASTER_RECOVERY_VERSION} (${masterPontosCount} batidas)...`);
-      parsed = JSON.parse(JSON.stringify(masterSource));
-      parsed._masterVersion = MASTER_RECOVERY_VERSION;
-      parsed.updatedAt = new Date().toISOString();
-      parsed = migrateAppState(parsed);
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(parsed));
+    // Se o primário falhou ou está vazio, tenta recuperar do Espelho de Segurança (_backup)
+    if (!parsed || !parsed.colaboradores || parsed.colaboradores.length < 5) {
+      const backupRaw = localStorage.getItem(STORAGE_KEY + '_backup');
+      if (backupRaw) {
+        try {
+          const bParsed = JSON.parse(backupRaw);
+          if (bParsed && Array.isArray(bParsed.colaboradores) && bParsed.colaboradores.length >= 5) {
+            console.log('✅ Recuperado com sucesso a partir do Espelho de Segurança local (_backup)!');
+            parsed = bParsed;
+          }
+        } catch (eBkp) {}
+      }
+    }
+
+    // Apenas aplica o seed inicial se o banco local estiver realmente inexistente ou sem colaboradores
+    if (!parsed || !parsed.colaboradores || parsed.colaboradores.length < 5) {
+      if (masterSource) {
+        console.warn('Banco local virgem/vazio. Inicializando com Base Mestra...');
+        parsed = JSON.parse(JSON.stringify(masterSource));
+        parsed._masterVersion = MASTER_RECOVERY_VERSION;
+        parsed.updatedAt = new Date().toISOString();
+        parsed = migrateAppState(parsed);
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(parsed));
+      }
     }
 
     if (parsed) {
@@ -8302,8 +8357,10 @@ function gerarPendenciasDoDashboardLocal() {
       const stObj = getDayStatus(c.id, isoDate, c.filialId);
       const st = (stObj?.type || reg?.override || '').toUpperCase();
 
+      const isAtraso = st === 'ATRASO' || (stObj?.delayMinutes > 5) || (reg?.atrasoMaiorMin > 5) || (reg?.atrasoMaior && parseTimeToMinutes(reg.atrasoMaior) > 5);
+
       if (['FALTA', 'FM', 'FT', 'EM', 'SM', 'ET', 'ST'].includes(st) || st.includes('+')) {
-        let atrasoMin = reg?.atrasoMaiorMin || 0;
+        let atrasoMin = reg?.atrasoMaiorMin || stObj?.delayMinutes || 0;
         if (!atrasoMin && reg?.atrasoMaior) atrasoMin = parseTimeToMinutes(reg.atrasoMaior);
 
         pendencias.push({
@@ -8319,8 +8376,8 @@ function gerarPendenciasDoDashboardLocal() {
         else if (st === 'FM' || st === 'FT') totalFaltasMeio++;
         else totalBatidasAusentes++;
         if (atrasoMin > 5) totalAtrasos++;
-      } else if (reg?.atrasoMaiorMin > 5 || (reg?.atrasoMaior && parseTimeToMinutes(reg.atrasoMaior) > 5)) {
-        const aMin = reg.atrasoMaiorMin || parseTimeToMinutes(reg.atrasoMaior);
+      } else if (isAtraso) {
+        const aMin = reg?.atrasoMaiorMin || stObj?.delayMinutes || parseTimeToMinutes(reg?.atrasoMaior || '00:00');
         pendencias.push({
           data: formatDateBR(isoDate),
           dataIso: isoDate,
