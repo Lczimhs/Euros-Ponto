@@ -139,6 +139,10 @@ if (typeof window !== 'undefined' && typeof window.fetch === 'function') {
     if (!isMotorApi) {
       return _nativeFetch(input, init);
     }
+    const isHttps = typeof window !== 'undefined' && window.location && window.location.protocol === 'https:';
+    if (isHttps) {
+      return await fetchViaSupabaseBridge(urlStr, init, _nativeFetch);
+    }
     try {
       return await _nativeFetch(input, init);
     } catch (localErr) {
@@ -7605,7 +7609,7 @@ async function coletarEProcessarRelogioApp(etapa) {
 
     if (resProc && resProc.ok) {
       showToast(`🔄 [3/3] Sincronizando batidas processadas com o Dashboard...`);
-      await sincronizarBatidasNGParaMatriz(false);
+      await sincronizarBatidasNGParaMatriz();
       await carregarPendenciasRelatorioApp(true);
       await carregarStatusRelogiosApp();
       showToast(`✅ ${nomeRel} coletado, processado e integrado com sucesso!`);
@@ -7889,13 +7893,12 @@ async function coletarRelogioApp(etapa = 0) {
         ).join('\n\n');
       }
 
-      if (autoProcessar) {
-        showToast('⚡ [2/2] Coleta concluída com sucesso! Processando marcações em 2 ciclos no NGPonto...');
-        await processarDuploApp(false);
-      } else {
-        showToast('✅ Coleta e importação concluídas no NGPonto!');
-        await carregarStatusRelogiosApp();
-      }
+      showToast('⚡ Coleta concluída com sucesso! Processando cálculos no NGPonto e sincronizando matriz...');
+      await processarDuploApp(false);
+      await sincronizarBatidasNGParaMatriz();
+      await carregarPendenciasRelatorioApp(true);
+      await carregarStatusRelogiosApp();
+      showToast('🎉 Ponto coletado e sincronizado! Dias sem pendência marcados como OK.');
     } else {
       showToast('Erro na coleta: ' + res.erro, 'error');
     }
