@@ -7234,6 +7234,37 @@ function initEvents() {
   initMatrixUnifiedScroll();
 }
 
+async function monitorarStatusMotorLocal() {
+  const badge = document.getElementById('motor-status-badge');
+  const txt = document.getElementById('motor-status-text');
+  if (!badge) return;
+
+  const isHttps = typeof window !== 'undefined' && window.location && window.location.protocol === 'https:';
+
+  try {
+    const res = await fetch(`${API_BASE}/api/status`, { cache: 'no-store' }).then(r => r.json());
+    if (res && res.ok) {
+      badge.style.background = 'rgba(16, 185, 129, 0.15)';
+      badge.style.borderColor = 'rgba(16, 185, 129, 0.4)';
+      badge.style.color = '#10b981';
+      const dot = badge.querySelector('.cloud-dot');
+      if (dot) { dot.style.background = '#10b981'; dot.style.boxShadow = '0 0 8px #10b981'; }
+      if (txt) txt.textContent = isHttps ? 'Ponte Cloud Ativa' : 'Motor Local 3050';
+      badge.title = `Motor DP Ativo: ${res.empresas?.length || 2} empresas, 4 relógios configurados.`;
+    } else {
+      throw new Error(res?.erro || 'Status não ok');
+    }
+  } catch (e) {
+    badge.style.background = 'rgba(239, 68, 68, 0.15)';
+    badge.style.borderColor = 'rgba(239, 68, 68, 0.4)';
+    badge.style.color = '#ef4444';
+    const dot = badge.querySelector('.cloud-dot');
+    if (dot) { dot.style.background = '#ef4444'; dot.style.boxShadow = 'none'; }
+    if (txt) txt.textContent = 'Motor Offline';
+    badge.title = 'Motor local não respondeu. Verifique se o servidor.js está em execução no DP.';
+  }
+}
+
 // Inicialização Geral ao Carregar a Página
 document.addEventListener('DOMContentLoaded', () => {
   try { initTheme(); } catch (e) { console.warn('initTheme error:', e); }
@@ -7284,6 +7315,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // Sincronização automática em segundo plano com a nuvem Supabase
   try { syncFromCloudOnStart(); } catch (e) {}
   try { initSupabaseRealtime(); } catch (e) {}
+  try { monitorarStatusMotorLocal(); setInterval(monitorarStatusMotorLocal, 15000); } catch (e) {}
 
   // Atualização automática em segundo plano das escalas e dados via NGPonto
   setTimeout(() => {

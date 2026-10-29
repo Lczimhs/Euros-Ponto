@@ -10,6 +10,8 @@
   <link rel="icon" type="image/png" sizes="64x64" href="favicon.png?v=20261028_logo">
   <link rel="shortcut icon" href="favicon.ico?v=20261028_logo">
   <link rel="apple-touch-icon" href="logo.png?v=20261028_logo">
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#0ea5e9">
   <link rel="stylesheet" href="style.css?v=20261028_blue_white">
   <script>
     (function() {
@@ -79,6 +81,9 @@
         <input type="file" id="input-import-file" style="display:none;" accept=".json">
         <div id="supabase-sync-badge" class="cloud-badge" title="Conectado e 100% sincronizado com o Supabase Cloud">
           <span class="cloud-dot"></span> <span>Supabase Nuvem</span>
+        </div>
+        <div id="motor-status-badge" class="cloud-badge" style="background: rgba(16, 185, 129, 0.15); border-color: rgba(16, 185, 129, 0.4); color: #10b981;" title="Motor DP Conectado (Porta 3050/3000)">
+          <span class="cloud-dot" style="background:#10b981; box-shadow:0 0 8px #10b981;"></span> <span id="motor-status-text">Motor DP Online</span>
         </div>
       </div>
     </div>
