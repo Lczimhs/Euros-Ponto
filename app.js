@@ -34,7 +34,7 @@ async function carregarEstadoDoServidorLocal() {
 
 // Chave do LocalStorage e Versão Mestra de Segurança
 const STORAGE_KEY = 'appLucas_ponto_va_v5_data';
-const MASTER_RECOVERY_VERSION = 2026103005;
+const MASTER_RECOVERY_VERSION = 2026103006;
 
 // ==========================================================================
 // 1. ESTADO GLOBAL DA APLICAÇÃO
@@ -2003,9 +2003,6 @@ function saveActiveModalDraft() {
         punches.st = '';
         atrasoMaior = '';
         atrasoPequeno = '';
-      } else if (override === 'OK') {
-        atrasoMaior = '';
-        atrasoPequeno = '';
       } else if (override === 'AUTO') {
         const dw = (new Date(isoDate + 'T12:00:00')).getDay() + 1;
         const colabSchedule = colabDraft?.horariosSemana ? (colabDraft.horariosSemana[dw] || colabDraft.horariosSemana[String(dw)]) : (colabDraft?.quadroNG || null);
@@ -3086,6 +3083,13 @@ function getDayStatus(colabId, isoStr, branchId) {
     }
 
     if (override === 'OK' || override === 'FOLGA COMP' || override === 'FOLGA' || resolution === 'ABONAR') {
+      const aMaior = (reg && (reg.atrasoMaiorMin !== undefined && reg.atrasoMaiorMin !== null))
+        ? Number(reg.atrasoMaiorMin)
+        : (reg && reg.atrasoMaior ? parseTimeToMinutes(reg.atrasoMaior) : 0);
+      const aPequeno = (reg && (reg.atrasoPequenoMin !== undefined && reg.atrasoPequenoMin !== null))
+        ? Number(reg.atrasoPequenoMin)
+        : (reg && reg.atrasoPequeno ? parseTimeToMinutes(reg.atrasoPequeno) : 0);
+
       return {
         type: 'OK',
         display: 'OK',
@@ -3094,6 +3098,8 @@ function getDayStatus(colabId, isoStr, branchId) {
         isWorkingDay: true,
         isSunday: false,
         isHoliday: false,
+        delayMinutes: aMaior,
+        atrasoPequenoMin: aPequeno,
         resolution
       };
     }
@@ -3420,13 +3426,14 @@ function calculateDsrAndOccurrences(colabId, year, month, branchId) {
     if (maiorMin > 0) {
       atrasosMaioresMinutos += maiorMin;
       atrasosMaioresQtd++;
+      const isDiaOk = (resolved.display === 'OK' || resolved.type === 'OK');
       ocorrencias.push({
         data: isoStr,
-        tipo: 'Atraso Maior (Dashboard)',
+        tipo: isDiaOk ? 'Atraso Registrado (Dia OK)' : 'Atraso Maior (Dashboard)',
         badgeClass: 'status-atraso',
         tempo: minutesToTime(maiorMin) + ' (' + formatMinutesFriendly(maiorMin) + ')',
-        impacto: resolved.resolution === 'ABONAR' ? 'Abonado' : 'Pendência no Dashboard',
-        obs: reg?.note || (resolved.resolution === 'ABONAR' ? 'Abonado pela chefia' : 'Enviado para análise')
+        impacto: resolved.resolution === 'ABONAR' ? 'Abonado' : (isDiaOk ? 'Contabilizado no DSR (Dia OK)' : 'Pendência no Dashboard'),
+        obs: reg?.note || (resolved.resolution === 'ABONAR' ? 'Abonado pela chefia' : (isDiaOk ? 'Atraso lançado com dia mantido OK' : 'Enviado para análise'))
       });
     }
 
@@ -4693,6 +4700,15 @@ function recalculateModalDelayIfAuto() {
   }
 });
 
+['input-atraso-maior', 'input-atraso-pequeno'].forEach(id => {
+  const el = document.getElementById(id);
+  if (el) {
+    el.addEventListener('change', () => {
+      commitAndSaveCellDetail(false, true);
+    });
+  }
+});
+
 document.getElementById('select-override-status')?.addEventListener('change', (e) => {
   const val = e.target.value;
   if (val === 'VAZIO') {
@@ -4706,18 +4722,14 @@ document.getElementById('select-override-status')?.addEventListener('change', (e
     if (inMaior) { inMaior.value = ''; delete inMaior.dataset.hadInitialValue; }
     if (inPequeno) { inPequeno.value = ''; delete inPequeno.dataset.hadInitialValue; }
   } else if (val === 'OK') {
-    // Ao marcar OK no dia, preenche os horários com a ESCALA EXATA PREVISTA do colaborador para este dia!
+    // Ao marcar OK no dia, preenche os horários com a ESCALA EXATA PREVISTA do colaborador para este dia se estiverem vazios
     const q = currentEditingCell?.quadroDia;
     if (q) {
-      document.getElementById('punch-em').value = q.e1 || '';
-      document.getElementById('punch-sm').value = q.s1 || '';
-      document.getElementById('punch-et').value = q.e2 || '';
-      document.getElementById('punch-st').value = q.s2 || '';
+      if (!document.getElementById('punch-em').value) document.getElementById('punch-em').value = q.e1 || '';
+      if (!document.getElementById('punch-sm').value) document.getElementById('punch-sm').value = q.s1 || '';
+      if (!document.getElementById('punch-et').value) document.getElementById('punch-et').value = q.e2 || '';
+      if (!document.getElementById('punch-st').value) document.getElementById('punch-st').value = q.s2 || '';
     }
-    const inMaior = document.getElementById('input-atraso-maior');
-    const inPequeno = document.getElementById('input-atraso-pequeno');
-    if (inMaior) { inMaior.value = ''; delete inMaior.dataset.hadInitialValue; }
-    if (inPequeno) { inPequeno.value = ''; delete inPequeno.dataset.hadInitialValue; }
   } else if (val === 'AUTO') {
     recalculateModalDelayIfAuto();
   }
@@ -4769,11 +4781,6 @@ function commitAndSaveCellDetail(closeAfterSave = false, showFeedback = true) {
 
   if (override === 'VAZIO') {
     punches = { em: '', sm: '', et: '', st: '' };
-    atrasoMaiorRaw = '';
-    atrasoPequenoRaw = '';
-    atrasoMaiorMin = 0;
-    atrasoPequenoMin = 0;
-  } else if (override === 'OK') {
     atrasoMaiorRaw = '';
     atrasoPequenoRaw = '';
     atrasoMaiorMin = 0;
@@ -6074,7 +6081,9 @@ function hasDescontoNoMes(occ) {
   if (!occ) return false;
   if (occ.faltasIntegrais > 0 || occ.faltasMeioPeriodo > 0) return true;
   if (occ.pequenosAtrasosMinutos > 0) return true;
-  return (occ.ocorrencias || []).some(o => String(o.tipo || '').startsWith('Atraso Maior') && o.impacto !== 'Abonado');
+  if (occ.atrasosMaioresMinutos > 0) return true;
+  if (occ.totalAtrasosMinutos > 0) return true;
+  return (occ.ocorrencias || []).some(o => String(o.tipo || '').includes('Atraso') && o.impacto !== 'Abonado');
 }
 
 // ==========================================================================
@@ -7464,6 +7473,7 @@ function initEvents() {
     if (el) {
       el.value = '';
       delete el.dataset.hadInitialValue;
+      commitAndSaveCellDetail(false, true);
     }
   });
   document.getElementById('btn-clear-atraso-pequeno')?.addEventListener('click', () => {
@@ -7471,6 +7481,7 @@ function initEvents() {
     if (el) {
       el.value = '';
       delete el.dataset.hadInitialValue;
+      commitAndSaveCellDetail(false, true);
     }
   });
 
