@@ -34,7 +34,7 @@ async function carregarEstadoDoServidorLocal() {
 
 // Chave do LocalStorage e Versão Mestra de Segurança
 const STORAGE_KEY = 'appLucas_ponto_va_v5_data';
-const MASTER_RECOVERY_VERSION = 2026103003;
+const MASTER_RECOVERY_VERSION = 2026103005;
 
 // ==========================================================================
 // 1. ESTADO GLOBAL DA APLICAÇÃO
