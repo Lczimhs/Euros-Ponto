@@ -34,7 +34,7 @@ async function carregarEstadoDoServidorLocal() {
 
 // Chave do LocalStorage e Versão Mestra de Segurança
 const STORAGE_KEY = 'appLucas_ponto_va_v5_data';
-const MASTER_RECOVERY_VERSION = 2026103002;
+const MASTER_RECOVERY_VERSION = 2026103003;
 
 // ==========================================================================
 // 1. ESTADO GLOBAL DA APLICAÇÃO
@@ -2949,6 +2949,7 @@ function getRegPendencias(reg) {
 }
 
 function pendenciaDisplay(p) {
+  if (p === 'FOLGA COMP' || p === 'FOLGA') return 'OK';
   if (p === '1/2 ATESTADO') return '½ AT';
   if (p === 'ATESTADO') return 'AT';
   if (p === 'AFASTADO') return 'AFAST';
@@ -3084,7 +3085,7 @@ function getDayStatus(colabId, isoStr, branchId) {
       };
     }
 
-    if (override === 'OK' || resolution === 'ABONAR') {
+    if (override === 'OK' || override === 'FOLGA COMP' || override === 'FOLGA' || resolution === 'ABONAR') {
       return {
         type: 'OK',
         display: 'OK',
@@ -3101,10 +3102,19 @@ function getDayStatus(colabId, isoStr, branchId) {
     const pendList = getRegPendencias(reg);
     if (pendList.length > 0 && override !== 'FÉRIAS' && override !== 'AFASTADO') {
       const primary = pickPrimaryPendencia(pendList);
+      let disp = pendList.map(p => {
+        if (p === 'ATRASO') {
+          let mins = (reg && reg.atrasoMaiorMin) || 0;
+          if (!mins && reg && reg.atrasoMaior) mins = parseTimeToMinutes(reg.atrasoMaior);
+          return 'A.' + minutesToTime(mins || 15);
+        }
+        if (p === 'FOLGA COMP' || p === 'FOLGA') return 'OK';
+        return pendenciaDisplay(p);
+      }).join('+');
       return {
         type: primary,
         types: pendList,
-        display: pendList.map(pendenciaDisplay).join('+'),
+        display: disp,
         cssClass: pendenciaCssClass(primary, pendList.length),
         isPending: true,
         isWorkingDay: true,
