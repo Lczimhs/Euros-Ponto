@@ -2172,6 +2172,9 @@ function applyRemoteState(incoming, force = false) {
     // Se o estado atual tiver registros substanciais e o recebido for vazio ou insignificante, JAMAIS esvaziar!
     if (curCount > 100 && incCount < 100) {
       console.warn(`PROTEÇÃO ATIVA: Ignorando tentativa remota de esvaziar batidas (${curCount} locais vs ${incCount} recebidas).`);
+    } else if (force) {
+      // Restauração forçada: substituição total e limpa pela base oficial
+      appState.registrosPonto = JSON.parse(JSON.stringify(incoming.registrosPonto || {}));
     } else {
       // Mescla inteligente: une os registros locais e remotos, preservando batidas preenchidas
       const merged = { ...appState.registrosPonto, ...incoming.registrosPonto };
@@ -2316,6 +2319,13 @@ async function syncFromCloudOnStart() {
       console.log('Verificação de Sincronização na Inicialização:');
       console.log(` - Nuvem: v:${cloudVersion}, batidas:${cloudPontoCount}, time:${new Date(cloudTime).toISOString()}`);
       console.log(` - Local: v:${localVersion}, batidas:${localPontoCount}, time:${new Date(localTime).toISOString()}`);
+
+      // Bloqueio de downgrade se a nuvem tiver versão mestra anterior à oficial
+      if (cloudVersion < MASTER_RECOVERY_VERSION) {
+        console.warn(`Nuvem possui versão defasada (v${cloudVersion} < v${MASTER_RECOVERY_VERSION}). Atualizando nuvem com a Base Mestra Oficial...`);
+        saveStateToStorage(true, true, true);
+        return;
+      }
 
       // SMART MERGE: Mesclagem inteligente de batidas para NUNCA perder nenhuma alteração
       if (cloud.registrosPonto && typeof cloud.registrosPonto === 'object') {
@@ -7212,7 +7222,12 @@ document.getElementById('btn-restore-master')?.addEventListener('click', () => {
   restored._masterVersion = MASTER_RECOVERY_VERSION;
   restored.updatedAt = new Date().toISOString();
 
-  applyRemoteState(restored, true);
+  // Restauração completa sem resquícios de dados locais corrompidos
+  appState.registrosPonto = JSON.parse(JSON.stringify(restored.registrosPonto || {}));
+  appState.colaboradores = (restored.colaboradores || []).map(normalizeColaborador);
+  appState.filiais = restored.filiais || appState.filiais;
+  appState.departamentos = normalizeDepartamentos(restored.departamentos);
+  appState.feriados = restored.feriados || appState.feriados;
   appState._masterVersion = MASTER_RECOVERY_VERSION;
   appState.updatedAt = restored.updatedAt;
 
