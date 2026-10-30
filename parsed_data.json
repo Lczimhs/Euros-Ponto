@@ -369,7 +369,7 @@
     }
   ],
   "focusMode": false,
-  "updatedAt": "2026-10-30T12:59:04.708Z",
+  "updatedAt": "2026-10-30T13:32:58.929Z",
   "currentYear": 2026,
   "carryOverDsr": {},
   "currentMonth": 9,
@@ -10540,7 +10540,7 @@
       "atrasoPequenoMin": 0
     },
     "colab-234_2026-10-06": {
-      "note": "Folga Comp.",
+      "note": "Folga Compensatória (NGPonto)",
       "punches": {
         "em": "08:01",
         "et": "14:01",
@@ -10694,7 +10694,7 @@
       "atrasoPequenoMin": 0
     },
     "colab-234_2026-10-13": {
-      "note": "",
+      "note": "Esqueceu de bater ponto (Justificado no NGPonto)",
       "punches": {
         "em": "07:07",
         "et": "13:56",
@@ -10707,9 +10707,9 @@
         "14:00",
         "18:00"
       ],
-      "override": "OK",
+      "override": "JUSTIFICADO",
       "override2": "",
-      "resolution": "NENHUMA",
+      "resolution": "ABONAR",
       "atrasoMaior": "",
       "atrasoPequeno": "",
       "atrasoMaiorMin": 0,
@@ -10760,7 +10760,7 @@
       "atrasoPequenoMin": 0
     },
     "colab-234_2026-10-16": {
-      "note": "",
+      "note": "Folga Compensatória (NGPonto)",
       "punches": {
         "em": "07:58",
         "et": "13:57",
@@ -10773,7 +10773,7 @@
         "14:00",
         "18:00"
       ],
-      "override": "OK",
+      "override": "FOLGA COMP",
       "override2": "",
       "resolution": "NENHUMA",
       "atrasoMaior": "",
@@ -10848,7 +10848,7 @@
       "atrasoPequenoMin": 0
     },
     "colab-234_2026-10-20": {
-      "note": "Esqueceu",
+      "note": "Esqueceu de bater ponto (Justificado no NGPonto)",
       "punches": {
         "em": "07:56",
         "et": "14:00",
@@ -10863,7 +10863,7 @@
       ],
       "override": "JUSTIFICADO",
       "override2": "",
-      "resolution": "NENHUMA",
+      "resolution": "ABONAR",
       "atrasoMaior": "",
       "atrasoPequeno": "",
       "atrasoMaiorMin": 0,
@@ -10892,7 +10892,7 @@
       "atrasoPequenoMin": 0
     },
     "colab-234_2026-10-22": {
-      "note": "",
+      "note": "Folga Compensatória (NGPonto)",
       "punches": {
         "em": "08:00",
         "et": "14:00",
@@ -10905,7 +10905,7 @@
         "14:00",
         "18:00"
       ],
-      "override": "OK",
+      "override": "FOLGA COMP",
       "override2": "",
       "resolution": "NENHUMA",
       "atrasoMaior": "",
@@ -13143,7 +13143,7 @@
       "atrasoPequenoMin": 0
     },
     "colab-255_2026-10-07": {
-      "note": "FOLGAS COMP.",
+      "note": "Folga Compensatória (NGPonto)",
       "punches": {
         "em": "",
         "et": "",
@@ -13462,7 +13462,7 @@
       "atrasoPequenoMin": 0
     },
     "colab-255_2026-10-22": {
-      "note": "ESQUECEU",
+      "note": "Esqueceu de bater ponto (Justificado no NGPonto)",
       "punches": {
         "em": "07:07",
         "et": "12:59",
@@ -13477,7 +13477,7 @@
       ],
       "override": "JUSTIFICADO",
       "override2": "",
-      "resolution": "NENHUMA",
+      "resolution": "ABONAR",
       "atrasoMaior": "",
       "atrasoPequeno": "",
       "atrasoMaiorMin": 0,
@@ -14606,7 +14606,7 @@
       "atrasoPequenoMin": 0
     },
     "colab-288_2026-10-16": {
-      "note": "Folga Comp.",
+      "note": "Folga Compensatória (NGPonto)",
       "punches": {
         "em": "12:58",
         "et": "",
@@ -15090,7 +15090,7 @@
       "atrasoPequenoMin": 0
     },
     "colab-294_2026-10-07": {
-      "note": "FOLGAS COMP.",
+      "note": "Folga Compensatória (NGPonto)",
       "punches": {
         "em": "07:24",
         "et": "14:56",
@@ -15112,7 +15112,7 @@
       "atrasoPequenoMin": 0
     },
     "colab-294_2026-10-08": {
-      "note": "FOLGAS COMP.",
+      "note": "Folga Compensatória (NGPonto)",
       "punches": {
         "em": "13:56",
         "et": "",
@@ -15255,7 +15255,7 @@
       "atrasoPequenoMin": 0
     },
     "colab-294_2026-10-15": {
-      "note": "FOLGAS COMP.",
+      "note": "Folga Compensatória (NGPonto)",
       "punches": {
         "em": "07:26",
         "et": "14:24",
@@ -15387,7 +15387,7 @@
       "atrasoPequenoMin": 0
     },
     "colab-294_2026-10-21": {
-      "note": "ESQUECEU",
+      "note": "Esqueceu de bater ponto (Justificado no NGPonto)",
       "punches": {
         "em": "07:21",
         "et": "14:00",
@@ -15402,7 +15402,7 @@
       ],
       "override": "JUSTIFICADO",
       "override2": "",
-      "resolution": "NENHUMA",
+      "resolution": "ABONAR",
       "atrasoMaior": "",
       "atrasoPequeno": "",
       "atrasoMaiorMin": 0,
@@ -15629,7 +15629,7 @@
       "atrasoPequenoMin": 0
     },
     "colab-295_2026-10-01": {
-      "note": "FOLGAS COMP.",
+      "note": "Folga Compensatória (NGPonto)",
       "punches": {
         "em": "08:17",
         "et": "15:05",
@@ -15717,7 +15717,7 @@
       "atrasoPequenoMin": 0
     },
     "colab-295_2026-10-05": {
-      "note": "FOLGAS COMP.",
+      "note": "Folga Compensatória (NGPonto)",
       "punches": {
         "em": "08:15",
         "et": "",
@@ -15893,7 +15893,7 @@
       "atrasoPequenoMin": 0
     },
     "colab-295_2026-10-13": {
-      "note": "ESQUECEU",
+      "note": "Esqueceu de bater ponto (Justificado no NGPonto)",
       "punches": {
         "em": "08:15",
         "et": "15:04",
@@ -15908,7 +15908,7 @@
       ],
       "override": "JUSTIFICADO",
       "override2": "",
-      "resolution": "NENHUMA",
+      "resolution": "ABONAR",
       "atrasoMaior": "",
       "atrasoPequeno": "",
       "atrasoMaiorMin": 0,
@@ -15937,7 +15937,7 @@
       "atrasoPequenoMin": 0
     },
     "colab-295_2026-10-15": {
-      "note": "ESQUECEU",
+      "note": "Esqueceu de bater ponto (Justificado no NGPonto)",
       "punches": {
         "em": "08:16",
         "et": "15:02",
@@ -15952,14 +15952,14 @@
       ],
       "override": "JUSTIFICADO",
       "override2": "",
-      "resolution": "NENHUMA",
+      "resolution": "ABONAR",
       "atrasoMaior": "",
       "atrasoPequeno": "",
       "atrasoMaiorMin": 0,
       "atrasoPequenoMin": 0
     },
     "colab-295_2026-10-16": {
-      "note": "FOLGAS COMP.",
+      "note": "Folga Compensatória (NGPonto)",
       "punches": {
         "em": "08:19",
         "et": "15:02",
@@ -16069,7 +16069,7 @@
       "atrasoPequenoMin": 0
     },
     "colab-295_2026-10-21": {
-      "note": "ESQUECEU",
+      "note": "Esqueceu de bater ponto (Justificado no NGPonto)",
       "punches": {
         "em": "08:15",
         "et": "15:06",
@@ -16084,7 +16084,7 @@
       ],
       "override": "JUSTIFICADO",
       "override2": "",
-      "resolution": "NENHUMA",
+      "resolution": "ABONAR",
       "atrasoMaior": "",
       "atrasoPequeno": "",
       "atrasoMaiorMin": 0,
@@ -16718,7 +16718,7 @@
       "atrasoPequenoMin": 0
     },
     "colab-313_2026-10-20": {
-      "note": "FOLGAS COMP.",
+      "note": "Folga Compensatória (NGPonto)",
       "punches": {
         "em": "07:28",
         "et": "13:02",
@@ -17675,7 +17675,7 @@
       "atrasoPequenoMin": 0
     },
     "colab-335_2026-10-02": {
-      "note": "FOLGAS COMP.",
+      "note": "Folga Compensatória (NGPonto)",
       "punches": {
         "em": "07:57",
         "et": "10:10",
@@ -17928,14 +17928,14 @@
       "resolution": "ABONAR"
     },
     "colab-335_2026-10-14": {
-      "note": "OK em massa pelo cabeçalho da data",
+      "note": "Folga Compensatória (NGPonto)",
       "punches": {
         "em": "08:00",
         "et": "13:00",
         "sm": "12:00",
         "st": "17:00"
       },
-      "override": "FALTA",
+      "override": "FOLGA COMP",
       "override2": "",
       "resolution": "NENHUMA",
       "atrasoMaior": "",
@@ -17944,7 +17944,7 @@
       "atrasoPequenoMin": 0
     },
     "colab-335_2026-10-15": {
-      "note": "CERT. CASAMENTO",
+      "note": "Licença Casamento / Gala (NGPonto)",
       "punches": {
         "em": "",
         "et": "",
@@ -17959,14 +17959,14 @@
       ],
       "override": "JUSTIFICADO",
       "override2": "",
-      "resolution": "NENHUMA",
+      "resolution": "ABONAR",
       "atrasoMaior": "",
       "atrasoPequeno": "",
       "atrasoMaiorMin": 0,
       "atrasoPequenoMin": 0
     },
     "colab-335_2026-10-16": {
-      "note": "CERT. CASAMENTO",
+      "note": "Licença Casamento / Gala (NGPonto)",
       "punches": {
         "em": "",
         "et": "",
@@ -17981,14 +17981,14 @@
       ],
       "override": "JUSTIFICADO",
       "override2": "",
-      "resolution": "NENHUMA",
+      "resolution": "ABONAR",
       "atrasoMaior": "",
       "atrasoPequeno": "",
       "atrasoMaiorMin": 0,
       "atrasoPequenoMin": 0
     },
     "colab-335_2026-10-17": {
-      "note": "CERT. CASAMENTO",
+      "note": "Licença Casamento / Gala (NGPonto)",
       "punches": {
         "em": "",
         "et": "",
@@ -18003,7 +18003,7 @@
       ],
       "override": "JUSTIFICADO",
       "override2": "",
-      "resolution": "NENHUMA",
+      "resolution": "ABONAR",
       "atrasoMaior": "",
       "atrasoPequeno": "",
       "atrasoMaiorMin": 0,
@@ -18054,7 +18054,7 @@
       "atrasoPequenoMin": 0
     },
     "colab-335_2026-10-20": {
-      "note": "FOLGAS COMP.",
+      "note": "Folga Compensatória (NGPonto)",
       "punches": {
         "em": "08:02",
         "et": "13:58",
@@ -18120,7 +18120,7 @@
       "atrasoPequenoMin": 0
     },
     "colab-335_2026-10-23": {
-      "note": "FOLGAS COMP.",
+      "note": "Folga Compensatória (NGPonto)",
       "punches": {
         "em": "",
         "et": "",
@@ -18142,7 +18142,7 @@
       "atrasoPequenoMin": 0
     },
     "colab-335_2026-10-24": {
-      "note": "FOLGAS COMP.",
+      "note": "Folga Compensatória (NGPonto)",
       "punches": {
         "em": "",
         "et": "",
@@ -19028,7 +19028,7 @@
       "atrasoPequenoMin": 0
     },
     "colab-343_2026-10-03": {
-      "note": "FOLGAS COMP.",
+      "note": "Folga Compensatória (NGPonto)",
       "punches": {
         "em": "",
         "et": "",
@@ -19248,7 +19248,7 @@
       "atrasoPequenoMin": 0
     },
     "colab-343_2026-10-13": {
-      "note": "FOLGAS COMP.",
+      "note": "Folga Compensatória (NGPonto)",
       "punches": {
         "em": "08:02",
         "et": "",
@@ -19336,7 +19336,7 @@
       "atrasoPequenoMin": 0
     },
     "colab-343_2026-10-17": {
-      "note": "FOLGAS COMP.",
+      "note": "Folga Compensatória (NGPonto)",
       "punches": {
         "em": "",
         "et": "",
@@ -19446,7 +19446,7 @@
       "atrasoPequenoMin": 0
     },
     "colab-343_2026-10-22": {
-      "note": "ESQUECEU",
+      "note": "Esqueceu de bater ponto (Justificado no NGPonto)",
       "punches": {
         "em": "07:59",
         "et": "14:57",
@@ -19461,7 +19461,7 @@
       ],
       "override": "JUSTIFICADO",
       "override2": "",
-      "resolution": "NENHUMA",
+      "resolution": "ABONAR",
       "atrasoMaior": "",
       "atrasoPequeno": "",
       "atrasoMaiorMin": 0,
@@ -19688,7 +19688,7 @@
       "atrasoPequenoMin": 0
     },
     "colab-344_2026-10-02": {
-      "note": "ESQUECEU",
+      "note": "Esqueceu de bater ponto (Justificado no NGPonto)",
       "punches": {
         "em": "08:00",
         "et": "14:00",
@@ -19703,7 +19703,7 @@
       ],
       "override": "JUSTIFICADO",
       "override2": "",
-      "resolution": "NENHUMA",
+      "resolution": "ABONAR",
       "atrasoMaior": "",
       "atrasoPequeno": "",
       "atrasoMaiorMin": 0,
@@ -19820,7 +19820,7 @@
       "atrasoPequenoMin": 0
     },
     "colab-344_2026-10-08": {
-      "note": "ABONO",
+      "note": "Abono Autorizado (NGPonto)",
       "punches": {
         "em": "07:32",
         "et": "",
@@ -19835,14 +19835,14 @@
       ],
       "override": "JUSTIFICADO",
       "override2": "",
-      "resolution": "NENHUMA",
+      "resolution": "ABONAR",
       "atrasoMaior": "",
       "atrasoPequeno": "",
       "atrasoMaiorMin": 0,
       "atrasoPequenoMin": 0
     },
     "colab-344_2026-10-09": {
-      "note": "ABONO",
+      "note": "Abono Autorizado (NGPonto)",
       "punches": {
         "em": "13:48",
         "et": "17:30",
@@ -19857,7 +19857,7 @@
       ],
       "override": "JUSTIFICADO",
       "override2": "",
-      "resolution": "NENHUMA",
+      "resolution": "ABONAR",
       "atrasoMaior": "",
       "atrasoPequeno": "",
       "atrasoMaiorMin": 0,
@@ -20513,7 +20513,7 @@
       "atrasoPequenoMin": 0
     },
     "colab-350_2026-10-09": {
-      "note": "FOLGAS COMP.",
+      "note": "Folga Compensatória (NGPonto)",
       "punches": {
         "em": "08:04",
         "et": "14:30",
@@ -20656,7 +20656,7 @@
       "atrasoPequenoMin": 0
     },
     "colab-350_2026-10-16": {
-      "note": "FOLGAS COMP.",
+      "note": "Folga Compensatória (NGPonto)",
       "punches": {
         "em": "13:52",
         "et": "",
@@ -21290,7 +21290,7 @@
       "atrasoPequenoMin": 0
     },
     "colab-356_2026-10-03": {
-      "note": "FOLGAS COMP.",
+      "note": "Folga Compensatória (NGPonto)",
       "punches": {
         "em": "",
         "et": "",
@@ -22139,14 +22139,14 @@
       "atrasoPequenoMin": 0
     },
     "colab-358_2026-10-13": {
-      "note": "Abono/OK em massa pelo cabeçalho da data",
+      "note": "Folga Compensatória (NGPonto)",
       "punches": {
         "em": "08:00",
         "et": "13:00",
         "sm": "12:00",
         "st": "17:00"
       },
-      "override": "FALTA",
+      "override": "FOLGA COMP",
       "override2": "",
       "resolution": "NENHUMA",
       "atrasoMaior": "",
@@ -22265,7 +22265,7 @@
       "atrasoPequenoMin": 0
     },
     "colab-358_2026-10-19": {
-      "note": "ESQUECEU",
+      "note": "Esqueceu de bater ponto (Justificado no NGPonto)",
       "punches": {
         "em": "08:00",
         "et": "13:57",
@@ -22280,7 +22280,7 @@
       ],
       "override": "JUSTIFICADO",
       "override2": "",
-      "resolution": "NENHUMA",
+      "resolution": "ABONAR",
       "atrasoMaior": "",
       "atrasoPequeno": "",
       "atrasoMaiorMin": 0,
@@ -23357,7 +23357,7 @@
       "atrasoPequenoMin": 0
     },
     "colab-361_2026-10-08": {
-      "note": "",
+      "note": "Folga Compensatória (NGPonto)",
       "punches": {
         "em": "08:00",
         "et": "13:49",
@@ -23370,7 +23370,7 @@
         "14:00",
         "18:00"
       ],
-      "override": "OK",
+      "override": "FOLGA COMP",
       "override2": "",
       "resolution": "NENHUMA",
       "atrasoMaior": "",
@@ -23401,7 +23401,7 @@
       "atrasoPequenoMin": 0
     },
     "colab-361_2026-10-10": {
-      "note": "",
+      "note": "Folga Compensatória (NGPonto)",
       "punches": {
         "em": "08:03",
         "et": "",
@@ -23414,7 +23414,7 @@
         "",
         ""
       ],
-      "override": "OK",
+      "override": "FOLGA COMP",
       "override2": "",
       "resolution": "NENHUMA",
       "atrasoMaior": "",
@@ -23461,7 +23461,7 @@
       "atrasoPequenoMin": 0
     },
     "colab-361_2026-10-13": {
-      "note": "Folga Comp.",
+      "note": "Folga Compensatória (NGPonto)",
       "punches": {
         "em": "07:39",
         "et": "14:21",
@@ -23593,7 +23593,7 @@
       "atrasoPequenoMin": 0
     },
     "colab-361_2026-10-19": {
-      "note": "Atestado",
+      "note": "Atestado Médico (NGPonto)",
       "punches": {
         "em": "07:33",
         "et": "13:38",
@@ -23615,7 +23615,7 @@
       "atrasoPequenoMin": 0
     },
     "colab-361_2026-10-20": {
-      "note": "Atestado",
+      "note": "Atestado Médico (NGPonto)",
       "punches": {
         "em": "",
         "et": "",
@@ -23631,7 +23631,7 @@
       "atrasoPequeno": ""
     },
     "colab-361_2026-10-21": {
-      "note": "Atestado",
+      "note": "Atestado Médico (NGPonto)",
       "punches": {
         "em": "",
         "et": "",
@@ -24846,7 +24846,7 @@
       "atrasoPequenoMin": 0
     },
     "colab-364_2026-10-15": {
-      "note": "ATESTADO",
+      "note": "Atestado Médico (NGPonto)",
       "punches": {
         "em": "",
         "et": "",
@@ -25352,7 +25352,7 @@
       "atrasoPequenoMin": 0
     },
     "colab-365_2026-10-07": {
-      "note": "FOLGAS COMP.",
+      "note": "Folga Compensatória (NGPonto)",
       "punches": {
         "em": "07:31",
         "et": "14:53",
@@ -25517,7 +25517,7 @@
       "atrasoPequenoMin": 0
     },
     "colab-365_2026-10-15": {
-      "note": "FOLGAS COMP.",
+      "note": "Folga Compensatória (NGPonto)",
       "punches": {
         "em": "07:29",
         "et": "14:31",
@@ -25561,7 +25561,7 @@
       "atrasoPequenoMin": 0
     },
     "colab-365_2026-10-17": {
-      "note": "FOLGAS COMP.",
+      "note": "Folga Compensatória (NGPonto)",
       "punches": {
         "em": "",
         "et": "",
@@ -25649,7 +25649,7 @@
       "atrasoPequenoMin": 0
     },
     "colab-365_2026-10-21": {
-      "note": "FOLGAS COMP.",
+      "note": "Folga Compensatória (NGPonto)",
       "punches": {
         "em": "",
         "et": "",
@@ -25693,7 +25693,7 @@
       "atrasoPequenoMin": 0
     },
     "colab-365_2026-10-23": {
-      "note": "ATESTADO",
+      "note": "Atestado Médico (NGPonto)",
       "punches": {
         "em": "",
         "et": "",
@@ -25715,7 +25715,7 @@
       "atrasoPequenoMin": 0
     },
     "colab-365_2026-10-24": {
-      "note": "ATESTADO",
+      "note": "Atestado Médico (NGPonto)",
       "punches": {
         "em": "",
         "et": "",
@@ -26287,7 +26287,7 @@
       "atrasoPequenoMin": 0
     },
     "colab-366_2026-10-19": {
-      "note": "ESQUECEU",
+      "note": "Esqueceu de bater ponto (Justificado no NGPonto)",
       "punches": {
         "em": "07:30",
         "et": "13:30",
@@ -26302,14 +26302,14 @@
       ],
       "override": "JUSTIFICADO",
       "override2": "",
-      "resolution": "NENHUMA",
+      "resolution": "ABONAR",
       "atrasoMaior": "",
       "atrasoPequeno": "",
       "atrasoMaiorMin": 0,
       "atrasoPequenoMin": 0
     },
     "colab-366_2026-10-20": {
-      "note": "FOLGAS COMP.",
+      "note": "Folga Compensatória (NGPonto)",
       "punches": {
         "em": "08:12",
         "et": "13:09",
@@ -26331,7 +26331,7 @@
       "atrasoPequenoMin": 0
     },
     "colab-366_2026-10-21": {
-      "note": "FOLGAS COMP.",
+      "note": "Folga Compensatória (NGPonto)",
       "punches": {
         "em": "08:13",
         "et": "13:15",
@@ -26353,7 +26353,7 @@
       "atrasoPequenoMin": 0
     },
     "colab-366_2026-10-22": {
-      "note": "FOLGAS COMP.",
+      "note": "Folga Compensatória (NGPonto)",
       "punches": {
         "em": "08:14",
         "et": "13:13",
@@ -27484,7 +27484,7 @@
       "atrasoPequenoMin": 0
     },
     "colab-456_2026-10-10": {
-      "note": "Esqueceu",
+      "note": "Esqueceu de bater ponto (Justificado no NGPonto)",
       "punches": {
         "em": "07:00",
         "et": "",
@@ -27499,7 +27499,7 @@
       ],
       "override": "JUSTIFICADO",
       "override2": "",
-      "resolution": "NENHUMA",
+      "resolution": "ABONAR",
       "atrasoMaior": "",
       "atrasoPequeno": "",
       "atrasoMaiorMin": 0,
@@ -27715,7 +27715,7 @@
       "atrasoPequenoMin": 0
     },
     "colab-456_2026-10-21": {
-      "note": "DEC. COMP",
+      "note": "Declaração de Comparecimento (NGPonto)",
       "punches": {
         "em": "12:59",
         "et": "",
@@ -27730,7 +27730,7 @@
       ],
       "override": "JUSTIFICADO",
       "override2": "",
-      "resolution": "NENHUMA",
+      "resolution": "ABONAR",
       "atrasoMaior": "",
       "atrasoPequeno": "",
       "atrasoMaiorMin": 0,
@@ -30574,14 +30574,14 @@
       "atrasoPequenoMin": 0
     },
     "colab-561_2026-10-07": {
-      "note": "Pendência SM (Planilha) (Replicado de 06/10/2026)",
+      "note": "Folga Compensatória (NGPonto)",
       "punches": {
         "em": "07:00",
         "et": "13:00",
         "sm": "11:00",
         "st": "17:00"
       },
-      "override": "OK",
+      "override": "FOLGA COMP",
       "override2": "",
       "resolution": "NENHUMA",
       "atrasoMaior": "",
@@ -30634,7 +30634,7 @@
       "atrasoPequenoMin": 0
     },
     "colab-561_2026-10-10": {
-      "note": "Esqueceu",
+      "note": "Esqueceu de bater ponto (Justificado no NGPonto)",
       "punches": {
         "em": "07:00",
         "et": "",
@@ -30649,7 +30649,7 @@
       ],
       "override": "JUSTIFICADO",
       "override2": "",
-      "resolution": "NENHUMA",
+      "resolution": "ABONAR",
       "atrasoMaior": "",
       "atrasoPequeno": "",
       "atrasoMaiorMin": 0,
@@ -30865,7 +30865,7 @@
       "atrasoPequenoMin": 0
     },
     "colab-561_2026-10-21": {
-      "note": "Esqueceu",
+      "note": "Declaração de Comparecimento (NGPonto)",
       "punches": {
         "em": "07:00",
         "et": "13:00",
@@ -30880,7 +30880,7 @@
       ],
       "override": "JUSTIFICADO",
       "override2": "",
-      "resolution": "NENHUMA",
+      "resolution": "ABONAR",
       "atrasoMaior": "",
       "atrasoPequeno": "",
       "atrasoMaiorMin": 0,
@@ -31129,7 +31129,7 @@
       "atrasoPequenoMin": 0
     },
     "colab-613_2026-10-02": {
-      "note": "Folga Comp.",
+      "note": "Folga Compensatória (NGPonto)",
       "punches": {
         "em": "07:33",
         "et": "12:58",
@@ -31217,7 +31217,7 @@
       "atrasoPequenoMin": 0
     },
     "colab-613_2026-10-06": {
-      "note": "DEC. COMP",
+      "note": "Declaração de Comparecimento (NGPonto)",
       "punches": {
         "em": "13:01",
         "et": "",
@@ -31232,7 +31232,7 @@
       ],
       "override": "JUSTIFICADO",
       "override2": "",
-      "resolution": "NENHUMA",
+      "resolution": "ABONAR",
       "atrasoMaior": "",
       "atrasoPequeno": "",
       "atrasoMaiorMin": 0,
@@ -31305,7 +31305,7 @@
       "atrasoPequenoMin": 0
     },
     "colab-613_2026-10-10": {
-      "note": "Folga Comp.",
+      "note": "Folga Compensatória (NGPonto)",
       "punches": {
         "em": "07:25",
         "et": "",
@@ -31381,7 +31381,7 @@
       "atrasoPequenoMin": 6
     },
     "colab-613_2026-10-14": {
-      "note": "Folga Comp.",
+      "note": "Folga Compensatória (NGPonto)",
       "punches": {
         "em": "07:09",
         "et": "14:30",
@@ -33868,7 +33868,7 @@
       "atrasoPequenoMin": 0
     },
     "colab-701_2026-10-08": {
-      "note": "DEC. COMP",
+      "note": "Declaração de Comparecimento (NGPonto)",
       "punches": {
         "em": "13:58",
         "et": "",
@@ -33883,7 +33883,7 @@
       ],
       "override": "JUSTIFICADO",
       "override2": "",
-      "resolution": "NENHUMA",
+      "resolution": "ABONAR",
       "atrasoMaior": "",
       "atrasoPequeno": "",
       "atrasoMaiorMin": 0,
@@ -34055,14 +34055,14 @@
       "atrasoPequenoMin": 0
     },
     "colab-701_2026-10-17": {
-      "note": "OK em massa pelo cabeçalho da data",
+      "note": "Folga Compensatória (NGPonto)",
       "punches": {
         "em": "08:00",
         "et": "",
         "sm": "12:00",
         "st": ""
       },
-      "override": "OK",
+      "override": "FOLGA COMP",
       "override2": "",
       "resolution": "NENHUMA",
       "atrasoMaior": "",
@@ -34247,14 +34247,14 @@
       "atrasoPequenoMin": 0
     },
     "colab-701_2026-10-26": {
-      "note": "OK em massa pelo cabeçalho da data",
+      "note": "Folga Compensatória (NGPonto)",
       "punches": {
         "em": "08:00",
         "et": "14:00",
         "sm": "12:00",
         "st": "18:00"
       },
-      "override": "OK",
+      "override": "FOLGA COMP",
       "override2": "",
       "resolution": "NENHUMA",
       "atrasoMaior": "",
@@ -36303,14 +36303,14 @@
       "atrasoPequenoMin": 0
     },
     "colab-780_2026-10-07": {
-      "note": "Falta integral (Planilha)",
+      "note": "Folga Compensatória (NGPonto)",
       "punches": {
         "em": "07:00",
         "et": "13:00",
         "sm": "11:00",
         "st": "17:00"
       },
-      "override": "OK",
+      "override": "FOLGA COMP",
       "override2": "",
       "resolution": "NENHUMA",
       "atrasoMaior": "",
@@ -36341,7 +36341,7 @@
       "atrasoPequenoMin": 0
     },
     "colab-780_2026-10-09": {
-      "note": "Folga Comp.",
+      "note": "Folga Compensatória (NGPonto)",
       "punches": {
         "em": "07:00",
         "et": "",
@@ -36363,7 +36363,7 @@
       "atrasoPequenoMin": 0
     },
     "colab-780_2026-10-10": {
-      "note": "Esqueceu",
+      "note": "Esqueceu de bater ponto (Justificado no NGPonto)",
       "punches": {
         "em": "07:00",
         "et": "",
@@ -36378,7 +36378,7 @@
       ],
       "override": "JUSTIFICADO",
       "override2": "",
-      "resolution": "NENHUMA",
+      "resolution": "ABONAR",
       "atrasoMaior": "",
       "atrasoPequeno": "",
       "atrasoMaiorMin": 0,
@@ -36594,7 +36594,7 @@
       "atrasoPequenoMin": 0
     },
     "colab-780_2026-10-21": {
-      "note": "Esqueceu",
+      "note": "Declaração de Comparecimento (NGPonto)",
       "punches": {
         "em": "07:00",
         "et": "13:00",
@@ -36607,9 +36607,9 @@
         "13:00",
         "17:00"
       ],
-      "override": "FOLGA COMP",
+      "override": "JUSTIFICADO",
       "override2": "",
-      "resolution": "NENHUMA",
+      "resolution": "ABONAR",
       "atrasoMaior": "",
       "atrasoPequeno": "",
       "atrasoMaiorMin": 0,
@@ -37903,7 +37903,7 @@
       "atrasoPequenoMin": 0
     },
     "colab-810_2026-10-20": {
-      "note": "Atestado",
+      "note": "Atestado Médico (NGPonto)",
       "punches": {
         "em": "06:58",
         "et": "13:00",
@@ -38249,7 +38249,7 @@
       "atrasoPequenoMin": 0
     },
     "colab-847_2026-10-05": {
-      "note": "Folga Comp.",
+      "note": "Folga Compensatória (NGPonto)",
       "punches": {
         "em": "07:58",
         "et": "14:51",
@@ -39987,7 +39987,7 @@
       "atrasoPequenoMin": 0
     },
     "colab-863_2026-10-23": {
-      "note": "Folga Comp.",
+      "note": "Folga Compensatória (NGPonto)",
       "punches": {
         "em": "07:59",
         "et": "13:59",
@@ -40229,7 +40229,7 @@
       "atrasoPequenoMin": 0
     },
     "colab-867_2026-10-03": {
-      "note": "Folga Comp.",
+      "note": "Folga Compensatória (NGPonto)",
       "punches": {
         "em": "",
         "et": "",
@@ -40383,7 +40383,7 @@
       "atrasoPequenoMin": 0
     },
     "colab-867_2026-10-10": {
-      "note": "Esqueceu",
+      "note": "Esqueceu de bater ponto (Justificado no NGPonto)",
       "punches": {
         "em": "07:00",
         "et": "",
@@ -40398,7 +40398,7 @@
       ],
       "override": "JUSTIFICADO",
       "override2": "",
-      "resolution": "NENHUMA",
+      "resolution": "ABONAR",
       "atrasoMaior": "",
       "atrasoPequeno": "",
       "atrasoMaiorMin": 0,
@@ -40504,7 +40504,7 @@
       "atrasoPequenoMin": 0
     },
     "colab-867_2026-10-16": {
-      "note": "Folga Comp.",
+      "note": "Folga Compensatória (NGPonto)",
       "punches": {
         "em": "07:00",
         "et": "",
@@ -40526,7 +40526,7 @@
       "atrasoPequenoMin": 0
     },
     "colab-867_2026-10-17": {
-      "note": "Folga Comp.",
+      "note": "Folga Compensatória (NGPonto)",
       "punches": {
         "em": "",
         "et": "",
@@ -40636,7 +40636,7 @@
       "atrasoPequenoMin": 0
     },
     "colab-867_2026-10-22": {
-      "note": "DEC. COMP",
+      "note": "Declaração de Comparecimento (NGPonto)",
       "punches": {
         "em": "07:00",
         "et": "",
@@ -40649,9 +40649,9 @@
         "13:00",
         "17:00"
       ],
-      "override": "FOLGA COMP",
+      "override": "JUSTIFICADO",
       "override2": "",
-      "resolution": "NENHUMA",
+      "resolution": "ABONAR",
       "atrasoMaior": "",
       "atrasoPequeno": "",
       "atrasoMaiorMin": 0,
@@ -41128,16 +41128,16 @@
       "atrasoPequenoMin": 0
     },
     "colab-890_2026-10-22": {
-      "note": "Férias (Planilha) (Replicado de 10/10/2026)",
+      "note": "Abono Autorizado (NGPonto)",
       "punches": {
         "em": "08:00",
         "et": "13:00",
         "sm": "12:00",
         "st": "17:00"
       },
-      "override": "OK",
+      "override": "JUSTIFICADO",
       "override2": "",
-      "resolution": "NENHUMA",
+      "resolution": "ABONAR",
       "atrasoMaior": "",
       "atrasoPequeno": "",
       "atrasoMaiorMin": 0,
@@ -41300,7 +41300,7 @@
       "atrasoPequenoMin": 0
     },
     "colab-898_2026-10-03": {
-      "note": "Folga Comp.",
+      "note": "Folga Compensatória (NGPonto)",
       "punches": {
         "em": "",
         "et": "",
@@ -41597,7 +41597,7 @@
       "atrasoPequenoMin": 0
     },
     "colab-898_2026-10-17": {
-      "note": "Folga Comp.",
+      "note": "Folga Compensatória (NGPonto)",
       "punches": {
         "em": "",
         "et": "",
@@ -41663,7 +41663,7 @@
       "atrasoPequenoMin": 0
     },
     "colab-898_2026-10-20": {
-      "note": "Folga Comp.",
+      "note": "Folga Compensatória (NGPonto)",
       "punches": {
         "em": "07:58",
         "et": "12:59",
@@ -41927,7 +41927,7 @@
       "atrasoPequenoMin": 0
     },
     "colab-900_2026-10-01": {
-      "note": "Esqueceu",
+      "note": "Esqueceu de bater ponto (Justificado no NGPonto)",
       "punches": {
         "em": "07:55",
         "et": "13:56",
@@ -41942,7 +41942,7 @@
       ],
       "override": "JUSTIFICADO",
       "override2": "",
-      "resolution": "NENHUMA",
+      "resolution": "ABONAR",
       "atrasoMaior": "",
       "atrasoPequeno": "",
       "atrasoMaiorMin": 0,
@@ -42103,7 +42103,7 @@
       "atrasoPequenoMin": 0
     },
     "colab-900_2026-10-09": {
-      "note": "Atestado",
+      "note": "Atestado Médico (NGPonto)",
       "punches": {
         "em": "07:39",
         "et": "13:51",
@@ -42125,18 +42125,20 @@
       "atrasoPequenoMin": 0
     },
     "colab-900_2026-10-10": {
-      "note": "Presença regular (Planilha)",
+      "note": "Folga Compensatória (NGPonto)",
       "punches": {
         "em": "08:00",
         "et": "13:00",
         "sm": "12:00",
         "st": "17:00"
       },
-      "override": "OK",
+      "override": "FOLGA COMP",
       "override2": "",
       "resolution": "NENHUMA",
       "atrasoMaiorMin": 0,
-      "atrasoPequenoMin": 0
+      "atrasoPequenoMin": 0,
+      "atrasoMaior": "",
+      "atrasoPequeno": ""
     },
     "colab-900_2026-10-11": {
       "note": "Repouso Semanal Remunerado / Folga",
@@ -42216,7 +42218,7 @@
       "atrasoPequenoMin": 0
     },
     "colab-900_2026-10-15": {
-      "note": "Atestado",
+      "note": "Atestado Médico (NGPonto)",
       "punches": {
         "em": "07:55",
         "et": "16:06",
@@ -42666,18 +42668,20 @@
       "atrasoPequenoMin": 0
     },
     "colab-908_2026-10-03": {
-      "note": "Presença regular (Planilha)",
+      "note": "Folga Compensatória (NGPonto)",
       "punches": {
         "em": "08:00",
         "et": "13:00",
         "sm": "12:00",
         "st": "17:00"
       },
-      "override": "OK",
+      "override": "FOLGA COMP",
       "override2": "",
       "resolution": "NENHUMA",
       "atrasoMaiorMin": 0,
-      "atrasoPequenoMin": 0
+      "atrasoPequenoMin": 0,
+      "atrasoMaior": "",
+      "atrasoPequeno": ""
     },
     "colab-908_2026-10-04": {
       "note": "Repouso Semanal Remunerado / Folga",
@@ -42702,7 +42706,7 @@
       "atrasoPequenoMin": 0
     },
     "colab-908_2026-10-05": {
-      "note": "Folga Comp.",
+      "note": "Folga Compensatória (NGPonto)",
       "punches": {
         "em": "07:32",
         "et": "13:40",
@@ -42746,7 +42750,7 @@
       "atrasoPequenoMin": 0
     },
     "colab-908_2026-10-07": {
-      "note": "Folga Comp.",
+      "note": "Folga Compensatória (NGPonto)",
       "punches": {
         "em": "07:32",
         "et": "13:29",
@@ -42812,18 +42816,20 @@
       "atrasoPequenoMin": 0
     },
     "colab-908_2026-10-10": {
-      "note": "Presença regular (Planilha)",
+      "note": "Folga Compensatória (NGPonto)",
       "punches": {
         "em": "08:00",
         "et": "13:00",
         "sm": "12:00",
         "st": "17:00"
       },
-      "override": "OK",
+      "override": "FOLGA COMP",
       "override2": "",
       "resolution": "NENHUMA",
       "atrasoMaiorMin": 0,
-      "atrasoPequenoMin": 0
+      "atrasoPequenoMin": 0,
+      "atrasoMaior": "",
+      "atrasoPequeno": ""
     },
     "colab-908_2026-10-11": {
       "note": "Repouso Semanal Remunerado / Folga",
@@ -42881,7 +42887,7 @@
       "resolution": "ABONAR"
     },
     "colab-908_2026-10-14": {
-      "note": "Folga Comp.",
+      "note": "Folga Compensatória (NGPonto)",
       "punches": {
         "em": "07:31",
         "et": "13:28",
@@ -42903,7 +42909,7 @@
       "atrasoPequenoMin": 0
     },
     "colab-908_2026-10-15": {
-      "note": "Folga Comp.",
+      "note": "Folga Compensatória (NGPonto)",
       "punches": {
         "em": "07:36",
         "et": "13:42",
@@ -43057,7 +43063,7 @@
       "atrasoPequenoMin": 0
     },
     "colab-908_2026-10-22": {
-      "note": "Atestado",
+      "note": "Atestado Médico (NGPonto)",
       "punches": {
         "em": "",
         "et": "",
@@ -43079,7 +43085,7 @@
       "atrasoPequenoMin": 0
     },
     "colab-908_2026-10-23": {
-      "note": "Atestado",
+      "note": "Atestado Médico (NGPonto)",
       "punches": {
         "em": "08:38",
         "et": "14:08",
@@ -43101,7 +43107,7 @@
       "atrasoPequenoMin": 0
     },
     "colab-908_2026-10-24": {
-      "note": "",
+      "note": "Folga Compensatória (NGPonto)",
       "punches": {
         "em": "",
         "et": "",
@@ -43114,7 +43120,7 @@
         "",
         ""
       ],
-      "override": "OK",
+      "override": "FOLGA COMP",
       "override2": "",
       "resolution": "NENHUMA",
       "atrasoMaior": "",
@@ -43619,7 +43625,7 @@
       "atrasoPequenoMin": 0
     },
     "colab-917_2026-10-06": {
-      "note": "Esqueceu",
+      "note": "Esqueceu de bater ponto (Justificado no NGPonto)",
       "punches": {
         "em": "07:33",
         "et": "14:02",
@@ -43634,7 +43640,7 @@
       ],
       "override": "JUSTIFICADO",
       "override2": "",
-      "resolution": "NENHUMA",
+      "resolution": "ABONAR",
       "atrasoMaior": "",
       "atrasoPequeno": "",
       "atrasoMaiorMin": 0,
@@ -43685,7 +43691,7 @@
       "atrasoPequenoMin": 0
     },
     "colab-917_2026-10-09": {
-      "note": "Folga Comp.",
+      "note": "Folga Compensatória (NGPonto)",
       "punches": {
         "em": "07:38",
         "et": "11:18",
@@ -43773,15 +43779,20 @@
       "atrasoPequenoMin": 0
     },
     "colab-917_2026-10-13": {
-      "note": "Abono/OK em massa pelo cabeçalho da data",
+      "note": "Esqueceu de bater ponto (Justificado no NGPonto)",
       "punches": {
         "em": "08:00",
         "et": "13:00",
         "sm": "12:00",
         "st": "17:00"
       },
-      "override": "OK",
-      "resolution": "ABONAR"
+      "override": "JUSTIFICADO",
+      "resolution": "ABONAR",
+      "override2": "",
+      "atrasoMaiorMin": 0,
+      "atrasoMaior": "",
+      "atrasoPequenoMin": 0,
+      "atrasoPequeno": ""
     },
     "colab-917_2026-10-14": {
       "note": "",
@@ -44944,7 +44955,7 @@
       "atrasoPequenoMin": 0
     },
     "colab-942_2026-10-06": {
-      "note": "Esqueceu",
+      "note": "Esqueceu de bater ponto (Justificado no NGPonto)",
       "punches": {
         "em": "08:00",
         "et": "13:57",
@@ -44959,14 +44970,14 @@
       ],
       "override": "JUSTIFICADO",
       "override2": "",
-      "resolution": "NENHUMA",
+      "resolution": "ABONAR",
       "atrasoMaior": "",
       "atrasoPequeno": "",
       "atrasoMaiorMin": 0,
       "atrasoPequenoMin": 0
     },
     "colab-942_2026-10-07": {
-      "note": "Esqueceu",
+      "note": "Esqueceu de bater ponto (Justificado no NGPonto)",
       "punches": {
         "em": "07:45",
         "et": "14:05",
@@ -44981,7 +44992,7 @@
       ],
       "override": "JUSTIFICADO",
       "override2": "",
-      "resolution": "NENHUMA",
+      "resolution": "ABONAR",
       "atrasoMaior": "",
       "atrasoPequeno": "",
       "atrasoMaiorMin": 0,
@@ -45010,7 +45021,7 @@
       "atrasoPequenoMin": 0
     },
     "colab-942_2026-10-09": {
-      "note": "Esqueceu",
+      "note": "Esqueceu de bater ponto (Justificado no NGPonto)",
       "punches": {
         "em": "08:00",
         "et": "13:55",
@@ -45025,14 +45036,14 @@
       ],
       "override": "JUSTIFICADO",
       "override2": "",
-      "resolution": "NENHUMA",
+      "resolution": "ABONAR",
       "atrasoMaior": "",
       "atrasoPequeno": "",
       "atrasoMaiorMin": 0,
       "atrasoPequenoMin": 0
     },
     "colab-942_2026-10-10": {
-      "note": "Folga Comp.",
+      "note": "Folga Compensatória (NGPonto)",
       "punches": {
         "em": "",
         "et": "",
@@ -45153,7 +45164,7 @@
       "atrasoPequenoMin": 0
     },
     "colab-942_2026-10-16": {
-      "note": "Justificado",
+      "note": "Esqueceu de bater ponto (Justificado no NGPonto)",
       "punches": {
         "em": "07:59",
         "et": "13:58",
@@ -45168,7 +45179,7 @@
       ],
       "override": "JUSTIFICADO",
       "override2": "",
-      "resolution": "NENHUMA",
+      "resolution": "ABONAR",
       "atrasoMaior": "",
       "atrasoPequeno": "",
       "atrasoMaiorMin": 0,
@@ -45219,7 +45230,7 @@
       "atrasoPequenoMin": 0
     },
     "colab-942_2026-10-19": {
-      "note": "Justificado",
+      "note": "Esqueceu de bater ponto (Justificado no NGPonto)",
       "punches": {
         "em": "07:45",
         "et": "13:54",
@@ -45234,7 +45245,7 @@
       ],
       "override": "JUSTIFICADO",
       "override2": "",
-      "resolution": "NENHUMA",
+      "resolution": "ABONAR",
       "atrasoMaior": "",
       "atrasoPequeno": "",
       "atrasoMaiorMin": 0,
@@ -45263,7 +45274,7 @@
       "atrasoPequenoMin": 0
     },
     "colab-942_2026-10-21": {
-      "note": "Justificado",
+      "note": "Esqueceu de bater ponto (Justificado no NGPonto)",
       "punches": {
         "em": "08:00",
         "et": "14:00",
@@ -45278,7 +45289,7 @@
       ],
       "override": "JUSTIFICADO",
       "override2": "",
-      "resolution": "NENHUMA",
+      "resolution": "ABONAR",
       "atrasoMaior": "",
       "atrasoPequeno": "",
       "atrasoMaiorMin": 0,
@@ -48222,7 +48233,7 @@
       "atrasoPequenoMin": 0
     },
     "colab-961_2026-10-02": {
-      "note": "DEC. COMP",
+      "note": "Declaração de Comparecimento (NGPonto)",
       "punches": {
         "em": "08:00",
         "et": "13:59",
@@ -48237,7 +48248,7 @@
       ],
       "override": "JUSTIFICADO",
       "override2": "",
-      "resolution": "NENHUMA",
+      "resolution": "ABONAR",
       "atrasoMaior": "",
       "atrasoPequeno": "",
       "atrasoMaiorMin": 0,
@@ -48497,21 +48508,23 @@
       "atrasoPequenoMin": 0
     },
     "colab-961_2026-10-15": {
-      "note": "Dia futuro em aberto (desmarcado)",
+      "note": "Atestado Médico (NGPonto)",
       "punches": {
         "em": "",
         "et": "",
         "sm": "",
         "st": ""
       },
-      "override": "VAZIO",
+      "override": "ATESTADO",
       "override2": "",
       "resolution": "NENHUMA",
       "atrasoMaiorMin": 0,
-      "atrasoPequenoMin": 0
+      "atrasoPequenoMin": 0,
+      "atrasoMaior": "",
+      "atrasoPequeno": ""
     },
     "colab-961_2026-10-16": {
-      "note": "DEC. COMP",
+      "note": "Declaração de Comparecimento (NGPonto)",
       "punches": {
         "em": "13:59",
         "et": "",
@@ -48526,14 +48539,14 @@
       ],
       "override": "JUSTIFICADO",
       "override2": "",
-      "resolution": "NENHUMA",
+      "resolution": "ABONAR",
       "atrasoMaior": "",
       "atrasoPequeno": "",
       "atrasoMaiorMin": 0,
       "atrasoPequenoMin": 0
     },
     "colab-961_2026-10-17": {
-      "note": "Esqueceu",
+      "note": "Esqueceu de bater ponto (Justificado no NGPonto)",
       "punches": {
         "em": "08:00",
         "et": "",
@@ -48548,7 +48561,7 @@
       ],
       "override": "JUSTIFICADO",
       "override2": "",
-      "resolution": "NENHUMA",
+      "resolution": "ABONAR",
       "atrasoMaior": "",
       "atrasoPequeno": "",
       "atrasoMaiorMin": 0,
@@ -48577,7 +48590,7 @@
       "atrasoPequenoMin": 0
     },
     "colab-961_2026-10-19": {
-      "note": "DEC. COMP",
+      "note": "Declaração de Comparecimento (NGPonto)",
       "punches": {
         "em": "",
         "et": "",
@@ -48592,14 +48605,14 @@
       ],
       "override": "JUSTIFICADO",
       "override2": "",
-      "resolution": "NENHUMA",
+      "resolution": "ABONAR",
       "atrasoMaior": "",
       "atrasoPequeno": "",
       "atrasoMaiorMin": 0,
       "atrasoPequenoMin": 0
     },
     "colab-961_2026-10-20": {
-      "note": "DEC. COMP",
+      "note": "Declaração de Comparecimento (NGPonto)",
       "punches": {
         "em": "08:00",
         "et": "14:00",
@@ -48614,7 +48627,7 @@
       ],
       "override": "JUSTIFICADO",
       "override2": "",
-      "resolution": "NENHUMA",
+      "resolution": "ABONAR",
       "atrasoMaior": "",
       "atrasoPequeno": "",
       "atrasoMaiorMin": 0,
@@ -48665,7 +48678,7 @@
       "atrasoPequenoMin": 0
     },
     "colab-961_2026-10-23": {
-      "note": "OK em massa pelo cabeçalho da data",
+      "note": "Atestado Médico (NGPonto)",
       "punches": {
         "em": "08:00",
         "et": "13:00",
@@ -48857,7 +48870,7 @@
       "atrasoPequenoMin": 0
     },
     "colab-963_2026-10-01": {
-      "note": "Atestado",
+      "note": "Atestado Médico (NGPonto)",
       "punches": {
         "em": "08:32",
         "et": "13:58",
@@ -48879,32 +48892,36 @@
       "atrasoPequenoMin": 0
     },
     "colab-963_2026-10-02": {
-      "note": "Presença regular (Planilha)",
+      "note": "Folga Compensatória (NGPonto)",
       "punches": {
         "em": "08:00",
         "et": "13:00",
         "sm": "12:00",
         "st": "17:00"
       },
-      "override": "OK",
+      "override": "FOLGA COMP",
       "override2": "",
       "resolution": "NENHUMA",
       "atrasoMaiorMin": 0,
-      "atrasoPequenoMin": 0
+      "atrasoPequenoMin": 0,
+      "atrasoMaior": "",
+      "atrasoPequeno": ""
     },
     "colab-963_2026-10-03": {
-      "note": "Presença regular (Planilha)",
+      "note": "Folga Compensatória (NGPonto)",
       "punches": {
         "em": "08:00",
         "et": "13:00",
         "sm": "12:00",
         "st": "17:00"
       },
-      "override": "OK",
+      "override": "FOLGA COMP",
       "override2": "",
       "resolution": "NENHUMA",
       "atrasoMaiorMin": 0,
-      "atrasoPequenoMin": 0
+      "atrasoPequenoMin": 0,
+      "atrasoMaior": "",
+      "atrasoPequeno": ""
     },
     "colab-963_2026-10-04": {
       "note": "Repouso Semanal Remunerado / Folga",
@@ -49039,18 +49056,20 @@
       "atrasoPequenoMin": 0
     },
     "colab-963_2026-10-10": {
-      "note": "Presença regular (Planilha)",
+      "note": "Folga Compensatória (NGPonto)",
       "punches": {
         "em": "08:00",
         "et": "13:00",
         "sm": "12:00",
         "st": "17:00"
       },
-      "override": "OK",
+      "override": "FOLGA COMP",
       "override2": "",
       "resolution": "NENHUMA",
       "atrasoMaiorMin": 0,
-      "atrasoPequenoMin": 0
+      "atrasoPequenoMin": 0,
+      "atrasoMaior": "",
+      "atrasoPequeno": ""
     },
     "colab-963_2026-10-11": {
       "note": "Repouso Semanal Remunerado / Folga",
@@ -51710,7 +51729,7 @@
       "atrasoPequenoMin": 0
     },
     "colab-974_2026-10-17": {
-      "note": "Folga Comp.",
+      "note": "Folga Compensatória (NGPonto)",
       "punches": {
         "em": "",
         "et": "",
@@ -52909,7 +52928,7 @@
       "atrasoPequenoMin": 0
     },
     "colab-977_2026-10-10": {
-      "note": "Esqueceu",
+      "note": "Esqueceu de bater ponto (Justificado no NGPonto)",
       "punches": {
         "em": "07:00",
         "et": "",
@@ -52924,7 +52943,7 @@
       ],
       "override": "JUSTIFICADO",
       "override2": "",
-      "resolution": "NENHUMA",
+      "resolution": "ABONAR",
       "atrasoMaior": "",
       "atrasoPequeno": "",
       "atrasoMaiorMin": 0,
@@ -54437,14 +54456,14 @@
       "atrasoPequenoMin": 0
     },
     "colab-990_2026-10-02": {
-      "note": "Atraso registrado A.30 (Planilha)",
+      "note": "Folga Compensatória (NGPonto)",
       "punches": {
         "em": "",
         "et": "",
         "sm": "",
         "st": ""
       },
-      "override": "AUTO",
+      "override": "FOLGA COMP",
       "override2": "",
       "resolution": "NENHUMA",
       "atrasoMaior": "",
@@ -54615,18 +54634,20 @@
       "atrasoPequenoMin": 0
     },
     "colab-990_2026-10-19": {
-      "note": "Dia futuro em aberto (desmarcado)",
+      "note": "Folga Compensatória (NGPonto)",
       "punches": {
         "em": "",
         "et": "",
         "sm": "",
         "st": ""
       },
-      "override": "VAZIO",
+      "override": "FOLGA COMP",
       "override2": "",
       "resolution": "NENHUMA",
       "atrasoMaiorMin": 0,
-      "atrasoPequenoMin": 0
+      "atrasoPequenoMin": 0,
+      "atrasoMaior": "",
+      "atrasoPequeno": ""
     },
     "colab-990_2026-10-20": {
       "note": "Dia futuro em aberto (desmarcado)",
@@ -54657,30 +54678,30 @@
       "atrasoPequenoMin": 0
     },
     "colab-990_2026-10-22": {
-      "note": "OK em massa pelo cabeçalho da data",
+      "note": "Abono Autorizado (NGPonto)",
       "punches": {
         "em": "08:00",
         "et": "13:00",
         "sm": "12:00",
         "st": "17:00"
       },
-      "override": "OK",
+      "override": "JUSTIFICADO",
       "override2": "",
-      "resolution": "NENHUMA",
+      "resolution": "ABONAR",
       "atrasoMaior": "",
       "atrasoPequeno": "",
       "atrasoMaiorMin": 0,
       "atrasoPequenoMin": 0
     },
     "colab-990_2026-10-23": {
-      "note": "Dia futuro em aberto (desmarcado)",
+      "note": "Atestado Médico (NGPonto)",
       "punches": {
         "em": "08:00",
         "et": "13:00",
         "sm": "12:00",
         "st": "17:00"
       },
-      "override": "OK",
+      "override": "ATESTADO",
       "override2": "",
       "resolution": "NENHUMA",
       "atrasoMaior": "",
@@ -54831,14 +54852,14 @@
       "atrasoPequenoMin": 0
     },
     "colab-993_2026-10-03": {
-      "note": "Falta integral (Planilha)",
+      "note": "Folga Compensatória (NGPonto)",
       "punches": {
         "em": "07:00",
         "et": "",
         "sm": "11:00",
         "st": ""
       },
-      "override": "OK",
+      "override": "FOLGA COMP",
       "override2": "",
       "resolution": "NENHUMA",
       "atrasoMaior": "",
@@ -54913,7 +54934,7 @@
       "atrasoPequenoMin": 0
     },
     "colab-993_2026-10-07": {
-      "note": "Folga Comp.",
+      "note": "Folga Compensatória (NGPonto)",
       "punches": {
         "em": "12:57",
         "et": "",
@@ -54979,7 +55000,7 @@
       "atrasoPequenoMin": 0
     },
     "colab-993_2026-10-10": {
-      "note": "Esqueceu",
+      "note": "Esqueceu de bater ponto (Justificado no NGPonto)",
       "punches": {
         "em": "07:00",
         "et": "",
@@ -54994,7 +55015,7 @@
       ],
       "override": "JUSTIFICADO",
       "override2": "",
-      "resolution": "NENHUMA",
+      "resolution": "ABONAR",
       "atrasoMaior": "",
       "atrasoPequeno": "",
       "atrasoMaiorMin": 0,
@@ -55122,7 +55143,7 @@
       "atrasoPequenoMin": 0
     },
     "colab-993_2026-10-17": {
-      "note": "Folga Comp.",
+      "note": "Folga Compensatória (NGPonto)",
       "punches": {
         "em": "",
         "et": "",
@@ -55232,7 +55253,7 @@
       "atrasoPequenoMin": 0
     },
     "colab-993_2026-10-22": {
-      "note": "Folga Comp.",
+      "note": "Folga Compensatória (NGPonto)",
       "punches": {
         "em": "12:55",
         "et": "",
@@ -55628,14 +55649,14 @@
       "atrasoPequenoMin": 0
     },
     "colab-994_2026-10-09": {
-      "note": "Falta integral (Planilha)",
+      "note": "Folga Compensatória (NGPonto)",
       "punches": {
         "em": "07:00",
         "et": "13:00",
         "sm": "11:00",
         "st": "17:00"
       },
-      "override": "OK",
+      "override": "FOLGA COMP",
       "override2": "",
       "resolution": "NENHUMA",
       "atrasoMaior": "",
@@ -55721,7 +55742,7 @@
       "resolution": "ABONAR"
     },
     "colab-994_2026-10-14": {
-      "note": "Atestado",
+      "note": "Atestado Médico (NGPonto)",
       "punches": {
         "em": "07:39",
         "et": "13:03",
@@ -55919,7 +55940,7 @@
       "atrasoPequenoMin": 0
     },
     "colab-994_2026-10-23": {
-      "note": "Folga Comp.",
+      "note": "Folga Compensatória (NGPonto)",
       "punches": {
         "em": "06:57",
         "et": "12:57",
@@ -55941,14 +55962,14 @@
       "atrasoPequenoMin": 0
     },
     "colab-994_2026-10-24": {
-      "note": "OK em massa pelo cabeçalho da data",
+      "note": "Folga Compensatória (NGPonto)",
       "punches": {
         "em": "07:00",
         "et": "",
         "sm": "11:00",
         "st": ""
       },
-      "override": "OK",
+      "override": "FOLGA COMP",
       "override2": "",
       "resolution": "NENHUMA",
       "atrasoMaior": "",
@@ -56199,7 +56220,7 @@
       "atrasoPequenoMin": 0
     },
     "colab-997_2026-10-05": {
-      "note": "Atestado médico (Planilha)",
+      "note": "Atestado Médico (NGPonto)",
       "punches": {
         "em": "",
         "et": "",
@@ -56210,7 +56231,9 @@
       "override2": "",
       "resolution": "NENHUMA",
       "atrasoMaiorMin": 0,
-      "atrasoPequenoMin": 0
+      "atrasoPequenoMin": 0,
+      "atrasoMaior": "",
+      "atrasoPequeno": ""
     },
     "colab-997_2026-10-06": {
       "note": "",
@@ -56433,18 +56456,20 @@
       "atrasoPequenoMin": 0
     },
     "colab-997_2026-10-16": {
-      "note": "Dia futuro em aberto (desmarcado)",
+      "note": "Atestado Médico (NGPonto)",
       "punches": {
         "em": "",
         "et": "",
         "sm": "",
         "st": ""
       },
-      "override": "VAZIO",
+      "override": "ATESTADO",
       "override2": "",
       "resolution": "NENHUMA",
       "atrasoMaiorMin": 0,
-      "atrasoPequenoMin": 0
+      "atrasoPequenoMin": 0,
+      "atrasoMaior": "",
+      "atrasoPequeno": ""
     },
     "colab-997_2026-10-17": {
       "note": "",
@@ -56831,7 +56856,7 @@
       "atrasoPequenoMin": 0
     },
     "colab-999_2026-10-05": {
-      "note": "Atestado",
+      "note": "Atestado Médico (NGPonto)",
       "punches": {
         "em": "14:00",
         "et": "",
@@ -57133,7 +57158,7 @@
       "atrasoPequenoMin": 0
     },
     "colab-999_2026-10-19": {
-      "note": "Esqueceu",
+      "note": "Esqueceu de bater ponto (Justificado no NGPonto)",
       "punches": {
         "em": "08:00",
         "et": "",
@@ -57148,7 +57173,7 @@
       ],
       "override": "JUSTIFICADO",
       "override2": "",
-      "resolution": "NENHUMA",
+      "resolution": "ABONAR",
       "atrasoMaior": "",
       "atrasoPequeno": "",
       "atrasoMaiorMin": 0,
@@ -57501,32 +57526,36 @@
       "atrasoPequenoMin": 0
     },
     "colab-1000_2026-10-05": {
-      "note": "Presença regular (Planilha)",
+      "note": "Atestado Médico (NGPonto)",
       "punches": {
         "em": "08:00",
         "et": "13:00",
         "sm": "12:00",
         "st": "17:00"
       },
-      "override": "OK",
+      "override": "ATESTADO",
       "override2": "",
       "resolution": "NENHUMA",
       "atrasoMaiorMin": 0,
-      "atrasoPequenoMin": 0
+      "atrasoPequenoMin": 0,
+      "atrasoMaior": "",
+      "atrasoPequeno": ""
     },
     "colab-1000_2026-10-06": {
-      "note": "Presença regular (Planilha)",
+      "note": "Atestado Médico (NGPonto)",
       "punches": {
         "em": "08:00",
         "et": "13:00",
         "sm": "12:00",
         "st": "17:00"
       },
-      "override": "OK",
+      "override": "ATESTADO",
       "override2": "",
       "resolution": "NENHUMA",
       "atrasoMaiorMin": 0,
-      "atrasoPequenoMin": 0
+      "atrasoPequenoMin": 0,
+      "atrasoMaior": "",
+      "atrasoPequeno": ""
     },
     "colab-1000_2026-10-07": {
       "note": "ATESTADO",
@@ -57595,7 +57624,7 @@
       "atrasoPequenoMin": 0
     },
     "colab-1000_2026-10-10": {
-      "note": "Esqueceu",
+      "note": "Esqueceu de bater ponto (Justificado no NGPonto)",
       "punches": {
         "em": "08:00",
         "et": "",
@@ -57610,7 +57639,7 @@
       ],
       "override": "JUSTIFICADO",
       "override2": "",
-      "resolution": "NENHUMA",
+      "resolution": "ABONAR",
       "atrasoMaior": "",
       "atrasoPequeno": "",
       "atrasoMaiorMin": 0,
@@ -57672,7 +57701,7 @@
       "resolution": "ABONAR"
     },
     "colab-1000_2026-10-14": {
-      "note": "Justificado",
+      "note": "Esqueceu de bater ponto (Justificado no NGPonto)",
       "punches": {
         "em": "08:01",
         "et": "14:00",
@@ -57687,14 +57716,14 @@
       ],
       "override": "JUSTIFICADO",
       "override2": "",
-      "resolution": "NENHUMA",
+      "resolution": "ABONAR",
       "atrasoMaior": "",
       "atrasoPequeno": "",
       "atrasoMaiorMin": 0,
       "atrasoPequenoMin": 0
     },
     "colab-1000_2026-10-15": {
-      "note": "Atestado",
+      "note": "Atestado Médico (NGPonto)",
       "punches": {
         "em": "08:46",
         "et": "13:59",
@@ -57738,7 +57767,7 @@
       "atrasoPequenoMin": 0
     },
     "colab-1000_2026-10-17": {
-      "note": "Justificado",
+      "note": "Esqueceu de bater ponto (Justificado no NGPonto)",
       "punches": {
         "em": "08:00",
         "et": "",
@@ -57753,7 +57782,7 @@
       ],
       "override": "JUSTIFICADO",
       "override2": "",
-      "resolution": "NENHUMA",
+      "resolution": "ABONAR",
       "atrasoMaior": "",
       "atrasoPequeno": "",
       "atrasoMaiorMin": 0,
@@ -57782,7 +57811,7 @@
       "atrasoPequenoMin": 0
     },
     "colab-1000_2026-10-19": {
-      "note": "Justificado",
+      "note": "Esqueceu de bater ponto (Justificado no NGPonto)",
       "punches": {
         "em": "08:00",
         "et": "14:00",
@@ -57797,7 +57826,7 @@
       ],
       "override": "JUSTIFICADO",
       "override2": "",
-      "resolution": "NENHUMA",
+      "resolution": "ABONAR",
       "atrasoMaior": "",
       "atrasoPequeno": "",
       "atrasoMaiorMin": 0,
@@ -58156,7 +58185,7 @@
       "atrasoPequenoMin": 0
     },
     "colab-1008_2026-10-05": {
-      "note": "Esqueceu",
+      "note": "Esqueceu de bater ponto (Justificado no NGPonto)",
       "punches": {
         "em": "08:24",
         "et": "14:00",
@@ -58171,7 +58200,7 @@
       ],
       "override": "JUSTIFICADO",
       "override2": "",
-      "resolution": "NENHUMA",
+      "resolution": "ABONAR",
       "atrasoMaior": "",
       "atrasoPequeno": "",
       "atrasoMaiorMin": 0,
@@ -58376,7 +58405,7 @@
       "atrasoPequenoMin": 0
     },
     "colab-1008_2026-10-15": {
-      "note": "Folga Comp.",
+      "note": "Folga Compensatória (NGPonto)",
       "punches": {
         "em": "",
         "et": "",
@@ -58486,7 +58515,7 @@
       "atrasoPequenoMin": 0
     },
     "colab-1008_2026-10-20": {
-      "note": "Esqueceu",
+      "note": "Esqueceu de bater ponto (Justificado no NGPonto)",
       "punches": {
         "em": "08:17",
         "et": "14:00",
@@ -58501,7 +58530,7 @@
       ],
       "override": "JUSTIFICADO",
       "override2": "",
-      "resolution": "NENHUMA",
+      "resolution": "ABONAR",
       "atrasoMaior": "",
       "atrasoPequeno": "",
       "atrasoMaiorMin": 0,
@@ -58832,7 +58861,7 @@
       "atrasoPequenoMin": 0
     },
     "colab-1009_2026-10-05": {
-      "note": "Folga Comp.",
+      "note": "Folga Compensatória (NGPonto)",
       "punches": {
         "em": "06:57",
         "et": "12:58",
@@ -58876,7 +58905,7 @@
       "atrasoPequenoMin": 0
     },
     "colab-1009_2026-10-07": {
-      "note": "Folga Comp.",
+      "note": "Folga Compensatória (NGPonto)",
       "punches": {
         "em": "07:49",
         "et": "12:57",
@@ -58942,7 +58971,7 @@
       "atrasoPequenoMin": 0
     },
     "colab-1009_2026-10-10": {
-      "note": "Esqueceu",
+      "note": "Esqueceu de bater ponto (Justificado no NGPonto)",
       "punches": {
         "em": "07:00",
         "et": "",
@@ -58957,7 +58986,7 @@
       ],
       "override": "JUSTIFICADO",
       "override2": "",
-      "resolution": "NENHUMA",
+      "resolution": "ABONAR",
       "atrasoMaior": "",
       "atrasoPequeno": "",
       "atrasoMaiorMin": 0,
@@ -59569,7 +59598,7 @@
       "atrasoPequenoMin": 0
     },
     "colab-1013_2026-10-08": {
-      "note": "Atestado",
+      "note": "Atestado Médico (NGPonto)",
       "punches": {
         "em": "08:00",
         "et": "",
@@ -59712,7 +59741,7 @@
       "atrasoPequenoMin": 0
     },
     "colab-1013_2026-10-15": {
-      "note": "Esqueceu",
+      "note": "Esqueceu de bater ponto (Justificado no NGPonto)",
       "punches": {
         "em": "08:00",
         "et": "13:59",
@@ -59727,7 +59756,7 @@
       ],
       "override": "JUSTIFICADO",
       "override2": "",
-      "resolution": "NENHUMA",
+      "resolution": "ABONAR",
       "atrasoMaior": "",
       "atrasoPequeno": "",
       "atrasoMaiorMin": 0,
@@ -59800,7 +59829,7 @@
       "atrasoPequenoMin": 0
     },
     "colab-1013_2026-10-19": {
-      "note": "Esqueceu",
+      "note": "Esqueceu de bater ponto (Justificado no NGPonto)",
       "punches": {
         "em": "08:00",
         "et": "13:59",
@@ -59815,7 +59844,7 @@
       ],
       "override": "JUSTIFICADO",
       "override2": "",
-      "resolution": "NENHUMA",
+      "resolution": "ABONAR",
       "atrasoMaior": "",
       "atrasoPequeno": "",
       "atrasoMaiorMin": 0,
@@ -62185,7 +62214,7 @@
       "atrasoPequenoMin": 0
     },
     "colab-1025_2026-10-13": {
-      "note": "Abono/OK em massa pelo cabeçalho da data",
+      "note": "Atestado Médico (NGPonto)",
       "punches": {
         "em": "08:00",
         "et": "13:00",
@@ -62201,16 +62230,16 @@
       "atrasoPequenoMin": 0
     },
     "colab-1025_2026-10-14": {
-      "note": "OK em massa pelo cabeçalho da data",
+      "note": "Esqueceu de bater ponto (Justificado no NGPonto)",
       "punches": {
         "em": "08:00",
         "et": "13:00",
         "sm": "12:00",
         "st": "17:00"
       },
-      "override": "OK",
+      "override": "JUSTIFICADO",
       "override2": "",
-      "resolution": "NENHUMA",
+      "resolution": "ABONAR",
       "atrasoMaior": "",
       "atrasoPequeno": "",
       "atrasoMaiorMin": 0,
@@ -62537,7 +62566,7 @@
       "atrasoPequenoMin": 0
     },
     "colab-1026_2026-10-06": {
-      "note": "DEC. COMP",
+      "note": "Declaração de Comparecimento (NGPonto)",
       "punches": {
         "em": "",
         "et": "",
@@ -62552,7 +62581,7 @@
       ],
       "override": "JUSTIFICADO",
       "override2": "",
-      "resolution": "NENHUMA",
+      "resolution": "ABONAR",
       "atrasoMaior": "",
       "atrasoPequeno": "",
       "atrasoMaiorMin": 0,
@@ -64858,7 +64887,7 @@
       "atrasoPequenoMin": 0
     },
     "colab-1032_2026-10-21": {
-      "note": "Folga Comp.",
+      "note": "Folga Compensatória (NGPonto)",
       "punches": {
         "em": "07:59",
         "et": "13:56",
@@ -66436,15 +66465,20 @@
       "atrasoPequenoMin": 0
     },
     "colab-1035_2026-10-16": {
-      "note": "OK em massa pelo cabeçalho da data",
+      "note": "Esqueceu de bater ponto (Justificado no NGPonto)",
       "punches": {
         "em": "08:00",
         "et": "13:00",
         "sm": "12:00",
         "st": "17:00"
       },
-      "override": "OK",
-      "resolution": "NENHUMA"
+      "override": "JUSTIFICADO",
+      "resolution": "ABONAR",
+      "override2": "",
+      "atrasoMaiorMin": 0,
+      "atrasoMaior": "",
+      "atrasoPequenoMin": 0,
+      "atrasoPequeno": ""
     },
     "colab-1035_2026-10-17": {
       "note": "OK em massa pelo cabeçalho da data",
@@ -66975,7 +67009,7 @@
       "atrasoPequenoMin": 0
     },
     "colab-1036_2026-10-16": {
-      "note": "Esqueceu",
+      "note": "Esqueceu de bater ponto (Justificado no NGPonto)",
       "punches": {
         "em": "08:00",
         "et": "11:59",
@@ -66990,7 +67024,7 @@
       ],
       "override": "JUSTIFICADO",
       "override2": "",
-      "resolution": "NENHUMA",
+      "resolution": "ABONAR",
       "atrasoMaior": "",
       "atrasoPequeno": "",
       "atrasoMaiorMin": 0,
@@ -67771,7 +67805,7 @@
       "atrasoPequenoMin": 0
     },
     "colab-1037_2026-10-22": {
-      "note": "Esqueceu",
+      "note": "Esqueceu de bater ponto (Justificado no NGPonto)",
       "punches": {
         "em": "08:00",
         "et": "13:57",
@@ -67786,7 +67820,7 @@
       ],
       "override": "JUSTIFICADO",
       "override2": "",
-      "resolution": "NENHUMA",
+      "resolution": "ABONAR",
       "atrasoMaior": "",
       "atrasoPequeno": "",
       "atrasoMaiorMin": 0,
@@ -69329,7 +69363,7 @@
       "atrasoPequenoMin": 0
     },
     "colab-1173_2026-10-01": {
-      "note": "Esqueceu",
+      "note": "Esqueceu de bater ponto (Justificado no NGPonto)",
       "punches": {
         "em": "07:40",
         "et": "13:50",
@@ -69344,7 +69378,7 @@
       ],
       "override": "JUSTIFICADO",
       "override2": "",
-      "resolution": "NENHUMA",
+      "resolution": "ABONAR",
       "atrasoMaior": "",
       "atrasoPequeno": "",
       "atrasoMaiorMin": 0,
@@ -69417,7 +69451,7 @@
       "atrasoPequenoMin": 0
     },
     "colab-1173_2026-10-05": {
-      "note": "Esqueceu",
+      "note": "Esqueceu de bater ponto (Justificado no NGPonto)",
       "punches": {
         "em": "07:52",
         "et": "14:00",
@@ -69432,7 +69466,7 @@
       ],
       "override": "JUSTIFICADO",
       "override2": "",
-      "resolution": "NENHUMA",
+      "resolution": "ABONAR",
       "atrasoMaior": "",
       "atrasoPequeno": "",
       "atrasoMaiorMin": 0,
@@ -69461,7 +69495,7 @@
       "atrasoPequenoMin": 0
     },
     "colab-1173_2026-10-07": {
-      "note": "Esqueceu",
+      "note": "Esqueceu de bater ponto (Justificado no NGPonto)",
       "punches": {
         "em": "07:52",
         "et": "14:00",
@@ -69476,7 +69510,7 @@
       ],
       "override": "JUSTIFICADO",
       "override2": "",
-      "resolution": "NENHUMA",
+      "resolution": "ABONAR",
       "atrasoMaior": "",
       "atrasoPequeno": "",
       "atrasoMaiorMin": 0,
@@ -69527,7 +69561,7 @@
       "atrasoPequenoMin": 0
     },
     "colab-1173_2026-10-10": {
-      "note": "Folga Comp.",
+      "note": "Folga Compensatória (NGPonto)",
       "punches": {
         "em": "",
         "et": "",
@@ -69593,18 +69627,23 @@
       "atrasoPequenoMin": 0
     },
     "colab-1173_2026-10-13": {
-      "note": "Abono/OK em massa pelo cabeçalho da data",
+      "note": "Atestado Médico (NGPonto)",
       "punches": {
         "em": "08:00",
         "et": "13:00",
         "sm": "12:00",
         "st": "17:00"
       },
-      "override": "OK",
-      "resolution": "ABONAR"
+      "override": "ATESTADO",
+      "resolution": "NENHUMA",
+      "override2": "",
+      "atrasoMaiorMin": 0,
+      "atrasoMaior": "",
+      "atrasoPequenoMin": 0,
+      "atrasoPequeno": ""
     },
     "colab-1173_2026-10-14": {
-      "note": "Justificado",
+      "note": "Esqueceu de bater ponto (Justificado no NGPonto)",
       "punches": {
         "em": "08:04",
         "et": "14:00",
@@ -69619,14 +69658,14 @@
       ],
       "override": "JUSTIFICADO",
       "override2": "",
-      "resolution": "NENHUMA",
+      "resolution": "ABONAR",
       "atrasoMaior": "",
       "atrasoPequeno": "",
       "atrasoMaiorMin": 0,
       "atrasoPequenoMin": 0
     },
     "colab-1173_2026-10-15": {
-      "note": "Justificado",
+      "note": "Esqueceu de bater ponto (Justificado no NGPonto)",
       "punches": {
         "em": "07:45",
         "et": "14:04",
@@ -69641,7 +69680,7 @@
       ],
       "override": "JUSTIFICADO",
       "override2": "",
-      "resolution": "NENHUMA",
+      "resolution": "ABONAR",
       "atrasoMaior": "",
       "atrasoPequeno": "",
       "atrasoMaiorMin": 0,
@@ -69670,7 +69709,7 @@
       "atrasoPequenoMin": 0
     },
     "colab-1173_2026-10-17": {
-      "note": "",
+      "note": "Folga Compensatória (NGPonto)",
       "punches": {
         "em": "",
         "et": "",
@@ -69683,7 +69722,7 @@
         "",
         ""
       ],
-      "override": "OK",
+      "override": "FOLGA COMP",
       "override2": "",
       "resolution": "NENHUMA",
       "atrasoMaior": "",
@@ -69736,7 +69775,7 @@
       "atrasoPequenoMin": 0
     },
     "colab-1173_2026-10-20": {
-      "note": "Esqueceu",
+      "note": "Esqueceu de bater ponto (Justificado no NGPonto)",
       "punches": {
         "em": "07:52",
         "et": "14:04",
@@ -69751,7 +69790,7 @@
       ],
       "override": "JUSTIFICADO",
       "override2": "",
-      "resolution": "NENHUMA",
+      "resolution": "ABONAR",
       "atrasoMaior": "",
       "atrasoPequeno": "",
       "atrasoMaiorMin": 0,
@@ -69824,7 +69863,7 @@
       "atrasoPequenoMin": 0
     },
     "colab-1173_2026-10-24": {
-      "note": "",
+      "note": "Folga Compensatória (NGPonto)",
       "punches": {
         "em": "",
         "et": "",
@@ -69837,7 +69876,7 @@
         "",
         ""
       ],
-      "override": "OK",
+      "override": "FOLGA COMP",
       "override2": "",
       "resolution": "NENHUMA",
       "atrasoMaior": "",
@@ -70044,18 +70083,20 @@
       "atrasoPequenoMin": 0
     },
     "colab-1405_2026-10-03": {
-      "note": "Presença regular (Planilha)",
+      "note": "Folga Compensatória (NGPonto)",
       "punches": {
         "em": "08:00",
         "et": "13:00",
         "sm": "12:00",
         "st": "17:00"
       },
-      "override": "OK",
+      "override": "FOLGA COMP",
       "override2": "",
       "resolution": "NENHUMA",
       "atrasoMaiorMin": 0,
-      "atrasoPequenoMin": 0
+      "atrasoPequenoMin": 0,
+      "atrasoMaior": "",
+      "atrasoPequeno": ""
     },
     "colab-1405_2026-10-04": {
       "note": "Repouso Semanal Remunerado / Folga",
@@ -70333,7 +70374,7 @@
       "atrasoPequenoMin": 0
     },
     "colab-1405_2026-10-17": {
-      "note": "",
+      "note": "Folga Compensatória (NGPonto)",
       "punches": {
         "em": "",
         "et": "",
@@ -70346,7 +70387,7 @@
         "",
         ""
       ],
-      "override": "OK",
+      "override": "FOLGA COMP",
       "override2": "",
       "resolution": "NENHUMA",
       "atrasoMaior": "",
@@ -73490,7 +73531,7 @@
       "atrasoPequenoMin": 0
     },
     "colab_branch-1_234_2026-10-06": {
-      "note": "Folga Comp.",
+      "note": "Folga Compensatória (NGPonto)",
       "punches": {
         "em": "08:01",
         "et": "14:01",
@@ -73644,7 +73685,7 @@
       "atrasoPequenoMin": 0
     },
     "colab_branch-1_234_2026-10-13": {
-      "note": "",
+      "note": "Esqueceu de bater ponto (Justificado no NGPonto)",
       "punches": {
         "em": "07:07",
         "et": "13:56",
@@ -73657,9 +73698,9 @@
         "14:00",
         "18:00"
       ],
-      "override": "OK",
+      "override": "JUSTIFICADO",
       "override2": "",
-      "resolution": "NENHUMA",
+      "resolution": "ABONAR",
       "atrasoMaior": "",
       "atrasoPequeno": "",
       "atrasoMaiorMin": 0,
@@ -73710,7 +73751,7 @@
       "atrasoPequenoMin": 0
     },
     "colab_branch-1_234_2026-10-16": {
-      "note": "",
+      "note": "Folga Compensatória (NGPonto)",
       "punches": {
         "em": "07:58",
         "et": "13:57",
@@ -73723,7 +73764,7 @@
         "14:00",
         "18:00"
       ],
-      "override": "OK",
+      "override": "FOLGA COMP",
       "override2": "",
       "resolution": "NENHUMA",
       "atrasoMaior": "",
@@ -73798,7 +73839,7 @@
       "atrasoPequenoMin": 0
     },
     "colab_branch-1_234_2026-10-20": {
-      "note": "Esqueceu",
+      "note": "Esqueceu de bater ponto (Justificado no NGPonto)",
       "punches": {
         "em": "07:56",
         "et": "14:00",
@@ -73813,7 +73854,7 @@
       ],
       "override": "JUSTIFICADO",
       "override2": "",
-      "resolution": "NENHUMA",
+      "resolution": "ABONAR",
       "atrasoMaior": "",
       "atrasoPequeno": "",
       "atrasoMaiorMin": 0,
@@ -73842,7 +73883,7 @@
       "atrasoPequenoMin": 0
     },
     "colab_branch-1_234_2026-10-22": {
-      "note": "",
+      "note": "Folga Compensatória (NGPonto)",
       "punches": {
         "em": "08:00",
         "et": "14:00",
@@ -73855,7 +73896,7 @@
         "14:00",
         "18:00"
       ],
-      "override": "OK",
+      "override": "FOLGA COMP",
       "override2": "",
       "resolution": "NENHUMA",
       "atrasoMaior": "",
@@ -75523,7 +75564,7 @@
       "atrasoPequenoMin": 0
     },
     "colab_branch-1_361_2026-10-08": {
-      "note": "",
+      "note": "Folga Compensatória (NGPonto)",
       "punches": {
         "em": "08:00",
         "et": "13:49",
@@ -75536,7 +75577,7 @@
         "14:00",
         "18:00"
       ],
-      "override": "OK",
+      "override": "FOLGA COMP",
       "override2": "",
       "resolution": "NENHUMA",
       "atrasoMaior": "",
@@ -75567,7 +75608,7 @@
       "atrasoPequenoMin": 0
     },
     "colab_branch-1_361_2026-10-10": {
-      "note": "",
+      "note": "Folga Compensatória (NGPonto)",
       "punches": {
         "em": "08:03",
         "et": "",
@@ -75580,7 +75621,7 @@
         "",
         ""
       ],
-      "override": "OK",
+      "override": "FOLGA COMP",
       "override2": "",
       "resolution": "NENHUMA",
       "atrasoMaior": "",
@@ -75627,7 +75668,7 @@
       "atrasoPequenoMin": 0
     },
     "colab_branch-1_361_2026-10-13": {
-      "note": "Folga Comp.",
+      "note": "Folga Compensatória (NGPonto)",
       "punches": {
         "em": "07:39",
         "et": "14:21",
@@ -75759,7 +75800,7 @@
       "atrasoPequenoMin": 0
     },
     "colab_branch-1_361_2026-10-19": {
-      "note": "Atestado",
+      "note": "Atestado Médico (NGPonto)",
       "punches": {
         "em": "07:33",
         "et": "13:38",
@@ -75781,7 +75822,7 @@
       "atrasoPequenoMin": 0
     },
     "colab_branch-1_361_2026-10-20": {
-      "note": "Atestado",
+      "note": "Atestado Médico (NGPonto)",
       "punches": {
         "em": "08:00",
         "et": "13:00",
@@ -75797,7 +75838,7 @@
       "atrasoPequenoMin": 0
     },
     "colab_branch-1_361_2026-10-21": {
-      "note": "Atestado",
+      "note": "Atestado Médico (NGPonto)",
       "punches": {
         "em": "08:00",
         "et": "13:00",
@@ -80590,7 +80631,7 @@
       "atrasoPequenoMin": 0
     },
     "colab_branch-1_701_2026-10-08": {
-      "note": "DEC. COMP",
+      "note": "Declaração de Comparecimento (NGPonto)",
       "punches": {
         "em": "13:58",
         "et": "",
@@ -80605,7 +80646,7 @@
       ],
       "override": "JUSTIFICADO",
       "override2": "",
-      "resolution": "NENHUMA",
+      "resolution": "ABONAR",
       "atrasoMaior": "",
       "atrasoPequeno": "",
       "atrasoMaiorMin": 0,
@@ -80765,14 +80806,14 @@
       "atrasoPequenoMin": 0
     },
     "colab_branch-1_701_2026-10-17": {
-      "note": "OK em massa pelo cabeçalho da data",
+      "note": "Folga Compensatória (NGPonto)",
       "punches": {
         "em": "08:00",
         "et": "",
         "sm": "12:00",
         "st": ""
       },
-      "override": "OK",
+      "override": "FOLGA COMP",
       "override2": "",
       "resolution": "NENHUMA",
       "atrasoMaior": "",
@@ -80957,14 +80998,14 @@
       "atrasoPequenoMin": 0
     },
     "colab_branch-1_701_2026-10-26": {
-      "note": "OK em massa pelo cabeçalho da data",
+      "note": "Folga Compensatória (NGPonto)",
       "punches": {
         "em": "08:00",
         "et": "14:00",
         "sm": "12:00",
         "st": "18:00"
       },
-      "override": "OK",
+      "override": "FOLGA COMP",
       "override2": "",
       "resolution": "NENHUMA",
       "atrasoMaior": "",
@@ -83519,7 +83560,7 @@
       "atrasoPequenoMin": 0
     },
     "colab_branch-1_847_2026-10-05": {
-      "note": "Folga Comp.",
+      "note": "Folga Compensatória (NGPonto)",
       "punches": {
         "em": "07:58",
         "et": "14:51",
@@ -85257,7 +85298,7 @@
       "atrasoPequenoMin": 0
     },
     "colab_branch-1_863_2026-10-23": {
-      "note": "Folga Comp.",
+      "note": "Folga Compensatória (NGPonto)",
       "punches": {
         "em": "07:59",
         "et": "13:59",
@@ -85499,7 +85540,7 @@
       "atrasoPequenoMin": 0
     },
     "colab_branch-1_898_2026-10-03": {
-      "note": "Folga Comp.",
+      "note": "Folga Compensatória (NGPonto)",
       "punches": {
         "em": "",
         "et": "",
@@ -85796,18 +85837,20 @@
       "atrasoPequenoMin": 0
     },
     "colab_branch-1_898_2026-10-17": {
-      "note": "OK em massa pelo cabeçalho da data",
+      "note": "Folga Compensatória (NGPonto)",
       "punches": {
         "em": "08:00",
         "et": "13:00",
         "sm": "12:00",
         "st": "17:00"
       },
-      "override": "OK",
+      "override": "FOLGA COMP",
       "override2": "",
       "resolution": "NENHUMA",
       "atrasoMaiorMin": 0,
-      "atrasoPequenoMin": 0
+      "atrasoPequenoMin": 0,
+      "atrasoMaior": "",
+      "atrasoPequeno": ""
     },
     "colab_branch-1_898_2026-10-18": {
       "note": "Repouso Semanal Remunerado / Folga",
@@ -85854,7 +85897,7 @@
       "atrasoPequenoMin": 0
     },
     "colab_branch-1_898_2026-10-20": {
-      "note": "Folga Comp.",
+      "note": "Folga Compensatória (NGPonto)",
       "punches": {
         "em": "07:58",
         "et": "12:59",
@@ -86118,7 +86161,7 @@
       "atrasoPequenoMin": 0
     },
     "colab_branch-1_900_2026-10-01": {
-      "note": "Esqueceu",
+      "note": "Esqueceu de bater ponto (Justificado no NGPonto)",
       "punches": {
         "em": "07:55",
         "et": "13:56",
@@ -86133,7 +86176,7 @@
       ],
       "override": "JUSTIFICADO",
       "override2": "",
-      "resolution": "NENHUMA",
+      "resolution": "ABONAR",
       "atrasoMaior": "",
       "atrasoPequeno": "",
       "atrasoMaiorMin": 0,
@@ -86294,7 +86337,7 @@
       "atrasoPequenoMin": 0
     },
     "colab_branch-1_900_2026-10-09": {
-      "note": "Atestado",
+      "note": "Atestado Médico (NGPonto)",
       "punches": {
         "em": "07:39",
         "et": "13:51",
@@ -86316,18 +86359,20 @@
       "atrasoPequenoMin": 0
     },
     "colab_branch-1_900_2026-10-10": {
-      "note": "Presença regular (Planilha)",
+      "note": "Folga Compensatória (NGPonto)",
       "punches": {
         "em": "08:00",
         "et": "13:00",
         "sm": "12:00",
         "st": "17:00"
       },
-      "override": "OK",
+      "override": "FOLGA COMP",
       "override2": "",
       "resolution": "NENHUMA",
       "atrasoMaiorMin": 0,
-      "atrasoPequenoMin": 0
+      "atrasoPequenoMin": 0,
+      "atrasoMaior": "",
+      "atrasoPequeno": ""
     },
     "colab_branch-1_900_2026-10-11": {
       "note": "Repouso Semanal Remunerado / Folga",
@@ -86407,7 +86452,7 @@
       "atrasoPequenoMin": 0
     },
     "colab_branch-1_900_2026-10-15": {
-      "note": "Atestado",
+      "note": "Atestado Médico (NGPonto)",
       "punches": {
         "em": "07:55",
         "et": "16:06",
@@ -86857,18 +86902,20 @@
       "atrasoPequenoMin": 0
     },
     "colab_branch-1_908_2026-10-03": {
-      "note": "Presença regular (Planilha)",
+      "note": "Folga Compensatória (NGPonto)",
       "punches": {
         "em": "08:00",
         "et": "13:00",
         "sm": "12:00",
         "st": "17:00"
       },
-      "override": "OK",
+      "override": "FOLGA COMP",
       "override2": "",
       "resolution": "NENHUMA",
       "atrasoMaiorMin": 0,
-      "atrasoPequenoMin": 0
+      "atrasoPequenoMin": 0,
+      "atrasoMaior": "",
+      "atrasoPequeno": ""
     },
     "colab_branch-1_908_2026-10-04": {
       "note": "Repouso Semanal Remunerado / Folga",
@@ -86893,7 +86940,7 @@
       "atrasoPequenoMin": 0
     },
     "colab_branch-1_908_2026-10-05": {
-      "note": "Folga Comp.",
+      "note": "Folga Compensatória (NGPonto)",
       "punches": {
         "em": "07:32",
         "et": "13:40",
@@ -86937,7 +86984,7 @@
       "atrasoPequenoMin": 0
     },
     "colab_branch-1_908_2026-10-07": {
-      "note": "Folga Comp.",
+      "note": "Folga Compensatória (NGPonto)",
       "punches": {
         "em": "07:32",
         "et": "13:29",
@@ -87003,18 +87050,20 @@
       "atrasoPequenoMin": 0
     },
     "colab_branch-1_908_2026-10-10": {
-      "note": "Presença regular (Planilha)",
+      "note": "Folga Compensatória (NGPonto)",
       "punches": {
         "em": "08:00",
         "et": "13:00",
         "sm": "12:00",
         "st": "17:00"
       },
-      "override": "OK",
+      "override": "FOLGA COMP",
       "override2": "",
       "resolution": "NENHUMA",
       "atrasoMaiorMin": 0,
-      "atrasoPequenoMin": 0
+      "atrasoPequenoMin": 0,
+      "atrasoMaior": "",
+      "atrasoPequeno": ""
     },
     "colab_branch-1_908_2026-10-11": {
       "note": "Repouso Semanal Remunerado / Folga",
@@ -87072,7 +87121,7 @@
       "resolution": "ABONAR"
     },
     "colab_branch-1_908_2026-10-14": {
-      "note": "Folga Comp.",
+      "note": "Folga Compensatória (NGPonto)",
       "punches": {
         "em": "07:31",
         "et": "13:28",
@@ -87094,7 +87143,7 @@
       "atrasoPequenoMin": 0
     },
     "colab_branch-1_908_2026-10-15": {
-      "note": "Folga Comp.",
+      "note": "Folga Compensatória (NGPonto)",
       "punches": {
         "em": "07:36",
         "et": "13:42",
@@ -87248,7 +87297,7 @@
       "atrasoPequenoMin": 0
     },
     "colab_branch-1_908_2026-10-22": {
-      "note": "Atestado",
+      "note": "Atestado Médico (NGPonto)",
       "punches": {
         "em": "",
         "et": "",
@@ -87270,7 +87319,7 @@
       "atrasoPequenoMin": 0
     },
     "colab_branch-1_908_2026-10-23": {
-      "note": "Atestado",
+      "note": "Atestado Médico (NGPonto)",
       "punches": {
         "em": "08:38",
         "et": "14:08",
@@ -87292,14 +87341,14 @@
       "atrasoPequenoMin": 0
     },
     "colab_branch-1_908_2026-10-24": {
-      "note": "",
+      "note": "Folga Compensatória (NGPonto)",
       "punches": {
         "em": "08:00",
         "et": "13:00",
         "sm": "12:00",
         "st": "17:00"
       },
-      "override": "OK",
+      "override": "FOLGA COMP",
       "override2": "",
       "resolution": "NENHUMA",
       "atrasoMaiorMin": 0,
@@ -87572,7 +87621,7 @@
       "atrasoPequenoMin": 0
     },
     "colab_branch-1_917_2026-10-06": {
-      "note": "Esqueceu",
+      "note": "Esqueceu de bater ponto (Justificado no NGPonto)",
       "punches": {
         "em": "07:33",
         "et": "14:02",
@@ -87587,7 +87636,7 @@
       ],
       "override": "JUSTIFICADO",
       "override2": "",
-      "resolution": "NENHUMA",
+      "resolution": "ABONAR",
       "atrasoMaior": "",
       "atrasoPequeno": "",
       "atrasoMaiorMin": 0,
@@ -87638,7 +87687,7 @@
       "atrasoPequenoMin": 0
     },
     "colab_branch-1_917_2026-10-09": {
-      "note": "Folga Comp.",
+      "note": "Folga Compensatória (NGPonto)",
       "punches": {
         "em": "07:38",
         "et": "11:18",
@@ -87726,15 +87775,20 @@
       "atrasoPequenoMin": 0
     },
     "colab_branch-1_917_2026-10-13": {
-      "note": "Abono/OK em massa pelo cabeçalho da data",
+      "note": "Esqueceu de bater ponto (Justificado no NGPonto)",
       "punches": {
         "em": "08:00",
         "et": "13:00",
         "sm": "12:00",
         "st": "17:00"
       },
-      "override": "OK",
-      "resolution": "ABONAR"
+      "override": "JUSTIFICADO",
+      "resolution": "ABONAR",
+      "override2": "",
+      "atrasoMaiorMin": 0,
+      "atrasoMaior": "",
+      "atrasoPequenoMin": 0,
+      "atrasoPequeno": ""
     },
     "colab_branch-1_917_2026-10-14": {
       "note": "",
@@ -88857,7 +88911,7 @@
       "atrasoPequenoMin": 0
     },
     "colab_branch-1_942_2026-10-06": {
-      "note": "Esqueceu",
+      "note": "Esqueceu de bater ponto (Justificado no NGPonto)",
       "punches": {
         "em": "08:00",
         "et": "13:57",
@@ -88872,14 +88926,14 @@
       ],
       "override": "JUSTIFICADO",
       "override2": "",
-      "resolution": "NENHUMA",
+      "resolution": "ABONAR",
       "atrasoMaior": "",
       "atrasoPequeno": "",
       "atrasoMaiorMin": 0,
       "atrasoPequenoMin": 0
     },
     "colab_branch-1_942_2026-10-07": {
-      "note": "Esqueceu",
+      "note": "Esqueceu de bater ponto (Justificado no NGPonto)",
       "punches": {
         "em": "07:45",
         "et": "14:05",
@@ -88894,7 +88948,7 @@
       ],
       "override": "JUSTIFICADO",
       "override2": "",
-      "resolution": "NENHUMA",
+      "resolution": "ABONAR",
       "atrasoMaior": "",
       "atrasoPequeno": "",
       "atrasoMaiorMin": 0,
@@ -88923,7 +88977,7 @@
       "atrasoPequenoMin": 0
     },
     "colab_branch-1_942_2026-10-09": {
-      "note": "Esqueceu",
+      "note": "Esqueceu de bater ponto (Justificado no NGPonto)",
       "punches": {
         "em": "08:00",
         "et": "13:55",
@@ -88938,14 +88992,14 @@
       ],
       "override": "JUSTIFICADO",
       "override2": "",
-      "resolution": "NENHUMA",
+      "resolution": "ABONAR",
       "atrasoMaior": "",
       "atrasoPequeno": "",
       "atrasoMaiorMin": 0,
       "atrasoPequenoMin": 0
     },
     "colab_branch-1_942_2026-10-10": {
-      "note": "Folga Comp.",
+      "note": "Folga Compensatória (NGPonto)",
       "punches": {
         "em": "",
         "et": "",
@@ -89066,7 +89120,7 @@
       "atrasoPequenoMin": 0
     },
     "colab_branch-1_942_2026-10-16": {
-      "note": "Justificado",
+      "note": "Esqueceu de bater ponto (Justificado no NGPonto)",
       "punches": {
         "em": "07:59",
         "et": "13:58",
@@ -89081,7 +89135,7 @@
       ],
       "override": "JUSTIFICADO",
       "override2": "",
-      "resolution": "NENHUMA",
+      "resolution": "ABONAR",
       "atrasoMaior": "",
       "atrasoPequeno": "",
       "atrasoMaiorMin": 0,
@@ -89132,7 +89186,7 @@
       "atrasoPequenoMin": 0
     },
     "colab_branch-1_942_2026-10-19": {
-      "note": "Justificado",
+      "note": "Esqueceu de bater ponto (Justificado no NGPonto)",
       "punches": {
         "em": "07:45",
         "et": "13:54",
@@ -89147,7 +89201,7 @@
       ],
       "override": "JUSTIFICADO",
       "override2": "",
-      "resolution": "NENHUMA",
+      "resolution": "ABONAR",
       "atrasoMaior": "",
       "atrasoPequeno": "",
       "atrasoMaiorMin": 0,
@@ -89176,7 +89230,7 @@
       "atrasoPequenoMin": 0
     },
     "colab_branch-1_942_2026-10-21": {
-      "note": "Justificado",
+      "note": "Esqueceu de bater ponto (Justificado no NGPonto)",
       "punches": {
         "em": "08:00",
         "et": "14:00",
@@ -89191,7 +89245,7 @@
       ],
       "override": "JUSTIFICADO",
       "override2": "",
-      "resolution": "NENHUMA",
+      "resolution": "ABONAR",
       "atrasoMaior": "",
       "atrasoPequeno": "",
       "atrasoMaiorMin": 0,
@@ -90793,7 +90847,7 @@
       "atrasoPequenoMin": 0
     },
     "colab_branch-1_961_2026-10-02": {
-      "note": "DEC. COMP",
+      "note": "Declaração de Comparecimento (NGPonto)",
       "punches": {
         "em": "08:00",
         "et": "13:59",
@@ -90808,7 +90862,7 @@
       ],
       "override": "JUSTIFICADO",
       "override2": "",
-      "resolution": "NENHUMA",
+      "resolution": "ABONAR",
       "atrasoMaior": "",
       "atrasoPequeno": "",
       "atrasoMaiorMin": 0,
@@ -91084,7 +91138,7 @@
       "atrasoPequenoMin": 0
     },
     "colab_branch-1_961_2026-10-16": {
-      "note": "DEC. COMP",
+      "note": "Declaração de Comparecimento (NGPonto)",
       "punches": {
         "em": "13:59",
         "et": "",
@@ -91099,14 +91153,14 @@
       ],
       "override": "JUSTIFICADO",
       "override2": "",
-      "resolution": "NENHUMA",
+      "resolution": "ABONAR",
       "atrasoMaior": "",
       "atrasoPequeno": "",
       "atrasoMaiorMin": 0,
       "atrasoPequenoMin": 0
     },
     "colab_branch-1_961_2026-10-17": {
-      "note": "Esqueceu",
+      "note": "Esqueceu de bater ponto (Justificado no NGPonto)",
       "punches": {
         "em": "08:00",
         "et": "",
@@ -91121,7 +91175,7 @@
       ],
       "override": "JUSTIFICADO",
       "override2": "",
-      "resolution": "NENHUMA",
+      "resolution": "ABONAR",
       "atrasoMaior": "",
       "atrasoPequeno": "",
       "atrasoMaiorMin": 0,
@@ -91150,23 +91204,23 @@
       "atrasoPequenoMin": 0
     },
     "colab_branch-1_961_2026-10-19": {
-      "note": "OK em massa pelo cabeçalho da data",
+      "note": "Declaração de Comparecimento (NGPonto)",
       "punches": {
         "em": "08:00",
         "et": "13:00",
         "sm": "12:00",
         "st": "17:00"
       },
-      "override": "OK",
+      "override": "JUSTIFICADO",
       "override2": "",
-      "resolution": "NENHUMA",
+      "resolution": "ABONAR",
       "atrasoMaior": "",
       "atrasoPequeno": "",
       "atrasoMaiorMin": 0,
       "atrasoPequenoMin": 0
     },
     "colab_branch-1_961_2026-10-20": {
-      "note": "DEC. COMP",
+      "note": "Declaração de Comparecimento (NGPonto)",
       "punches": {
         "em": "08:00",
         "et": "14:00",
@@ -91181,7 +91235,7 @@
       ],
       "override": "JUSTIFICADO",
       "override2": "",
-      "resolution": "NENHUMA",
+      "resolution": "ABONAR",
       "atrasoMaior": "",
       "atrasoPequeno": "",
       "atrasoMaiorMin": 0,
@@ -91232,7 +91286,7 @@
       "atrasoPequenoMin": 0
     },
     "colab_branch-1_961_2026-10-23": {
-      "note": "OK em massa pelo cabeçalho da data",
+      "note": "Atestado Médico (NGPonto)",
       "punches": {
         "em": "08:00",
         "et": "13:00",
@@ -91424,7 +91478,7 @@
       "atrasoPequenoMin": 0
     },
     "colab_branch-1_963_2026-10-01": {
-      "note": "Atestado",
+      "note": "Atestado Médico (NGPonto)",
       "punches": {
         "em": "08:32",
         "et": "13:58",
@@ -91446,32 +91500,36 @@
       "atrasoPequenoMin": 0
     },
     "colab_branch-1_963_2026-10-02": {
-      "note": "Presença regular (Planilha)",
+      "note": "Folga Compensatória (NGPonto)",
       "punches": {
         "em": "08:00",
         "et": "13:00",
         "sm": "12:00",
         "st": "17:00"
       },
-      "override": "OK",
+      "override": "FOLGA COMP",
       "override2": "",
       "resolution": "NENHUMA",
       "atrasoMaiorMin": 0,
-      "atrasoPequenoMin": 0
+      "atrasoPequenoMin": 0,
+      "atrasoMaior": "",
+      "atrasoPequeno": ""
     },
     "colab_branch-1_963_2026-10-03": {
-      "note": "Presença regular (Planilha)",
+      "note": "Folga Compensatória (NGPonto)",
       "punches": {
         "em": "08:00",
         "et": "13:00",
         "sm": "12:00",
         "st": "17:00"
       },
-      "override": "OK",
+      "override": "FOLGA COMP",
       "override2": "",
       "resolution": "NENHUMA",
       "atrasoMaiorMin": 0,
-      "atrasoPequenoMin": 0
+      "atrasoPequenoMin": 0,
+      "atrasoMaior": "",
+      "atrasoPequeno": ""
     },
     "colab_branch-1_963_2026-10-04": {
       "note": "Repouso Semanal Remunerado / Folga",
@@ -91606,18 +91664,20 @@
       "atrasoPequenoMin": 0
     },
     "colab_branch-1_963_2026-10-10": {
-      "note": "Presença regular (Planilha)",
+      "note": "Folga Compensatória (NGPonto)",
       "punches": {
         "em": "08:00",
         "et": "13:00",
         "sm": "12:00",
         "st": "17:00"
       },
-      "override": "OK",
+      "override": "FOLGA COMP",
       "override2": "",
       "resolution": "NENHUMA",
       "atrasoMaiorMin": 0,
-      "atrasoPequenoMin": 0
+      "atrasoPequenoMin": 0,
+      "atrasoMaior": "",
+      "atrasoPequeno": ""
     },
     "colab_branch-1_963_2026-10-11": {
       "note": "Repouso Semanal Remunerado / Folga",
@@ -93615,18 +93675,20 @@
       "atrasoPequenoMin": 0
     },
     "colab_branch-1_974_2026-10-17": {
-      "note": "OK em massa pelo cabeçalho da data",
+      "note": "Folga Compensatória (NGPonto)",
       "punches": {
         "em": "08:00",
         "et": "13:00",
         "sm": "12:00",
         "st": "17:00"
       },
-      "override": "OK",
+      "override": "FOLGA COMP",
       "override2": "",
       "resolution": "NENHUMA",
       "atrasoMaiorMin": 0,
-      "atrasoPequenoMin": 0
+      "atrasoPequenoMin": 0,
+      "atrasoMaior": "",
+      "atrasoPequeno": ""
     },
     "colab_branch-1_974_2026-10-18": {
       "note": "Repouso Semanal Remunerado / Folga",
@@ -95743,7 +95805,7 @@
       "atrasoPequenoMin": 0
     },
     "colab_branch-1_997_2026-10-05": {
-      "note": "Atestado médico (Planilha)",
+      "note": "Atestado Médico (NGPonto)",
       "punches": {
         "em": "",
         "et": "",
@@ -95754,7 +95816,9 @@
       "override2": "",
       "resolution": "NENHUMA",
       "atrasoMaiorMin": 0,
-      "atrasoPequenoMin": 0
+      "atrasoPequenoMin": 0,
+      "atrasoMaior": "",
+      "atrasoPequeno": ""
     },
     "colab_branch-1_997_2026-10-06": {
       "note": "",
@@ -95971,7 +96035,7 @@
       "atrasoPequenoMin": 0
     },
     "colab_branch-1_997_2026-10-16": {
-      "note": "OK em massa pelo cabeçalho da data",
+      "note": "Atestado Médico (NGPonto)",
       "punches": {
         "em": "08:00",
         "et": "13:00",
@@ -96365,7 +96429,7 @@
       "atrasoPequenoMin": 0
     },
     "colab_branch-1_999_2026-10-05": {
-      "note": "Atestado",
+      "note": "Atestado Médico (NGPonto)",
       "punches": {
         "em": "14:00",
         "et": "",
@@ -96667,7 +96731,7 @@
       "atrasoPequenoMin": 0
     },
     "colab_branch-1_999_2026-10-19": {
-      "note": "Esqueceu",
+      "note": "Esqueceu de bater ponto (Justificado no NGPonto)",
       "punches": {
         "em": "08:00",
         "et": "",
@@ -96682,7 +96746,7 @@
       ],
       "override": "JUSTIFICADO",
       "override2": "",
-      "resolution": "NENHUMA",
+      "resolution": "ABONAR",
       "atrasoMaior": "",
       "atrasoPequeno": "",
       "atrasoMaiorMin": 0,
@@ -97797,7 +97861,7 @@
       "atrasoPequenoMin": 0
     },
     "colab_branch-2_288_2026-10-16": {
-      "note": "Folga Comp.",
+      "note": "Folga Compensatória (NGPonto)",
       "punches": {
         "em": "12:58",
         "et": "",
@@ -98347,7 +98411,7 @@
       "atrasoPequenoMin": 0
     },
     "colab_branch-2_456_2026-10-10": {
-      "note": "Esqueceu",
+      "note": "Esqueceu de bater ponto (Justificado no NGPonto)",
       "punches": {
         "em": "07:00",
         "et": "",
@@ -98362,7 +98426,7 @@
       ],
       "override": "JUSTIFICADO",
       "override2": "",
-      "resolution": "NENHUMA",
+      "resolution": "ABONAR",
       "atrasoMaior": "",
       "atrasoPequeno": "",
       "atrasoMaiorMin": 0,
@@ -98578,7 +98642,7 @@
       "atrasoPequenoMin": 0
     },
     "colab_branch-2_456_2026-10-21": {
-      "note": "DEC. COMP",
+      "note": "Declaração de Comparecimento (NGPonto)",
       "punches": {
         "em": "12:59",
         "et": "",
@@ -98593,7 +98657,7 @@
       ],
       "override": "JUSTIFICADO",
       "override2": "",
-      "resolution": "NENHUMA",
+      "resolution": "ABONAR",
       "atrasoMaior": "",
       "atrasoPequeno": "",
       "atrasoMaiorMin": 0,
@@ -99604,14 +99668,14 @@
       "atrasoPequenoMin": 0
     },
     "colab_branch-2_561_2026-10-07": {
-      "note": "Pendência SM (Planilha) (Replicado de 06/10/2026)",
+      "note": "Folga Compensatória (NGPonto)",
       "punches": {
         "em": "07:00",
         "et": "13:00",
         "sm": "11:00",
         "st": "17:00"
       },
-      "override": "OK",
+      "override": "FOLGA COMP",
       "override2": "",
       "resolution": "NENHUMA",
       "atrasoMaior": "",
@@ -99664,7 +99728,7 @@
       "atrasoPequenoMin": 0
     },
     "colab_branch-2_561_2026-10-10": {
-      "note": "Esqueceu",
+      "note": "Esqueceu de bater ponto (Justificado no NGPonto)",
       "punches": {
         "em": "07:00",
         "et": "",
@@ -99679,7 +99743,7 @@
       ],
       "override": "JUSTIFICADO",
       "override2": "",
-      "resolution": "NENHUMA",
+      "resolution": "ABONAR",
       "atrasoMaior": "",
       "atrasoPequeno": "",
       "atrasoMaiorMin": 0,
@@ -99900,7 +99964,7 @@
       "atrasoPequenoMin": 0
     },
     "colab_branch-2_561_2026-10-21": {
-      "note": "Esqueceu",
+      "note": "Declaração de Comparecimento (NGPonto)",
       "punches": {
         "em": "07:00",
         "et": "13:00",
@@ -99915,7 +99979,7 @@
       ],
       "override": "JUSTIFICADO",
       "override2": "",
-      "resolution": "NENHUMA",
+      "resolution": "ABONAR",
       "atrasoMaior": "",
       "atrasoPequeno": "",
       "atrasoMaiorMin": 0,
@@ -100164,7 +100228,7 @@
       "atrasoPequenoMin": 0
     },
     "colab_branch-2_613_2026-10-02": {
-      "note": "Folga Comp.",
+      "note": "Folga Compensatória (NGPonto)",
       "punches": {
         "em": "07:33",
         "et": "12:58",
@@ -100252,7 +100316,7 @@
       "atrasoPequenoMin": 0
     },
     "colab_branch-2_613_2026-10-06": {
-      "note": "DEC. COMP",
+      "note": "Declaração de Comparecimento (NGPonto)",
       "punches": {
         "em": "13:01",
         "et": "",
@@ -100267,7 +100331,7 @@
       ],
       "override": "JUSTIFICADO",
       "override2": "",
-      "resolution": "NENHUMA",
+      "resolution": "ABONAR",
       "atrasoMaior": "",
       "atrasoPequeno": "",
       "atrasoMaiorMin": 0,
@@ -100340,7 +100404,7 @@
       "atrasoPequenoMin": 0
     },
     "colab_branch-2_613_2026-10-10": {
-      "note": "Folga Comp.",
+      "note": "Folga Compensatória (NGPonto)",
       "punches": {
         "em": "07:25",
         "et": "",
@@ -100416,7 +100480,7 @@
       "atrasoPequenoMin": 6
     },
     "colab_branch-2_613_2026-10-14": {
-      "note": "Folga Comp.",
+      "note": "Folga Compensatória (NGPonto)",
       "punches": {
         "em": "07:09",
         "et": "14:30",
@@ -100944,14 +101008,14 @@
       "atrasoPequenoMin": 0
     },
     "colab_branch-2_780_2026-10-07": {
-      "note": "Falta integral (Planilha)",
+      "note": "Folga Compensatória (NGPonto)",
       "punches": {
         "em": "07:00",
         "et": "13:00",
         "sm": "11:00",
         "st": "17:00"
       },
-      "override": "OK",
+      "override": "FOLGA COMP",
       "override2": "",
       "resolution": "NENHUMA",
       "atrasoMaior": "",
@@ -100982,7 +101046,7 @@
       "atrasoPequenoMin": 0
     },
     "colab_branch-2_780_2026-10-09": {
-      "note": "Folga Comp.",
+      "note": "Folga Compensatória (NGPonto)",
       "punches": {
         "em": "07:00",
         "et": "",
@@ -101004,7 +101068,7 @@
       "atrasoPequenoMin": 0
     },
     "colab_branch-2_780_2026-10-10": {
-      "note": "Esqueceu",
+      "note": "Esqueceu de bater ponto (Justificado no NGPonto)",
       "punches": {
         "em": "07:00",
         "et": "",
@@ -101019,7 +101083,7 @@
       ],
       "override": "JUSTIFICADO",
       "override2": "",
-      "resolution": "NENHUMA",
+      "resolution": "ABONAR",
       "atrasoMaior": "",
       "atrasoPequeno": "",
       "atrasoMaiorMin": 0,
@@ -101235,7 +101299,7 @@
       "atrasoPequenoMin": 0
     },
     "colab_branch-2_780_2026-10-21": {
-      "note": "Esqueceu",
+      "note": "Declaração de Comparecimento (NGPonto)",
       "punches": {
         "em": "07:00",
         "et": "13:00",
@@ -101248,9 +101312,9 @@
         "13:00",
         "17:00"
       ],
-      "override": "FOLGA COMP",
+      "override": "JUSTIFICADO",
       "override2": "",
-      "resolution": "NENHUMA",
+      "resolution": "ABONAR",
       "atrasoMaior": "",
       "atrasoPequeno": "",
       "atrasoMaiorMin": 0,
@@ -101884,7 +101948,7 @@
       "atrasoPequenoMin": 0
     },
     "colab_branch-2_810_2026-10-20": {
-      "note": "Atestado",
+      "note": "Atestado Médico (NGPonto)",
       "punches": {
         "em": "06:58",
         "et": "13:00",
@@ -102186,7 +102250,7 @@
       "atrasoPequenoMin": 0
     },
     "colab_branch-2_867_2026-10-03": {
-      "note": "Folga Comp.",
+      "note": "Folga Compensatória (NGPonto)",
       "punches": {
         "em": "",
         "et": "",
@@ -102340,7 +102404,7 @@
       "atrasoPequenoMin": 0
     },
     "colab_branch-2_867_2026-10-10": {
-      "note": "Esqueceu",
+      "note": "Esqueceu de bater ponto (Justificado no NGPonto)",
       "punches": {
         "em": "07:00",
         "et": "",
@@ -102355,7 +102419,7 @@
       ],
       "override": "JUSTIFICADO",
       "override2": "",
-      "resolution": "NENHUMA",
+      "resolution": "ABONAR",
       "atrasoMaior": "",
       "atrasoPequeno": "",
       "atrasoMaiorMin": 0,
@@ -102461,7 +102525,7 @@
       "atrasoPequenoMin": 0
     },
     "colab_branch-2_867_2026-10-16": {
-      "note": "Folga Comp.",
+      "note": "Folga Compensatória (NGPonto)",
       "punches": {
         "em": "07:00",
         "et": "",
@@ -102483,14 +102547,14 @@
       "atrasoPequenoMin": 0
     },
     "colab_branch-2_867_2026-10-17": {
-      "note": "OK em massa pelo cabeçalho da data (Replicado de 14/10/2026)",
+      "note": "Folga Compensatória (NGPonto)",
       "punches": {
         "em": "08:00",
         "et": "13:00",
         "sm": "12:00",
         "st": "17:00"
       },
-      "override": "OK",
+      "override": "FOLGA COMP",
       "override2": "",
       "resolution": "NENHUMA",
       "atrasoMaior": "",
@@ -102587,7 +102651,7 @@
       "atrasoPequenoMin": 0
     },
     "colab_branch-2_867_2026-10-22": {
-      "note": "DEC. COMP",
+      "note": "Declaração de Comparecimento (NGPonto)",
       "punches": {
         "em": "07:00",
         "et": "",
@@ -102600,9 +102664,9 @@
         "13:00",
         "17:00"
       ],
-      "override": "FOLGA COMP",
+      "override": "JUSTIFICADO",
       "override2": "",
-      "resolution": "NENHUMA",
+      "resolution": "ABONAR",
       "atrasoMaior": "",
       "atrasoPequeno": "",
       "atrasoMaiorMin": 0,
@@ -103079,16 +103143,16 @@
       "atrasoPequenoMin": 0
     },
     "colab_branch-2_890_2026-10-22": {
-      "note": "Férias (Planilha) (Replicado de 10/10/2026)",
+      "note": "Abono Autorizado (NGPonto)",
       "punches": {
         "em": "08:00",
         "et": "13:00",
         "sm": "12:00",
         "st": "17:00"
       },
-      "override": "OK",
+      "override": "JUSTIFICADO",
       "override2": "",
-      "resolution": "NENHUMA",
+      "resolution": "ABONAR",
       "atrasoMaior": "",
       "atrasoPequeno": "",
       "atrasoMaiorMin": 0,
@@ -105407,7 +105471,7 @@
       "atrasoPequenoMin": 0
     },
     "colab_branch-2_977_2026-10-10": {
-      "note": "Esqueceu",
+      "note": "Esqueceu de bater ponto (Justificado no NGPonto)",
       "punches": {
         "em": "07:00",
         "et": "",
@@ -105422,7 +105486,7 @@
       ],
       "override": "JUSTIFICADO",
       "override2": "",
-      "resolution": "NENHUMA",
+      "resolution": "ABONAR",
       "atrasoMaior": "",
       "atrasoPequeno": "",
       "atrasoMaiorMin": 0,
@@ -105896,14 +105960,14 @@
       "atrasoPequenoMin": 0
     },
     "colab_branch-2_990_2026-10-02": {
-      "note": "Atraso registrado A.30 (Planilha)",
+      "note": "Folga Compensatória (NGPonto)",
       "punches": {
         "em": "",
         "et": "",
         "sm": "",
         "st": ""
       },
-      "override": "AUTO",
+      "override": "FOLGA COMP",
       "override2": "",
       "resolution": "NENHUMA",
       "atrasoMaior": "",
@@ -106078,14 +106142,14 @@
       "atrasoPequenoMin": 0
     },
     "colab_branch-2_990_2026-10-19": {
-      "note": "OK em massa pelo cabeçalho da data",
+      "note": "Folga Compensatória (NGPonto)",
       "punches": {
         "em": "08:00",
         "et": "13:00",
         "sm": "12:00",
         "st": "17:00"
       },
-      "override": "OK",
+      "override": "FOLGA COMP",
       "override2": "",
       "resolution": "NENHUMA",
       "atrasoMaior": "",
@@ -106126,30 +106190,30 @@
       "atrasoPequenoMin": 0
     },
     "colab_branch-2_990_2026-10-22": {
-      "note": "OK em massa pelo cabeçalho da data",
+      "note": "Abono Autorizado (NGPonto)",
       "punches": {
         "em": "08:00",
         "et": "13:00",
         "sm": "12:00",
         "st": "17:00"
       },
-      "override": "OK",
+      "override": "JUSTIFICADO",
       "override2": "",
-      "resolution": "NENHUMA",
+      "resolution": "ABONAR",
       "atrasoMaior": "",
       "atrasoPequeno": "",
       "atrasoMaiorMin": 0,
       "atrasoPequenoMin": 0
     },
     "colab_branch-2_990_2026-10-23": {
-      "note": "Dia futuro em aberto (desmarcado)",
+      "note": "Atestado Médico (NGPonto)",
       "punches": {
         "em": "08:00",
         "et": "13:00",
         "sm": "12:00",
         "st": "17:00"
       },
-      "override": "OK",
+      "override": "ATESTADO",
       "override2": "",
       "resolution": "NENHUMA",
       "atrasoMaior": "",
@@ -106300,14 +106364,14 @@
       "atrasoPequenoMin": 0
     },
     "colab_branch-2_993_2026-10-03": {
-      "note": "Falta integral (Planilha)",
+      "note": "Folga Compensatória (NGPonto)",
       "punches": {
         "em": "07:00",
         "et": "",
         "sm": "11:00",
         "st": ""
       },
-      "override": "OK",
+      "override": "FOLGA COMP",
       "override2": "",
       "resolution": "NENHUMA",
       "atrasoMaior": "",
@@ -106382,7 +106446,7 @@
       "atrasoPequenoMin": 0
     },
     "colab_branch-2_993_2026-10-07": {
-      "note": "Folga Comp.",
+      "note": "Folga Compensatória (NGPonto)",
       "punches": {
         "em": "12:57",
         "et": "",
@@ -106448,7 +106512,7 @@
       "atrasoPequenoMin": 0
     },
     "colab_branch-2_993_2026-10-10": {
-      "note": "Esqueceu",
+      "note": "Esqueceu de bater ponto (Justificado no NGPonto)",
       "punches": {
         "em": "07:00",
         "et": "",
@@ -106463,7 +106527,7 @@
       ],
       "override": "JUSTIFICADO",
       "override2": "",
-      "resolution": "NENHUMA",
+      "resolution": "ABONAR",
       "atrasoMaior": "",
       "atrasoPequeno": "",
       "atrasoMaiorMin": 0,
@@ -106591,14 +106655,14 @@
       "atrasoPequenoMin": 0
     },
     "colab_branch-2_993_2026-10-17": {
-      "note": "OK em massa pelo cabeçalho da data",
+      "note": "Folga Compensatória (NGPonto)",
       "punches": {
         "em": "08:00",
         "et": "13:00",
         "sm": "12:00",
         "st": "17:00"
       },
-      "override": "OK",
+      "override": "FOLGA COMP",
       "override2": "",
       "resolution": "NENHUMA",
       "atrasoMaior": "",
@@ -106695,7 +106759,7 @@
       "atrasoPequenoMin": 0
     },
     "colab_branch-2_993_2026-10-22": {
-      "note": "Folga Comp.",
+      "note": "Folga Compensatória (NGPonto)",
       "punches": {
         "em": "12:55",
         "et": "",
@@ -107091,14 +107155,14 @@
       "atrasoPequenoMin": 0
     },
     "colab_branch-2_994_2026-10-09": {
-      "note": "Falta integral (Planilha)",
+      "note": "Folga Compensatória (NGPonto)",
       "punches": {
         "em": "07:00",
         "et": "13:00",
         "sm": "11:00",
         "st": "17:00"
       },
-      "override": "OK",
+      "override": "FOLGA COMP",
       "override2": "",
       "resolution": "NENHUMA",
       "atrasoMaior": "",
@@ -107184,7 +107248,7 @@
       "resolution": "ABONAR"
     },
     "colab_branch-2_994_2026-10-14": {
-      "note": "Atestado",
+      "note": "Atestado Médico (NGPonto)",
       "punches": {
         "em": "07:39",
         "et": "13:03",
@@ -107382,7 +107446,7 @@
       "atrasoPequenoMin": 0
     },
     "colab_branch-2_994_2026-10-23": {
-      "note": "Folga Comp.",
+      "note": "Folga Compensatória (NGPonto)",
       "punches": {
         "em": "06:57",
         "et": "12:57",
@@ -107404,14 +107468,14 @@
       "atrasoPequenoMin": 0
     },
     "colab_branch-2_994_2026-10-24": {
-      "note": "OK em massa pelo cabeçalho da data",
+      "note": "Folga Compensatória (NGPonto)",
       "punches": {
         "em": "07:00",
         "et": "",
         "sm": "11:00",
         "st": ""
       },
-      "override": "OK",
+      "override": "FOLGA COMP",
       "override2": "",
       "resolution": "NENHUMA",
       "atrasoMaior": "",
@@ -109936,7 +110000,7 @@
       "atrasoPequenoMin": 0
     },
     "colab_branch-3_255_2026-10-07": {
-      "note": "FOLGAS COMP.",
+      "note": "Folga Compensatória (NGPonto)",
       "punches": {
         "em": "",
         "et": "",
@@ -110255,7 +110319,7 @@
       "atrasoPequenoMin": 0
     },
     "colab_branch-3_255_2026-10-22": {
-      "note": "ESQUECEU",
+      "note": "Esqueceu de bater ponto (Justificado no NGPonto)",
       "punches": {
         "em": "07:07",
         "et": "12:59",
@@ -110270,7 +110334,7 @@
       ],
       "override": "JUSTIFICADO",
       "override2": "",
-      "resolution": "NENHUMA",
+      "resolution": "ABONAR",
       "atrasoMaior": "",
       "atrasoPequeno": "",
       "atrasoMaiorMin": 0,
@@ -111257,7 +111321,7 @@
       "atrasoPequenoMin": 0
     },
     "colab_branch-3_294_2026-10-07": {
-      "note": "FOLGAS COMP.",
+      "note": "Folga Compensatória (NGPonto)",
       "punches": {
         "em": "07:24",
         "et": "14:56",
@@ -111279,7 +111343,7 @@
       "atrasoPequenoMin": 0
     },
     "colab_branch-3_294_2026-10-08": {
-      "note": "FOLGAS COMP.",
+      "note": "Folga Compensatória (NGPonto)",
       "punches": {
         "em": "13:56",
         "et": "",
@@ -111422,7 +111486,7 @@
       "atrasoPequenoMin": 0
     },
     "colab_branch-3_294_2026-10-15": {
-      "note": "FOLGAS COMP.",
+      "note": "Folga Compensatória (NGPonto)",
       "punches": {
         "em": "07:26",
         "et": "14:24",
@@ -111554,7 +111618,7 @@
       "atrasoPequenoMin": 0
     },
     "colab_branch-3_294_2026-10-21": {
-      "note": "ESQUECEU",
+      "note": "Esqueceu de bater ponto (Justificado no NGPonto)",
       "punches": {
         "em": "07:21",
         "et": "14:00",
@@ -111569,7 +111633,7 @@
       ],
       "override": "JUSTIFICADO",
       "override2": "",
-      "resolution": "NENHUMA",
+      "resolution": "ABONAR",
       "atrasoMaior": "",
       "atrasoPequeno": "",
       "atrasoMaiorMin": 0,
@@ -111796,7 +111860,7 @@
       "atrasoPequenoMin": 0
     },
     "colab_branch-3_295_2026-10-01": {
-      "note": "FOLGAS COMP.",
+      "note": "Folga Compensatória (NGPonto)",
       "punches": {
         "em": "08:17",
         "et": "15:05",
@@ -111884,7 +111948,7 @@
       "atrasoPequenoMin": 0
     },
     "colab_branch-3_295_2026-10-05": {
-      "note": "FOLGAS COMP.",
+      "note": "Folga Compensatória (NGPonto)",
       "punches": {
         "em": "08:15",
         "et": "",
@@ -112060,7 +112124,7 @@
       "atrasoPequenoMin": 0
     },
     "colab_branch-3_295_2026-10-13": {
-      "note": "ESQUECEU",
+      "note": "Esqueceu de bater ponto (Justificado no NGPonto)",
       "punches": {
         "em": "08:15",
         "et": "15:04",
@@ -112075,7 +112139,7 @@
       ],
       "override": "JUSTIFICADO",
       "override2": "",
-      "resolution": "NENHUMA",
+      "resolution": "ABONAR",
       "atrasoMaior": "",
       "atrasoPequeno": "",
       "atrasoMaiorMin": 0,
@@ -112104,7 +112168,7 @@
       "atrasoPequenoMin": 0
     },
     "colab_branch-3_295_2026-10-15": {
-      "note": "ESQUECEU",
+      "note": "Esqueceu de bater ponto (Justificado no NGPonto)",
       "punches": {
         "em": "08:16",
         "et": "15:02",
@@ -112119,14 +112183,14 @@
       ],
       "override": "JUSTIFICADO",
       "override2": "",
-      "resolution": "NENHUMA",
+      "resolution": "ABONAR",
       "atrasoMaior": "",
       "atrasoPequeno": "",
       "atrasoMaiorMin": 0,
       "atrasoPequenoMin": 0
     },
     "colab_branch-3_295_2026-10-16": {
-      "note": "FOLGAS COMP.",
+      "note": "Folga Compensatória (NGPonto)",
       "punches": {
         "em": "08:19",
         "et": "15:02",
@@ -112236,7 +112300,7 @@
       "atrasoPequenoMin": 0
     },
     "colab_branch-3_295_2026-10-21": {
-      "note": "ESQUECEU",
+      "note": "Esqueceu de bater ponto (Justificado no NGPonto)",
       "punches": {
         "em": "08:15",
         "et": "15:06",
@@ -112251,7 +112315,7 @@
       ],
       "override": "JUSTIFICADO",
       "override2": "",
-      "resolution": "NENHUMA",
+      "resolution": "ABONAR",
       "atrasoMaior": "",
       "atrasoPequeno": "",
       "atrasoMaiorMin": 0,
@@ -112885,7 +112949,7 @@
       "atrasoPequenoMin": 0
     },
     "colab_branch-3_313_2026-10-20": {
-      "note": "FOLGAS COMP.",
+      "note": "Folga Compensatória (NGPonto)",
       "punches": {
         "em": "07:28",
         "et": "13:02",
@@ -113171,7 +113235,7 @@
       "atrasoPequenoMin": 0
     },
     "colab_branch-3_335_2026-10-02": {
-      "note": "FOLGAS COMP.",
+      "note": "Folga Compensatória (NGPonto)",
       "punches": {
         "em": "07:57",
         "et": "10:10",
@@ -113424,14 +113488,14 @@
       "resolution": "ABONAR"
     },
     "colab_branch-3_335_2026-10-14": {
-      "note": "OK em massa pelo cabeçalho da data",
+      "note": "Folga Compensatória (NGPonto)",
       "punches": {
         "em": "08:00",
         "et": "13:00",
         "sm": "12:00",
         "st": "17:00"
       },
-      "override": "FALTA",
+      "override": "FOLGA COMP",
       "override2": "",
       "resolution": "NENHUMA",
       "atrasoMaior": "",
@@ -113440,48 +113504,48 @@
       "atrasoPequenoMin": 0
     },
     "colab_branch-3_335_2026-10-15": {
-      "note": "OK em massa pelo cabeçalho da data (Replicado de 14/10/2026)",
+      "note": "Licença Casamento / Gala (NGPonto)",
       "punches": {
         "em": "08:00",
         "et": "13:00",
         "sm": "12:00",
         "st": "17:00"
       },
-      "override": "OK",
+      "override": "JUSTIFICADO",
       "override2": "",
-      "resolution": "NENHUMA",
+      "resolution": "ABONAR",
       "atrasoMaior": "",
       "atrasoPequeno": "",
       "atrasoMaiorMin": 0,
       "atrasoPequenoMin": 0
     },
     "colab_branch-3_335_2026-10-16": {
-      "note": "OK em massa pelo cabeçalho da data (Replicado de 14/10/2026)",
+      "note": "Licença Casamento / Gala (NGPonto)",
       "punches": {
         "em": "08:00",
         "et": "13:00",
         "sm": "12:00",
         "st": "17:00"
       },
-      "override": "OK",
+      "override": "JUSTIFICADO",
       "override2": "",
-      "resolution": "NENHUMA",
+      "resolution": "ABONAR",
       "atrasoMaior": "",
       "atrasoPequeno": "",
       "atrasoMaiorMin": 0,
       "atrasoPequenoMin": 0
     },
     "colab_branch-3_335_2026-10-17": {
-      "note": "OK em massa pelo cabeçalho da data (Replicado de 14/10/2026)",
+      "note": "Licença Casamento / Gala (NGPonto)",
       "punches": {
         "em": "08:00",
         "et": "13:00",
         "sm": "12:00",
         "st": "17:00"
       },
-      "override": "OK",
+      "override": "JUSTIFICADO",
       "override2": "",
-      "resolution": "NENHUMA",
+      "resolution": "ABONAR",
       "atrasoMaior": "",
       "atrasoPequeno": "",
       "atrasoMaiorMin": 0,
@@ -113532,7 +113596,7 @@
       "atrasoPequenoMin": 0
     },
     "colab_branch-3_335_2026-10-20": {
-      "note": "FOLGAS COMP.",
+      "note": "Folga Compensatória (NGPonto)",
       "punches": {
         "em": "08:02",
         "et": "13:58",
@@ -113598,32 +113662,36 @@
       "atrasoPequenoMin": 0
     },
     "colab_branch-3_335_2026-10-23": {
-      "note": "OK em massa pelo cabeçalho da data",
+      "note": "Folga Compensatória (NGPonto)",
       "punches": {
         "em": "08:00",
         "et": "13:00",
         "sm": "12:00",
         "st": "17:00"
       },
-      "override": "OK",
+      "override": "FOLGA COMP",
       "override2": "",
       "resolution": "NENHUMA",
       "atrasoMaiorMin": 0,
-      "atrasoPequenoMin": 0
+      "atrasoPequenoMin": 0,
+      "atrasoMaior": "",
+      "atrasoPequeno": ""
     },
     "colab_branch-3_335_2026-10-24": {
-      "note": "OK em massa pelo cabeçalho da data",
+      "note": "Folga Compensatória (NGPonto)",
       "punches": {
         "em": "08:00",
         "et": "13:00",
         "sm": "12:00",
         "st": "17:00"
       },
-      "override": "OK",
+      "override": "FOLGA COMP",
       "override2": "",
       "resolution": "NENHUMA",
       "atrasoMaiorMin": 0,
-      "atrasoPequenoMin": 0
+      "atrasoPequenoMin": 0,
+      "atrasoMaior": "",
+      "atrasoPequeno": ""
     },
     "colab_branch-3_335_2026-10-25": {
       "note": "Repouso Semanal Remunerado / Folga",
@@ -114384,7 +114452,7 @@
       "atrasoPequenoMin": 0
     },
     "colab_branch-3_343_2026-10-03": {
-      "note": "FOLGAS COMP.",
+      "note": "Folga Compensatória (NGPonto)",
       "punches": {
         "em": "",
         "et": "",
@@ -114604,7 +114672,7 @@
       "atrasoPequenoMin": 0
     },
     "colab_branch-3_343_2026-10-13": {
-      "note": "FOLGAS COMP.",
+      "note": "Folga Compensatória (NGPonto)",
       "punches": {
         "em": "08:02",
         "et": "",
@@ -114692,14 +114760,14 @@
       "atrasoPequenoMin": 0
     },
     "colab_branch-3_343_2026-10-17": {
-      "note": "OK em massa pelo cabeçalho da data",
+      "note": "Folga Compensatória (NGPonto)",
       "punches": {
         "em": "08:00",
         "et": "13:00",
         "sm": "12:00",
         "st": "17:00"
       },
-      "override": "OK",
+      "override": "FOLGA COMP",
       "override2": "",
       "resolution": "NENHUMA",
       "atrasoMaior": "",
@@ -114796,7 +114864,7 @@
       "atrasoPequenoMin": 0
     },
     "colab_branch-3_343_2026-10-22": {
-      "note": "ESQUECEU",
+      "note": "Esqueceu de bater ponto (Justificado no NGPonto)",
       "punches": {
         "em": "07:59",
         "et": "14:57",
@@ -114811,7 +114879,7 @@
       ],
       "override": "JUSTIFICADO",
       "override2": "",
-      "resolution": "NENHUMA",
+      "resolution": "ABONAR",
       "atrasoMaior": "",
       "atrasoPequeno": "",
       "atrasoMaiorMin": 0,
@@ -115038,7 +115106,7 @@
       "atrasoPequenoMin": 0
     },
     "colab_branch-3_344_2026-10-02": {
-      "note": "ESQUECEU",
+      "note": "Esqueceu de bater ponto (Justificado no NGPonto)",
       "punches": {
         "em": "08:00",
         "et": "14:00",
@@ -115053,7 +115121,7 @@
       ],
       "override": "JUSTIFICADO",
       "override2": "",
-      "resolution": "NENHUMA",
+      "resolution": "ABONAR",
       "atrasoMaior": "",
       "atrasoPequeno": "",
       "atrasoMaiorMin": 0,
@@ -115170,7 +115238,7 @@
       "atrasoPequenoMin": 0
     },
     "colab_branch-3_344_2026-10-08": {
-      "note": "ABONO",
+      "note": "Abono Autorizado (NGPonto)",
       "punches": {
         "em": "07:32",
         "et": "",
@@ -115185,14 +115253,14 @@
       ],
       "override": "JUSTIFICADO",
       "override2": "",
-      "resolution": "NENHUMA",
+      "resolution": "ABONAR",
       "atrasoMaior": "",
       "atrasoPequeno": "",
       "atrasoMaiorMin": 0,
       "atrasoPequenoMin": 0
     },
     "colab_branch-3_344_2026-10-09": {
-      "note": "ABONO",
+      "note": "Abono Autorizado (NGPonto)",
       "punches": {
         "em": "13:48",
         "et": "17:30",
@@ -115207,7 +115275,7 @@
       ],
       "override": "JUSTIFICADO",
       "override2": "",
-      "resolution": "NENHUMA",
+      "resolution": "ABONAR",
       "atrasoMaior": "",
       "atrasoPequeno": "",
       "atrasoMaiorMin": 0,
@@ -115863,7 +115931,7 @@
       "atrasoPequenoMin": 0
     },
     "colab_branch-3_350_2026-10-09": {
-      "note": "FOLGAS COMP.",
+      "note": "Folga Compensatória (NGPonto)",
       "punches": {
         "em": "08:04",
         "et": "14:30",
@@ -116006,7 +116074,7 @@
       "atrasoPequenoMin": 0
     },
     "colab_branch-3_350_2026-10-16": {
-      "note": "FOLGAS COMP.",
+      "note": "Folga Compensatória (NGPonto)",
       "punches": {
         "em": "13:52",
         "et": "",
@@ -116402,7 +116470,7 @@
       "atrasoPequenoMin": 0
     },
     "colab_branch-3_356_2026-10-03": {
-      "note": "FOLGAS COMP.",
+      "note": "Folga Compensatória (NGPonto)",
       "punches": {
         "em": "",
         "et": "",
@@ -117251,14 +117319,14 @@
       "atrasoPequenoMin": 0
     },
     "colab_branch-3_358_2026-10-13": {
-      "note": "Abono/OK em massa pelo cabeçalho da data",
+      "note": "Folga Compensatória (NGPonto)",
       "punches": {
         "em": "08:00",
         "et": "13:00",
         "sm": "12:00",
         "st": "17:00"
       },
-      "override": "FALTA",
+      "override": "FOLGA COMP",
       "override2": "",
       "resolution": "NENHUMA",
       "atrasoMaior": "",
@@ -117377,7 +117445,7 @@
       "atrasoPequenoMin": 0
     },
     "colab_branch-3_358_2026-10-19": {
-      "note": "ESQUECEU",
+      "note": "Esqueceu de bater ponto (Justificado no NGPonto)",
       "punches": {
         "em": "08:00",
         "et": "13:57",
@@ -117392,7 +117460,7 @@
       ],
       "override": "JUSTIFICADO",
       "override2": "",
-      "resolution": "NENHUMA",
+      "resolution": "ABONAR",
       "atrasoMaior": "",
       "atrasoPequeno": "",
       "atrasoMaiorMin": 0,
@@ -119641,14 +119709,14 @@
       "atrasoPequenoMin": 0
     },
     "colab_branch-3_364_2026-10-15": {
-      "note": "OK em massa pelo cabeçalho da data",
+      "note": "Atestado Médico (NGPonto)",
       "punches": {
         "em": "08:00",
         "et": "13:00",
         "sm": "12:00",
         "st": "17:00"
       },
-      "override": "OK",
+      "override": "ATESTADO",
       "override2": "",
       "resolution": "NENHUMA",
       "atrasoMaior": "",
@@ -120133,7 +120201,7 @@
       "atrasoPequenoMin": 0
     },
     "colab_branch-3_365_2026-10-07": {
-      "note": "FOLGAS COMP.",
+      "note": "Folga Compensatória (NGPonto)",
       "punches": {
         "em": "07:31",
         "et": "14:53",
@@ -120298,7 +120366,7 @@
       "atrasoPequenoMin": 0
     },
     "colab_branch-3_365_2026-10-15": {
-      "note": "FOLGAS COMP.",
+      "note": "Folga Compensatória (NGPonto)",
       "punches": {
         "em": "07:29",
         "et": "14:31",
@@ -120342,14 +120410,14 @@
       "atrasoPequenoMin": 0
     },
     "colab_branch-3_365_2026-10-17": {
-      "note": "OK em massa pelo cabeçalho da data",
+      "note": "Folga Compensatória (NGPonto)",
       "punches": {
         "em": "08:00",
         "et": "13:00",
         "sm": "12:00",
         "st": "17:00"
       },
-      "override": "OK",
+      "override": "FOLGA COMP",
       "override2": "",
       "resolution": "NENHUMA",
       "atrasoMaior": "",
@@ -120424,18 +120492,20 @@
       "atrasoPequenoMin": 0
     },
     "colab_branch-3_365_2026-10-21": {
-      "note": "OK em massa pelo cabeçalho da data",
+      "note": "Folga Compensatória (NGPonto)",
       "punches": {
         "em": "08:00",
         "et": "13:00",
         "sm": "12:00",
         "st": "17:00"
       },
-      "override": "OK",
+      "override": "FOLGA COMP",
       "override2": "",
       "resolution": "NENHUMA",
       "atrasoMaiorMin": 0,
-      "atrasoPequenoMin": 0
+      "atrasoPequenoMin": 0,
+      "atrasoMaior": "",
+      "atrasoPequeno": ""
     },
     "colab_branch-3_365_2026-10-22": {
       "note": "",
@@ -120460,32 +120530,36 @@
       "atrasoPequenoMin": 0
     },
     "colab_branch-3_365_2026-10-23": {
-      "note": "OK em massa pelo cabeçalho da data",
+      "note": "Atestado Médico (NGPonto)",
       "punches": {
         "em": "08:00",
         "et": "13:00",
         "sm": "12:00",
         "st": "17:00"
       },
-      "override": "OK",
+      "override": "ATESTADO",
       "override2": "",
       "resolution": "NENHUMA",
       "atrasoMaiorMin": 0,
-      "atrasoPequenoMin": 0
+      "atrasoPequenoMin": 0,
+      "atrasoMaior": "",
+      "atrasoPequeno": ""
     },
     "colab_branch-3_365_2026-10-24": {
-      "note": "OK em massa pelo cabeçalho da data",
+      "note": "Atestado Médico (NGPonto)",
       "punches": {
         "em": "08:00",
         "et": "13:00",
         "sm": "12:00",
         "st": "17:00"
       },
-      "override": "OK",
+      "override": "ATESTADO",
       "override2": "",
       "resolution": "NENHUMA",
       "atrasoMaiorMin": 0,
-      "atrasoPequenoMin": 0
+      "atrasoPequenoMin": 0,
+      "atrasoMaior": "",
+      "atrasoPequeno": ""
     },
     "colab_branch-3_365_2026-10-25": {
       "note": "Repouso Semanal Remunerado / Folga",
@@ -121038,7 +121112,7 @@
       "atrasoPequenoMin": 0
     },
     "colab_branch-3_366_2026-10-19": {
-      "note": "ESQUECEU",
+      "note": "Esqueceu de bater ponto (Justificado no NGPonto)",
       "punches": {
         "em": "07:30",
         "et": "13:30",
@@ -121053,14 +121127,14 @@
       ],
       "override": "JUSTIFICADO",
       "override2": "",
-      "resolution": "NENHUMA",
+      "resolution": "ABONAR",
       "atrasoMaior": "",
       "atrasoPequeno": "",
       "atrasoMaiorMin": 0,
       "atrasoPequenoMin": 0
     },
     "colab_branch-3_366_2026-10-20": {
-      "note": "FOLGAS COMP.",
+      "note": "Folga Compensatória (NGPonto)",
       "punches": {
         "em": "08:12",
         "et": "13:09",
@@ -121082,7 +121156,7 @@
       "atrasoPequenoMin": 0
     },
     "colab_branch-3_366_2026-10-21": {
-      "note": "FOLGAS COMP.",
+      "note": "Folga Compensatória (NGPonto)",
       "punches": {
         "em": "08:13",
         "et": "13:15",
@@ -121104,7 +121178,7 @@
       "atrasoPequenoMin": 0
     },
     "colab_branch-3_366_2026-10-22": {
-      "note": "FOLGAS COMP.",
+      "note": "Folga Compensatória (NGPonto)",
       "punches": {
         "em": "08:14",
         "et": "13:13",
@@ -121454,32 +121528,36 @@
       "atrasoPequenoMin": 0
     },
     "colab_branch-1_1000_2026-10-05": {
-      "note": "Presença regular (Planilha)",
+      "note": "Atestado Médico (NGPonto)",
       "punches": {
         "em": "08:00",
         "et": "13:00",
         "sm": "12:00",
         "st": "17:00"
       },
-      "override": "OK",
+      "override": "ATESTADO",
       "override2": "",
       "resolution": "NENHUMA",
       "atrasoMaiorMin": 0,
-      "atrasoPequenoMin": 0
+      "atrasoPequenoMin": 0,
+      "atrasoMaior": "",
+      "atrasoPequeno": ""
     },
     "colab_branch-1_1000_2026-10-06": {
-      "note": "Presença regular (Planilha)",
+      "note": "Atestado Médico (NGPonto)",
       "punches": {
         "em": "08:00",
         "et": "13:00",
         "sm": "12:00",
         "st": "17:00"
       },
-      "override": "OK",
+      "override": "ATESTADO",
       "override2": "",
       "resolution": "NENHUMA",
       "atrasoMaiorMin": 0,
-      "atrasoPequenoMin": 0
+      "atrasoPequenoMin": 0,
+      "atrasoMaior": "",
+      "atrasoPequeno": ""
     },
     "colab_branch-1_1000_2026-10-07": {
       "note": "ATESTADO",
@@ -121548,7 +121626,7 @@
       "atrasoPequenoMin": 0
     },
     "colab_branch-1_1000_2026-10-10": {
-      "note": "Esqueceu",
+      "note": "Esqueceu de bater ponto (Justificado no NGPonto)",
       "punches": {
         "em": "08:00",
         "et": "",
@@ -121563,7 +121641,7 @@
       ],
       "override": "JUSTIFICADO",
       "override2": "",
-      "resolution": "NENHUMA",
+      "resolution": "ABONAR",
       "atrasoMaior": "",
       "atrasoPequeno": "",
       "atrasoMaiorMin": 0,
@@ -121625,7 +121703,7 @@
       "resolution": "ABONAR"
     },
     "colab_branch-1_1000_2026-10-14": {
-      "note": "Justificado",
+      "note": "Esqueceu de bater ponto (Justificado no NGPonto)",
       "punches": {
         "em": "08:01",
         "et": "14:00",
@@ -121640,14 +121718,14 @@
       ],
       "override": "JUSTIFICADO",
       "override2": "",
-      "resolution": "NENHUMA",
+      "resolution": "ABONAR",
       "atrasoMaior": "",
       "atrasoPequeno": "",
       "atrasoMaiorMin": 0,
       "atrasoPequenoMin": 0
     },
     "colab_branch-1_1000_2026-10-15": {
-      "note": "Atestado",
+      "note": "Atestado Médico (NGPonto)",
       "punches": {
         "em": "08:46",
         "et": "13:59",
@@ -121691,7 +121769,7 @@
       "atrasoPequenoMin": 0
     },
     "colab_branch-1_1000_2026-10-17": {
-      "note": "Justificado",
+      "note": "Esqueceu de bater ponto (Justificado no NGPonto)",
       "punches": {
         "em": "08:00",
         "et": "",
@@ -121706,7 +121784,7 @@
       ],
       "override": "JUSTIFICADO",
       "override2": "",
-      "resolution": "NENHUMA",
+      "resolution": "ABONAR",
       "atrasoMaior": "",
       "atrasoPequeno": "",
       "atrasoMaiorMin": 0,
@@ -121735,7 +121813,7 @@
       "atrasoPequenoMin": 0
     },
     "colab_branch-1_1000_2026-10-19": {
-      "note": "Justificado",
+      "note": "Esqueceu de bater ponto (Justificado no NGPonto)",
       "punches": {
         "em": "08:00",
         "et": "14:00",
@@ -121750,7 +121828,7 @@
       ],
       "override": "JUSTIFICADO",
       "override2": "",
-      "resolution": "NENHUMA",
+      "resolution": "ABONAR",
       "atrasoMaior": "",
       "atrasoPequeno": "",
       "atrasoMaiorMin": 0,
@@ -122109,7 +122187,7 @@
       "atrasoPequenoMin": 0
     },
     "colab_branch-1_1008_2026-10-05": {
-      "note": "Esqueceu",
+      "note": "Esqueceu de bater ponto (Justificado no NGPonto)",
       "punches": {
         "em": "08:24",
         "et": "14:00",
@@ -122124,7 +122202,7 @@
       ],
       "override": "JUSTIFICADO",
       "override2": "",
-      "resolution": "NENHUMA",
+      "resolution": "ABONAR",
       "atrasoMaior": "",
       "atrasoPequeno": "",
       "atrasoMaiorMin": 0,
@@ -122329,14 +122407,14 @@
       "atrasoPequenoMin": 0
     },
     "colab_branch-1_1008_2026-10-15": {
-      "note": "OK em massa pelo cabeçalho da data",
+      "note": "Folga Compensatória (NGPonto)",
       "punches": {
         "em": "08:00",
         "et": "13:00",
         "sm": "12:00",
         "st": "17:00"
       },
-      "override": "OK",
+      "override": "FOLGA COMP",
       "override2": "",
       "resolution": "NENHUMA",
       "atrasoMaior": "",
@@ -122433,7 +122511,7 @@
       "atrasoPequenoMin": 0
     },
     "colab_branch-1_1008_2026-10-20": {
-      "note": "Esqueceu",
+      "note": "Esqueceu de bater ponto (Justificado no NGPonto)",
       "punches": {
         "em": "08:17",
         "et": "14:00",
@@ -122448,7 +122526,7 @@
       ],
       "override": "JUSTIFICADO",
       "override2": "",
-      "resolution": "NENHUMA",
+      "resolution": "ABONAR",
       "atrasoMaior": "",
       "atrasoPequeno": "",
       "atrasoMaiorMin": 0,
@@ -122845,7 +122923,7 @@
       "atrasoPequenoMin": 0
     },
     "colab_branch-1_1013_2026-10-08": {
-      "note": "Atestado",
+      "note": "Atestado Médico (NGPonto)",
       "punches": {
         "em": "08:00",
         "et": "",
@@ -122988,7 +123066,7 @@
       "atrasoPequenoMin": 0
     },
     "colab_branch-1_1013_2026-10-15": {
-      "note": "Esqueceu",
+      "note": "Esqueceu de bater ponto (Justificado no NGPonto)",
       "punches": {
         "em": "08:00",
         "et": "13:59",
@@ -123003,7 +123081,7 @@
       ],
       "override": "JUSTIFICADO",
       "override2": "",
-      "resolution": "NENHUMA",
+      "resolution": "ABONAR",
       "atrasoMaior": "",
       "atrasoPequeno": "",
       "atrasoMaiorMin": 0,
@@ -123076,7 +123154,7 @@
       "atrasoPequenoMin": 0
     },
     "colab_branch-1_1013_2026-10-19": {
-      "note": "Esqueceu",
+      "note": "Esqueceu de bater ponto (Justificado no NGPonto)",
       "punches": {
         "em": "08:00",
         "et": "13:59",
@@ -123091,7 +123169,7 @@
       ],
       "override": "JUSTIFICADO",
       "override2": "",
-      "resolution": "NENHUMA",
+      "resolution": "ABONAR",
       "atrasoMaior": "",
       "atrasoPequeno": "",
       "atrasoMaiorMin": 0,
@@ -124738,7 +124816,7 @@
       "atrasoPequenoMin": 0
     },
     "colab_branch-1_1025_2026-10-13": {
-      "note": "Abono/OK em massa pelo cabeçalho da data",
+      "note": "Atestado Médico (NGPonto)",
       "punches": {
         "em": "08:00",
         "et": "13:00",
@@ -124754,16 +124832,16 @@
       "atrasoPequenoMin": 0
     },
     "colab_branch-1_1025_2026-10-14": {
-      "note": "OK em massa pelo cabeçalho da data",
+      "note": "Esqueceu de bater ponto (Justificado no NGPonto)",
       "punches": {
         "em": "08:00",
         "et": "13:00",
         "sm": "12:00",
         "st": "17:00"
       },
-      "override": "OK",
+      "override": "JUSTIFICADO",
       "override2": "",
-      "resolution": "NENHUMA",
+      "resolution": "ABONAR",
       "atrasoMaior": "",
       "atrasoPequeno": "",
       "atrasoMaiorMin": 0,
@@ -125096,7 +125174,7 @@
       "atrasoPequenoMin": 0
     },
     "colab_branch-1_1026_2026-10-06": {
-      "note": "DEC. COMP",
+      "note": "Declaração de Comparecimento (NGPonto)",
       "punches": {
         "em": "",
         "et": "",
@@ -125111,7 +125189,7 @@
       ],
       "override": "JUSTIFICADO",
       "override2": "",
-      "resolution": "NENHUMA",
+      "resolution": "ABONAR",
       "atrasoMaior": "",
       "atrasoPequeno": "",
       "atrasoMaiorMin": 0,
@@ -127377,7 +127455,7 @@
       "atrasoPequenoMin": 0
     },
     "colab_branch-1_1032_2026-10-21": {
-      "note": "Folga Comp.",
+      "note": "Folga Compensatória (NGPonto)",
       "punches": {
         "em": "07:59",
         "et": "13:56",
@@ -128943,15 +129021,20 @@
       "atrasoPequenoMin": 0
     },
     "colab_branch-1_1035_2026-10-16": {
-      "note": "OK em massa pelo cabeçalho da data",
+      "note": "Esqueceu de bater ponto (Justificado no NGPonto)",
       "punches": {
         "em": "08:00",
         "et": "13:00",
         "sm": "12:00",
         "st": "17:00"
       },
-      "override": "OK",
-      "resolution": "NENHUMA"
+      "override": "JUSTIFICADO",
+      "resolution": "ABONAR",
+      "override2": "",
+      "atrasoMaiorMin": 0,
+      "atrasoMaior": "",
+      "atrasoPequenoMin": 0,
+      "atrasoPequeno": ""
     },
     "colab_branch-1_1035_2026-10-17": {
       "note": "OK em massa pelo cabeçalho da data",
@@ -129482,7 +129565,7 @@
       "atrasoPequenoMin": 0
     },
     "colab_branch-1_1036_2026-10-16": {
-      "note": "Esqueceu",
+      "note": "Esqueceu de bater ponto (Justificado no NGPonto)",
       "punches": {
         "em": "08:00",
         "et": "11:59",
@@ -129497,7 +129580,7 @@
       ],
       "override": "JUSTIFICADO",
       "override2": "",
-      "resolution": "NENHUMA",
+      "resolution": "ABONAR",
       "atrasoMaior": "",
       "atrasoPequeno": "",
       "atrasoMaiorMin": 0,
@@ -130278,7 +130361,7 @@
       "atrasoPequenoMin": 0
     },
     "colab_branch-1_1037_2026-10-22": {
-      "note": "Esqueceu",
+      "note": "Esqueceu de bater ponto (Justificado no NGPonto)",
       "punches": {
         "em": "08:00",
         "et": "13:57",
@@ -130293,7 +130376,7 @@
       ],
       "override": "JUSTIFICADO",
       "override2": "",
-      "resolution": "NENHUMA",
+      "resolution": "ABONAR",
       "atrasoMaior": "",
       "atrasoPequeno": "",
       "atrasoMaiorMin": 0,
@@ -131836,7 +131919,7 @@
       "atrasoPequenoMin": 0
     },
     "colab_branch-1_1173_2026-10-01": {
-      "note": "Esqueceu",
+      "note": "Esqueceu de bater ponto (Justificado no NGPonto)",
       "punches": {
         "em": "07:40",
         "et": "13:50",
@@ -131851,7 +131934,7 @@
       ],
       "override": "JUSTIFICADO",
       "override2": "",
-      "resolution": "NENHUMA",
+      "resolution": "ABONAR",
       "atrasoMaior": "",
       "atrasoPequeno": "",
       "atrasoMaiorMin": 0,
@@ -131924,7 +132007,7 @@
       "atrasoPequenoMin": 0
     },
     "colab_branch-1_1173_2026-10-05": {
-      "note": "Esqueceu",
+      "note": "Esqueceu de bater ponto (Justificado no NGPonto)",
       "punches": {
         "em": "07:52",
         "et": "14:00",
@@ -131939,7 +132022,7 @@
       ],
       "override": "JUSTIFICADO",
       "override2": "",
-      "resolution": "NENHUMA",
+      "resolution": "ABONAR",
       "atrasoMaior": "",
       "atrasoPequeno": "",
       "atrasoMaiorMin": 0,
@@ -131968,7 +132051,7 @@
       "atrasoPequenoMin": 0
     },
     "colab_branch-1_1173_2026-10-07": {
-      "note": "Esqueceu",
+      "note": "Esqueceu de bater ponto (Justificado no NGPonto)",
       "punches": {
         "em": "07:52",
         "et": "14:00",
@@ -131983,7 +132066,7 @@
       ],
       "override": "JUSTIFICADO",
       "override2": "",
-      "resolution": "NENHUMA",
+      "resolution": "ABONAR",
       "atrasoMaior": "",
       "atrasoPequeno": "",
       "atrasoMaiorMin": 0,
@@ -132034,7 +132117,7 @@
       "atrasoPequenoMin": 0
     },
     "colab_branch-1_1173_2026-10-10": {
-      "note": "Folga Comp.",
+      "note": "Folga Compensatória (NGPonto)",
       "punches": {
         "em": "",
         "et": "",
@@ -132100,18 +132183,23 @@
       "atrasoPequenoMin": 0
     },
     "colab_branch-1_1173_2026-10-13": {
-      "note": "Abono/OK em massa pelo cabeçalho da data",
+      "note": "Atestado Médico (NGPonto)",
       "punches": {
         "em": "08:00",
         "et": "13:00",
         "sm": "12:00",
         "st": "17:00"
       },
-      "override": "OK",
-      "resolution": "ABONAR"
+      "override": "ATESTADO",
+      "resolution": "NENHUMA",
+      "override2": "",
+      "atrasoMaiorMin": 0,
+      "atrasoMaior": "",
+      "atrasoPequenoMin": 0,
+      "atrasoPequeno": ""
     },
     "colab_branch-1_1173_2026-10-14": {
-      "note": "Justificado",
+      "note": "Esqueceu de bater ponto (Justificado no NGPonto)",
       "punches": {
         "em": "08:04",
         "et": "14:00",
@@ -132126,14 +132214,14 @@
       ],
       "override": "JUSTIFICADO",
       "override2": "",
-      "resolution": "NENHUMA",
+      "resolution": "ABONAR",
       "atrasoMaior": "",
       "atrasoPequeno": "",
       "atrasoMaiorMin": 0,
       "atrasoPequenoMin": 0
     },
     "colab_branch-1_1173_2026-10-15": {
-      "note": "Justificado",
+      "note": "Esqueceu de bater ponto (Justificado no NGPonto)",
       "punches": {
         "em": "07:45",
         "et": "14:04",
@@ -132148,7 +132236,7 @@
       ],
       "override": "JUSTIFICADO",
       "override2": "",
-      "resolution": "NENHUMA",
+      "resolution": "ABONAR",
       "atrasoMaior": "",
       "atrasoPequeno": "",
       "atrasoMaiorMin": 0,
@@ -132177,14 +132265,14 @@
       "atrasoPequenoMin": 0
     },
     "colab_branch-1_1173_2026-10-17": {
-      "note": "",
+      "note": "Folga Compensatória (NGPonto)",
       "punches": {
         "em": "08:00",
         "et": "13:00",
         "sm": "12:00",
         "st": "17:00"
       },
-      "override": "OK",
+      "override": "FOLGA COMP",
       "override2": "",
       "resolution": "NENHUMA",
       "atrasoMaiorMin": 0,
@@ -132237,7 +132325,7 @@
       "atrasoPequenoMin": 0
     },
     "colab_branch-1_1173_2026-10-20": {
-      "note": "Esqueceu",
+      "note": "Esqueceu de bater ponto (Justificado no NGPonto)",
       "punches": {
         "em": "07:52",
         "et": "14:04",
@@ -132252,7 +132340,7 @@
       ],
       "override": "JUSTIFICADO",
       "override2": "",
-      "resolution": "NENHUMA",
+      "resolution": "ABONAR",
       "atrasoMaior": "",
       "atrasoPequeno": "",
       "atrasoMaiorMin": 0,
@@ -132325,14 +132413,14 @@
       "atrasoPequenoMin": 0
     },
     "colab_branch-1_1173_2026-10-24": {
-      "note": "",
+      "note": "Folga Compensatória (NGPonto)",
       "punches": {
         "em": "08:00",
         "et": "13:00",
         "sm": "12:00",
         "st": "17:00"
       },
-      "override": "OK",
+      "override": "FOLGA COMP",
       "override2": "",
       "resolution": "NENHUMA",
       "atrasoMaiorMin": 0,
@@ -132539,18 +132627,20 @@
       "atrasoPequenoMin": 0
     },
     "colab_branch-1_1405_2026-10-03": {
-      "note": "Presença regular (Planilha)",
+      "note": "Folga Compensatória (NGPonto)",
       "punches": {
         "em": "08:00",
         "et": "13:00",
         "sm": "12:00",
         "st": "17:00"
       },
-      "override": "OK",
+      "override": "FOLGA COMP",
       "override2": "",
       "resolution": "NENHUMA",
       "atrasoMaiorMin": 0,
-      "atrasoPequenoMin": 0
+      "atrasoPequenoMin": 0,
+      "atrasoMaior": "",
+      "atrasoPequeno": ""
     },
     "colab_branch-1_1405_2026-10-04": {
       "note": "Repouso Semanal Remunerado / Folga",
@@ -132828,14 +132918,14 @@
       "atrasoPequenoMin": 0
     },
     "colab_branch-1_1405_2026-10-17": {
-      "note": "",
+      "note": "Folga Compensatória (NGPonto)",
       "punches": {
         "em": "08:00",
         "et": "13:00",
         "sm": "12:00",
         "st": "17:00"
       },
-      "override": "OK",
+      "override": "FOLGA COMP",
       "override2": "",
       "resolution": "NENHUMA",
       "atrasoMaiorMin": 0,
@@ -133384,7 +133474,7 @@
       "atrasoPequenoMin": 0
     },
     "colab_branch-2_1009_2026-10-05": {
-      "note": "Folga Comp.",
+      "note": "Folga Compensatória (NGPonto)",
       "punches": {
         "em": "06:57",
         "et": "12:58",
@@ -133428,7 +133518,7 @@
       "atrasoPequenoMin": 0
     },
     "colab_branch-2_1009_2026-10-07": {
-      "note": "Folga Comp.",
+      "note": "Folga Compensatória (NGPonto)",
       "punches": {
         "em": "07:49",
         "et": "12:57",
@@ -133494,7 +133584,7 @@
       "atrasoPequenoMin": 0
     },
     "colab_branch-2_1009_2026-10-10": {
-      "note": "Esqueceu",
+      "note": "Esqueceu de bater ponto (Justificado no NGPonto)",
       "punches": {
         "em": "07:00",
         "et": "",
@@ -133509,7 +133599,7 @@
       ],
       "override": "JUSTIFICADO",
       "override2": "",
-      "resolution": "NENHUMA",
+      "resolution": "ABONAR",
       "atrasoMaior": "",
       "atrasoPequeno": "",
       "atrasoMaiorMin": 0,
