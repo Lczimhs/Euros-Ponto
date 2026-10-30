@@ -1,3 +1,32 @@
+
+/**
+ * Hidratação inicial do banco local persistido no servidor (banco_proprio_local.json)
+ */
+async function carregarEstadoDoServidorLocal() {
+  if (typeof fetch !== 'function') return;
+  try {
+    const res = await fetch(`${API_BASE}/api/carregar-estado-local`).then(r => r.json());
+    if (res && res.ok && res.data && Array.isArray(res.data.colaboradores) && res.data.colaboradores.length >= 5) {
+      const serverData = res.data;
+      const serverTime = new Date(serverData.updatedAt || 0).getTime();
+      const localTime = new Date(appState.updatedAt || 0).getTime();
+      const serverCount = Object.keys(serverData.registrosPonto || {}).length;
+      const localCount = Object.keys(appState.registrosPonto || {}).length;
+
+      if (serverTime >= localTime || serverCount >= localCount) {
+        console.log(`[Startup] Carregando banco local do servidor (${serverCount} registros, atualizado em ${new Date(serverTime).toLocaleTimeString()})...`);
+        applyRemoteState(serverData, false);
+        appState.updatedAt = serverData.updatedAt || new Date().toISOString();
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(serverData));
+        localStorage.setItem(STORAGE_KEY + '_backup', JSON.stringify(serverData));
+        renderCurrentView();
+      }
+    }
+  } catch (e) {
+    console.warn('[Startup] Servidor local offline ou indisponível:', e);
+  }
+}
+
 /**
  * DASHBOARD DE PONTO E VALE ALIMENTAÇÃO (V4)
  * Motor Completo de Ponto, Apuração de VA, DSR e Gestão
@@ -4660,6 +4689,7 @@ document.getElementById('select-override-status')?.addEventListener('change', (e
     recalculateModalDelayIfAuto();
   }
   syncPendencia2State();
+  commitAndSaveCellDetail(false, true);
 });
 
 document.getElementById('select-override-status-2')?.addEventListener('change', (e) => {
@@ -4670,24 +4700,26 @@ document.getElementById('select-override-status-2')?.addEventListener('change', 
   }
 });
 
-document.getElementById('btn-save-cell-detail')?.addEventListener('click', () => {
+/**
+ * Grava e persiste imediatamente a célula de ponto em edição (Auto-Save Total)
+ */
+function commitAndSaveCellDetail(closeAfterSave = false, showFeedback = true) {
   const { colabId, isoDate } = currentEditingCell;
   if (!colabId || !isoDate) return;
 
   const colab = appState.colaboradores.find(c => c.id === colabId);
   const branchId = colab?.filialId || appState.activeBranchId;
 
-  // Proteção: feriados cadastrados não podem ser modificados pelo dashboard
   if (isHoliday(isoDate, branchId)) {
-    showToast('Não é permitido alterar manualmente registros em dias de feriado cadastrado. Exclua o feriado no cadastro caso deseje alterá-lo.', 'error');
+    if (showFeedback) showToast('Não é permitido alterar manualmente registros em dias de feriado cadastrado.', 'error');
     return;
   }
 
-  let override = document.getElementById('select-override-status').value;
+  let override = document.getElementById('select-override-status')?.value || 'AUTO';
   let override2 = document.getElementById('select-override-status-2')?.value || '';
   if (['AUTO', 'OK', 'FÉRIAS', 'AFASTADO', 'VAZIO'].includes(override) || override2 === override) override2 = '';
-  const resolution = document.getElementById('select-resolution').value;
-  const note = document.getElementById('input-cell-justificativa').value.trim();
+  const resolution = document.getElementById('select-resolution')?.value || 'NENHUMA';
+  const note = (document.getElementById('input-cell-justificativa')?.value || '').trim();
 
   let atrasoMaiorRaw = normalizeTimeInput((document.getElementById('input-atraso-maior')?.value || '').trim());
   let atrasoPequenoRaw = normalizeTimeInput((document.getElementById('input-atraso-pequeno')?.value || '').trim());
@@ -4696,13 +4728,12 @@ document.getElementById('btn-save-cell-detail')?.addEventListener('click', () =>
   let atrasoPequenoMin = parseTimeToMinutes(atrasoPequenoRaw);
 
   let punches = {
-    em: document.getElementById('punch-em').value,
-    sm: document.getElementById('punch-sm').value,
-    et: document.getElementById('punch-et').value,
-    st: document.getElementById('punch-st').value
+    em: document.getElementById('punch-em')?.value || '',
+    sm: document.getElementById('punch-sm')?.value || '',
+    et: document.getElementById('punch-et')?.value || '',
+    st: document.getElementById('punch-st')?.value || ''
   };
 
-  // Se o usuário selecionou VAZIO, aplica diretamente e limpa batidas e atrasos
   if (override === 'VAZIO') {
     punches = { em: '', sm: '', et: '', st: '' };
     atrasoMaiorRaw = '';
@@ -4745,27 +4776,18 @@ document.getElementById('btn-save-cell-detail')?.addEventListener('click', () =>
     appState.registrosPonto['colab-' + colab.cracha + '_' + isoDate] = regPayload;
   }
 
-  // Replicação para os próximos dias
-  const shouldReplicate = document.getElementById('check-replicate-days').checked;
-  const replicateCount = parseInt(document.getElementById('input-replicate-count').value, 10) || 1;
+  const shouldReplicate = document.getElementById('check-replicate-days')?.checked;
+  const replicateCount = parseInt(document.getElementById('input-replicate-count')?.value, 10) || 1;
 
   if (shouldReplicate && replicateCount > 0) {
     const curDate = new Date(isoDate + 'T12:00:00');
     let added = 0;
-
     for (let i = 1; added < replicateCount && i <= 40; i++) {
       const nextDate = new Date(curDate);
       nextDate.setDate(curDate.getDate() + i);
-
-      // Pula domingos
       if (nextDate.getDay() === 0) continue;
-
       const nextIso = nextDate.toISOString().split('T')[0];
-
-      // Pula feriados cadastrados (Nacional ou da filial do colaborador)
       if (isHoliday(nextIso, branchId)) continue;
-
-      // Pula dias após demissão
       if (colab && colab.status === 'demitido' && colab.dataDemissao && nextIso > colab.dataDemissao) continue;
 
       const nextKey = colabId + '_' + nextIso;
@@ -4788,18 +4810,30 @@ document.getElementById('btn-save-cell-detail')?.addEventListener('click', () =>
     }
   }
 
-  saveStateToStorage();
-  clearModalDraft(); closeModal('modal-cell-detail');
+  // 1. Salva atomicamente no LocalStorage e no Servidor Local em disco imediatamente
+  saveStateToStorage(true, true, true);
+
+  if (closeAfterSave) {
+    clearModalDraft();
+    closeModal('modal-cell-detail');
+  }
+
+  // 2. Atualiza a visualização da tela
   renderCurrentView();
 
-  // Se o relatório de pendências estiver carregado, re-filtra com o novo status da célula
   if (typeof impState !== 'undefined' && impState.pendenciasRaw) {
     impState.pendenciasCache = filtrarPendenciasComDashboardApp(impState.pendenciasRaw);
     if (impState.pendenciasCache.resumo) atualizarKpisCards(impState.pendenciasCache.resumo);
     atualizarTextoEmailApp();
   }
 
-  showToast('Registro de ponto atualizado com sucesso!', 'success');
+  if (showFeedback) {
+    showToast('⚡ Alteração salva automaticamente!', 'success');
+  }
+}
+
+document.getElementById('btn-save-cell-detail')?.addEventListener('click', () => {
+  commitAndSaveCellDetail(true, true);
 });
 
 // ==========================================================================
@@ -4877,11 +4911,7 @@ async function salvarAcertoNoNGPonto() {
 
 document.getElementById('btn-save-and-inject-ng')?.addEventListener('click', (e) => {
   e.preventDefault();
-  if (e.currentTarget.disabled) {
-    showToast('A gravação direta no NGPonto está temporariamente bloqueada.', 'warning');
-    return;
-  }
-  salvarAcertoNoNGPonto();
+  showToast('A gravação direta no NGPonto foi desativada para manter o Dashboard e o NGPonto independentes.', 'info');
 });
 
 /**
@@ -7187,6 +7217,9 @@ function openModal(modalId) {
 }
 
 function closeModal(modalId) {
+  if (modalId === 'modal-cell-detail' && currentEditingCell && currentEditingCell.colabId) {
+    try { commitAndSaveCellDetail(false, false); } catch(e) {}
+  }
   const m = document.getElementById(modalId);
   if (m) m.classList.remove('active');
   clearModalDraft();
@@ -7463,8 +7496,9 @@ document.addEventListener('DOMContentLoaded', () => {
   try { setupNavigation(); } catch (e) { console.error('setupNavigation error:', e); }
   try { initEvents(); } catch (e) { console.error('initEvents error:', e); }
 
-  // 2. Carrega estado do storage
+  // 2. Carrega estado do storage e hidrata do servidor local
   try { loadStateFromStorage(); } catch (e) { console.error('loadStateFromStorage error:', e); }
+  try { carregarEstadoDoServidorLocal(); } catch (e) {}
   try { checkModalDraftOnLoad(); } catch (e) {}
 
   // 3. Restaurar estado visual inicial
@@ -7829,8 +7863,6 @@ async function coletarEProcessarRelogioApp(etapa) {
     }).then(r => r.json());
 
     if (resProc && resProc.ok) {
-      showToast(`🔄 [3/3] Sincronizando batidas processadas com o Dashboard...`);
-      await sincronizarBatidasNGParaMatriz();
       await carregarPendenciasRelatorioApp(true);
       await carregarStatusRelogiosApp();
       showToast(`✅ ${nomeRel} coletado, processado e integrado com sucesso!`);
@@ -7981,8 +8013,7 @@ function initImportacaoEvents() {
   document.getElementById('btn-save-and-sync-employee')?.addEventListener('click', async () => {
     const btnSave = document.getElementById('btn-save-employee');
     if (btnSave) btnSave.click();
-    showToast('⚡ Cadastro salvo! Iniciando sincronização do ponto deste funcionário no NGPonto...');
-    await sincronizarBatidasNGParaMatriz();
+    showToast('⚡ Cadastro salvo com sucesso!');
   });
 
   // Lookup automático de Crachá/Filial para o modal limpo de funcionário
@@ -8116,12 +8147,11 @@ async function coletarRelogioApp(etapa = 0) {
         ).join('\n\n');
       }
 
-      showToast('⚡ Coleta concluída com sucesso! Processando cálculos no NGPonto e sincronizando matriz...');
+      showToast('⚡ Coleta concluída com sucesso! Processando cálculos no NGPonto...');
       await processarDuploApp(false);
-      await sincronizarBatidasNGParaMatriz();
       await carregarPendenciasRelatorioApp(true);
       await carregarStatusRelogiosApp();
-      showToast('🎉 Ponto coletado e sincronizado! Dias sem pendência marcados como OK.');
+      showToast('🎉 Ponto coletado e apurado no NGPonto com sucesso!');
     } else {
       showToast('Erro na coleta: ' + res.erro, 'error');
     }
@@ -8143,7 +8173,6 @@ async function processarDuploApp(comToast = true) {
 
     if (res.ok) {
       showToast('🎉 Marcações processadas com sucesso em 2 ciclos no NGPonto!');
-      await sincronizarBatidasNGParaMatriz();
       await carregarPendenciasRelatorioApp(true);
       await carregarStatusRelogiosApp();
     } else {
@@ -8162,10 +8191,7 @@ async function executarRotinaMatinalApp() {
   showToast('🌅 [1/4] Disparando Rotina Matinal: Conectando aos 4 relógios REP...');
   await coletarRelogioApp(0);
 
-  showToast('📊 [3/4] Sincronizando batidas e quadros com a Matriz de Ponto do dashboard...');
-  await sincronizarBatidasNGParaMatriz();
-
-  showToast('✉️ [4/4] Abrindo painel de envio de e-mails com as pendências de ontem formatadas...');
+  showToast('✉️ [3/3] Abrindo painel de envio de e-mails com as pendências de ontem formatadas...');
   const btnRel = document.getElementById('subtab-btn-relatorio');
   if (btnRel) btnRel.click();
   definirDataEmailRelativaApp(-1);
@@ -8173,125 +8199,12 @@ async function executarRotinaMatinalApp() {
 }
 
 async function sincronizarBatidasNGParaMatriz(mes, ano) {
-  const m = (typeof mes === 'number' && mes > 0) ? mes : (appState.currentMonth + 1);
-  const a = (typeof ano === 'number' && ano > 0) ? ano : appState.currentYear;
-  showToast(`🔄 [Sincronismo NGPonto] Carregando matriz consolidada do mês ${String(m).padStart(2,'0')}/${a}...`);
-
-  try {
-    const res = await fetch(`${API_BASE}/api/sincronizar-matriz?mes=${m}&ano=${a}`).then(r => r.json());
-    if (res.ok) {
-      // 1. Atualizar colaboradores com quadros e dados NGPonto
-      if (res.colaboradores && Array.isArray(res.colaboradores)) {
-        res.colaboradores.forEach(c => {
-          const codNum = parseInt(c.codigo, 10);
-          const colab = appState.colaboradores.find(x => Number(x.cracha) === codNum && (c.idowner === 6716 ? x.filialId === 'branch-4' : x.filialId !== 'branch-4'))
-            || appState.colaboradores.find(x => Number(x.cracha) === codNum);
-          if (colab) {
-            colab.cpf = c.cpf || colab.cpf || '';
-            colab.pis = c.pis || colab.pis || '';
-            colab.cargo = c.cargo || colab.cargo || '';
-            colab.quadroNG = c.horario1 || c.codigoQuadro || colab.quadroNG || '';
-            colab.horariosSemana = c.horariosSemana || colab.horariosSemana;
-            colab.idregistroNG = c.idregistro;
-            colab.idownerNG = c.idowner;
-            colab.setor = c.setor || colab.setor;
-
-            // Escala Sábado e Aprendiz a partir do NGPonto
-            const isAuto = c.tipoFuncionario === 'Autônomo';
-            const isAp = (c.cargo && /aprendi/i.test(c.cargo)) || (c.horario1 === '14:00 18:00');
-            if (c.horariosSemana && c.horariosSemana['7']) {
-              const s7 = c.horariosSemana['7'];
-              colab.trabalhaSabado = !s7.descanso && Boolean(s7.e1 || s7.s1);
-            } else if (isAp || isAuto) {
-              colab.trabalhaSabado = false;
-            }
-            if (isAp) {
-              colab.aprendiz = true;
-              colab.isAprendiz = true;
-            }
-            if (isAuto) {
-              colab.registraPonto = false;
-              colab.naoRecebeVa = true;
-              colab.recebeVa = false;
-            }
-          }
-        });
-      }
-
-      // 2. Atualizar registrosPonto com as batidas reais e status apurados no banco
-      if (res.matriz) {
-        let countAtualizados = 0;
-        Object.keys(res.matriz).forEach(key => {
-          const cell = res.matriz[key];
-          // Chave pode ser '7452_001008_2026-10-28' ou '001008_2026-10-28'
-          const parts = key.split('_');
-          const iso = cell.data || parts[parts.length - 1];
-          const codStr = cell.codigo || (parts.length >= 3 ? parts[1] : parts[0]);
-          const codNum = parseInt(codStr, 10);
-          const ownerNum = cell.idowner || (parts.length >= 3 ? parseInt(parts[0], 10) : 0);
-
-          if (codNum && iso) {
-            const colab = appState.colaboradores.find(x => Number(x.cracha) === codNum && (ownerNum === 6716 ? x.filialId === 'branch-4' : (ownerNum === 7452 ? x.filialId !== 'branch-4' : true)))
-              || appState.colaboradores.find(x => Number(x.cracha) === codNum);
-            if (colab) {
-              const regKey = colab.id + '_' + iso;
-              const existing = appState.registrosPonto[regKey];
-              // Preserva apenas abonos/justificativas manuais explícitas (FÉRIAS, ATESTADO, ABONAR)
-              const hasManualJustification = existing && !existing.sincronizadoNG && existing.note !== 'Dia futuro em aberto (desmarcado)' && (
-                existing.resolution === 'ABONAR' ||
-                ['FÉRIAS', 'FERIAS', 'ATESTADO', '1/2 ATESTADO', 'AFASTADO', 'AFAST'].includes((existing.override || '').toUpperCase())
-              );
-
-              if (!hasManualJustification) {
-                const regPayload = {
-                  override: cell.overrideStatus || 'AUTO',
-                  override2: cell.overrideStatus2 || '',
-                  resolution: cell.resolution || 'NENHUMA',
-                  punches: cell.punches || { em: '', sm: '', et: '', st: '' },
-                  note: cell.note || '',
-                  atrasoMaior: cell.atrasoMaior || '',
-                  atrasoMaiorMin: cell.atrasoMaiorMin || 0,
-                  atrasoPequeno: '',
-                  atrasoPequenoMin: 0,
-                  esperado: cell.esperado,
-                  sincronizadoNG: true
-                };
-                appState.registrosPonto[regKey] = regPayload;
-                appState.registrosPonto['colab-' + colab.cracha + '_' + iso] = regPayload;
-                countAtualizados++;
-              }
-            }
-          }
-        });
-        console.log(`[Sincronismo NGPonto] ${countAtualizados} dias de ponto sincronizados com sucesso.`);
-      }
-
-      saveStateToStorage();
-
-      // Atualiza KPIs
-      if (res.resumo) {
-        atualizarKpisCards(res.resumo);
-      }
-
-      if (appState.activeView === 'view-ponto') {
-        renderMatrixView();
-      }
-
-      showToast(`🎉 Sincronização concluída! ${res.colaboradores?.length || 0} colaboradores atualizados com o banco NGPonto.`);
-    } else {
-      showToast('Erro ao sincronizar com NGPonto: ' + res.erro, 'error');
-    }
-  } catch (e) {
-    showToast(formatMotorErrorMessage(e, 'Erro de comunicação com o motor de sincronismo'), 'error');
-  }
+  console.log('[Dashboard Blindado] Sincronismo da matriz com NGPonto desativado permanentemente para proteger alterações manuais.');
+  showToast('ℹ️ O Dashboard de Ponto é exclusivo para gestão manual e está desconectado do NGPonto para preservar suas alterações.', 'info');
 }
 
 /**
- * Verifica se um dia específico no dashboard do colaborador NÃO é referente a pendência
- * (Ex: FÉRIAS, ATESTADO, 1/2 ATESTADO, ABONADO, AFASTADO, DOMINGO, SÁBADO folga, FERIADO, etc.)
- * ou se o colaborador está registrado no AppLucas como "não bate ponto".
- */
-function isDiaNaoReferenteAPendencia(appColab, isoStr, fromNGMotor = false) {
+ * function isDiaNaoReferenteAPendencia(appColab, isoStr, fromNGMotor = false) {
   if (!appColab) return false;
 
   // 1. Colaborador registrado no AppLucas que NÃO bate ponto (excluído de pendências)

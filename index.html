@@ -616,10 +616,10 @@
             </p>
           </div>
           <div style="display:flex; gap:8px; align-items:center;">
-            <button class="btn btn-cyan btn-sm" id="btn-imp-rotina-matinal" title="Executa Coleta dos 4 Relógios + Processamento 2x + Sincronização da Matriz">
+            <button class="btn btn-cyan btn-sm" id="btn-imp-rotina-matinal" title="Executa Coleta dos 4 Relógios + Processamento 2x no NGPonto + Atualização do Relatório de Pendências">
               <span>🌅</span> Rotina Matinal (1-Clique)
             </button>
-            <button class="btn btn-primary btn-sm" id="btn-imp-sincronizar-matriz" title="Puxa todas as batidas e quadros do NGPonto diretamente para a Matriz de Ponto">
+            <button class="btn btn-primary btn-sm" id="btn-imp-sincronizar-matriz" style="display:none !important;" title="Puxa todas as batidas e quadros do NGPonto diretamente para a Matriz de Ponto">
               <span>🔄</span> Sincronizar com Matriz de Ponto
             </button>
           </div>
@@ -1145,7 +1145,7 @@
       <div class="modal-footer" style="display:flex; justify-content:space-between; align-items:center; width:100%;">
         <button type="button" class="btn btn-secondary" data-close="modal-cell-detail">Cancelar (Esc)</button>
         <div style="display:flex; gap:8px;">
-          <button type="button" class="btn btn-cyan" id="btn-save-and-inject-ng" disabled style="opacity:0.6; cursor:not-allowed;" title="Gravação Direta no SQL do NGPonto (Recurso bloqueado temporariamente)">
+          <button type="button" class="btn btn-cyan" id="btn-save-and-inject-ng" style="display:none !important;" disabled style="opacity:0.6; cursor:not-allowed;" title="Gravação Direta no SQL do NGPonto (Recurso bloqueado temporariamente)">
             <span>🔒</span> Salvar e Gravar no NGPonto
           </button>
           <button type="button" class="btn btn-primary" id="btn-save-cell-detail">Salvar Alterações (Enter)</button>
