@@ -34,7 +34,7 @@ async function carregarEstadoDoServidorLocal() {
 
 // Chave do LocalStorage e Versão Mestra de Segurança
 const STORAGE_KEY = 'appLucas_ponto_va_v5_data';
-const MASTER_RECOVERY_VERSION = 2026102402;
+const MASTER_RECOVERY_VERSION = 2026103002;
 
 // ==========================================================================
 // 1. ESTADO GLOBAL DA APLICAÇÃO
@@ -2366,6 +2366,19 @@ function loadStateFromStorage() {
           }
         } catch (eBkp) {}
       }
+    }
+
+    // Se a versão da Base Mestra Oficial embutida no sistema for mais recente que o cache local do cliente,
+    // atualiza o estado local com os registros consolidados da Base Mestra Oficial
+    if (parsed && masterSource && Number(parsed._masterVersion || 0) < MASTER_RECOVERY_VERSION) {
+      console.log(`🚀 Atualizando cache local da Base Mestra Oficial: v${parsed._masterVersion} -> v${MASTER_RECOVERY_VERSION}`);
+      parsed = JSON.parse(JSON.stringify(masterSource));
+      parsed._masterVersion = MASTER_RECOVERY_VERSION;
+      parsed.updatedAt = new Date().toISOString();
+      parsed = migrateAppState(parsed);
+      try {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(parsed));
+      } catch (e) {}
     }
 
     // Apenas aplica o seed inicial se o banco local estiver realmente inexistente ou sem colaboradores
