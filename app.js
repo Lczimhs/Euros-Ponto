@@ -34,7 +34,7 @@ async function carregarEstadoDoServidorLocal() {
 
 // Chave do LocalStorage e Versão Mestra de Segurança
 const STORAGE_KEY = 'appLucas_ponto_va_v5_data';
-const MASTER_RECOVERY_VERSION = 2026103101;
+const MASTER_RECOVERY_VERSION = 2026103102;
 
 // ==========================================================================
 // 1. ESTADO GLOBAL DA APLICAÇÃO
@@ -8548,6 +8548,35 @@ function gerarPendenciasDoDashboardLocal() {
 }
 
 async function carregarPendenciasRelatorioApp(forcar = false) {
+  if (impState.carregandoPendencias) return;
+  impState.carregandoPendencias = true;
+
+  // 1. CARREGAMENTO INSTANTÂNEO (ZERO-LAG PREVIEW):
+  // Se ainda não houver cache de pendências, calcula instantaneamente a partir dos dados do Dashboard
+  // para que o usuário NUNCA veja "Nenhum dado de pendência carregado ainda"
+  if (!impState.pendenciasCache) {
+    try {
+      const previewLocal = gerarPendenciasDoDashboardLocal();
+      if (previewLocal && previewLocal.colaboradores) {
+        impState.pendenciasCache = previewLocal;
+        impState.pendenciasRaw = previewLocal;
+        if (previewLocal.resumo) atualizarKpisCards(previewLocal.resumo);
+        atualizarTextoEmailApp();
+      }
+    } catch (ePrev) {}
+  }
+
+  // 2. Feedback visual no botão
+  const btnAtualizar = document.getElementById('btn-app-atualizar-relatorio-email');
+  const btnOriginalHtml = btnAtualizar ? btnAtualizar.innerHTML : '';
+  if (btnAtualizar) {
+    btnAtualizar.disabled = true;
+    btnAtualizar.innerHTML = '<span>⏳</span> Apurando NGPonto...';
+  }
+  if (forcar) {
+    showToast('⏳ Conectando ao motor local e apurando pendências oficiais no NGPonto... Aguarde.');
+  }
+
   const mes = appState.currentMonth + 1;
   const ano = appState.currentYear;
   let dados = null;
@@ -8558,22 +8587,31 @@ async function carregarPendenciasRelatorioApp(forcar = false) {
       dados = filtrarPendenciasComDashboardApp(res);
     }
   } catch (e) {
-    console.log('API de pendências remota indisponível, gerando diretamente do Dashboard Local...');
+    console.log('API de pendências remota demorou ou indisponível, utilizando dados do Dashboard...');
+  } finally {
+    if (btnAtualizar) {
+      btnAtualizar.disabled = false;
+      btnAtualizar.innerHTML = btnOriginalHtml || '<span>🔄</span> Atualizar Relatório';
+    }
+    impState.carregandoPendencias = false;
   }
 
-  // Fallback instantâneo e garantido diretamente do Dashboard (funciona 100% no Vercel e Local)
-  if (!dados) {
+  // Fallback garantido diretamente do Dashboard se a API não retornou
+  if (!dados && !impState.pendenciasCache) {
     dados = gerarPendenciasDoDashboardLocal();
   }
 
-  impState.pendenciasRaw = dados;
-  impState.pendenciasCache = dados;
+  if (dados) {
+    impState.pendenciasRaw = dados;
+    impState.pendenciasCache = dados;
 
-  if (dados.resumo) {
-    atualizarKpisCards(dados.resumo);
+    if (dados.resumo) {
+      atualizarKpisCards(dados.resumo);
+    }
+    atualizarTextoEmailApp();
   }
-  atualizarTextoEmailApp();
-  if (forcar) showToast('✅ Relatório de pendências atualizado e sincronizado com o dashboard!');
+
+  if (forcar) showToast('✅ Relatório de pendências oficial do NGPonto sincronizado com sucesso!');
 }
 
 function atualizarKpisCards(resumo) {
@@ -8601,6 +8639,12 @@ function definirDataEmailRelativaApp(offset = -1) {
   const inDia = document.getElementById('email-dia-ref');
   if (inDia) {
     inDia.value = `${dd}/${mm}`;
+    if (!impState.pendenciasCache) {
+      try {
+        impState.pendenciasCache = gerarPendenciasDoDashboardLocal();
+        if (impState.pendenciasCache?.resumo) atualizarKpisCards(impState.pendenciasCache.resumo);
+      } catch (e) {}
+    }
     atualizarTextoEmailApp();
   }
 }
@@ -8645,7 +8689,13 @@ function gerarTextoEmailPendenciasApp(setorFiltro, diaRef) {
   }
 
   if (!impState.pendenciasCache || !impState.pendenciasCache.colaboradores) {
-    return 'Nenhum dado de pendência carregado ainda. Clique em "Atualizar Relatório" acima.';
+    try {
+      impState.pendenciasCache = gerarPendenciasDoDashboardLocal();
+      if (impState.pendenciasCache?.resumo) atualizarKpisCards(impState.pendenciasCache.resumo);
+    } catch (e) {}
+    if (!impState.pendenciasCache || !impState.pendenciasCache.colaboradores) {
+      return 'Nenhum dado de pendência carregado ainda. Clique em "Atualizar Relatório" acima.';
+    }
   }
 
   let filtrados = impState.pendenciasCache.colaboradores.filter(c => c.temPendencia);
