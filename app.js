@@ -34,7 +34,7 @@ async function carregarEstadoDoServidorLocal() {
 
 // Chave do LocalStorage e Versão Mestra de Segurança
 const STORAGE_KEY = 'appLucas_ponto_va_v5_data';
-const MASTER_RECOVERY_VERSION = 2026103103;
+const MASTER_RECOVERY_VERSION = 2026103104;
 
 // ==========================================================================
 // 1. ESTADO GLOBAL DA APLICAÇÃO
@@ -8396,246 +8396,88 @@ function isDiaNaoReferenteAPendencia(appColab, isoStr, fromNGMotor = false) {
  * - Exclui dias com VAZIO, FÉRIAS, ATESTADO ou qualquer justificativa
  * - Recalcula resumo de KPIs fielmente
  */
-function filtrarPendenciasComDashboardApp(dadosMotor) {
+/**
+ * Processa os acertos de marcações oficiais vindos diretamente do banco NGPonto (pto_movimentomarcacao):
+ * - Mantém 100% da integridade dos cálculos do motor NGPonto (sem nenhuma interferência do Dashboard manual)
+ * - Exclui colaboradores que comprovadamente não batem ponto (folha manual / autônomos isentos)
+ */
+function processarAcertosNGPonto(dadosMotor) {
   if (!dadosMotor || !Array.isArray(dadosMotor.colaboradores)) return dadosMotor;
 
   const resultado = JSON.parse(JSON.stringify(dadosMotor));
-
-  let totalFaltas = 0;
-  let totalFaltasMeio = 0;
-  let totalBatidasAusentes = 0;
-  let totalAtrasos = 0;
-  let comPendencias = 0;
-  let totalValidos = 0;
+  const folhaManualCrachas = [325, 336, 431, 540, 696, 702, 736, 781, 898, 937, 965, 974, 1020, 1027, 1031, 1032];
 
   resultado.colaboradores = resultado.colaboradores.filter(c => {
     const codNum = parseInt(c.codigo, 10);
-    const appColab = appState.colaboradores.find(x => x.cracha === codNum && (c.idowner === 6716 ? x.filialId === 'branch-4' : x.filialId !== 'branch-4'))
-      || appState.colaboradores.find(x => x.cracha === codNum);
+    if (folhaManualCrachas.includes(codNum)) return false;
 
-    // REGRA 1: Colaboradores no AppLucas que NÃO batem ponto
+    const appColab = (appState.colaboradores || []).find(x => x.cracha === codNum && (c.idowner === 6716 ? x.filialId === 'branch-4' : x.filialId !== 'branch-4'))
+      || (appState.colaboradores || []).find(x => x.cracha === codNum);
+
     if (appColab) {
       const naoBate = appColab.registraPonto === false 
         || appColab.registraPonto === 'nao' 
         || appColab.registraPonto === 'false' 
         || appColab.registraPonto === 0 
-        || appColab.registraPonto === '0';
-      if (naoBate) {
-        c.temPendencia = false;
-        c.pendencias = [];
-        c.qtdPendencias = 0;
-        return false;
-      }
-    }
-
-    totalValidos++;
-
-    // REGRA 2: Filtra dias com VAZIO, FÉRIAS, ATESTADO ou não-pendência
-    if (c.pendencias && Array.isArray(c.pendencias)) {
-      c.pendencias = c.pendencias.filter(p => {
-        const iso = p.dataIso || (p.data && p.data.includes('/') ? p.data.split('/').reverse().join('-') : p.data);
-        if (!iso) return true;
-
-        if (isDiaNaoReferenteAPendencia(appColab, iso, true)) {
-          return false;
-        }
-        return true;
-      });
-
-      c.temPendencia = c.pendencias.length > 0;
-      c.qtdPendencias = c.pendencias.length;
-
-      if (c.temPendencia) {
-        comPendencias++;
-        c.pendencias.forEach(p => {
-          const st = (p.status || '').toUpperCase();
-          if (st === 'FALTA') totalFaltas++;
-          else if (st === 'FM' || st === 'FT') totalFaltasMeio++;
-          else if (['EM', 'SM', 'ET', 'ST'].includes(st) || st.includes('+')) totalBatidasAusentes++;
-          if (p.atrasoMinutos && p.atrasoMinutos > 5) totalAtrasos++;
-        });
-      }
+        || appColab.registraPonto === '0'
+        || appColab.relogioVinculo === 'folha_manual'
+        || appColab.relogioVinculo === 'isentos';
+      if (naoBate) return false;
     }
 
     return true;
   });
 
-  resultado.resumo = {
-    totalColaboradores: totalValidos,
-    comPendencias: comPendencias,
-    totalFaltas: totalFaltas,
-    totalFaltasMeio: totalFaltasMeio,
-    totalBatidasAusentes: totalBatidasAusentes,
-    totalAtrasos: totalAtrasos
-  };
-
   return resultado;
-}
-
-/**
- * Gera o relatório de pendências diretamente do Dashboard Local de forma instantânea e 100% confiável.
- * Exclui rigorosamente: Motoristas, Vendedores, Vigias, Guardas e Autônomos (que não batem ponto).
- */
-function gerarPendenciasDoDashboardLocal() {
-  const mesAtual = appState.currentMonth + 1;
-  const anoAtual = appState.currentYear;
-  const numDays = new Date(anoAtual, mesAtual, 0).getDate();
-
-  let totalFaltas = 0;
-  let totalFaltasMeio = 0;
-  let totalBatidasAusentes = 0;
-  let totalAtrasos = 0;
-  let comPendencias = 0;
-  let totalValidos = 0;
-
-  const listaColabs = [];
-
-  const getSetorColab = (c) => {
-    if (c.setor && c.setor.includes('(')) return c.setor;
-    if (c.filialId === 'branch-4') return 'Relógio Caiari (6716)';
-    if (c.filialId === 'branch-2') return 'Ind. Naviraí - MS (7452)';
-    if (c.deptId === 'dept-admin-sponto' || c.relogioVinculo === 'folha_manual') return 'Folha Manual (7452)';
-    if (c.deptId === 'dept-admin' || c.relogioVinculo === 'relogio2_adm') return 'ADM Ji-Paraná (7452)';
-    return 'Produção - Depósito I (7452)';
-  };
-
-  const folhaManualCrachas = [325, 336, 431, 540, 696, 702, 736, 781, 898, 937, 965, 974, 1020, 1027, 1031, 1032];
-
-  (appState.colaboradores || []).forEach(c => {
-    const codNum = Number(c.cracha);
-
-    // REGRA DE OURO: Motoristas, vendedores, vigias, guardas e autônomos NÃO batem ponto e NÃO entram em pendências
-    if (c.registraPonto === false || c.relogioVinculo === 'folha_manual' || c.relogioVinculo === 'isentos' || c.deptId === 'dept-admin-sponto' || folhaManualCrachas.includes(codNum)) {
-      return;
-    }
-    if (c.status === 'demitido' && c.dataDemissao && new Date(c.dataDemissao) < new Date(anoAtual, mesAtual - 1, 1)) {
-      return;
-    }
-
-    totalValidos++;
-    const pendencias = [];
-
-    for (let d = 1; d <= numDays; d++) {
-      const isoDate = `${anoAtual}-${String(mesAtual).padStart(2, '0')}-${String(d).padStart(2, '0')}`;
-
-      // Não gera pendência para datas futuras
-      const dataObj = new Date(anoAtual, mesAtual - 1, d);
-      const hoje = new Date();
-      hoje.setHours(23, 59, 59, 999);
-      if (dataObj > hoje) continue;
-
-      if (isDiaNaoReferenteAPendencia(c, isoDate)) continue;
-
-      const reg = getPontoRecord(c.id, isoDate);
-      const stObj = getDayStatus(c.id, isoDate, c.filialId);
-      const st = (stObj?.type || reg?.override || '').toUpperCase();
-
-      const isAtraso = st === 'ATRASO' || (stObj?.delayMinutes > 5) || (reg?.override !== 'AUTO' && ((reg?.atrasoMaiorMin > 5) || (reg?.atrasoMaior && parseTimeToMinutes(reg.atrasoMaior) > 5)));
-
-      if (['FALTA', 'FM', 'FT', 'EM', 'SM', 'ET', 'ST'].includes(st) || st.includes('+')) {
-        let atrasoMin = (reg?.override === 'AUTO') ? (stObj?.delayMinutes || 0) : (reg?.atrasoMaiorMin || stObj?.delayMinutes || 0);
-        if (!atrasoMin && reg?.override !== 'AUTO' && reg?.atrasoMaior) atrasoMin = parseTimeToMinutes(reg.atrasoMaior);
-
-        pendencias.push({
-          data: formatDateBR(isoDate),
-          dataIso: isoDate,
-          dia: d,
-          status: st,
-          atrasoMinutos: atrasoMin,
-          descricao: stObj?.display || st
-        });
-
-        if (st === 'FALTA') totalFaltas++;
-        else if (st === 'FM' || st === 'FT') totalFaltasMeio++;
-        else totalBatidasAusentes++;
-        if (atrasoMin > 5) totalAtrasos++;
-      } else if (isAtraso) {
-        const aMin = (reg?.override === 'AUTO') ? (stObj?.delayMinutes || 0) : (reg?.atrasoMaiorMin || stObj?.delayMinutes || parseTimeToMinutes(reg?.atrasoMaior || '00:00'));
-        pendencias.push({
-          data: formatDateBR(isoDate),
-          dataIso: isoDate,
-          dia: d,
-          status: 'ATRASO',
-          atrasoMinutos: aMin,
-          descricao: `Atraso ${minutesToTime(aMin)}`
-        });
-        totalAtrasos++;
-      }
-    }
-
-    const temPend = pendencias.length > 0;
-    if (temPend) comPendencias++;
-
-    listaColabs.push({
-      idowner: c.filialId === 'branch-4' ? 6716 : 7452,
-      idregistro: c.idregistro || c.cracha,
-      codigo: String(c.cracha).padStart(6, '0'),
-      nome: c.nome,
-      cargo: c.cargo || '',
-      setor: getSetorColab(c),
-      temPendencia: temPend,
-      totalPendencias: pendencias.length,
-      pendencias: pendencias
-    });
-  });
-
-  return {
-    ok: true,
-    mes: mesAtual,
-    ano: anoAtual,
-    resumo: {
-      totalColaboradores: totalValidos,
-      comPendencias: comPendencias,
-      totalFaltas: totalFaltas,
-      totalFaltasMeio: totalFaltasMeio,
-      totalBatidasAusentes: totalBatidasAusentes,
-      totalAtrasos: totalAtrasos
-    },
-    colaboradores: listaColabs
-  };
 }
 
 async function carregarPendenciasRelatorioApp(forcar = false) {
   if (impState.carregandoPendencias) return;
   impState.carregandoPendencias = true;
 
-  // 1. CARREGAMENTO INSTANTÂNEO (ZERO-LAG PREVIEW):
-  // Se ainda não houver cache de pendências, calcula instantaneamente a partir dos dados do Dashboard
-  // para que o usuário NUNCA veja "Nenhum dado de pendência carregado ainda"
-  if (!impState.pendenciasCache) {
-    try {
-      const previewLocal = gerarPendenciasDoDashboardLocal();
-      if (previewLocal && previewLocal.colaboradores) {
-        impState.pendenciasCache = previewLocal;
-        impState.pendenciasRaw = previewLocal;
-        if (previewLocal.resumo) atualizarKpisCards(previewLocal.resumo);
-        atualizarTextoEmailApp();
-      }
-    } catch (ePrev) {}
-  }
-
-  // 2. Feedback visual no botão
   const btnAtualizar = document.getElementById('btn-app-atualizar-relatorio-email');
   const btnOriginalHtml = btnAtualizar ? btnAtualizar.innerHTML : '';
   if (btnAtualizar) {
     btnAtualizar.disabled = true;
     btnAtualizar.innerHTML = '<span>⏳</span> Apurando NGPonto...';
   }
+
+  const inCorpo = document.getElementById('email-corpo-textarea');
+  const countEl = document.getElementById('email-contagem-pendencias');
+  if (!impState.pendenciasCache && inCorpo) {
+    inCorpo.value = '⏳ Consultando acertos de marcações oficiais no banco de dados do NGPonto...\nAguarde alguns instantes.';
+    if (countEl) countEl.textContent = 'Consultando NGPonto...';
+  }
+
   if (forcar) {
-    showToast('⏳ Conectando ao motor local e apurando pendências oficiais no NGPonto... Aguarde.');
+    showToast('⏳ Conectando ao motor local e apurando acertos de marcações do NGPonto... Aguarde.');
   }
 
   const mes = appState.currentMonth + 1;
   const ano = appState.currentYear;
-  let dados = null;
 
   try {
     const res = await fetch(`${API_BASE}/api/pendencias?idowner=0&mes=${mes}&ano=${ano}${forcar ? '&refresh=1' : ''}`).then(r => r.json());
-    if (res && res.ok && Array.isArray(res.colaboradores) && res.colaboradores.length > 0) {
-      dados = filtrarPendenciasComDashboardApp(res);
+    if (res && res.ok && Array.isArray(res.colaboradores)) {
+      const dados = processarAcertosNGPonto(res);
+      impState.pendenciasRaw = dados;
+      impState.pendenciasCache = dados;
+
+      if (dados.resumo) {
+        atualizarKpisCards(dados.resumo);
+      }
+      atualizarTextoEmailApp();
+      if (forcar) showToast('✅ Acertos de marcações do NGPonto atualizados com sucesso!');
+    } else {
+      throw new Error(res?.erro || 'Resposta inválida do motor NGPonto');
     }
   } catch (e) {
-    console.log('API de pendências remota demorou ou indisponível, utilizando dados do Dashboard...');
+    console.warn('Erro ao carregar acertos do NGPonto:', e);
+    if (inCorpo && !impState.pendenciasCache) {
+      inCorpo.value = '❌ Falha ao consultar acertos do NGPonto: ' + (e?.message || e) + '\n\nCertifique-se de que o Iniciar Painel Agente DP.bat está ativo no computador do DP e clique em "Atualizar Relatório".';
+      if (countEl) countEl.textContent = 'Erro de comunicação';
+    }
+    showToast('Erro ao consultar acertos do NGPonto: ' + (e?.message || e), 'error');
   } finally {
     if (btnAtualizar) {
       btnAtualizar.disabled = false;
@@ -8643,23 +8485,6 @@ async function carregarPendenciasRelatorioApp(forcar = false) {
     }
     impState.carregandoPendencias = false;
   }
-
-  // Fallback garantido diretamente do Dashboard se a API não retornou
-  if (!dados && !impState.pendenciasCache) {
-    dados = gerarPendenciasDoDashboardLocal();
-  }
-
-  if (dados) {
-    impState.pendenciasRaw = dados;
-    impState.pendenciasCache = dados;
-
-    if (dados.resumo) {
-      atualizarKpisCards(dados.resumo);
-    }
-    atualizarTextoEmailApp();
-  }
-
-  if (forcar) showToast('✅ Relatório de pendências oficial do NGPonto sincronizado com sucesso!');
 }
 
 function atualizarKpisCards(resumo) {
@@ -8687,13 +8512,11 @@ function definirDataEmailRelativaApp(offset = -1) {
   const inDia = document.getElementById('email-dia-ref');
   if (inDia) {
     inDia.value = `${dd}/${mm}`;
-    if (!impState.pendenciasCache) {
-      try {
-        impState.pendenciasCache = gerarPendenciasDoDashboardLocal();
-        if (impState.pendenciasCache?.resumo) atualizarKpisCards(impState.pendenciasCache.resumo);
-      } catch (e) {}
+    if (!impState.pendenciasCache && !impState.carregandoPendencias) {
+      carregarPendenciasRelatorioApp();
+    } else {
+      atualizarTextoEmailApp();
     }
-    atualizarTextoEmailApp();
   }
 }
 
@@ -8737,13 +8560,10 @@ function gerarTextoEmailPendenciasApp(setorFiltro, diaRef) {
   }
 
   if (!impState.pendenciasCache || !impState.pendenciasCache.colaboradores) {
-    try {
-      impState.pendenciasCache = gerarPendenciasDoDashboardLocal();
-      if (impState.pendenciasCache?.resumo) atualizarKpisCards(impState.pendenciasCache.resumo);
-    } catch (e) {}
-    if (!impState.pendenciasCache || !impState.pendenciasCache.colaboradores) {
-      return 'Nenhum dado de pendência carregado ainda. Clique em "Atualizar Relatório" acima.';
+    if (!impState.carregandoPendencias) {
+      setTimeout(() => carregarPendenciasRelatorioApp(), 50);
     }
+    return '⏳ Consultando acertos de marcações oficiais no banco de dados do NGPonto...\nAguarde alguns instantes.';
   }
 
   let filtrados = impState.pendenciasCache.colaboradores.filter(c => c.temPendencia);
@@ -8759,33 +8579,12 @@ function gerarTextoEmailPendenciasApp(setorFiltro, diaRef) {
   const linhas = [];
 
   filtrados.forEach((c) => {
-    const codNum = parseInt(c.codigo, 10);
-    const appColab = appState.colaboradores.find(x => x.cracha === codNum && (c.idowner === 6716 ? x.filialId === 'branch-4' : x.filialId !== 'branch-4'))
-      || appState.colaboradores.find(x => x.cracha === codNum);
-
-    // Garante que colaborador registrado no AppLucas como não bate ponto nunca entre no email
-    if (appColab) {
-      const naoBate = appColab.registraPonto === false 
-        || appColab.registraPonto === 'nao' 
-        || appColab.registraPonto === 'false' 
-        || appColab.registraPonto === 0 
-        || appColab.registraPonto === '0';
-      if (naoBate) return;
-    }
-
     let pendsColab = c.pendencias || [];
     if (diaRef) {
       const dRef = diaRef.trim();
       pendsColab = pendsColab.filter(p => {
-        const matchesDate = (p.data && p.data.startsWith(dRef)) 
+        return (p.data && p.data.startsWith(dRef)) 
           || (p.dataIso && (p.dataIso.endsWith(dRef.replace('/', '-')) || p.dataIso === dRef));
-        if (!matchesDate) return false;
-
-        const iso = p.dataIso || (p.data && p.data.includes('/') ? p.data.split('/').reverse().join('-') : p.data);
-        if (isDiaNaoReferenteAPendencia(appColab, iso)) {
-          return false;
-        }
-        return true;
       });
     }
 
@@ -8800,10 +8599,10 @@ function gerarTextoEmailPendenciasApp(setorFiltro, diaRef) {
   });
 
   const countEl = document.getElementById('email-contagem-pendencias');
-  if (countEl) countEl.textContent = `${linhas.length} pendências encontradas`;
+  if (countEl) countEl.textContent = `${linhas.length} pendências nos acertos do NGPonto`;
 
   if (linhas.length === 0) {
-    return 'Nenhuma pendência encontrada para esta data/filial.';
+    return 'Nenhuma pendência encontrada nos acertos do NGPonto para esta data/filial.';
   }
 
   const ehProducao = setorFiltro && (setorFiltro.toLowerCase().includes('produção') || setorFiltro.toLowerCase().includes('producao'));
