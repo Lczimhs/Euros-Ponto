@@ -111,24 +111,36 @@ async function fetchViaSupabaseBridge(urlStr, init = {}, nativeFetchFn = fetch) 
     'Content-Type': 'application/json'
   };
 
-  const postRes = await nativeFetchFn(`${SUPABASE_URL}/rest/v1/config_app`, {
-    method: 'POST',
-    headers: { ...sbHeaders, 'Prefer': 'resolution=merge-duplicates' },
-    body: JSON.stringify({
-      id: reqId,
-      data: {
-        type: 'motor_rpc_request',
-        status: 'pending',
-        method,
-        url: pathAndQuery,
-        body: bodyData,
-        createdAt: Date.now()
-      },
-      updated_at: new Date().toISOString()
-    })
-  });
+  let postRes;
+  try {
+    postRes = await nativeFetchFn(`${SUPABASE_URL}/rest/v1/config_app`, {
+      method: 'POST',
+      headers: { ...sbHeaders, 'Prefer': 'resolution=merge-duplicates' },
+      signal: (typeof AbortSignal !== 'undefined' && AbortSignal.timeout) ? AbortSignal.timeout(12000) : undefined,
+      body: JSON.stringify({
+        id: reqId,
+        data: {
+          type: 'motor_rpc_request',
+          status: 'pending',
+          method,
+          url: pathAndQuery,
+          body: bodyData,
+          createdAt: Date.now()
+        },
+        updated_at: new Date().toISOString()
+      })
+    });
+  } catch (postErr) {
+    if (postErr.name === 'TimeoutError' || postErr.message?.includes('timeout') || postErr.message?.includes('abort')) {
+      throw new Error('Ponte Cloud demorou para responder (Timeout). Se estiver no computador do DP, acesse direto via: http://localhost:3000');
+    }
+    throw postErr;
+  }
 
   if (!postRes.ok) {
+    if (postRes.status === 504) {
+      throw new Error('Ponte Cloud indisponível (504 Gateway Timeout). O Supabase Cloud não respondeu. Se você está no computador do DP, acesse direto pelo Painel Local: http://localhost:3000');
+    }
     throw new Error('Falha ao enviar comando pela Ponte Cloud (' + postRes.status + ')');
   }
 
