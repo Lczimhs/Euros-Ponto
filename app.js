@@ -34,7 +34,7 @@ async function carregarEstadoDoServidorLocal() {
 
 // Chave do LocalStorage e Versão Mestra de Segurança
 const STORAGE_KEY = 'appLucas_ponto_va_v5_data';
-const MASTER_RECOVERY_VERSION = 2026103102;
+const MASTER_RECOVERY_VERSION = 2026103103;
 
 // ==========================================================================
 // 1. ESTADO GLOBAL DA APLICAÇÃO
@@ -8201,42 +8201,69 @@ async function coletarRelogioApp(etapa = 0) {
   const nsr = document.getElementById('app-relNsr')?.value || '';
   const autoProcessar = !!document.getElementById('app-chkProcessarAposColeta')?.checked;
 
-  const descRelogio = etapa === 0 ? 'TODOS os 4 Relógios' : `Relógio Etapa ${etapa}`;
-  showToast(`📡 [1/2] Conectando aos relógios via RepCid.dll e coletando ${descRelogio} (${inicio} a ${fim})... Aguarde.`);
+  const btnColetar = document.getElementById('btn-imp-coletar-todos');
+  const btnOriginalHtml = btnColetar ? btnColetar.innerHTML : '';
+  if (btnColetar && etapa === 0) {
+    btnColetar.disabled = true;
+    btnColetar.innerHTML = '<span>⏳</span> Coletando 4 Relógios REP (~50s)...';
+  }
+
+  const descRelogio = etapa === 0 ? 'TODOS os 4 Relógios' : ('Relógio Etapa ' + etapa);
+  showToast('📡 Conectando aos relógios via RepCid.dll e coletando ' + descRelogio + ' (' + inicio + ' a ' + fim + ')... Aguarde cerca de 50 segundos.');
+
+  const box = document.getElementById('app-logRelogiosBox');
+  const txt = document.getElementById('app-logRelogiosTexto');
+  if (box) box.style.display = 'block';
+  if (txt) {
+    txt.textContent = '📡 Conectando aos relógios Control iD via TCP/IP...\n   • Depósito I - Produção (192.168.0.121)\n   • ADM Ji-Paraná (192.168.0.122)\n   • Ind. Naviraí - MS (192.168.1.48)\n   • Caiari Distribuidora (192.168.0.250)\n\nAguarde, a coleta direta dos equipamentos leva cerca de 45 a 60 segundos...';
+  }
 
   try {
-    const res = await fetch(`${API_BASE}/api/coletar-relogios`, {
+    const res = await fetch(API_BASE + '/api/coletar-relogios', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ etapa, inicio, fim, nsr })
     }).then(r => r.json());
 
-    if (res.ok) {
-      const box = document.getElementById('app-logRelogiosBox');
-      const txt = document.getElementById('app-logRelogiosTexto');
+    if (res && res.ok) {
       if (box) box.style.display = 'block';
-      if (txt) {
+      if (txt && res.resultados) {
         txt.textContent = res.resultados.map(x =>
           x.ok
-            ? `✅ [Etapa ${x.etapa}] ${x.relogio} (${x.empresa})\n   NSR lido: ${x.nsrInicial} até ${x.nsrAtual} | Batidas coletadas: ${x.batidasLidasRelogio} | Colaboradores Vinculados: ${x.colaboradoresVinculados}`
-            : `❌ [Etapa ${x.etapa}] ${x.relogio}: ${x.erro}`
+            ? ('✅ [Etapa ' + x.etapa + '] ' + x.relogio + ' (' + x.empresa + ')\n   NSR lido: ' + x.nsrInicial + ' até ' + x.nsrAtual + ' | Batidas coletadas: ' + x.batidasLidasRelogio + ' | Colaboradores Vinculados: ' + x.colaboradoresVinculados)
+            : ('❌ [Etapa ' + x.etapa + '] ' + x.relogio + ': ' + x.erro)
         ).join('\n\n');
       }
 
       showToast('⚡ Coleta concluída com sucesso! Processando cálculos no NGPonto...');
-      await processarDuploApp(false);
+      if (autoProcessar) {
+        await processarDuploApp(false);
+      }
       await carregarPendenciasRelatorioApp(true);
       await carregarStatusRelogiosApp();
       showToast('🎉 Ponto coletado e apurado no NGPonto com sucesso!');
     } else {
-      showToast('Erro na coleta: ' + res.erro, 'error');
+      showToast('Erro na coleta: ' + (res?.erro || 'Falha de comunicação'), 'error');
+      if (txt && res?.erro) txt.textContent += '\n\n❌ ERRO: ' + res.erro;
     }
   } catch (e) {
     showToast(formatMotorErrorMessage(e, 'Erro ao comunicar com o motor de coleta'), 'error');
+    if (txt) txt.textContent += '\n\n❌ ERRO: ' + e.message;
+  } finally {
+    if (btnColetar && etapa === 0) {
+      btnColetar.disabled = false;
+      btnColetar.innerHTML = btnOriginalHtml || '<span>🚀</span> Coletar e Importar TODOS os 4 Relógios';
+    }
   }
 }
 
 async function processarDuploApp(comToast = true) {
+  const btnProc = document.getElementById('btn-imp-processar-duplo');
+  const btnOriginalHtml = btnProc ? btnProc.innerHTML : '';
+  if (btnProc) {
+    btnProc.disabled = true;
+    btnProc.innerHTML = '<span>⏳</span> Processando 2x (~15s)...';
+  }
   if (comToast) showToast('⚡ Processando marcações em 2 ciclos no NGPonto (Euros Aço 7452 e Caiari 6716)...');
   try {
     const mes = appState.currentMonth + 1;
@@ -8247,15 +8274,20 @@ async function processarDuploApp(comToast = true) {
       body: JSON.stringify({ idowner: 0, mes, ano })
     }).then(r => r.json());
 
-    if (res.ok) {
+    if (res && res.ok) {
       showToast('🎉 Marcações processadas com sucesso em 2 ciclos no NGPonto!');
       await carregarPendenciasRelatorioApp(true);
       await carregarStatusRelogiosApp();
     } else {
-      showToast('Erro no processamento: ' + res.erro, 'error');
+      showToast('Erro no processamento: ' + (res?.erro || 'Falha no cálculo'), 'error');
     }
   } catch (e) {
     showToast(formatMotorErrorMessage(e, 'Erro ao processar marcações'), 'error');
+  } finally {
+    if (btnProc) {
+      btnProc.disabled = false;
+      btnProc.innerHTML = btnOriginalHtml || '<span>⚡</span> Processar Marcações (2x)';
+    }
   }
 }
 
@@ -8264,14 +8296,28 @@ async function executarRotinaMatinalApp() {
     return;
   }
 
-  showToast('🌅 [1/4] Disparando Rotina Matinal: Conectando aos 4 relógios REP...');
-  await coletarRelogioApp(0);
+  const btnRotina = document.getElementById('btn-imp-rotina-matinal');
+  const btnOriginalHtml = btnRotina ? btnRotina.innerHTML : '';
+  if (btnRotina) {
+    btnRotina.disabled = true;
+    btnRotina.innerHTML = '<span>⏳</span> Executando Rotina Matinal...';
+  }
 
-  showToast('✉️ [3/3] Abrindo painel de envio de e-mails com as pendências de ontem formatadas...');
-  const btnRel = document.getElementById('subtab-btn-relatorio');
-  if (btnRel) btnRel.click();
-  definirDataEmailRelativaApp(-1);
-  showToast('🎉 Rotina Matinal concluída com sucesso!');
+  try {
+    showToast('🌅 [1/3] Disparando Rotina Matinal: Conectando aos 4 relógios REP...');
+    await coletarRelogioApp(0);
+
+    showToast('✉️ [2/3] Abrindo painel de envio de e-mails com as pendências de ontem formatadas...');
+    const btnRel = document.getElementById('subtab-btn-relatorio');
+    if (btnRel) btnRel.click();
+    definirDataEmailRelativaApp(-1);
+    showToast('🎉 Rotina Matinal concluída com sucesso!');
+  } finally {
+    if (btnRotina) {
+      btnRotina.disabled = false;
+      btnRotina.innerHTML = btnOriginalHtml || '<span>🌅</span> Rotina Matinal (1-Clique)';
+    }
+  }
 }
 
 async function sincronizarBatidasNGParaMatriz(mes, ano) {
@@ -8280,7 +8326,9 @@ async function sincronizarBatidasNGParaMatriz(mes, ano) {
 }
 
 /**
- * function isDiaNaoReferenteAPendencia(appColab, isoStr, fromNGMotor = false) {
+ * Verifica se o dia é isento de pendências (não bate ponto, férias, atestado, feriado, folga, etc.)
+ */
+function isDiaNaoReferenteAPendencia(appColab, isoStr, fromNGMotor = false) {
   if (!appColab) return false;
 
   // 1. Colaborador registrado no AppLucas que NÃO bate ponto (excluído de pendências)
