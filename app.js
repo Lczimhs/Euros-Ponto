@@ -34,7 +34,7 @@ async function carregarEstadoDoServidorLocal() {
 
 // Chave do LocalStorage e Versão Mestra de Segurança
 const STORAGE_KEY = 'appLucas_ponto_va_v5_data';
-const MASTER_RECOVERY_VERSION = 2026103006;
+const MASTER_RECOVERY_VERSION = 2026103101;
 
 // ==========================================================================
 // 1. ESTADO GLOBAL DA APLICAÇÃO
@@ -144,31 +144,46 @@ async function fetchViaSupabaseBridge(urlStr, init = {}, nativeFetchFn = fetch) 
     throw new Error('Falha ao enviar comando pela Ponte Cloud (' + postRes.status + ')');
   }
 
-  const timeoutMs = 150 * 1000;
+  const isOperacaoPesada = pathAndQuery.includes('coletar-relogios') || pathAndQuery.includes('processar');
+  const timeoutMs = isOperacaoPesada ? (240 * 1000) : (130 * 1000);
   const start = Date.now();
-  while (Date.now() - start < timeoutMs) {
-    await new Promise(r => setTimeout(r, 900));
-    const pollRes = await nativeFetchFn(`${SUPABASE_URL}/rest/v1/config_app?id=eq.${encodeURIComponent(reqId)}&select=data`, {
-      method: 'GET',
-      headers: sbHeaders
-    });
-    if (!pollRes.ok) continue;
-    const rows = await pollRes.json();
-    const row = Array.isArray(rows) ? rows[0] : null;
-    if (row && row.data && row.data.status === 'done') {
+  let finalizou = false;
+
+  try {
+    while (Date.now() - start < timeoutMs) {
+      await new Promise(r => setTimeout(r, 1200));
+      const pollRes = await nativeFetchFn(`${SUPABASE_URL}/rest/v1/config_app?id=eq.${encodeURIComponent(reqId)}&select=data`, {
+        method: 'GET',
+        headers: sbHeaders,
+        signal: (typeof AbortSignal !== 'undefined' && AbortSignal.timeout) ? AbortSignal.timeout(8000) : undefined
+      }).catch(() => null);
+
+      if (!pollRes || !pollRes.ok) continue;
+      const rows = await pollRes.json().catch(() => null);
+      const row = Array.isArray(rows) ? rows[0] : null;
+      if (row && row.data && row.data.status === 'done') {
+        finalizou = true;
+        nativeFetchFn(`${SUPABASE_URL}/rest/v1/config_app?id=eq.${encodeURIComponent(reqId)}`, {
+          method: 'DELETE',
+          headers: sbHeaders
+        }).catch(() => {});
+
+        return new Response(JSON.stringify(row.data.response || { ok: false, erro: 'Resposta vazia do motor' }), {
+          status: row.data.httpStatus || 200,
+          headers: { 'Content-Type': 'application/json' }
+        });
+      }
+    }
+  } finally {
+    if (!finalizou) {
       nativeFetchFn(`${SUPABASE_URL}/rest/v1/config_app?id=eq.${encodeURIComponent(reqId)}`, {
         method: 'DELETE',
         headers: sbHeaders
       }).catch(() => {});
-
-      return new Response(JSON.stringify(row.data.response || { ok: false, erro: 'Resposta vazia do motor' }), {
-        status: row.data.httpStatus || 200,
-        headers: { 'Content-Type': 'application/json' }
-      });
     }
   }
 
-  throw new Error('O Motor Local (servidor.js) não respondeu. Verifique se o computador do DP está ligado.');
+  throw new Error('O Motor Local (servidor.js) não respondeu a tempo. Verifique se o Iniciar Painel Agente DP.bat está aberto no computador do DP.');
 }
 
 if (typeof window !== 'undefined' && typeof window.fetch === 'function') {
