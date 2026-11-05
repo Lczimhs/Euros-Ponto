@@ -34,7 +34,7 @@ async function carregarEstadoDoServidorLocal() {
 
 // Chave do LocalStorage e Versão Mestra de Segurança
 const STORAGE_KEY = 'appLucas_ponto_va_v5_data';
-const MASTER_RECOVERY_VERSION = 2026103104;
+const MASTER_RECOVERY_VERSION = 2026110501;
 
 // ==========================================================================
 // 1. ESTADO GLOBAL DA APLICAÇÃO
@@ -7150,14 +7150,18 @@ function exportVACSV() {
   const month = appState.currentMonth;
   const employees = getFilteredAndSortedEmployees(false);
   const deptMap = Object.fromEntries(appState.departamentos.map(d => [d.id, d.nome]));
+  const formatMoeda = (val) => 'R$ ' + Number(val || 0).toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
 
   let csv = 'Crachá;Nome;Departamento;Aprendiz;Taxa_Dia_RS;Registra_Ponto;Situacao;Data_Demissao;Dias_Uteis;Dias_OK;Meios_Dias;Faltas_Atestados;Valor_Liquido_RS;Valor_Descontado_RS\n';
   employees.forEach(colab => {
     const va = calculateVAForEmployee(colab.id, year, month, appState.activeBranchId);
     const isAprendiz = !!(colab.aprendiz || colab.isAprendiz);
     const naoRecebeVa = !!(colab.naoRecebeVa || colab.recebeVa === false);
-    const taxaDia = naoRecebeVa ? '0.00' : (isAprendiz ? '4.00' : '8.00');
-    csv += colab.cracha + ';"' + colab.nome + '";"' + (deptMap[colab.deptId] || '') + '";"' + (isAprendiz ? 'SIM' : 'NAO') + '";' + taxaDia + ';"' + (colab.registraPonto ? 'SIM' : 'NAO') + '";"' + (colab.status || 'ativo') + '";"' + formatDateBR(colab.dataDemissao) + '";' + va.totalBusinessDays + ';' + va.fullDaysWorked + ';' + va.halfDaysWorked + ';' + va.absenceDays + ';' + va.valorLiquido.toFixed(2) + ';' + va.valorDescontado.toFixed(2) + '\n';
+    const taxaDiaNum = naoRecebeVa ? 0 : (isAprendiz ? 4 : 8);
+    const taxaDia = formatMoeda(taxaDiaNum);
+    const valorLiquido = formatMoeda(va.valorLiquido);
+    const valorDescontado = formatMoeda(va.valorDescontado);
+    csv += colab.cracha + ';"' + colab.nome + '";"' + (deptMap[colab.deptId] || '') + '";"' + (isAprendiz ? 'SIM' : 'NAO') + '";"' + taxaDia + '";"' + (colab.registraPonto ? 'SIM' : 'NAO') + '";"' + (colab.status || 'ativo') + '";"' + formatDateBR(colab.dataDemissao) + '";' + va.totalBusinessDays + ';' + va.fullDaysWorked + ';' + va.halfDaysWorked + ';' + va.absenceDays + ';"' + valorLiquido + '";"' + valorDescontado + '"\n';
   });
 
   downloadFile('fechamento_VA_' + MESES_PT[month] + '_' + year + '.csv', csv, 'text/csv;charset=utf-8;');
@@ -7266,6 +7270,11 @@ document.getElementById('btn-restore-master')?.addEventListener('click', () => {
   if (!master) {
     showToast('Base mestra não encontrada na memória.', 'warning');
     return;
+  }
+
+  if (typeof window !== 'undefined' && typeof window.confirm === 'function') {
+    const confirmar = window.confirm('Deseja realmente restaurar a Base Mestra Oficial? Todas as alterações feitas após a última atualização da base oficial serão substituídas.');
+    if (!confirmar) return;
   }
 
   const restored = JSON.parse(JSON.stringify(master));
