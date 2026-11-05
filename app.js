@@ -3398,7 +3398,7 @@ function calculateDsrAndOccurrences(colabId, year, month, branchId) {
       });
     });
 
-    // 3. Atestados Médicos (Integral e 1/2 Atestado) - Justificados (não são faltas injustificadas)
+    // 3. Atestados Médicos (Integral e 1/2 Atestado) - Justificados (não perdem DSR, mas descontam VA)
     dayTypes.filter(t => t === 'ATESTADO' || t === '1/2 ATESTADO').forEach(t => {
       if (!notAbonado) return;
       const isHalf = t === '1/2 ATESTADO';
@@ -3407,7 +3407,7 @@ function calculateDsrAndOccurrences(colabId, year, month, branchId) {
         tipo: isHalf ? '½ Atestado Médico (Justificado)' : 'Atestado Médico Integral (Justificado)',
         badgeClass: 'status-atestado',
         tempo: isHalf ? '1/2 Período' : 'Dia Completo',
-        impacto: 'Ausência justificada (não perde DSR)',
+        impacto: isHalf ? 'Ausência justificada (não perde DSR • Desconta ½ VA)' : 'Ausência justificada (não perde DSR • Desconta VA)',
         obs: reg?.note || (isHalf ? 'Meio período abonado por atestado' : 'Atestado médico anexado')
       });
     });
@@ -3719,17 +3719,17 @@ function calculateVAForEmployee(colabId, year, month, branchId) {
           note = isAprendiz 
             ? 'Dia trabalhado Aprendiz (Meio período: R$ 4,00)' 
             : 'Dia integral trabalhado (R$ 8,00)';
-        } else if (resolved.types && resolved.types.length > 0) {
-          // Pendências do dia (até 2). ATESTADO e 1/2 ATESTADO NÃO descontam VA.
-          const types = resolved.types;
-          const hasFalta = types.includes('FALTA');
-          const halfCount = types.filter(t => t === 'FM' || t === 'FT').length;
+        } else if ((resolved.types && resolved.types.length > 0) || ['FALTA', 'FM', 'FT', 'ATESTADO', '1/2 ATESTADO'].includes(resolved.type)) {
+          // Pendências do dia (até 2). ATESTADO desconta VA integral; 1/2 ATESTADO desconta meio período de VA.
+          const types = (resolved.types && resolved.types.length > 0) ? resolved.types : [resolved.type];
+          const hasIntegralAbsence = types.includes('FALTA') || types.includes('ATESTADO');
+          const halfCount = types.filter(t => t === 'FM' || t === 'FT' || t === '1/2 ATESTADO').length;
           const hasPunchPend = types.some(t => PENDENCIAS_BATIDA.includes(t));
           const punchDiscounts = hasPunchPend && halfCount === 0 &&
             (resolved.resolution === 'DESCONTAR_VA' || resolved.resolution === 'DESCONTAR_AMBOS');
 
           let desc = 0;
-          if (hasFalta) {
+          if (hasIntegralAbsence) {
             desc = baseRate;
           } else {
             desc = halfCount * halfRate;
@@ -3742,15 +3742,19 @@ function calculateVAForEmployee(colabId, year, month, branchId) {
 
           if (desc <= 0) {
             fullDaysWorked++;
-            note = types.some(t => t === 'ATESTADO' || t === '1/2 ATESTADO')
-              ? 'Atestado médico (' + resolved.display + ') - sem desconto de VA'
-              : 'Pendência (' + resolved.display + ') - VA mantido';
+            note = 'Pendência (' + resolved.display + ') - VA mantido';
           } else if (desc >= baseRate) {
             absenceDays++;
-            note = resolved.display + ' - Desconto integral de R$ ' + baseRate.toFixed(2).replace('.', ',');
+            const labelIntegral = types.includes('ATESTADO')
+              ? 'Atestado médico (' + resolved.display + ')'
+              : resolved.display;
+            note = labelIntegral + ' - Desconto integral de R$ ' + baseRate.toFixed(2).replace('.', ',');
           } else {
             halfDaysWorked++;
-            note = 'Meio período (' + resolved.display + ') - Desconto R$ ' + desc.toFixed(2).replace('.', ',');
+            const labelHalf = types.includes('1/2 ATESTADO')
+              ? 'Meio período atestado (' + resolved.display + ')'
+              : 'Meio período (' + resolved.display + ')';
+            note = labelHalf + ' - Desconto R$ ' + desc.toFixed(2).replace('.', ',');
           }
         } else if (resolved.type === 'ATRASO') {
           if (resolved.resolution === 'DESCONTAR_VA' || resolved.resolution === 'DESCONTAR_AMBOS') {
