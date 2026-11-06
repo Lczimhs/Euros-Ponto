@@ -34,7 +34,7 @@ async function carregarEstadoDoServidorLocal() {
 
 // Chave do LocalStorage e Versão Mestra de Segurança
 const STORAGE_KEY = 'appLucas_ponto_va_v5_data';
-const MASTER_RECOVERY_VERSION = 2026110501;
+const MASTER_RECOVERY_VERSION = 2026110601;
 
 // ==========================================================================
 // 1. ESTADO GLOBAL DA APLICAÇÃO
@@ -1754,6 +1754,14 @@ function migrateAppState(state) {
     }
   });
 
+  // Limpeza de marcações residuais dos meses de Novembro e Dezembro (deixa apenas feriados)
+  Object.keys(newRp).forEach(k => {
+    if (k.includes('2026-11-') || k.includes('2026-12-')) {
+      delete newRp[k];
+      hasChanges = true;
+    }
+  });
+
   state.colaboradores = updatedColabs;
   state.registrosPonto = newRp;
   state.avisos = updatedAvisos;
@@ -3085,7 +3093,26 @@ function getDayStatus(colabId, isoStr, branchId) {
     };
   }
 
+  const isNovOrDez = isoStr.startsWith('2026-11') || isoStr.startsWith('2026-12');
   let reg = getPontoRecord(colabId, isoStr);
+
+  // Para Novembro e Dezembro: manter o dashboard limpo deixando apenas os feriados (e descansos de fim de semana)
+  if (isNovOrDez) {
+    const hasManualPunches = reg && reg.punches && Object.values(reg.punches).some(p => !!p);
+    const hasManualOverride = reg && reg.override && !['AUTO', 'VAZIO'].includes(reg.override);
+    if (!hasManualPunches && !hasManualOverride) {
+      return {
+        type: 'VAZIO',
+        display: '',
+        cssClass: 'status-empty',
+        isPending: false,
+        isWorkingDay: false,
+        isSunday: false,
+        isHoliday: false,
+        isEmptyDay: true
+      };
+    }
+  }
   const _now = new Date();
   const _todayIso = `${_now.getFullYear()}-${String(_now.getMonth() + 1).padStart(2, '0')}-${String(_now.getDate()).padStart(2, '0')}`;
   const _isStaleFutureEmpty = reg && reg.override === 'VAZIO' && reg.note === 'Dia futuro em aberto (desmarcado)' && isoStr <= _todayIso;
@@ -3257,6 +3284,20 @@ function getDayStatus(colabId, isoStr, branchId) {
       delayMinutes: 0,
       atrasoPequenoMin: atrasoPequenoMin,
       resolution: (reg && reg.resolution) || 'NENHUMA'
+    };
+  }
+
+  // Para Novembro e Dezembro, caso chegue aqui sem marcações manuais
+  if (isoStr.startsWith('2026-11') || isoStr.startsWith('2026-12')) {
+    return {
+      type: 'VAZIO',
+      display: '',
+      cssClass: 'status-empty',
+      isPending: false,
+      isWorkingDay: false,
+      isSunday: false,
+      isHoliday: false,
+      isEmptyDay: true
     };
   }
 
