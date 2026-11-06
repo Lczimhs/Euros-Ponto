@@ -34,7 +34,7 @@ async function carregarEstadoDoServidorLocal() {
 
 // Chave do LocalStorage e Versão Mestra de Segurança
 const STORAGE_KEY = 'appLucas_ponto_va_v5_data';
-const MASTER_RECOVERY_VERSION = 2026110601;
+const MASTER_RECOVERY_VERSION = 2026110602;
 
 // ==========================================================================
 // 1. ESTADO GLOBAL DA APLICAÇÃO
@@ -43,7 +43,9 @@ let appState = {
   activeView: 'view-ponto',
   activeBranchId: 'branch-1',
   currentYear: 2026,
-  currentMonth: 9, // Outubro (0-indexed: 9 = Outubro)
+  currentMonth: 10, // Novembro (0-indexed: 10 = Novembro)
+  calendarYear: 2026,
+  calendarMonth: 10,
   statusFilter: 'ativos', // 'ativos' | 'demitidos' | 'todos'
   departmentFilter: 'todos', // 'todos' ou ID do departamento
   calFilterDept: 'todos',    // filtro de depto no calendário
@@ -1820,7 +1822,9 @@ function getStoragePayload() {
     carryOverDsr: appState.carryOverDsr || {},
     activeBranchId: appState.activeBranchId || 'branch-1',
     currentYear: typeof appState.currentYear === 'number' ? appState.currentYear : 2026,
-    currentMonth: typeof appState.currentMonth === 'number' ? appState.currentMonth : 9,
+    currentMonth: typeof appState.currentMonth === 'number' ? appState.currentMonth : 10,
+    calendarYear: typeof appState.calendarYear === 'number' ? appState.calendarYear : 2026,
+    calendarMonth: typeof appState.calendarMonth === 'number' ? appState.calendarMonth : 10,
     statusFilter: appState.statusFilter || 'ativos',
     departmentFilter: appState.departmentFilter || 'todos',
     calFilterDept: appState.calFilterDept || 'todos',
@@ -2497,7 +2501,17 @@ function loadStateFromStorage() {
         }
 
         if (typeof parsed.currentYear === 'number') appState.currentYear = parsed.currentYear;
-        if (typeof parsed.currentMonth === 'number') appState.currentMonth = parsed.currentMonth;
+        if (typeof parsed.currentMonth === 'number') {
+          // Virada de mês oficial: ao entrar no sistema, o mês padrão é Novembro (10 = Novembro de 2026)
+          appState.currentMonth = (parsed.currentMonth === 9 || !parsed._masterVersion || Number(parsed._masterVersion) < MASTER_RECOVERY_VERSION) ? 10 : parsed.currentMonth;
+        } else {
+          appState.currentMonth = 10;
+        }
+        if (typeof parsed.calendarMonth === 'number' && parsed.calendarMonth !== 9) {
+          appState.calendarMonth = parsed.calendarMonth;
+        } else {
+          appState.calendarMonth = 10;
+        }
         if (parsed.statusFilter) appState.statusFilter = parsed.statusFilter;
         if (parsed.departmentFilter) appState.departmentFilter = parsed.departmentFilter;
         if (parsed.calFilterDept) appState.calFilterDept = parsed.calFilterDept;
@@ -5310,7 +5324,7 @@ function renderAvisosView() {
   syncDismissalNotices();
 
   if (typeof appState.calendarYear !== 'number') appState.calendarYear = appState.currentYear || 2026;
-  if (typeof appState.calendarMonth !== 'number') appState.calendarMonth = (typeof appState.currentMonth === 'number') ? appState.currentMonth : 9;
+  if (typeof appState.calendarMonth !== 'number') appState.calendarMonth = (typeof appState.currentMonth === 'number') ? appState.currentMonth : 10;
 
   const calYear = appState.calendarYear;
   const calMonth = appState.calendarMonth;
@@ -5991,7 +6005,7 @@ function handleLegalPresetChange(preset) {
   }
 
   const calYear = appState.calendarYear || 2026;
-  const calMonth = (typeof appState.calendarMonth === 'number') ? appState.calendarMonth : 9;
+  const calMonth = (typeof appState.calendarMonth === 'number') ? appState.calendarMonth : 10;
 
   if (preset === 'rescisao') {
     if (tipoInput) tipoInput.value = 'rescisao';
